@@ -1,3 +1,5 @@
 [
-["index.html", "R for Statistical Learning Preface", " R for Statistical Learning David Dalpiaz 2016-12-09 Preface This is the very first part of the book. Will this show on the web? "]
+["index.html", "R for Statistical Learning Preface", " R for Statistical Learning David Dalpiaz 2016-12-09 Preface This is the very first part of the book. Will this show on the web? "],
+["introduction.html", "Chapter 1 Introduction", " Chapter 1 Introduction This is the first real chapter. This is a travis test. asdf For a right triangle, if $c$ denotes the length of the hypotenuse and $a$ and $b$ denote the lengths of the other two sides, we have $$a^2 + b^2 = c^2$$ "],
+["diving-in.html", "Chapter 2 Diving In", " Chapter 2 Diving In Now let’s talk details. asdf "]
 ]
