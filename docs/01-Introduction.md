@@ -3,3 +3,12 @@
 This is the first real chapter.
 
 This is a travis test.
+
+asdf
+
+
+```theorem
+For a right triangle, if $c$ denotes the length of the hypotenuse
+and $a$ and $b$ denote the lengths of the other two sides, we have
+$$a^2 + b^2 = c^2$$
+```
