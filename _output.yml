@@ -7,11 +7,18 @@ bookdown::gitbook:
       before: |
         <li><a href="./">R for Statistical Learning</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">Dalpiaz</a></li>
+    edit:
+      link: https://github.com/daviddalpiaz/r4sl/edit/master/%s
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
+  dev: "cairo_pdf"
   latex_engine: xelatex
   citation_package: natbib
+  pandoc_args: --chapters
+  toc_depth: 3
+  toc_unnumbered: no
+  toc_appendix: yes
 bookdown::epub_book:
   stylesheet: style.css
