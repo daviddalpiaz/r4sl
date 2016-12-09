@@ -95,9 +95,11 @@
 <p>This is the first real chapter.</p>
 <p>This is a travis test.</p>
 <p>asdf</p>
-<pre class="theorem"><code>For a right triangle, if $c$ denotes the length of the hypotenuse
-and $a$ and $b$ denote the lengths of the other two sides, we have
-$$a^2 + b^2 = c^2$$</code></pre>
+
+<div class="theorem">
+<span id="thm:unnamed-chunk-1" class="theorem"><strong>Theorem 1.1  (Pythagorean Theorem) </strong></span>For a right triangle, if <span class="math inline">\(c\)</span> denotes the length of the hypotenuse and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> denote the lengths of the other two sides, we have <span class="math display">\[a^2 + b^2 = c^2\]</span>
+</div>
+<p></p>
 
 </div>
             </section>
@@ -119,6 +121,7 @@ $$a^2 + b^2 = c^2$$</code></pre>
 require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
+"github": false,
 "facebook": true,
 "twitter": true,
 "google": false,
@@ -144,6 +147,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
