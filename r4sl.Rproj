@@ -13,5 +13,6 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 AutoAppendNewline: Yes
+LineEndingConversion: None
 
-BuildType: Website
+BuildType: Package
