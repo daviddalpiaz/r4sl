@@ -17,10 +17,10 @@ test gitpages build status
 
 ```r
 install.packages(c("rmarkdown", "tidyverse", "knitr", "ISLR", "caret", 
-                 "AppliedPredictiveModeling", "ellipse", "nnet", "pROC", 
-                 "knitr", "randomForest", "leaps", "glmnet", "mxnet", "gam", 
-                 "tree", "rpart", "gbm", "extraTrees", "kernlab", "e1071",
-                 "extraTrees", "sparcl", "formatR"))
+                   "AppliedPredictiveModeling", "ellipse", "nnet", "pROC", 
+                   "knitr", "randomForest", "leaps", "glmnet", "mxnet", "gam", 
+                   "tree", "rpart", "gbm", "extraTrees", "kernlab", "e1071",
+                   "extraTrees", "sparcl", "formatR"))
 ```
 
 
