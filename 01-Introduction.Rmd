@@ -33,5 +33,6 @@ iris.rf <- randomForest(Species ~ .,
                         importance = TRUE,
                         proximity = TRUE)
 iris.rf
+
 ```
 
