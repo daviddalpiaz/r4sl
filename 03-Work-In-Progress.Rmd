@@ -1,5 +1,180 @@
-# Technical Details
+# Data Visualization
 
-Now I'll teach you some crazy math, but I need to work it out first...
+```{r package_setup, message = FALSE, warning = FALSE}
+library(ISLR)
+library(caret)
+library(AppliedPredictiveModeling)
+library(ellipse)
+```
 
-asdf
+For this example we will use the [Iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set) which was introduced by [R.A. Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher) as an example where [Linear Discriminant Analysis](https://en.wikipedia.org/wiki/Linear_discriminant_analysis) would be useful.
+
+We've been sort of bad about "looking at the data" before starting analysis, so we'll do a better job of that in this example.
+
+```{r data}
+data("iris")
+head(iris)
+str(iris)
+```
+
+The `caret` package is an extremely useful package for doing predictive modeling in R. We'll start to use some functions from `caret` in this example. The figures below are created using the `caret` package which uses the `lattice` package in the background. (Some tweaks to the `caret` functionality were made using the `AppliedPredictiveModeling` package.) `featurePlot()` is essentially a wrapper around `xyplot()` and `bwplot()` from `lattice`.
+
+[Here's a rather long talk by the author of the package, giving some thoughts on predictive modeling.](https://www.youtube.com/watch?v=dB-JHhEJvQA)
+
+```{r paris_plot, fig.width = 7, fig.height = 7}
+transparentTheme(trans = .4)
+featurePlot(x = iris[, 1:4],
+            y = iris$Species,
+            plot = "pairs",
+            ## Add a key at the top
+            auto.key = list(columns = 3))
+```
+
+```{r contour_plot, fig.width = 7, fig.height = 7}
+featurePlot(x = iris[, 1:4],
+            y = iris$Species,
+            plot = "ellipse",
+            ## Add a key at the top
+            auto.key = list(columns = 3))
+```
+
+```{r density_plot, fig.width = 10, fig.height = 5}
+transparentTheme(trans = .9)
+featurePlot(x = iris[, 1:4],
+                  y = iris$Species,
+                  plot = "density",
+                  ## Pass in options to xyplot() to 
+                  ## make it prettier
+                  scales = list(x = list(relation="free"),
+                                y = list(relation="free")),
+                  adjust = 1.5,
+                  pch = "|",
+                  layout = c(4, 1),
+                  auto.key = list(columns = 3))
+```
+
+```{r boxplots, fig.width = 10, fig.height = 5}
+featurePlot(x = iris[, 1:4],
+                  y = iris$Species,
+                  plot = "box",
+                  ## Pass in options to bwplot() 
+                  scales = list(y = list(relation="free"),
+                                x = list(rot = 90)),
+                  layout = c(4,1 ),
+                  auto.key = list(columns = 2))
+```
+
+# Data Splitting
+
+We've been repeatedly writing our own data splitting function, but actually, `caret` can take care of that for us with `createDataPartition()`. `createDataPartition()` is a very in-depth function, but here we simply use it to return an index of observations that will be used for a training set, which is roughly a quarter of the data.
+
+One thing to note is that this is not a simple random split. By looking at the class labels, `iris$Species` it splits the data in a way that will have roughly the same proportion of each class in both the train and test sets.
+
+```{r data_splitting}
+set.seed(1)
+trainIndex <- createDataPartition(iris$Species, p = 0.25,
+                                  list = FALSE,
+                                  times = 1)
+head(trainIndex)
+irisTrain <- iris[ trainIndex,]
+irisTest  <- iris[-trainIndex,]
+```
+
+# Useful Function
+
+An old favorite.
+
+```{r misclass_function}
+get_error <- function(actual, predicted) {
+  mean(actual != predicted)
+}
+```
+
+
+# Multi-Class Logistic Regression
+
+We briefly discussed an extension of logistic regression that allows for not only binary response variables, but also multiple class response variables. There are several implementations of this in `R`. Here we use the `nnet` package.
+
+```{r multi_logistic}
+library(nnet)
+multi_fit <- multinom(Species ~ ., data = irisTrain)
+multi_pred <- predict(multi_fit, newdata = irisTest) # returns classes
+get_error(multi_pred, irisTest$Species) # test error
+```
+
+
+# Linear Discriminant Analysis
+
+The `lda()` function can be found in the `MASS` package. It's syntax for fitting a model is similar to `lm()` and `glm()`, however note that when calling predict on objects returned from `lda()` they are slightly different.
+
+```{r lda}
+library(MASS)
+lda(Species ~ ., data = irisTrain)
+lda_fit <- lda(Species ~ ., data = irisTrain)
+#lda_fit <- lda(Species ~ Petal.Length, data = irisTrain)
+#lda_fit <- lda(Species ~ Sepal.Width, data = irisTrain)
+lda_out <- predict(lda_fit, irisTest)
+names(lda_out)
+lda_prob <- lda_out$posterior
+lda_pred <- lda_out$class
+```
+
+```{r lda_metrics}
+get_error(lda_pred, irisTest$Species) # test error
+table(lda_pred, irisTest$Species)
+```
+
+
+
+# Quadratic Discriminant Analysis
+
+The function `qda()` can also be found in the `MASS` package. Its use is essentially identical to `lda()`.
+
+```{r qda}
+qda_fit <- qda(Species ~ ., data = irisTrain)
+qda_out <- predict(qda_fit, irisTest)
+qda_prob <- qda_out$posterior
+qda_pred <- qda_out$class
+```
+
+```{r qda_metrics}
+get_error(qda_pred, irisTest$Species) # test error
+table(qda_pred, irisTest$Species)
+```
+
+# $k$-Nearest Neighbors, Again
+
+We saw `knn()` from the `class` package before, but, it also works with multi-class response variables. The following example shows an example of a use of the `seq_along()` function.
+
+```{r knn}
+library(class)
+
+X_train <- irisTrain[ , names(iris) != "Species"]
+X_test <- irisTest[ , names(iris) != "Species"]
+
+y_train <- irisTrain[ , names(iris) == "Species"]
+y_test <- irisTest[ , names(iris) == "Species"]
+
+k_to_try <- c(1, 3, 5, 7, 9, 11, 13)
+error_k <- rep(0, length(k_to_try))
+for(i in seq_along(k_to_try)) {
+  pred <- knn(train = scale(X_train), test = scale(X_test), cl = y_train, k = k_to_try[i])
+  error_k[i] <- get_error(y_test, pred)
+}
+min(error_k)
+(best_k <- max(k_to_try[which(error_k == min(error_k))]))
+
+
+knn_pred <- knn(train = scale(X_train), test = scale(X_test), cl = y_train, k = best_k)
+get_error(y_test, knn_pred) # test error
+table(knn_pred, y_test)
+```
+
+The `caret` package has a function `confusionMatrix()` that will take a simple table and output a number of additional metrics.
+
+```{r knn_metrics}
+#?confusionMatrix
+confusionMatrix(table(knn_pred, y_test))
+```
+
+
