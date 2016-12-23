@@ -1,5 +1,12 @@
-Package: placeholder
-Title: Does not matter.
+Package: r4sl
+Title: R for Statistical Learning
 Version: 0.0.1
-Imports: bookdown, randomForest
-Remotes: rstudio/bookdown
+Authors@R: c(person("David", "Dalpiaz" , "dalpiaz2@illinois.edu", c("aut", "cre")))
+Depends: R (>= 3.3.0)
+URL: https://github.com/daviddalpiaz/r4sl
+Imports: 
+  bookdown, rmarkdown, tidyverse, knitr, ISLR, caret, AppliedPredictiveModeling,
+  ellipse, nnet, pROC, knitr, randomForest, leaps, glmnet, mxnet, gam, tree, 
+  rpart, gbm, extraTrees, kernlab, e1071, extraTrees, sparcl, formatR
+Remotes: 
+  rstudio/bookdown
