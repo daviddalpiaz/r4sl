@@ -8,7 +8,7 @@
   <title>R for Statistical Learning</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Words words words…">
-  <meta name="generator" content="bookdown 0.3.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -26,7 +26,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2016-12-23">
+<meta name="date" content="2017-01-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="index.html">
-<link rel="next" href="diving-in.html">
+
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,43 +51,6 @@
 
 
 
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -107,7 +70,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="diving-in.html"><a href="diving-in.html"><i class="fa fa-check"></i><b>2</b> Diving In</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">Dalpiaz</a></li>
 
@@ -130,51 +92,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>This is the first real chapter.</p>
-<p>This is a travis test.</p>
-<p>asdf</p>
 
-<div class="theorem">
-<span id="thm:unnamed-chunk-1" class="theorem"><strong>Theorem 1.1  (Pythagorean Theorem) </strong></span>For a right triangle, if <span class="math inline">\(c\)</span> denotes the length of the hypotenuse and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> denote the lengths of the other two sides, we have <span class="math display">\[a^2 + b^2 = c^2\]</span>
+<div id="refs" class="references">
+
 </div>
-<p></p>
-<p>test gitpages build status</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;knitr&quot;</span>, <span class="st">&quot;ISLR&quot;</span>, <span class="st">&quot;caret&quot;</span>, 
-                   <span class="st">&quot;AppliedPredictiveModeling&quot;</span>, <span class="st">&quot;ellipse&quot;</span>, <span class="st">&quot;nnet&quot;</span>, <span class="st">&quot;pROC&quot;</span>, 
-                   <span class="st">&quot;knitr&quot;</span>, <span class="st">&quot;randomForest&quot;</span>, <span class="st">&quot;leaps&quot;</span>, <span class="st">&quot;glmnet&quot;</span>, <span class="st">&quot;mxnet&quot;</span>, <span class="st">&quot;gam&quot;</span>, 
-                   <span class="st">&quot;tree&quot;</span>, <span class="st">&quot;rpart&quot;</span>, <span class="st">&quot;gbm&quot;</span>, <span class="st">&quot;extraTrees&quot;</span>, <span class="st">&quot;kernlab&quot;</span>, <span class="st">&quot;e1071&quot;</span>,
-                   <span class="st">&quot;extraTrees&quot;</span>, <span class="st">&quot;sparcl&quot;</span>, <span class="st">&quot;formatR&quot;</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randomForest)</code></pre></div>
-<pre><code>## randomForest 4.6-12</code></pre>
-<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">71</span>)
-iris.rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Species ~<span class="st"> </span>.,
-                        <span class="dt">data =</span> iris,
-                        <span class="dt">importance =</span> <span class="ot">TRUE</span>,
-                        <span class="dt">proximity =</span> <span class="ot">TRUE</span>)
-iris.rf</code></pre></div>
-<pre><code>## 
-## Call:
-##  randomForest(formula = Species ~ ., data = iris, importance = TRUE,      proximity = TRUE) 
-##                Type of random forest: classification
-##                      Number of trees: 500
-## No. of variables tried at each split: 2
-## 
-##         OOB estimate of  error rate: 5.33%
-## Confusion matrix:
-##            setosa versicolor virginica class.error
-## setosa         50          0         0        0.00
-## versicolor      0         46         4        0.08
-## virginica       0          4        46        0.08</code></pre>
-
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="diving-in.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -213,17 +142,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

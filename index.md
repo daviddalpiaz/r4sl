@@ -1,7 +1,7 @@
 --- 
 title: "R for Statistical Learning"
 author: "David Dalpiaz"
-date: "2016-12-23"
+date: "2017-01-16"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -14,6 +14,3 @@ description: "Words words words..."
 
 # Preface {-}
 
-This is the very first part of the book.
-
-Will this show on the web?
