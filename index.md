@@ -12,7 +12,7 @@ url: 'http\://daviddalpiaz.github.io/r4sl/'
 description: ""
 ---
 
-# Introduction
+# Introduction {-}
 
 Welcome to Applied Statistics with `R`!
 
