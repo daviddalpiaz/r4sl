@@ -7,7 +7,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">R for Statistical Learning</a></li>
       after: |
-        <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2016 David Dalpiaz</a></li>
+        <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
     edit:
       link: https://github.com/daviddalpiaz/r4sl/edit/master/%s
 bookdown::pdf_book:
