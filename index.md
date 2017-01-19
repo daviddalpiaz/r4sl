@@ -12,9 +12,12 @@ url: 'http\://daviddalpiaz.github.io/r4sl/'
 description: ""
 ---
 
+
+
 # Introduction {-}
 
 Welcome to Applied Statistics with `R`!
+
 
 ## About This Book
 
@@ -38,6 +41,7 @@ This text uses MathJax to render mathematical notation for the web. Occasionally
 a^2 + b^2 = c^2
 \]
 
+
 ## Conventions
 
 `R` code will be typeset using a `monospace` font which is syntax highlighted.
@@ -58,9 +62,11 @@ sqrt(a ^ 2 + b ^ 2)
 
 Often the sybmol $\triangleq$ will be used to mean "is defined to be."
 
+
 ## Acknowledgements
 
 Your name could be here! Suggest an edit!
+
 
 ## License
 

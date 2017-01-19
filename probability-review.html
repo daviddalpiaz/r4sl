@@ -156,7 +156,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2016 David Dalpiaz</a></li>
+<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
 
 </ul>
 
@@ -183,14 +183,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>When discussing probability models, we speak of random <strong>experiments</strong> that produce one of a number of possible <strong>outcomes</strong>.</p>
 <p>A <strong>probability model</strong> that describes the uncertainty of an experiment consists of two elements:</p>
 <ul>
-<li>The <strong>sample space</strong>, often denoted as <span class="math inline">\(\Omega\)</span>, which is a set which contains all possible outcomes.</li>
+<li>The <strong>sample space</strong>, often denoted as <span class="math inline">\(\Omega\)</span>, which is a set that contains all possible outcomes.</li>
 <li>A <strong>probability function</strong> that assigns to an event <span class="math inline">\(A\)</span> a nonnegative number, <span class="math inline">\(P[A]\)</span>, that represents how likely it is that event <span class="math inline">\(A\)</span> occurs as a result of the experiment.</li>
 </ul>
 <p>We call <span class="math inline">\(P[A]\)</span> the <strong>probability</strong> of event <span class="math inline">\(A\)</span>. An <strong>event</strong> <span class="math inline">\(A\)</span> could be any subset of the sample space, not necessarily a single possible outcome. The probability law must follow a number of rules, which are the result of a set of axioms that we introduce now.</p>
 </div>
 <div id="probability-axioms" class="section level2">
 <h2><span class="header-section-number">1.2</span> Probability Axioms</h2>
-<p>Given a sample space <span class="math inline">\(\Omega\)</span> for a particular experiment, the <strong>probability function</strong> associated with the experiement must satisfy the following axioms.</p>
+<p>Given a sample space <span class="math inline">\(\Omega\)</span> for a particular experiment, the <strong>probability function</strong> associated with the experiment must satisfy the following axioms.</p>
 <ol style="list-style-type: decimal">
 <li><em>Nonnegativity</em>: <span class="math inline">\(P[A] \geq 0\)</span> for any event <span class="math inline">\(A \subset \Omega\)</span>.</li>
 <li><em>Normalization</em>: <span class="math inline">\(P[\Omega] = 1\)</span>. That is, the probability of the entire space is 1.</li>
@@ -210,11 +210,11 @@ P[A^c] = 1 - P[A]
 <p><span class="math display">\[
 P[A \cup B] = P[A] + P[B] - P[A \cap B]
 \]</span></p>
-<p>If additionally <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <em>disjoint</em>, then we have:</p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are also <em>disjoint</em>, then we have:</p>
 <p><span class="math display">\[
 P[A \cup B] = P[A] + P[B]
 \]</span></p>
-<p>If we had <span class="math inline">\(n\)</span> mutually exclusive events, <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, then we have:</p>
+<p>If we have <span class="math inline">\(n\)</span> mutually exclusive events, <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, then we have:</p>
 <p><span class="math display">\[
 P\left[\textstyle\bigcup_{i = 1}^{n} E_i\right] = \sum_{i = 1}^{n} P[E_i]
 \]</span></p>
@@ -224,7 +224,7 @@ P[A \mid B] = \frac{P[A \cap B]}{P[B]}
 \]</span></p>
 <p>Rearranging the conditional probability rule, we obtain the <strong>multiplication rule</strong>:</p>
 <p><span class="math display">\[
-P[A \cap B] = P[A \mid B] \cdot P[B]
+P[A \cap B] = P[B] \cdot P[A \mid B] \cdot 
 \]</span></p>
 <p>For a number of events <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, the multiplication rule can be expanded into the <strong>chain rule</strong>:</p>
 <p><span class="math display">\[
@@ -246,7 +246,7 @@ P[A_i | B] = \frac{P[A_i]P[B | A_i]}{P[B]} = \frac{P[A_i]P[B | A_i]}{\sum_{i = 1
 <p><span class="math display">\[
 P[B] = \sum_{i = 1}^{n}P[A_i]P[B | A_i]
 \]</span></p>
-<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are said to be <strong>independent</strong> if they statisfy</p>
+<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are said to be <strong>independent</strong> if they satisfy</p>
 <p><span class="math display">\[
 P[A \cap B] = P[A] \cdot P[B]
 \]</span></p>
@@ -276,7 +276,7 @@ P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
 <div id="discrete-random-variables" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> Discrete Random Variables</h3>
 <ul>
-<li>most commonly defined as possible values + pmf (probabilites)</li>
+<li>most commonly defined as possible values + pmf (probabilities)</li>
 <li>binomial as example, parameters</li>
 </ul>
 </div>
@@ -300,9 +300,11 @@ P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
 </div>
 <div id="expectations" class="section level2">
 <h2><span class="header-section-number">1.5</span> Expectations</h2>
+<p>For discrete random variables, we define the <strong>expectation</strong> of the function of a random variable <span class="math inline">\(X\)</span> as follows.</p>
 <p><span class="math display">\[
 \mathbb{E}[f(X)] \triangleq \sum_{x} f(x)p(x)
 \]</span></p>
+<p>For continuous random variables we have a similar definition.</p>
 <p><span class="math display">\[
 \mathbb{E}[f(X)] \triangleq \int f(x)p(x) dx
 \]</span></p>
@@ -310,23 +312,25 @@ P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
 \mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X]
 \]</span></p>
 <p><span class="math display">\[
-\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2]
+\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
 \]</span></p>
 <p><span class="math display">\[
 \sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}
 \]</span></p>
 <p><span class="math display">\[
-\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]
+\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y]
 \]</span></p>
 </div>
 <div id="likelihood" class="section level2">
 <h2><span class="header-section-number">1.6</span> Likelihood</h2>
+<p>Consider <span class="math inline">\(n\)</span> iid random variables <span class="math inline">\(X_1, X_2, \ldots X_n\)</span>. We can then write their likelihood as</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \prod_{i = i}^n f(x_i; \theta)
+\]</span></p>
+<p>where <span class="math inline">\(f(x_i; \theta)\)</span> is the density (mass) function for random variable <span class="math inline">\(X_i\)</span> evaluated at <span class="math inline">\(x_i\)</span> with parameter <span class="math inline">\(\theta\)</span>.</p>
 <ul>
 <li>discussion of parameters</li>
 </ul>
-<p><span class="math display">\[
-\mathcal{L}(\theta \mid x_1, x_2, \ldots x_n)
-\]</span></p>
 </div>
 <div id="bayesian-nomenclature" class="section level2">
 <h2><span class="header-section-number">1.7</span> Bayesian Nomenclature</h2>
@@ -354,7 +358,7 @@ P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
 <li>Statistics Texts with Introduction to Probability
 <ul>
 <li><a href="https://www.pearsonhighered.com/program/Hogg-Probability-and-Statistical-Inference-9th-Edition/PGM91556.html">Probability and Statistical Inference</a> by Robert V. Hogg, Elliot Tanis, and Dale Zimmerman</li>
-<li><a href="https://www.pearsonhighered.com/program/Hogg-Introduction-to-Mathematical-Statistics-7th-Edition/PGM49624.html">Introduction to Mathematical Statistics</a> by Robert V. Hogg, Joeseph McKean, and Allen T. Craig</li>
+<li><a href="https://www.pearsonhighered.com/program/Hogg-Introduction-to-Mathematical-Statistics-7th-Edition/PGM49624.html">Introduction to Mathematical Statistics</a> by Robert V. Hogg, Joseph McKean, and Allen T. Craig</li>
 </ul></li>
 </ul>
 
