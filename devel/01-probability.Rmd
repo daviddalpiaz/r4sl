@@ -1,0 +1,80 @@
+# Probability Review
+
+
+## Probability Rules
+
+$$
+P[A \cap B] = P[A \mid B] \cdot P[B]
+$$
+
+- cond prob
+- bayes rule
+- ind events
+
+
+## Random Variables
+
+- basic idea
+- how events can be written in terms of RVs
+- ind rvs
+
+
+### Distributions
+
+- basic, unmathematical defn
+- discussion of parameters
+
+
+### Continuous
+
+- most commonly defined as possible values + pdf, can also use cdf or mgf
+- normal as example
+
+
+### Discrete
+
+- most commonly defined as possible values + pmf (probabilites)
+- binomial as example
+
+
+### Several Random Variables
+
+- joint, marginal, conditional
+
+
+## Expectations
+
+$$
+\mathbb{E}[f(X)] \triangleq \sum_{x} f(x)p(x)
+$$
+
+$$
+\mathbb{E}[f(X)] \triangleq \int f(x)p(x) dx
+$$
+
+$$
+\mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X]
+$$
+
+$$
+\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2]
+$$
+
+$$
+\sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}
+$$
+
+- covariance
+
+
+## Likelihood
+
+
+## References
+
+- MIT book
+- murphy bayes ML
+- ross
+- dasgupta  
+- hogg tanis
+- hogg craig
