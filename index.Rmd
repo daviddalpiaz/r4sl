@@ -12,12 +12,6 @@ url: 'http\://daviddalpiaz.github.io/r4sl/'
 description: ""
 ---
 
-```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
-require(knitr)
-knit_hooks$set(purl = hook_purl)
-opts_template$set(nopurl = list(purl = FALSE))
-opts_template$set(dopurl = list(purl = TRUE))
-```
 
 # Introduction {-}
 
