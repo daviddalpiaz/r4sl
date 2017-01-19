@@ -122,8 +122,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>1.5</b> Expectations</a></li>
 <li class="chapter" data-level="1.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>1.6</b> Likelihood</a></li>
-<li class="chapter" data-level="1.7" data-path="probability-review.html"><a href="probability-review.html#bayesian-nomenclature"><i class="fa fa-check"></i><b>1.7</b> Bayesian Nomenclature</a></li>
-<li class="chapter" data-level="1.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
+<li class="chapter" data-level="1.7" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>1.7</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
 <li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-resources"><i class="fa fa-check"></i><b>2.1</b> <code>R</code> Resources</a></li>
@@ -275,27 +274,56 @@ P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
 </div>
 <div id="discrete-random-variables" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> Discrete Random Variables</h3>
+<p>The distribution of a discrete random variable <span class="math inline">\(X\)</span> is most often specified by a list of possible values and a probability <strong>mass</strong> function, <span class="math inline">\(p(x)\)</span>. The mass function directly gives probabilities, that is,</p>
+<p><span class="math display">\[
+p(x) = p_X(x) = P[X = x].
+\]</span></p>
+<p>Note we almost always drop the subscript from the more correct <span class="math inline">\(p_X(x)\)</span> and simply refer to <span class="math inline">\(p(x)\)</span>. The relevant random variable is discerned from context</p>
+<p>The most common example of a discrete random variable is a <strong>binomial</strong> random variable. The mass function of a binomial random variable <span class="math inline">\(X\)</span>, is given by</p>
+<p><span class="math display">\[
+p(x | n, p) = {n \choose x} p^x(1 - p)^{n - x}, \ \ \ x = 0, 1, \ldots, n, \ n \in \mathbb{N}, \ 0 &lt; p &lt; 1.
+\]</span></p>
+<p>This line conveys a large ammount of information.</p>
 <ul>
-<li>most commonly defined as possible values + pmf (probabilities)</li>
-<li>binomial as example, parameters</li>
+<li>The function <span class="math inline">\(p(x | n, p)\)</span> is the mass function. It is a function of <span class="math inline">\(x\)</span>, the possible values of the random variable <span class="math inline">\(X\)</span>. It is conditional on the <strong>paramters</strong> <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>. Different values of these parameters specify different binomial distributions.</li>
+<li><span class="math inline">\(x = 0, 1, \ldots, n\)</span> indicates the <strong>sample space</strong>, that is, the possible values of the random variable.</li>
+<li><span class="math inline">\(n \in \mathbb{N}\)</span> and <span class="math inline">\(0 &lt; p &lt; 1\)</span> specify the <strong>parameter spaces</strong>. These are the possible values of the parameters that give a valid binomial distribution.</li>
 </ul>
+<p>Often all of this information is simply encoded by writing</p>
+<p><span class="math display">\[
+X \sim \text{bin}(n, p).
+\]</span></p>
 </div>
 <div id="continuous-random-variables" class="section level3">
 <h3><span class="header-section-number">1.4.3</span> Continuous Random Variables</h3>
+<p>The distribution of a continuous random variable <span class="math inline">\(X\)</span> is most often specified by a set of possible values and a probability <strong>density</strong> function, <span class="math inline">\(f(x)\)</span>. (A cumulative density or moment generating function would also suffice.)</p>
+<p>The probability of the event <span class="math inline">\(a &lt; X &lt; b\)</span> is calculated as</p>
+<p><span class="math display">\[
+P[a &lt; X &lt; b] = \int_{a}^{b} f(x)dx.
+\]</span></p>
+<p>Note that densities are <strong>not</strong> probabilities.</p>
+<p>The most common example of a continuous random variable is a <strong>normal</strong> random variable. The density of a normal random variable <span class="math inline">\(X\)</span>, is given by</p>
+<p><span class="math display">\[
+f(x | \mu, \sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} \cdot \exp\left[\frac{-1}{2} \left(\frac{x - \mu}{\sigma}\right)^2 \right],  \ \ \ -\infty &lt; x &lt; \infty, \ -\infty &lt; \mu &lt; \infty, \ \sigma &gt; 0.
+\]</span></p>
 <ul>
-<li>most commonly defined as possible values + pdf, can also use cdf or mgf</li>
-<li>normal as example, parameters</li>
+<li>The function <span class="math inline">\(f(x | \mu, \sigma^2)\)</span> is the density function. It is a function of <span class="math inline">\(x\)</span>, the possible values of the random variable <span class="math inline">\(X\)</span>. It is conditional on the <strong>paramters</strong> <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. Different values of these parameters specify different normal distributions.</li>
+<li><span class="math inline">\(-\infty &lt; x &lt; \infty\)</span> indicates the sample space. In this case, the random variable may take any value on the real line.</li>
+<li><span class="math inline">\(-\infty &lt; \mu &lt; \infty\)</span> and <span class="math inline">\(\sigma &gt; 0\)</span> specify the parameter space. These are the possible values of the parameters that give a valid normal distribution.</li>
 </ul>
+<p>Often all of this information is simply encoded by writing</p>
+<p><span class="math display">\[
+X \sim N(\mu, \sigma^2)
+\]</span></p>
 </div>
 <div id="several-random-variables" class="section level3">
 <h3><span class="header-section-number">1.4.4</span> Several Random Variables</h3>
-<ul>
-<li>discussion only two DRV, note extensions to several and continuous</li>
-<li>ind</li>
-<li>joint</li>
-<li>marginal</li>
-<li>conditional</li>
-</ul>
+<p>Consider two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We say they are independent if</p>
+<p><span class="math display">\[
+f(x, y) = f(x) \cdot f(y)
+\]</span></p>
+<p>for all <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Here <span class="math inline">\(f(x, y)\)</span> is the <strong>joint</strong> density (mass) function of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We call <span class="math inline">\(f(x)\)</span> the <strong>marginal</strong> density (mass) function of <span class="math inline">\(X\)</span>. Then <span class="math inline">\(f(y)\)</span> the marginal density (mass) function of <span class="math inline">\(Y\)</span>. The joint density (mass) function <span class="math inline">\(f(x, y)\)</span> together with the possible <span class="math inline">\((x, y)\)</span> values specify the joint distribution of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+<p>Similar notions exist for more than two variables.</p>
 </div>
 </div>
 <div id="expectations" class="section level2">
@@ -308,41 +336,41 @@ P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
 <p><span class="math display">\[
 \mathbb{E}[f(X)] \triangleq \int f(x)p(x) dx
 \]</span></p>
+<p>For specific functions <span class="math inline">\(f\)</span>, expectations are given names.</p>
+<p>The <strong>mean</strong> of a random variable <span class="math inline">\(X\)</span> is given by</p>
 <p><span class="math display">\[
-\mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X]
+\mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X].
 \]</span></p>
+<p>So for a discrete random variable, we would have</p>
 <p><span class="math display">\[
-\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\text{mean}[X] = \sum_{x} x \cdot p(x)
 \]</span></p>
+<p>For a continuous random variable we would simply replace the sum by an integral.</p>
+<p>The <strong>variance</strong> of a random variable <span class="math inline">\(X\)</span> is given by</p>
 <p><span class="math display">\[
-\sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}
+\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2.
 \]</span></p>
+<p>The **standard deviation of a random variable <span class="math inline">\(X\)</span> is given by</p>
 <p><span class="math display">\[
-\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y]
+\sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}.
+\]</span></p>
+<p>The <strong>covariance</strong> or random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by</p>
+<p><span class="math display">\[
+\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y].
 \]</span></p>
 </div>
 <div id="likelihood" class="section level2">
 <h2><span class="header-section-number">1.6</span> Likelihood</h2>
-<p>Consider <span class="math inline">\(n\)</span> iid random variables <span class="math inline">\(X_1, X_2, \ldots X_n\)</span>. We can then write their likelihood as</p>
+<p>Consider <span class="math inline">\(n\)</span> iid random variables <span class="math inline">\(X_1, X_2, \ldots X_n\)</span>. We can then write their <strong>likelihood</strong> as</p>
 <p><span class="math display">\[
 \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \prod_{i = i}^n f(x_i; \theta)
 \]</span></p>
-<p>where <span class="math inline">\(f(x_i; \theta)\)</span> is the density (mass) function for random variable <span class="math inline">\(X_i\)</span> evaluated at <span class="math inline">\(x_i\)</span> with parameter <span class="math inline">\(\theta\)</span>.</p>
-<ul>
-<li>discussion of parameters</li>
-</ul>
-</div>
-<div id="bayesian-nomenclature" class="section level2">
-<h2><span class="header-section-number">1.7</span> Bayesian Nomenclature</h2>
-<ul>
-<li>post</li>
-<li>prior</li>
-<li>likelihood</li>
-<li>post ~ prior * likelihood</li>
-</ul>
+<p>where <span class="math inline">\(f(x_i; \theta)\)</span> is the density (or mass) function of random variable <span class="math inline">\(X_i\)</span> evaluated at <span class="math inline">\(x_i\)</span> with parameter <span class="math inline">\(\theta\)</span>.</p>
+<p>Whereas a probability is a function of a possible observed value given a particular parameter value, a likelihood is the opposite. It is a function of a possible parameter value given observed data.</p>
+<p>Maximumizing likelihood is a common techinque for fitting a model to data.</p>
 </div>
 <div id="references" class="section level2">
-<h2><span class="header-section-number">1.8</span> References</h2>
+<h2><span class="header-section-number">1.7</span> References</h2>
 <p>Any of the following are either dedicated to, or contain a good coverage of the details of the topics above.</p>
 <ul>
 <li>Probability Texts

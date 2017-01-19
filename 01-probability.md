@@ -124,6 +124,7 @@ $$
 
 A **random variable** is simply a *function* which maps outcomes in the sample space to real numbers.
 
+
 ### Distributions
 
 We often talk about the **distribution** of a random variable, which can be thought of as:
@@ -136,23 +137,75 @@ This is not a strict mathematical definition, but is useful for conveying the id
 
 If the possible values of a random variables are *discrete*, it is called a *discrete random variable*. If the possible values of a random variables are *continuous*, it is called a *continuous random variable*. 
 
+
 ### Discrete Random Variables
 
-- most commonly defined as possible values + pmf (probabilities)
-- binomial as example,  parameters
+The distribution of a discrete random variable $X$ is most often specified by a list of possible values and a probability **mass** function, $p(x)$. The mass function directly gives probabilities, that is, 
+
+$$
+p(x) = p_X(x) = P[X = x].
+$$
+
+Note we almost always drop the subscript from the more correct $p_X(x)$ and simply refer to $p(x)$. The relevant random variable is discerned from context
+
+The most common example of a discrete random variable is a **binomial** random variable. The mass function of a binomial random variable $X$, is given by
+
+$$
+p(x | n, p) = {n \choose x} p^x(1 - p)^{n - x}, \ \ \ x = 0, 1, \ldots, n, \ n \in \mathbb{N}, \ 0 < p < 1.
+$$
+
+This line conveys a large ammount of information.
+
+- The function $p(x | n, p)$ is the mass function. It is a function of $x$, the possible values of the random variable $X$. It is conditional on the **paramters** $n$ and $p$. Different values of these parameters specify different binomial distributions.
+- $x = 0, 1, \ldots, n$ indicates the **sample space**, that is, the possible values of the random variable.
+- $n \in \mathbb{N}$ and $0 < p < 1$ specify the **parameter spaces**. These are the possible values of the parameters that give a valid binomial distribution.
+
+Often all of this information is simply encoded by writing
+
+$$
+X \sim \text{bin}(n, p).
+$$
+
 
 ### Continuous Random Variables
 
-- most commonly defined as possible values + pdf, can also use cdf or mgf
-- normal as example, parameters
+The distribution of a continuous random variable $X$ is most often specified by a set of possible values and a probability **density** function, $f(x)$. (A cumulative density or moment generating function would also suffice.)
+
+The probability of the event $a < X < b$ is calculated as
+
+$$
+P[a < X < b] = \int_{a}^{b} f(x)dx.
+$$
+
+Note that densities are **not** probabilities.
+
+The most common example of a continuous random variable is a **normal** random variable. The density of a normal random variable $X$, is given by 
+
+$$
+f(x | \mu, \sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} \cdot \exp\left[\frac{-1}{2} \left(\frac{x - \mu}{\sigma}\right)^2 \right],  \ \ \ -\infty < x < \infty, \ -\infty < \mu < \infty, \ \sigma > 0.
+$$
+
+- The function $f(x | \mu, \sigma^2)$ is the density function. It is a function of $x$, the possible values of the random variable $X$. It is conditional on the **paramters** $\mu$ and $\sigma^2$. Different values of these parameters specify different normal distributions.
+- $-\infty < x < \infty$ indicates the sample space. In this case, the random variable may take any value on the real line.
+- $-\infty < \mu < \infty$ and $\sigma > 0$ specify the parameter space. These are the possible values of the parameters that give a valid normal distribution.
+
+Often all of this information is simply encoded by writing
+
+$$
+X \sim N(\mu, \sigma^2)
+$$
 
 ### Several Random Variables
 
-- discussion only two DRV, note extensions to several and continuous
-- ind
-- joint
-- marginal
-- conditional
+Consider two random variables $X$ and $Y$. We say they are independent if
+
+$$
+f(x, y) = f(x) \cdot f(y)
+$$
+
+for all $x$ and $y$. Here $f(x, y)$ is the **joint** density (mass) function of $X$ and $Y$. We call $f(x)$ the **marginal** density (mass) function of $X$. Then $f(y)$ the marginal density (mass) function of $Y$. The joint density (mass) function $f(x, y)$ together with the possible $(x, y)$ values specify the joint distribution of $X$ and $Y$.
+
+Similar notions exist for more than two variables.
 
 
 ## Expectations
@@ -169,43 +222,54 @@ $$
 \mathbb{E}[f(X)] \triangleq \int f(x)p(x) dx
 $$
 
-$$
-\mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X]
-$$
+For specific functions $f$, expectations are given names.
+
+The **mean** of a random variable $X$ is given by
 
 $$
-\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X].
 $$
 
-$$
-\sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}
-$$
+So for a discrete random variable, we would have
 
 $$
-\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y]
+\text{mean}[X] = \sum_{x} x \cdot p(x)
+$$
+
+For a continuous random variable we would simply replace the sum by an integral.
+
+The **variance** of a random variable $X$ is given by
+
+$$
+\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2.
+$$
+
+The **standard deviation of a random variable $X$ is given by
+
+$$
+\sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}.
+$$
+
+The **covariance** or random variables $X$ and $Y$ is given by
+
+$$
+\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y].
 $$
 
 
 ## Likelihood
 
-
-
-Consider $n$ iid random variables $X_1, X_2, \ldots X_n$. We can then write their likelihood as
+Consider $n$ iid random variables $X_1, X_2, \ldots X_n$. We can then write their **likelihood** as
 
 $$
 \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \prod_{i = i}^n f(x_i; \theta)
 $$
 
-where $f(x_i; \theta)$ is the density (mass) function for random variable $X_i$ evaluated at $x_i$ with parameter $\theta$.
+where $f(x_i; \theta)$ is the density (or mass) function of random variable $X_i$ evaluated at $x_i$ with parameter $\theta$.
 
-- discussion of parameters
+Whereas a probability is a function of a possible observed value given a particular parameter value, a likelihood is the opposite. It is a function of a possible parameter value given observed data.
 
-## Bayesian Nomenclature
-
-- post
-- prior
-- likelihood
-- post ~ prior * likelihood
+Maximumizing likelihood is a common techinque for fitting a model to data.
 
 
 ## References

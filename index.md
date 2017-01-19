@@ -13,7 +13,6 @@ description: ""
 ---
 
 
-
 # Introduction {-}
 
 Welcome to Applied Statistics with `R`!
