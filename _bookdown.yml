@@ -3,6 +3,6 @@ chapter_name: "Chapter "
 repo: https://github.com/daviddalpiaz/r4sl
 rmd_files: ["index.Rmd", 
             "01-Introduction.Rmd",
-            "02-r-intro"]
+            "02-r-intro.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
