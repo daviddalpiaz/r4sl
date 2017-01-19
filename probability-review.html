@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="probability-review.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="introduction-to-r.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -175,51 +175,188 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R for Statistical Learning</h1>
-<h4 class="author"><em>David Dalpiaz</em></h4>
-<h4 class="date"><em>2017-01-19</em></h4>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p>Welcome to Applied Statistics with <code>R</code>!</p>
-<div id="about-this-book" class="section level2">
-<h2><span class="header-section-number">0.1</span> About This Book</h2>
-<p>This book will serve as a supplement to <a href="http://www-bcf.usc.edu/~gareth/ISL/">An Introduction to Statistical Learning</a> for <a href="https://go.illinois.edu/stat430">STAT 430 - Basics of Statistical Learning</a> at the <a href="http://illinois.edu/">University of Illinois at Urbana-Champaign</a>.</p>
-<p>Chapters will come in roughly three flavors:</p>
+<div id="probability-review" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Probability Review</h1>
+<p>We give a very brief review of some necessary probability concepts. As the treatment is less than complete, a list of references is given at the end of the chapter. For example, we ignore the usual recap of basic set theory and omit proofs and examples.</p>
+<div id="probability-models" class="section level2">
+<h2><span class="header-section-number">1.1</span> Probability Models</h2>
+<p>When discussing probability models, we speak of random <strong>experiments</strong> that produce one of a number of possible <strong>outcomes</strong>.</p>
+<p>A <strong>probability model</strong> that describes the uncertainty of an experiment consists of two elements:</p>
 <ul>
-<li><strong>Notes</strong> that discuss mathematics in greater detail.</li>
-<li><strong>Tutorials</strong> that illustrate the use of <code>R</code> for statistical learning.</li>
-<li><strong>Analyses</strong> that show end-to-end analysis of a particular dataset.</li>
+<li>The <strong>sample space</strong>, often denoted as <span class="math inline">\(\Omega\)</span>, which is a set which contains all possible outcomes.</li>
+<li>A <strong>probability function</strong> that assigns to an event <span class="math inline">\(A\)</span> a nonnegative number, <span class="math inline">\(P[A]\)</span>, that represents how likely it is that event <span class="math inline">\(A\)</span> occurs as a result of the experiment.</li>
 </ul>
-<p>This book is under active development. Chapters will be added as we move through the course. Often they will be more in the style of course notes than a fully narrative text.</p>
-<p>When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a <a href="http://daviddalpiaz.github.io/r4sl/r4sl.pdf"><strong>pdf version</strong> is continuously maintained</a>.</p>
-<p>Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (<code>dalpiaz2 AT illinois DOT edu</code>) Or, if you know RMarkdown and are familiar with GitHub, <a href="https://github.com/daviddalpiaz/r4sl">make a pull request and fix an issue yourself!</a> This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We’ll also link to your GitHub account, or personal website upon request.</p>
-<p>This text uses MathJax to render mathematical notation for the web. Occasionally, but rarely, a JavaScript error will prevent MathJax from rendering correctly. In this case, you will see the “code” instead of the expected mathematical equations. From experience, this is almost always fixed by simply refreshing the page. You’ll also notice that if you right-click any equation you can obtain the MathML Code (for copying into Microsoft Word) or the TeX command used to generate the equation.</p>
+<p>We call <span class="math inline">\(P[A]\)</span> the <strong>probability</strong> of event <span class="math inline">\(A\)</span>. An <strong>event</strong> <span class="math inline">\(A\)</span> could be any subset of the sample space, not necessarily a single possible outcome. The probability law must follow a number of rules, which are the result of a set of axioms that we introduce now.</p>
+</div>
+<div id="probability-axioms" class="section level2">
+<h2><span class="header-section-number">1.2</span> Probability Axioms</h2>
+<p>Given a sample space <span class="math inline">\(\Omega\)</span> for a particular experiment, the <strong>probability function</strong> associated with the experiement must satisfy the following axioms.</p>
+<ol style="list-style-type: decimal">
+<li><em>Nonnegativity</em>: <span class="math inline">\(P[A] \geq 0\)</span> for any event <span class="math inline">\(A \subset \Omega\)</span>.</li>
+<li><em>Normalization</em>: <span class="math inline">\(P[\Omega] = 1\)</span>. That is, the probability of the entire space is 1.</li>
+<li><em>Additivity</em>: For mutually exclusive events <span class="math inline">\(E_1, E_2, \ldots\)</span> <span class="math display">\[
+P\left[\bigcup_{i = 1}^{\infty} E_i\right] = \sum_{i = 1}^{\infty} P[E_i]
+\]</span></li>
+</ol>
+<p>Using these axioms, many additional probability rules can easily be derived.</p>
+</div>
+<div id="probability-rules" class="section level2">
+<h2><span class="header-section-number">1.3</span> Probability Rules</h2>
+<p>Given an event <span class="math inline">\(A\)</span>, and its complement, <span class="math inline">\(A^c\)</span>, that is, the outcomes in <span class="math inline">\(\Omega\)</span> which are not in <span class="math inline">\(A\)</span>, we have the <strong>complement rule</strong>:</p>
 <p><span class="math display">\[
-a^2 + b^2 = c^2
+P[A^c] = 1 - P[A]
+\]</span></p>
+<p>In general, for two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, we have the <strong>addition rule</strong>:</p>
+<p><span class="math display">\[
+P[A \cup B] = P[A] + P[B] - P[A \cap B]
+\]</span></p>
+<p>If additionally <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <em>disjoint</em>, then we have:</p>
+<p><span class="math display">\[
+P[A \cup B] = P[A] + P[B]
+\]</span></p>
+<p>If we had <span class="math inline">\(n\)</span> mutually exclusive events, <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, then we have:</p>
+<p><span class="math display">\[
+P\left[\textstyle\bigcup_{i = 1}^{n} E_i\right] = \sum_{i = 1}^{n} P[E_i]
+\]</span></p>
+<p>Often, we would like to understand the probability of an event <span class="math inline">\(A\)</span>, given some information about the outcome of event <span class="math inline">\(B\)</span>. In that case, we have the <strong>conditional probability rule</strong> provided <span class="math inline">\(P[B] &gt; 0\)</span>.</p>
+<p><span class="math display">\[
+P[A \mid B] = \frac{P[A \cap B]}{P[B]}
+\]</span></p>
+<p>Rearranging the conditional probability rule, we obtain the <strong>multiplication rule</strong>:</p>
+<p><span class="math display">\[
+P[A \cap B] = P[A \mid B] \cdot P[B]
+\]</span></p>
+<p>For a number of events <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, the multiplication rule can be expanded into the <strong>chain rule</strong>:</p>
+<p><span class="math display">\[
+P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = P[E_1] \cdot P[E_2 \mid E_1] \cdot P[E_3 \mid E_1 \cap E_2] \cdots P\left[E_n \mid \textstyle\bigcap_{i = 1}^{n - 1} E_i\right] 
+\]</span></p>
+<p>Define a <strong>partition</strong> of a sample space <span class="math inline">\(\Omega\)</span> to be a set of disjoint events <span class="math inline">\(A_1, A_2, \ldots, A_n\)</span> whose union is the sample space <span class="math inline">\(\Omega\)</span>. That is</p>
+<p><span class="math display">\[
+A_i \cap A_j = \emptyset
+\]</span></p>
+<p>for all <span class="math inline">\(i \neq j\)</span>, and</p>
+<p><span class="math display">\[
+\bigcup_{i = 1}^{n} A_i = \Omega.
+\]</span></p>
+<p>Now, let <span class="math inline">\(A_1, A_2, \ldots, A_n\)</span> form a partition of the sample space where <span class="math inline">\(P[A_i] &gt; 0\)</span> for all <span class="math inline">\(i\)</span>. Then for any event <span class="math inline">\(B\)</span> with <span class="math inline">\(P[B] &gt; 0\)</span> we have <strong>Bayes’ Rule</strong>:</p>
+<p><span class="math display">\[
+P[A_i | B] = \frac{P[A_i]P[B | A_i]}{P[B]} = \frac{P[A_i]P[B | A_i]}{\sum_{i = 1}^{n}P[A_i]P[B | A_i]}
+\]</span></p>
+<p>The denominator of the latter equality is often called the <strong>law of total probability</strong>:</p>
+<p><span class="math display">\[
+P[B] = \sum_{i = 1}^{n}P[A_i]P[B | A_i]
+\]</span></p>
+<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are said to be <strong>independent</strong> if they statisfy</p>
+<p><span class="math display">\[
+P[A \cap B] = P[A] \cdot P[B]
+\]</span></p>
+<p>This becomes the new multiplication rule for independent events.</p>
+<p>A collection of events <span class="math inline">\(E_1, E_2, \ldots E_n\)</span> is said to be independent if</p>
+<p><span class="math display">\[
+P\left[\bigcup_{i \in S} E_i \right] = \prod_{i \in S}P[A_i]
+\]</span></p>
+<p>for every subset <span class="math inline">\(S\)</span> of <span class="math inline">\(\{1, 2, \ldots n\}\)</span>.</p>
+<p>If this is the case, then the chain rule is greatly simplified to:</p>
+<p><span class="math display">\[
+P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
 \]</span></p>
 </div>
-<div id="conventions" class="section level2">
-<h2><span class="header-section-number">0.2</span> Conventions</h2>
-<p><code>R</code> code will be typeset using a <code>monospace</code> font which is syntax highlighted.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">3</span>
-b &lt;-<span class="st"> </span><span class="dv">4</span>
-<span class="kw">sqrt</span>(a ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span>b ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
-<p><code>R</code> output lines, which would appear in the console will begin with <code>##</code>. They will generally not be syntax highlighted.</p>
-<pre><code>## [1] 5</code></pre>
-<p>Often the sybmol <span class="math inline">\(\triangleq\)</span> will be used to mean “is defined to be.”</p>
+<div id="random-variables" class="section level2">
+<h2><span class="header-section-number">1.4</span> Random Variables</h2>
+<p>A <strong>random variable</strong> is simply a <em>function</em> which maps outcomes in the sample space to real numbers.</p>
+<div id="distributions" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Distributions</h3>
+<p>We often talk about the <strong>distribution</strong> of a random variable, which can be thought of as:</p>
+<p><span class="math display">\[
+\text{distribution} = \text{list of possible} \textbf{ values} + \text{associated} \textbf{ probabilities}
+\]</span></p>
+<p>This is not a strict mathematical definition, but is useful for conveying the idea.</p>
+<p>If the possible values of a random variables are <em>discrete</em>, it is called a <em>discrete random variable</em>. If the possible values of a random variables are <em>continuous</em>, it is called a <em>continuous random variable</em>.</p>
 </div>
-<div id="acknowledgements" class="section level2">
-<h2><span class="header-section-number">0.3</span> Acknowledgements</h2>
-<p>Your name could be here! Suggest an edit!</p>
+<div id="discrete-random-variables" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Discrete Random Variables</h3>
+<ul>
+<li>most commonly defined as possible values + pmf (probabilites)</li>
+<li>binomial as example, parameters</li>
+</ul>
 </div>
-<div id="license" class="section level2">
-<h2><span class="header-section-number">0.4</span> License</h2>
-<div class="figure">
-<img src="images/cc.png" alt="This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License." />
-<p class="caption">This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+<div id="continuous-random-variables" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Continuous Random Variables</h3>
+<ul>
+<li>most commonly defined as possible values + pdf, can also use cdf or mgf</li>
+<li>normal as example, parameters</li>
+</ul>
 </div>
+<div id="several-random-variables" class="section level3">
+<h3><span class="header-section-number">1.4.4</span> Several Random Variables</h3>
+<ul>
+<li>discussion only two DRV, note extensions to several and continuous</li>
+<li>ind</li>
+<li>joint</li>
+<li>marginal</li>
+<li>conditional</li>
+</ul>
+</div>
+</div>
+<div id="expectations" class="section level2">
+<h2><span class="header-section-number">1.5</span> Expectations</h2>
+<p><span class="math display">\[
+\mathbb{E}[f(X)] \triangleq \sum_{x} f(x)p(x)
+\]</span></p>
+<p><span class="math display">\[
+\mathbb{E}[f(X)] \triangleq \int f(x)p(x) dx
+\]</span></p>
+<p><span class="math display">\[
+\mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X]
+\]</span></p>
+<p><span class="math display">\[
+\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2]
+\]</span></p>
+<p><span class="math display">\[
+\sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}
+\]</span></p>
+<p><span class="math display">\[
+\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]
+\]</span></p>
+</div>
+<div id="likelihood" class="section level2">
+<h2><span class="header-section-number">1.6</span> Likelihood</h2>
+<ul>
+<li>discussion of parameters</li>
+</ul>
+<p><span class="math display">\[
+\mathcal{L}(\theta \mid x_1, x_2, \ldots x_n)
+\]</span></p>
+</div>
+<div id="bayesian-nomenclature" class="section level2">
+<h2><span class="header-section-number">1.7</span> Bayesian Nomenclature</h2>
+<ul>
+<li>post</li>
+<li>prior</li>
+<li>likelihood</li>
+<li>post ~ prior * likelihood</li>
+</ul>
+</div>
+<div id="references" class="section level2">
+<h2><span class="header-section-number">1.8</span> References</h2>
+<p>Any of the following are either dedicated to, or contain a good coverage of the details of the topics above.</p>
+<ul>
+<li>Probability Texts
+<ul>
+<li><a href="http://athenasc.com/probbook.html">Introduction to Probability</a> by Dimitri P. Bertsekas and John N. Tsitsiklis</li>
+<li><a href="https://www.pearsonhighered.com/program/Ross-First-Course-in-Probability-A-9th-Edition/PGM110742.html">A First Course in Probability</a> by Sheldon Ross</li>
+</ul></li>
+<li>Machine Learning Texts with Probability Focus
+<ul>
+<li><a href="http://www.springer.com/us/book/9781441996336">Probability for Statistics and Machine Learning</a> by Anirban DasGupta</li>
+<li><a href="https://mitpress.mit.edu/books/machine-learning-0">Machine Learning: A Probabilistic Perspective</a> by Kevin P. Murphy</li>
+</ul></li>
+<li>Statistics Texts with Introduction to Probability
+<ul>
+<li><a href="https://www.pearsonhighered.com/program/Hogg-Probability-and-Statistical-Inference-9th-Edition/PGM91556.html">Probability and Statistical Inference</a> by Robert V. Hogg, Elliot Tanis, and Dale Zimmerman</li>
+<li><a href="https://www.pearsonhighered.com/program/Hogg-Introduction-to-Mathematical-Statistics-7th-Edition/PGM49624.html">Introduction to Mathematical Statistics</a> by Robert V. Hogg, Joeseph McKean, and Allen T. Craig</li>
+</ul></li>
+</ul>
 
 </div>
 </div>
@@ -228,8 +365,8 @@ b &lt;-<span class="st"> </span><span class="dv">4</span>
           </div>
         </div>
       </div>
-
-<a href="probability-review.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -258,7 +395,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/r4sl/edit/master/index.Rmd",
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/01-probability.Rmd",
 "text": "Edit"
 },
 "download": null,
