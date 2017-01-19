@@ -26,7 +26,9 @@ Chapters will come in roughly three flavors:
 - **Tutorials** that illustrate the use of `R` for statistical learning.
 - **Analyses** that show end-to-end analysis of a particular dataset.
 
-This book is under active development. Chapters will be added as we move through the course. When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a [**pdf version** is continuously maintained](http://daviddalpiaz.github.io/r4sl/r4sl.pdf).
+This book is under active development. Chapters will be added as we move through the course. Often they will be more in the style of course notes than a fully narrative text.
+
+When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a [**pdf version** is continuously maintained](http://daviddalpiaz.github.io/r4sl/r4sl.pdf).
 
 Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (`dalpiaz2 AT illinois DOT edu`) Or, if you know RMarkdown and are familiar with GitHub, [make a pull request and fix an issue yourself!](https://github.com/daviddalpiaz/r4sl) This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We'll also link to your GitHub account, or personal website upon request.
 
@@ -53,6 +55,8 @@ a <- 3
 b <- 4
 sqrt(a ^ 2 + b ^ 2)
 ```
+
+Often the sybmol $\triangleq$ will be used to mean "is defined to be."
 
 ## Acknowledgements
 
