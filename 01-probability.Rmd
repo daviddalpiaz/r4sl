@@ -1,8 +1,3 @@
----
-output:
-  html_document: default
-  pdf_document: default
----
 # Probability Review
 
 We give a very brief review of some necessary probability concepts. As the treatment is less than complete, a list of references is given at the end of the chapter. For example, we ignore the usual recap of basic set theory and omit proofs and examples.
@@ -14,7 +9,7 @@ When discussing probability models, we speak of random **experiments** that prod
 
 A **probability model** that describes the uncertainty of an experiment consists of two elements:
 
-- The **sample space**, often denoted as $\Omega$, which is a set which contains all possible outcomes.
+- The **sample space**, often denoted as $\Omega$, which is a set that contains all possible outcomes.
 -  A **probability function** that assigns to an event $A$ a nonnegative number, $P[A]$, that represents how likely it is that event $A$ occurs as a result of the experiment.
 
 We call $P[A]$ the **probability** of event $A$. An **event** $A$ could be any subset of the sample space, not necessarily a single possible outcome. The probability law must follow a number of rules, which are the result of a set of axioms that we introduce now.
@@ -22,7 +17,7 @@ We call $P[A]$ the **probability** of event $A$. An **event** $A$ could be any s
 
 ## Probability Axioms
 
-Given a sample space $\Omega$ for a particular experiment, the **probability function** associated with the experiement must satisfy the following axioms.
+Given a sample space $\Omega$ for a particular experiment, the **probability function** associated with the experiment must satisfy the following axioms.
 
 1. *Nonnegativity*: $P[A] \geq 0$ for any event $A \subset \Omega$.
 2. *Normalization*: $P[\Omega] = 1$. That is, the probability of the entire space is 1.
@@ -48,13 +43,13 @@ $$
 P[A \cup B] = P[A] + P[B] - P[A \cap B]
 $$
 
-If additionally $A$ and $B$ are *disjoint*, then we have:
+If $A$ and $B$ are also *disjoint*, then we have:
 
 $$
 P[A \cup B] = P[A] + P[B]
 $$
 
-If we had $n$ mutually exclusive events, $E_1, E_2, \ldots E_n$, then we have:
+If we have $n$ mutually exclusive events, $E_1, E_2, \ldots E_n$, then we have:
 
 $$
 P\left[\textstyle\bigcup_{i = 1}^{n} E_i\right] = \sum_{i = 1}^{n} P[E_i]
@@ -69,7 +64,7 @@ $$
 Rearranging the conditional probability rule, we obtain the **multiplication rule**:
 
 $$
-P[A \cap B] = P[A \mid B] \cdot P[B]
+P[A \cap B] = P[B] \cdot P[A \mid B] \cdot 
 $$
 
 For a number of events $E_1, E_2, \ldots E_n$, the multiplication rule can be expanded into the **chain rule**:
@@ -102,7 +97,7 @@ $$
 P[B] = \sum_{i = 1}^{n}P[A_i]P[B | A_i]
 $$
 
-Two events $A$ and $B$ are said to be **independent** if they statisfy
+Two events $A$ and $B$ are said to be **independent** if they satisfy
 
 $$
 P[A \cap B] = P[A] \cdot P[B]
@@ -143,7 +138,7 @@ If the possible values of a random variables are *discrete*, it is called a *dis
 
 ### Discrete Random Variables
 
-- most commonly defined as possible values + pmf (probabilites)
+- most commonly defined as possible values + pmf (probabilities)
 - binomial as example,  parameters
 
 ### Continuous Random Variables
@@ -162,9 +157,13 @@ If the possible values of a random variables are *discrete*, it is called a *dis
 
 ## Expectations
 
+For discrete random variables, we define the **expectation** of the function of a random variable $X$ as follows.
+
 $$
 \mathbb{E}[f(X)] \triangleq \sum_{x} f(x)p(x)
 $$
+
+For continuous random variables we have a similar definition.
 
 $$
 \mathbb{E}[f(X)] \triangleq \int f(x)p(x) dx
@@ -175,7 +174,7 @@ $$
 $$
 
 $$
-\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2]
+\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
 $$
 
 $$
@@ -183,18 +182,23 @@ $$
 $$
 
 $$
-\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]
+\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y]
 $$
 
 
 ## Likelihood
 
+
+
+Consider $n$ iid random variables $X_1, X_2, \ldots X_n$. We can then write their likelihood as
+
+$$
+\mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \prod_{i = i}^n f(x_i; \theta)
+$$
+
+where $f(x_i; \theta)$ is the density (mass) function for random variable $X_i$ evaluated at $x_i$ with parameter $\theta$.
+
 - discussion of parameters
-
-$$
-\mathcal{L}(\theta \mid x_1, x_2, \ldots x_n)
-$$
-
 
 ## Bayesian Nomenclature
 
@@ -216,5 +220,5 @@ Any of the following are either dedicated to, or contain a good coverage of the 
     - [Machine Learning: A Probabilistic Perspective](https://mitpress.mit.edu/books/machine-learning-0) by Kevin P. Murphy
 - Statistics Texts with Introduction to Probability
     - [Probability and Statistical Inference](https://www.pearsonhighered.com/program/Hogg-Probability-and-Statistical-Inference-9th-Edition/PGM91556.html) by Robert V. Hogg, Elliot Tanis, and Dale Zimmerman
-    - [Introduction to Mathematical Statistics](https://www.pearsonhighered.com/program/Hogg-Introduction-to-Mathematical-Statistics-7th-Edition/PGM49624.html) by Robert V. Hogg, Joeseph McKean, and Allen T. Craig
+    - [Introduction to Mathematical Statistics](https://www.pearsonhighered.com/program/Hogg-Introduction-to-Mathematical-Statistics-7th-Edition/PGM49624.html) by Robert V. Hogg, Joseph McKean, and Allen T. Craig
 
