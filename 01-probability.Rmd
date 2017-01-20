@@ -213,16 +213,16 @@ Similar notions exist for more than two variables.
 For discrete random variables, we define the **expectation** of the function of a random variable $X$ as follows.
 
 $$
-\mathbb{E}[f(X)] \triangleq \sum_{x} f(x)p(x)
+\mathbb{E}[g(X)] \triangleq \sum_{x} g(x)p(x)
 $$
 
 For continuous random variables we have a similar definition.
 
 $$
-\mathbb{E}[f(X)] \triangleq \int f(x)p(x) dx
+\mathbb{E}[g(X)] \triangleq \int g(x)f(x) dx
 $$
 
-For specific functions $f$, expectations are given names.
+For specific functions $g$, expectations are given names.
 
 The **mean** of a random variable $X$ is given by
 
