@@ -15,7 +15,7 @@ description: ""
 
 # Introduction {-}
 
-Welcome to Applied Statistics with `R`!
+Welcome to `R` for Statistical Learning!
 
 
 ## About This Book
