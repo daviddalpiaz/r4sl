@@ -1,0 +1,3 @@
+tidyverse, knitr, ISLR, caret, AppliedPredictiveModeling,
+ellipse, nnet, pROC, knitr, randomForest, leaps, glmnet, gam, tree, 
+rpart, gbm, extraTrees, kernlab, e1071, extraTrees, sparcl, formatR
