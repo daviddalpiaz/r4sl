@@ -1,7 +1,7 @@
 --- 
 title: "R for Statistical Learning"
 author: "David Dalpiaz"
-date: "2017-01-19"
+date: "2017-01-20"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -15,7 +15,7 @@ description: ""
 
 # Introduction {-}
 
-Welcome to Applied Statistics with `R`!
+Welcome to `R` for Statistical Learning!
 
 
 ## About This Book
