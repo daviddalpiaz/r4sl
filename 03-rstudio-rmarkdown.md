@@ -16,4 +16,4 @@ Note that RStudio and RMarkdown and constantly receiving excellent support and u
 
 ## Template
 
-[This `.zip` file](https://daviddalpiaz.github.io/stat430sp17/rmd_template/rmd-template.zip) contains the files necessary to produce [this rendered document](https://daviddalpiaz.github.io/stat430sp17/rmd_template/rmd-template.html). This document is a more complete version of a template than what is seen in the above videos.
+[This `.zip` file](https://daviddalpiaz.github.io/stat430sp17/rmd-template/rmd-template.zip) contains the files necessary to produce [this rendered document](https://daviddalpiaz.github.io/stat430sp17/rmd-template/rmd-template.html). This document is a more complete version of a template than what is seen in the above videos.
