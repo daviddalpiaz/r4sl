@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Statistical Learning</title>
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown 0.3.8 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/r4sl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/r4sl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz">
+
+
+<meta name="date" content="2017-01-24">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="rstudio-and-rmarkdown.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.2</b> Conventions</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>1</b> Probability Review</a><ul>
+<li class="chapter" data-level="1.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>1.1</b> Probability Models</a></li>
+<li class="chapter" data-level="1.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>1.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="1.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>1.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="1.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>1.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>1.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>1.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="1.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="1.4.4" data-path="probability-review.html"><a href="probability-review.html#several-random-variables"><i class="fa fa-check"></i><b>1.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>1.5</b> Expectations</a></li>
+<li class="chapter" data-level="1.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>1.6</b> Likelihood</a></li>
+<li class="chapter" data-level="1.7" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>1.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-resources"><i class="fa fa-check"></i><b>2.1</b> <code>R</code> Resources</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-basics"><i class="fa fa-check"></i><b>2.2</b> <code>R</code> Basics</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2.1</b> Basic Calculations</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting Help</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.2.3</b> Installing Packages</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.2.4</b> Data Types</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>2.2.5</b> Vectors</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#summary-statistics"><i class="fa fa-check"></i><b>2.2.6</b> Summary Statistics</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#matrices"><i class="fa fa-check"></i><b>2.2.7</b> Matrices</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>2.2.8</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#plotting"><i class="fa fa-check"></i><b>2.2.9</b> Plotting</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#distributions-1"><i class="fa fa-check"></i><b>2.2.10</b> Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-basics"><i class="fa fa-check"></i><b>2.3</b> Programming Basics</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#logical-operators"><i class="fa fa-check"></i><b>2.3.1</b> Logical Operators</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#control-flow"><i class="fa fa-check"></i><b>2.3.2</b> Control Flow</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.3.3</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#hypothesis-tests-in-r"><i class="fa fa-check"></i><b>2.4</b> Hypothesis Tests in <code>R</code></a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#one-sample-t-test-review"><i class="fa fa-check"></i><b>2.4.1</b> One Sample t-Test: Review</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#one-sample-t-test-example"><i class="fa fa-check"></i><b>2.4.2</b> One Sample t-Test: Example</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#two-sample-t-test-review"><i class="fa fa-check"></i><b>2.4.3</b> Two Sample t-Test: Review</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#two-sample-t-test-example"><i class="fa fa-check"></i><b>2.4.4</b> Two Sample t-Test: Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#simulation"><i class="fa fa-check"></i><b>2.5</b> Simulation</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#paired-differences"><i class="fa fa-check"></i><b>2.5.1</b> Paired Differences</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#distribution-of-a-sample-mean"><i class="fa fa-check"></i><b>2.5.2</b> Distribution of a Sample Mean</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> RStudio and RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.1</b> Template</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Regression Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#linear-models-in-r"><i class="fa fa-check"></i><b>4.2</b> Linear Models in <code>R</code></a></li>
+<li class="chapter" data-level="4.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="4.4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
+<li class="chapter" data-level="4.5" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
+<li class="chapter" data-level="4.6" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression-basics-in-r" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Regression Basics in <code>R</code></h1>
+<p>This chapter will recap the basics of performing regression analyses in <code>R</code>. For more detailed coverage, see <a href="http://daviddalpiaz.github.io/appliedstats/">Applied Statistics with <code>R</code></a>.</p>
+<p>We will use the <a href="http://www-bcf.usc.edu/~gareth/ISL/data.html">Advertising data</a> associated with Introduction to Statistical Learning.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/Advertising.csv&quot;</span>)</code></pre></div>
+<p>After loading data into <code>R</code>, our first step should <strong>always</strong> be to inspect the data. We will start by simply printing some observations in order to understand the basic structure of the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Advertising</code></pre></div>
+<pre><code>## # A tibble: 200 × 4
+##       TV Radio Newspaper Sales
+##    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1  230.1  37.8      69.2  22.1
+## 2   44.5  39.3      45.1  10.4
+## 3   17.2  45.9      69.3   9.3
+## 4  151.5  41.3      58.5  18.5
+## 5  180.8  10.8      58.4  12.9
+## 6    8.7  48.9      75.0   7.2
+## 7   57.5  32.8      23.5  11.8
+## 8  120.2  19.6      11.6  13.2
+## 9    8.6   2.1       1.0   4.8
+## 10 199.8   2.6      21.2  10.6
+## # ... with 190 more rows</code></pre>
+<p>Because the data was read using <code>read_csv()</code>, <code>Advertising</code> is a tibble. We see that there are a total of 200 observations and 4 variables, each of which is numeric. (Specifically double-precision vectors, but more importantly they are numbers.) For the purpose of this analysis, <code>Sales</code> will be the <strong>response variable</strong>. That is, we seek to understand the relationship between <code>Sales</code>, and the <strong>predictor variables</strong>: <code>TV</code>, <code>Radio</code>, and <code>Newspaper</code>.</p>
+<div id="visualization-for-regression" class="section level2">
+<h2><span class="header-section-number">4.1</span> Visualization for Regression</h2>
+<p>After investigating the structure of the data, the next step should be to visualize the data. Since we have only numeric variables, we should consider <strong>scatter plots</strong>.</p>
+<p>We could do so for any individual predictor.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Sales ~<span class="st"> </span>TV, <span class="dt">data =</span> Advertising, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>,
+     <span class="dt">main =</span> <span class="st">&quot;Sales vs Television Advertising&quot;</span>)</code></pre></div>
+<p><img src="04-reg-basics_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The <code>pairs()</code> function is a useful way to quickly visualize a number of scatter plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(Advertising)</code></pre></div>
+<p><img src="04-reg-basics_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Often, we will be most interested in only the relationship between each predictor and the response. For this, we can use the <code>featurePlot()</code> function from the <code>caret</code> package. (We will use the <code>caret</code> package more and more frequently as we introduce new topics.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+<span class="kw">featurePlot</span>(<span class="dt">x =</span> Advertising[ , <span class="kw">c</span>(<span class="st">&quot;TV&quot;</span>, <span class="st">&quot;Radio&quot;</span>, <span class="st">&quot;Newspaper&quot;</span>)], <span class="dt">y =</span> Advertising$Sales)</code></pre></div>
+<p><img src="04-reg-basics_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>We see that there is a clear increase in <code>Sales</code> as <code>Radio</code> or <code>TV</code> are increased. The relationship between <code>Sales</code> and <code>Newspaper</code> is less clear. How all of the predictors work together is also unclear, as there is some obvious correlation between <code>Radio</code> and <code>TV</code>. To investigate further, we will need to model the data.</p>
+</div>
+<div id="linear-models-in-r" class="section level2">
+<h2><span class="header-section-number">4.2</span> Linear Models in <code>R</code></h2>
+<p>The following code fits a additive linear model with <code>Sales</code> as the response and each remaining variable as a predictor. Note, by not using <code>attach()</code> and instead specifying the <code>data =</code> argument, we are able to specify this model without using each of the variable names directly. the comm</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_1 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
+<span class="co"># mod_1 = lm(Sales ~ TV + Radio + Newspaper, data = Advertising)</span></code></pre></div>
+<p>Note that the commented line is equivalent to the line that is run, but we will often use the <code>response ~ .</code> syntax when possible.</p>
+</div>
+<div id="hypothesis-testing" class="section level2">
+<h2><span class="header-section-number">4.3</span> Hypothesis Testing</h2>
+<p>The <code>summary()</code> function will return a large amount of useful information about a model fit using <code>lm()</code>. Much of it will be helpful for hypothesis testing including individual tests about each predictor, as well as the significance of the regression test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mod_1)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sales ~ ., data = Advertising)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.8277 -0.8908  0.2418  1.1893  2.8292 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***
+## TV           0.045765   0.001395  32.809   &lt;2e-16 ***
+## Radio        0.188530   0.008611  21.893   &lt;2e-16 ***
+## Newspaper   -0.001037   0.005871  -0.177     0.86    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.686 on 196 degrees of freedom
+## Multiple R-squared:  0.8972, Adjusted R-squared:  0.8956 
+## F-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_0 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV +<span class="st"> </span>Radio, <span class="dt">data =</span> Advertising)</code></pre></div>
+<p>The <code>anova()</code> function is useful for comparing two models. Here we compare the full additive model, <code>mod_1</code>, to a reduced model <code>mod_0</code>. Essentially we are testing for the significance of the <code>Newspaper</code> variable in the additive model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(mod_0, mod_1)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: Sales ~ TV + Radio
+## Model 2: Sales ~ TV + Radio + Newspaper
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1    197 556.91                           
+## 2    196 556.83  1  0.088717 0.0312 0.8599</code></pre>
+<p>Note that hypothesis testing is <em>not</em> our focus, so we omit many details.</p>
+</div>
+<div id="prediction" class="section level2">
+<h2><span class="header-section-number">4.4</span> Prediction</h2>
+<p>The <code>predict()</code> function is an extremely versatile function, for, prediction. When used on the result of a model fit using <code>lm()</code> it will, by default, return predictions for each of the data points used to fit the model. (Here, we limit the printed result to the first 10.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(mod_1), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>##         1         2         3         4         5         6         7 
+## 20.523974 12.337855 12.307671 17.597830 13.188672 12.478348 11.729760 
+##         8         9        10 
+## 12.122953  3.727341 12.550849</code></pre>
+<p>Note that effect of the <code>predict()</code> function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class <code>lm</code>. Because of this, <code>predict()</code> then runs the <code>predict.lm()</code> function. Thus, we should use <code>?predict.lm()</code> for details.</p>
+<p>We could also specify new data, which should be a data frame or tibble with the same column names as the predictors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">TV =</span> <span class="dv">150</span>, <span class="dt">Radio =</span> <span class="dv">40</span>, <span class="dt">Newspaper =</span> <span class="dv">1</span>)</code></pre></div>
+<p>We can then use the <code>predict()</code> function for point estimates, confidence intervals, and prediction intervals.</p>
+<p>Using only the first two arguments, <code>R</code> will simply return a point estimate, that is, the “predicted values,” <span class="math inline">\(\hat{y}\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(mod_1, <span class="dt">newdata =</span> new_obs)</code></pre></div>
+<pre><code>##        1 
+## 17.34375</code></pre>
+<p>If we specify an additional argument <code>interval</code> with a value of <code>&quot;confidence&quot;</code>, <code>R</code> will return a 95% confidence interval for the mean response at the specified point. Note that here <code>R</code> also gives the point estimate as <code>fit</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(mod_1, <span class="dt">newdata =</span> new_obs, <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>)</code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 17.34375 16.77654 17.91096</code></pre>
+<p>Lastly, we can alter the level using the <code>level</code> argument. Here we report a prediction interval instead of a confidence interval.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(mod_1, <span class="dt">newdata =</span> new_obs, <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>, <span class="dt">level =</span> <span class="fl">0.99</span>)</code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 17.34375 12.89612 21.79138</code></pre>
+</div>
+<div id="unusual-observations" class="section level2">
+<h2><span class="header-section-number">4.5</span> Unusual Observations</h2>
+<p><code>R</code> provides several functions for obtaining metrics related to unusual observations.</p>
+<ul>
+<li><code>resid()</code> provides the residual for each observation</li>
+<li><code>hatvalues</code> gives the leverage of each observation</li>
+<li><code>rstudent</code> give the studentized residual for each observation</li>
+<li><code>cooks.distance</code> calculates the influence of each observation</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">resid</span>(mod_1), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>##           1           2           3           4           5           6 
+##  1.57602559 -1.93785482 -3.00767078  0.90217049 -0.28867186 -5.27834763 
+##           7           8           9          10 
+##  0.07024005  1.07704683  1.07265914 -1.95084872</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">hatvalues</span>(mod_1), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>##           1           2           3           4           5           6 
+## 0.025202848 0.019418228 0.039226158 0.016609666 0.023508833 0.047481074 
+##           7           8           9          10 
+## 0.014435091 0.009184456 0.030714427 0.017147645</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rstudent</span>(mod_1), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>##           1           2           3           4           5           6 
+##  0.94680369 -1.16207937 -1.83138947  0.53877383 -0.17288663 -3.28803309 
+##           7           8           9          10 
+##  0.04186991  0.64099269  0.64544184 -1.16856434</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">cooks.distance</span>(mod_1), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>##            1            2            3            4            5 
+## 5.797287e-03 6.673622e-03 3.382760e-02 1.230165e-03 1.807925e-04 
+##            6            7            8            9           10 
+## 1.283058e-01 6.452021e-06 9.550237e-04 3.310088e-03 5.945006e-03</code></pre>
+</div>
+<div id="adding-complexity" class="section level2">
+<h2><span class="header-section-number">4.6</span> Adding Complexity</h2>
+<p>We have a number of ways to add complexity to a linear model, even allowing a linear model to be used with non-linear relationships.</p>
+<div id="interactions" class="section level3">
+<h3><span class="header-section-number">4.6.1</span> Interactions</h3>
+<p>Interactions can be introduced to the <code>lm()</code> procedure in a number of ways.</p>
+<p>We can use the <code>:</code> operator to introduce a single interaction of interest.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_2 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. +<span class="st"> </span>TV:Newspaper, <span class="dt">data =</span> Advertising)
+<span class="kw">coef</span>(mod_2)</code></pre></div>
+<pre><code>##   (Intercept)            TV         Radio     Newspaper  TV:Newspaper 
+##  3.8730824491  0.0392939602  0.1901312252 -0.0320449675  0.0002016962</code></pre>
+<p>The <code>response ~ . ^ k</code> syntax can be used to model all <code>k</code>-way interactions. (As well as the appropriate lower order terms.) Here we fit a model with all two-way interactions, and the lower order main effects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_3 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Advertising)
+<span class="kw">coef</span>(mod_3)</code></pre></div>
+<pre><code>##     (Intercept)              TV           Radio       Newspaper 
+##    6.460158e+00    2.032710e-02    2.292919e-02    1.703394e-02 
+##        TV:Radio    TV:Newspaper Radio:Newspaper 
+##    1.139280e-03   -7.971435e-05   -1.095976e-04</code></pre>
+<p>The <code>*</code> operator can be used to specify all interactions of a certain order, as well as all lower order terms according to the usual hierarchy. Here we see a three-way interaction and all lower order terms.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_4 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV *<span class="st"> </span>Radio *<span class="st"> </span>Newspaper, <span class="dt">data =</span> Advertising)
+<span class="kw">coef</span>(mod_4)</code></pre></div>
+<pre><code>##        (Intercept)                 TV              Radio 
+##       6.555887e+00       1.971030e-02       1.962160e-02 
+##          Newspaper           TV:Radio       TV:Newspaper 
+##       1.310565e-02       1.161523e-03      -5.545501e-05 
+##    Radio:Newspaper TV:Radio:Newspaper 
+##       9.062944e-06      -7.609955e-07</code></pre>
+<p>Note that, we have only been dealing with numeric predictors. <strong>Categorical predictors</strong> are often recorded as <strong>factor</strong> variables in <code>R</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibble)
+cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">x1 =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">10</span>)),
+  <span class="dt">x2 =</span> <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">30</span>),
+  <span class="dt">y  =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">30</span>)
+)
+cat_pred</code></pre></div>
+<pre><code>## # A tibble: 30 × 3
+##       x1         x2           y
+##    &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+## 1      A 0.44166016 -1.62242415
+## 2      A 0.20752816 -0.50067001
+## 3      A 0.89078263  0.61189734
+## 4      A 0.79433630  0.74160918
+## 5      A 0.19683193 -0.08785722
+## 6      A 0.01860512  0.54932457
+## 7      A 0.75738429 -0.69026188
+## 8      A 0.36018177  0.91999626
+## 9      A 0.83282619  0.79535812
+## 10     A 0.74648604  0.07329302
+## # ... with 20 more rows</code></pre>
+<p>Notice that in simple simulated tibble, <code>R</code> automatically forces <code>x1</code> to be a factor variables since it contains only character information. The following two models illustrate the effect of factor variables on linear models.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
+<span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
+<pre><code>## (Intercept)         x1B         x1C          x2 
+## -0.08191398 -0.03571346  0.08534045  0.30675068</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
+<span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
+<pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
+##  -0.1636031  -0.3389362   0.3797719   0.4624491   0.4978888  -0.5161627</code></pre>
+</div>
+<div id="polynomials" class="section level3">
+<h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
+<p>Polynomial terms can be specified using the inhibit function <code>I()</code> or through the <code>poly()</code> function. Note that these two methods produce different coefficients, but the same residuals! This is due to the <code>poly()</code> function using orthogonal polynomials by default.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_5 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV +<span class="st"> </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> Advertising)
+<span class="kw">coef</span>(mod_5)</code></pre></div>
+<pre><code>##   (Intercept)            TV       I(TV^2) 
+##  6.114120e+00  6.726593e-02 -6.846934e-05</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_6 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> Advertising)
+<span class="kw">coef</span>(mod_6)</code></pre></div>
+<pre><code>##           (Intercept) poly(TV, degree = 2)1 poly(TV, degree = 2)2 
+##             14.022500             57.572721             -6.228802</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">resid</span>(mod_5), <span class="kw">resid</span>(mod_6))</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Polynomials and interactions can be mixed to create even more complex models.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_7 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> Advertising)
+<span class="co"># mod_7 = lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)</span>
+<span class="kw">coef</span>(mod_7)</code></pre></div>
+<pre><code>##           (Intercept)                    TV                 Radio 
+##          6.206394e+00          2.092726e-02          3.766579e-02 
+##             Newspaper poly(TV, degree = 3)1 poly(TV, degree = 3)2 
+##          1.405289e-02                    NA         -9.925605e+00 
+## poly(TV, degree = 3)3              TV:Radio          TV:Newspaper 
+##          5.309590e+00          1.082074e-03         -5.690107e-05 
+##       Radio:Newspaper 
+##         -9.924992e-05</code></pre>
+<p>Notice here that <code>R</code> ignores the first order term from <code>poly(TV, degree = 3)</code> as it is already in the model. We could consider using the commented line instead.</p>
+</div>
+<div id="transformations" class="section level3">
+<h3><span class="header-section-number">4.6.3</span> Transformations</h3>
+<p>Note that we could also create more complex models, which allow for non-linearity using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_8 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Sales) ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
+<span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">resid</span>(mod_8) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># incorrect RMSE for Model 8</span></code></pre></div>
+<pre><code>## [1] 2.615564</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">resid</span>(mod_7) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># RMSE for Model 7</span></code></pre></div>
+<pre><code>## [1] 6.806914</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">exp</span>(<span class="kw">resid</span>(mod_8)) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># correct RMSE for Model 8</span></code></pre></div>
+<pre><code>## [1] 14.4703</code></pre>
+
+<div id="refs" class="references">
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rstudio-and-rmarkdown.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/04-reg-basics.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
