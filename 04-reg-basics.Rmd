@@ -2,7 +2,7 @@
 
 This chapter will recap the basics of performing regression analyses in `R`. For more detailed coverage, see [Applied Statistics with `R`](http://daviddalpiaz.github.io/appliedstats/).
 
-We will use the [Advertising data](http://www-bcf.usc.edu/~gareth/ISL/data.html) associated with Introduction to Statistical Learning.
+We will use the [Advertising data](data/Advertising.csv) associated with [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/data.html).
 
 ```{r, message = FALSE, warning = FALSE}
 library(readr)
