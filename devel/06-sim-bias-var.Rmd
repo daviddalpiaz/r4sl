@@ -1,0 +1,108 @@
+# Simulating the Bias–Variance Tradeoff
+
+
+```{r}
+f = function(x) {
+  x ^ 2
+}
+```
+
+```{r}
+get_sim_data = function(f, sample_size = 100) {
+  x = runif(n = sample_size, 0, 1)
+  y = f(x) + rnorm(n = sample_size, mean = 0, sd = 0.3)
+  data.frame(x, y)
+}
+```
+
+```{r}
+sim_data = get_sim_data(f, sample_size = 100)
+
+fit_1 = lm(y ~ 1, data = sim_data)
+fit_2 = lm(y ~ poly(x, degree = 1), data = sim_data)
+fit_3 = lm(y ~ poly(x, degree = 2), data = sim_data)
+fit_4 = lm(y ~ poly(x, degree = 3), data = sim_data)
+```
+
+```{r}
+plot(y ~ x, data = sim_data)
+grid = seq(from = 0, to = 1, by = 0.01)
+lines(grid, f(grid), col = "black", lwd = 5)
+lines(grid, predict(fit_1, newdata = data.frame(x = grid)), col = "red", lwd = 2)
+lines(grid, predict(fit_2, newdata = data.frame(x = grid)), col = "blue", lwd = 2)
+lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = "green", lwd = 3)
+lines(grid, predict(fit_4, newdata = data.frame(x = grid)), col = "orange", lwd = 2)
+```
+
+```{r}
+set.seed(34)
+n_sims = 30000
+n_models = 4
+x0 = 0.9
+predictions = matrix(0, nrow = n_sims, ncol = n_models)
+sim_data = get_sim_data(f, sample_siz = 100)
+plot(y ~ x, data = sim_data, col = "white", xlim = c(0.5, 1))
+lines(grid, f(grid), col = "black", lwd = 3)
+
+for (i in 1:n_sims) {
+  
+  sim_data = get_sim_data(f, sample_size = 100)
+  
+  fit_1 = lm(y ~ 1, data = sim_data)
+  fit_2 = lm(y ~ poly(x, degree = 1), data = sim_data)
+  fit_3 = lm(y ~ poly(x, degree = 2), data = sim_data)
+  fit_4 = lm(y ~ poly(x, degree = 3), data = sim_data)
+  
+  # lines(grid, predict(fit_1, newdata = data.frame(x = grid)), col = "red", lwd = 1)
+  # lines(grid, predict(fit_2, newdata = data.frame(x = grid)), col = "blue", lwd = 1)
+  # lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = "green", lwd = 1)
+  # lines(grid, predict(fit_4, newdata = data.frame(x = grid)), col = "orange", lwd = 1)
+
+  predictions[i, ] <- c(
+    predict(fit_1, newdata = data.frame(x = x0)),
+    predict(fit_2, newdata = data.frame(x = x0)),
+    predict(fit_3, newdata = data.frame(x = x0)),
+    predict(fit_4, newdata = data.frame(x = x0))
+  )
+}
+
+```
+
+```{r}
+y0 = f(x0) + rnorm(n = n_sims, mean = 0, sd = 0.3)
+```
+
+```{r}
+bias = function(estimate, truth) {
+  mean(estimate - truth)
+}
+
+mse = function(estimate, truth) {
+  mean((estimate - truth) ^ 2)
+}
+
+var_n = function(estimate) {
+  mean((estimate - mean(estimate)) ^ 2)
+}
+```
+
+```{r}
+bias(predictions[, 3], y0) ^ 2 + var(predictions[, 3]) + var(y0)
+mse(predictions[, 3], y0)
+```
+
+```{r}
+bias(predictions[, 3], y0) ^ 2 + var(predictions[, 3]) + var(y0) - mse(predictions[, 3], y0)
+0.001746595
+0.0006933145
+0.001037828
+0.0003370496
+0.0004526304
+0.0002717982
+```
+
+
+TODO: note about difference do to estimating with simulation
+
+
+TODO: summarize with table, talk about where balance is found, bias inc, var dec
