@@ -72,9 +72,9 @@ featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$S
 We see that there is a clear increase in `Sales` as `Radio` or `TV` are increased. The relationship between `Sales` and `Newspaper` is less clear. How all of the predictors work together is also unclear, as there is some obvious correlation between `Radio` and `TV`. To investigate further, we will need to model the data.
 
 
-## Linear Models in `R`
+## The `lm()` Function
 
-The following code fits a additive linear model with `Sales` as the response and each remaining variable as a predictor. Note, by not using `attach()` and instead specifying the `data = ` argument, we are able to specify this model without using each of the variable names directly. the comm
+The following code fits an additive **linear model** with `Sales` as the response and each remaining variable as a predictor. Note, by not using `attach()` and instead specifying the `data = ` argument, we are able to specify this model without using each of the variable names directly.
 
 
 ```r
@@ -158,7 +158,7 @@ head(predict(mod_1), n = 10)
 ## 12.122953  3.727341 12.550849
 ```
 
-Note that effect of the `predict()` function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class `lm`. Because of this, `predict()` then runs the `predict.lm()` function. Thus, we should use `?predict.lm()` for details.
+Note that the effect of the `predict()` function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class `lm`. Because of this, `predict()` then runs the `predict.lm()` function. Thus, we should use `?predict.lm()` for details.
 
 We could also specify new data, which should be a data frame or tibble with the same column names as the predictors.
 
@@ -169,7 +169,7 @@ new_obs = data.frame(TV = 150, Radio = 40, Newspaper = 1)
 
 We can then use the `predict()` function for point estimates, confidence intervals, and prediction intervals.
 
-Using only the first two arguments, `R` will simply return a point estimate, that is, the "predicted values," $\hat{y}$.
+Using only the first two arguments, `R` will simply return a point estimate, that is, the "predicted value," $\hat{y}$.
 
 
 ```r
@@ -211,9 +211,9 @@ predict(mod_1, newdata = new_obs, interval = "prediction", level = 0.99)
 `R` provides several functions for obtaining metrics related to unusual observations.
 
 - `resid()` provides the residual for each observation
-- `hatvalues` gives the leverage of each observation
-- `rstudent` give the studentized residual for each observation
-- `cooks.distance` calculates the influence of each observation
+- `hatvalues()` gives the leverage of each observation
+- `rstudent()` give the studentized residual for each observation
+- `cooks.distance()` calculates the influence of each observation
 
 
 ```r
@@ -263,7 +263,7 @@ head(cooks.distance(mod_1), n = 10)
 
 ## Adding Complexity
 
-We have a number of ways to add complexity to a linear model, even allowing a linear model to be used with non-linear relationships.
+We have a number of ways to add complexity to a linear model, even allowing a linear model to be used to model non-linear relationships.
 
 ### Interactions
 
@@ -320,7 +320,7 @@ Note that, we have only been dealing with numeric predictors. **Categorical pred
 ```r
 library(tibble)
 cat_pred = tibble(
-  x1 = c(rep("A", 10), rep("B", 10), rep("C", 10)),
+  x1 = factor(c(rep("A", 10), rep("B", 10), rep("C", 10))),
   x2 = runif(n = 30),
   y  = rnorm(n = 30)
 )
@@ -329,22 +329,24 @@ cat_pred
 
 ```
 ## # A tibble: 30 × 3
-##       x1         x2          y
-##    <chr>      <dbl>      <dbl>
-## 1      A 0.39091616  1.7132528
-## 2      A 0.90034104  0.5563913
-## 3      A 0.10103291 -0.8200308
-## 4      A 0.34524512 -0.3656978
-## 5      A 0.13935809  1.8313888
-## 6      A 0.02216850 -0.1226874
-## 7      A 0.31633727  1.3224016
-## 8      A 0.05052204 -0.9921978
-## 9      A 0.57494820  0.6852000
-## 10     A 0.65748563 -0.1198870
+##        x1        x2          y
+##    <fctr>     <dbl>      <dbl>
+## 1       A 0.3200078 -1.6458535
+## 2       A 0.9191434 -0.2075177
+## 3       A 0.1368563 -0.3204092
+## 4       A 0.3283006 -0.9491029
+## 5       A 0.2743922 -0.5610424
+## 6       A 0.8113808 -2.6062140
+## 7       A 0.6486606 -0.3554850
+## 8       A 0.7970058 -2.1001464
+## 9       A 0.4740064  1.8103370
+## 10      A 0.6708732 -0.1283296
 ## # ... with 20 more rows
 ```
 
-Notice that in simple simulated tibble, `R` automatically forces `x1` to be a factor variables since it contains only character information. The following two models illustrate the effect of factor variables on linear models.
+Notice that in this simple simulated tibble, we have coerced `x1` to be a factor variable, although this is not strictly necessary since the variable took values `A`, `B`, and `C`. When using `lm()`, even if not a factor, `R` would have treated `x1` as such. Coercion to factor is more important if a cateogical variable is coded for example as `1`, `2` and `3`. Otherwise it is treated as numeric, which creates a difference in the regression model.
+
+The following two models illustrate the effect of factor variables on linear models.
 
 
 ```r
@@ -354,7 +356,7 @@ coef(cat_pred_mod_add)
 
 ```
 ## (Intercept)         x1B         x1C          x2 
-##   0.2092778  -0.1373437  -0.2366279   0.4560303
+## -0.69472909  0.66186446  0.47795101 -0.02164669
 ```
 
 
@@ -364,8 +366,10 @@ coef(cat_pred_mod_int)
 ```
 
 ```
-## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  0.08724493  0.04024942 -0.02742546  0.80485957 -0.45109445 -0.53652375
+##  (Intercept)          x1B          x1C           x2       x1B:x2 
+## -0.143119322 -0.215133431 -0.008362107 -1.046824173  2.099361364 
+##       x1C:x2 
+##  0.891823134
 ```
 
 
@@ -427,7 +431,7 @@ Notice here that `R` ignores the first order term from `poly(TV, degree = 3)` as
 
 ### Transformations
 
-Note that we could also create more complex models, which allow for non-linearity using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.
+Note that we could also create more complex models, which allow for non-linearity, using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.
 
 
 ```r

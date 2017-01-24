@@ -159,7 +159,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Regression Basics in <code>R</code></a><ul>
 <li class="chapter" data-level="4.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
-<li class="chapter" data-level="4.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#linear-models-in-r"><i class="fa fa-check"></i><b>4.2</b> Linear Models in <code>R</code></a></li>
+<li class="chapter" data-level="4.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
@@ -228,9 +228,9 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 <p><img src="04-reg-basics_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>We see that there is a clear increase in <code>Sales</code> as <code>Radio</code> or <code>TV</code> are increased. The relationship between <code>Sales</code> and <code>Newspaper</code> is less clear. How all of the predictors work together is also unclear, as there is some obvious correlation between <code>Radio</code> and <code>TV</code>. To investigate further, we will need to model the data.</p>
 </div>
-<div id="linear-models-in-r" class="section level2">
-<h2><span class="header-section-number">4.2</span> Linear Models in <code>R</code></h2>
-<p>The following code fits a additive linear model with <code>Sales</code> as the response and each remaining variable as a predictor. Note, by not using <code>attach()</code> and instead specifying the <code>data =</code> argument, we are able to specify this model without using each of the variable names directly. the comm</p>
+<div id="the-lm-function" class="section level2">
+<h2><span class="header-section-number">4.2</span> The <code>lm()</code> Function</h2>
+<p>The following code fits an additive <strong>linear model</strong> with <code>Sales</code> as the response and each remaining variable as a predictor. Note, by not using <code>attach()</code> and instead specifying the <code>data =</code> argument, we are able to specify this model without using each of the variable names directly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_1 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
 <span class="co"># mod_1 = lm(Sales ~ TV + Radio + Newspaper, data = Advertising)</span></code></pre></div>
 <p>Note that the commented line is equivalent to the line that is run, but we will often use the <code>response ~ .</code> syntax when possible.</p>
@@ -279,11 +279,11 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 ## 20.523974 12.337855 12.307671 17.597830 13.188672 12.478348 11.729760 
 ##         8         9        10 
 ## 12.122953  3.727341 12.550849</code></pre>
-<p>Note that effect of the <code>predict()</code> function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class <code>lm</code>. Because of this, <code>predict()</code> then runs the <code>predict.lm()</code> function. Thus, we should use <code>?predict.lm()</code> for details.</p>
+<p>Note that the effect of the <code>predict()</code> function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class <code>lm</code>. Because of this, <code>predict()</code> then runs the <code>predict.lm()</code> function. Thus, we should use <code>?predict.lm()</code> for details.</p>
 <p>We could also specify new data, which should be a data frame or tibble with the same column names as the predictors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">TV =</span> <span class="dv">150</span>, <span class="dt">Radio =</span> <span class="dv">40</span>, <span class="dt">Newspaper =</span> <span class="dv">1</span>)</code></pre></div>
 <p>We can then use the <code>predict()</code> function for point estimates, confidence intervals, and prediction intervals.</p>
-<p>Using only the first two arguments, <code>R</code> will simply return a point estimate, that is, the “predicted values,” <span class="math inline">\(\hat{y}\)</span>.</p>
+<p>Using only the first two arguments, <code>R</code> will simply return a point estimate, that is, the “predicted value,” <span class="math inline">\(\hat{y}\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(mod_1, <span class="dt">newdata =</span> new_obs)</code></pre></div>
 <pre><code>##        1 
 ## 17.34375</code></pre>
@@ -301,9 +301,9 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 <p><code>R</code> provides several functions for obtaining metrics related to unusual observations.</p>
 <ul>
 <li><code>resid()</code> provides the residual for each observation</li>
-<li><code>hatvalues</code> gives the leverage of each observation</li>
-<li><code>rstudent</code> give the studentized residual for each observation</li>
-<li><code>cooks.distance</code> calculates the influence of each observation</li>
+<li><code>hatvalues()</code> gives the leverage of each observation</li>
+<li><code>rstudent()</code> give the studentized residual for each observation</li>
+<li><code>cooks.distance()</code> calculates the influence of each observation</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">resid</span>(mod_1), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>##           1           2           3           4           5           6 
@@ -328,7 +328,7 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 </div>
 <div id="adding-complexity" class="section level2">
 <h2><span class="header-section-number">4.6</span> Adding Complexity</h2>
-<p>We have a number of ways to add complexity to a linear model, even allowing a linear model to be used with non-linear relationships.</p>
+<p>We have a number of ways to add complexity to a linear model, even allowing a linear model to be used to model non-linear relationships.</p>
 <div id="interactions" class="section level3">
 <h3><span class="header-section-number">4.6.1</span> Interactions</h3>
 <p>Interactions can be introduced to the <code>lm()</code> procedure in a number of ways.</p>
@@ -356,34 +356,35 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 <p>Note that, we have only been dealing with numeric predictors. <strong>Categorical predictors</strong> are often recorded as <strong>factor</strong> variables in <code>R</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibble)
 cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
-  <span class="dt">x1 =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">10</span>)),
+  <span class="dt">x1 =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">10</span>))),
   <span class="dt">x2 =</span> <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">30</span>),
   <span class="dt">y  =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">30</span>)
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##       x1         x2           y
-##    &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1      A 0.44166016 -1.62242415
-## 2      A 0.20752816 -0.50067001
-## 3      A 0.89078263  0.61189734
-## 4      A 0.79433630  0.74160918
-## 5      A 0.19683193 -0.08785722
-## 6      A 0.01860512  0.54932457
-## 7      A 0.75738429 -0.69026188
-## 8      A 0.36018177  0.91999626
-## 9      A 0.83282619  0.79535812
-## 10     A 0.74648604  0.07329302
+##        x1         x2           y
+##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+## 1       A 0.56538189  1.03407405
+## 2       A 0.03268847  0.60992559
+## 3       A 0.16976205 -0.01317083
+## 4       A 0.90828930 -0.77192583
+## 5       A 0.07462881  1.66045741
+## 6       A 0.27212540  1.90470704
+## 7       A 0.46424816  0.12665769
+## 8       A 0.66227225 -1.02493552
+## 9       A 0.57152494 -1.21563750
+## 10      A 0.28098098  0.12205988
 ## # ... with 20 more rows</code></pre>
-<p>Notice that in simple simulated tibble, <code>R</code> automatically forces <code>x1</code> to be a factor variables since it contains only character information. The following two models illustrate the effect of factor variables on linear models.</p>
+<p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
+<p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-## -0.08191398 -0.03571346  0.08534045  0.30675068</code></pre>
+##   0.4833131  -0.4628038  -0.3084972  -0.5999444</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.1636031  -0.3389362   0.3797719   0.4624491   0.4978888  -0.5161627</code></pre>
+##    1.204070   -1.550413   -1.466490   -2.400979    2.606595    2.577635</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
@@ -414,7 +415,7 @@ cat_pred</code></pre></div>
 </div>
 <div id="transformations" class="section level3">
 <h3><span class="header-section-number">4.6.3</span> Transformations</h3>
-<p>Note that we could also create more complex models, which allow for non-linearity using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.</p>
+<p>Note that we could also create more complex models, which allow for non-linearity, using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_8 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Sales) ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
 <span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">resid</span>(mod_8) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># incorrect RMSE for Model 8</span></code></pre></div>
 <pre><code>## [1] 2.615564</code></pre>
