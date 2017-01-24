@@ -2,7 +2,7 @@
 
 This chapter will recap the basics of performing regression analyses in `R`. For more detailed coverage, see [Applied Statistics with `R`](http://daviddalpiaz.github.io/appliedstats/).
 
-We will use the [Advertising data](http://www-bcf.usc.edu/~gareth/ISL/data.html) associated with Introduction to Statistical Learning.
+We will use the [Advertising data](data/Advertising.csv) associated with [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/data.html).
 
 
 ```r
@@ -331,16 +331,16 @@ cat_pred
 ## # A tibble: 30 × 3
 ##        x1        x2          y
 ##    <fctr>     <dbl>      <dbl>
-## 1       A 0.3200078 -1.6458535
-## 2       A 0.9191434 -0.2075177
-## 3       A 0.1368563 -0.3204092
-## 4       A 0.3283006 -0.9491029
-## 5       A 0.2743922 -0.5610424
-## 6       A 0.8113808 -2.6062140
-## 7       A 0.6486606 -0.3554850
-## 8       A 0.7970058 -2.1001464
-## 9       A 0.4740064  1.8103370
-## 10      A 0.6708732 -0.1283296
+## 1       A 0.3380703 -0.5108769
+## 2       A 0.3560972  1.9907465
+## 3       A 0.5423833 -0.5599996
+## 4       A 0.9348142 -0.7033847
+## 5       A 0.9807432 -1.8545100
+## 6       A 0.9094498  0.4763292
+## 7       A 0.3065730 -1.0609395
+## 8       A 0.5391288  0.4519529
+## 9       A 0.2310927 -0.8845551
+## 10      A 0.7803466 -0.2552428
 ## # ... with 20 more rows
 ```
 
@@ -356,7 +356,7 @@ coef(cat_pred_mod_add)
 
 ```
 ## (Intercept)         x1B         x1C          x2 
-## -0.69472909  0.66186446  0.47795101 -0.02164669
+## -0.08849277  0.33851876 -0.01848227 -0.34222931
 ```
 
 
@@ -366,10 +366,8 @@ coef(cat_pred_mod_int)
 ```
 
 ```
-##  (Intercept)          x1B          x1C           x2       x1B:x2 
-## -0.143119322 -0.215133431 -0.008362107 -1.046824173  2.099361364 
-##       x1C:x2 
-##  0.891823134
+## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
+##   0.1662089  -0.3564707  -0.2418286  -0.7725632   1.1326017   0.3580053
 ```
 
 
