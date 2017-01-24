@@ -44,9 +44,9 @@ featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$S
 We see that there is a clear increase in `Sales` as `Radio` or `TV` are increased. The relationship between `Sales` and `Newspaper` is less clear. How all of the predictors work together is also unclear, as there is some obvious correlation between `Radio` and `TV`. To investigate further, we will need to model the data.
 
 
-## Linear Models in `R`
+## The `lm()` Function
 
-The following code fits a additive linear model with `Sales` as the response and each remaining variable as a predictor. Note, by not using `attach()` and instead specifying the `data = ` argument, we are able to specify this model without using each of the variable names directly. the comm
+The following code fits an additive **linear model** with `Sales` as the response and each remaining variable as a predictor. Note, by not using `attach()` and instead specifying the `data = ` argument, we are able to specify this model without using each of the variable names directly.
 
 ```{r}
 mod_1 = lm(Sales ~ ., data = Advertising)
@@ -85,7 +85,7 @@ The `predict()` function is an extremely versatile function, for, prediction. Wh
 head(predict(mod_1), n = 10)
 ```
 
-Note that effect of the `predict()` function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class `lm`. Because of this, `predict()` then runs the `predict.lm()` function. Thus, we should use `?predict.lm()` for details.
+Note that the effect of the `predict()` function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class `lm`. Because of this, `predict()` then runs the `predict.lm()` function. Thus, we should use `?predict.lm()` for details.
 
 We could also specify new data, which should be a data frame or tibble with the same column names as the predictors.
 
@@ -95,7 +95,7 @@ new_obs = data.frame(TV = 150, Radio = 40, Newspaper = 1)
 
 We can then use the `predict()` function for point estimates, confidence intervals, and prediction intervals.
 
-Using only the first two arguments, `R` will simply return a point estimate, that is, the "predicted values," $\hat{y}$.
+Using only the first two arguments, `R` will simply return a point estimate, that is, the "predicted value," $\hat{y}$.
 
 ```{r}
 predict(mod_1, newdata = new_obs)
@@ -119,9 +119,9 @@ predict(mod_1, newdata = new_obs, interval = "prediction", level = 0.99)
 `R` provides several functions for obtaining metrics related to unusual observations.
 
 - `resid()` provides the residual for each observation
-- `hatvalues` gives the leverage of each observation
-- `rstudent` give the studentized residual for each observation
-- `cooks.distance` calculates the influence of each observation
+- `hatvalues()` gives the leverage of each observation
+- `rstudent()` give the studentized residual for each observation
+- `cooks.distance()` calculates the influence of each observation
 
 ```{r}
 head(resid(mod_1), n = 10)
@@ -133,7 +133,7 @@ head(cooks.distance(mod_1), n = 10)
 
 ## Adding Complexity
 
-We have a number of ways to add complexity to a linear model, even allowing a linear model to be used with non-linear relationships.
+We have a number of ways to add complexity to a linear model, even allowing a linear model to be used to model non-linear relationships.
 
 ### Interactions
 
@@ -165,14 +165,16 @@ Note that, we have only been dealing with numeric predictors. **Categorical pred
 ```{r}
 library(tibble)
 cat_pred = tibble(
-  x1 = c(rep("A", 10), rep("B", 10), rep("C", 10)),
+  x1 = factor(c(rep("A", 10), rep("B", 10), rep("C", 10))),
   x2 = runif(n = 30),
   y  = rnorm(n = 30)
 )
 cat_pred
 ```
 
-Notice that in simple simulated tibble, `R` automatically forces `x1` to be a factor variables since it contains only character information. The following two models illustrate the effect of factor variables on linear models.
+Notice that in this simple simulated tibble, we have coerced `x1` to be a factor variable, although this is not strictly necessary since the variable took values `A`, `B`, and `C`. When using `lm()`, even if not a factor, `R` would have treated `x1` as such. Coercion to factor is more important if a cateogical variable is coded for example as `1`, `2` and `3`. Otherwise it is treated as numeric, which creates a difference in the regression model.
+
+The following two models illustrate the effect of factor variables on linear models.
 
 ```{r}
 cat_pred_mod_add = lm(y ~ x1 + x2, data = cat_pred)
@@ -210,7 +212,7 @@ Notice here that `R` ignores the first order term from `poly(TV, degree = 3)` as
 
 ### Transformations
 
-Note that we could also create more complex models, which allow for non-linearity using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.
+Note that we could also create more complex models, which allow for non-linearity, using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.
 
 ```{r}
 mod_8 = lm(log(Sales) ~ ., data = Advertising)
