@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="R for Statistical Learning">
-  <meta name="generator" content="bookdown 0.3.8 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-01-24">
+<meta name="date" content="2017-01-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,6 @@
   
   
 <link rel="prev" href="rstudio-and-rmarkdown.html">
-
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -362,29 +361,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1          x2           y
-##    &lt;fctr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1       A 0.816365712  0.17200153
-## 2       A 0.676862076  1.20725436
-## 3       A 0.006783549 -2.41782264
-## 4       A 0.743743436  0.76141053
-## 5       A 0.400004317 -1.09537569
-## 6       A 0.264767796  1.41341504
-## 7       A 0.260642493 -0.08990855
-## 8       A 0.730398811 -0.42773448
-## 9       A 0.192407730  0.62905458
-## 10      A 0.710715771  0.83161328
+##        x1         x2           y
+##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+## 1       A 0.22254763 -0.12508808
+## 2       A 0.85301499 -1.25778452
+## 3       A 0.46478599  0.94483222
+## 4       A 0.80792542 -0.34023291
+## 5       A 0.17122292  2.41312282
+## 6       A 0.12955643 -0.90457045
+## 7       A 0.31941060  0.49724615
+## 8       A 0.36424655  0.44661541
+## 9       A 0.04815425  0.29405155
+## 10      A 0.29603290 -0.08488532
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  0.22021419  0.02769777 -0.03875294 -0.25365650</code></pre>
+##   0.4615145  -0.4663491  -0.2990934  -0.7429736</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.7702473   1.5325378   1.6127294   1.8086485  -3.2131322  -3.0901808</code></pre>
+##   0.7538822  -0.6419257  -0.9290096  -1.5381215   0.6163407   1.4094264</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
