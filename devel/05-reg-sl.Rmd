@@ -1,9 +1,8 @@
 # Regression for Statistical Learning
 
+## Test-Train Split
 
-### Test-Train Split
-
-Frequently we will take a dataset and split it in two. One part of the datasets will be used to fit a model, which we will call the **training** data. The remainder of the original data will be used to assess how well the model is predicting, which we will call the **testing** data. Test data should never be used to train a model.
+Frequently we will take a dataset and split it in two. One part of the datasets will be used to fit (train) a model, which we will call the **training** data. The remainder of the original data will be used to assess how well the model is predicting, which we will call the **test** data. Test data should *never* be used to train a model.
 
 TODO: note about train-evaluate-test difference. save for later.
 
@@ -12,19 +11,26 @@ Here we use the `sample()` function to obtain a random sample of the rows of the
 TODO: note about `set.seed()`
 
 ```{r}
-set.seed(1234)
-dim(advertising)
-n = nrow(advertising)
-
-train_index = sample(1:n, size = trunc(.5*n))
-train_data = advertising[train_index, ]
-test_data = advertising[-train_index, ]
+Advertising = read_csv("../data/Advertising.csv")
 ```
 
 
-### Assesing Model Accuaracy
+```{r}
+set.seed(1234)
+dim(Advertising)
+n = nrow(Advertising)
 
-We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**. (Root-mean-square error.) 
+train_index = sample(1:n, size = trunc(.5 * n))
+train_data = Advertising[train_index, ]
+test_data = Advertising[-train_index, ]
+```
+
+
+## Assesing Model Accuaracy
+
+We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**. (Root-mean-square error.)
+
+TODO: math notation
 
 TODO: note why we prefer "root"
 
@@ -32,8 +38,12 @@ For linear models, training error will not increase as model flexibility increas
 
 ```{r}
 fit = lm(Sales ~ ., data = train_data)
-sqrt(mean((train_data$Sales - predict(fit, newdata = train_data)) ^ 2)) # train MSE
-sqrt(mean((test_data$Sales - predict(fit, newdata = test_data)) ^ 2)) # test MSE
+
+# train MSE
+sqrt(mean((train_data$Sales - predict(fit, newdata = train_data)) ^ 2))
+
+# test MSE
+sqrt(mean((test_data$Sales - predict(fit, newdata = test_data)) ^ 2)) 
 ```
 
 The previous two operations obtain the train and test MSE. Since these are operations we are about to use repeatedly, we write a function to make our code easier to write and read.
@@ -43,8 +53,12 @@ get_rmse = function(actual, predicted) {
   sqrt(mean((actual - predicted) ^ 2))
 }
 
-get_mse(actual = train_data$Sales, predicted = predict(fit, newdata = train_data)) # train MSE
-get_mse(actual = test_data$Sales, predicted = predict(fit, newdata = test_data)) # test MSE
+# train MSE
+get_mse(actual = train_data$Sales, 
+        predicted = predict(fit, newdata = train_data))
+# test MSE
+get_mse(actual = test_data$Sales, 
+        predicted = predict(fit, newdata = test_data))
 ```
 
 
@@ -113,8 +127,6 @@ Here we see the results summarized as a table. `fit_1` is the least flexible, an
 | `fit_4` | `r get_mse(train_data$Sales, predict(fit_4, train_data))` | `r get_mse(test_data$Sales, predict(fit_4, test_data))` |
 | `fit_5` | `r get_mse(train_data$Sales, predict(fit_5, train_data))` | `r get_mse(test_data$Sales, predict(fit_5, test_data))` |
 
-
-
 To summarize:
 
 - **Underfitting:** *High* Train MSE, *High* Test MSE. Seen in `fit_1`.
@@ -124,12 +136,8 @@ To summarize:
 
 
 
-
-TODO: exp vs pred
-TODO: collinearity
-TODO: not diagnostics!
-
-
-TODO: note about transformations?
-
-
+TODO: consider adding argument names
+TODO: exp vs pred, only look at test RMSE to decide. no hyp testing!
+TODO: collinearity, didn't even consider!
+TODO: no diagnostics! who cares!
+TODO: fix relative reference
