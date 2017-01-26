@@ -47,7 +47,7 @@ featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$S
 There are many metrics to assess the accuracy of a regression model. Most of these measure in some way the average error that the model makes. The metric that we will be most interested in is the root-mean-square error.
 
 $$
-\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(x_i)\right)^2}{n}}
+\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{1}{n}\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(x_i)\right)^2}
 $$
 
 While for the sake of comparing models, the choice between RMSE and MSE is arbitraty, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context MSE, refers to an average, whereas in an ANOVA context, the denominator for MSE may not be $n$.
@@ -104,19 +104,18 @@ test_data = Advertising[-train_index, ]
 We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**.
 
 $$
-\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Train}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
+\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Tr}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
 $$
 
-Train RMSE will still always go down (or stay the same) as the complexity of a linear model increases. That means train RMSE will not be useful for comparing models, but checking that it decreases is a useful sanity check.
+Here $n_{Tr}$ is the number of observations in the train set. Train RMSE will still always go down (or stay the same) as the complexity of a linear model increases. That means train RMSE will not be useful for comparing models, but checking that it decreases is a useful sanity check.
 
 $$
-\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Test}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
+\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Te}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
 $$
 
-Test RMSE uses the model fit using the training data, but evaluated on the unused test data. What happens to test RMSE as the size of the model increases? That is what we will investigate.
+Here $n_{Te}$ is the number of observations in the train set. Test RMSE uses the model fit using the training data, but evaluated on the unused test data. What happens to test RMSE as the size of the model increases? That is what we will investigate.
 
-
-We'll start with the simplest possible linear model, that is, a model with no predictors.
+We will start with the simplest possible linear model, that is, a model with no predictors.
 
 ```{r}
 fit_0 = lm(Sales ~ 1, data = train_data)
@@ -199,6 +198,8 @@ get_complexity(fit_5)
 get_rmse(model = fit_5, data = train_data, response = "Sales") # train MSE
 get_rmse(model = fit_5, data = test_data, response = "Sales") # test MSE
 ```
+
+## Choosing a Model
 
 ```{r, eval = FALSE}
 fit_1 = lm(Sales ~ ., data = train_data)
