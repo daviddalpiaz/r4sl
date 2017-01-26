@@ -201,6 +201,10 @@ get_rmse(model = fit_5, data = test_data, response = "Sales") # test MSE
 
 ## Choosing a Model
 
+To further understand the relationship between train RMSE, test RMSE, and model complexity, we summarize our results.
+
+First, we recap the models that we have fit.
+
 ```{r, eval = FALSE}
 fit_1 = lm(Sales ~ ., data = train_data)
 fit_2 = lm(Sales ~ Radio * Newspaper * TV, data = train_data)
@@ -211,23 +215,31 @@ fit_5 = lm(Sales ~ Radio * Newspaper * TV +
            I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
 ```
 
+Next, we create a list of the models fit.
+
 ```{r}
 model_list = list(fit_1, fit_2, fit_3, fit_4, fit_5)
 ```
 
-```{r}
-model_complexity = sapply(model_list, get_complexity)
+We then obtain train RMSE, test RMSE, and model complexity for each.
 
+```{r}
 train_rmse = sapply(model_list, get_rmse, data = train_data, response = "Sales")
 test_rmse = sapply(model_list, get_rmse, data = test_data, response = "Sales")
-
-# test_rmse = c(get_rmse(fit_1, test_data, "Sales"),
-#               get_rmse(fit_2, test_data, "Sales"),
-#               get_rmse(fit_3, test_data, "Sales"),
-#               get_rmse(fit_4, test_data, "Sales"),
-#               get_rmse(fit_5, test_data, "Sales"))
+model_complexity = sapply(model_list, get_complexity)
 ```
 
+```{r, echo = FALSE, eval = FALSE}
+# the following is the same as the apply command above
+
+test_rmse = c(get_rmse(fit_1, test_data, "Sales"),
+              get_rmse(fit_2, test_data, "Sales"),
+              get_rmse(fit_3, test_data, "Sales"),
+              get_rmse(fit_4, test_data, "Sales"),
+              get_rmse(fit_5, test_data, "Sales"))
+```
+
+We then plot the results. The train RMSE can be seen in blue, while the test RMSE is given in orange.
 
 ```{r}
 plot(model_complexity, train_rmse, type = "b", 
@@ -239,10 +251,7 @@ plot(model_complexity, train_rmse, type = "b",
 lines(model_complexity, test_rmse, type = "b", col = "darkorange")
 ```
 
-
-
-Here we see the results summarized as a table. `fit_1` is the least flexible, and `fit_5` is the most flexible. We see the Train MSE decrease as flexibility increases. We see that the Test MSE is smallest for `fit_3`. (Note this may not be the best model, but it is the best model of the models we have seen in this example.)
-
+We also summarize the results as a table. `fit_1` is the least flexible, and `fit_5` is the most flexible. We see the Train MSE decrease as flexibility increases. We see that the Test MSE is smallest for `fit_3`. (Note this may not be the best model, but it is the best model of the models we have seen in this example.)
 
 | Model   | Train RMSE        | Test RMSE        | Predictors              |
 |---------|-------------------|------------------|-------------------------|
