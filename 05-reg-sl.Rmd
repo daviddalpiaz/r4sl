@@ -1,21 +1,21 @@
 # Regression for Statistical Learning
 
-When using linear models in the past, we often emphasised distributional results, which were useful for creating and performing hypothesis tests. Frequently, when developing a linear regression model, part of our goal was to **explain** a relationship.
+When using linear models in the past, we often emphasized distributional results, which were useful for creating and performing hypothesis tests. Frequently, when developing a linear regression model, part of our goal was to **explain** a relationship.
 
 Now, we will ignore much of what we have learned and instead simply use regression as a tool to **predict**. Instead of a model which explains relationships, we seek a model which minimizes errors.
 
-![](../images/regression.png)
+![](images/regression.png)
 
 First, note that a linear model is one of many methods used in regression. **Regression** is a form of **supervised learning**. Supervised learning deals with problems where there are both an input and an output. Regression problems are the subset of supervised learning problems with a **numeric** output.
 
-Often one of the biggest differences between *statistical learning*, *machine learning*, *artificial intelligence* are the names use to describe variables and methods.
+Often one of the biggest differences between *statistical learning*, *machine learning*, *artificial intelligence* are the names used to describe variables and methods.
 
 - The **input** can be called: input vector, feature vector, or predictors. The elements of these would be an input, feature, or predictor. The individual features can be either numeric or categorical.
 - The **output** may be called: output, response, outcome, or target. The response must be numeric.
 
 As an aside, some textbooks and statisticians use the terms independent and dependent variables to describe the response and the predictors. However, this practice can be confusing as those terms have specific meanings in probability theory.
 
-*Our goal is to find a rule, algorithm, or function which takes as input a feature vector, and outputs a response which is as close to the true value as possible.* We often write the true, unknown relationship between the input and ouput $f(\bf{x})$. The relationship we learn, based on data, is written $\hat{f}(\bf{x})$.
+*Our goal is to find a rule, algorithm, or function which takes as input a feature vector, and outputs a response which is as close to the true value as possible.* We often write the true, unknown relationship between the input and output $f(\bf{x})$. The relationship we learn, based on data, is written $\hat{f}(\bf{x})$.
 
 From a statistical learning point-of-view, we write,
 
@@ -27,7 +27,7 @@ to indicate that the true response is a function of both the unknown relationshi
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE}
 library(readr)
-Advertising = read_csv("../data/Advertising.csv")
+Advertising = read_csv("data/Advertising.csv")
 ```
 
 To discuss linear models in the context of prediction, we return to the `Advertising` data from the previous chapter.
@@ -47,15 +47,15 @@ featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$S
 There are many metrics to assess the accuracy of a regression model. Most of these measure in some way the average error that the model makes. The metric that we will be most interested in is the root-mean-square error.
 
 $$
-\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{1}{n}\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(x_i)\right)^2}
+\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{1}{n}\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
 $$
 
-While for the sake of comparing models, the choice between RMSE and MSE is arbitraty, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context MSE, refers to an average, whereas in an ANOVA context, the denominator for MSE may not be $n$.
+While for the sake of comparing models, the choice between RMSE and MSE is arbitrary, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context MSE refers to an average, whereas in an ANOVA context, the denominator for MSE may not be $n$.
 
 For a linear model , the estimate of $f$, $\hat{f}$, is given by the fitted regression line.
 
 $$
-\hat{y}_i = \hat{f}(x_i)
+\hat{y}_i = \hat{f}(\bf{x}_i)
 $$
 
 We can write an `R` function that will be useful for performing this calculation.
@@ -71,7 +71,7 @@ rmse = function(actual, predicted) {
 
 Aside from how well a model predicts, we will also be very interested in the complexity (flexibility) of a model. For now, we will only considered nested linear models for simplicity. Then in that case, the more predictors that a model has, the more complex the model. For the sake of assigning a numerical value to the complexity of a linear model, we will use the number of predictors, $p$.
 
-We write a simply `R` function to extract this information from a model.
+We write a simple `R` function to extract this information from a model.
 
 ```{r}
 get_complexity = function(model) {
@@ -82,13 +82,13 @@ get_complexity = function(model) {
 
 ## Test-Train Split
 
-There is an issue with fitting a model to all availible data then using RMSE to determine how well the model predicts. It is essentially cheating! As a linear model becomes more complex, the RSS, thus RMSE, can never go up. It will only go down, or in very specific cases, stay the same.
+There is an issue with fitting a model to all available data then using RMSE to determine how well the model predicts. It is essentially cheating! As a linear model becomes more complex, the RSS, thus RMSE, can never go up. It will only go down, or in very specific cases, stay the same.
 
 This would suggest that to predict well, we should use the largest possible model! However, in reality we have hard fit to a specific dataset, but as soon as we see new data, a large model may in fact predict poorly. This is called **overfitting**.
 
 Frequently we will take a dataset of interest and split it in two. One part of the datasets will be used to fit (train) a model, which we will call the **training** data. The remainder of the original data will be used to assess how well the model is predicting, which we will call the **test** data. Test data should *never* be used to train a model.
 
-Note that sometimes the terms *evaluation set* and *test set* are used interchangably. We will give somewhat specific definitions to these later. For now we will simply use a single test set for a training set.
+Note that sometimes the terms *evaluation set* and *test set* are used interchangeably. We will give somewhat specific definitions to these later. For now we will simply use a single test set for a training set.
 
 Here we use the `sample()` function to obtain a random sample of the rows of the original data. We then use those row numbers (and remaining row numbers) to split the data accordingly. Notice we used the `set.seed()` function to allow use to reproduce the same random split each time we perform this analysis.
 
@@ -104,16 +104,16 @@ test_data = Advertising[-train_index, ]
 We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**.
 
 $$
-\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Tr}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
+\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Tr}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
 $$
 
 Here $n_{Tr}$ is the number of observations in the train set. Train RMSE will still always go down (or stay the same) as the complexity of a linear model increases. That means train RMSE will not be useful for comparing models, but checking that it decreases is a useful sanity check.
 
 $$
-\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Te}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
+\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Te}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
 $$
 
-Here $n_{Te}$ is the number of observations in the train set. Test RMSE uses the model fit using the training data, but evaluated on the unused test data. What happens to test RMSE as the size of the model increases? That is what we will investigate.
+Here $n_{Te}$ is the number of observations in the test set. Test RMSE uses the model fit to the training data, but evaluated on the unused test data. This is a measure of how well the fitted model will predict **in general**, not simply how well it fits data used to train the model, as is the case with train RMSE. What happens to test RMSE as the size of the model increases? That is what we will investigate.
 
 We will start with the simplest possible linear model, that is, a model with no predictors.
 
@@ -145,7 +145,7 @@ get_rmse = function(model, data, response) {
 }
 ```
 
-By using this function, our code becomes easier to read, and it is more obvious what task we are accomnplishing. 
+By using this function, our code becomes easier to read, and it is more obvious what task we are accomplishing. 
 
 ```{r}
 get_rmse(model = fit_0, data = train_data, response = "Sales") # train MSE
@@ -201,7 +201,7 @@ get_rmse(model = fit_5, data = test_data, response = "Sales") # test MSE
 
 ## Choosing a Model
 
-To further understand the relationship between train RMSE, test RMSE, and model complexity, we summarize our results.
+To better understand the relationship between train RMSE, test RMSE, and model complexity, we summarize our results, as the above is somewhat cluttered.
 
 First, we recap the models that we have fit.
 
@@ -251,7 +251,7 @@ plot(model_complexity, train_rmse, type = "b",
 lines(model_complexity, test_rmse, type = "b", col = "darkorange")
 ```
 
-We also summarize the results as a table. `fit_1` is the least flexible, and `fit_5` is the most flexible. We see the Train MSE decrease as flexibility increases. We see that the Test MSE is smallest for `fit_3`. (Note this may not be the best model, but it is the best model of the models we have seen in this example.)
+We also summarize the results as a table. `fit_1` is the least flexible, and `fit_5` is the most flexible. We see the Train MSE decrease as flexibility increases. We see that the Test MSE is smallest for `fit_3`, thus is the model we believe will perform the best on future data not used to train the model. Note this may not be the best model, but it is the best model of the models we have seen in this example.
 
 | Model   | Train RMSE        | Test RMSE        | Predictors              |
 |---------|-------------------|------------------|-------------------------|
@@ -263,23 +263,13 @@ We also summarize the results as a table. `fit_1` is the least flexible, and `fi
 
 To summarize:
 
-- **Underfitting:** *High* Train MSE, *High* Test MSE. Seen in `fit_1`.
-- **Overfitting:** *Low* Train MSE, *High* Test MSE. Seen in `fit_5`.
+- **Underfitting models:** *High* Train MSE, *High* Test MSE. Seen in `fit_1` and `fit_2`.
+- **Overfitting models:** *Low* Train MSE, *High* Test MSE. Seen in `fit_4` and `fit_5`.
 
-- TODO: note about "echo"
+A number of notes on these results:
 
-- TODO: garunatee train
-- TODO: note for test
-- TODO: note about which is higher
+- The labels of under and overfitting are *relative* to the best model see, `fit_3`.
+- The train RMSE is guarantee to follow this non-increasing pattern. The same is not true of test RMSE. Here we see a nice U-shaped curve. There are theoretical reasons why we should expect this, but that is on average. Because of the randomness of one test-train split, we may not always see this result. Re-perform this analysis with a different seed value and the pattern may not hold. We will discuss why we expect this next chapter. We will discuss how we can help create this U-shape much later.
+- Often we expect train RMSE to be lower than test RMSE. Again, due to the randomness of the split, you may get lucky and this will not be true.
 
-- TODO: dependence on seed. will fix later
-
-- TODO: relativity
-
-- TODO: which model we would choose
-- TODO: "generalize"
-
-- TODO: exp vs pred, only look at test RMSE to decide. no hyp testing!
-- TODO: collinearity, didn't even consider!
-- TODO: assumptions? who cares? diagnostics! why bother? 
-- TODO: fix relative reference
+A final note on the analysis performed here; we paid no attention whatsoever to the "assumptions" of a linear model. We only sought a model that **predicted** well, and paid no attention to a model for **explaination**. Hypothesis testing did not play a role in deciding the model, only prediction accuracy. Collinearity? We don't care. Assumptions? Still don't care. Diagnostics? Never heard of them. (These statements are a little over the top, and not completely true, but just to drive home the point that we only care about prediction. Often we latch onto methods that we have seen before, even when they are not needed.)
