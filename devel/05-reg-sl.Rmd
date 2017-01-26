@@ -1,8 +1,3 @@
----
-output:
-  html_document: default
-  pdf_document: default
----
 # Regression for Statistical Learning
 
 When using linear models in the past, we often emphasised distributional results, which were useful for creating and performing hypothesis tests. Frequently, when developing a linear regression model, part of our goal was to **explain** a relationship.
@@ -46,6 +41,7 @@ library(caret)
 featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$Sales)
 ```
 
+
 ## Assesing Model Accuracy
 
 There are many metrics to assess the accuracy of a regression model. Most of these measure in some way the average error that the model makes. The metric that we will be most interested in is the root-mean-square error.
@@ -54,20 +50,45 @@ $$
 \text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(x_i)\right)^2}{n}}
 $$
 
-- TODO: note why we prefer "root"
-- TODO: note difference between MSE in anova context.
-- TODO: only goes down
+While for the sake of comparing models, the choice between RMSE and MSE is arbitraty, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context MSE, refers to an average, whereas in an ANOVA context, the denominator for MSE may not be $n$.
+
+For a linear model , the estimate of $f$, $\hat{f}$, is given by the fitted regression line.
 
 $$
 \hat{y}_i = \hat{f}(x_i)
 $$
 
+We can write an `R` function that will be useful for performing this calculation.
+
+```{r}
+rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+```
+
+
+## Model Complexity
+
+Aside from how well a model predicts, we will also be very interested in the complexity (flexibility) of a model. For now, we will only considered nested linear models for simplicity. Then in that case, the more predictors that a model has, the more complex the model. For the sake of assigning a numerical value to the complexity of a linear model, we will use the number of predictors, $p$.
+
+We write a simply `R` function to extract this information from a model.
+
+```{r}
+get_complexity = function(model) {
+  length(coef(model)) - 1
+}
+```
+
+
 ## Test-Train Split
+
+There is an issue with fitting a model to all availible data then using RMSE to determine how well the model predicts. It is essentially cheating! As a linear model becomes more complex, the RSS, thus RMSE, can never go up. It will only go down, or in very specific cases, stay the same.
+
+This would suggest that to predict well, we should use the largest possible model! However, in reality we have hard fit to a specific dataset, but as soon as we see new data, a large model may in fact predict poorly. This is called **overfitting**.
 
 Frequently we will take a dataset of interest and split it in two. One part of the datasets will be used to fit (train) a model, which we will call the **training** data. The remainder of the original data will be used to assess how well the model is predicting, which we will call the **test** data. Test data should *never* be used to train a model.
 
-- TODO: note about train-evaluate-test difference. save for later.
-
+Note that sometimes the terms *evaluation set* and *test set* are used interchangably. We will give somewhat specific definitions to these later. For now we will simply use a single test set for a training set.
 
 Here we use the `sample()` function to obtain a random sample of the rows of the original data. We then use those row numbers (and remaining row numbers) to split the data accordingly. Notice we used the `set.seed()` function to allow use to reproduce the same random split each time we perform this analysis.
 
@@ -80,44 +101,22 @@ train_data = Advertising[train_index, ]
 test_data = Advertising[-train_index, ]
 ```
 
-
-
-
-
-
-
-We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**. (Root-mean-square error.)
-
+We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**.
 
 $$
 \text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Train}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
 $$
 
-- TODO: still only goes down
+Train RMSE will still always go down (or stay the same) as the complexity of a linear model increases. That means train RMSE will not be useful for comparing models, but checking that it decreases is a useful sanity check.
 
 $$
 \text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Test}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
 $$
 
-- TODO: what happens here?
+Test RMSE uses the model fit using the training data, but evaluated on the unused test data. What happens to test RMSE as the size of the model increases? That is what we will investigate.
 
 
-
-
-## Model Complexity
-
-- TODO: currently only for nested
-- TODO: will discuss more later
-
-
-```{r}
-get_complexity = function(model) {
-  length(coef(model)) - 1
-}
-```
-
-
-For linear models, training error will not increase as model flexibility increases, thus train RMSE is not useful for determining how well a model predicts. Instead we will only consider the test RMSE.
+We'll start with the simplest possible linear model, that is, a model with no predictors.
 
 ```{r}
 fit_0 = lm(Sales ~ 1, data = train_data)
@@ -125,30 +124,31 @@ get_complexity(fit_0)
 
 # train MSE
 sqrt(mean((train_data$Sales - predict(fit_0, train_data)) ^ 2))
-
 # test MSE
 sqrt(mean((test_data$Sales - predict(fit_0, test_data)) ^ 2)) 
 ```
 
-The previous two operations obtain the train and test MSE. Since these are operations we are about to use repeatedly, we write a function to make our code easier to write and read.
+The previous two operations obtain the train and test RMSE. Since these are operations we are about to use repeatedly, we should use the function that we happen to have already written.
 
 ```{r}
-rmse = function(actual, predicted) {
-  sqrt(mean((actual - predicted) ^ 2))
-}
-
 # train MSE
 rmse(actual = train_data$Sales, predicted = predict(fit_0, train_data))
 # test MSE
 rmse(actual = test_data$Sales, predicted = predict(fit_0, test_data))
 ```
 
+This function can actually be improved for the inputs that we are using. We would like to obtain train and test RMSE for a fitted model, given a train or test dataset, and the appropriate response variable.
+
 ```{r}
 get_rmse = function(model, data, response) {
   rmse(actual = data[, response], 
        predicted = predict(model, data))
 }
+```
 
+By using this function, our code becomes easier to read, and it is more obvious what task we are accomnplishing. 
+
+```{r}
 get_rmse(model = fit_0, data = train_data, response = "Sales") # train MSE
 get_rmse(model = fit_0, data = test_data, response = "Sales") # test MSE
 ```
