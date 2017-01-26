@@ -1,25 +1,41 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # Regression for Statistical Learning
 
-When using linear models in the past, we often emphasised distributional results, which were useful for creating and performing hypothesis tests. Frequently, when creating a regression model, part of our goal was to **explain** a relationship.
+When using linear models in the past, we often emphasised distributional results, which were useful for creating and performing hypothesis tests. Frequently, when developing a linear regression model, part of our goal was to **explain** a relationship.
 
 Now, we will ignore much of what we have learned and instead simply use regression as a tool to **predict**. Instead of a model which explains relationships, we seek a model which minimizes errors.
 
-![Simulation vs Modeling](../images/regression.svg)
+![](../images/regression.png)
 
+First, note that a linear model is one of many methods used in regression. **Regression** is a form of **supervised learning**. Supervised learning deals with problems where there are both an input and an output. Regression problems are the subset of supervised learning problems with a **numeric** output.
 
-- TODO: linear model is just one form of regression
-- TODO: supervised learning
-- TODO: input: features (feature vector) predictors (observation)
-- TODO: output: response, target, outcome IS NUMERIC
+Often one of the biggest differences between *statistical learning*, *machine learning*, *artificial intelligence* are the names use to describe variables and methods.
 
-- TODO: don't use ind and dep as names
+- The **input** can be called: input vector, feature vector, or predictors. The elements of these would be an input, feature, or predictor. The individual features can be either numeric or categorical.
+- The **output** may be called: output, response, outcome, or target. The response must be numeric.
+
+As an aside, some textbooks and statisticians use the terms independent and dependent variables to describe the response and the predictors. However, this practice can be confusing as those terms have specific meanings in probability theory.
+
+*Our goal is to find a rule, algorithm, or function which takes as input a feature vector, and outputs a response which is as close to the true value as possible.* We often write the true, unknown relationship between the input and ouput $f(\bf{x})$. The relationship we learn, based on data, is written $\hat{f}(\bf{x})$.
+
+From a statistical learning point-of-view, we write,
+
+$$
+Y = f(\bf{x}) + \epsilon
+$$
+
+to indicate that the true response is a function of both the unknown relationship, as well as some unlearnable noise.
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE}
 library(readr)
 Advertising = read_csv("../data/Advertising.csv")
 ```
 
-TO discuss regression in the context of prediction, we return to the `Advertising` data from the previous chapter.
+To discuss linear models in the context of prediction, we return to the `Advertising` data from the previous chapter.
 
 ```{r}
 Advertising
@@ -30,6 +46,22 @@ library(caret)
 featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$Sales)
 ```
 
+## Assesing Model Accuracy
+
+There are many metrics to assess the accuracy of a regression model. Most of these measure in some way the average error that the model makes. The metric that we will be most interested in is the root-mean-square error.
+
+$$
+\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(x_i)\right)^2}{n}}
+$$
+
+- TODO: note why we prefer "root"
+- TODO: note difference between MSE in anova context.
+- TODO: only goes down
+
+$$
+\hat{y}_i = \hat{f}(x_i)
+$$
+
 ## Test-Train Split
 
 Frequently we will take a dataset of interest and split it in two. One part of the datasets will be used to fit (train) a model, which we will call the **training** data. The remainder of the original data will be used to assess how well the model is predicting, which we will call the **test** data. Test data should *never* be used to train a model.
@@ -37,7 +69,7 @@ Frequently we will take a dataset of interest and split it in two. One part of t
 - TODO: note about train-evaluate-test difference. save for later.
 
 
-Here we use the `sample()` function to obtain a random sample of the rows of the original data. We then use those row numbers (and remaining row numbers) to split the data accordingly. Notice we used the `set.seed()` function to allow use to reporoduce the same random split each time we perform this analysis.
+Here we use the `sample()` function to obtain a random sample of the rows of the original data. We then use those row numbers (and remaining row numbers) to split the data accordingly. Notice we used the `set.seed()` function to allow use to reproduce the same random split each time we perform this analysis.
 
 ```{r}
 set.seed(9)
@@ -49,9 +81,33 @@ test_data = Advertising[-train_index, ]
 ```
 
 
+
+
+
+
+
+We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**. (Root-mean-square error.)
+
+
+$$
+\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Train}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
+$$
+
+- TODO: still only goes down
+
+$$
+\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Test}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
+$$
+
+- TODO: what happens here?
+
+
+
+
 ## Model Complexity
 
 - TODO: currently only for nested
+- TODO: will discuss more later
 
 
 ```{r}
@@ -59,42 +115,6 @@ get_complexity = function(model) {
   length(coef(model)) - 1
 }
 ```
-
-
-## Assesing Model Accuracy
-
-There are many metrics to assess the accuracy of a regression model. Most of these measure in some way the average error that the model makes. The metric that we will be most interested in is the root-mean-square error.
-
-
-
-$$
-\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\sum_{i = 1}^{n}\left(y_i - \hat{f}(x_i)\right)^2}
-$$
-
-- TODO: note why we prefer "root"
-- TODO: note difference between MSE in anova context.
-- TODO: only goes down
-
-$$
-\hat{y}_i = \hat{f}(x_i)
-$$
-
-We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**. (Root-mean-square error.)
-
-
-$$
-\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\sum_{i \in \text{Train}}\left(y_i - \hat{f}(x_i)\right)^2}
-$$
-
-- TODO: still only goes down
-
-$$
-\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Test Data}) = \sqrt{\sum_{i \in \text{Test}}\left(y_i - \hat{f}(x_i)\right)^2}
-$$
-
-- TODO: what happens here?
-
-
 
 
 For linear models, training error will not increase as model flexibility increases, thus train RMSE is not useful for determining how well a model predicts. Instead we will only consider the test RMSE.
