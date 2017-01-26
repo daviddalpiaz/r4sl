@@ -36,7 +36,7 @@ pairs(Advertising)
 
 Often, we will be most interested in only the relationship between each predictor and the response. For this, we can use the `featurePlot()` function from the `caret` package. (We will use the `caret` package more and more frequently as we introduce new topics.)
 
-```{r, message = FALSE, warning = FALSE}
+```{r, fig.height = 4, fig.width = 10, message = FALSE, warning = FALSE}
 library(caret)
 featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$Sales)
 ```
