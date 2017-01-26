@@ -51,7 +51,7 @@ featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$S
 There are many metrics to assess the accuracy of a regression model. Most of these measure in some way the average error that the model makes. The metric that we will be most interested in is the root-mean-square error.
 
 $$
-\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(x_i)\right)^2}{n}}
+\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{1}{n}\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(x_i)\right)^2}
 $$
 
 - TODO: note why we prefer "root"
@@ -90,14 +90,18 @@ We will look at two measures that assess how well a model is predicting, the **t
 
 
 $$
-\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Train}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
+\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Tr}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
 $$
+
+$n_{Tr}$ is the number of observations in the train set.
 
 - TODO: still only goes down
 
 $$
-\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Test}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
+\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Te}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(x_i)\right)^2}
 $$
+
+$n_{Te}$ is the number of observations in the train set.
 
 - TODO: what happens here?
 
@@ -199,6 +203,8 @@ get_complexity(fit_5)
 get_rmse(model = fit_5, data = train_data, response = "Sales") # train MSE
 get_rmse(model = fit_5, data = test_data, response = "Sales") # test MSE
 ```
+
+## Choosing a Model
 
 ```{r, eval = FALSE}
 fit_1 = lm(Sales ~ ., data = train_data)
