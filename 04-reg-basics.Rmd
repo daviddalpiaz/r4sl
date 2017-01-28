@@ -216,7 +216,7 @@ Note that we could also create more complex models, which allow for non-linearit
 
 ```{r}
 mod_8 = lm(log(Sales) ~ ., data = Advertising)
-sqrt(sum(resid(mod_8) ^ 2)) # incorrect RMSE for Model 8
-sqrt(sum(resid(mod_7) ^ 2)) # RMSE for Model 7
-sqrt(sum(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
+sqrt(mean(resid(mod_8) ^ 2)) # incorrect RMSE for Model 8
+sqrt(mean(resid(mod_7) ^ 2)) # RMSE for Model 7
+sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
 ```
