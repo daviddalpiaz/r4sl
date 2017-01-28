@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-01-26">
+<meta name="date" content="2017-01-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -370,29 +370,27 @@ cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
 ##        x1         x2          y
 ##    &lt;fctr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1       A 0.30968058  0.6605026
-## 2       A 0.62687976 -1.1366779
-## 3       A 0.50266936  0.8252216
-## 4       A 0.08766071  0.3020379
-## 5       A 0.57507925  0.3957681
-## 6       A 0.31640503  0.4079244
-## 7       A 0.11208091  0.8275100
-## 8       A 0.93976405  2.0834097
-## 9       A 0.74671265  1.2167836
-## 10      A 0.68458536  0.8957262
+## 1       A 0.72647761  0.9668784
+## 2       A 0.74574783 -0.2846072
+## 3       A 0.13654434  1.0775098
+## 4       A 0.78688020  0.8243792
+## 5       A 0.39087311  0.1508924
+## 6       A 0.09650342  0.9133573
+## 7       A 0.47667357  1.1684267
+## 8       A 0.81106148  0.4441061
+## 9       A 0.34096200  1.8165744
+## 10      A 0.75692847  1.5883614
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##   0.3400762  -0.1486129  -0.6136264   0.6278553</code></pre>
+##  0.85009349 -1.11972807 -0.89301132  0.03130661</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
-<pre><code>##  (Intercept)          x1B          x1C           x2       x1B:x2 
-##  0.166391610 -0.003998668 -0.183839797  0.982203958 -0.289650745 
-##       x1C:x2 
-## -0.791842933</code></pre>
+<pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
+##  1.17074506 -1.76272498 -0.87891181 -0.57729606  1.55442399 -0.02092297</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
@@ -425,12 +423,12 @@ cat_pred</code></pre></div>
 <h3><span class="header-section-number">4.6.3</span> Transformations</h3>
 <p>Note that we could also create more complex models, which allow for non-linearity, using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_8 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Sales) ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
-<span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">resid</span>(mod_8) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># incorrect RMSE for Model 8</span></code></pre></div>
-<pre><code>## [1] 2.615564</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">resid</span>(mod_7) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># RMSE for Model 7</span></code></pre></div>
-<pre><code>## [1] 6.806914</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">exp</span>(<span class="kw">resid</span>(mod_8)) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># correct RMSE for Model 8</span></code></pre></div>
-<pre><code>## [1] 14.4703</code></pre>
+<span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">resid</span>(mod_8) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># incorrect RMSE for Model 8</span></code></pre></div>
+<pre><code>## [1] 0.1849483</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">resid</span>(mod_7) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># RMSE for Model 7</span></code></pre></div>
+<pre><code>## [1] 0.4813215</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">exp</span>(<span class="kw">resid</span>(mod_8)) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># correct RMSE for Model 8</span></code></pre></div>
+<pre><code>## [1] 1.023205</code></pre>
 
 </div>
 </div>
