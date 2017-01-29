@@ -1,11 +1,56 @@
 # Simulating the Bias–Variance Tradeoff
 
+## Bias-Variance Decomposition
+
+$$
+y = f(\mathbf x) + \epsilon
+$$
+
+
+- estimate $\hat{f}(\mathbf x)$, train using data
+
+$$
+E[\epsilon] = 0 \quad \text{and} \quad \text{var}(\epsilon) = \sigma^2.
+$$
+
+- expected prediction error at $x_0$
+
+$$
+E\left[\left(y_0 - \hat{f}(\mathbf x_0)\right)^2\right] = \text{bias}\left(\hat{f}(\mathbf x_0)\right)^2 + \text{var}\left(\hat{f}(\mathbf x_0)\right) + \sigma^2
+$$
+
+
+
+$$
+\text{bias}\left(\hat{f}(\mathbf x_0)\right) = E\left[\hat{f}(\mathbf x_0)\right] - f(\mathbf x_0)
+$$
+
+- reducible error = bias^2 = var
+- irreduble error, noise
+
+
+## Simulation
+
+Suppose we would like a train a model to learn the function $f(x) = x^2$.
 
 ```{r}
 f = function(x) {
   x ^ 2
 }
 ```
+
+More specifically,
+
+$$
+y = x^2 + \epsilon
+$$
+where
+
+$$
+\epsilon \sim N(\mu = 0, \sigma^2 = 0.3^2).
+$$
+
+We write a function which generate data accordingly.
 
 ```{r}
 get_sim_data = function(f, sample_size = 100) {
@@ -14,6 +59,8 @@ get_sim_data = function(f, sample_size = 100) {
   data.frame(x, y)
 }
 ```
+
+- TODO: fitting to some data
 
 ```{r}
 sim_data = get_sim_data(f, sample_size = 100)
@@ -24,7 +71,9 @@ fit_3 = lm(y ~ poly(x, degree = 2), data = sim_data)
 fit_4 = lm(y ~ poly(x, degree = 3), data = sim_data)
 ```
 
-```{r}
+- TODO: plotting data and fits
+
+```{r, fig.height = 8, fig.width = 8}
 plot(y ~ x, data = sim_data)
 grid = seq(from = 0, to = 1, by = 0.01)
 lines(grid, f(grid), col = "black", lwd = 5)
@@ -34,29 +83,30 @@ lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = "green", lwd =
 lines(grid, predict(fit_4, newdata = data.frame(x = grid)), col = "orange", lwd = 2)
 ```
 
-```{r}
-set.seed(34)
-n_sims = 30000
+- TODO: repeated simulations
+
+```{r, fig.height = 10, fig.width = 10}
+set.seed(1)
+n_sims = 1000
 n_models = 4
 x0 = 0.9
 predictions = matrix(0, nrow = n_sims, ncol = n_models)
-sim_data = get_sim_data(f, sample_siz = 100)
-plot(y ~ x, data = sim_data, col = "white", xlim = c(0.5, 1))
-lines(grid, f(grid), col = "black", lwd = 3)
+sim_data = get_sim_data(f, sample_size = 100)
+plot(y ~ x, data = sim_data, col = "white", xlim = c(0.75, 1), ylim = c(0, 1.5))
 
 for (i in 1:n_sims) {
   
   sim_data = get_sim_data(f, sample_size = 100)
-  
+
   fit_1 = lm(y ~ 1, data = sim_data)
   fit_2 = lm(y ~ poly(x, degree = 1), data = sim_data)
   fit_3 = lm(y ~ poly(x, degree = 2), data = sim_data)
   fit_4 = lm(y ~ poly(x, degree = 3), data = sim_data)
   
-  # lines(grid, predict(fit_1, newdata = data.frame(x = grid)), col = "red", lwd = 1)
-  # lines(grid, predict(fit_2, newdata = data.frame(x = grid)), col = "blue", lwd = 1)
-  # lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = "green", lwd = 1)
-  # lines(grid, predict(fit_4, newdata = data.frame(x = grid)), col = "orange", lwd = 1)
+  lines(grid, predict(fit_1, newdata = data.frame(x = grid)), col = "red", lwd = 1)
+  lines(grid, predict(fit_2, newdata = data.frame(x = grid)), col = "blue", lwd = 1)
+  lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = "green", lwd = 1)
+  lines(grid, predict(fit_4, newdata = data.frame(x = grid)), col = "orange", lwd = 1)
 
   predictions[i, ] <- c(
     predict(fit_1, newdata = data.frame(x = x0)),
@@ -66,43 +116,67 @@ for (i in 1:n_sims) {
   )
 }
 
+lines(grid, f(grid), col = "white", lwd = 5)
+lines(grid, f(grid), col = "black", lwd = 5, lty = 2)
 ```
 
-```{r}
-y0 = f(x0) + rnorm(n = n_sims, mean = 0, sd = 0.3)
-```
+- TODO: new obs at particular point x0
 
 ```{r}
-bias = function(estimate, truth) {
+eps = rnorm(n = n_sims, mean = 0, sd = 0.3)
+y0 = f(x0) + eps
+```
+
+
+## Bias-Variance Tradeoff
+
+```{r}
+get_bias = function(estimate, truth) {
   mean(estimate - truth)
 }
 
-mse = function(estimate, truth) {
+get_mse = function(estimate, truth) {
   mean((estimate - truth) ^ 2)
 }
 
-var_n = function(estimate) {
-  mean((estimate - mean(estimate)) ^ 2)
-}
 ```
 
 ```{r}
-bias(predictions[, 3], y0) ^ 2 + var(predictions[, 3]) + var(y0)
-mse(predictions[, 3], y0)
+bias = apply(predictions, 2, get_bias, y0)
+variance = apply(predictions, 2, var)
+mse = apply(predictions, 2, get_mse, y0)
 ```
 
 ```{r}
-bias(predictions[, 3], y0) ^ 2 + var(predictions[, 3]) + var(y0) - mse(predictions[, 3], y0)
-0.001746595
-0.0006933145
-0.001037828
-0.0003370496
-0.0004526304
-0.0002717982
+bias ^ 2 + variance + var(eps)
+mse
+```
+
+```{r, echo = FALSE}
+options(scipen = 999)
+```
+
+| Model   | Squared Bias     | Variance (Of Estimate) | MSE        |
+|---------|------------------|------------------------|------------|
+| `fit_1` | `r bias[1] ^ 2`  | `r variance[1]`        | `r mse[1]` |
+| `fit_2` | `r bias[2] ^ 2`  | `r variance[2]`        | `r mse[2]` |
+| `fit_3` | `r bias[3] ^ 2`  | `r variance[3]`        | `r mse[3]` |
+| `fit_4` | `r bias[4] ^ 2`  | `r variance[4]`        | `r mse[4]` |
+
+
+```{r, echo = FALSE}
+options(scipen = 0)
 ```
 
 
-TODO: note about difference do to estimating with simulation
+```{r}
+all(diff(bias ^ 2) < 0)
+all(diff(variance) > 0)
+diff(mse)
+```
 
 
-TODO: summarize with table, talk about where balance is found, bias inc, var dec
+- TODO: note about difference do to estimating with simulation
+
+
+- TODO: summarize with table, talk about where balance is found, bias inc, var dec
