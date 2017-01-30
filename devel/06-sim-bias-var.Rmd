@@ -1,37 +1,38 @@
 # Simulating the Bias–Variance Tradeoff
 
-## Bias-Variance Decomposition
+Consider the general regression setup 
 
 $$
 y = f(\mathbf x) + \epsilon
 $$
 
-
-- estimate $\hat{f}(\mathbf x)$, train using data
+with
 
 $$
 E[\epsilon] = 0 \quad \text{and} \quad \text{var}(\epsilon) = \sigma^2.
 $$
 
-- expected prediction error at $x_0$
+## Bias-Variance Decomposition
+
+Using $\hat{f}(\mathbf x)$, trained with data, to estimate $f(\mathbf x)$, we are interested in the expected prediction error. Specifically, considered making a prediction of $y_0 = f(\mathbf x_0) + \epsilon$ at the point $\mathbf x_0$.
+
+In that case, we have
 
 $$
-E\left[\left(y_0 - \hat{f}(\mathbf x_0)\right)^2\right] = \text{bias}\left(\hat{f}(\mathbf x_0)\right)^2 + \text{var}\left(\hat{f}(\mathbf x_0)\right) + \sigma^2
+E\left[\left(y_0 - \hat{f}(\mathbf x_0)\right)^2\right] = \text{bias}\left(\hat{f}(\mathbf x_0)\right)^2 + \text{var}\left(\hat{f}(\mathbf x_0)\right) + \sigma^2.
 $$
 
-
+Recall the definition of the bias of an estimate.
 
 $$
 \text{bias}\left(\hat{f}(\mathbf x_0)\right) = E\left[\hat{f}(\mathbf x_0)\right] - f(\mathbf x_0)
 $$
 
-- reducible error = bias^2 = var
-- irreduble error, noise
-
+So, we have decomposed the error into two types; **reducible** and **irreducible**. The reducible can be further decomposed into the squared **bias** and **variance** of the estimate. We can "control" these through our choice of model. The irreducible, is noise, that should not and cannot be modeled.
 
 ## Simulation
 
-Suppose we would like a train a model to learn the function $f(x) = x^2$.
+We will illustrate this decomposition, and the resulting bias-variance tradeoff through simulation. Suppose we would like a train a model to learn the function $f(x) = x^2$.
 
 ```{r}
 f = function(x) {
@@ -50,7 +51,7 @@ $$
 \epsilon \sim N(\mu = 0, \sigma^2 = 0.3^2).
 $$
 
-We write a function which generate data accordingly.
+We write a function which generates data accordingly.
 
 ```{r}
 get_sim_data = function(f, sample_size = 100) {
@@ -60,7 +61,7 @@ get_sim_data = function(f, sample_size = 100) {
 }
 ```
 
-- TODO: fitting to some data
+To get a sense of the data, we generate one simulated dataset, and fit the four models that we will be interested in.
 
 ```{r}
 sim_data = get_sim_data(f, sample_size = 100)
@@ -71,7 +72,7 @@ fit_3 = lm(y ~ poly(x, degree = 2), data = sim_data)
 fit_4 = lm(y ~ poly(x, degree = 3), data = sim_data)
 ```
 
-- TODO: plotting data and fits
+Plotting these four trained models, we see that the zero predictor model does very poorly. The single predictor model is reasonable, but we can see that the two and three predictor models seem more appropriate. Between these latter two, it is hard to see which seems more appropriate.
 
 ```{r, fig.height = 8, fig.width = 8}
 plot(y ~ x, data = sim_data)
@@ -83,9 +84,9 @@ lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = "green", lwd =
 lines(grid, predict(fit_4, newdata = data.frame(x = grid)), col = "orange", lwd = 2)
 ```
 
-- TODO: repeated simulations
+We will now use simulation to estimate the bias, variance, and mean squared error for the estimates given by these models at the point $x_0 = 0.9$. We use simulation to complete this task, as performing the exact calculations are always difficult, and often impossible.
 
-```{r, fig.height = 10, fig.width = 10}
+```{r, fig.height = 8, fig.width = 8}
 set.seed(1)
 n_sims = 1000
 n_models = 4
@@ -138,7 +139,6 @@ get_bias = function(estimate, truth) {
 get_mse = function(estimate, truth) {
   mean((estimate - truth) ^ 2)
 }
-
 ```
 
 ```{r}
