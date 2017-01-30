@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="regression-for-statistical-learning.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -200,222 +200,184 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="probability-review" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Probability Review</h1>
-<p>We give a very brief review of some necessary probability concepts. As the treatment is less than complete, a list of references is given at the end of the chapter. For example, we ignore the usual recap of basic set theory and omit proofs and examples.</p>
-<div id="probability-models" class="section level2">
-<h2><span class="header-section-number">1.1</span> Probability Models</h2>
-<p>When discussing probability models, we speak of random <strong>experiments</strong> that produce one of a number of possible <strong>outcomes</strong>.</p>
-<p>A <strong>probability model</strong> that describes the uncertainty of an experiment consists of two elements:</p>
-<ul>
-<li>The <strong>sample space</strong>, often denoted as <span class="math inline">\(\Omega\)</span>, which is a set that contains all possible outcomes.</li>
-<li>A <strong>probability function</strong> that assigns to an event <span class="math inline">\(A\)</span> a nonnegative number, <span class="math inline">\(P[A]\)</span>, that represents how likely it is that event <span class="math inline">\(A\)</span> occurs as a result of the experiment.</li>
-</ul>
-<p>We call <span class="math inline">\(P[A]\)</span> the <strong>probability</strong> of event <span class="math inline">\(A\)</span>. An <strong>event</strong> <span class="math inline">\(A\)</span> could be any subset of the sample space, not necessarily a single possible outcome. The probability law must follow a number of rules, which are the result of a set of axioms that we introduce now.</p>
+<div id="simulating-the-biasvariance-tradeoff" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Simulating the Bias–Variance Tradeoff</h1>
+<p>Consider the general regression setup</p>
+<p><span class="math display">\[
+y = f(\mathbf x) + \epsilon
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+E[\epsilon] = 0 \quad \text{and} \quad \text{var}(\epsilon) = \sigma^2.
+\]</span></p>
+<div id="bias-variance-decomposition" class="section level2">
+<h2><span class="header-section-number">6.1</span> Bias-Variance Decomposition</h2>
+<p>Using <span class="math inline">\(\hat{f}(\mathbf x)\)</span>, trained with data, to estimate <span class="math inline">\(f(\mathbf x)\)</span>, we are interested in the expected prediction error. Specifically, considered making a prediction of <span class="math inline">\(y_0 = f(\mathbf x_0) + \epsilon\)</span> at the point <span class="math inline">\(\mathbf x_0\)</span>.</p>
+<p>In that case, we have</p>
+<p><span class="math display">\[
+E\left[\left(y_0 - \hat{f}(\mathbf x_0)\right)^2\right] = \text{bias}\left(\hat{f}(\mathbf x_0)\right)^2 + \text{var}\left(\hat{f}(\mathbf x_0)\right) + \sigma^2.
+\]</span></p>
+<p>Recall the definition of the bias of an estimate.</p>
+<p><span class="math display">\[
+\text{bias}\left(\hat{f}(\mathbf x_0)\right) = E\left[\hat{f}(\mathbf x_0)\right] - f(\mathbf x_0)
+\]</span></p>
+<p>So, we have decomposed the error into two types; <strong>reducible</strong> and <strong>irreducible</strong>. The reducible can be further decomposed into the squared <strong>bias</strong> and <strong>variance</strong> of the estimate. We can “control” these through our choice of model. The irreducible, is noise, that should not and cannot be modeled.</p>
 </div>
-<div id="probability-axioms" class="section level2">
-<h2><span class="header-section-number">1.2</span> Probability Axioms</h2>
-<p>Given a sample space <span class="math inline">\(\Omega\)</span> for a particular experiment, the <strong>probability function</strong> associated with the experiment must satisfy the following axioms.</p>
-<ol style="list-style-type: decimal">
-<li><em>Nonnegativity</em>: <span class="math inline">\(P[A] \geq 0\)</span> for any event <span class="math inline">\(A \subset \Omega\)</span>.</li>
-<li><em>Normalization</em>: <span class="math inline">\(P[\Omega] = 1\)</span>. That is, the probability of the entire space is 1.</li>
-<li><em>Additivity</em>: For mutually exclusive events <span class="math inline">\(E_1, E_2, \ldots\)</span> <span class="math display">\[
-P\left[\bigcup_{i = 1}^{\infty} E_i\right] = \sum_{i = 1}^{\infty} P[E_i]
-\]</span></li>
-</ol>
-<p>Using these axioms, many additional probability rules can easily be derived.</p>
-</div>
-<div id="probability-rules" class="section level2">
-<h2><span class="header-section-number">1.3</span> Probability Rules</h2>
-<p>Given an event <span class="math inline">\(A\)</span>, and its complement, <span class="math inline">\(A^c\)</span>, that is, the outcomes in <span class="math inline">\(\Omega\)</span> which are not in <span class="math inline">\(A\)</span>, we have the <strong>complement rule</strong>:</p>
+<div id="simulation-1" class="section level2">
+<h2><span class="header-section-number">6.2</span> Simulation</h2>
+<p>We will illustrate this decomposition, and the resulting bias-variance tradeoff through simulation. Suppose we would like a train a model to learn the function <span class="math inline">\(f(x) = x^2\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f =<span class="st"> </span>function(x) {
+  x ^<span class="st"> </span><span class="dv">2</span>
+}</code></pre></div>
+<p>More specifically,</p>
 <p><span class="math display">\[
-P[A^c] = 1 - P[A]
-\]</span></p>
-<p>In general, for two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, we have the <strong>addition rule</strong>:</p>
+y = x^2 + \epsilon
+\]</span> where</p>
 <p><span class="math display">\[
-P[A \cup B] = P[A] + P[B] - P[A \cap B]
+\epsilon \sim N(\mu = 0, \sigma^2 = 0.3^2).
 \]</span></p>
-<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are also <em>disjoint</em>, then we have:</p>
-<p><span class="math display">\[
-P[A \cup B] = P[A] + P[B]
-\]</span></p>
-<p>If we have <span class="math inline">\(n\)</span> mutually exclusive events, <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, then we have:</p>
-<p><span class="math display">\[
-P\left[\textstyle\bigcup_{i = 1}^{n} E_i\right] = \sum_{i = 1}^{n} P[E_i]
-\]</span></p>
-<p>Often, we would like to understand the probability of an event <span class="math inline">\(A\)</span>, given some information about the outcome of event <span class="math inline">\(B\)</span>. In that case, we have the <strong>conditional probability rule</strong> provided <span class="math inline">\(P[B] &gt; 0\)</span>.</p>
-<p><span class="math display">\[
-P[A \mid B] = \frac{P[A \cap B]}{P[B]}
-\]</span></p>
-<p>Rearranging the conditional probability rule, we obtain the <strong>multiplication rule</strong>:</p>
-<p><span class="math display">\[
-P[A \cap B] = P[B] \cdot P[A \mid B] \cdot 
-\]</span></p>
-<p>For a number of events <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, the multiplication rule can be expanded into the <strong>chain rule</strong>:</p>
-<p><span class="math display">\[
-P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = P[E_1] \cdot P[E_2 \mid E_1] \cdot P[E_3 \mid E_1 \cap E_2] \cdots P\left[E_n \mid \textstyle\bigcap_{i = 1}^{n - 1} E_i\right] 
-\]</span></p>
-<p>Define a <strong>partition</strong> of a sample space <span class="math inline">\(\Omega\)</span> to be a set of disjoint events <span class="math inline">\(A_1, A_2, \ldots, A_n\)</span> whose union is the sample space <span class="math inline">\(\Omega\)</span>. That is</p>
-<p><span class="math display">\[
-A_i \cap A_j = \emptyset
-\]</span></p>
-<p>for all <span class="math inline">\(i \neq j\)</span>, and</p>
-<p><span class="math display">\[
-\bigcup_{i = 1}^{n} A_i = \Omega.
-\]</span></p>
-<p>Now, let <span class="math inline">\(A_1, A_2, \ldots, A_n\)</span> form a partition of the sample space where <span class="math inline">\(P[A_i] &gt; 0\)</span> for all <span class="math inline">\(i\)</span>. Then for any event <span class="math inline">\(B\)</span> with <span class="math inline">\(P[B] &gt; 0\)</span> we have <strong>Bayes’ Rule</strong>:</p>
-<p><span class="math display">\[
-P[A_i | B] = \frac{P[A_i]P[B | A_i]}{P[B]} = \frac{P[A_i]P[B | A_i]}{\sum_{i = 1}^{n}P[A_i]P[B | A_i]}
-\]</span></p>
-<p>The denominator of the latter equality is often called the <strong>law of total probability</strong>:</p>
-<p><span class="math display">\[
-P[B] = \sum_{i = 1}^{n}P[A_i]P[B | A_i]
-\]</span></p>
-<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are said to be <strong>independent</strong> if they satisfy</p>
-<p><span class="math display">\[
-P[A \cap B] = P[A] \cdot P[B]
-\]</span></p>
-<p>This becomes the new multiplication rule for independent events.</p>
-<p>A collection of events <span class="math inline">\(E_1, E_2, \ldots E_n\)</span> is said to be independent if</p>
-<p><span class="math display">\[
-P\left[\bigcup_{i \in S} E_i \right] = \prod_{i \in S}P[A_i]
-\]</span></p>
-<p>for every subset <span class="math inline">\(S\)</span> of <span class="math inline">\(\{1, 2, \ldots n\}\)</span>.</p>
-<p>If this is the case, then the chain rule is greatly simplified to:</p>
-<p><span class="math display">\[
-P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
-\]</span></p>
-</div>
-<div id="random-variables" class="section level2">
-<h2><span class="header-section-number">1.4</span> Random Variables</h2>
-<p>A <strong>random variable</strong> is simply a <em>function</em> which maps outcomes in the sample space to real numbers.</p>
-<div id="distributions" class="section level3">
-<h3><span class="header-section-number">1.4.1</span> Distributions</h3>
-<p>We often talk about the <strong>distribution</strong> of a random variable, which can be thought of as:</p>
-<p><span class="math display">\[
-\text{distribution} = \text{list of possible} \textbf{ values} + \text{associated} \textbf{ probabilities}
-\]</span></p>
-<p>This is not a strict mathematical definition, but is useful for conveying the idea.</p>
-<p>If the possible values of a random variables are <em>discrete</em>, it is called a <em>discrete random variable</em>. If the possible values of a random variables are <em>continuous</em>, it is called a <em>continuous random variable</em>.</p>
-</div>
-<div id="discrete-random-variables" class="section level3">
-<h3><span class="header-section-number">1.4.2</span> Discrete Random Variables</h3>
-<p>The distribution of a discrete random variable <span class="math inline">\(X\)</span> is most often specified by a list of possible values and a probability <strong>mass</strong> function, <span class="math inline">\(p(x)\)</span>. The mass function directly gives probabilities, that is,</p>
-<p><span class="math display">\[
-p(x) = p_X(x) = P[X = x].
-\]</span></p>
-<p>Note we almost always drop the subscript from the more correct <span class="math inline">\(p_X(x)\)</span> and simply refer to <span class="math inline">\(p(x)\)</span>. The relevant random variable is discerned from context</p>
-<p>The most common example of a discrete random variable is a <strong>binomial</strong> random variable. The mass function of a binomial random variable <span class="math inline">\(X\)</span>, is given by</p>
-<p><span class="math display">\[
-p(x | n, p) = {n \choose x} p^x(1 - p)^{n - x}, \ \ \ x = 0, 1, \ldots, n, \ n \in \mathbb{N}, \ 0 &lt; p &lt; 1.
-\]</span></p>
-<p>This line conveys a large ammount of information.</p>
-<ul>
-<li>The function <span class="math inline">\(p(x | n, p)\)</span> is the mass function. It is a function of <span class="math inline">\(x\)</span>, the possible values of the random variable <span class="math inline">\(X\)</span>. It is conditional on the <strong>paramters</strong> <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>. Different values of these parameters specify different binomial distributions.</li>
-<li><span class="math inline">\(x = 0, 1, \ldots, n\)</span> indicates the <strong>sample space</strong>, that is, the possible values of the random variable.</li>
-<li><span class="math inline">\(n \in \mathbb{N}\)</span> and <span class="math inline">\(0 &lt; p &lt; 1\)</span> specify the <strong>parameter spaces</strong>. These are the possible values of the parameters that give a valid binomial distribution.</li>
-</ul>
-<p>Often all of this information is simply encoded by writing</p>
-<p><span class="math display">\[
-X \sim \text{bin}(n, p).
-\]</span></p>
-</div>
-<div id="continuous-random-variables" class="section level3">
-<h3><span class="header-section-number">1.4.3</span> Continuous Random Variables</h3>
-<p>The distribution of a continuous random variable <span class="math inline">\(X\)</span> is most often specified by a set of possible values and a probability <strong>density</strong> function, <span class="math inline">\(f(x)\)</span>. (A cumulative density or moment generating function would also suffice.)</p>
-<p>The probability of the event <span class="math inline">\(a &lt; X &lt; b\)</span> is calculated as</p>
-<p><span class="math display">\[
-P[a &lt; X &lt; b] = \int_{a}^{b} f(x)dx.
-\]</span></p>
-<p>Note that densities are <strong>not</strong> probabilities.</p>
-<p>The most common example of a continuous random variable is a <strong>normal</strong> random variable. The density of a normal random variable <span class="math inline">\(X\)</span>, is given by</p>
-<p><span class="math display">\[
-f(x | \mu, \sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} \cdot \exp\left[\frac{-1}{2} \left(\frac{x - \mu}{\sigma}\right)^2 \right],  \ \ \ -\infty &lt; x &lt; \infty, \ -\infty &lt; \mu &lt; \infty, \ \sigma &gt; 0.
-\]</span></p>
-<ul>
-<li>The function <span class="math inline">\(f(x | \mu, \sigma^2)\)</span> is the density function. It is a function of <span class="math inline">\(x\)</span>, the possible values of the random variable <span class="math inline">\(X\)</span>. It is conditional on the <strong>paramters</strong> <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. Different values of these parameters specify different normal distributions.</li>
-<li><span class="math inline">\(-\infty &lt; x &lt; \infty\)</span> indicates the sample space. In this case, the random variable may take any value on the real line.</li>
-<li><span class="math inline">\(-\infty &lt; \mu &lt; \infty\)</span> and <span class="math inline">\(\sigma &gt; 0\)</span> specify the parameter space. These are the possible values of the parameters that give a valid normal distribution.</li>
-</ul>
-<p>Often all of this information is simply encoded by writing</p>
-<p><span class="math display">\[
-X \sim N(\mu, \sigma^2)
-\]</span></p>
-</div>
-<div id="several-random-variables" class="section level3">
-<h3><span class="header-section-number">1.4.4</span> Several Random Variables</h3>
-<p>Consider two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We say they are independent if</p>
-<p><span class="math display">\[
-f(x, y) = f(x) \cdot f(y)
-\]</span></p>
-<p>for all <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Here <span class="math inline">\(f(x, y)\)</span> is the <strong>joint</strong> density (mass) function of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We call <span class="math inline">\(f(x)\)</span> the <strong>marginal</strong> density (mass) function of <span class="math inline">\(X\)</span>. Then <span class="math inline">\(f(y)\)</span> the marginal density (mass) function of <span class="math inline">\(Y\)</span>. The joint density (mass) function <span class="math inline">\(f(x, y)\)</span> together with the possible <span class="math inline">\((x, y)\)</span> values specify the joint distribution of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
-<p>Similar notions exist for more than two variables.</p>
-</div>
-</div>
-<div id="expectations" class="section level2">
-<h2><span class="header-section-number">1.5</span> Expectations</h2>
-<p>For discrete random variables, we define the <strong>expectation</strong> of the function of a random variable <span class="math inline">\(X\)</span> as follows.</p>
-<p><span class="math display">\[
-\mathbb{E}[g(X)] \triangleq \sum_{x} g(x)p(x)
-\]</span></p>
-<p>For continuous random variables we have a similar definition.</p>
-<p><span class="math display">\[
-\mathbb{E}[g(X)] \triangleq \int g(x)f(x) dx
-\]</span></p>
-<p>For specific functions <span class="math inline">\(g\)</span>, expectations are given names.</p>
-<p>The <strong>mean</strong> of a random variable <span class="math inline">\(X\)</span> is given by</p>
-<p><span class="math display">\[
-\mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X].
-\]</span></p>
-<p>So for a discrete random variable, we would have</p>
-<p><span class="math display">\[
-\text{mean}[X] = \sum_{x} x \cdot p(x)
-\]</span></p>
-<p>For a continuous random variable we would simply replace the sum by an integral.</p>
-<p>The <strong>variance</strong> of a random variable <span class="math inline">\(X\)</span> is given by</p>
-<p><span class="math display">\[
-\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2.
-\]</span></p>
-<p>The **standard deviation of a random variable <span class="math inline">\(X\)</span> is given by</p>
-<p><span class="math display">\[
-\sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}.
-\]</span></p>
-<p>The <strong>covariance</strong> or random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by</p>
-<p><span class="math display">\[
-\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y].
-\]</span></p>
-</div>
-<div id="likelihood" class="section level2">
-<h2><span class="header-section-number">1.6</span> Likelihood</h2>
-<p>Consider <span class="math inline">\(n\)</span> iid random variables <span class="math inline">\(X_1, X_2, \ldots X_n\)</span>. We can then write their <strong>likelihood</strong> as</p>
-<p><span class="math display">\[
-\mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \prod_{i = i}^n f(x_i; \theta)
-\]</span></p>
-<p>where <span class="math inline">\(f(x_i; \theta)\)</span> is the density (or mass) function of random variable <span class="math inline">\(X_i\)</span> evaluated at <span class="math inline">\(x_i\)</span> with parameter <span class="math inline">\(\theta\)</span>.</p>
-<p>Whereas a probability is a function of a possible observed value given a particular parameter value, a likelihood is the opposite. It is a function of a possible parameter value given observed data.</p>
-<p>Maximumizing likelihood is a common techinque for fitting a model to data.</p>
-</div>
-<div id="references" class="section level2">
-<h2><span class="header-section-number">1.7</span> References</h2>
-<p>Any of the following are either dedicated to, or contain a good coverage of the details of the topics above.</p>
-<ul>
-<li>Probability Texts
-<ul>
-<li><a href="http://athenasc.com/probbook.html">Introduction to Probability</a> by Dimitri P. Bertsekas and John N. Tsitsiklis</li>
-<li><a href="https://www.pearsonhighered.com/program/Ross-First-Course-in-Probability-A-9th-Edition/PGM110742.html">A First Course in Probability</a> by Sheldon Ross</li>
-</ul></li>
-<li>Machine Learning Texts with Probability Focus
-<ul>
-<li><a href="http://www.springer.com/us/book/9781441996336">Probability for Statistics and Machine Learning</a> by Anirban DasGupta</li>
-<li><a href="https://mitpress.mit.edu/books/machine-learning-0">Machine Learning: A Probabilistic Perspective</a> by Kevin P. Murphy</li>
-</ul></li>
-<li>Statistics Texts with Introduction to Probability
-<ul>
-<li><a href="https://www.pearsonhighered.com/program/Hogg-Probability-and-Statistical-Inference-9th-Edition/PGM91556.html">Probability and Statistical Inference</a> by Robert V. Hogg, Elliot Tanis, and Dale Zimmerman</li>
-<li><a href="https://www.pearsonhighered.com/program/Hogg-Introduction-to-Mathematical-Statistics-7th-Edition/PGM49624.html">Introduction to Mathematical Statistics</a> by Robert V. Hogg, Joseph McKean, and Allen T. Craig</li>
-</ul></li>
-</ul>
+<p>We write a function which generates data accordingly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_sim_data =<span class="st"> </span>function(f, <span class="dt">sample_size =</span> <span class="dv">100</span>) {
+  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
+  y =<span class="st"> </span><span class="kw">f</span>(x) +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.3</span>)
+  <span class="kw">data.frame</span>(x, y)
+}</code></pre></div>
+<p>To get a sense of the data, we generate one simulated dataset, and fit the four models that we will be of interest.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_data =<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
 
+fit_1 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> sim_data)
+fit_2 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)
+fit_3 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)
+fit_4 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> sim_data)</code></pre></div>
+<p>Plotting these four trained models, we see that the zero predictor model (red) does very poorly. The single predictor model (blue) is reasonable, but we can see that the two (green) and three (orange) predictor models seem more appropriate. Between these latter two, it is hard to see which seems more appropriate.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
+<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_data)
+grid =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+<span class="kw">lines</span>(grid, <span class="kw">predict</span>(fit_1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> grid)), 
+      <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
+<span class="kw">lines</span>(grid, <span class="kw">predict</span>(fit_2, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> grid)), 
+      <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">3</span>)
+<span class="kw">lines</span>(grid, <span class="kw">predict</span>(fit_3, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> grid)), 
+      <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">4</span>)
+<span class="kw">lines</span>(grid, <span class="kw">predict</span>(fit_4, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> grid)), 
+      <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">5</span>)
+<span class="kw">lines</span>(grid, <span class="kw">f</span>(grid), <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">5</span>)
+<span class="kw">legend</span>(<span class="dt">x =</span> <span class="fl">0.75</span>, <span class="dt">y =</span> <span class="dv">0</span>, 
+       <span class="kw">c</span>(<span class="st">&quot;y ~ 1&quot;</span>, <span class="st">&quot;y ~ poly(x, 1)&quot;</span>, <span class="st">&quot;y ~ poly(x, 2)&quot;</span>,  <span class="st">&quot;y ~ poly(x, 3)&quot;</span>, <span class="st">&quot;truth&quot;</span>), 
+       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>), <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
+<p><img src="06-sim-bias-var_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
+<p>We will now use simulation to estimate the bias, variance, and mean squared error for the estimates for <span class="math inline">\(f(x)\)</span> given by these models at the point <span class="math inline">\(x_0 = 0.95\)</span>. We use simulation to complete this task, as performing the exact calculations are always difficult, and often impossible.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
+n_sims =<span class="st"> </span><span class="dv">1000</span>
+n_models =<span class="st"> </span><span class="dv">4</span>
+x0 =<span class="st"> </span><span class="fl">0.95</span>
+predictions =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> n_sims, <span class="dt">ncol =</span> n_models)
+sim_data =<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
+<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_data, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">0.75</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1.5</span>))
+
+for (i in <span class="dv">1</span>:n_sims) {
+  
+  sim_data =<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
+
+  fit_1 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> sim_data)
+  fit_2 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)
+  fit_3 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)
+  fit_4 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> sim_data)
+  
+  <span class="kw">lines</span>(grid, <span class="kw">predict</span>(fit_1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> grid)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
+  <span class="co"># lines(grid, predict(fit_2, newdata = data.frame(x = grid)), col = &quot;blue&quot;, lwd = 1)</span>
+  <span class="co"># lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = &quot;green&quot;, lwd = 1)</span>
+  <span class="kw">lines</span>(grid, <span class="kw">predict</span>(fit_4, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> grid)), <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
+
+  predictions[i, ] &lt;-<span class="st"> </span><span class="kw">c</span>(
+    <span class="kw">predict</span>(fit_1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> x0)),
+    <span class="kw">predict</span>(fit_2, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> x0)),
+    <span class="kw">predict</span>(fit_3, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> x0)),
+    <span class="kw">predict</span>(fit_4, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> x0))
+  )
+}
+
+<span class="kw">points</span>(x0, <span class="kw">f</span>(x0), <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">pch =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</code></pre></div>
+<p><img src="06-sim-bias-var_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+<p>The above plot shows the 1000 trained models for each of the zero predictor and three predictor models. (We have exlcuded the one and two predictor models for clarity of the plot.) The truth at <span class="math inline">\(x_0 = 0.95\)</span> is given by a black “X”. We see that the red lines for the zero predictor model are on average wrong, with some variability. The orange lines for the three predictor model are on average correct, but with more variance.</p>
+</div>
+<div id="bias-variance-tradeoff" class="section level2">
+<h2><span class="header-section-number">6.3</span> Bias-Variance Tradeoff</h2>
+<p>To evaluate the bias and variance, we simulate values for the response <span class="math inline">\(y\)</span> at <span class="math inline">\(x_0 = 0.95\)</span> according to the true model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eps =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_sims, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.3</span>)
+y0 =<span class="st"> </span><span class="kw">f</span>(x0) +<span class="st"> </span>eps</code></pre></div>
+<p><code>R</code> already has a function to calculate variance, however, we add functions for bias and mean squared error.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_bias =<span class="st"> </span>function(estimate, truth) {
+  <span class="kw">mean</span>(estimate -<span class="st"> </span>truth)
+}
+
+get_mse =<span class="st"> </span>function(estimate, truth) {
+  <span class="kw">mean</span>((estimate -<span class="st"> </span>truth) ^<span class="st"> </span><span class="dv">2</span>)
+}</code></pre></div>
+<p>When then use the predictions obtained from the above simulation to estimate the bias, variance and mean squared error for estimating <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0 = 0.95\)</span> for the four models.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bias =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_bias, y0)
+variance =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, var)
+mse =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_mse, y0)</code></pre></div>
+<p>We summarize these results in the following table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Model</th>
+<th align="left">Squared Bias</th>
+<th align="left">Variance (Of Estimate)</th>
+<th align="left">MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>fit_1</code></td>
+<td align="left">0.3214372</td>
+<td align="left">0.001784</td>
+<td align="left">0.4201411</td>
+</tr>
+<tr class="even">
+<td align="left"><code>fit_2</code></td>
+<td align="left">0.0133764</td>
+<td align="left">0.0036355</td>
+<td align="left">0.1145159</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>fit_3</code></td>
+<td align="left">0.0000103</td>
+<td align="left">0.0058178</td>
+<td align="left">0.1031294</td>
+</tr>
+<tr class="even">
+<td align="left"><code>fit_4</code></td>
+<td align="left">0.000005</td>
+<td align="left">0.0079906</td>
+<td align="left">0.1053599</td>
+</tr>
+</tbody>
+</table>
+<p>A number of things to notice here:</p>
+<ul>
+<li>We use squared bias in this table. Since bias can be positive or negative, squared bias is more useful for observing the trend as complexity increases.</li>
+<li>The squared bias trend which we see here is <strong>decreasing</strong> bias as complexity increases, which we expect to see in general.</li>
+<li>The exact opposite is true of variance. As model complexity increases, variance <strong>increases</strong>.</li>
+<li>The mean squared error, which is a function of the bias and variance, decreases, then increases. This is a result of the bias-variance tradeoff. We can decrease bias, by increases variance. Or, we can decrease variance by increasing bias. By striking the correct balance, we can find a good mean squared error.</li>
+</ul>
+<p>We can check for these trends with the <code>diff()</code> function in <code>R</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all</span>(<span class="kw">diff</span>(bias ^<span class="st"> </span><span class="dv">2</span>) &lt;<span class="st"> </span><span class="dv">0</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all</span>(<span class="kw">diff</span>(variance) &gt;<span class="st"> </span><span class="dv">0</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(mse)</code></pre></div>
+<pre><code>## [1] -0.305625170 -0.011386537  0.002230515</code></pre>
+<p>Notice that the table lacks a column for the variance of the noise. Add this to squared bias and variance would give the mean squared error. However, notice that we are simulation to estiamte the bias and variance, so the relationship is not exact. If we used more replications of the simulation, these two values would move closer together.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bias ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span>variance +<span class="st"> </span><span class="kw">var</span>(eps)</code></pre></div>
+<pre><code>## [1] 0.4194956 0.1132862 0.1021024 0.1042700</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mse</code></pre></div>
+<pre><code>## [1] 0.4201411 0.1145159 0.1031294 0.1053599</code></pre>
+
+<div id="refs" class="references">
+
+</div>
 </div>
 </div>
             </section>
@@ -423,8 +385,8 @@ f(x, y) = f(x) \cdot f(y)
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="regression-for-statistical-learning.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -453,7 +415,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/r4sl/edit/master/01-probability.Rmd",
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/06-sim-bias-var.Rmd",
 "text": "Edit"
 },
 "download": null,
