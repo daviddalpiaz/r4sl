@@ -55,13 +55,13 @@ We write a function which generates data accordingly.
 
 ```{r}
 get_sim_data = function(f, sample_size = 100) {
-  x = runif(n = sample_size, 0, 1)
+  x = runif(n = sample_size, min = 0, max = 1)
   y = f(x) + rnorm(n = sample_size, mean = 0, sd = 0.3)
   data.frame(x, y)
 }
 ```
 
-To get a sense of the data, we generate one simulated dataset, and fit the four models that we will be interested in.
+To get a sense of the data, we generate one simulated dataset, and fit the four models that we will be of interest.
 
 ```{r}
 sim_data = get_sim_data(f, sample_size = 100)
@@ -72,7 +72,7 @@ fit_3 = lm(y ~ poly(x, degree = 2), data = sim_data)
 fit_4 = lm(y ~ poly(x, degree = 3), data = sim_data)
 ```
 
-Plotting these four trained models, we see that the zero predictor model does very poorly. The single predictor model is reasonable, but we can see that the two and three predictor models seem more appropriate. Between these latter two, it is hard to see which seems more appropriate.
+Plotting these four trained models, we see that the zero predictor model (red) does very poorly. The single predictor model (blue) is reasonable, but we can see that the two (green) and three (orange) predictor models seem more appropriate. Between these latter two, it is hard to see which seems more appropriate.
 
 ```{r, fig.height = 8, fig.width = 8}
 plot(y ~ x, data = sim_data)
@@ -84,7 +84,7 @@ lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = "green", lwd =
 lines(grid, predict(fit_4, newdata = data.frame(x = grid)), col = "orange", lwd = 2)
 ```
 
-We will now use simulation to estimate the bias, variance, and mean squared error for the estimates given by these models at the point $x_0 = 0.9$. We use simulation to complete this task, as performing the exact calculations are always difficult, and often impossible.
+We will now use simulation to estimate the bias, variance, and mean squared error for the estimates for $f(x)$ given by these models at the point $x_0 = 0.9$. We use simulation to complete this task, as performing the exact calculations are always difficult, and often impossible.
 
 ```{r, fig.height = 8, fig.width = 8}
 set.seed(1)
@@ -121,15 +121,19 @@ lines(grid, f(grid), col = "white", lwd = 5)
 lines(grid, f(grid), col = "black", lwd = 5, lty = 2)
 ```
 
-- TODO: new obs at particular point x0
+The above plot shows the 1000 trained models for each of the four models considered. The truth is given by the black and white dashed line.
+
+
+## Bias-Variance Tradeoff
+
+To evaluate the bias and variance, we simulate values for the response $y$ at $x_0 = 0.9$ according to the true model.
 
 ```{r}
 eps = rnorm(n = n_sims, mean = 0, sd = 0.3)
 y0 = f(x0) + eps
 ```
 
-
-## Bias-Variance Tradeoff
+`R` already has a function to calculate variance, however, we add functions for bias and mean squared error.
 
 ```{r}
 get_bias = function(estimate, truth) {
@@ -141,16 +145,15 @@ get_mse = function(estimate, truth) {
 }
 ```
 
+When then use the predictions obtained from the above simulation to estimate the bias, variance and mean squared error for estimating $f(x)$ at $x_0 = 0.9$ for the four models.
+
 ```{r}
 bias = apply(predictions, 2, get_bias, y0)
 variance = apply(predictions, 2, var)
 mse = apply(predictions, 2, get_mse, y0)
 ```
 
-```{r}
-bias ^ 2 + variance + var(eps)
-mse
-```
+We summarize these results in the following table.
 
 ```{r, echo = FALSE}
 options(scipen = 999)
@@ -168,6 +171,13 @@ options(scipen = 999)
 options(scipen = 0)
 ```
 
+A number of things to notice here:
+
+- We use squared bias in this table. Since bias can be positive or negative, squared bias is more useful for observing the trend as complexity increases. That trend, which we see here, is **decreasing** bias as complexity increases, which we expect to see in general.
+- The exact opposite is true of variance. As model complexity increases, variance **increases**.
+- The mean squared error, which is a function of the bias and variance, decreases, then increases. This is a result of the bias-variance tradeoff. We can decrease bias, by increases variance. Or, we can decrease variance by increasing bias. By striking the correct balance, we can find a good mean squared error.
+
+We can check for these trends with the `diff()` function in `R`.
 
 ```{r}
 all(diff(bias ^ 2) < 0)
@@ -175,8 +185,10 @@ all(diff(variance) > 0)
 diff(mse)
 ```
 
+```{r}
+bias ^ 2 + variance + var(eps)
+mse
+```
 
+- TODO: MSE missing noise in table
 - TODO: note about difference do to estimating with simulation
-
-
-- TODO: summarize with table, talk about where balance is found, bias inc, var dec
