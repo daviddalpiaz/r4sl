@@ -68,7 +68,7 @@ $$
 \text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{1}{n}\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
 $$
 
-While for the sake of comparing models, the choice between RMSE and MSE is arbitrary, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context MSE refers to an average, whereas in an ANOVA context, the denominator for MSE may not be $n$.
+While for the sake of comparing models, the choice between RMSE and RMSE is arbitrary, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context RMSE refers to an average, whereas in an ANOVA context, the denominator for RMSE may not be $n$.
 
 For a linear model , the estimate of $f$, $\hat{f}$, is given by the fitted regression line.
 
@@ -149,7 +149,7 @@ get_complexity(fit_0)
 ```
 
 ```r
-# train MSE
+# train RMSE
 sqrt(mean((train_data$Sales - predict(fit_0, train_data)) ^ 2))
 ```
 
@@ -158,7 +158,7 @@ sqrt(mean((train_data$Sales - predict(fit_0, train_data)) ^ 2))
 ```
 
 ```r
-# test MSE
+# test RMSE
 sqrt(mean((test_data$Sales - predict(fit_0, test_data)) ^ 2)) 
 ```
 
@@ -170,7 +170,7 @@ The previous two operations obtain the train and test RMSE. Since these are oper
 
 
 ```r
-# train MSE
+# train RMSE
 rmse(actual = train_data$Sales, predicted = predict(fit_0, train_data))
 ```
 
@@ -179,7 +179,7 @@ rmse(actual = train_data$Sales, predicted = predict(fit_0, train_data))
 ```
 
 ```r
-# test MSE
+# test RMSE
 rmse(actual = test_data$Sales, predicted = predict(fit_0, test_data))
 ```
 
@@ -201,7 +201,7 @@ By using this function, our code becomes easier to read, and it is more obvious 
 
 
 ```r
-get_rmse(model = fit_0, data = train_data, response = "Sales") # train MSE
+get_rmse(model = fit_0, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
@@ -209,7 +209,7 @@ get_rmse(model = fit_0, data = train_data, response = "Sales") # train MSE
 ```
 
 ```r
-get_rmse(model = fit_0, data = test_data, response = "Sales") # test MSE
+get_rmse(model = fit_0, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
@@ -232,7 +232,7 @@ get_complexity(fit_1)
 ```
 
 ```r
-get_rmse(model = fit_1, data = train_data, response = "Sales") # train MSE
+get_rmse(model = fit_1, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
@@ -240,7 +240,7 @@ get_rmse(model = fit_1, data = train_data, response = "Sales") # train MSE
 ```
 
 ```r
-get_rmse(model = fit_1, data = test_data, response = "Sales") # test MSE
+get_rmse(model = fit_1, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
@@ -258,7 +258,7 @@ get_complexity(fit_2)
 ```
 
 ```r
-get_rmse(model = fit_2, data = train_data, response = "Sales") # train MSE
+get_rmse(model = fit_2, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
@@ -266,7 +266,7 @@ get_rmse(model = fit_2, data = train_data, response = "Sales") # train MSE
 ```
 
 ```r
-get_rmse(model = fit_2, data = test_data, response = "Sales") # test MSE
+get_rmse(model = fit_2, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
@@ -284,7 +284,7 @@ get_complexity(fit_3)
 ```
 
 ```r
-get_rmse(model = fit_3, data = train_data, response = "Sales") # train MSE
+get_rmse(model = fit_3, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
@@ -292,7 +292,7 @@ get_rmse(model = fit_3, data = train_data, response = "Sales") # train MSE
 ```
 
 ```r
-get_rmse(model = fit_3, data = test_data, response = "Sales") # test MSE
+get_rmse(model = fit_3, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
@@ -311,7 +311,7 @@ get_complexity(fit_4)
 ```
 
 ```r
-get_rmse(model = fit_4, data = train_data, response = "Sales") # train MSE
+get_rmse(model = fit_4, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
@@ -319,7 +319,7 @@ get_rmse(model = fit_4, data = train_data, response = "Sales") # train MSE
 ```
 
 ```r
-get_rmse(model = fit_4, data = test_data, response = "Sales") # test MSE
+get_rmse(model = fit_4, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
@@ -338,7 +338,7 @@ get_complexity(fit_5)
 ```
 
 ```r
-get_rmse(model = fit_5, data = train_data, response = "Sales") # train MSE
+get_rmse(model = fit_5, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
@@ -346,7 +346,7 @@ get_rmse(model = fit_5, data = train_data, response = "Sales") # train MSE
 ```
 
 ```r
-get_rmse(model = fit_5, data = test_data, response = "Sales") # test MSE
+get_rmse(model = fit_5, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
@@ -403,7 +403,7 @@ lines(model_complexity, test_rmse, type = "b", col = "darkorange")
 
 ![](05-reg-sl_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
-We also summarize the results as a table. `fit_1` is the least flexible, and `fit_5` is the most flexible. We see the Train MSE decrease as flexibility increases. We see that the Test MSE is smallest for `fit_3`, thus is the model we believe will perform the best on future data not used to train the model. Note this may not be the best model, but it is the best model of the models we have seen in this example.
+We also summarize the results as a table. `fit_1` is the least flexible, and `fit_5` is the most flexible. We see the Train RMSE decrease as flexibility increases. We see that the Test RMSE is smallest for `fit_3`, thus is the model we believe will perform the best on future data not used to train the model. Note this may not be the best model, but it is the best model of the models we have seen in this example.
 
 | Model   | Train RMSE        | Test RMSE        | Predictors              |
 |---------|-------------------|------------------|-------------------------|
@@ -415,13 +415,15 @@ We also summarize the results as a table. `fit_1` is the least flexible, and `fi
 
 To summarize:
 
-- **Underfitting models:** *High* Train MSE, *High* Test MSE. Seen in `fit_1` and `fit_2`.
-- **Overfitting models:** *Low* Train MSE, *High* Test MSE. Seen in `fit_4` and `fit_5`.
+- **Underfitting models:** *High* Train RMSE, *High* Test RMSE. Seen in `fit_1` and `fit_2`.
+- **Overfitting models:** *Low* Train RMSE, *High* Test RMSE. Seen in `fit_4` and `fit_5`.
+
+So, we say that a model is overfitting if there exists a less complex model with higher Train RMSE, but lower Test RMSE.
 
 A number of notes on these results:
 
 - The labels of under and overfitting are *relative* to the best model see, `fit_3`.
-- The train RMSE is guarantee to follow this non-increasing pattern. The same is not true of test RMSE. Here we see a nice U-shaped curve. There are theoretical reasons why we should expect this, but that is on average. Because of the randomness of one test-train split, we may not always see this result. Re-perform this analysis with a different seed value and the pattern may not hold. We will discuss why we expect this next chapter. We will discuss how we can help create this U-shape much later.
+- The train RMSE is guaranteed to follow this non-increasing pattern. The same is not true of test RMSE. Here we see a nice U-shaped curve. There are theoretical reasons why we should expect this, but that is on average. Because of the randomness of one test-train split, we may not always see this result. Re-perform this analysis with a different seed value and the pattern may not hold. We will discuss why we expect this next chapter. We will discuss how we can help create this U-shape much later.
 - Often we expect train RMSE to be lower than test RMSE. Again, due to the randomness of the split, you may get lucky and this will not be true.
 
 A final note on the analysis performed here; we paid no attention whatsoever to the "assumptions" of a linear model. We only sought a model that **predicted** well, and paid no attention to a model for **explaination**. Hypothesis testing did not play a role in deciding the model, only prediction accuracy. Collinearity? We don't care. Assumptions? Still don't care. Diagnostics? Never heard of them. (These statements are a little over the top, and not completely true, but just to drive home the point that we only care about prediction. Often we latch onto methods that we have seen before, even when they are not needed.)
