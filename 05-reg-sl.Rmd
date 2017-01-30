@@ -50,7 +50,7 @@ $$
 \text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{1}{n}\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
 $$
 
-While for the sake of comparing models, the choice between RMSE and RMSE is arbitrary, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context RMSE refers to an average, whereas in an ANOVA context, the denominator for RMSE may not be $n$.
+While for the sake of comparing models, the choice between RMSE and MSE is arbitrary, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context MSE refers to an average, whereas in an ANOVA context, the denominator for MSE may not be $n$.
 
 For a linear model , the estimate of $f$, $\hat{f}$, is given by the fitted regression line.
 
