@@ -1,0 +1,10 @@
+# Logistic Regression
+
+- how probabilities create classifications
+
+- multiple
+
+- >2 outcomes
+    - only show how to do in `R`
+    - note its coming from a NN package
+    - will discuss later

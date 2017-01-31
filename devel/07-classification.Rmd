@@ -1,0 +1,125 @@
+# Classification
+
+
+![](../images/classification.png)
+
+
+$$
+\hat{y}_i = \hat{C}(\bf x_i)
+$$
+
+```{r}
+library(ISLR)
+library(tibble)
+as_tibble(Default)
+```
+
+```{r}
+is.factor(Default$default)
+is.factor(Default$student)
+```
+
+
+```{r}
+set.seed(42)
+train_index = sample(nrow(Default), 5000)
+train_default = Default[train_index, ]
+test_default = Default[-train_index, ]
+```
+
+
+## Visualization for Classification
+
+
+```{r, message = FALSE, warning = FALSE}
+library(caret)
+```
+
+
+```{r, fig.height = 5, fig.width = 10}
+
+
+featurePlot(x = train_default[, 3:4], 
+            y = train_default$default, # needs to be a factor
+            plot = "density", 
+            scales = list(x = list(relation="free"), 
+                          y = list(relation="free")), 
+            adjust = 1.5, 
+            pch = "|", 
+            layout = c(2, 1), 
+            auto.key = list(columns = 2))
+```
+
+
+
+
+```{r, fig.height = 5, fig.width = 10, message = FALSE, warning = FALSE}
+featurePlot(x = train_default[, 3:4], 
+            y = train_default$student, # needs to be a factor
+            plot = "density", 
+            scales = list(x = list(relation="free"), 
+                          y = list(relation="free")), 
+            adjust = 1.5, 
+            pch = "|", 
+            layout = c(2, 1), 
+            auto.key = list(columns = 2))
+```
+
+useful to know about, will discuss confounding in logistic section
+
+```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
+
+
+featurePlot(x = train_default[, 2:4], 
+            y = train_default$default, 
+            plot = "pairs",
+            ## Add a key at the top
+            auto.key = list(columns = 2))
+
+
+```
+
+
+
+
+## A Simple Classifier
+
+use balance
+
+## Metrics for Classification
+
+https://en.wikipedia.org/wiki/Sensitivity_and_specificity
+
+![](../images/confusion.png)
+
+
+
+$$
+\text{Acc}(\hat{C}, \text{Data}) = \frac{1}{n}\sum_{i = 1}^{n}I(y_i = \hat{C}(\bf x_i))
+$$
+
+$$
+\text{Acc}_{\text{Train}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{Tr}}\sum_{i \in \text{Train}}^{}I(y_i = \hat{C}(\bf x_i))
+$$
+
+$$
+\text{Acc}_{\text{Test}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{Te}}\sum_{i \in \text{Test}}^{}I(y_i = \hat{C}(\bf x_i))
+$$
+
+
+
+
+$$
+\text{Sens} = \text{True Positive Rate} = \frac{\text{TP}}{\text{P}} = \frac{\text{TP}}{\text{TP + FN}}
+$$
+
+$$
+\text{Spec} = \text{True Negative Rate} = \frac{\text{TN}}{\text{N}} = \frac{\text{TP}}{\text{TN + FP}}
+$$
+
+
+
+from TEST table you get estimated probabilites
+
+
+
