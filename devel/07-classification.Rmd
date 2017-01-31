@@ -1,12 +1,16 @@
 # Classification
 
+**Classification** is a form of **supervised learning** where the response variable is categorical, as opposed to numeric for regression. *Our goal is to find a rule, algorithm, or function which takes as input a feature vector, and outputs a category which is the true category as often as possible.* 
 
 ![](../images/classification.png)
 
+That is the classifier $\hat{C}$ returns the predicted category $\hat{y}$.
 
 $$
 \hat{y}_i = \hat{C}(\bf x_i)
 $$
+
+To build our first classifier, we will use the `Default` dataset from the `ISLR` package.
 
 ```{r}
 library(ISLR)
@@ -14,11 +18,14 @@ library(tibble)
 as_tibble(Default)
 ```
 
+Our goal is to properly classify individuals as defaulters based on student status, credit card balance, and income. Be aware that the response `default` is a factor, as is the predictor `student`. 
+
 ```{r}
 is.factor(Default$default)
 is.factor(Default$student)
 ```
 
+As we did with regression, we test-train split our data. In this case, using 50% for each.
 
 ```{r}
 set.seed(42)
@@ -30,20 +37,28 @@ test_default = Default[-train_index, ]
 
 ## Visualization for Classification
 
+Often, some simple visualizations can suggest simple classification rules. To quickly create some useful visualizations, we use the `featurePlot()` function from the `caret()` package.
 
 ```{r, message = FALSE, warning = FALSE}
 library(caret)
 ```
 
+A density plot can often suggest a simple split based on a numeric predictor. Essentially this plot graphs an estimate of density
+
+$$
+f_{X_i}(x_i \mid y = k)
+$$
+
+for each numeric predictor $x_i$ and each category $k$ for the response $y$.
 
 ```{r, fig.height = 5, fig.width = 10}
 
 
-featurePlot(x = train_default[, 3:4], 
-            y = train_default$default, # needs to be a factor
+featurePlot(x = train_default[, c("balance", "income")], 
+            y = train_default$default,
             plot = "density", 
-            scales = list(x = list(relation="free"), 
-                          y = list(relation="free")), 
+            scales = list(x = list(relation = "free"), 
+                          y = list(relation = "free")), 
             adjust = 1.5, 
             pch = "|", 
             layout = c(2, 1), 
@@ -51,26 +66,38 @@ featurePlot(x = train_default[, 3:4],
 ```
 
 
+- TODO: Some comments on the arguments to this function
 
+- `x` is a data from containing only **numeric predictors**. It would be non-sensical to estimate a density for a categorical predictor.
+- `y` is the response variable. It needs to be a factor variable. If coded as `0` and `1`, you will need to coerce to factor for plotting.
+- `plot`
+- `scales`
+- `adjust`
+- `pch`
+- `layout`
+- `auto.key`
+
+
+- TODO: comment on a split @ balance ~~ 1400
 
 ```{r, fig.height = 5, fig.width = 10, message = FALSE, warning = FALSE}
-featurePlot(x = train_default[, 3:4], 
-            y = train_default$student, # needs to be a factor
+featurePlot(x = train_default[, c("balance", "income")], 
+            y = train_default$student,
             plot = "density", 
-            scales = list(x = list(relation="free"), 
-                          y = list(relation="free")), 
+            scales = list(x = list(relation = "free"), 
+                          y = list(relation = "free")), 
             adjust = 1.5, 
             pch = "|", 
             layout = c(2, 1), 
             auto.key = list(columns = 2))
 ```
 
-useful to know about, will discuss confounding in logistic section
+TODO: useful to know about when making more complicated classifiers, students carry a slightly higher balance, have lower income
 
 ```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
 
 
-featurePlot(x = train_default[, 2:4], 
+featurePlot(x = train_default[, c("student", "balance", "income")], 
             y = train_default$default, 
             plot = "pairs",
             ## Add a key at the top
@@ -80,18 +107,68 @@ featurePlot(x = train_default[, 2:4],
 ```
 
 
+```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
 
+
+featurePlot(x = train_default[, c("balance", "income")], 
+            y = train_default$default, 
+            plot = "ellipse",
+            ## Add a key at the top
+            auto.key = list(columns = 2))
+
+
+```
+
+- TODO: useful for LDA and QDA since sort of assumption MVN
 
 ## A Simple Classifier
 
 use balance
 
+```{r}
+simple_class = function(x, cutoff) {
+  ifelse(x > cutoff, "Yes", "No")
+}
+```
+
+
+```{r}
+train_pred = simple_class(x = train_default$balance, cutoff = 1400)
+test_pred = simple_class(x = train_default$balance, cutoff = 1400)
+head(train_pred, n = 10)
+```
+
+
+
 ## Metrics for Classification
+
+- TODO: crosstabs
+
+```{r}
+(train_tab = table(predicted = train_pred, actual = train_default$default))
+```
+
+
+
+```{r}
+(test_tab = table(predicted = test_pred, actual = test_default$default))
+```
+
+
+
+- TODO; difference of errors, what to expect based on prevalence, not 50% for binary class problem, BALANCE of problem
 
 https://en.wikipedia.org/wiki/Sensitivity_and_specificity
 
 ![](../images/confusion.png)
 
+- TODO: not about transpose
+- TODO: crosstab with meaning
+
+```{r}
+train_con_mat = confusionMatrix(train_tab, positive = "Yes")
+(test_con_mat = confusionMatrix(test_tab, positive = "Yes"))
+```
 
 
 $$
@@ -105,21 +182,67 @@ $$
 $$
 \text{Acc}_{\text{Test}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{Te}}\sum_{i \in \text{Test}}^{}I(y_i = \hat{C}(\bf x_i))
 $$
+```{r}
+train_con_mat$overall["Accuracy"]
+```
+
+```{r}
+test_con_mat$overall["Accuracy"]
+```
 
 
-
+- TODO: Type I and Type II are hard to rememeber! these are easier!
 
 $$
 \text{Sens} = \text{True Positive Rate} = \frac{\text{TP}}{\text{P}} = \frac{\text{TP}}{\text{TP + FN}}
 $$
 
+```{r}
+test_con_mat$byClass["Sensitivity"]
+```
+
 $$
 \text{Spec} = \text{True Negative Rate} = \frac{\text{TN}}{\text{N}} = \frac{\text{TP}}{\text{TN + FP}}
 $$
 
+```{r}
+test_con_mat$byClass["Specificity"]
+```
+
+from TEST table you get estimated probabilities
+
+$$
+\text{Prev} = \frac{\text{P}}{\text{Total Obs}}= \frac{\text{TP + FN}}{\text{Total Obs}}
+$$
+
+```{r}
+train_con_mat$byClass["Prevalence"]
+test_con_mat$byClass["Prevalence"]
+```
+
+```{r}
+
+simpler_class = function(x, cutoff) {
+  ifelse(x > cutoff, "No", "No")
+}
+
+```
 
 
-from TEST table you get estimated probabilites
+```{r}
+table(predicted = simpler_class(test_default$balance, cutoff = 1400), 
+      actual = test_default$default)
+```
 
+```{r}
+4835 / (4835 + 165) # test accuracy
+1 - 0.0336 # 1 - (train prevelence)
+1 - 0.033 # 1 - (test prevelence)
+```
+
+
+- TODO: confusion matrix won't work here
+
+So in reality, to create a good classifier, we should obtain a test accuracy better than 0.967, which we obtained by simply manipulating the prevalence.
 
 

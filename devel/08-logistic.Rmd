@@ -1,7 +1,16 @@
 # Logistic Regression
 
-- how probabilities create classifications
 
+- how linear regression makes sense mean(0/1 @ x) ~~ prob, but isn't limited to (0,1)
+    - how coercion to 0/1 from factor works
+    
+- how to read the "usual" logistic regression plot (which isn't a great plot)
+
+- how probabilities create classifications
+    - how chaning usual cutoff usually lowers acc, but changes sens and spec, possible for better
+    - ROC curve?
+
+- confounding example from slides
 - multiple
 
 - >2 outcomes
