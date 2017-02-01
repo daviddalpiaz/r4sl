@@ -4,7 +4,7 @@
 
 ![](../images/classification.png)
 
-That is the classifier $\hat{C}$ returns the predicted category $\hat{y}$.
+That is, the classifier $\hat{C}$ returns the predicted category $\hat{y}$.
 
 $$
 \hat{y}_i = \hat{C}(\bf x_i)
@@ -65,20 +65,16 @@ featurePlot(x = train_default[, c("balance", "income")],
             auto.key = list(columns = 2))
 ```
 
-
-- TODO: Some comments on the arguments to this function
-
-- `x` is a data from containing only **numeric predictors**. It would be non-sensical to estimate a density for a categorical predictor.
+- `x` is a data from containing only **numeric predictors**. It would be nonsensical to estimate a density for a categorical predictor.
 - `y` is the response variable. It needs to be a factor variable. If coded as `0` and `1`, you will need to coerce to factor for plotting.
-- `plot`
-- `scales`
-- `adjust`
-- `pch`
-- `layout`
-- `auto.key`
+- `plot` specifies the type of plot, here `density`.
+- `scales` defines the scale of the axes for each plot. By default, the axis of each plot would be the same, which often is not useful, so the arguments here of a different axis for each plot will almost always be used.
+- `adjust` specifies the amount of smoothing used for the density estimate.
+- `pch` specifies the **p**lot **ch**aracter used for the bottom of the plot.
+- `layout` places the individual plots into rows and columns. For some odd reason, it is given as (col, row).
+- `auto.key` defines the key at the top of the plot. The number of columns should be the number of categories.
 
-
-- TODO: comment on a split @ balance ~~ 1400
+It seems that the income variable by itself is not particularly useful. However, there seems to be a big difference in default status at a `balance` of about 1400. We will use this information shortly.
 
 ```{r, fig.height = 5, fig.width = 10, message = FALSE, warning = FALSE}
 featurePlot(x = train_default[, c("balance", "income")], 
@@ -92,45 +88,58 @@ featurePlot(x = train_default[, c("balance", "income")],
             auto.key = list(columns = 2))
 ```
 
-TODO: useful to know about when making more complicated classifiers, students carry a slightly higher balance, have lower income
+Above, we create a similar plot, except with `student` as the response. We see that students often carry a slightly larger balance, and have far lower income. This will be useful to know when making more complicated classifiers.
 
 ```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
-
-
 featurePlot(x = train_default[, c("student", "balance", "income")], 
             y = train_default$default, 
             plot = "pairs",
-            ## Add a key at the top
             auto.key = list(columns = 2))
-
-
 ```
 
+We can use `plot = "pairs"` to consider multiple variables at the same time. This plot reinforces using `balance` to create a classifier, and again shows that `income` seems not that useful.
 
 ```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
-
-
+library(ellipse)
 featurePlot(x = train_default[, c("balance", "income")], 
             y = train_default$default, 
             plot = "ellipse",
-            ## Add a key at the top
             auto.key = list(columns = 2))
-
-
 ```
 
-- TODO: useful for LDA and QDA since sort of assumption MVN
+Similar to `pairs` is a plot of type `ellipse`, which requires the `ellipse` package. Here we only use numeric predictors, as essentially we are assuming multivariate normality. The ellipses plots and ellipses of equal density. This will be useful later when discussing LDA and QDA.
+
 
 ## A Simple Classifier
 
-use balance
+A very simple classifier is a rule based on a cutoff $c$ for a particular input variable $x$.
+
+$$
+\hat{C}(\text{x}) = 
+\begin{cases} 
+      1 & \text{x} > c \\
+      0 & \text{x} \leq c 
+   \end{cases}
+$$
+
+Based on the first plot, we believe we can use `balance` to create a reasonable classifier. In particular,
+
+$$
+\hat{C}(\text{balance}) = 
+\begin{cases} 
+      \text{Yes} & \text{balance} > 1400 \\
+      \text{No} & \text{balance} \leq 1400 
+   \end{cases}
+$$
+
+So we predict an individual is a defaulter if their `balance` is above 1400, and not a defaulter if the balance is 1400 or less.
 
 ```{r}
 simple_class = function(x, cutoff) {
   ifelse(x > cutoff, "Yes", "No")
 }
 ```
-
+We write a simple `R` function that compares a variable to a cutoff, then use it to make predictions on the train and test sets with our chosen variable and cutoff.
 
 ```{r}
 train_pred = simple_class(x = train_default$balance, cutoff = 1400)
@@ -139,36 +148,34 @@ head(train_pred, n = 10)
 ```
 
 
-
 ## Metrics for Classification
 
-- TODO: crosstabs
+In the classification setting, there are a large number of metrics to asses how well a classifier is performing.
+
+One of the most obvious things to do is arrange predictions and true values in a cross table.
 
 ```{r}
 (train_tab = table(predicted = train_pred, actual = train_default$default))
 ```
 
-
-
 ```{r}
 (test_tab = table(predicted = test_pred, actual = test_default$default))
 ```
 
-
-
-- TODO; difference of errors, what to expect based on prevalence, not 50% for binary class problem, BALANCE of problem
-
-https://en.wikipedia.org/wiki/Sensitivity_and_specificity
+Often we give specific names to individual cells of these tables, and in the predictive setting, we would call this table a [**confusion matrix**](https://en.wikipedia.org/wiki/Confusion_matrix). Be aware, that the placement of Actual and Predicted values affects the names of the cells, and often the matrix may be presented transposed.
 
 ![](../images/confusion.png)
 
-- TODO: not about transpose
-- TODO: crosstab with meaning
+The `confusionMatrix()` function from the `caret` package can be used to obtain a wealth of additional information.
 
 ```{r}
 train_con_mat = confusionMatrix(train_tab, positive = "Yes")
 (test_con_mat = confusionMatrix(test_tab, positive = "Yes"))
 ```
+
+
+
+
 
 
 $$
@@ -190,7 +197,7 @@ train_con_mat$overall["Accuracy"]
 test_con_mat$overall["Accuracy"]
 ```
 
-
+- TODO: could also considerd error rate.
 - TODO: Type I and Type II are hard to rememeber! these are easier!
 
 $$
@@ -243,6 +250,7 @@ table(predicted = simpler_class(test_default$balance, cutoff = 1400),
 
 - TODO: confusion matrix won't work here
 
-So in reality, to create a good classifier, we should obtain a test accuracy better than 0.967, which we obtained by simply manipulating the prevalence.
+So in reality, to create a good classifier, we should obtain a test accuracy better than 0.967, which is obtained by simply manipulating the prevalence.
 
+- TODO; difference of errors, what to expect based on prevalence, not 50% for binary class problem, BALANCE of problem
 

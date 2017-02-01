@@ -4,7 +4,12 @@
 - how linear regression makes sense mean(0/1 @ x) ~~ prob, but isn't limited to (0,1)
     - how coercion to 0/1 from factor works
     
+- add something about bayes rule, and how we are directly optimizing towards?
+
+
+    
 - how to read the "usual" logistic regression plot (which isn't a great plot)
+    - note how ISL illustrates proportion at each x
 
 - how probabilities create classifications
     - how chaning usual cutoff usually lowers acc, but changes sens and spec, possible for better
