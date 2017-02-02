@@ -180,16 +180,18 @@ So we predict an individual is a defaulter if their `balance` is above 1400, and
 
 
 ```r
-simple_class = function(x, cutoff) {
-  ifelse(x > cutoff, "Yes", "No")
+simple_class = function(x, cutoff, above = 1, below = 0) {
+  ifelse(x > cutoff, above, below)
 }
 ```
 We write a simple `R` function that compares a variable to a cutoff, then use it to make predictions on the train and test sets with our chosen variable and cutoff.
 
 
 ```r
-train_pred = simple_class(x = train_default$balance, cutoff = 1400)
-test_pred = simple_class(x = train_default$balance, cutoff = 1400)
+train_pred = simple_class(x = train_default$balance, 
+                          cutoff = 1400, above = "Yes", below = "No")
+test_pred = simple_class(x = train_default$balance, 
+                         cutoff = 1400, above = "Yes", below = "No")
 head(train_pred, n = 10)
 ```
 
@@ -380,19 +382,21 @@ test_con_mat$byClass["Prevalence"]
 
 Here, we see an extremely low prevalence, which suggests an even simpler classifier than our current based on `balance`.
 
-
-```r
-simpler_class = function(x, cutoff) {
-  ifelse(x > cutoff, "No", "No")
-}
-```
+$$
+\hat{C}(\text{balance}) = 
+\begin{cases} 
+      \text{No} & \text{balance} > 1400 \\
+      \text{No} & \text{balance} \leq 1400 
+   \end{cases}
+$$
 
 This classifier simply classifies all observations as negative cases.
 
 
 ```r
-table(predicted = simpler_class(test_default$balance, cutoff = 1400), 
-      actual = test_default$default)
+pred_all_no = simple_class(test_default$balance, 
+                           cutoff = 1400, above = "No", below = "No")
+table(predicted = pred_all_no, actual = test_default$default)
 ```
 
 ```

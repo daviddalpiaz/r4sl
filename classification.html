@@ -319,12 +319,14 @@ f_{X_i}(x_i \mid y = k)
    \end{cases}
 \]</span></p>
 <p>So we predict an individual is a defaulter if their <code>balance</code> is above 1400, and not a defaulter if the balance is 1400 or less.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simple_class =<span class="st"> </span>function(x, cutoff) {
-  <span class="kw">ifelse</span>(x &gt;<span class="st"> </span>cutoff, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simple_class =<span class="st"> </span>function(x, cutoff, <span class="dt">above =</span> <span class="dv">1</span>, <span class="dt">below =</span> <span class="dv">0</span>) {
+  <span class="kw">ifelse</span>(x &gt;<span class="st"> </span>cutoff, above, below)
 }</code></pre></div>
 <p>We write a simple <code>R</code> function that compares a variable to a cutoff, then use it to make predictions on the train and test sets with our chosen variable and cutoff.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, <span class="dt">cutoff =</span> <span class="dv">1400</span>)
-test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, <span class="dt">cutoff =</span> <span class="dv">1400</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, 
+                          <span class="dt">cutoff =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
+test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, 
+                         <span class="dt">cutoff =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
 <span class="kw">head</span>(train_pred, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>##  [1] &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;</code></pre>
 </div>
@@ -429,12 +431,17 @@ I(y_i = \hat{C}(x)) =
 <pre><code>## Prevalence 
 ##      0.033</code></pre>
 <p>Here, we see an extremely low prevalence, which suggests an even simpler classifier than our current based on <code>balance</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simpler_class =<span class="st"> </span>function(x, cutoff) {
-  <span class="kw">ifelse</span>(x &gt;<span class="st"> </span>cutoff, <span class="st">&quot;No&quot;</span>, <span class="st">&quot;No&quot;</span>)
-}</code></pre></div>
+<p><span class="math display">\[
+\hat{C}(\text{balance}) = 
+\begin{cases} 
+      \text{No} &amp; \text{balance} &gt; 1400 \\
+      \text{No} &amp; \text{balance} \leq 1400 
+   \end{cases}
+\]</span></p>
 <p>This classifier simply classifies all observations as negative cases.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> <span class="kw">simpler_class</span>(test_default$balance, <span class="dt">cutoff =</span> <span class="dv">1400</span>), 
-      <span class="dt">actual =</span> test_default$default)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_all_no =<span class="st"> </span><span class="kw">simple_class</span>(test_default$balance, 
+                           <span class="dt">cutoff =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
+<span class="kw">table</span>(<span class="dt">predicted =</span> pred_all_no, <span class="dt">actual =</span> test_default$default)</code></pre></div>
 <pre><code>##          actual
 ## predicted   No  Yes
 ##        No 4835  165</code></pre>
