@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
-  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="prev" href="rstudio-and-rmarkdown.html">
 <link rel="next" href="regression-for-statistical-learning.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -378,29 +378,31 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1         x2           y
-##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1       A 0.26595199  0.03299888
-## 2       A 0.35453494  0.13349645
-## 3       A 0.29507504  0.02996379
-## 4       A 0.45766031  0.71711092
-## 5       A 0.09054546  1.36265859
-## 6       A 0.68001679 -0.63057816
-## 7       A 0.85123985 -1.27284842
-## 8       A 0.08557746  0.78411127
-## 9       A 0.48024363 -1.24740563
-## 10      A 0.22879340 -0.74594295
+##        x1        x2           y
+##    &lt;fctr&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1       A 0.9391894 -0.50780078
+## 2       A 0.9204577 -0.51683353
+## 3       A 0.4977047 -0.21853653
+## 4       A 0.4848890 -1.13128719
+## 5       A 0.1141382  1.00888172
+## 6       A 0.5570143  0.50950338
+## 7       A 0.5544481  0.86762553
+## 8       A 0.9898489  0.01338533
+## 9       A 0.2184962 -2.01883613
+## 10      A 0.2996491  0.65090782
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
-<pre><code>## (Intercept)         x1B         x1C          x2 
-##   0.2699452   0.3868622  -0.1779411  -0.9330407</code></pre>
+<pre><code>##  (Intercept)          x1B          x1C           x2 
+## -0.130723665  0.302344672 -0.294953637 -0.006412266</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
-<pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##   0.8816263  -0.4425920  -1.0043315  -2.5471287   1.9838965   2.1344650</code></pre>
+<pre><code>##  (Intercept)          x1B          x1C           x2       x1B:x2 
+##  0.005845027 -0.489206771 -0.190248788 -0.251341826  1.715031333 
+##       x1C:x2 
+## -0.320373310</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
