@@ -22,3 +22,14 @@
     - only show how to do in `R`
     - note its coming from a NN package
     - will discuss later
+
+- test-train split
+    - train err down
+    - test error U
+
+- boundries?
+
+
+- prob cutoff of 0.5 is same as logodds curoff of 0
+
+- decide on: a division of "doing in R" and handwritten notes and slides
