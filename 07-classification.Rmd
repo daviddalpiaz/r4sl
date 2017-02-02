@@ -43,13 +43,13 @@ Often, some simple visualizations can suggest simple classification rules. To qu
 library(caret)
 ```
 
-A density plot can often suggest a simple split based on a numeric predictor. Essentially this plot graphs an estimate of density
+A density plot can often suggest a simple split based on a numeric predictor. Essentially this plot graphs a density estimate
 
 $$
 f_{X_i}(x_i \mid y = k)
 $$
 
-for each numeric predictor $x_i$ and each category $k$ for the response $y$.
+for each numeric predictor $x_i$ and each category $k$ of the response $y$.
 
 ```{r, fig.height = 5, fig.width = 10}
 
@@ -65,10 +65,12 @@ featurePlot(x = train_default[, c("balance", "income")],
             auto.key = list(columns = 2))
 ```
 
-- `x` is a data from containing only **numeric predictors**. It would be nonsensical to estimate a density for a categorical predictor.
+Some notes about the arguments to this function:
+
+- `x` is a data frame containing only **numeric predictors**. It would be nonsensical to estimate a density for a categorical predictor.
 - `y` is the response variable. It needs to be a factor variable. If coded as `0` and `1`, you will need to coerce to factor for plotting.
 - `plot` specifies the type of plot, here `density`.
-- `scales` defines the scale of the axes for each plot. By default, the axis of each plot would be the same, which often is not useful, so the arguments here of a different axis for each plot will almost always be used.
+- `scales` defines the scale of the axes for each plot. By default, the axis of each plot would be the same, which often is not useful, so the arguments here, a different axis for each plot, will almost always be used.
 - `adjust` specifies the amount of smoothing used for the density estimate.
 - `pch` specifies the **p**lot **ch**aracter used for the bottom of the plot.
 - `layout` places the individual plots into rows and columns. For some odd reason, it is given as (col, row).
@@ -107,7 +109,7 @@ featurePlot(x = train_default[, c("balance", "income")],
             auto.key = list(columns = 2))
 ```
 
-Similar to `pairs` is a plot of type `ellipse`, which requires the `ellipse` package. Here we only use numeric predictors, as essentially we are assuming multivariate normality. The ellipses plots and ellipses of equal density. This will be useful later when discussing LDA and QDA.
+Similar to `pairs` is a plot of type `ellipse`, which requires the `ellipse` package. Here we only use numeric predictors, as essentially we are assuming multivariate normality. The ellipses mark points of equal density. This will be useful later when discussing LDA and QDA.
 
 
 ## A Simple Classifier
@@ -164,23 +166,36 @@ One of the most obvious things to do is arrange predictions and true values in a
 
 Often we give specific names to individual cells of these tables, and in the predictive setting, we would call this table a [**confusion matrix**](https://en.wikipedia.org/wiki/Confusion_matrix). Be aware, that the placement of Actual and Predicted values affects the names of the cells, and often the matrix may be presented transposed.
 
+In statistics, we label the errors Type I and Type II, but these are hard to remember. False Positive and False Negative are more descriptive, so we choose to use these.
+
 ![](../images/confusion.png)
 
-The `confusionMatrix()` function from the `caret` package can be used to obtain a wealth of additional information.
+The `confusionMatrix()` function from the `caret` package can be used to obtain a wealth of additional information, which we see output below for the test data. Note that we specify which category is considered "positive."
 
 ```{r}
 train_con_mat = confusionMatrix(train_tab, positive = "Yes")
 (test_con_mat = confusionMatrix(test_tab, positive = "Yes"))
 ```
 
-
-
-
-
+The most common, and most important metric is the **classification accuracy**. 
 
 $$
 \text{Acc}(\hat{C}, \text{Data}) = \frac{1}{n}\sum_{i = 1}^{n}I(y_i = \hat{C}(\bf x_i))
 $$
+
+Here, $I$ is an indicator function, so we are essentially calculating the proportion of predicted classes that match the true class.
+
+$$
+I(y_i = \hat{C}(x)) = 
+\begin{cases} 
+  1 & y_i = \hat{C}(x) \\
+  0 & y_i \neq \hat{C}(x) \\
+\end{cases}
+$$
+
+It is also common to discuss the **misclassification rate**, or classification error, which is simply one minus the accuracy.
+
+Like regression, we often split the data, and then consider Train Accuracy and Test Accuracy. Test Accuracy will be used as a measure of how well a classifier will work on unseen future data.
 
 $$
 \text{Acc}_{\text{Train}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{Tr}}\sum_{i \in \text{Train}}^{}I(y_i = \hat{C}(\bf x_i))
@@ -189,6 +204,9 @@ $$
 $$
 \text{Acc}_{\text{Test}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{Te}}\sum_{i \in \text{Test}}^{}I(y_i = \hat{C}(\bf x_i))
 $$
+
+These accuracy values are given by calling `confusionMatrix()`, or, if stored, can be accessed directly.
+
 ```{r}
 train_con_mat$overall["Accuracy"]
 ```
@@ -197,8 +215,7 @@ train_con_mat$overall["Accuracy"]
 test_con_mat$overall["Accuracy"]
 ```
 
-- TODO: could also considerd error rate.
-- TODO: Type I and Type II are hard to rememeber! these are easier!
+Sometimes guarding against making certain errors, FP or FN, are more important than simply finding the best accuracy. Thus, sometimes we will consider **sensitivity** and **specificity**.
 
 $$
 \text{Sens} = \text{True Positive Rate} = \frac{\text{TP}}{\text{P}} = \frac{\text{TP}}{\text{TP + FN}}
@@ -216,7 +233,9 @@ $$
 test_con_mat$byClass["Specificity"]
 ```
 
-from TEST table you get estimated probabilities
+Like accuracy, these can easily be found using `confusionMatrix()`.
+
+When considering how well a classifier is performing, often, it is understandable to assume that any accuracy in a binary classification problem above 0.50, is a reasonable classifier. This however is not the case. We need to consider the **balance** of the classes. To do so, we look at the **prevalence** of positive cases.
 
 $$
 \text{Prev} = \frac{\text{P}}{\text{Total Obs}}= \frac{\text{TP + FN}}{\text{Total Obs}}
@@ -227,19 +246,22 @@ train_con_mat$byClass["Prevalence"]
 test_con_mat$byClass["Prevalence"]
 ```
 
-```{r}
+Here, we see an extremely low prevalence, which suggests an even simpler classifier than our current based on `balance`.
 
+```{r}
 simpler_class = function(x, cutoff) {
   ifelse(x > cutoff, "No", "No")
 }
-
 ```
 
+This classifier simply classifies all observations as negative cases.
 
 ```{r}
 table(predicted = simpler_class(test_default$balance, cutoff = 1400), 
       actual = test_default$default)
 ```
+
+The `confusionMatrix()` function won't even accept this table as input, because it isn't a full matrix, only one row, so we calculate some metrics "by hand".
 
 ```{r}
 4835 / (4835 + 165) # test accuracy
@@ -247,10 +269,4 @@ table(predicted = simpler_class(test_default$balance, cutoff = 1400),
 1 - 0.033 # 1 - (test prevelence)
 ```
 
-
-- TODO: confusion matrix won't work here
-
-So in reality, to create a good classifier, we should obtain a test accuracy better than 0.967, which is obtained by simply manipulating the prevalence.
-
-- TODO; difference of errors, what to expect based on prevalence, not 50% for binary class problem, BALANCE of problem
-
+This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test accuracy better than 0.967, which is obtained by simply manipulating the prevalence. Next chapter, we'll introduce much better classifiers which should have no problem accomplishing this task.
