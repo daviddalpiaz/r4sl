@@ -338,7 +338,7 @@ test_con_mat$byClass["Sensitivity"]
 ```
 
 $$
-\text{Spec} = \text{True Negative Rate} = \frac{\text{TN}}{\text{N}} = \frac{\text{TP}}{\text{TN + FP}}
+\text{Spec} = \text{True Negative Rate} = \frac{\text{TN}}{\text{N}} = \frac{\text{TN}}{\text{TN + FP}}
 $$
 
 
