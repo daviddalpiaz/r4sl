@@ -415,14 +415,14 @@ We also summarize the results as a table. `fit_1` is the least flexible, and `fi
 
 To summarize:
 
-- **Underfitting models:** *High* Train RMSE, *High* Test RMSE. Seen in `fit_1` and `fit_2`.
-- **Overfitting models:** *Low* Train RMSE, *High* Test RMSE. Seen in `fit_4` and `fit_5`.
+- **Underfitting models:** In general *High* Train RMSE, *High* Test RMSE. Seen in `fit_1` and `fit_2`.
+- **Overfitting models:** In general *Low* Train RMSE, *High* Test RMSE. Seen in `fit_4` and `fit_5`.
 
-So, we say that a model is overfitting if there exists a less complex model with higher Train RMSE, but lower Test RMSE.
+Specifically, we say that a model is overfitting if there exists a less complex model with lower Test RMSE. Then a model is underfitting if there exists a more complex model with lower Test RMSE.
 
 A number of notes on these results:
 
-- The labels of under and overfitting are *relative* to the best model see, `fit_3`.
+- The labels of under and overfitting are *relative* to the best model we see, `fit_3`. Any model more complex with higher Test RMSE is overfitting. Any model less complex with higher Test RMSE is underfitting. 
 - The train RMSE is guaranteed to follow this non-increasing pattern. The same is not true of test RMSE. Here we see a nice U-shaped curve. There are theoretical reasons why we should expect this, but that is on average. Because of the randomness of one test-train split, we may not always see this result. Re-perform this analysis with a different seed value and the pattern may not hold. We will discuss why we expect this next chapter. We will discuss how we can help create this U-shape much later.
 - Often we expect train RMSE to be lower than test RMSE. Again, due to the randomness of the split, you may get lucky and this will not be true.
 

@@ -431,13 +431,13 @@ model_complexity =<span class="st"> </span><span class="kw">sapply</span>(model_
 </table>
 <p>To summarize:</p>
 <ul>
-<li><strong>Underfitting models:</strong> <em>High</em> Train RMSE, <em>High</em> Test RMSE. Seen in <code>fit_1</code> and <code>fit_2</code>.</li>
-<li><strong>Overfitting models:</strong> <em>Low</em> Train RMSE, <em>High</em> Test RMSE. Seen in <code>fit_4</code> and <code>fit_5</code>.</li>
+<li><strong>Underfitting models:</strong> In general <em>High</em> Train RMSE, <em>High</em> Test RMSE. Seen in <code>fit_1</code> and <code>fit_2</code>.</li>
+<li><strong>Overfitting models:</strong> In general <em>Low</em> Train RMSE, <em>High</em> Test RMSE. Seen in <code>fit_4</code> and <code>fit_5</code>.</li>
 </ul>
-<p>So, we say that a model is overfitting if there exists a less complex model with higher Train RMSE, but lower Test RMSE.</p>
+<p>Specifically, we say that a model is overfitting if there exists a less complex model with lower Test RMSE. Then a model is underfitting if there exists a more complex model with lower Test RMSE.</p>
 <p>A number of notes on these results:</p>
 <ul>
-<li>The labels of under and overfitting are <em>relative</em> to the best model see, <code>fit_3</code>.</li>
+<li>The labels of under and overfitting are <em>relative</em> to the best model we see, <code>fit_3</code>. Any model more complex with higher Test RMSE is overfitting. Any model less complex with higher Test RMSE is underfitting.</li>
 <li>The train RMSE is guaranteed to follow this non-increasing pattern. The same is not true of test RMSE. Here we see a nice U-shaped curve. There are theoretical reasons why we should expect this, but that is on average. Because of the randomness of one test-train split, we may not always see this result. Re-perform this analysis with a different seed value and the pattern may not hold. We will discuss why we expect this next chapter. We will discuss how we can help create this U-shape much later.</li>
 <li>Often we expect train RMSE to be lower than test RMSE. Again, due to the randomness of the split, you may get lucky and this will not be true.</li>
 </ul>
