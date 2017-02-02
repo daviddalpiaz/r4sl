@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-01">
+<meta name="date" content="2017-02-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -179,6 +179,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>6.1</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="6.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation-1"><i class="fa fa-check"></i><b>6.2</b> Simulation</a></li>
 <li class="chapter" data-level="6.3" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>6.3</b> Bias-Variance Tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>7</b> Classification</a><ul>
+<li class="chapter" data-level="7.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>7.1</b> Visualization for Classification</a></li>
+<li class="chapter" data-level="7.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>7.2</b> A Simple Classifier</a></li>
+<li class="chapter" data-level="7.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>7.3</b> Metrics for Classification</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -373,29 +378,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1          x2            y
-##    &lt;fctr&gt;       &lt;dbl&gt;        &lt;dbl&gt;
-## 1       A 0.006979866  1.735618735
-## 2       A 0.899778998  0.316218119
-## 3       A 0.159376491 -0.548515100
-## 4       A 0.794996848 -2.197659306
-## 5       A 0.385648059  0.062424027
-## 6       A 0.750244896  0.399088007
-## 7       A 0.592256214  1.666888606
-## 8       A 0.119842809  0.427678087
-## 9       A 0.401851424  0.004891107
-## 10      A 0.390447183  1.076754556
+##        x1          x2          y
+##    &lt;fctr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+## 1       A 0.003399729  1.1316855
+## 2       A 0.374268842 -0.1036792
+## 3       A 0.567001595 -0.1987580
+## 4       A 0.557992400 -1.2338473
+## 5       A 0.518474385 -0.4728803
+## 6       A 0.318909606 -0.3389690
+## 7       A 0.603394516 -1.4592404
+## 8       A 0.389052465 -0.1007243
+## 9       A 0.844134253  1.5873895
+## 10      A 0.903058319  0.9454141
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##   0.1735760  -0.4388868  -0.1253464   0.2682768</code></pre>
+##  0.09487159  0.02540406 -0.02922184 -0.23472419</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##   0.8782387  -0.5827302  -2.3139048  -1.2971454   0.5350140   4.7789590</code></pre>
+##  -0.1988497   0.2909262   0.6176441   0.3435030  -0.5257820  -1.1341834</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
