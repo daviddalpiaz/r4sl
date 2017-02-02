@@ -2,7 +2,7 @@
 
 **Classification** is a form of **supervised learning** where the response variable is categorical, as opposed to numeric for regression. *Our goal is to find a rule, algorithm, or function which takes as input a feature vector, and outputs a category which is the true category as often as possible.* 
 
-![](../images/classification.png)
+![](images/classification.png)
 
 That is, the classifier $\hat{C}$ returns the predicted category $\hat{y}$.
 
@@ -168,7 +168,7 @@ Often we give specific names to individual cells of these tables, and in the pre
 
 In statistics, we label the errors Type I and Type II, but these are hard to remember. False Positive and False Negative are more descriptive, so we choose to use these.
 
-![](../images/confusion.png)
+![](images/confusion.png)
 
 The `confusionMatrix()` function from the `caret` package can be used to obtain a wealth of additional information, which we see output below for the test data. Note that we specify which category is considered "positive."
 
