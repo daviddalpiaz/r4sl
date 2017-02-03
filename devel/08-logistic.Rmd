@@ -1,10 +1,57 @@
 # Logistic Regression
 
+```{r}
+library(ISLR)
+library(tibble)
+as_tibble(Default)
+```
+
+
+```{r}
+Default_for_lm = Default
+Default_for_lm$default = as.numeric(Default_for_lm$default) - 1
+
+# test-train here
+
+model_lm = lm(default ~ balance, data = Default)
+```
+
+
+```{r}
+# repeat with glm
+```
+
+
+```{r}
+# add complexity, get test accuracy or error curve
+```
+
+
+```{r}
+# roc curve
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+# multiclass, neural networks
+```
+
+
+```{r}
+
+```
+
+- a lot of this will only be done on the board:
 
 - how linear regression makes sense mean(0/1 @ x) ~~ prob, but isn't limited to (0,1)
     - how coercion to 0/1 from factor works
     
-- add something about bayes rule, and how we are directly optimizing towards?
+- add something about bayes classifier, and how we are directly optimizing towards?
 
 
     
@@ -23,11 +70,7 @@
     - note its coming from a NN package
     - will discuss later
 
-- test-train split
-    - train err down
-    - test error U
-
-- boundries?
+- boundries?, with two numeric x's
 
 
 - prob cutoff of 0.5 is same as logodds curoff of 0
