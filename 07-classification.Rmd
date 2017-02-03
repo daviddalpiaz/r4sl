@@ -144,7 +144,7 @@ We write a simple `R` function that compares a variable to a cutoff, then use it
 ```{r}
 train_pred = simple_class(x = train_default$balance, 
                           cutoff = 1400, above = "Yes", below = "No")
-test_pred = simple_class(x = train_default$balance, 
+test_pred = simple_class(x = test_default$balance, 
                          cutoff = 1400, above = "Yes", below = "No")
 head(train_pred, n = 10)
 ```
