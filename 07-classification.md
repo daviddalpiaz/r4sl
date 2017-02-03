@@ -190,7 +190,7 @@ We write a simple `R` function that compares a variable to a cutoff, then use it
 ```r
 train_pred = simple_class(x = train_default$balance, 
                           cutoff = 1400, above = "Yes", below = "No")
-test_pred = simple_class(x = train_default$balance, 
+test_pred = simple_class(x = test_default$balance, 
                          cutoff = 1400, above = "Yes", below = "No")
 head(train_pred, n = 10)
 ```
@@ -226,8 +226,8 @@ One of the most obvious things to do is arrange predictions and true values in a
 ```
 ##          actual
 ## predicted   No  Yes
-##       No  4204  144
-##       Yes  631   21
+##       No  4361   23
+##       Yes  474  142
 ```
 
 Often we give specific names to individual cells of these tables, and in the predictive setting, we would call this table a [**confusion matrix**](https://en.wikipedia.org/wiki/Confusion_matrix). Be aware, that the placement of Actual and Predicted values affects the names of the cells, and often the matrix may be presented transposed.
@@ -249,27 +249,27 @@ train_con_mat = confusionMatrix(train_tab, positive = "Yes")
 ## 
 ##          actual
 ## predicted   No  Yes
-##       No  4204  144
-##       Yes  631   21
-##                                           
-##                Accuracy : 0.845           
-##                  95% CI : (0.8347, 0.8549)
-##     No Information Rate : 0.967           
-##     P-Value [Acc > NIR] : 1               
-##                                           
-##                   Kappa : -0.0013         
-##  Mcnemar's Test P-Value : <2e-16          
-##                                           
-##             Sensitivity : 0.12727         
-##             Specificity : 0.86949         
-##          Pos Pred Value : 0.03221         
-##          Neg Pred Value : 0.96688         
-##              Prevalence : 0.03300         
-##          Detection Rate : 0.00420         
-##    Detection Prevalence : 0.13040         
-##       Balanced Accuracy : 0.49838         
-##                                           
-##        'Positive' Class : Yes             
+##       No  4361   23
+##       Yes  474  142
+##                                          
+##                Accuracy : 0.9006         
+##                  95% CI : (0.892, 0.9088)
+##     No Information Rate : 0.967          
+##     P-Value [Acc > NIR] : 1              
+##                                          
+##                   Kappa : 0.3287         
+##  Mcnemar's Test P-Value : <2e-16         
+##                                          
+##             Sensitivity : 0.8606         
+##             Specificity : 0.9020         
+##          Pos Pred Value : 0.2305         
+##          Neg Pred Value : 0.9948         
+##              Prevalence : 0.0330         
+##          Detection Rate : 0.0284         
+##    Detection Prevalence : 0.1232         
+##       Balanced Accuracy : 0.8813         
+##                                          
+##        'Positive' Class : Yes            
 ## 
 ```
 
@@ -320,7 +320,7 @@ test_con_mat$overall["Accuracy"]
 
 ```
 ## Accuracy 
-##    0.845
+##   0.9006
 ```
 
 Sometimes guarding against making certain errors, FP or FN, are more important than simply finding the best accuracy. Thus, sometimes we will consider **sensitivity** and **specificity**.
@@ -336,7 +336,7 @@ test_con_mat$byClass["Sensitivity"]
 
 ```
 ## Sensitivity 
-##   0.1272727
+##   0.8606061
 ```
 
 $$
@@ -350,7 +350,7 @@ test_con_mat$byClass["Specificity"]
 
 ```
 ## Specificity 
-##   0.8694933
+##   0.9019648
 ```
 
 Like accuracy, these can easily be found using `confusionMatrix()`.

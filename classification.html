@@ -325,7 +325,7 @@ f_{X_i}(x_i \mid y = k)
 <p>We write a simple <code>R</code> function that compares a variable to a cutoff, then use it to make predictions on the train and test sets with our chosen variable and cutoff.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, 
                           <span class="dt">cutoff =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
-test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, 
+test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> test_default$balance, 
                          <span class="dt">cutoff =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
 <span class="kw">head</span>(train_pred, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>##  [1] &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;</code></pre>
@@ -342,8 +342,8 @@ test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">test_tab =</span> <span class="kw">table</span>(<span class="dt">predicted =</span> test_pred, <span class="dt">actual =</span> test_default$default))</code></pre></div>
 <pre><code>##          actual
 ## predicted   No  Yes
-##       No  4204  144
-##       Yes  631   21</code></pre>
+##       No  4361   23
+##       Yes  474  142</code></pre>
 <p>Often we give specific names to individual cells of these tables, and in the predictive setting, we would call this table a <a href="https://en.wikipedia.org/wiki/Confusion_matrix"><strong>confusion matrix</strong></a>. Be aware, that the placement of Actual and Predicted values affects the names of the cells, and often the matrix may be presented transposed.</p>
 <p>In statistics, we label the errors Type I and Type II, but these are hard to remember. False Positive and False Negative are more descriptive, so we choose to use these.</p>
 <div class="figure">
@@ -357,27 +357,27 @@ test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span c
 ## 
 ##          actual
 ## predicted   No  Yes
-##       No  4204  144
-##       Yes  631   21
-##                                           
-##                Accuracy : 0.845           
-##                  95% CI : (0.8347, 0.8549)
-##     No Information Rate : 0.967           
-##     P-Value [Acc &gt; NIR] : 1               
-##                                           
-##                   Kappa : -0.0013         
-##  Mcnemar&#39;s Test P-Value : &lt;2e-16          
-##                                           
-##             Sensitivity : 0.12727         
-##             Specificity : 0.86949         
-##          Pos Pred Value : 0.03221         
-##          Neg Pred Value : 0.96688         
-##              Prevalence : 0.03300         
-##          Detection Rate : 0.00420         
-##    Detection Prevalence : 0.13040         
-##       Balanced Accuracy : 0.49838         
-##                                           
-##        &#39;Positive&#39; Class : Yes             
+##       No  4361   23
+##       Yes  474  142
+##                                          
+##                Accuracy : 0.9006         
+##                  95% CI : (0.892, 0.9088)
+##     No Information Rate : 0.967          
+##     P-Value [Acc &gt; NIR] : 1              
+##                                          
+##                   Kappa : 0.3287         
+##  Mcnemar&#39;s Test P-Value : &lt;2e-16         
+##                                          
+##             Sensitivity : 0.8606         
+##             Specificity : 0.9020         
+##          Pos Pred Value : 0.2305         
+##          Neg Pred Value : 0.9948         
+##              Prevalence : 0.0330         
+##          Detection Rate : 0.0284         
+##    Detection Prevalence : 0.1232         
+##       Balanced Accuracy : 0.8813         
+##                                          
+##        &#39;Positive&#39; Class : Yes            
 ## </code></pre>
 <p>The most common, and most important metric is the <strong>classification accuracy</strong>.</p>
 <p><span class="math display">\[
@@ -405,20 +405,20 @@ I(y_i = \hat{C}(x)) =
 ##   0.8916</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_con_mat$overall[<span class="st">&quot;Accuracy&quot;</span>]</code></pre></div>
 <pre><code>## Accuracy 
-##    0.845</code></pre>
+##   0.9006</code></pre>
 <p>Sometimes guarding against making certain errors, FP or FN, are more important than simply finding the best accuracy. Thus, sometimes we will consider <strong>sensitivity</strong> and <strong>specificity</strong>.</p>
 <p><span class="math display">\[
 \text{Sens} = \text{True Positive Rate} = \frac{\text{TP}}{\text{P}} = \frac{\text{TP}}{\text{TP + FN}}
 \]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_con_mat$byClass[<span class="st">&quot;Sensitivity&quot;</span>]</code></pre></div>
 <pre><code>## Sensitivity 
-##   0.1272727</code></pre>
+##   0.8606061</code></pre>
 <p><span class="math display">\[
 \text{Spec} = \text{True Negative Rate} = \frac{\text{TN}}{\text{N}} = \frac{\text{TN}}{\text{TN + FP}}
 \]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_con_mat$byClass[<span class="st">&quot;Specificity&quot;</span>]</code></pre></div>
 <pre><code>## Specificity 
-##   0.8694933</code></pre>
+##   0.9019648</code></pre>
 <p>Like accuracy, these can easily be found using <code>confusionMatrix()</code>.</p>
 <p>When considering how well a classifier is performing, often, it is understandable to assume that any accuracy in a binary classification problem above 0.50, is a reasonable classifier. This however is not the case. We need to consider the <strong>balance</strong> of the classes. To do so, we look at the <strong>prevalence</strong> of positive cases.</p>
 <p><span class="math display">\[
