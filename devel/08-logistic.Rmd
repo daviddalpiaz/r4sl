@@ -27,7 +27,10 @@ model_lm = lm(default ~ balance, data = Default)
 ```{r}
 # repeat with glm
 model_glm = glm(default ~ balance, data = train_default, family = "binomial")
-predict(model_glm)
+
+mean(ifelse(predict(model_glm, newdata = train_default, type = "link") > 0, "Yes", "No") == train_default$default)
+mean(ifelse(predict(model_glm, newdata = train_default, type = "response") > 0.5, "Yes", "No") == train_default$default)
+
 ```
 
 
