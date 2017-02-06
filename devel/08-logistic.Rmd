@@ -8,10 +8,17 @@ as_tibble(Default)
 
 
 ```{r}
+set.seed(42)
+train_index = sample(nrow(Default), 5000)
+train_default = Default[train_index, ]
+test_default = Default[-train_index, ]
+```
+
+
+
+```{r}
 Default_for_lm = Default
 Default_for_lm$default = as.numeric(Default_for_lm$default) - 1
-
-# test-train here
 
 model_lm = lm(default ~ balance, data = Default)
 ```
@@ -19,6 +26,8 @@ model_lm = lm(default ~ balance, data = Default)
 
 ```{r}
 # repeat with glm
+model_glm = glm(default ~ balance, data = train_default, family = "binomial")
+predict(model_glm)
 ```
 
 
