@@ -144,7 +144,7 @@ y0 = f(x0) + eps
 
 ```{r}
 get_bias = function(estimate, truth) {
-  mean(estimate - truth)
+  mean(estimate) - truth
 }
 
 get_mse = function(estimate, truth) {
@@ -155,7 +155,7 @@ get_mse = function(estimate, truth) {
 When then use the predictions obtained from the above simulation to estimate the bias, variance and mean squared error for estimating $f(x)$ at $x_0 = 0.95$ for the four models.
 
 ```{r}
-bias = apply(predictions, 2, get_bias, y0)
+bias = apply(predictions, 2, get_bias, f(x0))
 variance = apply(predictions, 2, var)
 mse = apply(predictions, 2, get_mse, y0)
 ```
