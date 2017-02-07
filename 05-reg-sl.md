@@ -115,9 +115,9 @@ Here we use the `sample()` function to obtain a random sample of the rows of the
 
 ```r
 set.seed(9)
-train_size = nrow(Advertising)
+num_obs = nrow(Advertising)
 
-train_index = sample(1:train_size, size = trunc(0.50 * train_size))
+train_index = sample(1:num_obs, size = trunc(0.50 * num_obs))
 train_data = Advertising[train_index, ]
 test_data = Advertising[-train_index, ]
 ```

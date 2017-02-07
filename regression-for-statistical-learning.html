@@ -277,9 +277,9 @@ Y = f(\bf{x}) + \epsilon
 <p>Note that sometimes the terms <em>evaluation set</em> and <em>test set</em> are used interchangeably. We will give somewhat specific definitions to these later. For now we will simply use a single test set for a training set.</p>
 <p>Here we use the <code>sample()</code> function to obtain a random sample of the rows of the original data. We then use those row numbers (and remaining row numbers) to split the data accordingly. Notice we used the <code>set.seed()</code> function to allow use to reproduce the same random split each time we perform this analysis.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">9</span>)
-train_size =<span class="st"> </span><span class="kw">nrow</span>(Advertising)
+num_obs =<span class="st"> </span><span class="kw">nrow</span>(Advertising)
 
-train_index =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:train_size, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>train_size))
+train_index =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:num_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>num_obs))
 train_data =<span class="st"> </span>Advertising[train_index, ]
 test_data =<span class="st"> </span>Advertising[-train_index, ]</code></pre></div>
 <p>We will look at two measures that assess how well a model is predicting, the <strong>train RMSE</strong> and the <strong>test RMSE</strong>.</p>
