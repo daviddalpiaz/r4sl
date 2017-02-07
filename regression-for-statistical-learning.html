@@ -279,7 +279,7 @@ Y = f(\bf{x}) + \epsilon
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">9</span>)
 num_obs =<span class="st"> </span><span class="kw">nrow</span>(Advertising)
 
-train_index =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:num_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>num_obs))
+train_index =<span class="st"> </span><span class="kw">sample</span>(num_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>num_obs))
 train_data =<span class="st"> </span>Advertising[train_index, ]
 test_data =<span class="st"> </span>Advertising[-train_index, ]</code></pre></div>
 <p>We will look at two measures that assess how well a model is predicting, the <strong>train RMSE</strong> and the <strong>test RMSE</strong>.</p>
