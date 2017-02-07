@@ -65,8 +65,10 @@ Often the sybmol $\triangleq$ will be used to mean "is defined to be."
 
 ## Acknowledgements
 
-Your name could be here! Suggest an edit!
+Your name could be here! Suggest an edit! Correct a typo!
 
+- [James Balamuta](http://www.thecoatlessprofessor.com/), Summer 2016 - ??? 
+- Korawat Tanwisuth, Spring 2017
 
 ## License
 
