@@ -155,7 +155,7 @@ y0 = f(x0) + eps
 
 ```r
 get_bias = function(estimate, truth) {
-  mean(estimate - truth)
+  mean(estimate) - truth
 }
 
 get_mse = function(estimate, truth) {
@@ -167,7 +167,7 @@ When then use the predictions obtained from the above simulation to estimate the
 
 
 ```r
-bias = apply(predictions, 2, get_bias, y0)
+bias = apply(predictions, 2, get_bias, f(x0))
 variance = apply(predictions, 2, var)
 mse = apply(predictions, 2, get_mse, y0)
 ```
@@ -178,10 +178,10 @@ We summarize these results in the following table.
 
 | Model   | Squared Bias     | Variance (Of Estimate) | MSE        |
 |---------|------------------|------------------------|------------|
-| `fit_1` | 0.3214372  | 0.001784        | 0.4201411 |
-| `fit_2` | 0.0133764  | 0.0036355        | 0.1145159 |
-| `fit_3` | 0.0000103  | 0.0058178        | 0.1031294 |
-| `fit_4` | 0.000005  | 0.0079906        | 0.1053599 |
+| `fit_1` | 0.322916  | 0.001784        | 0.4201411 |
+| `fit_2` | 0.0136794  | 0.0036355        | 0.1145159 |
+| `fit_3` | 0.0000036  | 0.0058178        | 0.1031294 |
+| `fit_4` | 0.0000009  | 0.0079906        | 0.1053599 |
 
 
 
@@ -228,7 +228,7 @@ bias ^ 2 + variance + var(eps)
 ```
 
 ```
-## [1] 0.4194956 0.1132862 0.1021024 0.1042700
+## [1] 0.4209744 0.1135892 0.1020958 0.1042659
 ```
 
 ```r

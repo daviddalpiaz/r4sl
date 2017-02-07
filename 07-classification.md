@@ -159,11 +159,11 @@ Similar to `pairs` is a plot of type `ellipse`, which requires the `ellipse` pac
 A very simple classifier is a rule based on a cutoff $c$ for a particular input variable $x$.
 
 $$
-\hat{C}(\text{x}) = 
+\hat{C}(\bf x) = 
 \begin{cases} 
-      1 & \text{x} > c \\
-      0 & \text{x} \leq c 
-   \end{cases}
+      1 & x > c \\
+      0 & x \leq c 
+\end{cases}
 $$
 
 Based on the first plot, we believe we can use `balance` to create a reasonable classifier. In particular,

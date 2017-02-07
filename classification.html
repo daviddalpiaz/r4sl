@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-06">
+<meta name="date" content="2017-02-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -304,11 +304,11 @@ f_{X_i}(x_i \mid y = k)
 <h2><span class="header-section-number">7.2</span> A Simple Classifier</h2>
 <p>A very simple classifier is a rule based on a cutoff <span class="math inline">\(c\)</span> for a particular input variable <span class="math inline">\(x\)</span>.</p>
 <p><span class="math display">\[
-\hat{C}(\text{x}) = 
+\hat{C}(\bf x) = 
 \begin{cases} 
-      1 &amp; \text{x} &gt; c \\
-      0 &amp; \text{x} \leq c 
-   \end{cases}
+      1 &amp; x &gt; c \\
+      0 &amp; x \leq c 
+\end{cases}
 \]</span></p>
 <p>Based on the first plot, we believe we can use <code>balance</code> to create a reasonable classifier. In particular,</p>
 <p><span class="math display">\[

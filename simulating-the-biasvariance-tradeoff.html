@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-06">
+<meta name="date" content="2017-02-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -313,14 +313,14 @@ for (i in <span class="dv">1</span>:n_sims) {
 y0 =<span class="st"> </span><span class="kw">f</span>(x0) +<span class="st"> </span>eps</code></pre></div>
 <p><code>R</code> already has a function to calculate variance, however, we add functions for bias and mean squared error.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_bias =<span class="st"> </span>function(estimate, truth) {
-  <span class="kw">mean</span>(estimate -<span class="st"> </span>truth)
+  <span class="kw">mean</span>(estimate) -<span class="st"> </span>truth
 }
 
 get_mse =<span class="st"> </span>function(estimate, truth) {
   <span class="kw">mean</span>((estimate -<span class="st"> </span>truth) ^<span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <p>When then use the predictions obtained from the above simulation to estimate the bias, variance and mean squared error for estimating <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0 = 0.95\)</span> for the four models.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bias =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_bias, y0)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bias =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_bias, <span class="kw">f</span>(x0))
 variance =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, var)
 mse =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_mse, y0)</code></pre></div>
 <p>We summarize these results in the following table.</p>
@@ -336,25 +336,25 @@ mse =<span class="st"> </span><span class="kw">apply</span>(predictions, <span c
 <tbody>
 <tr class="odd">
 <td align="left"><code>fit_1</code></td>
-<td align="left">0.3214372</td>
+<td align="left">0.322916</td>
 <td align="left">0.001784</td>
 <td align="left">0.4201411</td>
 </tr>
 <tr class="even">
 <td align="left"><code>fit_2</code></td>
-<td align="left">0.0133764</td>
+<td align="left">0.0136794</td>
 <td align="left">0.0036355</td>
 <td align="left">0.1145159</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>fit_3</code></td>
-<td align="left">0.0000103</td>
+<td align="left">0.0000036</td>
 <td align="left">0.0058178</td>
 <td align="left">0.1031294</td>
 </tr>
 <tr class="even">
 <td align="left"><code>fit_4</code></td>
-<td align="left">0.000005</td>
+<td align="left">0.0000009</td>
 <td align="left">0.0079906</td>
 <td align="left">0.1053599</td>
 </tr>
@@ -376,7 +376,7 @@ mse =<span class="st"> </span><span class="kw">apply</span>(predictions, <span c
 <pre><code>## [1] -0.305625170 -0.011386537  0.002230515</code></pre>
 <p>Notice that the table lacks a column for the variance of the noise. Add this to squared bias and variance would give the mean squared error. However, notice that we are simulation to estiamte the bias and variance, so the relationship is not exact. If we used more replications of the simulation, these two values would move closer together.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bias ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span>variance +<span class="st"> </span><span class="kw">var</span>(eps)</code></pre></div>
-<pre><code>## [1] 0.4194956 0.1132862 0.1021024 0.1042700</code></pre>
+<pre><code>## [1] 0.4209744 0.1135892 0.1020958 0.1042659</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mse</code></pre></div>
 <pre><code>## [1] 0.4201411 0.1145159 0.1031294 0.1053599</code></pre>
 
