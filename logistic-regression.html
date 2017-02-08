@@ -471,7 +471,6 @@ test_pred_90 =<span class="st"> </span><span class="kw">get_pred</span>(model_gl
 test_tab_50 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_50, <span class="dt">actual =</span> default_test$default)
 test_tab_90 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_90, <span class="dt">actual =</span> default_test$default)
 
-
 test_con_mat_10 =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_10, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
 test_con_mat_50 =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_50, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
 test_con_mat_90 =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_90, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</code></pre></div>
@@ -488,7 +487,7 @@ test_con_mat_90 =<span class="st"> </span><span class="kw">confusionMatrix</span
   <span class="kw">c</span>(test_con_mat_90$overall[<span class="st">&quot;Accuracy&quot;</span>], 
     test_con_mat_90$byClass[<span class="st">&quot;Sensitivity&quot;</span>], 
     test_con_mat_90$byClass[<span class="st">&quot;Specificity&quot;</span>])
-  
+
 )
 
 <span class="kw">rownames</span>(metrics) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;c = 0.10&quot;</span>, <span class="st">&quot;c = 0.50&quot;</span>, <span class="st">&quot;c = 0.90&quot;</span>)

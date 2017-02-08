@@ -478,7 +478,6 @@ test_tab_10 = table(predicted = test_pred_10, actual = default_test$default)
 test_tab_50 = table(predicted = test_pred_50, actual = default_test$default)
 test_tab_90 = table(predicted = test_pred_90, actual = default_test$default)
 
-
 test_con_mat_10 = confusionMatrix(test_tab_10, positive = "Yes")
 test_con_mat_50 = confusionMatrix(test_tab_50, positive = "Yes")
 test_con_mat_90 = confusionMatrix(test_tab_90, positive = "Yes")
@@ -499,7 +498,7 @@ metrics = rbind(
   c(test_con_mat_90$overall["Accuracy"], 
     test_con_mat_90$byClass["Sensitivity"], 
     test_con_mat_90$byClass["Specificity"])
-  
+
 )
 
 rownames(metrics) = c("c = 0.10", "c = 0.50", "c = 0.90")
