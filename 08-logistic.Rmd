@@ -280,12 +280,12 @@ $$
 \hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}] = 0.5
 $$
 
-This is equivilent to point that satisfy
+This is equivalent to point that satisfy
 
 $$
 \hat{\beta}_0 + \hat{\beta}_1 x_1 = 0.
 $$
-Thus, for logistic regression with a single predictor, the decision boundry is given by the *point*
+Thus, for logistic regression with a single predictor, the decision boundary is given by the *point*
 
 $$
 x_1 = \frac{-\hat{\beta}_0}{\hat{\beta}_1}.
@@ -324,7 +324,7 @@ test_error = 1 - sapply(model_list, get_accuracy, data = default_test,
                        res = "default", pos = "Yes", neg = "No", cut = 0.5)
 ```
 
-Here we see the misclassification error rates for each model. The train decreases, adn the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.
+Here we see the misclassification error rates for each model. The train decreases, and the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.
 
 ```{r}
 diff(train_error)
@@ -337,21 +337,42 @@ We call `model_2` the **additive** logistic model, which we will use quite often
 
 ## ROC Curves
 
+Let's return to our simple model with only balance as a predictor.
+
 
 ```{r}
 model_glm = glm(default ~ balance, data = default_train, family = "binomial")
+```
 
+We write a function which allows use to make predictions based on different probability cutoffs.
 
-
+```{r}
 get_pred = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
   probs = predict(mod, newdata = data, type = "response")
   ifelse(probs > cut, pos, neg)
 }
+```
 
+
+$$
+\hat{C}(\bf x) = 
+\begin{cases} 
+      1 & \hat{f}({\bf x}) > c \\
+      0 & \hat{f}({\bf x}) \leq c 
+\end{cases}
+$$
+
+Let's use this to obtain predictions using a low, medium, and high cutoff. (0.1, 0.5, and 0.9)
+
+```{r}
 test_pred_10 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.1)
 test_pred_50 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.5)
 test_pred_90 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.9)
+```
 
+Now we evaluate accuracy, sensitivity, and specificity for these classifiers.
+
+```{r}
 test_tab_10 = table(predicted = test_pred_10, actual = default_train$default)
 test_tab_50 = table(predicted = test_pred_50, actual = default_train$default)
 test_tab_90 = table(predicted = test_pred_90, actual = default_train$default)
@@ -360,24 +381,34 @@ test_tab_90 = table(predicted = test_pred_90, actual = default_train$default)
 test_con_mat_10 = confusionMatrix(test_tab_10, positive = "Yes")
 test_con_mat_50 = confusionMatrix(test_tab_50, positive = "Yes")
 test_con_mat_90 = confusionMatrix(test_tab_90, positive = "Yes")
-
-c(test_con_mat_10$overall["Accuracy"], 
-  test_con_mat_10$byClass["Sensitivity"], 
-  test_con_mat_10$byClass["Specificity"])
-
-c(test_con_mat_50$overall["Accuracy"], 
-  test_con_mat_50$byClass["Sensitivity"], 
-  test_con_mat_50$byClass["Specificity"])
-
-c(test_con_mat_90$overall["Accuracy"], 
-  test_con_mat_90$byClass["Sensitivity"], 
-  test_con_mat_90$byClass["Specificity"])
-
-
 ```
 
-- 90 acc is luck based on split
-- spec up, sens down
+```{r}
+metrics = rbind(
+  
+  c(test_con_mat_10$overall["Accuracy"], 
+    test_con_mat_10$byClass["Sensitivity"], 
+    test_con_mat_10$byClass["Specificity"]),
+  
+  c(test_con_mat_50$overall["Accuracy"], 
+    test_con_mat_50$byClass["Sensitivity"], 
+    test_con_mat_50$byClass["Specificity"]),
+  
+  c(test_con_mat_90$overall["Accuracy"], 
+    test_con_mat_90$byClass["Sensitivity"], 
+    test_con_mat_90$byClass["Specificity"])
+  
+)
+
+rownames(metrics) = c("c = 0.10", "c = 0.50", "c = 0.90")
+metrics
+```
+
+We see then sensitivity decreases as the cutoff is increases. Conversely, specificity increases as the cutoff increases. This is useful if we are more interested in a particular error, instead of giving them equal weight.
+
+Note that usually the best accuracy will be seen near $c = 0.50$, but our results here difference due to the randomness of the test-train split.
+
+Instead of manually checking cutoffs, we can create an ROC curve (receiver operating characteristic curve) which will sweep through all possible cutoffs, and plot the sensitivity and specificity.
 
 ```{r, message = FALSE, warning = FALSE}
 library(pROC)
@@ -386,8 +417,7 @@ test_roc = roc(default_test$default ~ test_prob, plot = TRUE, print.auc = TRUE)
 as.numeric(test_roc$auc)
 ```
 
-
-
+A good model will have a high AUC, that is as often as possible a hgih sensitivity and specificity.
 
 ## Multinomial Logistic Regression
 
