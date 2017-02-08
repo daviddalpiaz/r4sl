@@ -536,7 +536,7 @@ as.numeric(test_roc$auc)
 ## [1] 0.9515076
 ```
 
-A good model will have a high AUC, that is as often as possible a hgih sensitivity and specificity.
+A good model will have a high AUC, that is as often as possible a high sensitivity and specificity.
 
 ## Multinomial Logistic Regression
 
