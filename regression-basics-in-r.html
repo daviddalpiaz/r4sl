@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-07">
+<meta name="date" content="2017-02-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -184,6 +184,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>7.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="7.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>7.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="7.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>7.3</b> Metrics for Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>8.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>8.2</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="8.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>8.3</b> Logistic Regression with <code>glm()</code></a></li>
+<li class="chapter" data-level="8.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>8.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>8.5</b> Multinomial Logistic Regression</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -378,29 +385,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1         x2           y
-##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1       A 0.93132948  1.19613814
-## 2       A 0.46024360  0.99886671
-## 3       A 0.79239356 -0.45537248
-## 4       A 0.69279103 -0.40050247
-## 5       A 0.22059387 -0.81824274
-## 6       A 0.83655527 -1.01740263
-## 7       A 0.91005272 -0.77782294
-## 8       A 0.36501409 -1.51846529
-## 9       A 0.05874693 -0.09927468
-## 10      A 0.01797428  0.02486341
+##        x1        x2          y
+##    &lt;fctr&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1       A 0.1944238 -2.5101313
+## 2       A 0.9146850  0.4044995
+## 3       A 0.7270247  1.1925815
+## 4       A 0.1140996 -0.2416745
+## 5       A 0.4195110 -1.5902592
+## 6       A 0.6290954 -0.1860469
+## 7       A 0.1458745 -0.1353568
+## 8       A 0.5811342 -1.5667473
+## 9       A 0.7120027 -0.6504986
+## 10      A 0.4917920  2.2280653
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  -0.3586989   0.2672905   0.4100073   0.1361740</code></pre>
+## -0.27745603  0.37524571 -0.30680961 -0.05700371</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-## -0.35922267  0.23487134  0.47457789  0.13716489  0.07248993 -0.14869671</code></pre>
+##  -1.1544297   1.7254374   0.9857282   1.7219765  -2.6996689  -2.6703967</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>

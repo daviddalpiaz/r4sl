@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-07">
+<meta name="date" content="2017-02-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="prev" href="simulating-the-biasvariance-tradeoff.html">
-
+<link rel="next" href="logistic-regression.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -184,6 +184,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>7.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="7.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>7.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="7.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>7.3</b> Metrics for Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>8.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>8.2</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="8.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>8.3</b> Logistic Regression with <code>glm()</code></a></li>
+<li class="chapter" data-level="8.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>8.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>8.5</b> Multinomial Logistic Regression</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -454,9 +461,6 @@ I(y_i = \hat{C}(x)) =
 <pre><code>## [1] 0.967</code></pre>
 <p>This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test accuracy better than 0.967, which is obtained by simply manipulating the prevalence. Next chapter, we’ll introduce much better classifiers which should have no problem accomplishing this task.</p>
 
-<div id="refs" class="references">
-
-</div>
 </div>
 </div>
             </section>
@@ -464,8 +468,8 @@ I(y_i = \hat{C}(x)) =
           </div>
         </div>
       </div>
-<a href="simulating-the-biasvariance-tradeoff.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="simulating-the-biasvariance-tradeoff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logistic-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
