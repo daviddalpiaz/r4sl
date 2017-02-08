@@ -417,7 +417,7 @@ test_roc = roc(default_test$default ~ test_prob, plot = TRUE, print.auc = TRUE)
 as.numeric(test_roc$auc)
 ```
 
-A good model will have a high AUC, that is as often as possible a hgih sensitivity and specificity.
+A good model will have a high AUC, that is as often as possible a high sensitivity and specificity.
 
 ## Multinomial Logistic Regression
 
