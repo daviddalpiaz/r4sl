@@ -467,9 +467,9 @@ test_error =<span class="st"> </span><span class="dv">1</span> -<span class="st"
 test_pred_50 =<span class="st"> </span><span class="kw">get_pred</span>(model_glm, <span class="dt">data =</span> default_test, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
 test_pred_90 =<span class="st"> </span><span class="kw">get_pred</span>(model_glm, <span class="dt">data =</span> default_test, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.9</span>)</code></pre></div>
 <p>Now we evaluate accuracy, sensitivity, and specificity for these classifiers.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_tab_10 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_10, <span class="dt">actual =</span> default_train$default)
-test_tab_50 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_50, <span class="dt">actual =</span> default_train$default)
-test_tab_90 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_90, <span class="dt">actual =</span> default_train$default)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_tab_10 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_10, <span class="dt">actual =</span> default_test$default)
+test_tab_50 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_50, <span class="dt">actual =</span> default_test$default)
+test_tab_90 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_90, <span class="dt">actual =</span> default_test$default)
 
 
 test_con_mat_10 =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_10, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
@@ -494,11 +494,11 @@ test_con_mat_90 =<span class="st"> </span><span class="kw">confusionMatrix</span
 <span class="kw">rownames</span>(metrics) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;c = 0.10&quot;</span>, <span class="st">&quot;c = 0.50&quot;</span>, <span class="st">&quot;c = 0.90&quot;</span>)
 metrics</code></pre></div>
 <pre><code>##          Accuracy Sensitivity Specificity
-## c = 0.10   0.8914  0.04166667   0.9209437
-## c = 0.50   0.9532  0.01190476   0.9859272
-## c = 0.90   0.9656  0.00000000   0.9991722</code></pre>
-<p>We see then sensitivity decreases as the cutoff is increases. Conversely, specificity increases as the cutoff increases. This is useful if we are more interested in a particular error, instead of giving them equal weight.</p>
-<p>Note that usually the best accuracy will be seen near <span class="math inline">\(c = 0.50\)</span>, but our results here difference due to the randomness of the test-train split.</p>
+## c = 0.10   0.9404  0.77575758   0.9460186
+## c = 0.50   0.9738  0.31515152   0.9962771
+## c = 0.90   0.9674  0.01818182   0.9997932</code></pre>
+<p>We see then sensitivity decreases as the cutoff is increased. Conversely, specificity increases as the cutoff increases. This is useful if we are more interested in a particular error, instead of giving them equal weight.</p>
+<p>Note that usually the best accuracy will be seen near <span class="math inline">\(c = 0.50\)</span>.</p>
 <p>Instead of manually checking cutoffs, we can create an ROC curve (receiver operating characteristic curve) which will sweep through all possible cutoffs, and plot the sensitivity and specificity.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pROC)
 test_prob =<span class="st"> </span><span class="kw">predict</span>(model_glm, <span class="dt">newdata =</span> default_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)

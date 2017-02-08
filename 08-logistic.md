@@ -474,9 +474,9 @@ Now we evaluate accuracy, sensitivity, and specificity for these classifiers.
 
 
 ```r
-test_tab_10 = table(predicted = test_pred_10, actual = default_train$default)
-test_tab_50 = table(predicted = test_pred_50, actual = default_train$default)
-test_tab_90 = table(predicted = test_pred_90, actual = default_train$default)
+test_tab_10 = table(predicted = test_pred_10, actual = default_test$default)
+test_tab_50 = table(predicted = test_pred_50, actual = default_test$default)
+test_tab_90 = table(predicted = test_pred_90, actual = default_test$default)
 
 
 test_con_mat_10 = confusionMatrix(test_tab_10, positive = "Yes")
@@ -508,14 +508,14 @@ metrics
 
 ```
 ##          Accuracy Sensitivity Specificity
-## c = 0.10   0.8914  0.04166667   0.9209437
-## c = 0.50   0.9532  0.01190476   0.9859272
-## c = 0.90   0.9656  0.00000000   0.9991722
+## c = 0.10   0.9404  0.77575758   0.9460186
+## c = 0.50   0.9738  0.31515152   0.9962771
+## c = 0.90   0.9674  0.01818182   0.9997932
 ```
 
-We see then sensitivity decreases as the cutoff is increases. Conversely, specificity increases as the cutoff increases. This is useful if we are more interested in a particular error, instead of giving them equal weight.
+We see then sensitivity decreases as the cutoff is increased. Conversely, specificity increases as the cutoff increases. This is useful if we are more interested in a particular error, instead of giving them equal weight.
 
-Note that usually the best accuracy will be seen near $c = 0.50$, but our results here difference due to the randomness of the test-train split.
+Note that usually the best accuracy will be seen near $c = 0.50$.
 
 Instead of manually checking cutoffs, we can create an ROC curve (receiver operating characteristic curve) which will sweep through all possible cutoffs, and plot the sensitivity and specificity.
 
