@@ -1,0 +1,8 @@
+# Generative Models
+
+
+## Linear Discriminant Analysis
+
+## Quadratic Discriminant Analysis
+
+## Naive Bayes
