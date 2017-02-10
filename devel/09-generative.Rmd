@@ -1,8 +1,159 @@
 # Generative Models
 
+```{r}
+iris_obs = nrow(iris)
+iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
+iris_train = iris[iris_index, ]
+iris_test = iris[-iris_index, ]
+```
+
+
+```{r, fig.height=8, fig.width=8}
+featurePlot(x = iris_train[, c("Sepal.Length", "Sepal.Width", 
+                               "Petal.Length", "Petal.Width")], 
+            y = iris_train$Species,
+            plot = "density", 
+            scales = list(x = list(relation = "free"), 
+                          y = list(relation = "free")), 
+            adjust = 1.5, 
+            pch = "|", 
+            layout = c(2, 2), 
+            auto.key = list(columns = 3))
+```
+
+```{r, fig.height=8, fig.width=8}
+
+featurePlot(x = iris_train[, c("Sepal.Length", "Sepal.Width", 
+                               "Petal.Length", "Petal.Width")], 
+            y = iris_train$Species,
+            plot = "ellipse",
+            auto.key = list(columns = 3))
+```
+
+
+```{r, fig.height=4, fig.width=7}
+featurePlot(x = iris_train[, c("Sepal.Length", "Sepal.Width", 
+                               "Petal.Length", "Petal.Width")], 
+            y = iris_train$Species,
+                  plot = "box",
+                  scales = list(y = list(relation="free"),
+                                x = list(rot = 90)),
+                  layout = c(4, 1))
+```
+
 
 ## Linear Discriminant Analysis
 
+```{r}
+library(MASS)
+iris_lda = lda(Species ~ ., data = iris_train)
+iris_lda
+
+
+names(predict(iris_lda, iris_train))
+
+head(predict(iris_lda, iris_train)$class, n = 10)
+
+head(predict(iris_lda, iris_train)$posterior, n = 10)
+
+
+iris_lda_train_pred = predict(iris_lda, iris_train)$class
+iris_lda_test_pred = predict(iris_lda, iris_test)$class
+
+
+
+
+
+
+accuracy = function(actual, predicted) {
+  mean(actual == predicted)
+}
+
+
+accuracy(predicted = iris_lda_train_pred, actual = iris_train$Species)
+accuracy(predicted = iris_lda_test_pred, actual = iris_test$Species)
+
+
+
+table(predicted = iris_lda_test_pred, actual = iris_test$Species)
+
+```
+
+- TODO: predicted two classes perfectly
+- TODO: change prior, to flat?
+
 ## Quadratic Discriminant Analysis
 
+
+```{r}
+
+iris_qda = qda(Species ~ ., data = iris_train)
+iris_qda
+
+
+
+
+iris_qda_train_pred = predict(iris_qda, iris_train)$class
+iris_qda_test_pred = predict(iris_qda, iris_test)$class
+
+
+
+
+
+accuracy(predicted = iris_qda_train_pred, actual = iris_train$Species)
+accuracy(predicted = iris_qda_test_pred, actual = iris_test$Species)
+
+
+
+table(predicted = iris_qda_test_pred, actual = iris_test$Species)
+
+```
+
+- TODO: number of parameters vs number of obs in each class
+- TODO: lda with quadratic terms
+
 ## Naive Bayes
+
+
+
+
+```{r}
+library(e1071)
+
+iris_nb = naiveBayes(Species ~ ., data = iris_train)
+iris_nb
+
+
+head(predict(iris_nb, iris_train))
+head(predict(iris_nb, iris_train, type = "class"))
+head(predict(iris_nb, iris_train, type = "raw"))
+
+iris_nb_train_pred = predict(iris_nb, iris_train)
+iris_nb_test_pred = predict(iris_nb, iris_test)
+
+
+
+
+
+accuracy(predicted = iris_nb_train_pred, actual = iris_train$Species)
+accuracy(predicted = iris_nb_test_pred, actual = iris_test$Species)
+
+
+
+table(predicted = iris_nb_test_pred, actual = iris_test$Species)
+
+
+```
+
+- TODO: how mean estimates are the same as above
+
+
+
+
+
+
+
+
+
+
+
