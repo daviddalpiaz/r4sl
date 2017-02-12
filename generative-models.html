@@ -476,6 +476,7 @@ iris_nb</code></pre></div>
 ##   virginica  2.0956522 0.3022315</code></pre>
 <p>Many packages implement naive Bayes. Here we choose to use <code>naiveBayes()</code> from the package <code>e1071</code>. (The name of this package has an interesting history. Based on the name you wouldn’t know it, but the package contains many functions related to machine learning.)</p>
 <p>The <code>Conditional probabilities:</code> portion of the output gives the mean and standard deviation of the normal distribution for each predictor in each class. Notice how these mean estimates match those for LDA and QDA above.</p>
+<p>Note that <code>naiveBayes()</code> will work without a factor response, but functions much better with one. (Especially when making predictions.) If you are using a <code>0</code> and <code>1</code> response, you might consider coercing to a factor first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_train))</code></pre></div>
 <pre><code>## [1] setosa    virginica setosa    setosa    virginica setosa   
 ## Levels: setosa versicolor virginica</code></pre>

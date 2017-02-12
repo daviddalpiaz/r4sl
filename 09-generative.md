@@ -442,6 +442,8 @@ Many packages implement naive Bayes. Here we choose to use `naiveBayes()` from t
 
 The `Conditional probabilities:` portion of the output gives the mean and standard deviation of the normal distribution for each predictor in each class. Notice how these mean estimates match those for LDA and QDA above.
 
+Note that `naiveBayes()` will work without a factor response, but functions much better with one. (Especially when making predictions.) If you are using a `0` and `1` response, you might consider coercing to a factor first.
+
 
 ```r
 head(predict(iris_nb, iris_train))
