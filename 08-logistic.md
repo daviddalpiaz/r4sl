@@ -553,6 +553,7 @@ Before proceeding, we test-train split this data.
 
 
 ```r
+set.seed(430)
 iris_obs = nrow(iris)
 iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
 iris_train = iris[iris_index, ]
@@ -570,8 +571,8 @@ summary(model_multi)$coefficients
 
 ```
 ##            (Intercept) Sepal.Length Sepal.Width Petal.Length Petal.Width
-## versicolor     41.5588    -2.905333   -22.40524     13.04116     1.72182
-## virginica     -45.8317   -13.152520   -31.08222     40.80352    27.96529
+## versicolor    26.81602    -6.983313   -16.24574     20.35750    3.218787
+## virginica    -34.24228    -8.398869   -17.03985     31.94659   11.594518
 ```
 
 Notice we are only given coefficients for two of the three class, much like only needing coefficients for one class in logistic regression.
@@ -584,7 +585,7 @@ head(predict(model_multi, newdata = iris_train))
 ```
 
 ```
-## [1] versicolor versicolor virginica  versicolor setosa     versicolor
+## [1] setosa    virginica setosa    setosa    virginica setosa   
 ## Levels: setosa versicolor virginica
 ```
 
@@ -594,12 +595,12 @@ head(predict(model_multi, newdata = iris, type = "prob"))
 
 ```
 ##   setosa   versicolor    virginica
-## 1      1 4.323382e-15 9.039653e-70
-## 2      1 5.667775e-10 7.046653e-62
-## 3      1 3.113884e-12 3.300312e-65
-## 4      1 5.312106e-10 9.633711e-60
-## 5      1 6.151112e-16 1.504787e-70
-## 6      1 1.635952e-17 3.874846e-69
+## 1      1 1.386333e-16 1.137629e-39
+## 2      1 1.888634e-12 3.059666e-35
+## 3      1 3.868198e-14 2.226923e-37
+## 4      1 2.315067e-11 1.687874e-33
+## 5      1 5.490420e-17 4.794326e-40
+## 6      1 2.196721e-17 1.482366e-38
 ```
 
 Notice that by default, classifications are returned. When obtaining probabilities, we are given the predicted probability for **each** class.
