@@ -433,6 +433,7 @@ As an example of a dataset with a three category response, we use the `iris` dat
 Before proceeding, we test-train split this data.
 
 ```{r}
+set.seed(430)
 iris_obs = nrow(iris)
 iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
 iris_train = iris[iris_index, ]
