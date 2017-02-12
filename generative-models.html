@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Statistical Learning</title>
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/r4sl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/r4sl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz">
+
+
+<meta name="date" content="2017-02-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="prev" href="logistic-regression.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.2</b> Conventions</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>1</b> Probability Review</a><ul>
+<li class="chapter" data-level="1.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>1.1</b> Probability Models</a></li>
+<li class="chapter" data-level="1.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>1.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="1.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>1.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="1.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>1.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>1.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>1.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="1.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="1.4.4" data-path="probability-review.html"><a href="probability-review.html#several-random-variables"><i class="fa fa-check"></i><b>1.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>1.5</b> Expectations</a></li>
+<li class="chapter" data-level="1.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>1.6</b> Likelihood</a></li>
+<li class="chapter" data-level="1.7" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>1.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-resources"><i class="fa fa-check"></i><b>2.1</b> <code>R</code> Resources</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-basics"><i class="fa fa-check"></i><b>2.2</b> <code>R</code> Basics</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2.1</b> Basic Calculations</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting Help</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.2.3</b> Installing Packages</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.2.4</b> Data Types</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>2.2.5</b> Vectors</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#summary-statistics"><i class="fa fa-check"></i><b>2.2.6</b> Summary Statistics</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#matrices"><i class="fa fa-check"></i><b>2.2.7</b> Matrices</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>2.2.8</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#plotting"><i class="fa fa-check"></i><b>2.2.9</b> Plotting</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#distributions-1"><i class="fa fa-check"></i><b>2.2.10</b> Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-basics"><i class="fa fa-check"></i><b>2.3</b> Programming Basics</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#logical-operators"><i class="fa fa-check"></i><b>2.3.1</b> Logical Operators</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#control-flow"><i class="fa fa-check"></i><b>2.3.2</b> Control Flow</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.3.3</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#hypothesis-tests-in-r"><i class="fa fa-check"></i><b>2.4</b> Hypothesis Tests in <code>R</code></a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#one-sample-t-test-review"><i class="fa fa-check"></i><b>2.4.1</b> One Sample t-Test: Review</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#one-sample-t-test-example"><i class="fa fa-check"></i><b>2.4.2</b> One Sample t-Test: Example</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#two-sample-t-test-review"><i class="fa fa-check"></i><b>2.4.3</b> Two Sample t-Test: Review</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#two-sample-t-test-example"><i class="fa fa-check"></i><b>2.4.4</b> Two Sample t-Test: Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#simulation"><i class="fa fa-check"></i><b>2.5</b> Simulation</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#paired-differences"><i class="fa fa-check"></i><b>2.5.1</b> Paired Differences</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#distribution-of-a-sample-mean"><i class="fa fa-check"></i><b>2.5.2</b> Distribution of a Sample Mean</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> RStudio and RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.1</b> Template</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Regression Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
+<li class="chapter" data-level="4.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="4.4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
+<li class="chapter" data-level="4.5" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
+<li class="chapter" data-level="4.6" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html"><i class="fa fa-check"></i><b>5</b> Regression for Statistical Learning</a><ul>
+<li class="chapter" data-level="5.1" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>5.1</b> Assesing Model Accuracy</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#model-complexity"><i class="fa fa-check"></i><b>5.2</b> Model Complexity</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#test-train-split"><i class="fa fa-check"></i><b>5.3</b> Test-Train Split</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>5.4</b> Adding Flexibility to Linear Models</a></li>
+<li class="chapter" data-level="5.5" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#choosing-a-model"><i class="fa fa-check"></i><b>5.5</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>6</b> Simulating the Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="6.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>6.1</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="6.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation-1"><i class="fa fa-check"></i><b>6.2</b> Simulation</a></li>
+<li class="chapter" data-level="6.3" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>6.3</b> Bias-Variance Tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>7</b> Classification</a><ul>
+<li class="chapter" data-level="7.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>7.1</b> Visualization for Classification</a></li>
+<li class="chapter" data-level="7.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>7.2</b> A Simple Classifier</a></li>
+<li class="chapter" data-level="7.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>7.3</b> Metrics for Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>8.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>8.2</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="8.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>8.3</b> Logistic Regression with <code>glm()</code></a></li>
+<li class="chapter" data-level="8.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>8.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>8.5</b> Multinomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>9</b> Generative Models</a><ul>
+<li class="chapter" data-level="9.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>9.1</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="9.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>9.2</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>9.3</b> Naive Bayes</a></li>
+<li class="chapter" data-level="9.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>9.4</b> Discrete Inputs</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="generative-models" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Generative Models</h1>
+<p>In this chapter, we continue our discussion of classification methods. We introduce three new methods, each a <strong>generative</strong> method. This in comparison to logistic regression, which is a <strong>discriminative</strong> method.</p>
+<p>Generative methods model the joint probability, <span class="math inline">\(p(x, y)\)</span>, often by assuming some distribution for the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span>, <span class="math inline">\(f(x \mid y)\)</span>. Bayes theorem is then applied to classify according to <span class="math inline">\(p(y \mid x)\)</span>. Discriminative methods directly model this conditional, <span class="math inline">\(p(y \mid x)\)</span>. A detailed discussion and analysis can be found in <a href="https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf">Ng and Jordan, 2002</a>.</p>
+<p>Each of the methods in this chapter will use Bayes theorem to build a classifier.</p>
+<p><span class="math display">\[
+p_k(x) = P[Y = k \mid {\mathbf X} = {\mathbf x}] = \frac{\pi_k \cdot f_k({\mathbf x})}{\sum_{i = 1 }^{K} \pi_k \cdot f_k({\mathbf x})}
+\]</span></p>
+<p>We call <span class="math inline">\(p_k(x)\)</span> the <strong>posterior</strong> probability, which we will estimate then use to create classifications. The <span class="math inline">\(\pi_k\)</span> are called the <strong>prior</strong> probabilities for each class <span class="math inline">\(k\)</span>. That is, <span class="math inline">\(P[y = k]\)</span>, unconditioned on <span class="math inline">\(X\)</span>. The <span class="math inline">\(f_k({\mathbf x})\)</span> are called the <strong>likelihoods</strong>, which are indexed by <span class="math inline">\(k\)</span> to denote that they are conditional on the classes. The denominator is often referred to as a <strong>normalizing constant</strong>.</p>
+<p>The methods will differ by placing different modeling assumptions on the likelihoods, <span class="math inline">\(f_k({\mathbf x})\)</span>. For each method, the priors could be learned from data or pre-specified.</p>
+<p>For each method, classifications are made to the class with the highest estimated posterior probability, which is equivalent to the class with the largest</p>
+<p><span class="math display">\[
+\log(\hat{\pi}_k \cdot \hat{f}_k({\mathbf x})).
+\]</span></p>
+<p>By substituting the corresponding likelihoods, simplifying, and eliminating unnecessary terms, we could derive the discriminant function for each.</p>
+<p>To illustrate these new methods, we return to the iris data, which you may remember has three classes. After a test-train split, we create a number of plots to refresh our memory.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
+iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)
+iris_index =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
+<span class="co"># iris_index = sample(iris_obs, size = trunc(0.10 * iris_obs))</span>
+iris_train =<span class="st"> </span>iris[iris_index, ]
+iris_test =<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_train[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
+                               <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
+            <span class="dt">y =</span> iris_train$Species,
+            <span class="dt">plot =</span> <span class="st">&quot;density&quot;</span>, 
+            <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>), 
+                          <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>)), 
+            <span class="dt">adjust =</span> <span class="fl">1.5</span>, 
+            <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, 
+            <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), 
+            <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>))</code></pre></div>
+<p><img src="09-generative_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_train[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
+                               <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
+            <span class="dt">y =</span> iris_train$Species,
+            <span class="dt">plot =</span> <span class="st">&quot;ellipse&quot;</span>,
+            <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>))</code></pre></div>
+<p><img src="09-generative_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_train[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
+                               <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
+            <span class="dt">y =</span> iris_train$Species,
+                  <span class="dt">plot =</span> <span class="st">&quot;box&quot;</span>,
+                  <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>),
+                                <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">rot =</span> <span class="dv">90</span>)),
+                  <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))</code></pre></div>
+<p><img src="09-generative_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Especially based on the pairs plot, we see that it should not be too difficult to find a good classifier.</p>
+<p>Notice that we use <code>caret::featurePlot</code> to access the <code>featurePlot()</code> function without loading the entire <code>caret</code> package.</p>
+<div id="linear-discriminant-analysis" class="section level2">
+<h2><span class="header-section-number">9.1</span> Linear Discriminant Analysis</h2>
+<p>LDA assumes that the predictors are multivariate normal conditioned on the classes.</p>
+<p><span class="math display">\[
+{\mathbf X} \mid Y = k \sim N(\mu_k, \Sigma)
+\]</span></p>
+<p><span class="math display">\[
+f_k({\mathbf x}) = \frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}{2}(\mathbf x - \mu_k)^{\prime}\Sigma^{-1}(\mathbf x - \mu_k)\right]
+\]</span></p>
+<p>Notice that <span class="math inline">\(\Sigma\)</span> does <strong>not</strong> depend on <span class="math inline">\(k\)</span>, that is, we are assuming the same <span class="math inline">\(\Sigma\)</span> for each class. We then use information from all the classes to estimate <span class="math inline">\(\Sigma\)</span>.</p>
+<p>To fit an LDA model, we use the <code>lda()</code> function from the <code>MASS</code> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
+iris_lda =<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+iris_lda</code></pre></div>
+<pre><code>## Call:
+## lda(Species ~ ., data = iris_train)
+## 
+## Prior probabilities of groups:
+##     setosa versicolor  virginica 
+##  0.3733333  0.3200000  0.3066667 
+## 
+## Group means:
+##            Sepal.Length Sepal.Width Petal.Length Petal.Width
+## setosa         4.978571    3.378571     1.432143   0.2607143
+## versicolor     5.995833    2.808333     4.254167   1.3333333
+## virginica      6.669565    3.065217     5.717391   2.0956522
+## 
+## Coefficients of linear discriminants:
+##                     LD1        LD2
+## Sepal.Length  0.7100013 -0.8446128
+## Sepal.Width   1.2435532  2.4773120
+## Petal.Length -2.3419418 -0.4065865
+## Petal.Width  -1.8502355  2.3234441
+## 
+## Proportion of trace:
+##    LD1    LD2 
+## 0.9908 0.0092</code></pre>
+<p>Here we see the estimated <span class="math inline">\(\hat{\pi}_k\)</span> and <span class="math inline">\(\hat{\mu}_k\)</span> for each class.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.list</span>(<span class="kw">predict</span>(iris_lda, iris_train))</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(<span class="kw">predict</span>(iris_lda, iris_train))</code></pre></div>
+<pre><code>## [1] &quot;class&quot;     &quot;posterior&quot; &quot;x&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_lda, iris_train)$class, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>##  [1] setosa     virginica  setosa     setosa     virginica  setosa    
+##  [7] virginica  setosa     versicolor setosa    
+## Levels: setosa versicolor virginica</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_lda, iris_train)$posterior, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>##           setosa   versicolor    virginica
+## 23  1.000000e+00 1.517145e-21 1.717663e-41
+## 106 2.894733e-43 1.643603e-06 9.999984e-01
+## 37  1.000000e+00 2.169066e-20 1.287216e-40
+## 40  1.000000e+00 3.979954e-17 8.243133e-36
+## 145 1.303566e-37 4.335258e-06 9.999957e-01
+## 36  1.000000e+00 1.947567e-18 5.996917e-38
+## 119 2.220147e-51 9.587514e-09 1.000000e+00
+## 16  1.000000e+00 5.981936e-23 1.344538e-42
+## 94  1.599359e-11 9.999999e-01 1.035129e-07
+## 27  1.000000e+00 8.154612e-15 4.862249e-32</code></pre>
+<p>As we should come to expect, the <code>predict()</code> function operates in a new way when called on an <code>lda</code> object. By default, it returns an entire list. Within that list <code>class</code> stores the classifications and <code>posterior</code> contains the estimated probability for each class.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_train)$class
+iris_lda_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_test)$class</code></pre></div>
+<p>We store the predictions made on the train and test sets.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
+  <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
+<pre><code>## [1] 0.96</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<pre><code>## [1] 0.9866667</code></pre>
+<p>As expected, LDA performs well on both the train and test data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_lda_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<pre><code>##             actual
+## predicted    setosa versicolor virginica
+##   setosa         22          0         0
+##   versicolor      0         26         1
+##   virginica       0          0        26</code></pre>
+<p>Looking at the test set, we see that we are perfectly predicting both setosa and versicolor. The only error is labeling a virginica as a versicolor.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat =<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train, <span class="dt">prior =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) /<span class="st"> </span><span class="dv">3</span>)
+iris_lda_flat</code></pre></div>
+<pre><code>## Call:
+## lda(Species ~ ., data = iris_train, prior = c(1, 1, 1)/3)
+## 
+## Prior probabilities of groups:
+##     setosa versicolor  virginica 
+##  0.3333333  0.3333333  0.3333333 
+## 
+## Group means:
+##            Sepal.Length Sepal.Width Petal.Length Petal.Width
+## setosa         4.978571    3.378571     1.432143   0.2607143
+## versicolor     5.995833    2.808333     4.254167   1.3333333
+## virginica      6.669565    3.065217     5.717391   2.0956522
+## 
+## Coefficients of linear discriminants:
+##                     LD1        LD2
+## Sepal.Length  0.7136357 -0.8415442
+## Sepal.Width   1.2328623  2.4826497
+## Petal.Length -2.3401674 -0.4166784
+## Petal.Width  -1.8602343  2.3154465
+## 
+## Proportion of trace:
+##    LD1    LD2 
+## 0.9901 0.0099</code></pre>
+<p>Instead of learning (estimating) the proportion of the three species from the data, we could instead specify them ourselves. Here we choose a uniform distributions over the possible species. We would call this a “flat” prior.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_train)$class
+iris_lda_flat_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_test)$class</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_flat_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
+<pre><code>## [1] 0.96</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_flat_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>This actually gives a better test accuracy!</p>
+</div>
+<div id="quadratic-discriminant-analysis" class="section level2">
+<h2><span class="header-section-number">9.2</span> Quadratic Discriminant Analysis</h2>
+<p>QDA also assumes that the predictors are multivariate normal conditioned on the classes.</p>
+<p><span class="math display">\[
+{\mathbf X} \mid Y = k \sim N(\mu_k, \Sigma_k)
+\]</span></p>
+<p><span class="math display">\[
+f_k({\mathbf x}) = \frac{1}{(2\pi)^{p/2}|\Sigma_k|^{1/2}}\exp\left[-\frac{1}{2}(\mathbf x - \mu_k)^{\prime}\Sigma_{k}^{-1}(\mathbf x - \mu_k)\right]
+\]</span></p>
+<p>Notice that now <span class="math inline">\(\Sigma_k\)</span> <strong>does</strong> depend on <span class="math inline">\(k\)</span>, that is, we are allowing a different <span class="math inline">\(\Sigma_k\)</span> for each class. We only use information from class <span class="math inline">\(k\)</span> to estimate <span class="math inline">\(\Sigma_k\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda =<span class="st"> </span><span class="kw">qda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+iris_qda</code></pre></div>
+<pre><code>## Call:
+## qda(Species ~ ., data = iris_train)
+## 
+## Prior probabilities of groups:
+##     setosa versicolor  virginica 
+##  0.3733333  0.3200000  0.3066667 
+## 
+## Group means:
+##            Sepal.Length Sepal.Width Petal.Length Petal.Width
+## setosa         4.978571    3.378571     1.432143   0.2607143
+## versicolor     5.995833    2.808333     4.254167   1.3333333
+## virginica      6.669565    3.065217     5.717391   2.0956522</code></pre>
+<p>Here the output is similar to LDA, again giving the estimated <span class="math inline">\(\hat{\pi}_k\)</span> and <span class="math inline">\(\hat{\mu}_k\)</span> for each class. Like <code>lda()</code>, the <code>qda()</code> function is found in the <code>MASS</code> package.</p>
+<p>Consider trying to fit QDA again, but this time with a smaller training set. (Use the commented line above to obtain a smaller test set.) This will cause an error because there are not enough observations within each class to estimate the large number of parameters in the <span class="math inline">\(\Sigma_k\)</span> matrices. This is less of a problem with LDA, since all observations, no matter the class, are being use to estimate the shared <span class="math inline">\(\Sigma\)</span> matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_train)$class
+iris_qda_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_test)$class</code></pre></div>
+<p>The <code>predict()</code> function operates the same as the <code>predict()</code> function for LDA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_qda_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
+<pre><code>## [1] 0.9866667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_qda_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<pre><code>## [1] 0.96</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_qda_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<pre><code>##             actual
+## predicted    setosa versicolor virginica
+##   setosa         22          0         0
+##   versicolor      0         23         0
+##   virginica       0          3        27</code></pre>
+<p>Here we find that QDA is not performing as well as LDA. It is misclassifying versicolors. Since QDA is a more complex model than LDA (many more parameters) we would say that QDA is overfitting here.</p>
+<p>Also note that, QDA creates quadratic decision boundaries, while LDA creates linear decision boundaries. We could also add quadratic terms to LDA to allow it to create quadratic decision boundaries.</p>
+</div>
+<div id="naive-bayes" class="section level2">
+<h2><span class="header-section-number">9.3</span> Naive Bayes</h2>
+<p>Naive Bayes comes in many forms. With only numeric predictors, it often assumes a multivariate normal conditioned on the classes, but a very specific multivariate normal.</p>
+<p><span class="math display">\[
+{\mathbf X} \mid Y = k \sim N(\mu_k, \Sigma_k)
+\]</span></p>
+<p>Naive Bayes assumes that the predictors <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> are independent. This is the “naive” part of naive Bayes. The Bayes part is nothing new. Since <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> are assumed independent, each <span class="math inline">\(\Sigma_k\)</span> is diagonal, that is, we assume no correlation between predictors. Independence implies zero correlation.</p>
+<p>This will allow us to write the (joint) likelihood as a product of univariate distributions. In this case, the product of univariate normal distributions instead of a (joint) multivariate distribution.</p>
+<p><span class="math display">\[
+f_k({\mathbf x}) = \prod_{j = 1}^{j = p} f_{kj}(x_j)
+\]</span></p>
+<p>Here, <span class="math inline">\(f_{kj}(x_j)\)</span> is the density for the <span class="math inline">\(j\)</span>-th predictor conditioned on the <span class="math inline">\(k\)</span>-th class. Notice that there is a <span class="math inline">\(\sigma_{kj}\)</span> for each predictor for each class.</p>
+<p><span class="math display">\[
+f_{kj}(x_j) = \frac{1}{\sigma_{kj}\sqrt{2\pi}}\exp\left[-\frac{1}{2}\left(\frac{x_j - \mu_{kj}}{\sigma_{kj}}\right)^2\right]
+\]</span></p>
+<p>When <span class="math inline">\(p = 1\)</span>, this version of naive Bayes is equivalent to QDA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)
+iris_nb =<span class="st"> </span><span class="kw">naiveBayes</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+iris_nb</code></pre></div>
+<pre><code>## 
+## Naive Bayes Classifier for Discrete Predictors
+## 
+## Call:
+## naiveBayes.default(x = X, y = Y, laplace = laplace)
+## 
+## A-priori probabilities:
+## Y
+##     setosa versicolor  virginica 
+##  0.3733333  0.3200000  0.3066667 
+## 
+## Conditional probabilities:
+##             Sepal.Length
+## Y                [,1]      [,2]
+##   setosa     4.978571 0.3774742
+##   versicolor 5.995833 0.5812125
+##   virginica  6.669565 0.6392003
+## 
+##             Sepal.Width
+## Y                [,1]      [,2]
+##   setosa     3.378571 0.4349177
+##   versicolor 2.808333 0.3269313
+##   virginica  3.065217 0.3600615
+## 
+##             Petal.Length
+## Y                [,1]      [,2]
+##   setosa     1.432143 0.1743848
+##   versicolor 4.254167 0.5166608
+##   virginica  5.717391 0.5540366
+## 
+##             Petal.Width
+## Y                 [,1]      [,2]
+##   setosa     0.2607143 0.1133310
+##   versicolor 1.3333333 0.2334368
+##   virginica  2.0956522 0.3022315</code></pre>
+<p>Many packages implement naive Bayes. Here we choose to use <code>naiveBayes()</code> from the package <code>e1071</code>. (The name of this package has an interesting history. Based on the name you wouldn’t know it, but the package contains many functions related to machine learning.)</p>
+<p>The <code>Conditional probabilities:</code> portion of the output gives the mean and standard deviation of the normal distribution for each predictor in each class. Notice how these mean estimates match those for LDA and QDA above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_train))</code></pre></div>
+<pre><code>## [1] setosa    virginica setosa    setosa    virginica setosa   
+## Levels: setosa versicolor virginica</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_train, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</code></pre></div>
+<pre><code>## [1] setosa    virginica setosa    setosa    virginica setosa   
+## Levels: setosa versicolor virginica</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_train, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>))</code></pre></div>
+<pre><code>##             setosa   versicolor    virginica
+## [1,]  1.000000e+00 3.134201e-16 2.948226e-27
+## [2,] 4.400050e-257 5.188308e-08 9.999999e-01
+## [3,]  1.000000e+00 2.263278e-14 1.168760e-24
+## [4,]  1.000000e+00 4.855740e-14 2.167253e-24
+## [5,] 1.897732e-218 6.189883e-08 9.999999e-01
+## [6,]  1.000000e+00 8.184097e-15 6.816322e-26</code></pre>
+<p>Oh look, <code>predict()</code> has another new mode of operation. If only there were a way to unify the <code>predict()</code> function across all of these methods…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_nb_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_train)
+iris_nb_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_test)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_nb_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
+<pre><code>## [1] 0.9466667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_nb_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<pre><code>## [1] 0.9466667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_nb_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<pre><code>##             actual
+## predicted    setosa versicolor virginica
+##   setosa         22          0         0
+##   versicolor      0         26         4
+##   virginica       0          0        23</code></pre>
+<p>Like LDA, naive Bayes is having trouble with virginica.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Method</th>
+<th align="right">Train Accuracy</th>
+<th align="right">Test Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">LDA</td>
+<td align="right">0.9600000</td>
+<td align="right">0.9866667</td>
+</tr>
+<tr class="even">
+<td align="left">LDA, Flat Prior</td>
+<td align="right">0.9600000</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">QDA</td>
+<td align="right">0.9866667</td>
+<td align="right">0.9600000</td>
+</tr>
+<tr class="even">
+<td align="left">Naive Bayes</td>
+<td align="right">0.9466667</td>
+<td align="right">0.9466667</td>
+</tr>
+</tbody>
+</table>
+<p>Summarizing the results, we see that Naive Bayes is the worst of LDA, QDA, and NB for this data. So why should we care about naive Bayes?</p>
+<p>The strength of naive Bayes comes from its ability to handle a large number of predictors, <span class="math inline">\(p\)</span>, even with a limited sample size <span class="math inline">\(n\)</span>. Even with the naive independence assumption, naive Bayes works rather well in practice. Also because of this assumption, we can often train naive Bayes where LDA and QDA may be impossible to train because of the large number of parameters relative to the number of observations.</p>
+<p>Here naive Bayes doesn’t get a chance to show its strength since LDA and QDA already perform well, and the number of predictors is low. The choice between LDA and QDA is mostly down to a consideration about the amount of complexity needed.</p>
+</div>
+<div id="discrete-inputs" class="section level2">
+<h2><span class="header-section-number">9.4</span> Discrete Inputs</h2>
+<p>So far, we have assumed that all predictors are numeric. What happens with categorical predictors?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_train_mod =<span class="st"> </span>iris_train
+
+iris_train_mod$Sepal.Width =<span class="st"> </span><span class="kw">ifelse</span>(iris_train$Sepal.Width &gt;<span class="st"> </span><span class="dv">3</span>, 
+                                    <span class="kw">ifelse</span>(iris_train$Sepal.Width &gt;<span class="st"> </span><span class="dv">4</span>, 
+                                           <span class="st">&quot;Large&quot;</span>, <span class="st">&quot;Medium&quot;</span>),
+                                    <span class="st">&quot;Small&quot;</span>)
+
+<span class="kw">unique</span>(iris_train_mod$Sepal.Width)</code></pre></div>
+<pre><code>## [1] &quot;Medium&quot; &quot;Small&quot;  &quot;Large&quot;</code></pre>
+<p>Here we make a new dataset where <code>Sepal.Width</code> is categorical, with levels <code>Small</code>, <code>Medium</code>, and <code>Large</code>. We then try to train classifiers using only the sepal variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">naiveBayes</span>(Species ~<span class="st"> </span>Sepal.Length +<span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris_train_mod)</code></pre></div>
+<pre><code>## 
+## Naive Bayes Classifier for Discrete Predictors
+## 
+## Call:
+## naiveBayes.default(x = X, y = Y, laplace = laplace)
+## 
+## A-priori probabilities:
+## Y
+##     setosa versicolor  virginica 
+##  0.3733333  0.3200000  0.3066667 
+## 
+## Conditional probabilities:
+##             Sepal.Length
+## Y                [,1]      [,2]
+##   setosa     4.978571 0.3774742
+##   versicolor 5.995833 0.5812125
+##   virginica  6.669565 0.6392003
+## 
+##             Sepal.Width
+## Y                 Large     Medium      Small
+##   setosa     0.07142857 0.67857143 0.25000000
+##   versicolor 0.00000000 0.25000000 0.75000000
+##   virginica  0.00000000 0.43478261 0.56521739</code></pre>
+<p>Naive Bayes makes a somewhat obvious and intelligent choice to model the categorical variable as a multinomial. It then estimates the probability parameters of a multinomial distribution.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lda</span>(Species ~<span class="st"> </span>Sepal.Length +<span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris_train_mod)</code></pre></div>
+<pre><code>## Call:
+## lda(Species ~ Sepal.Length + Sepal.Width, data = iris_train_mod)
+## 
+## Prior probabilities of groups:
+##     setosa versicolor  virginica 
+##  0.3733333  0.3200000  0.3066667 
+## 
+## Group means:
+##            Sepal.Length Sepal.WidthMedium Sepal.WidthSmall
+## setosa         4.978571         0.6785714        0.2500000
+## versicolor     5.995833         0.2500000        0.7500000
+## virginica      6.669565         0.4347826        0.5652174
+## 
+## Coefficients of linear discriminants:
+##                        LD1        LD2
+## Sepal.Length      2.051602  0.4768608
+## Sepal.WidthMedium 1.728698 -0.4433340
+## Sepal.WidthSmall  3.173903 -2.2804034
+## 
+## Proportion of trace:
+##    LD1    LD2 
+## 0.9764 0.0236</code></pre>
+<p>LDA however creates dummy variables, here with <code>Large</code> is the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.</p>
+
+<div id="refs" class="references">
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="logistic-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/09-generative.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

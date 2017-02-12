@@ -33,7 +33,7 @@
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="prev" href="classification.html">
-
+<link rel="next" href="generative-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -191,6 +191,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>8.3</b> Logistic Regression with <code>glm()</code></a></li>
 <li class="chapter" data-level="8.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>8.4</b> ROC Curves</a></li>
 <li class="chapter" data-level="8.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>8.5</b> Multinomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>9</b> Generative Models</a><ul>
+<li class="chapter" data-level="9.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>9.1</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="9.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>9.2</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>9.3</b> Naive Bayes</a></li>
+<li class="chapter" data-level="9.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>9.4</b> Discrete Inputs</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -544,9 +550,6 @@ model_multi =<span class="st"> </span><span class="kw">multinom</span>(Species ~
 <p>Notice that by default, classifications are returned. When obtaining probabilities, we are given the predicted probability for <strong>each</strong> class.</p>
 <p>Interestingly, you’ve just fit a neural network, and you didn’t even know it! (Hence the <code>nnet</code> package.) Later we will discuss the connections between logistic regression, multinomial logistic regression, and simple neural networks.</p>
 
-<div id="refs" class="references">
-
-</div>
 </div>
 </div>
             </section>
@@ -554,8 +557,8 @@ model_multi =<span class="st"> </span><span class="kw">multinom</span>(Species ~
           </div>
         </div>
       </div>
-<a href="classification.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="classification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="generative-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
