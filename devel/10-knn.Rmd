@@ -35,7 +35,6 @@ y_default_train = default_train[, 1]
 # testing data
 X_default_test = default_test[, -1]
 y_default_test = default_test[, 1]
-
 ```
 
 
@@ -54,28 +53,44 @@ accuracy = function(actual, predicted) {
 - TODO: change error to acc
 
 ```{r}
-k_to_try = 50
-error_k = rep(0, k_to_try)
+set.seed(42)
+k_to_try = 100
+acc_k = rep(0, k_to_try)
 for(i in 1:k_to_try) {
   pred = knn(train = scale(X_default_train), 
              test = scale(X_default_test), 
              cl = y_default_train, 
              k = i)
-  error_k[i] = accuracy(y_default_test, pred)
+  acc_k[i] = accuracy(y_default_test, pred)
 }
-min(error_k)
+min(acc_k)
 
 ```
 
 - TODO: make plot nicer
 
-```{r}
-plot(error_k, type = "b")
+```{r, fig.height=5, fig.width=10}
+plot(acc_k, type = "b", col = "dodgerblue", cex = 1, pch = 20, 
+     xlab = "k, number of neighbors", ylab = "classification accuracy",
+     main = "Accuracy vs Neighbors")
+abline(v = which(error_k == max(acc_k)), col = "darkorange", lwd = 1.5)
+abline(h = max(acc_k), col = "grey", lty = 2)
+abline(h = mean(y_default_test == "No"), col = "grey", lty = 2)
 ```
 
 ```{r}
-which(error_k == max(error_k))
 
+```
+
+
+
+- TODO: if ties, pick least flexible, highest k model
+
+- TODO: eventually "averaging" over entire dataset, acc approached prevelence
+
+
+```{r}
+mean(y_default_test == "No")
 ```
 
 
@@ -108,7 +123,7 @@ attributes(knn(train, test, cl, k = 3, prob = TRUE))
 
 
 
-
+-TODO: plot which shows how CV follows test. see here: http://www.milanor.net/blog/cross-validation-for-predictive-analytics-using-r/
 
 
 
@@ -116,6 +131,6 @@ attributes(knn(train, test, cl, k = 3, prob = TRUE))
 
 - TODO: regression data
 - TODO: boston
-- TODO: plot with fitting for various k, single predictor
+- TODO: plot with fitting for various k, single predictor. back to boston. see old.
 
 
