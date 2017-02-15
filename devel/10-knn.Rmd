@@ -1,1 +1,121 @@
 # k-Nearest Neighbors
+
+- TODO: non-parametric method
+- TODO: but tuning parameter
+
+- TODO: no really training done, so `knn()` basically replaces `predict()`
+
+- TODO: normalization
+- TODO: `scale()`
+- TODO: compare results
+
+- TODO: split data into X and Y
+
+```{r}
+library(ISLR)
+```
+
+- TODO: note that input must be numeric
+
+```{r}
+set.seed(42)
+Default$student = as.numeric(Default$student) - 1
+default_index = sample(nrow(Default), 5000)
+default_train = Default[default_index, ]
+default_test = Default[-default_index, ]
+```
+
+
+
+```{r}
+# training data
+X_default_train = default_train[, -1]
+y_default_train = default_train[, 1]
+
+# testing data
+X_default_test = default_test[, -1]
+y_default_test = default_test[, 1]
+
+```
+
+
+```{r}
+library(class)
+knn(train = X_default_train, test = X_default_test, cl = y_default_train, k = 3)
+```
+
+
+```{r}
+accuracy = function(actual, predicted) {
+  mean(actual == predicted)
+}
+```
+
+- TODO: change error to acc
+
+```{r}
+k_to_try = 50
+error_k = rep(0, k_to_try)
+for(i in 1:k_to_try) {
+  pred = knn(train = scale(X_default_train), 
+             test = scale(X_default_test), 
+             cl = y_default_train, 
+             k = i)
+  error_k[i] = accuracy(y_default_test, pred)
+}
+min(error_k)
+
+```
+
+- TODO: make plot nicer
+
+```{r}
+plot(error_k, type = "b")
+```
+
+```{r}
+which(error_k == max(error_k))
+
+```
+
+
+
+- TODO: default data
+- TODO: iris data
+
+
+- TODO: plot acc vs k
+
+
+- TODO: no need for predict
+
+- TODO: how to obtain probabilites
+
+
+
+
+```{r}
+train = rbind(iris3[1:25, , 1], iris3[1:25, , 2], iris3[1:25, , 3])
+test = rbind(iris3[26:50, , 1], iris3[26:50, , 2], iris3[26:50, , 3])
+cl = factor(c(rep("s", 25), rep("c", 25), rep("v", 25)))
+attributes(knn(train, test, cl, k = 3, prob = TRUE))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- TODO: regression data
+- TODO: boston
+- TODO: plot with fitting for various k, single predictor
+
+
