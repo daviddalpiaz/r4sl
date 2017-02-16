@@ -1,20 +1,26 @@
 # k-Nearest Neighbors
 
+
+
+
 - TODO: non-parametric method
 - TODO: but tuning parameter
     - how the method should be fit, not a result of the fitting
-
-
-
+    
+## Classification
 
 ```{r}
 library(ISLR)
+library(class)
+library(MASS)
 ```
 
-- TODO: need to arrange data
+- TODO: `Default` comes from `ISLR`
+- TODO: `knn()` comes from `class`
+- TODO: `Boston` comes from `MASS`
 
-
-- TODO: note that input must be numeric
+- TODO: need to arrange data for `knn()`
+- TODO: note that input (predictors) must be numeric
 
 ```{r}
 set.seed(42)
@@ -24,7 +30,7 @@ default_train = Default[default_index, ]
 default_test = Default[-default_index, ]
 ```
 
-- TODO: split data into X and Y
+- TODO: split data into X and Y for knn
 
 ```{r}
 # training data
@@ -36,14 +42,12 @@ X_default_test = default_test[, -1]
 y_default_test = default_test[, 1]
 ```
 
-
 ```{r}
-library(class)
 knn(train = X_default_train, test = X_default_test, cl = y_default_train, k = 3)
 ```
 
 - TODO: no "training" done, so `knn()` basically replaces `predict()`
-
+- TODO: fast @ train, slow @ test
 
 ```{r}
 accuracy = function(actual, predicted) {
@@ -51,18 +55,12 @@ accuracy = function(actual, predicted) {
 }
 ```
 
-
-
-
 ```{r}
 accuracy(actual = y_default_test,
          predicted = knn(train = X_default_train, 
                          test = X_default_test, 
                          cl = y_default_train, k = 5))
 ```
-
-
-
 
 ```{r}
 accuracy(actual = y_default_test,
@@ -77,7 +75,6 @@ accuracy(actual = y_default_test,
 
 
 - TODO: seq_along
-
 - TODO: change error to acc
 
 ```{r}
@@ -95,13 +92,9 @@ max(acc_k)
 
 ```
 
-
 ```{r}
 seq_along(1:k_to_try)
 ```
-
-
-
 
 - TODO: make plot nicer
 
@@ -122,12 +115,8 @@ abline(h = mean(y_default_test == "No"), col = "grey", lty = 2)
 max(which(acc_k == max(acc_k)))
 ```
 
-
-
-- TODO: if ties, pick least flexible, highest k model
-
-- TODO: eventually "averaging" over entire dataset, acc approached prevelence
-
+- TODO: if ties, pick least flexible, highest k model, lowest chance of overfitting
+- TODO: eventually "averaging" over entire dataset, acc approaching prevelence
 
 ```{r}
 mean(y_default_test == "No")
@@ -135,37 +124,34 @@ mean(y_default_test == "No")
 
 
 
-- TODO: default data
+
+
+
+
+
+
+
+
+
 - TODO: iris data
+    - previous test-train split
+    - X Y split
+
+
+
+- TODO: how to obtain probabilites
+- TODO: prob is sort of weird. given for BEST class only.
 
 
 - TODO: plot acc vs k
-
-
-- TODO: no need for predict
-
-- TODO: how to obtain probabilites
+- TODO: seq_along
 
 
 
-
-```{r}
-train = rbind(iris3[1:25, , 1], iris3[1:25, , 2], iris3[1:25, , 3])
-test = rbind(iris3[26:50, , 1], iris3[26:50, , 2], iris3[26:50, , 3])
-cl = factor(c(rep("s", 25), rep("c", 25), rep("v", 25)))
-attributes(knn(train, test, cl, k = 3, prob = TRUE))
-```
+- TODO: curse of dimensionality
 
 
-
-
-
-
-
-
-
-
-
+## Regression
 
 
 - TODO: regression data

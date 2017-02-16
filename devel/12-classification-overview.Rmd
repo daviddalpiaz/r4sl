@@ -13,3 +13,5 @@
 - TODO: bias-var tradeoff
 
 - TODO: test-train, CV strategy
+
+- TODO: curse of dimensionality
