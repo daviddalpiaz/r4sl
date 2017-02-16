@@ -253,8 +253,8 @@ The line that is run is performing
 $$
 \hat{C}(\bf x) = 
 \begin{cases} 
-      1 & \hat{f}({\bf x}) > 0.5 \\
-      0 & \hat{f}({\bf x}) \leq 0.5 
+      1 & \hat{f}({\bf x}) > 0 \\
+      0 & \hat{f}({\bf x}) \leq 0 
 \end{cases}
 $$
 
