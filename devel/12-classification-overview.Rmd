@@ -1,0 +1,15 @@
+# Classification Overview
+
+
+- TODO: NFL
+    - link delgado paper
+    
+- TODO: disc vs gen
+
+- TODO: para vs non
+
+- TODO: tuning parameter
+
+- TODO: bias-var tradeoff
+
+- TODO: test-train, CV strategy

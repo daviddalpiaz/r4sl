@@ -2,18 +2,17 @@
 
 - TODO: non-parametric method
 - TODO: but tuning parameter
+    - how the method should be fit, not a result of the fitting
 
-- TODO: no really training done, so `knn()` basically replaces `predict()`
 
-- TODO: normalization
-- TODO: `scale()`
-- TODO: compare results
 
-- TODO: split data into X and Y
 
 ```{r}
 library(ISLR)
 ```
+
+- TODO: need to arrange data
+
 
 - TODO: note that input must be numeric
 
@@ -25,7 +24,7 @@ default_train = Default[default_index, ]
 default_test = Default[-default_index, ]
 ```
 
-
+- TODO: split data into X and Y
 
 ```{r}
 # training data
@@ -43,12 +42,41 @@ library(class)
 knn(train = X_default_train, test = X_default_test, cl = y_default_train, k = 3)
 ```
 
+- TODO: no "training" done, so `knn()` basically replaces `predict()`
+
 
 ```{r}
 accuracy = function(actual, predicted) {
   mean(actual == predicted)
 }
 ```
+
+
+
+
+```{r}
+accuracy(actual = y_default_test,
+         predicted = knn(train = X_default_train, 
+                         test = X_default_test, 
+                         cl = y_default_train, k = 5))
+```
+
+
+
+
+```{r}
+accuracy(actual = y_default_test,
+         predicted = knn(train = scale(X_default_train), 
+                         test = scale(X_default_test), 
+                         cl = y_default_train, k = 5))
+```
+
+- TODO: normalization
+- TODO: `scale()`
+- TODO: compare results
+
+
+- TODO: seq_along
 
 - TODO: change error to acc
 
@@ -63,23 +91,35 @@ for(i in 1:k_to_try) {
              k = i)
   acc_k[i] = accuracy(y_default_test, pred)
 }
-min(acc_k)
+max(acc_k)
 
 ```
 
+
+```{r}
+seq_along(1:k_to_try)
+```
+
+
+
+
 - TODO: make plot nicer
 
-```{r, fig.height=5, fig.width=10}
+```{r, fig.height = 5, fig.width = 10}
+# plot accuracy vs choice of k
 plot(acc_k, type = "b", col = "dodgerblue", cex = 1, pch = 20, 
      xlab = "k, number of neighbors", ylab = "classification accuracy",
      main = "Accuracy vs Neighbors")
-abline(v = which(error_k == max(acc_k)), col = "darkorange", lwd = 1.5)
+# add lines indicating k with best accuracy
+abline(v = which(acc_k == max(acc_k)), col = "darkorange", lwd = 1.5)
+# add line for max accuracy seen
 abline(h = max(acc_k), col = "grey", lty = 2)
+# add line for prevalence in test set
 abline(h = mean(y_default_test == "No"), col = "grey", lty = 2)
 ```
 
 ```{r}
-
+max(which(acc_k == max(acc_k)))
 ```
 
 
@@ -123,7 +163,6 @@ attributes(knn(train, test, cl, k = 3, prob = TRUE))
 
 
 
--TODO: plot which shows how CV follows test. see here: http://www.milanor.net/blog/cross-validation-for-predictive-analytics-using-r/
 
 
 

@@ -1,0 +1,36 @@
+# Resampling
+
+- TODO: use some of ISL slides in class
+
+- TODO: do repeated test-train splits and notice variability of test
+
+
+## Cross-Validation
+
+
+- TODO: loocv shortcut
+
+- TODO: glm $delta
+
+- TODO: createfolds via caret
+    - note full caret later
+    
+- TODO: big bad example
+
+
+
+- TODO: with knn, plot acc vs k: test, cv, train
+    - note how cv follows test
+    - add error bars?
+-TODO: plot which shows how CV follows test. see here: http://www.milanor.net/blog/cross-validation-for-predictive-analytics-using-r/
+
+
+- TODO: consider further chaptering, probably a good idea
+
+## Bootstrap
+
+- TODO: sim data
+    - use repeated sims to estimate var of a prediction
+    - what if only had one simulated dataset (sample) boostrap
+    - plot hist of simulated preds, plot hist of boostrapped preds
+    - https://www.otexts.org/1469
