@@ -5,6 +5,27 @@ Authors@R: c(person("David", "Dalpiaz" , "dalpiaz2@illinois.edu", c("aut", "cre"
 Depends: R (>= 3.3.0)
 URL: https://github.com/daviddalpiaz/r4sl
 Imports: 
-  bookdown, rmarkdown
+  bookdown, 
+  rmarkdown,
+  tidyverse,
+  caret,
+  e1071,
+  class,
+  FNN,
+  knitr, 
+  ISLR,
+  ellipse, 
+  nnet, 
+  pROC,
+  randomForest,
+  leaps,
+  glmnet,
+  gam,
+  tree,
+  rpart, 
+  gbm, 
+  extraTrees, 
+  kernlab, 
+  sparcl
 Remotes: 
   rstudio/bookdown
