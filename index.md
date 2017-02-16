@@ -69,6 +69,8 @@ Your name could be here! Suggest an edit! Correct a typo!
 
 - [James Balamuta](http://www.thecoatlessprofessor.com/), Summer 2016 - ??? 
 - Korawat Tanwisuth, Spring 2017
+- [Yiming Gao](https://www.linkedin.com/in/yiming-gao), Spring 2017
+
 
 ## License
 
