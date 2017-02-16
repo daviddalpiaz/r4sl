@@ -198,6 +198,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>9.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="9.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>9.4</b> Discrete Inputs</a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html"><i class="fa fa-check"></i><b>10</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="10.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#classification-1"><i class="fa fa-check"></i><b>10.1</b> Classification</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#default-data"><i class="fa fa-check"></i><b>10.1.1</b> Default Data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#iris-data"><i class="fa fa-check"></i><b>10.1.2</b> Iris Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#regression"><i class="fa fa-check"></i><b>10.2</b> Regression</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
 
@@ -391,31 +398,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1        x2            y
-##    &lt;fctr&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-## 1       A 0.7193957 -0.343293225
-## 2       A 0.3054583 -1.146195173
-## 3       A 0.5066173 -0.129972384
-## 4       A 0.8083271  0.048191646
-## 5       A 0.1996896  0.907645163
-## 6       A 0.6934828 -0.903457811
-## 7       A 0.2516969 -1.281790322
-## 8       A 0.7436065 -0.072073021
-## 9       A 0.4704455  0.008355137
-## 10      A 0.2305049 -1.110771320
+##        x1         x2          y
+##    &lt;fctr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1       A 0.06337505 -1.1110942
+## 2       A 0.40132108 -0.7823616
+## 3       A 0.12086177  0.8910694
+## 4       A 0.65392984  0.8020086
+## 5       A 0.30433086  0.2166427
+## 6       A 0.75492527 -0.1559704
+## 7       A 0.31856503  0.1323675
+## 8       A 0.64788758 -2.4383275
+## 9       A 0.41723958 -0.6789635
+## 10      A 0.57703084  0.2623886
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  -1.0839017   0.1535039   0.2147423   1.3827035</code></pre>
+##  -0.6767005   0.5891965  -0.2255396   0.9167262</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
-<pre><code>##  (Intercept)          x1B          x1C           x2       x1B:x2 
-## -0.682400273  0.218095427 -1.122505474  0.568170799 -0.009179621 
-##       x1C:x2 
-##  2.479565866</code></pre>
+<pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
+## -0.06228212 -0.82022278 -0.13964822 -0.52575106  2.93068140  0.09581153</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
