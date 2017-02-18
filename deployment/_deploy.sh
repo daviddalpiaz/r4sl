@@ -25,7 +25,7 @@ cd book-output
 cp -r ../_book/* ./
 
 # Copy all .Rmd files to book-output
-cp -r *.Rmd ./
+cp -r ../*.Rmd ./
 
 # Add all files in book-output to the repo
 git add *
