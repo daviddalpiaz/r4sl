@@ -57,7 +57,7 @@ head(knn(train = X_default_train,
          test = X_default_test, 
          cl = y_default_train, 
          k = 3),
-     n = 25)
+         n = 25)
 ```
 
 ```
