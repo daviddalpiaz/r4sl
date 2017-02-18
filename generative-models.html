@@ -197,6 +197,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>9.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="9.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>9.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="9.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>9.4</b> Discrete Inputs</a></li>
+<li class="chapter" data-level="9.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown"><i class="fa fa-check"></i><b>9.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html"><i class="fa fa-check"></i><b>10</b> k-Nearest Neighbors</a><ul>
 <li class="chapter" data-level="10.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#classification-1"><i class="fa fa-check"></i><b>10.1</b> Classification</a><ul>
@@ -609,6 +610,12 @@ iris_train_mod$Sepal.Width =<span class="st"> </span><span class="kw">ifelse</sp
 ##    LD1    LD2 
 ## 0.9764 0.0236</code></pre>
 <p>LDA however creates dummy variables, here with <code>Large</code> is the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.</p>
+</div>
+<div id="rmarkdown" class="section level2">
+<h2><span class="header-section-number">9.5</span> RMarkdown</h2>
+<p>The RMarkdown file for this chapter can be found <a href="09-generative.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.3.2 and the following packages:</p>
+<pre><code>## [1] &quot;e1071&quot;     &quot;MASS&quot;      &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;    
+## [7] &quot;datasets&quot;  &quot;base&quot;</code></pre>
 
 </div>
 </div>

@@ -627,3 +627,15 @@ lda(Species ~ Sepal.Length + Sepal.Width, data = iris_train_mod)
 ```
 
 LDA however creates dummy variables, here with `Large` is the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](09-generative.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+
+
+```
+## [1] "e1071"     "MASS"      "stats"     "graphics"  "grDevices" "utils"    
+## [7] "datasets"  "base"
+```
+
