@@ -53,7 +53,7 @@ head(knn(train = X_default_train,
          test = X_default_test, 
          cl = y_default_train, 
          k = 3),
-     n = 25)
+         n = 25)
 ```
 
 Because of the lack of any need for training, the `knn()` function essentially replaces the `predict()` function, and immediately returns classifications. Here, `knn()` used four arguments:
