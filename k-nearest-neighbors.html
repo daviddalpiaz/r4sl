@@ -249,14 +249,14 @@ Default$student =<span class="st"> </span><span class="kw">as.numeric</span>(Def
 default_index =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
 default_train =<span class="st"> </span>Default[default_index, ]
 default_test =<span class="st"> </span>Default[-default_index, ]</code></pre></div>
-<p>Also unlike previous methods, <code>knn()</code> does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable.</p>
+<p>Also unlike previous methods, <code>knn()</code> does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable. Note that the <span class="math inline">\(y\)</span> data should be a factor vector, <strong>not</strong> a data frame containing a factor vector.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># training data</span>
 X_default_train =<span class="st"> </span>default_train[, -<span class="dv">1</span>]
-y_default_train =<span class="st"> </span>default_train[, <span class="dv">1</span>]
+y_default_train =<span class="st"> </span>default_train$default
 
 <span class="co"># testing data</span>
 X_default_test =<span class="st"> </span>default_test[, -<span class="dv">1</span>]
-y_default_test =<span class="st"> </span>default_test[, <span class="dv">1</span>]</code></pre></div>
+y_default_test =<span class="st"> </span>default_test$default</code></pre></div>
 <p>There is very little “training” with <span class="math inline">\(k\)</span>-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that <span class="math inline">\(k\)</span>-nearest neighbors is fast at training time. However, at test time, <span class="math inline">\(k\)</span>-nearest neighbors is very slow. For each test case, the method must find the <span class="math inline">\(k\)</span>-nearest neighbors, which is not computationally cheap. (Note that <code>knn()</code> uses Euclidean distance.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">knn</span>(<span class="dt">train =</span> X_default_train, 
          <span class="dt">test =</span> X_default_test, 
@@ -346,11 +346,11 @@ iris_test =<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
 <p>All the predictors here are numeric, so we proceed to splitting the data into predictors and classes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># training data</span>
 X_iris_train =<span class="st"> </span>iris_train[, -<span class="dv">5</span>]
-y_iris_train =<span class="st"> </span>iris_train[, <span class="dv">5</span>]
+y_iris_train =<span class="st"> </span>iris_train$Species
 
 <span class="co"># testing data</span>
 X_iris_test =<span class="st"> </span>iris_test[, -<span class="dv">5</span>]
-y_iris_test =<span class="st"> </span>iris_test[, <span class="dv">5</span>]</code></pre></div>
+y_iris_test =<span class="st"> </span>iris_test$Species</code></pre></div>
 <p>Like previous methods, we can obtain predicted probabilities given test predictors. To do so, we add an argument, <code>prob = TRUE</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_pred =<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_iris_train), 
                 <span class="dt">test =</span> <span class="kw">scale</span>(X_iris_test),
@@ -403,7 +403,7 @@ y_iris_test =<span class="st"> </span>iris_test[, <span class="dv">5</span>]</co
 <h2><span class="header-section-number">10.2</span> Regression</h2>
 <p>We quickly illustrate KNN for regression using the <code>Boston</code> data. We’ll only use <code>lstat</code> as a predictor, and <code>medv</code> as the response. We won’t test-train split for this example since won’t be checking RMSE, but instead plotting fitted models. There is also no need to worry about scaling since there is only one predictor.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_boston =<span class="st"> </span>Boston[<span class="st">&quot;lstat&quot;</span>]
-y_boston =<span class="st"> </span>Boston[<span class="st">&quot;medv&quot;</span>]</code></pre></div>
+y_boston =<span class="st"> </span>Boston$medv</code></pre></div>
 <p>We create a “test” set, that is a grid of <code>lstat</code> values at which we will predict <code>medv</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">seq</span>(<span class="kw">range</span>(X_boston$lstat)[<span class="dv">1</span>], <span class="kw">range</span>(X_boston$lstat)[<span class="dv">2</span>], <span class="dt">by =</span> <span class="fl">0.01</span>))</code></pre></div>
 <p>Unfortunately, <code>knn()</code> from <code>class</code> only handles classification. To perform regression, we will need <code>knn.reg()</code> from the <code>FNN</code> package. Notice that, we do <strong>not</strong> load this package, but instead use <code>FNN::knn.reg</code> to access the function. This is useful since <code>FNN</code> also contains a function <code>knn()</code> and would then mask <code>knn()</code> from <code>class</code>.</p>

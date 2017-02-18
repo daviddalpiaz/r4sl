@@ -36,17 +36,17 @@ default_train = Default[default_index, ]
 default_test = Default[-default_index, ]
 ```
 
-Also unlike previous methods, `knn()` does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable.
+Also unlike previous methods, `knn()` does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable. Note that the $y$ data should be a factor vector, **not** a data frame containing a factor vector.
 
 
 ```r
 # training data
 X_default_train = default_train[, -1]
-y_default_train = default_train[, 1]
+y_default_train = default_train$default
 
 # testing data
 X_default_test = default_test[, -1]
-y_default_test = default_test[, 1]
+y_default_test = default_test$default
 ```
 
 There is very little "training" with $k$-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that $k$-nearest neighbors is fast at training time. However, at test time, $k$-nearest neighbors is very slow. For each test case, the method must find the $k$-nearest neighbors, which is not computationally cheap. (Note that `knn()` uses Euclidean distance.)
@@ -223,11 +223,11 @@ All the predictors here are numeric, so we proceed to splitting the data into pr
 ```r
 # training data
 X_iris_train = iris_train[, -5]
-y_iris_train = iris_train[, 5]
+y_iris_train = iris_train$Species
 
 # testing data
 X_iris_test = iris_test[, -5]
-y_iris_test = iris_test[, 5]
+y_iris_test = iris_test$Species
 ```
 
 Like previous methods, we can obtain predicted probabilities given test predictors. To do so, we add an argument, `prob = TRUE`
@@ -304,7 +304,7 @@ We quickly illustrate KNN for regression using the `Boston` data. We'll only use
 
 ```r
 X_boston = Boston["lstat"]
-y_boston = Boston["medv"]
+y_boston = Boston$medv
 ```
 
 We create a "test" set, that is a grid of `lstat` values at which we will predict `medv`.
