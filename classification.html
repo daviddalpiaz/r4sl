@@ -323,12 +323,12 @@ f_{X_i}(x_i \mid y = k)
 </div>
 <div id="a-simple-classifier" class="section level2">
 <h2><span class="header-section-number">7.2</span> A Simple Classifier</h2>
-<p>A very simple classifier is a rule based on a cutoff <span class="math inline">\(c\)</span> for a particular input variable <span class="math inline">\(x\)</span>.</p>
+<p>A very simple classifier is a rule based on a boundary <span class="math inline">\(b\)</span> for a particular input variable <span class="math inline">\(x\)</span>.</p>
 <p><span class="math display">\[
 \hat{C}(\bf x) = 
 \begin{cases} 
-      1 &amp; x &gt; c \\
-      0 &amp; x \leq c 
+      1 &amp; x &gt; b \\
+      0 &amp; x \leq b 
 \end{cases}
 \]</span></p>
 <p>Based on the first plot, we believe we can use <code>balance</code> to create a reasonable classifier. In particular,</p>
@@ -340,14 +340,14 @@ f_{X_i}(x_i \mid y = k)
    \end{cases}
 \]</span></p>
 <p>So we predict an individual is a defaulter if their <code>balance</code> is above 1400, and not a defaulter if the balance is 1400 or less.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simple_class =<span class="st"> </span>function(x, cutoff, <span class="dt">above =</span> <span class="dv">1</span>, <span class="dt">below =</span> <span class="dv">0</span>) {
-  <span class="kw">ifelse</span>(x &gt;<span class="st"> </span>cutoff, above, below)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simple_class =<span class="st"> </span>function(x, boundary, <span class="dt">above =</span> <span class="dv">1</span>, <span class="dt">below =</span> <span class="dv">0</span>) {
+  <span class="kw">ifelse</span>(x &gt;<span class="st"> </span>boundary, above, below)
 }</code></pre></div>
-<p>We write a simple <code>R</code> function that compares a variable to a cutoff, then use it to make predictions on the train and test sets with our chosen variable and cutoff.</p>
+<p>We write a simple <code>R</code> function that compares a variable to a boundary, then use it to make predictions on the train and test sets with our chosen variable and boundary.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, 
-                          <span class="dt">cutoff =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
+                          <span class="dt">boundary =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
 test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> test_default$balance, 
-                         <span class="dt">cutoff =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
+                         <span class="dt">boundary =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
 <span class="kw">head</span>(train_pred, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>##  [1] &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;</code></pre>
 </div>
@@ -461,7 +461,7 @@ I(y_i = \hat{C}(x)) =
 \]</span></p>
 <p>This classifier simply classifies all observations as negative cases.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_all_no =<span class="st"> </span><span class="kw">simple_class</span>(test_default$balance, 
-                           <span class="dt">cutoff =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
+                           <span class="dt">boundary =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
 <span class="kw">table</span>(<span class="dt">predicted =</span> pred_all_no, <span class="dt">actual =</span> test_default$default)</code></pre></div>
 <pre><code>##          actual
 ## predicted   No  Yes

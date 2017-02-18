@@ -156,13 +156,13 @@ Similar to `pairs` is a plot of type `ellipse`, which requires the `ellipse` pac
 
 ## A Simple Classifier
 
-A very simple classifier is a rule based on a cutoff $c$ for a particular input variable $x$.
+A very simple classifier is a rule based on a boundary $b$ for a particular input variable $x$.
 
 $$
 \hat{C}(\bf x) = 
 \begin{cases} 
-      1 & x > c \\
-      0 & x \leq c 
+      1 & x > b \\
+      0 & x \leq b 
 \end{cases}
 $$
 
@@ -180,18 +180,19 @@ So we predict an individual is a defaulter if their `balance` is above 1400, and
 
 
 ```r
-simple_class = function(x, cutoff, above = 1, below = 0) {
-  ifelse(x > cutoff, above, below)
+simple_class = function(x, boundary, above = 1, below = 0) {
+  ifelse(x > boundary, above, below)
 }
 ```
-We write a simple `R` function that compares a variable to a cutoff, then use it to make predictions on the train and test sets with our chosen variable and cutoff.
+
+We write a simple `R` function that compares a variable to a boundary, then use it to make predictions on the train and test sets with our chosen variable and boundary.
 
 
 ```r
 train_pred = simple_class(x = train_default$balance, 
-                          cutoff = 1400, above = "Yes", below = "No")
+                          boundary = 1400, above = "Yes", below = "No")
 test_pred = simple_class(x = test_default$balance, 
-                         cutoff = 1400, above = "Yes", below = "No")
+                         boundary = 1400, above = "Yes", below = "No")
 head(train_pred, n = 10)
 ```
 
@@ -395,7 +396,7 @@ This classifier simply classifies all observations as negative cases.
 
 ```r
 pred_all_no = simple_class(test_default$balance, 
-                           cutoff = 1400, above = "No", below = "No")
+                           boundary = 1400, above = "No", below = "No")
 table(predicted = pred_all_no, actual = test_default$default)
 ```
 
