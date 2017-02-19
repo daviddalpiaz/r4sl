@@ -325,7 +325,22 @@ LDA however creates dummy variables, here with `Large` is the reference level, t
 
 The RMarkdown file for this chapter can be found [**here**](09-generative.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
 
+- Base Packages, Attached
+
 ```{r, echo = FALSE}
-(.packages())
+sessionInfo()$basePkgs
 ```
+
+- Additonal Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additonal Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```
+
 
