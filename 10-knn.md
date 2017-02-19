@@ -354,3 +354,14 @@ lines(lstat_grid$lstat, pred_506$pred, col = "darkorange", lwd = 2)
 ![](10-knn_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
 We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly variable model. Conversely, `k = 506` is clearly underfitting the data, as `k = 506` is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+
+
+```
+## [1] "MASS"      "class"     "ISLR"      "stats"     "graphics"  "grDevices"
+## [7] "utils"     "datasets"  "base"
+```
+

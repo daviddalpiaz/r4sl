@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-18">
+<meta name="date" content="2017-02-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -205,6 +205,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.1.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#iris-data"><i class="fa fa-check"></i><b>10.1.2</b> Iris Data</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#regression"><i class="fa fa-check"></i><b>10.2</b> Regression</a></li>
+<li class="chapter" data-level="10.3" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#rmarkdown-1"><i class="fa fa-check"></i><b>10.3</b> RMarkdown</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -435,6 +436,12 @@ pred_506 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span cl
 <span class="kw">lines</span>(lstat_grid$lstat, pred_506$pred, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
 <p><img src="10-knn_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
 <p>We see that <code>k = 1</code> is clearly overfitting, as <code>k = 1</code> is a very complex, highly variable model. Conversely, <code>k = 506</code> is clearly underfitting the data, as <code>k = 506</code> is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.</p>
+</div>
+<div id="rmarkdown-1" class="section level2">
+<h2><span class="header-section-number">10.3</span> RMarkdown</h2>
+<p>The RMarkdown file for this chapter can be found <a href="10-knn.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.3.2 and the following packages:</p>
+<pre><code>## [1] &quot;MASS&quot;      &quot;class&quot;     &quot;ISLR&quot;      &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot;
+## [7] &quot;utils&quot;     &quot;datasets&quot;  &quot;base&quot;</code></pre>
 
 <div id="refs" class="references">
 

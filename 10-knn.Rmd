@@ -246,3 +246,12 @@ lines(lstat_grid$lstat, pred_506$pred, col = "darkorange", lwd = 2)
 ```
 
 We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly variable model. Conversely, `k = 506` is clearly underfitting the data, as `k = 506` is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+```{r, echo = FALSE}
+(.packages())
+```
+
