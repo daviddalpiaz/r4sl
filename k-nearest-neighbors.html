@@ -105,9 +105,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.2</b> Conventions</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.2</b> Caveat Emptor</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.3</b> Conventions</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>1</b> Probability Review</a><ul>
 <li class="chapter" data-level="1.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>1.1</b> Probability Models</a></li>
@@ -205,7 +206,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.1.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#iris-data"><i class="fa fa-check"></i><b>10.1.2</b> Iris Data</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#regression"><i class="fa fa-check"></i><b>10.2</b> Regression</a></li>
-<li class="chapter" data-level="10.3" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#rmarkdown-1"><i class="fa fa-check"></i><b>10.3</b> RMarkdown</a></li>
+<li class="chapter" data-level="10.3" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#external-links"><i class="fa fa-check"></i><b>10.3</b> External Links</a></li>
+<li class="chapter" data-level="10.4" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#rmarkdown-1"><i class="fa fa-check"></i><b>10.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -437,8 +439,14 @@ pred_506 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span cl
 <p><img src="10-knn_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
 <p>We see that <code>k = 1</code> is clearly overfitting, as <code>k = 1</code> is a very complex, highly variable model. Conversely, <code>k = 506</code> is clearly underfitting the data, as <code>k = 506</code> is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.</p>
 </div>
+<div id="external-links" class="section level2">
+<h2><span class="header-section-number">10.3</span> External Links</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=4ObVzTuFivY">YouTube: <span class="math inline">\(k\)</span>-Nearest Neighbor Classification Algorithm</a> - Video from user “mathematicalmonk” which gives a brief but thorough introduction to the method.</li>
+</ul>
+</div>
 <div id="rmarkdown-1" class="section level2">
-<h2><span class="header-section-number">10.3</span> RMarkdown</h2>
+<h2><span class="header-section-number">10.4</span> RMarkdown</h2>
 <p>The RMarkdown file for this chapter can be found <a href="10-knn.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.3.2 and the following packages:</p>
 <pre><code>## [1] &quot;MASS&quot;      &quot;class&quot;     &quot;ISLR&quot;      &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot;
 ## [7] &quot;utils&quot;     &quot;datasets&quot;  &quot;base&quot;</code></pre>

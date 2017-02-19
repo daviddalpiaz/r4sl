@@ -355,6 +355,10 @@ lines(lstat_grid$lstat, pred_506$pred, col = "darkorange", lwd = 2)
 
 We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly variable model. Conversely, `k = 506` is clearly underfitting the data, as `k = 506` is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.
 
+## External Links
+
+- [YouTube: $k$-Nearest Neighbor Classification Algorithm](https://www.youtube.com/watch?v=4ObVzTuFivY) - Video from user "mathematicalmonk" which gives a brief but thorough introduction to the method.
+
 ## RMarkdown
 
 The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version 3.3.2 and the following packages:
