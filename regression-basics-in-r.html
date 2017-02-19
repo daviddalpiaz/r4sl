@@ -220,6 +220,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.4" data-path="resampling.html"><a href="resampling.html#external-links-1"><i class="fa fa-check"></i><b>11.4</b> External Links</a></li>
 <li class="chapter" data-level="11.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-2"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>12</b> Classification Overview</a><ul>
+<li class="chapter" data-level="12.0.1" data-path="classification-overview.html"><a href="classification-overview.html#bayes-classifier-1"><i class="fa fa-check"></i><b>12.0.1</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="12.0.2" data-path="classification-overview.html"><a href="classification-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i><b>12.0.2</b> The Bias-Variance Tradeoff</a></li>
+<li class="chapter" data-level="12.0.3" data-path="classification-overview.html"><a href="classification-overview.html#the-test-train-split"><i class="fa fa-check"></i><b>12.0.3</b> The Test-Train Split</a></li>
+<li class="chapter" data-level="12.0.4" data-path="classification-overview.html"><a href="classification-overview.html#classification-methods"><i class="fa fa-check"></i><b>12.0.4</b> Classification Methods</a></li>
+<li class="chapter" data-level="12.0.5" data-path="classification-overview.html"><a href="classification-overview.html#discriminative-versus-generative-methods"><i class="fa fa-check"></i><b>12.0.5</b> Discriminative versus Generative Methods</a></li>
+<li class="chapter" data-level="12.0.6" data-path="classification-overview.html"><a href="classification-overview.html#parametric-and-non-parametric-methods"><i class="fa fa-check"></i><b>12.0.6</b> Parametric and Non-Parametric Methods</a></li>
+<li class="chapter" data-level="12.0.7" data-path="classification-overview.html"><a href="classification-overview.html#tuning-parameters"><i class="fa fa-check"></i><b>12.0.7</b> Tuning Parameters</a></li>
+<li class="chapter" data-level="12.0.8" data-path="classification-overview.html"><a href="classification-overview.html#cross-validation-1"><i class="fa fa-check"></i><b>12.0.8</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12.0.9" data-path="classification-overview.html"><a href="classification-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>12.0.9</b> Curse of Dimensionality</a></li>
+<li class="chapter" data-level="12.0.10" data-path="classification-overview.html"><a href="classification-overview.html#no-free-lunch-theorem"><i class="fa fa-check"></i><b>12.0.10</b> No-Free-Lunch Theorem</a></li>
+<li class="chapter" data-level="12.1" data-path="classification-overview.html"><a href="classification-overview.html#external-links-2"><i class="fa fa-check"></i><b>12.1</b> External Links</a></li>
+<li class="chapter" data-level="12.2" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>12.2</b> RMarkdown</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
 
@@ -413,29 +427,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1         x2          y
-##    &lt;fctr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1       A 0.62179248  0.3054257
-## 2       A 0.37327323 -2.3684568
-## 3       A 0.82827728 -0.8282590
-## 4       A 0.44708831  0.8853598
-## 5       A 0.50134798 -0.4887990
-## 6       A 0.87315626  0.9568519
-## 7       A 0.63231053 -0.2478073
-## 8       A 0.56337904  0.1788676
-## 9       A 0.02691872 -0.7768764
-## 10      A 0.13445066  1.1052710
+##        x1         x2           y
+##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+## 1       A 0.66986644 -1.86558426
+## 2       A 0.34234969  0.24448998
+## 3       A 0.42019890 -1.22033152
+## 4       A 0.28359885 -0.18326810
+## 5       A 0.97325361 -0.16679969
+## 6       A 0.26473348  0.07937201
+## 7       A 0.05019855 -1.04142144
+## 8       A 0.61389528 -0.22925549
+## 9       A 0.07758157  1.06136574
+## 10      A 0.06415965  0.23778350
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  0.07045691  0.62682647  0.05250599 -0.39644019</code></pre>
+##  -0.4570018   0.2503695   0.1238880   0.3953280</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.3684374   1.1811805   0.7781546   0.4809984  -1.0993496  -1.3719060</code></pre>
+##  0.06392304 -0.22904563 -1.18089389 -0.99017076  1.29700904  3.45565944</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
