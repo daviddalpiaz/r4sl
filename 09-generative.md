@@ -633,37 +633,9 @@ LDA however creates dummy variables, here with `Large` is the reference level, t
 
 The RMarkdown file for this chapter can be found [**here**](09-generative.Rmd). The file was created using `R` version 3.3.2 and the following packages:
 
-- Base Packages, Attached
-
 
 ```
-## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
+## [1] "e1071"     "MASS"      "stats"     "graphics"  "grDevices" "utils"    
+## [7] "datasets"  "base"
 ```
-
-- Additonal Packages, Attached
-
-
-```
-## [1] "e1071" "MASS"
-```
-
-- Additonal Packages, Not Attached
-
-
-```
-##  [1] "Rcpp"         "nloptr"       "plyr"         "class"       
-##  [5] "methods"      "iterators"    "tools"        "digest"      
-##  [9] "lme4"         "evaluate"     "tibble"       "gtable"      
-## [13] "nlme"         "lattice"      "mgcv"         "Matrix"      
-## [17] "foreach"      "yaml"         "parallel"     "SparseM"     
-## [21] "stringr"      "knitr"        "MatrixModels" "stats4"      
-## [25] "rprojroot"    "grid"         "caret"        "nnet"        
-## [29] "ellipse"      "rmarkdown"    "bookdown"     "minqa"       
-## [33] "ggplot2"      "reshape2"     "car"          "magrittr"    
-## [37] "backports"    "scales"       "codetools"    "ModelMetrics"
-## [41] "htmltools"    "splines"      "assertthat"   "pbkrtest"    
-## [45] "colorspace"   "quantreg"     "stringi"      "lazyeval"    
-## [49] "munsell"
-```
-
 

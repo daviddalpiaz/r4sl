@@ -363,26 +363,9 @@ We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly
 
 The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version 3.3.2 and the following packages:
 
-- Base Packages, Attached
-
 
 ```
-## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
+## [1] "MASS"      "class"     "ISLR"      "stats"     "graphics"  "grDevices"
+## [7] "utils"     "datasets"  "base"
 ```
 
-- Additonal Packages, Attached
-
-
-```
-## [1] "MASS"  "class" "ISLR"
-```
-
-- Additonal Packages, Not Attached
-
-
-```
-##  [1] "Rcpp"      "bookdown"  "FNN"       "digest"    "rprojroot"
-##  [6] "backports" "magrittr"  "evaluate"  "stringi"   "rmarkdown"
-## [11] "tools"     "stringr"   "yaml"      "htmltools" "knitr"    
-## [16] "methods"
-```
