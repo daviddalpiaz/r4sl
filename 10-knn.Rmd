@@ -255,7 +255,20 @@ We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly
 
 The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
 
+- Base Packages, Attached
+
 ```{r, echo = FALSE}
-(.packages())
+sessionInfo()$basePkgs
 ```
 
+- Additonal Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additonal Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```

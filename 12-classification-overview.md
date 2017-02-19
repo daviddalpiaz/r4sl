@@ -2,7 +2,7 @@
 
 At this point, you should know...
 
-### Bayes Classifier
+### Bayes Classifier {-}
 
 - Classify to the class with the highest probability given a particular input $x$.
 
@@ -12,20 +12,20 @@ $$
 
 - Since we rarely, if ever, know the true probabilities, use a classification method to estimate them using data.
 
-### The Bias-Variance Tradeoff
+### The Bias-Variance Tradeoff {-}
 
 - As model complexity increases, **bias** decreases.
 - As model complexity decreases, **variance** increases.
 - As a result, there is a model somewhere in the middle with the best accuracy. (Or lowest RMSE for regression.)
 
-### The Test-Train Split
+### The Test-Train Split {-}
 
 - **Never use test data to train a model.** Test accuracy is a measure of how well a method works in general.
 - We can identify underfitting and overfitting models relative to the best test accuracy.
     - A less complex model than the model with the best test accuracy is **underfitting**.
     - A more complex model than the model with the best test accuracy is **overfitting**.
     
-### Classification Methods
+### Classification Methods {-}
 
 - Logistic Regression
 - Linear Discriminant Analysis (LDA)
@@ -38,29 +38,29 @@ $$
     - Make classifications.
     - Find decision boundaries. (Seen only for some.)
 
-### Discriminative versus Generative Methods
+### Discriminative versus Generative Methods {-}
 
 - **Discriminative** methods learn the conditional distribution $p(y \mid x)$, thus could only simulate $y$ given a fixed $x$.
 - **Generative** methods learn the joint distribution $p(x, y)$, thus could only simulate new data $(x, y)$.
 
-### Parametric and Non-Parametric Methods
+### Parametric and Non-Parametric Methods {-}
 
 - **Parametric** methods models $P[Y = k \mid X = x]$ as a specific function of parameters which are learned through data.
 - **Non-Parametric** use an algorithmic approach to estimate $P[Y = k \mid X = x]$ for each possible input $x$.
 
-### Tuning Parameters
+### Tuning Parameters {-}
 
 - Specify **how** to train a model. This in contrast to model parameters, which are learned through training.
 
-### Cross-Validation
+### Cross-Validation {-}
 
 - A method to estimate test metrics with training data. Repeats the train-validate split inside the training data.
 
-### Curse of Dimensionality
+### Curse of Dimensionality {-}
 
 - As feature space grows, that is as $p$ grows, "neighborhoods" must become much larger to contain "neighbors," thus local methods are not so local.
 
-### No-Free-Lunch Theorem
+### No-Free-Lunch Theorem {-}
 
 - There is no one classifier that will be best across all datasets.
 
@@ -72,4 +72,4 @@ $$
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version 3.3.2.
+The RMarkdown file for this chapter can be found [**here**](12-classification-overview.Rmd). The file was created using `R` version 3.3.2.
