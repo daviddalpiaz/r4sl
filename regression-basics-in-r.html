@@ -209,6 +209,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.3" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#external-links"><i class="fa fa-check"></i><b>10.3</b> External Links</a></li>
 <li class="chapter" data-level="10.4" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#rmarkdown-1"><i class="fa fa-check"></i><b>10.4</b> RMarkdown</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>11</b> Resampling</a><ul>
+<li class="chapter" data-level="11.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>11.1</b> Test-Train Split</a></li>
+<li class="chapter" data-level="11.2" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>11.2</b> Cross-Validation</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="resampling.html"><a href="resampling.html#method-specific"><i class="fa fa-check"></i><b>11.2.1</b> Method Specific</a></li>
+<li class="chapter" data-level="11.2.2" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>11.2.2</b> Manual Cross-Validation</a></li>
+<li class="chapter" data-level="11.2.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>11.2.3</b> Test Data</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>11.3</b> Bootstrap</a></li>
+<li class="chapter" data-level="11.4" data-path="resampling.html"><a href="resampling.html#external-links-1"><i class="fa fa-check"></i><b>11.4</b> External Links</a></li>
+<li class="chapter" data-level="11.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-2"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
 
@@ -402,29 +413,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1        x2          y
-##    &lt;fctr&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-## 1       A 0.6743330 -1.2204214
-## 2       A 0.4867505  1.2501154
-## 3       A 0.0450075  0.3533447
-## 4       A 0.7260333  0.5032706
-## 5       A 0.9052191  0.3458957
-## 6       A 0.9138898  0.9240048
-## 7       A 0.6789248  0.0580891
-## 8       A 0.3725388 -0.4621662
-## 9       A 0.5753755 -0.6909734
-## 10      A 0.9340194  1.6899698
+##        x1         x2          y
+##    &lt;fctr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1       A 0.62179248  0.3054257
+## 2       A 0.37327323 -2.3684568
+## 3       A 0.82827728 -0.8282590
+## 4       A 0.44708831  0.8853598
+## 5       A 0.50134798 -0.4887990
+## 6       A 0.87315626  0.9568519
+## 7       A 0.63231053 -0.2478073
+## 8       A 0.56337904  0.1788676
+## 9       A 0.02691872 -0.7768764
+## 10      A 0.13445066  1.1052710
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##   0.6210288  -0.2217802   0.4811516  -0.5480210</code></pre>
+##  0.07045691  0.62682647  0.05250599 -0.39644019</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.3030504   0.5857751   2.1499050   0.9159614  -1.2180742  -2.6758566</code></pre>
+##  -0.3684374   1.1811805   0.7781546   0.4809984  -1.0993496  -1.3719060</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>

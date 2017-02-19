@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Statistical Learning</title>
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/r4sl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/r4sl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz">
+
+
+<meta name="date" content="2017-02-19">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="prev" href="k-nearest-neighbors.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.2</b> Caveat Emptor</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.3</b> Conventions</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>1</b> Probability Review</a><ul>
+<li class="chapter" data-level="1.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>1.1</b> Probability Models</a></li>
+<li class="chapter" data-level="1.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>1.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="1.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>1.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="1.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>1.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>1.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>1.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="1.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="1.4.4" data-path="probability-review.html"><a href="probability-review.html#several-random-variables"><i class="fa fa-check"></i><b>1.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>1.5</b> Expectations</a></li>
+<li class="chapter" data-level="1.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>1.6</b> Likelihood</a></li>
+<li class="chapter" data-level="1.7" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>1.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-resources"><i class="fa fa-check"></i><b>2.1</b> <code>R</code> Resources</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-basics"><i class="fa fa-check"></i><b>2.2</b> <code>R</code> Basics</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2.1</b> Basic Calculations</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting Help</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.2.3</b> Installing Packages</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.2.4</b> Data Types</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>2.2.5</b> Vectors</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#summary-statistics"><i class="fa fa-check"></i><b>2.2.6</b> Summary Statistics</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#matrices"><i class="fa fa-check"></i><b>2.2.7</b> Matrices</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-frames"><i class="fa fa-check"></i><b>2.2.8</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#plotting"><i class="fa fa-check"></i><b>2.2.9</b> Plotting</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#distributions-1"><i class="fa fa-check"></i><b>2.2.10</b> Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#programming-basics"><i class="fa fa-check"></i><b>2.3</b> Programming Basics</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#logical-operators"><i class="fa fa-check"></i><b>2.3.1</b> Logical Operators</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#control-flow"><i class="fa fa-check"></i><b>2.3.2</b> Control Flow</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.3.3</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#hypothesis-tests-in-r"><i class="fa fa-check"></i><b>2.4</b> Hypothesis Tests in <code>R</code></a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#one-sample-t-test-review"><i class="fa fa-check"></i><b>2.4.1</b> One Sample t-Test: Review</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#one-sample-t-test-example"><i class="fa fa-check"></i><b>2.4.2</b> One Sample t-Test: Example</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#two-sample-t-test-review"><i class="fa fa-check"></i><b>2.4.3</b> Two Sample t-Test: Review</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#two-sample-t-test-example"><i class="fa fa-check"></i><b>2.4.4</b> Two Sample t-Test: Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#simulation"><i class="fa fa-check"></i><b>2.5</b> Simulation</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#paired-differences"><i class="fa fa-check"></i><b>2.5.1</b> Paired Differences</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#distribution-of-a-sample-mean"><i class="fa fa-check"></i><b>2.5.2</b> Distribution of a Sample Mean</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> RStudio and RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.1</b> Template</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Regression Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
+<li class="chapter" data-level="4.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="4.4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
+<li class="chapter" data-level="4.5" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
+<li class="chapter" data-level="4.6" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html"><i class="fa fa-check"></i><b>5</b> Regression for Statistical Learning</a><ul>
+<li class="chapter" data-level="5.1" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>5.1</b> Assesing Model Accuracy</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#model-complexity"><i class="fa fa-check"></i><b>5.2</b> Model Complexity</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#test-train-split"><i class="fa fa-check"></i><b>5.3</b> Test-Train Split</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>5.4</b> Adding Flexibility to Linear Models</a></li>
+<li class="chapter" data-level="5.5" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#choosing-a-model"><i class="fa fa-check"></i><b>5.5</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>6</b> Simulating the Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="6.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>6.1</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="6.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation-1"><i class="fa fa-check"></i><b>6.2</b> Simulation</a></li>
+<li class="chapter" data-level="6.3" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>6.3</b> Bias-Variance Tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>7</b> Classification</a><ul>
+<li class="chapter" data-level="7.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>7.1</b> Visualization for Classification</a></li>
+<li class="chapter" data-level="7.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>7.2</b> A Simple Classifier</a></li>
+<li class="chapter" data-level="7.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>7.3</b> Metrics for Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>8.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>8.2</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="8.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>8.3</b> Logistic Regression with <code>glm()</code></a></li>
+<li class="chapter" data-level="8.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>8.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="8.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>8.5</b> Multinomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>9</b> Generative Models</a><ul>
+<li class="chapter" data-level="9.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>9.1</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="9.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>9.2</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>9.3</b> Naive Bayes</a></li>
+<li class="chapter" data-level="9.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>9.4</b> Discrete Inputs</a></li>
+<li class="chapter" data-level="9.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown"><i class="fa fa-check"></i><b>9.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html"><i class="fa fa-check"></i><b>10</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="10.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#classification-1"><i class="fa fa-check"></i><b>10.1</b> Classification</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#default-data"><i class="fa fa-check"></i><b>10.1.1</b> Default Data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#iris-data"><i class="fa fa-check"></i><b>10.1.2</b> Iris Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#regression"><i class="fa fa-check"></i><b>10.2</b> Regression</a></li>
+<li class="chapter" data-level="10.3" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#external-links"><i class="fa fa-check"></i><b>10.3</b> External Links</a></li>
+<li class="chapter" data-level="10.4" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#rmarkdown-1"><i class="fa fa-check"></i><b>10.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>11</b> Resampling</a><ul>
+<li class="chapter" data-level="11.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>11.1</b> Test-Train Split</a></li>
+<li class="chapter" data-level="11.2" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>11.2</b> Cross-Validation</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="resampling.html"><a href="resampling.html#method-specific"><i class="fa fa-check"></i><b>11.2.1</b> Method Specific</a></li>
+<li class="chapter" data-level="11.2.2" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>11.2.2</b> Manual Cross-Validation</a></li>
+<li class="chapter" data-level="11.2.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>11.2.3</b> Test Data</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>11.3</b> Bootstrap</a></li>
+<li class="chapter" data-level="11.4" data-path="resampling.html"><a href="resampling.html#external-links-1"><i class="fa fa-check"></i><b>11.4</b> External Links</a></li>
+<li class="chapter" data-level="11.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-2"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="resampling" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Resampling</h1>
+<p>In this chapter we introduce resampling methods including cross-validation and the bootstrap.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)</code></pre></div>
+<p>Here, we will use the <code>Auto</code> data from <code>ISLR</code> and attempt to predict <code>mpg</code> (a numeric variable) from <code>horsepower</code>.</p>
+<pre><code>## # A tibble: 392 × 9
+##      mpg cylinders displacement horsepower weight acceleration  year
+## *  &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;
+## 1     18         8          307        130   3504         12.0    70
+## 2     15         8          350        165   3693         11.5    70
+## 3     18         8          318        150   3436         11.0    70
+## 4     16         8          304        150   3433         12.0    70
+## 5     17         8          302        140   3449         10.5    70
+## 6     15         8          429        198   4341         10.0    70
+## 7     14         8          454        220   4354          9.0    70
+## 8     14         8          440        215   4312          8.5    70
+## 9     14         8          455        225   4425         10.0    70
+## 10    15         8          390        190   3850          8.5    70
+## # ... with 382 more rows, and 2 more variables: origin &lt;dbl&gt;, name &lt;fctr&gt;</code></pre>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div id="test-train-split-1" class="section level2">
+<h2><span class="header-section-number">11.1</span> Test-Train Split</h2>
+<p>First, let’s return to the usual test-train split procedure that we have used so far. Let’s evaluate what happens if we repeat the process a large number of times, each time storing the test RMSE. We’ll consider three models:</p>
+<ul>
+<li>An underfitting model: <code>mpg ~ horsepower</code></li>
+<li>A reasonable model: <code>mpg ~ poly(horsepower, 2)</code></li>
+<li>A ridiculous, overfitting model: <code>mpg ~ poly(horsepower, 8)</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+num_reps =<span class="st"> </span><span class="dv">100</span>
+
+lin_rmse  =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+quad_rmse =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+huge_rmse =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+
+for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
+  
+  trainIndex =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">392</span>, <span class="dt">size =</span> <span class="dv">196</span>)
+  
+  lin_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
+  lin_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(lin_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+  
+  quad_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
+  quad_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(quad_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+  
+  huge_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
+  huge_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(huge_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+}</code></pre></div>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
+<p>Notice two things, first that the “Reasonable” model has on average the smallest error. Second, notice large variability in the RMSE. We see this in the “Reasonable” model, but it is very clear in the “Ridiculous” model. Here it is very clear that if we use an “unlucky” split, our test error will be much larger than the likely reality.</p>
+</div>
+<div id="cross-validation" class="section level2">
+<h2><span class="header-section-number">11.2</span> Cross-Validation</h2>
+<p>Instead of using a single test-train split, we instead look to use cross-validation. There are many ways to perform cross-validation <code>R</code>, depending on the method of interest.</p>
+<div id="method-specific" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> Method Specific</h3>
+<p>Some method, for example <code>glm()</code> through <code>cv.glm()</code> and <code>knn()</code> through <code>knn.cv()</code> have cross-validation capabilities built-in. We’ll use <code>glm()</code> for illustration. First we need to convince ourselves that <code>glm()</code> can be used to perform the same tasks as <code>lm()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
+<span class="kw">coef</span>(glm_fit)</code></pre></div>
+<pre><code>## (Intercept)  horsepower 
+##  39.9358610  -0.1578447</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
+<span class="kw">coef</span>(lm_fit)</code></pre></div>
+<pre><code>## (Intercept)  horsepower 
+##  39.9358610  -0.1578447</code></pre>
+<p>By default, <code>cv.glm()</code> will report leave-one-out cross-validation (LOOCV).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(boot)
+glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
+loocv_rmse =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit)$delta)
+loocv_rmse</code></pre></div>
+<pre><code>## [1] 4.922552 4.922514</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loocv_rmse[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [1] 4.922552</code></pre>
+<p>We are actually given two values. The first is exactly the LOOCV MSE. The second is a minor correct that we will not worry about. We take a square root to obtain LOOCV-RMSE.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loocv_rmse_poly =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">10</span>)
+for (i in <span class="kw">seq_along</span>(loocv_rmse_poly)) {
+  glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, i), <span class="dt">data =</span> Auto)
+  loocv_rmse_poly[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit)$delta[<span class="dv">1</span>])
+}
+loocv_rmse_poly</code></pre></div>
+<pre><code>##  [1] 4.922552 4.387279 4.397156 4.407316 4.362707 4.356449 4.339706
+##  [8] 4.354440 4.366764 4.414854</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(loocv_rmse_poly, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, 
+     <span class="dt">main =</span> <span class="st">&quot;LOOCV-RMSE vs Polynomial Degree&quot;</span>, 
+     <span class="dt">ylab =</span> <span class="st">&quot;LOOCV-RMSE&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Polynomial Degree&quot;</span>)</code></pre></div>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>If you run the above code locally, you will notice that is painfully slow. We are fitting each of the 10 models 392 times, that is, each model <span class="math inline">\(n\)</span> times, once with each data point left out. (Note: in this case, for a linear model, there is actually a shortcut formula which would allow us to obtain LOOCV-RMSE from a single fit to the data. See details in ISL as well as a link below.)</p>
+<p>We could instead use <span class="math inline">\(k\)</span>-fold cross-validation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">17</span>)
+cv_10_rmse_poly =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">10</span>)
+for (i in <span class="kw">seq_along</span>(cv_10_rmse_poly)){
+  glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, i), <span class="dt">data =</span> Auto)
+  cv_10_rmse_poly[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+}
+cv_10_rmse_poly</code></pre></div>
+<pre><code>##  [1] 4.919878 4.380552 4.393929 4.397498 4.345010 4.361311 4.346963
+##  [8] 4.439821 4.353321 4.416102</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cv_10_rmse_poly, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>,
+     <span class="dt">main =</span> <span class="st">&quot;10 Fold CV-RMSE vs Polynomial Degree&quot;</span>, 
+     <span class="dt">ylab =</span> <span class="st">&quot;10 Fold CV-RMSE&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Polynomial Degree&quot;</span>)</code></pre></div>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Here we chose 10-fold cross-validation. Notice it is <strong>much</strong> faster. IN practice, we usually stick to 5 or 10-fold CV.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+num_reps =<span class="st"> </span><span class="dv">100</span>
+
+
+lin_rmse_10_fold  =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+quad_rmse_10_fold =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+huge_rmse_10_fold =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+
+for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
+  
+  lin_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">1</span>), <span class="dt">data =</span> Auto)
+  quad_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto)
+  huge_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto)
+  lin_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, lin_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  quad_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, quad_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  huge_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, huge_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+}</code></pre></div>
+<p>Repeating the test-train split analysis from above, this time with 10-fold CV, see that that the resulting RMSE are much less variable. That means, will cross-validation still has some inherent randomness, it has a much smaller effect on the results.</p>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
+</div>
+<div id="manual-cross-validation" class="section level3">
+<h3><span class="header-section-number">11.2.2</span> Manual Cross-Validation</h3>
+<p>For methods that do not have a built-in ability to perform cross-validation, or for methods that have limited cross-validation capability, we will need to write our own code for cross-validation. (Spoiler: This is not true, but let’s pretend it is, so we can see how to perform cross-validation from scratch.)</p>
+<p>This essentially ammounts to randomly splitting the data, then looping over the splits. The <code>createFolds()</code> function from teh <code>caret()</code> package will make this much easier.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">createFolds</span>(Auto$mpg)</code></pre></div>
+<pre><code>## $Fold01
+##  [1]   8  16  23  34  38  43  57  73  81 107 123 127 141 162 174 177 180
+## [18] 187 188 218 221 227 232 238 244 258 273 281 282 284 287 305 307 318
+## [35] 321 331 337 341 376 385 388
+## 
+## $Fold02
+##  [1]  18  20  35  58  67  75  78  95  96 125 126 142 154 157 159 168 170
+## [18] 172 182 186 215 241 249 255 271 277 288 289 292 298 301 304 310 311
+## [35] 315 322 328 352 370 373
+## 
+## $Fold03
+##  [1]  11  21  22  25  30  39  44  45  46  47  63  65  69  79  90 112 137
+## [18] 147 165 167 173 204 209 213 216 217 239 247 267 279 308 313 329 338
+## [35] 339 351 359 361 379
+## 
+## $Fold04
+##  [1]   1  28  29  59  61  85  92 121 136 143 145 146 148 153 155 163 193
+## [18] 198 202 206 212 224 231 233 246 266 269 280 295 303 323 326 336 343
+## [35] 364 375 382 387
+## 
+## $Fold05
+##  [1]   7  17  31  41  48  49  51  53  71  80  86  87  93  94 100 120 132
+## [18] 135 169 176 200 214 219 225 229 236 250 256 278 296 297 306 319 332
+## [35] 349 354 356 381 391 392
+## 
+## $Fold06
+##  [1]   6  12  14  42  50  60  68  82  91  99 101 102 105 108 139 158 160
+## [18] 171 179 183 185 208 226 240 243 245 251 252 253 254 309 320 325 330
+## [35] 348 350 365 378 383
+## 
+## $Fold07
+##  [1]  24  52  64  72  83  84  88 131 133 138 150 161 175 189 190 191 201
+## [18] 211 230 261 262 264 265 272 275 285 286 294 312 317 333 342 355 358
+## [35] 360 362 363 374 380
+## 
+## $Fold08
+##  [1]   2   5  10  40  54  56  62  76  77  89 104 109 118 119 128 129 130
+## [18] 134 181 184 194 197 220 228 257 259 263 268 270 276 290 293 300 347
+## [35] 357 366 368 369 371
+## 
+## $Fold09
+##  [1]   3   9  26  32  37  55  66  74 103 106 113 116 140 149 152 156 164
+## [18] 166 178 195 199 203 207 210 234 235 237 248 283 299 302 314 316 327
+## [35] 334 340 345 372 384
+## 
+## $Fold10
+##  [1]   4  13  15  19  27  33  36  70  97  98 110 111 114 115 117 122 124
+## [18] 144 151 192 196 205 222 223 242 260 274 291 324 335 344 346 353 367
+## [35] 377 386 389 390</code></pre>
+<p>Can you use this to verify the 10-fold CV results from above?</p>
+</div>
+<div id="test-data" class="section level3">
+<h3><span class="header-section-number">11.2.3</span> Test Data</h3>
+<p>The following example illustrates the need for a test set which is <strong>never</strong> used in model training. If for no other reason, it gives us a quick sanity check that we have cross-validated correctly.</p>
+<p>To be specific we will test-train split the data, then perform cross-validation on the training data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
+  <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate data</span>
+<span class="co"># y is 0/1</span>
+<span class="co"># X are independent N(0,1) variables</span>
+<span class="co"># X has no relationship with the response</span>
+<span class="co"># p &gt;&gt;&gt; n</span>
+<span class="kw">set.seed</span>(<span class="dv">430</span>)
+n =<span class="st"> </span><span class="dv">400</span>
+p =<span class="st"> </span><span class="dv">5000</span>
+X =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(n))
+y =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), 
+      <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first n/2 observations are used for training</span>
+<span class="co"># last n/2 observations used for testing</span>
+<span class="co"># both are 50% 0s and 50% 1s</span>
+<span class="co"># cv will be done inside train data</span>
+full_data =<span class="st"> </span><span class="kw">data.frame</span>(y, X)
+train =<span class="st"> </span>full_data[<span class="dv">1</span>:(n /<span class="st"> </span><span class="dv">2</span>), ]
+test =<span class="st"> </span>full_data[((n /<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="dv">1</span>):n, ]</code></pre></div>
+<p>First, we use the screen-then-validate approach.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correlation between y and each predictor variable</span>
+correlations =<span class="st"> </span><span class="kw">apply</span>(train[, -<span class="dv">1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> train$y)
+<span class="kw">hist</span>(correlations)</code></pre></div>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select the 25 largest (absolute) correlation</span>
+<span class="co"># these should be &quot;useful&quot; for prediction</span>
+selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>:<span class="dv">25</span>]
+correlations[selected]</code></pre></div>
+<pre><code>##       X424      X4779      X2484      X1154      X2617      X1603 
+## -0.2577389  0.2491598  0.2379113 -0.2373367  0.2336055  0.2327971 
+##      X2963      X1091      X2806      X4586      X2569      X4532 
+##  0.2318932 -0.2281451 -0.2271382  0.2252979  0.2239974 -0.2225698 
+##      X3167       X741      X3329      X3862      X1741       X654 
+## -0.2201853 -0.2188919 -0.2186248 -0.2174146 -0.2150666  0.2130732 
+##      X3786      X4617      X3296      X2295       X999      X4349 
+##  0.2090650 -0.2086551 -0.2075271 -0.2072127  0.2055167 -0.1995252 
+##      X1409 
+##  0.1977006</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># subset the test and training data based on the selected predictors</span>
+train_screen =<span class="st"> </span>train[<span class="kw">c</span>(<span class="dv">1</span>, selected)]
+test_screen =<span class="st"> </span>test[<span class="kw">c</span>(<span class="dv">1</span>, selected)]
+
+<span class="co"># fit an additive logistic regression</span>
+<span class="co"># use 10-fold cross-validation to obtain an estimate of test accuracy</span>
+<span class="co"># horribly optimistic</span>
+<span class="kw">library</span>(boot)
+glm_fit =<span class="st"> </span><span class="kw">glm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+<span class="dv">1</span> -<span class="st"> </span><span class="kw">cv.glm</span>(train_screen, glm_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [1] 0.709234</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get test accuracy, which we expect to be 0.50</span>
+<span class="co"># no better than guessing</span>
+glm_pred =<span class="st"> </span>(<span class="kw">predict</span>(glm_fit, <span class="dt">newdata =</span> test_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) &gt;<span class="st"> </span><span class="fl">0.5</span>) *<span class="st"> </span><span class="dv">1</span>
+<span class="kw">accuracy</span>(<span class="dt">predicted =</span> glm_pred, <span class="dt">actual =</span> test_screen$y)</code></pre></div>
+<pre><code>## [1] 0.46</code></pre>
+<p>Now, we will correctly screen-while-validating.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use the caret package to obtain 10 &quot;folds&quot;</span>
+folds =<span class="st"> </span>caret::<span class="kw">createFolds</span>(train_screen$y)
+
+<span class="co"># for each fold</span>
+<span class="co"># - pre-screen variables on the 9 training folds</span>
+<span class="co"># - fit model to these variables</span>
+<span class="co"># - get accuracy on validation fold</span>
+fold_acc =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(folds))
+
+for(i in <span class="kw">seq_along</span>(folds)) {
+
+  <span class="co"># split for fold i  </span>
+  train_fold =<span class="st"> </span>train[-folds[[i]],]
+  validate_fold =<span class="st"> </span>train[folds[[i]],]
+
+  <span class="co"># screening for fold i  </span>
+  correlations =<span class="st"> </span><span class="kw">apply</span>(train_fold[, -<span class="dv">1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> train_fold[,<span class="dv">1</span>])
+  selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>:<span class="dv">25</span>]
+  train_fold_screen =<span class="st"> </span>train_fold[ ,<span class="kw">c</span>(<span class="dv">1</span>,selected)]
+  validate_fold_screen =<span class="st"> </span>validate_fold[ ,<span class="kw">c</span>(<span class="dv">1</span>,selected)]
+
+  <span class="co"># accuracy for fold i  </span>
+  glm_fit =<span class="st"> </span><span class="kw">glm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_fold_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+  glm_pred =<span class="st"> </span>(<span class="kw">predict</span>(glm_fit, <span class="dt">newdata =</span> validate_fold_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) &gt;<span class="st"> </span><span class="fl">0.5</span>)*<span class="dv">1</span>
+  fold_acc[i] =<span class="st"> </span><span class="kw">mean</span>(glm_pred ==<span class="st"> </span>validate_fold_screen$y)
+  
+}
+
+<span class="co"># report all 10 validation fold accuracies</span>
+fold_acc</code></pre></div>
+<pre><code>##  [1] 0.45 0.40 0.50 0.35 0.50 0.35 0.45 0.50 0.60 0.50</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># properly cross-validated error</span>
+<span class="co"># this roughly matches what we expect in the test set</span>
+<span class="kw">mean</span>(fold_acc)</code></pre></div>
+<pre><code>## [1] 0.46</code></pre>
+</div>
+</div>
+<div id="bootstrap" class="section level2">
+<h2><span class="header-section-number">11.3</span> Bootstrap</h2>
+<p>ISL also discusses the bootstrap, which is another resampling method. However, it is less relevant to the statistical learning tasks we will encounter. It could be useful if we were to attempt to calculate the bias and variance of a prediction (estimate) without access to the data generating process. Return to Chapter 6 and think about how the bootstrap could be used to obtain estimates of bias and variance with a single dataset, instead of repeated simulated datasets.</p>
+<p>For fun, write-up a simulation study which compares the strategy in Chapter 6 to a strategy using bootstrap resampling of a single dataset. Submit it to be added to this chapter!</p>
+</div>
+<div id="external-links-1" class="section level2">
+<h2><span class="header-section-number">11.4</span> External Links</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=m5StqDv-YlM">YouTube: Cross-Validation, Part 1</a> - Video from user “mathematicalmonk” which introduces <span class="math inline">\(K\)</span>-fold cross-validation in greater detail.
+<ul>
+<li><a href="https://www.youtube.com/watch?v=OcJwdF8zBjM">YouTube: Cross-Validation, Part 2</a> - Continuation which discusses selection and resampling strategies.</li>
+<li><a href="https://www.youtube.com/watch?v=mvbBycl8BNM">YouTube: Cross-Validation, Part 3</a> - Continuation which discusses choice of <span class="math inline">\(K\)</span>.</li>
+</ul></li>
+<li><a href="http://robjhyndman.com/hyndsight/loocv-linear-models/">Blog: Fast Computation of Cross-Validation in Linear Models</a> - Details for using leverage to speed-up LOOCV for linear models.</li>
+<li><a href="https://www.otexts.org/1467">OTexts: Bootstrap</a> - Some brief mathematical details of the bootstrap.</li>
+</ul>
+</div>
+<div id="rmarkdown-2" class="section level2">
+<h2><span class="header-section-number">11.5</span> RMarkdown</h2>
+<p>The RMarkdown file for this chapter can be found <a href="11-resampling.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.3.2 and the following packages:</p>
+<ul>
+<li>Base Packages, Attached</li>
+</ul>
+<pre><code>## [1] &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;base&quot;</code></pre>
+<ul>
+<li>Additonal Packages, Attached</li>
+</ul>
+<pre><code>## [1] &quot;boot&quot; &quot;ISLR&quot;</code></pre>
+<ul>
+<li>Additonal Packages, Not Attached</li>
+</ul>
+<pre><code>##  [1] &quot;Rcpp&quot;         &quot;nloptr&quot;       &quot;plyr&quot;         &quot;methods&quot;     
+##  [5] &quot;iterators&quot;    &quot;tools&quot;        &quot;digest&quot;       &quot;lme4&quot;        
+##  [9] &quot;evaluate&quot;     &quot;tibble&quot;       &quot;gtable&quot;       &quot;nlme&quot;        
+## [13] &quot;lattice&quot;      &quot;mgcv&quot;         &quot;Matrix&quot;       &quot;foreach&quot;     
+## [17] &quot;parallel&quot;     &quot;yaml&quot;         &quot;SparseM&quot;      &quot;stringr&quot;     
+## [21] &quot;knitr&quot;        &quot;MatrixModels&quot; &quot;stats4&quot;       &quot;rprojroot&quot;   
+## [25] &quot;grid&quot;         &quot;caret&quot;        &quot;nnet&quot;         &quot;rmarkdown&quot;   
+## [29] &quot;bookdown&quot;     &quot;minqa&quot;        &quot;ggplot2&quot;      &quot;reshape2&quot;    
+## [33] &quot;car&quot;          &quot;magrittr&quot;     &quot;backports&quot;    &quot;scales&quot;      
+## [37] &quot;codetools&quot;    &quot;ModelMetrics&quot; &quot;htmltools&quot;    &quot;MASS&quot;        
+## [41] &quot;splines&quot;      &quot;assertthat&quot;   &quot;pbkrtest&quot;     &quot;colorspace&quot;  
+## [45] &quot;quantreg&quot;     &quot;stringi&quot;      &quot;lazyeval&quot;     &quot;munsell&quot;</code></pre>
+
+<div id="refs" class="references">
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="k-nearest-neighbors.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/11-resampling.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
