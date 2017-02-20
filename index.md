@@ -1,7 +1,7 @@
 --- 
 title: "R for Statistical Learning"
 author: "David Dalpiaz"
-date: "2017-02-19"
+date: "2017-02-20"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -43,6 +43,7 @@ When possible, it would be best to always access the text online to be sure you 
 
 Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (`dalpiaz2 AT illinois DOT edu`) Or, if you know RMarkdown and are familiar with GitHub, [make a pull request and fix an issue yourself!](https://github.com/daviddalpiaz/r4sl) This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We'll also link to your GitHub account, or personal website upon request.
 
+The author is currently going through a midlife `R` crisis and reverting back to `<-` as the assignment operator. Please be patient during this difficult time.
 
 ## Conventions
 
