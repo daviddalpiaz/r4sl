@@ -1064,7 +1064,7 @@ We have previously seen vectors and matrices for storing data as we introduced `
 ```r
 example_data = data.frame(x = c(1, 3, 5, 7, 9, 1, 3, 5, 7, 9),
                           y = rep("Hello", 10),
-                          z = rep(c("TRUE", "FALSE"), 5))
+                          z = rep(c(TRUE, FALSE), 5))
 ```
 
 Unlike a matrix, which can be thought of as a vector rearranged into rows and columns, a data frame is not required to have the same data type for each element. A data frame is a **list** of vectors. So, each vector must contain the same data type, but the different vectors can store different data types. 
@@ -1136,18 +1136,18 @@ example_data
 
 ```
 ## # A tibble: 10 × 3
-##        x      y      z
-##    <dbl> <fctr> <fctr>
-## 1      1  Hello   TRUE
-## 2      3  Hello  FALSE
-## 3      5  Hello   TRUE
-## 4      7  Hello  FALSE
-## 5      9  Hello   TRUE
-## 6      1  Hello  FALSE
-## 7      3  Hello   TRUE
-## 8      5  Hello  FALSE
-## 9      7  Hello   TRUE
-## 10     9  Hello  FALSE
+##        x      y     z
+##    <dbl> <fctr> <lgl>
+## 1      1  Hello  TRUE
+## 2      3  Hello FALSE
+## 3      5  Hello  TRUE
+## 4      7  Hello FALSE
+## 5      9  Hello  TRUE
+## 6      1  Hello FALSE
+## 7      3  Hello  TRUE
+## 8      5  Hello FALSE
+## 9      7  Hello  TRUE
+## 10     9  Hello FALSE
 ```
 
 Alternatively, we could use the "Import Dataset" feature in RStudio which can be found in the environment window. (By default, the top-right pane of RStudio.)  Once completed, this process will automatically generate the code to import a file. The resulting code will be shown in the console window. In recent versions of RStudio, `read_csv()` is used by default, thus reading in a tibble.
@@ -1546,8 +1546,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1] -7.1681715  1.6334483  2.8935571  0.2077945  3.5101864  4.7828705
-##  [7]  4.9778958 11.6851693 -2.0808600 -1.4506747
+##  [1]  3.4928818  5.0152844  5.2748213 -0.7896884 -6.7271696 10.5554503
+##  [7]  7.9896255 -8.0920215 -0.6347020 -2.2744398
 ```
 
 These functions exist for many other distributions, including but not limited to:
@@ -1835,8 +1835,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1]  3.9952351 -3.3987457  4.2298591 -0.6522642 -0.5931462 -6.5414683
-##  [7]  7.1032848 -2.4584492  7.6382721 -4.6137433
+##  [1] -1.3997680 14.7805023  7.3453344 -6.1722987  8.7852186  4.7889890
+##  [7] 10.1099833 -1.4931966  2.8707613 -0.7748414
 ```
 
 ```r
@@ -1844,8 +1844,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1]  0.7082047 -0.7775868  0.7553515 -0.2256921 -0.2138126 -1.4091047
-##  [7]  1.3327551 -0.5886379  1.4402587 -1.0217359
+##  [1] -0.8185559  1.6880425  0.5362088 -1.5579019  0.7592713  0.1401876
+##  [7]  0.9644998 -0.8330296 -0.1569785 -0.7217442
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -1947,7 +1947,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 24.76515
+## [1] 41.66794
 ```
 
 ```r
@@ -1955,7 +1955,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 24.76515
+## [1] 41.66794
 ```
 
 ```r
@@ -1963,7 +1963,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 24.76515
+## [1] 41.66794
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -1974,7 +1974,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 22.28863
+## [1] 37.50115
 ```
 
 ## Hypothesis Tests in `R`
