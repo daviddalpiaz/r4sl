@@ -554,14 +554,14 @@ example_data
 The `data.frame()` function above is one way to create a data frame. We can also import data from various file types in into `R`, as well as use data stored in packages.
 
 ```{r, echo = FALSE}
-write.csv(example_data, "data/example_data.csv", row.names = FALSE)
+write.csv(example_data, "data/example-data.csv", row.names = FALSE)
 ```
 
-[The example data above can also be found here as a .csv file.](data/example_data.csv) To read this data into `R`, we would use the `read_csv()` function from the `readr` package. Note that `R` has a built in function `read.csv()` that operates very similarly. The `readr` function `read_csv()` has a number of advantages. For example, it is much faster reading larger data. [It also uses the `tibble` package to read the data as a tibble.](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html)
+[The example data above can also be found here as a .csv file.](data/example-data.csv) To read this data into `R`, we would use the `read_csv()` function from the `readr` package. Note that `R` has a built in function `read.csv()` that operates very similarly. The `readr` function `read_csv()` has a number of advantages. For example, it is much faster reading larger data. [It also uses the `tibble` package to read the data as a tibble.](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html)
 
 ```{r, message = FALSE, warning = FALSE}
 library(readr)
-example_data_from_csv = read_csv("data/example_data.csv")
+example_data_from_csv = read_csv("data/example-data.csv")
 ```
 
 This particular line of code assumes that the file `example_data.csv` exists in a folder called `data` in your current working directory.
