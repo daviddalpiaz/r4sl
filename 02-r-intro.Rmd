@@ -1124,7 +1124,7 @@ n     <- 9
 We can then easily compute the test statistic.
 
 ```{r}
-t <- (x_bar - mu_0) / (s / sqrt(n))
+t <- x_bar - mu_0) / (s / sqrt(n))
 t
 ```
 
