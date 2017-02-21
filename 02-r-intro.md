@@ -1092,12 +1092,12 @@ The `data.frame()` function above is one way to create a data frame. We can also
 
 
 
-[The example data above can also be found here as a .csv file.](data/example_data.csv) To read this data into `R`, we would use the `read_csv()` function from the `readr` package. Note that `R` has a built in function `read.csv()` that operates very similarly. The `readr` function `read_csv()` has a number of advantages. For example, it is much faster reading larger data. [It also uses the `tibble` package to read the data as a tibble.](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html)
+[The example data above can also be found here as a .csv file.](data/example-data.csv) To read this data into `R`, we would use the `read_csv()` function from the `readr` package. Note that `R` has a built in function `read.csv()` that operates very similarly. The `readr` function `read_csv()` has a number of advantages. For example, it is much faster reading larger data. [It also uses the `tibble` package to read the data as a tibble.](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html)
 
 
 ```r
 library(readr)
-example_data_from_csv = read_csv("data/example_data.csv")
+example_data_from_csv = read_csv("data/example-data.csv")
 ```
 
 This particular line of code assumes that the file `example_data.csv` exists in a folder called `data` in your current working directory.
@@ -1546,8 +1546,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1]  3.4928818  5.0152844  5.2748213 -0.7896884 -6.7271696 10.5554503
-##  [7]  7.9896255 -8.0920215 -0.6347020 -2.2744398
+##  [1]  5.9026078  4.6563074  1.6082419 -0.6541494  8.6338639 -2.6137579
+##  [7]  8.5864485  1.7603236 -5.1060761 -2.5173590
 ```
 
 These functions exist for many other distributions, including but not limited to:
@@ -1835,8 +1835,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1] -1.3997680 14.7805023  7.3453344 -6.1722987  8.7852186  4.7889890
-##  [7] 10.1099833 -1.4931966  2.8707613 -0.7748414
+##  [1]  5.9137392  7.5498591  0.7908942  9.8407527  2.4168566 -4.7332558
+##  [7]  2.0015101  1.2543718  5.6936327  4.2289120
 ```
 
 ```r
@@ -1844,8 +1844,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1] -0.8185559  1.6880425  0.5362088 -1.5579019  0.7592713  0.1401876
-##  [7]  0.9644998 -0.8330296 -0.1569785 -0.7217442
+##  [1]  0.5896166  0.9885740 -0.6595561  1.5471936 -0.2630757 -2.0065845
+##  [7] -0.3643552 -0.5465401  0.5359451  0.1787824
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -1947,7 +1947,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 41.66794
+## [1] 16.81812
 ```
 
 ```r
@@ -1955,7 +1955,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 41.66794
+## [1] 16.81812
 ```
 
 ```r
@@ -1963,7 +1963,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 41.66794
+## [1] 16.81812
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -1974,7 +1974,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 37.50115
+## [1] 15.13631
 ```
 
 ## Hypothesis Tests in `R`
