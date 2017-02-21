@@ -28,22 +28,22 @@ Unlike many of our previous methods, `knn()` requires that all predictors be num
 
 ```{r}
 set.seed(42)
-Default$student = as.numeric(Default$student) - 1
-default_index = sample(nrow(Default), 5000)
-default_train = Default[default_index, ]
-default_test = Default[-default_index, ]
+Default$student <- as.numeric(Default$student) - 1
+default_index <- sample(nrow(Default), 5000)
+default_train <- Default[default_index, ]
+default_test  <- Default[-default_index, ]
 ```
 
 Also unlike previous methods, `knn()` does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable. Note that the $y$ data should be a factor vector, **not** a data frame containing a factor vector.
 
 ```{r}
 # training data
-X_default_train = default_train[, -1]
-y_default_train = default_train$default
+X_default_train <- default_train[, -1]
+y_default_train <- default_train$default
 
 # testing data
-X_default_test = default_test[, -1]
-y_default_test = default_test$default
+X_default_test <- default_test[, -1]
+y_default_test <- default_test$default
 ```
 
 There is very little "training" with $k$-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that $k$-nearest neighbors is fast at training time. However, at test time, $k$-nearest neighbors is very slow. For each test case, the method must find the $k$-nearest neighbors, which is not computationally cheap. (Note that `knn()` uses Euclidean distance.)
@@ -65,7 +65,7 @@ Because of the lack of any need for training, the `knn()` function essentially r
 
 
 ```{r}
-accuracy = function(actual, predicted) {
+accuracy <- function(actual, predicted) {
   mean(actual == predicted)
 }
 ```
@@ -94,26 +94,26 @@ How do we choose $k$? Try different values and see which works best.
 
 ```{r}
 set.seed(42)
-k_to_try = 1:100
-acc_k = rep(x = 0, times = length(k_to_try))
+k_to_try <- 1:100
+acc_k <- rep(x = 0, times = length(k_to_try))
 
-for(i in seq_along(k_to_try)) {
-  pred = knn(train = scale(X_default_train), 
-             test = scale(X_default_test), 
-             cl = y_default_train, 
-             k = k_to_try[i])
-  acc_k[i] = accuracy(y_default_test, pred)
+for (i in seq_along(k_to_try)) {
+  pred <- knn(train = scale(X_default_train), 
+              test = scale(X_default_test), 
+              cl = y_default_train, 
+              k = k_to_try[i])
+  acc_k[i] <- accuracy(y_default_test, pred)
 }
 ```
 
 The `seq_along()` function can be very useful for looping over a vector that stores non-consecutive numbers. It often removes the need for an additional counter variable. We actually didn't need it in the above `knn()` example, but it is still a good habit. Here we see an example where we would have otherwise needed another variable.
 
 ```{r}
-ex_seq = seq(from = 1, to = 100, by = 5)
+ex_seq <- seq(from = 1, to = 100, by = 5)
 seq_along(ex_seq)
-ex_storage = rep(x = 0, times = length(ex_seq))
-for(i in seq_along(ex_seq)) {
-  ex_storage[i] = mean(rnorm(n = 10, mean = ex_seq[i], sd = 1))
+ex_storage <- rep(x = 0, times = length(ex_seq))
+for (i in seq_along(ex_seq)) {
+  ex_storage[i] <- mean(rnorm(n = 10, mean = ex_seq[i], sd = 1))
 }
 
 ex_storage
@@ -156,32 +156,32 @@ Like LDA and QDA, KNN can be used for both binary and multi-class problems. As a
 
 ```{r}
 set.seed(430)
-iris_obs = nrow(iris)
-iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
-iris_train = iris[iris_index, ]
-iris_test = iris[-iris_index, ]
+iris_obs <- nrow(iris)
+iris_index <- sample(iris_obs, size = trunc(0.50 * iris_obs))
+iris_train <- iris[iris_index, ]
+iris_test  <- iris[-iris_index, ]
 ```
 
 All the predictors here are numeric, so we proceed to splitting the data into predictors and classes.
 
 ```{r}
 # training data
-X_iris_train = iris_train[, -5]
-y_iris_train = iris_train$Species
+X_iris_train <- iris_train[, -5]
+y_iris_train <- iris_train$Species
 
 # testing data
-X_iris_test = iris_test[, -5]
-y_iris_test = iris_test$Species
+X_iris_test <- iris_test[, -5]
+y_iris_test <- iris_test$Species
 ```
 
 Like previous methods, we can obtain predicted probabilities given test predictors. To do so, we add an argument, `prob = TRUE`
 
 ```{r}
-iris_pred = knn(train = scale(X_iris_train), 
-                test = scale(X_iris_test),
-                cl = y_iris_train,
-                k = 10,
-                prob = TRUE)
+iris_pred <- knn(train = scale(X_iris_train), 
+                 test = scale(X_iris_test),
+                 cl = y_iris_train,
+                 k = 10,
+                 prob = TRUE)
 ```
 
 ```{r}
@@ -200,25 +200,25 @@ attributes(iris_pred)$prob
 We quickly illustrate KNN for regression using the `Boston` data. We'll only use `lstat` as a predictor, and `medv` as the response. We won't test-train split for this example since won't be checking RMSE, but instead plotting fitted models. There is also no need to worry about scaling since there is only one predictor.
 
 ```{r}
-X_boston = Boston["lstat"]
-y_boston = Boston$medv
+X_boston <- Boston["lstat"]
+y_boston <- Boston$medv
 ```
 
 We create a "test" set, that is a grid of `lstat` values at which we will predict `medv`.
 
 ```{r}
-lstat_grid = data.frame(lstat = seq(range(X_boston$lstat)[1], range(X_boston$lstat)[2], by = 0.01))
+lstat_grid <- data.frame(lstat = seq(range(X_boston$lstat)[1], range(X_boston$lstat)[2], by = 0.01))
 ```
 
 Unfortunately, `knn()` from `class` only handles classification. To perform regression, we will need `knn.reg()` from the `FNN` package. Notice that, we do **not** load this package, but instead use `FNN::knn.reg` to access the function. This is useful since `FNN` also contains a function `knn()` and would then mask `knn()` from `class`.
 
 ```{r}
-pred_001 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 1)
-pred_005 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 5)
-pred_010 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 10)
-pred_050 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 50)
-pred_100 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 100)
-pred_506 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 506)
+pred_001 <- FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 1)
+pred_005 <- FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 5)
+pred_010 <- FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 10)
+pred_050 <- FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 50)
+pred_100 <- FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 100)
+pred_506 <- FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 506)
 ```
 
 We make predictions for various values of `k`. Note that `506` is the number of observations in this dataset.

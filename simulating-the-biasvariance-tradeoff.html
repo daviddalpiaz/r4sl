@@ -280,7 +280,7 @@ E\left[\left(y_0 - \hat{f}(\mathbf x_0)\right)^2\right] = \text{bias}\left(\hat{
 <div id="simulation-1" class="section level2">
 <h2><span class="header-section-number">6.2</span> Simulation</h2>
 <p>We will illustrate this decomposition, and the resulting bias-variance tradeoff through simulation. Suppose we would like a train a model to learn the function <span class="math inline">\(f(x) = x^2\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f =<span class="st"> </span>function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span>function(x) {
   x ^<span class="st"> </span><span class="dv">2</span>
 }</code></pre></div>
 <p>More specifically,</p>
@@ -291,18 +291,18 @@ y = x^2 + \epsilon
 \epsilon \sim N(\mu = 0, \sigma^2 = 0.3^2).
 \]</span></p>
 <p>We write a function which generates data accordingly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_sim_data =<span class="st"> </span>function(f, <span class="dt">sample_size =</span> <span class="dv">100</span>) {
-  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
-  y =<span class="st"> </span><span class="kw">f</span>(x) +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_sim_data &lt;-<span class="st"> </span>function(f, <span class="dt">sample_size =</span> <span class="dv">100</span>) {
+  x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
+  y &lt;-<span class="st"> </span><span class="kw">f</span>(x) +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.3</span>)
   <span class="kw">data.frame</span>(x, y)
 }</code></pre></div>
 <p>To get a sense of the data, we generate one simulated dataset, and fit the four models that we will be of interest.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_data =<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_data &lt;-<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
 
-fit_1 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> sim_data)
-fit_2 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)
-fit_3 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)
-fit_4 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> sim_data)</code></pre></div>
+fit_1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> sim_data)
+fit_2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)
+fit_3 &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)
+fit_4 &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> sim_data)</code></pre></div>
 <p>Plotting these four trained models, we see that the zero predictor model (red) does very poorly. The single predictor model (blue) is reasonable, but we can see that the two (green) and three (orange) predictor models seem more appropriate. Between these latter two, it is hard to see which seems more appropriate.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
 <span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_data)
@@ -322,21 +322,21 @@ grid =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from
 <p><img src="06-sim-bias-var_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
 <p>We will now use simulation to estimate the bias, variance, and mean squared error for the estimates for <span class="math inline">\(f(x)\)</span> given by these models at the point <span class="math inline">\(x_0 = 0.95\)</span>. We use simulation to complete this task, as performing the exact calculations are always difficult, and often impossible.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
-n_sims =<span class="st"> </span><span class="dv">1000</span>
-n_models =<span class="st"> </span><span class="dv">4</span>
-x0 =<span class="st"> </span><span class="fl">0.95</span>
-predictions =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> n_sims, <span class="dt">ncol =</span> n_models)
-sim_data =<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
+n_sims &lt;-<span class="st"> </span><span class="dv">1000</span>
+n_models &lt;-<span class="st"> </span><span class="dv">4</span>
+x0 &lt;-<span class="st"> </span><span class="fl">0.95</span>
+predictions &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> n_sims, <span class="dt">ncol =</span> n_models)
+sim_data &lt;-<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
 <span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_data, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="fl">0.75</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1.5</span>))
 
 for (i in <span class="dv">1</span>:n_sims) {
   
-  sim_data =<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
+  sim_data &lt;-<span class="st"> </span><span class="kw">get_sim_data</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>)
 
-  fit_1 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> sim_data)
-  fit_2 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)
-  fit_3 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)
-  fit_4 =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> sim_data)
+  fit_1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> sim_data)
+  fit_2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)
+  fit_3 &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)
+  fit_4 &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> sim_data)
   
   <span class="kw">lines</span>(grid, <span class="kw">predict</span>(fit_1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> grid)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
   <span class="co"># lines(grid, predict(fit_2, newdata = data.frame(x = grid)), col = &quot;blue&quot;, lwd = 1)</span>
@@ -358,20 +358,20 @@ for (i in <span class="dv">1</span>:n_sims) {
 <div id="bias-variance-tradeoff" class="section level2">
 <h2><span class="header-section-number">6.3</span> Bias-Variance Tradeoff</h2>
 <p>To evaluate the bias and variance, we simulate values for the response <span class="math inline">\(y\)</span> at <span class="math inline">\(x_0 = 0.95\)</span> according to the true model.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eps =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_sims, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.3</span>)
-y0 =<span class="st"> </span><span class="kw">f</span>(x0) +<span class="st"> </span>eps</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_sims, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.3</span>)
+y0  &lt;-<span class="st"> </span><span class="kw">f</span>(x0) +<span class="st"> </span>eps</code></pre></div>
 <p><code>R</code> already has a function to calculate variance, however, we add functions for bias and mean squared error.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_bias =<span class="st"> </span>function(estimate, truth) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_bias &lt;-<span class="st"> </span>function(estimate, truth) {
   <span class="kw">mean</span>(estimate) -<span class="st"> </span>truth
 }
 
-get_mse =<span class="st"> </span>function(estimate, truth) {
+get_mse &lt;-<span class="st"> </span>function(estimate, truth) {
   <span class="kw">mean</span>((estimate -<span class="st"> </span>truth) ^<span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <p>When then use the predictions obtained from the above simulation to estimate the bias, variance and mean squared error for estimating <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0 = 0.95\)</span> for the four models.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bias =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_bias, <span class="kw">f</span>(x0))
-variance =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, var)
-mse =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_mse, y0)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bias &lt;-<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_bias, <span class="kw">f</span>(x0))
+variance &lt;-<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, var)
+mse &lt;-<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_mse, y0)</code></pre></div>
 <p>We summarize these results in the following table.</p>
 <table>
 <thead>

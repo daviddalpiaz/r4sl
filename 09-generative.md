@@ -27,11 +27,11 @@ To illustrate these new methods, we return to the iris data, which you may remem
 
 ```r
 set.seed(430)
-iris_obs = nrow(iris)
-iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
-# iris_index = sample(iris_obs, size = trunc(0.10 * iris_obs))
-iris_train = iris[iris_index, ]
-iris_test = iris[-iris_index, ]
+iris_obs <- nrow(iris)
+iris_index <- sample(iris_obs, size = trunc(0.50 * iris_obs))
+# iris_index <- sample(iris_obs, size = trunc(0.10 * iris_obs))
+iris_train <- iris[iris_index, ]
+iris_test  <- iris[-iris_index, ]
 ```
 
 
@@ -99,7 +99,7 @@ To fit an LDA model, we use the `lda()` function from the `MASS` package.
 
 ```r
 library(MASS)
-iris_lda = lda(Species ~ ., data = iris_train)
+iris_lda <- lda(Species ~ ., data = iris_train)
 iris_lda
 ```
 
@@ -180,15 +180,15 @@ As we should come to expect, the `predict()` function operates in a new way when
 
 
 ```r
-iris_lda_train_pred = predict(iris_lda, iris_train)$class
-iris_lda_test_pred = predict(iris_lda, iris_test)$class
+iris_lda_train_pred <- predict(iris_lda, iris_train)$class
+iris_lda_test_pred  <- predict(iris_lda, iris_test)$class
 ```
 
 We store the predictions made on the train and test sets.
 
 
 ```r
-accuracy = function(actual, predicted) {
+accuracy <- function(actual, predicted) {
   mean(actual == predicted)
 }
 ```
@@ -229,7 +229,7 @@ Looking at the test set, we see that we are perfectly predicting both setosa and
 
 
 ```r
-iris_lda_flat = lda(Species ~ ., data = iris_train, prior = c(1, 1, 1) / 3)
+iris_lda_flat <- lda(Species ~ ., data = iris_train, prior = c(1, 1, 1) / 3)
 iris_lda_flat
 ```
 
@@ -263,8 +263,8 @@ Instead of learning (estimating) the proportion of the three species from the da
 
 
 ```r
-iris_lda_flat_train_pred = predict(iris_lda_flat, iris_train)$class
-iris_lda_flat_test_pred = predict(iris_lda_flat, iris_test)$class
+iris_lda_flat_train_pred <- predict(iris_lda_flat, iris_train)$class
+iris_lda_flat_test_pred  <- predict(iris_lda_flat, iris_test)$class
 ```
 
 
@@ -303,7 +303,7 @@ Notice that now $\Sigma_k$ **does** depend on $k$, that is, we are allowing a di
 
 
 ```r
-iris_qda = qda(Species ~ ., data = iris_train)
+iris_qda <- qda(Species ~ ., data = iris_train)
 iris_qda
 ```
 
@@ -328,8 +328,8 @@ Consider trying to fit QDA again, but this time with a smaller training set. (Us
 
 
 ```r
-iris_qda_train_pred = predict(iris_qda, iris_train)$class
-iris_qda_test_pred = predict(iris_qda, iris_test)$class
+iris_qda_train_pred <- predict(iris_qda, iris_train)$class
+iris_qda_test_pred  <- predict(iris_qda, iris_test)$class
 ```
 
 The `predict()` function operates the same as the `predict()` function for LDA.
@@ -396,7 +396,7 @@ When $p = 1$, this version of naive Bayes is equivalent to QDA.
 
 ```r
 library(e1071)
-iris_nb = naiveBayes(Species ~ ., data = iris_train)
+iris_nb <- naiveBayes(Species ~ ., data = iris_train)
 iris_nb
 ```
 
@@ -481,8 +481,8 @@ Oh look, `predict()` has another new mode of operation. If only there were a way
 
 
 ```r
-iris_nb_train_pred = predict(iris_nb, iris_train)
-iris_nb_test_pred = predict(iris_nb, iris_test)
+iris_nb_train_pred <- predict(iris_nb, iris_train)
+iris_nb_test_pred  <- predict(iris_nb, iris_test)
 ```
 
 
@@ -547,12 +547,12 @@ So far, we have assumed that all predictors are numeric. What happens with categ
 
 
 ```r
-iris_train_mod = iris_train
+iris_train_mod <- iris_train
 
-iris_train_mod$Sepal.Width = ifelse(iris_train$Sepal.Width > 3, 
-                                    ifelse(iris_train$Sepal.Width > 4, 
-                                           "Large", "Medium"),
-                                    "Small")
+iris_train_mod$Sepal.Width <- ifelse(iris_train$Sepal.Width > 3, 
+                                     ifelse(iris_train$Sepal.Width > 4, 
+                                            "Large", "Medium"), 
+                                     "Small")
 
 unique(iris_train_mod$Sepal.Width)
 ```

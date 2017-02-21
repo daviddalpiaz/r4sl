@@ -29,9 +29,9 @@ As we did with regression, we test-train split our data. In this case, using 50%
 
 ```{r}
 set.seed(42)
-train_index = sample(nrow(Default), 5000)
-train_default = Default[train_index, ]
-test_default = Default[-train_index, ]
+train_index   <- sample(nrow(Default), 5000)
+train_default <- Default[train_index, ]
+test_default  <- Default[-train_index, ]
 ```
 
 
@@ -135,7 +135,7 @@ $$
 So we predict an individual is a defaulter if their `balance` is above 1400, and not a defaulter if the balance is 1400 or less.
 
 ```{r}
-simple_class = function(x, boundary, above = 1, below = 0) {
+simple_class <- function(x, boundary, above = 1, below = 0) {
   ifelse(x > boundary, above, below)
 }
 ```
@@ -143,10 +143,10 @@ simple_class = function(x, boundary, above = 1, below = 0) {
 We write a simple `R` function that compares a variable to a boundary, then use it to make predictions on the train and test sets with our chosen variable and boundary.
 
 ```{r}
-train_pred = simple_class(x = train_default$balance, 
+train_pred <- simple_class(x = train_default$balance, 
+                           boundary = 1400, above = "Yes", below = "No")
+test_pred <- simple_class(x = test_default$balance, 
                           boundary = 1400, above = "Yes", below = "No")
-test_pred = simple_class(x = test_default$balance, 
-                         boundary = 1400, above = "Yes", below = "No")
 head(train_pred, n = 10)
 ```
 
@@ -158,11 +158,11 @@ In the classification setting, there are a large number of metrics to asses how 
 One of the most obvious things to do is arrange predictions and true values in a cross table.
 
 ```{r}
-(train_tab = table(predicted = train_pred, actual = train_default$default))
+(train_tab <- table(predicted = train_pred, actual = train_default$default))
 ```
 
 ```{r}
-(test_tab = table(predicted = test_pred, actual = test_default$default))
+(test_tab <- table(predicted = test_pred, actual = test_default$default))
 ```
 
 Often we give specific names to individual cells of these tables, and in the predictive setting, we would call this table a [**confusion matrix**](https://en.wikipedia.org/wiki/Confusion_matrix). Be aware, that the placement of Actual and Predicted values affects the names of the cells, and often the matrix may be presented transposed.
@@ -174,8 +174,8 @@ In statistics, we label the errors Type I and Type II, but these are hard to rem
 The `confusionMatrix()` function from the `caret` package can be used to obtain a wealth of additional information, which we see output below for the test data. Note that we specify which category is considered "positive."
 
 ```{r}
-train_con_mat = confusionMatrix(train_tab, positive = "Yes")
-(test_con_mat = confusionMatrix(test_tab, positive = "Yes"))
+train_con_mat <- confusionMatrix(train_tab, positive = "Yes")
+(test_con_mat <- confusionMatrix(test_tab, positive = "Yes"))
 ```
 
 The most common, and most important metric is the **classification accuracy**. 
@@ -260,9 +260,9 @@ $$
 This classifier simply classifies all observations as negative cases.
 
 ```{r}
-pred_all_no = simple_class(test_default$balance, 
-                           boundary = 1400, above = "No", below = "No")
-table(predicted = pred_all_no, actual = test_default$default)
+pred_all_no <- simple_class(test_default$balance, 
+                            boundary = 1400, above = "No", below = "No")
+table(predicted <- pred_all_no, actual = test_default$default)
 ```
 
 The `confusionMatrix()` function won't even accept this table as input, because it isn't a full matrix, only one row, so we calculate some metrics "by hand".

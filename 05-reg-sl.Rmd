@@ -27,7 +27,7 @@ to indicate that the true response is a function of both the unknown relationshi
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE}
 library(readr)
-Advertising = read_csv("data/Advertising.csv")
+Advertising <- read_csv("data/Advertising.csv")
 ```
 
 To discuss linear models in the context of prediction, we return to the `Advertising` data from the previous chapter.
@@ -61,7 +61,7 @@ $$
 We can write an `R` function that will be useful for performing this calculation.
 
 ```{r}
-rmse = function(actual, predicted) {
+rmse <- function(actual, predicted) {
   sqrt(mean((actual - predicted) ^ 2))
 }
 ```
@@ -74,7 +74,7 @@ Aside from how well a model predicts, we will also be very interested in the com
 We write a simple `R` function to extract this information from a model.
 
 ```{r}
-get_complexity = function(model) {
+get_complexity <- function(model) {
   length(coef(model)) - 1
 }
 ```
@@ -94,11 +94,11 @@ Here we use the `sample()` function to obtain a random sample of the rows of the
 
 ```{r}
 set.seed(9)
-num_obs = nrow(Advertising)
+num_obs <- nrow(Advertising)
 
-train_index = sample(num_obs, size = trunc(0.50 * num_obs))
-train_data = Advertising[train_index, ]
-test_data = Advertising[-train_index, ]
+train_index <- sample(num_obs, size = trunc(0.50 * num_obs))
+train_data  <- Advertising[train_index, ]
+test_data   <- Advertising[-train_index, ]
 ```
 
 We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**.
@@ -118,7 +118,7 @@ Here $n_{Te}$ is the number of observations in the test set. Test RMSE uses the 
 We will start with the simplest possible linear model, that is, a model with no predictors.
 
 ```{r}
-fit_0 = lm(Sales ~ 1, data = train_data)
+fit_0 <- lm(Sales ~ 1, data = train_data)
 get_complexity(fit_0)
 
 # train RMSE
@@ -139,7 +139,7 @@ rmse(actual = test_data$Sales, predicted = predict(fit_0, test_data))
 This function can actually be improved for the inputs that we are using. We would like to obtain train and test RMSE for a fitted model, given a train or test dataset, and the appropriate response variable.
 
 ```{r}
-get_rmse = function(model, data, response) {
+get_rmse <- function(model, data, response) {
   rmse(actual = data[, response], 
        predicted = predict(model, data))
 }
@@ -158,7 +158,7 @@ get_rmse(model = fit_0, data = test_data, response = "Sales") # test RMSE
 Each successive model we fit will be more and more flexible using both interactions and polynomial terms. We will see the training error decrease each time the model is made more flexible. We expect the test error to decrease a number of times, then eventually start going up, as a result of overfitting.
 
 ```{r}
-fit_1 = lm(Sales ~ ., data = train_data)
+fit_1 <- lm(Sales ~ ., data = train_data)
 get_complexity(fit_1)
 
 get_rmse(model = fit_1, data = train_data, response = "Sales") # train RMSE
@@ -166,7 +166,7 @@ get_rmse(model = fit_1, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```{r}
-fit_2 = lm(Sales ~ Radio * Newspaper * TV, data = train_data)
+fit_2 <- lm(Sales ~ Radio * Newspaper * TV, data = train_data)
 get_complexity(fit_2)
 
 get_rmse(model = fit_2, data = train_data, response = "Sales") # train RMSE
@@ -174,7 +174,7 @@ get_rmse(model = fit_2, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```{r}
-fit_3 = lm(Sales ~ Radio * Newspaper * TV + I(TV ^ 2), data = train_data)
+fit_3 <- lm(Sales ~ Radio * Newspaper * TV + I(TV ^ 2), data = train_data)
 get_complexity(fit_3)
 
 get_rmse(model = fit_3, data = train_data, response = "Sales") # train RMSE
@@ -182,8 +182,8 @@ get_rmse(model = fit_3, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```{r}
-fit_4 = lm(Sales ~ Radio * Newspaper * TV + 
-           I(TV ^ 2) + I(Radio ^ 2) + I(Newspaper ^ 2), data = train_data)
+fit_4 <- lm(Sales ~ Radio * Newspaper * TV + 
+            I(TV ^ 2) + I(Radio ^ 2) + I(Newspaper ^ 2), data = train_data)
 get_complexity(fit_4)
 
 get_rmse(model = fit_4, data = train_data, response = "Sales") # train RMSE
@@ -191,8 +191,8 @@ get_rmse(model = fit_4, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```{r}
-fit_5 = lm(Sales ~ Radio * Newspaper * TV +
-           I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
+fit_5 <- lm(Sales ~ Radio * Newspaper * TV +
+            I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
 get_complexity(fit_5)
 
 get_rmse(model = fit_5, data = train_data, response = "Sales") # train RMSE
@@ -206,37 +206,37 @@ To better understand the relationship between train RMSE, test RMSE, and model c
 First, we recap the models that we have fit.
 
 ```{r, eval = FALSE}
-fit_1 = lm(Sales ~ ., data = train_data)
-fit_2 = lm(Sales ~ Radio * Newspaper * TV, data = train_data)
-fit_3 = lm(Sales ~ Radio * Newspaper * TV + I(TV ^ 2), data = train_data)
-fit_4 = lm(Sales ~ Radio * Newspaper * TV + 
-           I(TV ^ 2) + I(Radio ^ 2) + I(Newspaper ^ 2), data = train_data)
-fit_5 = lm(Sales ~ Radio * Newspaper * TV +
-           I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
+fit_1 <- lm(Sales ~ ., data = train_data)
+fit_2 <- lm(Sales ~ Radio * Newspaper * TV, data = train_data)
+fit_3 <- lm(Sales ~ Radio * Newspaper * TV + I(TV ^ 2), data = train_data)
+fit_4 <- lm(Sales ~ Radio * Newspaper * TV + 
+            I(TV ^ 2) + I(Radio ^ 2) + I(Newspaper ^ 2), data = train_data)
+fit_5 <- lm(Sales ~ Radio * Newspaper * TV +
+            I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
 ```
 
 Next, we create a list of the models fit.
 
 ```{r}
-model_list = list(fit_1, fit_2, fit_3, fit_4, fit_5)
+model_list <- list(fit_1, fit_2, fit_3, fit_4, fit_5)
 ```
 
 We then obtain train RMSE, test RMSE, and model complexity for each.
 
 ```{r}
-train_rmse = sapply(model_list, get_rmse, data = train_data, response = "Sales")
-test_rmse = sapply(model_list, get_rmse, data = test_data, response = "Sales")
-model_complexity = sapply(model_list, get_complexity)
+train_rmse <- sapply(model_list, get_rmse, data = train_data, response = "Sales")
+test_rmse  <- sapply(model_list, get_rmse, data = test_data, response = "Sales")
+model_complexity <- sapply(model_list, get_complexity)
 ```
 
 ```{r, echo = FALSE, eval = FALSE}
 # the following is the same as the apply command above
 
-test_rmse = c(get_rmse(fit_1, test_data, "Sales"),
-              get_rmse(fit_2, test_data, "Sales"),
-              get_rmse(fit_3, test_data, "Sales"),
-              get_rmse(fit_4, test_data, "Sales"),
-              get_rmse(fit_5, test_data, "Sales"))
+test_rmse <- c(get_rmse(fit_1, test_data, "Sales"),
+               get_rmse(fit_2, test_data, "Sales"),
+               get_rmse(fit_3, test_data, "Sales"),
+               get_rmse(fit_4, test_data, "Sales"),
+               get_rmse(fit_5, test_data, "Sales"))
 ```
 
 We then plot the results. The train RMSE can be seen in blue, while the test RMSE is given in orange.

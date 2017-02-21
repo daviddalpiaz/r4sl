@@ -189,11 +189,11 @@ c(1, 3, 5, 7, 8, 9)
 ## [1] 1 3 5 7 8 9
 ```
 
-Here `R` simply outputs this vector. If we would like to store this vector in a **variable** we can do so with the **assignment** operator `=`. In this case the variable `x` now holds the vector we just created, and we can access the vector by typing `x`.
+Here `R` simply outputs this vector. If we would like to store this vector in a **variable** we can do so with the **assignment** operator `<-`. In this case the variable `x` now holds the vector we just created, and we can access the vector by typing `x`.
 
 
 ```r
-x = c(1, 3, 5, 7, 8, 9)
+x <- c(1, 3, 5, 7, 8, 9)
 x
 ```
 
@@ -201,17 +201,19 @@ x
 ## [1] 1 3 5 7 8 9
 ```
 
-As an aside, there is a long history of the assignment operator in `R`, partially due to the keys available on the [keyboards of the creators of the `S` language.](https://twitter.com/kwbroman/status/747829864091127809) (Which preceded `R`.) For simplicity we will use `=`, but know that often you will see `<-` as the assignment operator. 
+As an aside, there is a long history of the assignment operator in `R`, partially due to the keys available on the [keyboards of the creators of the `S` language.](https://twitter.com/kwbroman/status/747829864091127809) (Which preceded `R`.) In many cases, the use of `=` in place of `<-` will simply work.
 
 The pros and cons of these two are well beyond the scope of this book, but know that for our purposes you will have no issue if you simply use `=`. If you are interested in the weird cases where the difference matters, check out [The R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/).
 
-If you wish to use `<-`, you will still need to use `=`, however only for argument passing. Some users like to keep assignment (`<-`) and argument passing (`=`) separate. No matter what you choose, the more important thing is that you **stay consistent**. Also, if working on a larger collaborative project, you should use whatever style is already in place.
+If you wish to use `<-`, you will still need to use `=`, however only for argument passing. THis is considered a positive of using `<-`, keeping assignment (`<-`) and argument passing (`=`) separate.
+
+No matter what you choose, the more important thing is that you **stay consistent**. Also, if working on a larger collaborative project, you should use whatever style is already in place. If you plan to work with the `R` community, you will find that most use `<-`.
 
 Frequently you may wish to create a vector based on a sequence of numbers. The quickest and easiest way to do this is with the `:` operator, which creates a sequence of integers between two specified integers.
 
 
 ```r
-(y = 1:100)
+(y <- 1:100)
 ```
 
 ```
@@ -288,7 +290,7 @@ One of the biggest strengths of `R` is its use of vectorized operations. (Freque
 
 
 ```r
-x = 1:10
+x <- 1:10
 x + 1
 ```
 
@@ -334,9 +336,9 @@ We see that when a function like `log()` is called on a vector `x`, a vector is 
 
 
 ```r
-vec_1 = 1:10
-vec_2 = 1:1000
-vec_3 = 42
+vec_1 <- 1:10
+vec_2 <- 1:1000
+vec_3 <- 42
 ```
 
 The length of a vector can be obtained with the `length()` function.
@@ -479,7 +481,7 @@ Matrices can be created using the `matrix` function.
 
 
 ```r
-x = 1:9
+x <- 1:9
 x
 ```
 
@@ -488,7 +490,7 @@ x
 ```
 
 ```r
-X = matrix(x, nrow = 3, ncol = 3)
+X <- matrix(x, nrow = 3, ncol = 3)
 X
 ```
 
@@ -505,7 +507,7 @@ By default the `matrix` function reorders a vector into columns, but we can also
 
 
 ```r
-Y = matrix(x, nrow = 3, ncol = 3, byrow = TRUE)
+Y <- matrix(x, nrow = 3, ncol = 3, byrow = TRUE)
 Y
 ```
 
@@ -520,7 +522,7 @@ We can also create a matrix of a specified dimension where every element is the 
 
 
 ```r
-Z = matrix(0, 2, 4)
+Z <- matrix(0, 2, 4)
 Z
 ```
 
@@ -586,7 +588,7 @@ Matrices can also be created by combining vectors as columns, using `cbind`, or 
 
 
 ```r
-x = 1:9
+x <- 1:9
 rev(x)
 ```
 
@@ -636,10 +638,10 @@ rbind(x, rev(x), rep(1, 9))
 
 
 ```r
-x = 1:9
-y = 9:1
-X = matrix(x, 3, 3)
-Y = matrix(y, 3, 3)
+x <- 1:9
+y <- 9:1
+X <- matrix(x, 3, 3)
+Y <- matrix(y, 3, 3)
 X
 ```
 
@@ -733,7 +735,7 @@ t(X)
 
 
 ```r
-Z = matrix(c(9, 2, -3, 2, 4, -2, -3, -2, 16), 3, byrow = TRUE)
+Z <- matrix(c(9, 2, -3, 2, 4, -2, -3, -2, 16), 3, byrow = TRUE)
 Z
 ```
 
@@ -759,7 +761,7 @@ solve(Z)
 
 
 ```r
-X = matrix(1:6, 2, 3)
+X <- matrix(1:6, 2, 3)
 X
 ```
 
@@ -858,8 +860,8 @@ Certain operations in `R`, for example `%*%` have different behavior on vectors 
 
 
 ```r
-a_vec = c(1, 2, 3)
-b_vec = c(2, 2, 2)
+a_vec <- c(1, 2, 3)
+b_vec <- c(2, 2, 2)
 ```
 
 Note that these are indeed vectors. They are not matrices.
@@ -988,8 +990,8 @@ is used repeatedly.
 
 
 ```r
-C_mat = matrix(c(1, 2, 3, 4, 5, 6), 2, 3)
-D_mat = matrix(c(2, 2, 2, 2, 2, 2), 2, 3)
+C_mat <- matrix(c(1, 2, 3, 4, 5, 6), 2, 3)
+D_mat <- matrix(c(2, 2, 2, 2, 2, 2), 2, 3)
 ```
 
 This is useful both as a shortcut for a frequent calculation and as a more efficient implementation than using `t()` and `%*%`.
@@ -1062,9 +1064,9 @@ We have previously seen vectors and matrices for storing data as we introduced `
 
 
 ```r
-example_data = data.frame(x = c(1, 3, 5, 7, 9, 1, 3, 5, 7, 9),
-                          y = rep("Hello", 10),
-                          z = rep(c("TRUE", "FALSE"), 5))
+example_data <- data.frame(x = c(1, 3, 5, 7, 9, 1, 3, 5, 7, 9),
+                           y = rep("Hello", 10),
+                           z = rep(c("TRUE", "FALSE"), 5))
 ```
 
 Unlike a matrix, which can be thought of as a vector rearranged into rows and columns, a data frame is not required to have the same data type for each element. A data frame is a **list** of vectors. So, each vector must contain the same data type, but the different vectors can store different data types. 
@@ -1130,7 +1132,7 @@ The `as_tibble()` function can be used to coerce a regular data frame to a tibbl
 
 ```r
 library(tibble)
-example_data = as_tibble(example_data)
+example_data <- as_tibble(example_data)
 example_data
 ```
 
@@ -1546,8 +1548,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1] 11.18896378  3.00342132  8.01525231 14.00560950  8.13573205
-##  [6]  5.82376926  3.18701918  3.22775186 -4.86307995  0.07524648
+##  [1]  0.1238314  3.6842837  3.7765429 -3.8087257  6.5152139  0.6663078
+##  [7]  0.8282499  4.0299349  0.1503051  3.7061225
 ```
 
 These functions exist for many other distributions, including but not limited to:
@@ -1593,8 +1595,8 @@ In `R`, logical operators are vectorized. To demonstrate this, we will use the f
 
 
 ```r
-heights = c(110, 120, 115, 136, 205, 156, 175)
-weights = c(64, 67, 62, 60, 77, 70, 66)
+heights <- c(110, 120, 115, 136, 205, 156, 175)
+weights <- c(64, 67, 62, 60, 77, 70, 66)
 ```
 
 First, using the `<` operator, when can find which `heights` are less than `121`. Further, we could also find which `heights` are less than `121` or exactly equal to `156.`
@@ -1647,8 +1649,8 @@ When comparing vectors, be sure you are comparing vectors of the same length.
 
 
 ```r
-a = 1:10
-b = 2:4
+a <- 1:10
+b <- 2:4
 a < b
 ```
 
@@ -1715,13 +1717,13 @@ For example,
 
 
 ```r
-x = 1
-y = 3
+x <- 1
+y <- 3
 if (x > y) {
-  z = x * y
+  z <- x * y
   print("x is larger than y")
 } else {
-  z = x + 5 * y
+  z <- x + 5 * y
   print("x is less than or equal to y")
 }
 ```
@@ -1753,7 +1755,7 @@ The real power of `ifelse()` comes from its ability to be applied to vectors.
 
 
 ```r
-fib = c(1, 1, 2, 3, 5, 8, 13, 21)
+fib <- c(1, 1, 2, 3, 5, 8, 13, 21)
 ifelse(fib > 6, "Foo", "Bar")
 ```
 
@@ -1765,9 +1767,9 @@ Now a `for` loop example,
 
 
 ```r
-x = 11:15
+x <- 11:15
 for (i in 1:5) {
-  x[i] = x[i] * 2
+  x[i] <- x[i] * 2
 }
 
 x
@@ -1781,8 +1783,8 @@ Note that this `for` loop is very normal in many programming languages, but not 
 
 
 ```r
-x = 11:15
-x = x * 2
+x <- 11:15
+x <- x * 2
 x
 ```
 
@@ -1817,7 +1819,7 @@ In `R` we would write a function to do this. When writing a function, there are 
 
 
 ```r
-standardize = function(x) {
+standardize <- function(x) {
   m = mean(x)
   std = sd(x)
   result = (x - m) / std
@@ -1831,12 +1833,12 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 
 
 ```r
-(test_sample = rnorm(n = 10, mean = 2, sd = 5))
+(test_sample <- rnorm(n = 10, mean = 2, sd = 5))
 ```
 
 ```
-##  [1]  4.5167383  1.8565371  1.2348970  0.3881103  0.4191004 -2.6265575
-##  [7]  6.0938238 -9.4904537 -6.5054736 -5.4149236
+##  [1] -0.8618044 11.3967188  7.2341399 -7.4683400  4.5472009 -0.9584286
+##  [7] -0.6846457  8.3619107 -0.9993157 -0.5235569
 ```
 
 ```r
@@ -1844,15 +1846,15 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1]  1.1003739  0.5651907  0.4401282  0.2697704  0.2760050 -0.3367250
-##  [7]  1.4176543 -1.7176138 -1.1170911 -0.8976926
+##  [1] -0.5033490  1.6494430  0.9184278 -1.6635620  0.4465585 -0.5203178
+##  [7] -0.4722372  1.1164823 -0.5274982 -0.4439474
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
 
 
 ```r
-standardize = function(x) {
+standardize <- function(x) {
   (x - mean(x)) / sd(x)
 }
 ```
@@ -1861,7 +1863,7 @@ When specifying arguments, you can provide default arguments.
 
 
 ```r
-power_of_num = function(num, power = 2) {
+power_of_num <- function(num, power = 2) {
   num ^ power
 }
 ```
@@ -1935,7 +1937,7 @@ It will also have the ability to return the biased estimate (based on maximum li
 
 
 ```r
-get_var = function(x, biased = FALSE) {
+get_var <- function(x, biased = FALSE) {
   n = length(x) - 1 * !biased
   (1 / n) * sum((x - mean(x)) ^ 2)
 }
@@ -1947,7 +1949,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 24.70723
+## [1] 32.42442
 ```
 
 ```r
@@ -1955,7 +1957,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 24.70723
+## [1] 32.42442
 ```
 
 ```r
@@ -1963,7 +1965,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 24.70723
+## [1] 32.42442
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -1974,7 +1976,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 22.2365
+## [1] 29.18197
 ```
 
 ## Hypothesis Tests in `R`
@@ -2018,7 +2020,7 @@ Suppose a grocery store sells "16 ounce" boxes of *Captain Crisp* cereal. A rand
 
 
 ```r
-capt_crisp = data.frame(weight = c(15.5, 16.2, 16.1, 15.8, 15.6, 16.0, 15.8, 15.9, 16.2))
+capt_crisp <- data.frame(weight = c(15.5, 16.2, 16.1, 15.8, 15.6, 16.0, 15.8, 15.9, 16.2))
 ```
 
 The company that makes *Captain Crisp* cereal claims that the average weight of a box is at least 16 ounces. We will assume the weight of cereal in a box is normally distributed and use a 0.05 level of significance to test the company's claim.
@@ -2033,17 +2035,17 @@ The sample mean $\bar{x}$ and the sample standard deviation $s$ can be easily co
 
 
 ```r
-x_bar = mean(capt_crisp$weight)
-s     = sd(capt_crisp$weight)
-mu_0  = 16
-n     = 9
+x_bar <- mean(capt_crisp$weight)
+s     <- sd(capt_crisp$weight)
+mu_0  <- 16
+n     <- 9
 ```
 
 We can then easily compute the test statistic.
 
 
 ```r
-t = (x_bar - mu_0) / (s / sqrt(n))
+t <- (x_bar - mu_0) / (s / sqrt(n))
 t
 ```
 
@@ -2103,8 +2105,8 @@ Since the test was one-sided, `R` returned a one-sided confidence interval. If i
 
 
 ```r
-capt_test_results = t.test(capt_crisp$weight, mu = 16,
-                           alternative = c("two.sided"), conf.level = 0.95)
+capt_test_results <- t.test(capt_crisp$weight, mu = 16,
+                            alternative = c("two.sided"), conf.level = 0.95)
 ```
 
 This time we have stored the results. By doing so, we can directly access portions of the output from `t.test()`. To see what information is available we use the `names()` function.
@@ -2187,16 +2189,16 @@ Assume that the distributions of $X$ and $Y$ are $\mathrm{N}(\mu_{1},\sigma^{2})
 
 
 ```r
-x = c(70, 82, 78, 74, 94, 82)
-n = length(x)
+x <- c(70, 82, 78, 74, 94, 82)
+n <- length(x)
 ```
 
 and the $m = 8$ observations of $Y$,
 
 
 ```r
-y = c(64, 72, 60, 76, 72, 80, 84, 68)
-m = length(y)
+y <- c(64, 72, 60, 76, 72, 80, 84, 68)
+m <- length(y)
 ```
 
 we will test $H_{0}: \mu_{1} = \mu_{2}$ versus $H_{1}: \mu_{1} > \mu_{2}$.
@@ -2205,10 +2207,10 @@ First, note that we can calculate the sample means and standard deviations.
 
 
 ```r
-x_bar = mean(x)
-s_x   = sd(x)
-y_bar = mean(y)
-s_y   = sd(y)
+x_bar <- mean(x)
+s_x   <- sd(x)
+y_bar <- mean(y)
+s_y   <- sd(y)
 ```
 
 We can then calculate the pooled standard deviation.
@@ -2219,7 +2221,7 @@ s_{p} = \sqrt{\frac{(n-1)s_{x}^{2}+(m-1)s_{y}^{2}}{n+m-2}}
 
 
 ```r
-s_p = sqrt(((n - 1) * s_x ^ 2 + (m - 1) * s_y ^ 2) / (n + m - 2))
+s_p <- sqrt(((n - 1) * s_x ^ 2 + (m - 1) * s_y ^ 2) / (n + m - 2))
 ```
 
 Thus, the relevant $t$ test statistic is given by
@@ -2230,7 +2232,7 @@ t = \frac{(\bar{x}-\bar{y})-\mu_{0}}{s_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}.
 
 
 ```r
-t = ((x_bar - y_bar) - 0) / (s_p * sqrt(1 / n + 1 / m))
+t <- ((x_bar - y_bar) - 0) / (s_p * sqrt(1 / n + 1 / m))
 t
 ```
 
@@ -2280,8 +2282,8 @@ Above we carried out the analysis using two vectors `x` and `y`. In general, we 
 
 
 ```r
-t_test_data = data.frame(values = c(x, y),
-                         group  = c(rep("A", length(x)), rep("B", length(y))))
+t_test_data <- data.frame(values = c(x, y),
+                          group  = c(rep("A", length(x)), rep("B", length(y))))
 ```
 
 We now have the data stored in a single variables (`values`) and have created a second variable (`group`) which indicates which "sample" the value belongs to.
@@ -2423,8 +2425,8 @@ We will repeat the process a large number of times. Then we will use the distrib
 
 ```r
 set.seed(42)
-num_samples = 10000
-differences = rep(0, num_samples)
+num_samples <- 10000
+differences <- rep(0, num_samples)
 ```
 
 Before starting our `for` loop to perform the operation, we set a seed for reproducibility, create and set a variable `num_samples` which will define the number of repetitions, and lastly create a variables `differences` which will store the simulate values, $d_s$.
@@ -2434,9 +2436,9 @@ By using `set.seed()` we can reproduce the random results of `rnorm()` each time
 
 ```r
 for (s in 1:num_samples) {
-  x1 = rnorm(n = 25, mean = 6, sd = 2)
-  x2 = rnorm(n = 25, mean = 5, sd = 2)
-  differences[s] = mean(x1) - mean(x2)
+  x1 <- rnorm(n = 25, mean = 6, sd = 2)
+  x2 <- rnorm(n = 25, mean = 5, sd = 2)
+  differences[s] <- mean(x1) - mean(x2)
 }
 ```
 
@@ -2490,7 +2492,7 @@ We could have also accomplished this task with a single line of more "idiomatic"
 
 ```r
 set.seed(42)
-diffs = replicate(10000, mean(rnorm(25, 6, 2)) - mean(rnorm(25, 5, 2)))
+diffs <- replicate(10000, mean(rnorm(25, 6, 2)) - mean(rnorm(25, 5, 2)))
 ```
 
 Use `?replicate` to take a look at the documentation for the `replicate` function and see if you can understand how this line performs the same operations that our `for` loop above executed.
@@ -2539,22 +2541,22 @@ The following verifies this result for a Poisson distribution with $\mu = 10$ an
 
 ```r
 set.seed(1337)
-mu          = 10
-sample_size = 50
-samples     = 100000
-x_bars      = rep(0, samples)
+mu <- 10
+sample_size <- 50
+samples <- 100000
+x_bars <- rep(0, samples)
 ```
 
 
 ```r
 for(i in 1:samples){
-  x_bars[i] = mean(rpois(sample_size, lambda = mu))
+  x_bars[i] <- mean(rpois(sample_size, lambda = mu))
 }
 ```
 
 
 ```r
-x_bar_hist = hist(x_bars, breaks = 50, 
+x_bar_hist <- hist(x_bars, breaks = 50, 
                   main = "Histogram of Sample Means",
                   xlab = "Sample Means")
 ```
@@ -2606,11 +2608,11 @@ This last histogram uses a bit of a trick to approximately shade the bars that a
 
 
 ```r
-shading = ifelse(x_bar_hist$breaks > mu - 2 * sqrt(mu) / sqrt(sample_size) & 
+shading <- ifelse(x_bar_hist$breaks > mu - 2 * sqrt(mu) / sqrt(sample_size) & 
                    x_bar_hist$breaks < mu + 2 * sqrt(mu) / sqrt(sample_size),
                   "darkorange", "dodgerblue")
 
-x_bar_hist = hist(x_bars, breaks = 50, col = shading,
+x_bar_hist <- hist(x_bars, breaks = 50, col = shading,
                   main = "Histogram of Sample Means, Two Standard Deviations",
                   xlab = "Sample Means")
 ```

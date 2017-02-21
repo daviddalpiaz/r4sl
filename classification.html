@@ -290,9 +290,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] TRUE</code></pre>
 <p>As we did with regression, we test-train split our data. In this case, using 50% for each.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-train_index =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
-train_default =<span class="st"> </span>Default[train_index, ]
-test_default =<span class="st"> </span>Default[-train_index, ]</code></pre></div>
+train_index   &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
+train_default &lt;-<span class="st"> </span>Default[train_index, ]
+test_default  &lt;-<span class="st"> </span>Default[-train_index, ]</code></pre></div>
 <div id="visualization-for-classification" class="section level2">
 <h2><span class="header-section-number">7.1</span> Visualization for Classification</h2>
 <p>Often, some simple visualizations can suggest simple classification rules. To quickly create some useful visualizations, we use the <code>featurePlot()</code> function from the <code>caret()</code> package.</p>
@@ -368,14 +368,14 @@ f_{X_i}(x_i \mid y = k)
    \end{cases}
 \]</span></p>
 <p>So we predict an individual is a defaulter if their <code>balance</code> is above 1400, and not a defaulter if the balance is 1400 or less.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simple_class =<span class="st"> </span>function(x, boundary, <span class="dt">above =</span> <span class="dv">1</span>, <span class="dt">below =</span> <span class="dv">0</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simple_class &lt;-<span class="st"> </span>function(x, boundary, <span class="dt">above =</span> <span class="dv">1</span>, <span class="dt">below =</span> <span class="dv">0</span>) {
   <span class="kw">ifelse</span>(x &gt;<span class="st"> </span>boundary, above, below)
 }</code></pre></div>
 <p>We write a simple <code>R</code> function that compares a variable to a boundary, then use it to make predictions on the train and test sets with our chosen variable and boundary.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_pred &lt;-<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> train_default$balance, 
+                           <span class="dt">boundary =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
+test_pred &lt;-<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> test_default$balance, 
                           <span class="dt">boundary =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
-test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span class="dt">x =</span> test_default$balance, 
-                         <span class="dt">boundary =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
 <span class="kw">head</span>(train_pred, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>##  [1] &quot;No&quot;  &quot;Yes&quot; &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;  &quot;No&quot;</code></pre>
 </div>
@@ -383,12 +383,12 @@ test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span c
 <h2><span class="header-section-number">7.3</span> Metrics for Classification</h2>
 <p>In the classification setting, there are a large number of metrics to asses how well a classifier is performing.</p>
 <p>One of the most obvious things to do is arrange predictions and true values in a cross table.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">train_tab =</span> <span class="kw">table</span>(<span class="dt">predicted =</span> train_pred, <span class="dt">actual =</span> train_default$default))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(train_tab &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> train_pred, <span class="dt">actual =</span> train_default$default))</code></pre></div>
 <pre><code>##          actual
 ## predicted   No  Yes
 ##       No  4319   29
 ##       Yes  513  139</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">test_tab =</span> <span class="kw">table</span>(<span class="dt">predicted =</span> test_pred, <span class="dt">actual =</span> test_default$default))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(test_tab &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred, <span class="dt">actual =</span> test_default$default))</code></pre></div>
 <pre><code>##          actual
 ## predicted   No  Yes
 ##       No  4361   23
@@ -400,8 +400,8 @@ test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span c
 
 </div>
 <p>The <code>confusionMatrix()</code> function from the <code>caret</code> package can be used to obtain a wealth of additional information, which we see output below for the test data. Note that we specify which category is considered “positive.”</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_con_mat =<span class="st"> </span><span class="kw">confusionMatrix</span>(train_tab, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
-(<span class="dt">test_con_mat =</span> <span class="kw">confusionMatrix</span>(test_tab, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_con_mat &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(train_tab, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
+(test_con_mat &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>))</code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##          actual
@@ -488,12 +488,12 @@ I(y_i = \hat{C}(x)) =
    \end{cases}
 \]</span></p>
 <p>This classifier simply classifies all observations as negative cases.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_all_no =<span class="st"> </span><span class="kw">simple_class</span>(test_default$balance, 
-                           <span class="dt">boundary =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
-<span class="kw">table</span>(<span class="dt">predicted =</span> pred_all_no, <span class="dt">actual =</span> test_default$default)</code></pre></div>
-<pre><code>##          actual
-## predicted   No  Yes
-##        No 4835  165</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_all_no &lt;-<span class="st"> </span><span class="kw">simple_class</span>(test_default$balance, 
+                            <span class="dt">boundary =</span> <span class="dv">1400</span>, <span class="dt">above =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">below =</span> <span class="st">&quot;No&quot;</span>)
+<span class="kw">table</span>(predicted &lt;-<span class="st"> </span>pred_all_no, <span class="dt">actual =</span> test_default$default)</code></pre></div>
+<pre><code>##     actual
+##        No  Yes
+##   No 4835  165</code></pre>
 <p>The <code>confusionMatrix()</code> function won’t even accept this table as input, because it isn’t a full matrix, only one row, so we calculate some metrics “by hand”.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4835</span> /<span class="st"> </span>(<span class="dv">4835</span> +<span class="st"> </span><span class="dv">165</span>) <span class="co"># test accuracy</span></code></pre></div>
 <pre><code>## [1] 0.967</code></pre>
