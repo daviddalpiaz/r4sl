@@ -80,7 +80,7 @@ We can write an `R` function that will be useful for performing this calculation
 
 
 ```r
-rmse <- function(actual, predicted) {
+rmse = function(actual, predicted) {
   sqrt(mean((actual - predicted) ^ 2))
 }
 ```
@@ -94,7 +94,7 @@ We write a simple `R` function to extract this information from a model.
 
 
 ```r
-get_complexity <- function(model) {
+get_complexity = function(model) {
   length(coef(model)) - 1
 }
 ```
@@ -115,11 +115,11 @@ Here we use the `sample()` function to obtain a random sample of the rows of the
 
 ```r
 set.seed(9)
-num_obs <- nrow(Advertising)
+num_obs = nrow(Advertising)
 
-train_index <- sample(num_obs, size = trunc(0.50 * num_obs))
-train_data  <- Advertising[train_index, ]
-test_data   <- Advertising[-train_index, ]
+train_index = sample(num_obs, size = trunc(0.50 * num_obs))
+train_data = Advertising[train_index, ]
+test_data = Advertising[-train_index, ]
 ```
 
 We will look at two measures that assess how well a model is predicting, the **train RMSE** and the **test RMSE**.
@@ -140,7 +140,7 @@ We will start with the simplest possible linear model, that is, a model with no 
 
 
 ```r
-fit_0 <- lm(Sales ~ 1, data = train_data)
+fit_0 = lm(Sales ~ 1, data = train_data)
 get_complexity(fit_0)
 ```
 
@@ -191,7 +191,7 @@ This function can actually be improved for the inputs that we are using. We woul
 
 
 ```r
-get_rmse <- function(model, data, response) {
+get_rmse = function(model, data, response) {
   rmse(actual = data[, response], 
        predicted = predict(model, data))
 }
@@ -223,7 +223,7 @@ Each successive model we fit will be more and more flexible using both interacti
 
 
 ```r
-fit_1 <- lm(Sales ~ ., data = train_data)
+fit_1 = lm(Sales ~ ., data = train_data)
 get_complexity(fit_1)
 ```
 
@@ -249,7 +249,7 @@ get_rmse(model = fit_1, data = test_data, response = "Sales") # test RMSE
 
 
 ```r
-fit_2 <- lm(Sales ~ Radio * Newspaper * TV, data = train_data)
+fit_2 = lm(Sales ~ Radio * Newspaper * TV, data = train_data)
 get_complexity(fit_2)
 ```
 
@@ -275,7 +275,7 @@ get_rmse(model = fit_2, data = test_data, response = "Sales") # test RMSE
 
 
 ```r
-fit_3 <- lm(Sales ~ Radio * Newspaper * TV + I(TV ^ 2), data = train_data)
+fit_3 = lm(Sales ~ Radio * Newspaper * TV + I(TV ^ 2), data = train_data)
 get_complexity(fit_3)
 ```
 
@@ -301,8 +301,8 @@ get_rmse(model = fit_3, data = test_data, response = "Sales") # test RMSE
 
 
 ```r
-fit_4 <- lm(Sales ~ Radio * Newspaper * TV + 
-            I(TV ^ 2) + I(Radio ^ 2) + I(Newspaper ^ 2), data = train_data)
+fit_4 = lm(Sales ~ Radio * Newspaper * TV + 
+           I(TV ^ 2) + I(Radio ^ 2) + I(Newspaper ^ 2), data = train_data)
 get_complexity(fit_4)
 ```
 
@@ -328,8 +328,8 @@ get_rmse(model = fit_4, data = test_data, response = "Sales") # test RMSE
 
 
 ```r
-fit_5 <- lm(Sales ~ Radio * Newspaper * TV +
-            I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
+fit_5 = lm(Sales ~ Radio * Newspaper * TV +
+           I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
 get_complexity(fit_5)
 ```
 
@@ -361,29 +361,29 @@ First, we recap the models that we have fit.
 
 
 ```r
-fit_1 <- lm(Sales ~ ., data = train_data)
-fit_2 <- lm(Sales ~ Radio * Newspaper * TV, data = train_data)
-fit_3 <- lm(Sales ~ Radio * Newspaper * TV + I(TV ^ 2), data = train_data)
-fit_4 <- lm(Sales ~ Radio * Newspaper * TV + 
-            I(TV ^ 2) + I(Radio ^ 2) + I(Newspaper ^ 2), data = train_data)
-fit_5 <- lm(Sales ~ Radio * Newspaper * TV +
-            I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
+fit_1 = lm(Sales ~ ., data = train_data)
+fit_2 = lm(Sales ~ Radio * Newspaper * TV, data = train_data)
+fit_3 = lm(Sales ~ Radio * Newspaper * TV + I(TV ^ 2), data = train_data)
+fit_4 = lm(Sales ~ Radio * Newspaper * TV + 
+           I(TV ^ 2) + I(Radio ^ 2) + I(Newspaper ^ 2), data = train_data)
+fit_5 = lm(Sales ~ Radio * Newspaper * TV +
+           I(TV ^ 2) * I(Radio ^ 2) * I(Newspaper ^ 2), data = train_data)
 ```
 
 Next, we create a list of the models fit.
 
 
 ```r
-model_list <- list(fit_1, fit_2, fit_3, fit_4, fit_5)
+model_list = list(fit_1, fit_2, fit_3, fit_4, fit_5)
 ```
 
 We then obtain train RMSE, test RMSE, and model complexity for each.
 
 
 ```r
-train_rmse <- sapply(model_list, get_rmse, data = train_data, response = "Sales")
-test_rmse  <- sapply(model_list, get_rmse, data = test_data, response = "Sales")
-model_complexity <- sapply(model_list, get_complexity)
+train_rmse = sapply(model_list, get_rmse, data = train_data, response = "Sales")
+test_rmse = sapply(model_list, get_rmse, data = test_data, response = "Sales")
+model_complexity = sapply(model_list, get_complexity)
 ```
 
 

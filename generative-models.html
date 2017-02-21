@@ -271,11 +271,11 @@ p_k(x) = P[Y = k \mid {\mathbf X} = {\mathbf x}] = \frac{\pi_k \cdot f_k({\mathb
 <p>By substituting the corresponding likelihoods, simplifying, and eliminating unnecessary terms, we could derive the discriminant function for each.</p>
 <p>To illustrate these new methods, we return to the iris data, which you may remember has three classes. After a test-train split, we create a number of plots to refresh our memory.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
-iris_obs &lt;-<span class="st"> </span><span class="kw">nrow</span>(iris)
-iris_index &lt;-<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
-<span class="co"># iris_index &lt;- sample(iris_obs, size = trunc(0.10 * iris_obs))</span>
-iris_train &lt;-<span class="st"> </span>iris[iris_index, ]
-iris_test  &lt;-<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
+iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)
+iris_index =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
+<span class="co"># iris_index = sample(iris_obs, size = trunc(0.10 * iris_obs))</span>
+iris_train =<span class="st"> </span>iris[iris_index, ]
+iris_test =<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_train[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
                                <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
             <span class="dt">y =</span> iris_train$Species,
@@ -315,7 +315,7 @@ f_k({\mathbf x}) = \frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}{2}(\m
 <p>Notice that <span class="math inline">\(\Sigma\)</span> does <strong>not</strong> depend on <span class="math inline">\(k\)</span>, that is, we are assuming the same <span class="math inline">\(\Sigma\)</span> for each class. We then use information from all the classes to estimate <span class="math inline">\(\Sigma\)</span>.</p>
 <p>To fit an LDA model, we use the <code>lda()</code> function from the <code>MASS</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
-iris_lda &lt;-<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+iris_lda =<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
 iris_lda</code></pre></div>
 <pre><code>## Call:
 ## lda(Species ~ ., data = iris_train)
@@ -362,10 +362,10 @@ iris_lda</code></pre></div>
 ## 94  1.599359e-11 9.999999e-01 1.035129e-07
 ## 27  1.000000e+00 8.154612e-15 4.862249e-32</code></pre>
 <p>As we should come to expect, the <code>predict()</code> function operates in a new way when called on an <code>lda</code> object. By default, it returns an entire list. Within that list <code>class</code> stores the classifications and <code>posterior</code> contains the estimated probability for each class.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_train_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_train)$class
-iris_lda_test_pred  &lt;-<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_test)$class</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_train)$class
+iris_lda_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_test)$class</code></pre></div>
 <p>We store the predictions made on the train and test sets.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy &lt;-<span class="st"> </span>function(actual, predicted) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
   <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
@@ -380,7 +380,7 @@ iris_lda_test_pred  &lt;-<span class="st"> </span><span class="kw">predict</span
 ##   versicolor      0         26         1
 ##   virginica       0          0        26</code></pre>
 <p>Looking at the test set, we see that we are perfectly predicting both setosa and versicolor. The only error is labeling a virginica as a versicolor.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat &lt;-<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train, <span class="dt">prior =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) /<span class="st"> </span><span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat =<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train, <span class="dt">prior =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) /<span class="st"> </span><span class="dv">3</span>)
 iris_lda_flat</code></pre></div>
 <pre><code>## Call:
 ## lda(Species ~ ., data = iris_train, prior = c(1, 1, 1)/3)
@@ -406,8 +406,8 @@ iris_lda_flat</code></pre></div>
 ##    LD1    LD2 
 ## 0.9901 0.0099</code></pre>
 <p>Instead of learning (estimating) the proportion of the three species from the data, we could instead specify them ourselves. Here we choose a uniform distributions over the possible species. We would call this a “flat” prior.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat_train_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_train)$class
-iris_lda_flat_test_pred  &lt;-<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_test)$class</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_train)$class
+iris_lda_flat_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_test)$class</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_flat_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
 <pre><code>## [1] 0.96</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_flat_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
@@ -424,7 +424,7 @@ iris_lda_flat_test_pred  &lt;-<span class="st"> </span><span class="kw">predict<
 f_k({\mathbf x}) = \frac{1}{(2\pi)^{p/2}|\Sigma_k|^{1/2}}\exp\left[-\frac{1}{2}(\mathbf x - \mu_k)^{\prime}\Sigma_{k}^{-1}(\mathbf x - \mu_k)\right]
 \]</span></p>
 <p>Notice that now <span class="math inline">\(\Sigma_k\)</span> <strong>does</strong> depend on <span class="math inline">\(k\)</span>, that is, we are allowing a different <span class="math inline">\(\Sigma_k\)</span> for each class. We only use information from class <span class="math inline">\(k\)</span> to estimate <span class="math inline">\(\Sigma_k\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda &lt;-<span class="st"> </span><span class="kw">qda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda =<span class="st"> </span><span class="kw">qda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
 iris_qda</code></pre></div>
 <pre><code>## Call:
 ## qda(Species ~ ., data = iris_train)
@@ -440,8 +440,8 @@ iris_qda</code></pre></div>
 ## virginica      6.669565    3.065217     5.717391   2.0956522</code></pre>
 <p>Here the output is similar to LDA, again giving the estimated <span class="math inline">\(\hat{\pi}_k\)</span> and <span class="math inline">\(\hat{\mu}_k\)</span> for each class. Like <code>lda()</code>, the <code>qda()</code> function is found in the <code>MASS</code> package.</p>
 <p>Consider trying to fit QDA again, but this time with a smaller training set. (Use the commented line above to obtain a smaller test set.) This will cause an error because there are not enough observations within each class to estimate the large number of parameters in the <span class="math inline">\(\Sigma_k\)</span> matrices. This is less of a problem with LDA, since all observations, no matter the class, are being use to estimate the shared <span class="math inline">\(\Sigma\)</span> matrix.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda_train_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_train)$class
-iris_qda_test_pred  &lt;-<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_test)$class</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_train)$class
+iris_qda_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_test)$class</code></pre></div>
 <p>The <code>predict()</code> function operates the same as the <code>predict()</code> function for LDA.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_qda_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
 <pre><code>## [1] 0.9866667</code></pre>
@@ -473,7 +473,7 @@ f_{kj}(x_j) = \frac{1}{\sigma_{kj}\sqrt{2\pi}}\exp\left[-\frac{1}{2}\left(\frac{
 \]</span></p>
 <p>When <span class="math inline">\(p = 1\)</span>, this version of naive Bayes is equivalent to QDA.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)
-iris_nb &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+iris_nb =<span class="st"> </span><span class="kw">naiveBayes</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
 iris_nb</code></pre></div>
 <pre><code>## 
 ## Naive Bayes Classifier for Discrete Predictors
@@ -528,8 +528,8 @@ iris_nb</code></pre></div>
 ## [5,] 1.897732e-218 6.189883e-08 9.999999e-01
 ## [6,]  1.000000e+00 8.184097e-15 6.816322e-26</code></pre>
 <p>Oh look, <code>predict()</code> has another new mode of operation. If only there were a way to unify the <code>predict()</code> function across all of these methods…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_nb_train_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_train)
-iris_nb_test_pred  &lt;-<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_test)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_nb_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_train)
+iris_nb_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_test)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_nb_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
 <pre><code>## [1] 0.9466667</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_nb_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
@@ -579,12 +579,12 @@ iris_nb_test_pred  &lt;-<span class="st"> </span><span class="kw">predict</span>
 <div id="discrete-inputs" class="section level2">
 <h2><span class="header-section-number">9.4</span> Discrete Inputs</h2>
 <p>So far, we have assumed that all predictors are numeric. What happens with categorical predictors?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_train_mod &lt;-<span class="st"> </span>iris_train
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_train_mod =<span class="st"> </span>iris_train
 
-iris_train_mod$Sepal.Width &lt;-<span class="st"> </span><span class="kw">ifelse</span>(iris_train$Sepal.Width &gt;<span class="st"> </span><span class="dv">3</span>, 
-                                     <span class="kw">ifelse</span>(iris_train$Sepal.Width &gt;<span class="st"> </span><span class="dv">4</span>, 
-                                            <span class="st">&quot;Large&quot;</span>, <span class="st">&quot;Medium&quot;</span>), 
-                                     <span class="st">&quot;Small&quot;</span>)
+iris_train_mod$Sepal.Width =<span class="st"> </span><span class="kw">ifelse</span>(iris_train$Sepal.Width &gt;<span class="st"> </span><span class="dv">3</span>, 
+                                    <span class="kw">ifelse</span>(iris_train$Sepal.Width &gt;<span class="st"> </span><span class="dv">4</span>, 
+                                           <span class="st">&quot;Large&quot;</span>, <span class="st">&quot;Medium&quot;</span>),
+                                    <span class="st">&quot;Small&quot;</span>)
 
 <span class="kw">unique</span>(iris_train_mod$Sepal.Width)</code></pre></div>
 <pre><code>## [1] &quot;Medium&quot; &quot;Small&quot;  &quot;Large&quot;</code></pre>

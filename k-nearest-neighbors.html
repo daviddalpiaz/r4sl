@@ -273,18 +273,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">10.1.1</span> Default Data</h3>
 <p>Unlike many of our previous methods, <code>knn()</code> requires that all predictors be numeric, so we coerce <code>student</code> to be a <code>0</code> and <code>1</code> variable instead of a factor. (We can leave the response as a factor.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-Default$student &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Default$student) -<span class="st"> </span><span class="dv">1</span>
-default_index &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
-default_train &lt;-<span class="st"> </span>Default[default_index, ]
-default_test  &lt;-<span class="st"> </span>Default[-default_index, ]</code></pre></div>
+Default$student =<span class="st"> </span><span class="kw">as.numeric</span>(Default$student) -<span class="st"> </span><span class="dv">1</span>
+default_index =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
+default_train =<span class="st"> </span>Default[default_index, ]
+default_test =<span class="st"> </span>Default[-default_index, ]</code></pre></div>
 <p>Also unlike previous methods, <code>knn()</code> does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable. Note that the <span class="math inline">\(y\)</span> data should be a factor vector, <strong>not</strong> a data frame containing a factor vector.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># training data</span>
-X_default_train &lt;-<span class="st"> </span>default_train[, -<span class="dv">1</span>]
-y_default_train &lt;-<span class="st"> </span>default_train$default
+X_default_train =<span class="st"> </span>default_train[, -<span class="dv">1</span>]
+y_default_train =<span class="st"> </span>default_train$default
 
 <span class="co"># testing data</span>
-X_default_test &lt;-<span class="st"> </span>default_test[, -<span class="dv">1</span>]
-y_default_test &lt;-<span class="st"> </span>default_test$default</code></pre></div>
+X_default_test =<span class="st"> </span>default_test[, -<span class="dv">1</span>]
+y_default_test =<span class="st"> </span>default_test$default</code></pre></div>
 <p>There is very little “training” with <span class="math inline">\(k\)</span>-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that <span class="math inline">\(k\)</span>-nearest neighbors is fast at training time. However, at test time, <span class="math inline">\(k\)</span>-nearest neighbors is very slow. For each test case, the method must find the <span class="math inline">\(k\)</span>-nearest neighbors, which is not computationally cheap. (Note that <code>knn()</code> uses Euclidean distance.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">knn</span>(<span class="dt">train =</span> X_default_train, 
          <span class="dt">test =</span> X_default_test, 
@@ -301,7 +301,7 @@ y_default_test &lt;-<span class="st"> </span>default_test$default</code></pre></
 <li><code>cl</code>, the true class labels for the train set.</li>
 <li><code>k</code>, the number of neighbors to consider.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy &lt;-<span class="st"> </span>function(actual, predicted) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
   <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
 }</code></pre></div>
 <p>We’ll use our usual <code>accuracy()</code> function to asses how well <code>knn()</code> works with this data.</p>
@@ -319,23 +319,23 @@ y_default_test &lt;-<span class="st"> </span>default_test$default</code></pre></
 <p>Here we see the scaling improves the classification accuracy. This may not always be the case, and often, it is normal to attempt classification with and without scaling.</p>
 <p>How do we choose <span class="math inline">\(k\)</span>? Try different values and see which works best.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-k_to_try &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">100</span>
-acc_k &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">times =</span> <span class="kw">length</span>(k_to_try))
+k_to_try =<span class="st"> </span><span class="dv">1</span>:<span class="dv">100</span>
+acc_k =<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">times =</span> <span class="kw">length</span>(k_to_try))
 
-for (i in <span class="kw">seq_along</span>(k_to_try)) {
-  pred &lt;-<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_default_train), 
-              <span class="dt">test =</span> <span class="kw">scale</span>(X_default_test), 
-              <span class="dt">cl =</span> y_default_train, 
-              <span class="dt">k =</span> k_to_try[i])
-  acc_k[i] &lt;-<span class="st"> </span><span class="kw">accuracy</span>(y_default_test, pred)
+for(i in <span class="kw">seq_along</span>(k_to_try)) {
+  pred =<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_default_train), 
+             <span class="dt">test =</span> <span class="kw">scale</span>(X_default_test), 
+             <span class="dt">cl =</span> y_default_train, 
+             <span class="dt">k =</span> k_to_try[i])
+  acc_k[i] =<span class="st"> </span><span class="kw">accuracy</span>(y_default_test, pred)
 }</code></pre></div>
 <p>The <code>seq_along()</code> function can be very useful for looping over a vector that stores non-consecutive numbers. It often removes the need for an additional counter variable. We actually didn’t need it in the above <code>knn()</code> example, but it is still a good habit. Here we see an example where we would have otherwise needed another variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">5</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex_seq =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">5</span>)
 <span class="kw">seq_along</span>(ex_seq)</code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex_storage &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">times =</span> <span class="kw">length</span>(ex_seq))
-for (i in <span class="kw">seq_along</span>(ex_seq)) {
-  ex_storage[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> ex_seq[i], <span class="dt">sd =</span> <span class="dv">1</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ex_storage =<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">times =</span> <span class="kw">length</span>(ex_seq))
+for(i in <span class="kw">seq_along</span>(ex_seq)) {
+  ex_storage[i] =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> ex_seq[i], <span class="dt">sd =</span> <span class="dv">1</span>))
 }
 
 ex_storage</code></pre></div>
@@ -367,24 +367,24 @@ ex_storage</code></pre></div>
 <h3><span class="header-section-number">10.1.2</span> Iris Data</h3>
 <p>Like LDA and QDA, KNN can be used for both binary and multi-class problems. As an example, we return to the iris data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
-iris_obs &lt;-<span class="st"> </span><span class="kw">nrow</span>(iris)
-iris_index &lt;-<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
-iris_train &lt;-<span class="st"> </span>iris[iris_index, ]
-iris_test  &lt;-<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
+iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)
+iris_index =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
+iris_train =<span class="st"> </span>iris[iris_index, ]
+iris_test =<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
 <p>All the predictors here are numeric, so we proceed to splitting the data into predictors and classes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># training data</span>
-X_iris_train &lt;-<span class="st"> </span>iris_train[, -<span class="dv">5</span>]
-y_iris_train &lt;-<span class="st"> </span>iris_train$Species
+X_iris_train =<span class="st"> </span>iris_train[, -<span class="dv">5</span>]
+y_iris_train =<span class="st"> </span>iris_train$Species
 
 <span class="co"># testing data</span>
-X_iris_test &lt;-<span class="st"> </span>iris_test[, -<span class="dv">5</span>]
-y_iris_test &lt;-<span class="st"> </span>iris_test$Species</code></pre></div>
+X_iris_test =<span class="st"> </span>iris_test[, -<span class="dv">5</span>]
+y_iris_test =<span class="st"> </span>iris_test$Species</code></pre></div>
 <p>Like previous methods, we can obtain predicted probabilities given test predictors. To do so, we add an argument, <code>prob = TRUE</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_pred &lt;-<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_iris_train), 
-                 <span class="dt">test =</span> <span class="kw">scale</span>(X_iris_test),
-                 <span class="dt">cl =</span> y_iris_train,
-                 <span class="dt">k =</span> <span class="dv">10</span>,
-                 <span class="dt">prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_pred =<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_iris_train), 
+                <span class="dt">test =</span> <span class="kw">scale</span>(X_iris_test),
+                <span class="dt">cl =</span> y_iris_train,
+                <span class="dt">k =</span> <span class="dv">10</span>,
+                <span class="dt">prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_pred</code></pre></div>
 <pre><code>##  [1] setosa     setosa     setosa     setosa     setosa     setosa    
 ##  [7] setosa     setosa     setosa     setosa     setosa     setosa    
@@ -430,17 +430,17 @@ y_iris_test &lt;-<span class="st"> </span>iris_test$Species</code></pre></div>
 <div id="regression" class="section level2">
 <h2><span class="header-section-number">10.2</span> Regression</h2>
 <p>We quickly illustrate KNN for regression using the <code>Boston</code> data. We’ll only use <code>lstat</code> as a predictor, and <code>medv</code> as the response. We won’t test-train split for this example since won’t be checking RMSE, but instead plotting fitted models. There is also no need to worry about scaling since there is only one predictor.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_boston &lt;-<span class="st"> </span>Boston[<span class="st">&quot;lstat&quot;</span>]
-y_boston &lt;-<span class="st"> </span>Boston$medv</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_boston =<span class="st"> </span>Boston[<span class="st">&quot;lstat&quot;</span>]
+y_boston =<span class="st"> </span>Boston$medv</code></pre></div>
 <p>We create a “test” set, that is a grid of <code>lstat</code> values at which we will predict <code>medv</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lstat_grid &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">seq</span>(<span class="kw">range</span>(X_boston$lstat)[<span class="dv">1</span>], <span class="kw">range</span>(X_boston$lstat)[<span class="dv">2</span>], <span class="dt">by =</span> <span class="fl">0.01</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">seq</span>(<span class="kw">range</span>(X_boston$lstat)[<span class="dv">1</span>], <span class="kw">range</span>(X_boston$lstat)[<span class="dv">2</span>], <span class="dt">by =</span> <span class="fl">0.01</span>))</code></pre></div>
 <p>Unfortunately, <code>knn()</code> from <code>class</code> only handles classification. To perform regression, we will need <code>knn.reg()</code> from the <code>FNN</code> package. Notice that, we do <strong>not</strong> load this package, but instead use <code>FNN::knn.reg</code> to access the function. This is useful since <code>FNN</code> also contains a function <code>knn()</code> and would then mask <code>knn()</code> from <code>class</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_001 &lt;-<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">1</span>)
-pred_005 &lt;-<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">5</span>)
-pred_010 &lt;-<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">10</span>)
-pred_050 &lt;-<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">50</span>)
-pred_100 &lt;-<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">100</span>)
-pred_506 &lt;-<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">506</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_001 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">1</span>)
+pred_005 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">5</span>)
+pred_010 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">10</span>)
+pred_050 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">50</span>)
+pred_100 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">100</span>)
+pred_506 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">506</span>)</code></pre></div>
 <p>We make predictions for various values of <code>k</code>. Note that <code>506</code> is the number of observations in this dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>))
 

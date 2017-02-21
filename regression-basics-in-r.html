@@ -259,7 +259,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>This chapter will recap the basics of performing regression analyses in <code>R</code>. For more detailed coverage, see <a href="http://daviddalpiaz.github.io/appliedstats/">Applied Statistics with <code>R</code></a>.</p>
 <p>We will use the <a href="data/Advertising.csv">Advertising data</a> associated with <a href="http://www-bcf.usc.edu/~gareth/ISL/data.html">Introduction to Statistical Learning</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
-Advertising &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/Advertising.csv&quot;</span>)</code></pre></div>
+Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/Advertising.csv&quot;</span>)</code></pre></div>
 <p>After loading data into <code>R</code>, our first step should <strong>always</strong> be to inspect the data. We will start by simply printing some observations in order to understand the basic structure of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Advertising</code></pre></div>
 <pre><code>## # A tibble: 200 × 4
@@ -296,8 +296,8 @@ Advertising &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span
 <div id="the-lm-function" class="section level2">
 <h2><span class="header-section-number">4.2</span> The <code>lm()</code> Function</h2>
 <p>The following code fits an additive <strong>linear model</strong> with <code>Sales</code> as the response and each remaining variable as a predictor. Note, by not using <code>attach()</code> and instead specifying the <code>data =</code> argument, we are able to specify this model without using each of the variable names directly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
-<span class="co"># mod_1 &lt;- lm(Sales ~ TV + Radio + Newspaper, data = Advertising)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_1 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
+<span class="co"># mod_1 = lm(Sales ~ TV + Radio + Newspaper, data = Advertising)</span></code></pre></div>
 <p>Note that the commented line is equivalent to the line that is run, but we will often use the <code>response ~ .</code> syntax when possible.</p>
 </div>
 <div id="hypothesis-testing" class="section level2">
@@ -324,7 +324,7 @@ Advertising &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span
 ## Residual standard error: 1.686 on 196 degrees of freedom
 ## Multiple R-squared:  0.8972, Adjusted R-squared:  0.8956 
 ## F-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV +<span class="st"> </span>Radio, <span class="dt">data =</span> Advertising)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_0 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV +<span class="st"> </span>Radio, <span class="dt">data =</span> Advertising)</code></pre></div>
 <p>The <code>anova()</code> function is useful for comparing two models. Here we compare the full additive model, <code>mod_1</code>, to a reduced model <code>mod_0</code>. Essentially we are testing for the significance of the <code>Newspaper</code> variable in the additive model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(mod_0, mod_1)</code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -346,7 +346,7 @@ Advertising &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span
 ## 12.122953  3.727341 12.550849</code></pre>
 <p>Note that the effect of the <code>predict()</code> function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class <code>lm</code>. Because of this, <code>predict()</code> then runs the <code>predict.lm()</code> function. Thus, we should use <code>?predict.lm()</code> for details.</p>
 <p>We could also specify new data, which should be a data frame or tibble with the same column names as the predictors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_obs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">TV =</span> <span class="dv">150</span>, <span class="dt">Radio =</span> <span class="dv">40</span>, <span class="dt">Newspaper =</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">TV =</span> <span class="dv">150</span>, <span class="dt">Radio =</span> <span class="dv">40</span>, <span class="dt">Newspaper =</span> <span class="dv">1</span>)</code></pre></div>
 <p>We can then use the <code>predict()</code> function for point estimates, confidence intervals, and prediction intervals.</p>
 <p>Using only the first two arguments, <code>R</code> will simply return a point estimate, that is, the “predicted value,” <span class="math inline">\(\hat{y}\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(mod_1, <span class="dt">newdata =</span> new_obs)</code></pre></div>
@@ -398,19 +398,19 @@ Advertising &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span
 <h3><span class="header-section-number">4.6.1</span> Interactions</h3>
 <p>Interactions can be introduced to the <code>lm()</code> procedure in a number of ways.</p>
 <p>We can use the <code>:</code> operator to introduce a single interaction of interest.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. +<span class="st"> </span>TV:Newspaper, <span class="dt">data =</span> Advertising)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_2 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. +<span class="st"> </span>TV:Newspaper, <span class="dt">data =</span> Advertising)
 <span class="kw">coef</span>(mod_2)</code></pre></div>
 <pre><code>##   (Intercept)            TV         Radio     Newspaper  TV:Newspaper 
 ##  3.8730824491  0.0392939602  0.1901312252 -0.0320449675  0.0002016962</code></pre>
 <p>The <code>response ~ . ^ k</code> syntax can be used to model all <code>k</code>-way interactions. (As well as the appropriate lower order terms.) Here we fit a model with all two-way interactions, and the lower order main effects.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_3 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Advertising)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_3 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Advertising)
 <span class="kw">coef</span>(mod_3)</code></pre></div>
 <pre><code>##     (Intercept)              TV           Radio       Newspaper 
 ##    6.460158e+00    2.032710e-02    2.292919e-02    1.703394e-02 
 ##        TV:Radio    TV:Newspaper Radio:Newspaper 
 ##    1.139280e-03   -7.971435e-05   -1.095976e-04</code></pre>
 <p>The <code>*</code> operator can be used to specify all interactions of a certain order, as well as all lower order terms according to the usual hierarchy. Here we see a three-way interaction and all lower order terms.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_4 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV *<span class="st"> </span>Radio *<span class="st"> </span>Newspaper, <span class="dt">data =</span> Advertising)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_4 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV *<span class="st"> </span>Radio *<span class="st"> </span>Newspaper, <span class="dt">data =</span> Advertising)
 <span class="kw">coef</span>(mod_4)</code></pre></div>
 <pre><code>##        (Intercept)                 TV              Radio 
 ##       6.555887e+00       1.971030e-02       1.962160e-02 
@@ -420,53 +420,53 @@ Advertising &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span
 ##       9.062944e-06      -7.609955e-07</code></pre>
 <p>Note that, we have only been dealing with numeric predictors. <strong>Categorical predictors</strong> are often recorded as <strong>factor</strong> variables in <code>R</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibble)
-cat_pred &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
   <span class="dt">x1 =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">10</span>))),
   <span class="dt">x2 =</span> <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">30</span>),
   <span class="dt">y  =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">30</span>)
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1           x2          y
-##    &lt;fctr&gt;        &lt;dbl&gt;      &lt;dbl&gt;
-## 1       A 0.9178169414 -0.6152418
-## 2       A 0.3157299105  0.1649796
-## 3       A 0.0003883736 -0.4402191
-## 4       A 0.9530386610  2.4000783
-## 5       A 0.1797620496 -0.2461393
-## 6       A 0.9649138027  0.8665141
-## 7       A 0.2049109361  0.3223663
-## 8       A 0.2679904688  1.5776098
-## 9       A 0.5475034167 -0.2473806
-## 10      A 0.8780897560  0.1062882
+##        x1        x2            y
+##    &lt;fctr&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+## 1       A 0.9614443 -0.574979354
+## 2       A 0.3980694  0.117549381
+## 3       A 0.4725313 -1.204419520
+## 4       A 0.1386229  1.724845528
+## 5       A 0.5701789  0.009159112
+## 6       A 0.8241479  0.352899173
+## 7       A 0.4249909  2.015785100
+## 8       A 0.2003979 -0.572098010
+## 9       A 0.7398123 -0.280818842
+## 10      A 0.1703236 -0.030973524
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  -0.1448854  -0.6313628  -0.1412510   1.0205664</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
+##  0.37615764 -0.25984869  0.07520526 -0.44987624</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-## -0.01666916 -0.35871603 -0.78092136  0.77541786 -0.41867286  1.25060293</code></pre>
+##  0.67864540 -1.30732412  0.06201815 -1.06713277  2.04813399  0.08298515</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
 <p>Polynomial terms can be specified using the inhibit function <code>I()</code> or through the <code>poly()</code> function. Note that these two methods produce different coefficients, but the same residuals! This is due to the <code>poly()</code> function using orthogonal polynomials by default.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_5 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV +<span class="st"> </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> Advertising)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_5 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV +<span class="st"> </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> Advertising)
 <span class="kw">coef</span>(mod_5)</code></pre></div>
 <pre><code>##   (Intercept)            TV       I(TV^2) 
 ##  6.114120e+00  6.726593e-02 -6.846934e-05</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_6 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> Advertising)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_6 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> Advertising)
 <span class="kw">coef</span>(mod_6)</code></pre></div>
 <pre><code>##           (Intercept) poly(TV, degree = 2)1 poly(TV, degree = 2)2 
 ##             14.022500             57.572721             -6.228802</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">resid</span>(mod_5), <span class="kw">resid</span>(mod_6))</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Polynomials and interactions can be mixed to create even more complex models.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_7 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> Advertising)
-<span class="co"># mod_7 &lt;- lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_7 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> Advertising)
+<span class="co"># mod_7 = lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)</span>
 <span class="kw">coef</span>(mod_7)</code></pre></div>
 <pre><code>##           (Intercept)                    TV                 Radio 
 ##          6.206394e+00          2.092726e-02          3.766579e-02 
@@ -481,7 +481,7 @@ cat_pred</code></pre></div>
 <div id="transformations" class="section level3">
 <h3><span class="header-section-number">4.6.3</span> Transformations</h3>
 <p>Note that we could also create more complex models, which allow for non-linearity, using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_8 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Sales) ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod_8 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Sales) ~<span class="st"> </span>., <span class="dt">data =</span> Advertising)
 <span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">resid</span>(mod_8) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># incorrect RMSE for Model 8</span></code></pre></div>
 <pre><code>## [1] 0.1849483</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">resid</span>(mod_7) ^<span class="st"> </span><span class="dv">2</span>)) <span class="co"># RMSE for Model 7</span></code></pre></div>

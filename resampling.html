@@ -283,24 +283,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>A ridiculous, overfitting model: <code>mpg ~ poly(horsepower, 8)</code></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-num_reps &lt;-<span class="st"> </span><span class="dv">100</span>
+num_reps =<span class="st"> </span><span class="dv">100</span>
 
-lin_rmse  &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
-quad_rmse &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
-huge_rmse &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+lin_rmse  =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+quad_rmse =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+huge_rmse =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
 
 for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
   
   trainIndex =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">392</span>, <span class="dt">size =</span> <span class="dv">196</span>)
   
-  lin_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
-  lin_rmse[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(lin_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+  lin_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
+  lin_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(lin_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
   
-  quad_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
-  quad_rmse[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(quad_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+  quad_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
+  quad_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(quad_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
   
-  huge_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
-  huge_rmse[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(huge_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+  huge_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
+  huge_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(huge_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
 }</code></pre></div>
 <p><img src="11-resampling_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
 <p>Notice two things, first that the “Reasonable” model has on average the smallest error. Second, notice large variability in the RMSE. We see this in the “Reasonable” model, but it is very clear in the “Ridiculous” model. Here it is very clear that if we use an “unlucky” split, our test error will be much larger than the likely reality.</p>
@@ -311,27 +311,27 @@ for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
 <div id="method-specific" class="section level3">
 <h3><span class="header-section-number">11.2.1</span> Method Specific</h3>
 <p>Some method, for example <code>glm()</code> through <code>cv.glm()</code> and <code>knn()</code> through <code>knn.cv()</code> have cross-validation capabilities built-in. We’ll use <code>glm()</code> for illustration. First we need to convince ourselves that <code>glm()</code> can be used to perform the same tasks as <code>lm()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
 <span class="kw">coef</span>(glm_fit)</code></pre></div>
 <pre><code>## (Intercept)  horsepower 
 ##  39.9358610  -0.1578447</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
 <span class="kw">coef</span>(lm_fit)</code></pre></div>
 <pre><code>## (Intercept)  horsepower 
 ##  39.9358610  -0.1578447</code></pre>
 <p>By default, <code>cv.glm()</code> will report leave-one-out cross-validation (LOOCV).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(boot)
-glm_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
-loocv_rmse &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit)$delta)
+glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)
+loocv_rmse =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit)$delta)
 loocv_rmse</code></pre></div>
 <pre><code>## [1] 4.922552 4.922514</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loocv_rmse[<span class="dv">1</span>]</code></pre></div>
 <pre><code>## [1] 4.922552</code></pre>
 <p>We are actually given two values. The first is exactly the LOOCV MSE. The second is a minor correct that we will not worry about. We take a square root to obtain LOOCV-RMSE.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loocv_rmse_poly &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">10</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loocv_rmse_poly =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">10</span>)
 for (i in <span class="kw">seq_along</span>(loocv_rmse_poly)) {
-  glm_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, i), <span class="dt">data =</span> Auto)
-  loocv_rmse_poly[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit)$delta[<span class="dv">1</span>])
+  glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, i), <span class="dt">data =</span> Auto)
+  loocv_rmse_poly[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit)$delta[<span class="dv">1</span>])
 }
 loocv_rmse_poly</code></pre></div>
 <pre><code>##  [1] 4.922552 4.387279 4.397156 4.407316 4.362707 4.356449 4.339706
@@ -343,10 +343,10 @@ loocv_rmse_poly</code></pre></div>
 <p>If you run the above code locally, you will notice that is painfully slow. We are fitting each of the 10 models 392 times, that is, each model <span class="math inline">\(n\)</span> times, once with each data point left out. (Note: in this case, for a linear model, there is actually a shortcut formula which would allow us to obtain LOOCV-RMSE from a single fit to the data. See details in ISL as well as a link below.)</p>
 <p>We could instead use <span class="math inline">\(k\)</span>-fold cross-validation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">17</span>)
-cv_10_rmse_poly &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">10</span>)
+cv_10_rmse_poly =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">10</span>)
 for (i in <span class="kw">seq_along</span>(cv_10_rmse_poly)){
-  glm_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, i), <span class="dt">data =</span> Auto)
-  cv_10_rmse_poly[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, i), <span class="dt">data =</span> Auto)
+  cv_10_rmse_poly[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, glm_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
 }
 cv_10_rmse_poly</code></pre></div>
 <pre><code>##  [1] 4.919878 4.380552 4.393929 4.397498 4.345010 4.361311 4.346963
@@ -357,21 +357,21 @@ cv_10_rmse_poly</code></pre></div>
 <p><img src="11-resampling_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Here we chose 10-fold cross-validation. Notice it is <strong>much</strong> faster. IN practice, we usually stick to 5 or 10-fold CV.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-num_reps &lt;-<span class="st"> </span><span class="dv">100</span>
+num_reps =<span class="st"> </span><span class="dv">100</span>
 
 
-lin_rmse_10_fold  &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
-quad_rmse_10_fold &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
-huge_rmse_10_fold &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+lin_rmse_10_fold  =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+quad_rmse_10_fold =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
+huge_rmse_10_fold =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_reps)
 
 for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
   
-  lin_fit  &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">1</span>), <span class="dt">data =</span> Auto)
-  quad_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto)
-  huge_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto)
-  lin_rmse_10_fold[i]  &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, lin_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
-  quad_rmse_10_fold[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, quad_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
-  huge_rmse_10_fold[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, huge_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  lin_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">1</span>), <span class="dt">data =</span> Auto)
+  quad_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto)
+  huge_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto)
+  lin_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, lin_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  quad_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, quad_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  huge_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, huge_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
 }</code></pre></div>
 <p>Repeating the test-train split analysis from above, this time with 10-fold CV, see that that the resulting RMSE are much less variable. That means, will cross-validation still has some inherent randomness, it has a much smaller effect on the results.</p>
 <p><img src="11-resampling_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
@@ -436,7 +436,7 @@ for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
 <h3><span class="header-section-number">11.2.3</span> Test Data</h3>
 <p>The following example illustrates the need for a test set which is <strong>never</strong> used in model training. If for no other reason, it gives us a quick sanity check that we have cross-validated correctly.</p>
 <p>To be specific we will test-train split the data, then perform cross-validation on the training data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy &lt;-<span class="st"> </span>function(actual, predicted) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
   <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate data</span>
@@ -445,26 +445,26 @@ for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
 <span class="co"># X has no relationship with the response</span>
 <span class="co"># p &gt;&gt;&gt; n</span>
 <span class="kw">set.seed</span>(<span class="dv">430</span>)
-n &lt;-<span class="st"> </span><span class="dv">400</span>
-p &lt;-<span class="st"> </span><span class="dv">5000</span>
-X &lt;-<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(n))
-y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), 
-       <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>))</code></pre></div>
+n =<span class="st"> </span><span class="dv">400</span>
+p =<span class="st"> </span><span class="dv">5000</span>
+X =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(n))
+y =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), 
+      <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>), <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dt">times =</span> n /<span class="st"> </span><span class="dv">4</span>))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first n/2 observations are used for training</span>
 <span class="co"># last n/2 observations used for testing</span>
 <span class="co"># both are 50% 0s and 50% 1s</span>
 <span class="co"># cv will be done inside train data</span>
-full_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(y, X)
-train &lt;-<span class="st"> </span>full_data[<span class="dv">1</span>:(n /<span class="st"> </span><span class="dv">2</span>), ]
-test  &lt;-<span class="st"> </span>full_data[((n /<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="dv">1</span>):n, ]</code></pre></div>
+full_data =<span class="st"> </span><span class="kw">data.frame</span>(y, X)
+train =<span class="st"> </span>full_data[<span class="dv">1</span>:(n /<span class="st"> </span><span class="dv">2</span>), ]
+test =<span class="st"> </span>full_data[((n /<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="dv">1</span>):n, ]</code></pre></div>
 <p>First, we use the screen-then-validate approach.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correlation between y and each predictor variable</span>
-correlations &lt;-<span class="st"> </span><span class="kw">apply</span>(train[, -<span class="dv">1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> train$y)
+correlations =<span class="st"> </span><span class="kw">apply</span>(train[, -<span class="dv">1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> train$y)
 <span class="kw">hist</span>(correlations)</code></pre></div>
 <p><img src="11-resampling_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select the 25 largest (absolute) correlation</span>
 <span class="co"># these should be &quot;useful&quot; for prediction</span>
-selected &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>:<span class="dv">25</span>]
+selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>:<span class="dv">25</span>]
 correlations[selected]</code></pre></div>
 <pre><code>##       X424      X4779      X2484      X1154      X2617      X1603 
 ## -0.2577389  0.2491598  0.2379113 -0.2373367  0.2336055  0.2327971 
@@ -477,47 +477,47 @@ correlations[selected]</code></pre></div>
 ##      X1409 
 ##  0.1977006</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># subset the test and training data based on the selected predictors</span>
-train_screen &lt;-<span class="st"> </span>train[<span class="kw">c</span>(<span class="dv">1</span>, selected)]
-test_screen  &lt;-<span class="st"> </span>test[<span class="kw">c</span>(<span class="dv">1</span>, selected)]
+train_screen =<span class="st"> </span>train[<span class="kw">c</span>(<span class="dv">1</span>, selected)]
+test_screen =<span class="st"> </span>test[<span class="kw">c</span>(<span class="dv">1</span>, selected)]
 
 <span class="co"># fit an additive logistic regression</span>
 <span class="co"># use 10-fold cross-validation to obtain an estimate of test accuracy</span>
 <span class="co"># horribly optimistic</span>
 <span class="kw">library</span>(boot)
-glm_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+glm_fit =<span class="st"> </span><span class="kw">glm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
 <span class="dv">1</span> -<span class="st"> </span><span class="kw">cv.glm</span>(train_screen, glm_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>]</code></pre></div>
 <pre><code>## [1] 0.709234</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get test accuracy, which we expect to be 0.50</span>
 <span class="co"># no better than guessing</span>
-glm_pred &lt;-<span class="st"> </span>(<span class="kw">predict</span>(glm_fit, <span class="dt">newdata =</span> test_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) &gt;<span class="st"> </span><span class="fl">0.5</span>) *<span class="st"> </span><span class="dv">1</span>
+glm_pred =<span class="st"> </span>(<span class="kw">predict</span>(glm_fit, <span class="dt">newdata =</span> test_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) &gt;<span class="st"> </span><span class="fl">0.5</span>) *<span class="st"> </span><span class="dv">1</span>
 <span class="kw">accuracy</span>(<span class="dt">predicted =</span> glm_pred, <span class="dt">actual =</span> test_screen$y)</code></pre></div>
 <pre><code>## [1] 0.46</code></pre>
 <p>Now, we will correctly screen-while-validating.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use the caret package to obtain 10 &quot;folds&quot;</span>
-folds &lt;-<span class="st"> </span>caret::<span class="kw">createFolds</span>(train_screen$y)
+folds =<span class="st"> </span>caret::<span class="kw">createFolds</span>(train_screen$y)
 
 <span class="co"># for each fold</span>
 <span class="co"># - pre-screen variables on the 9 training folds</span>
 <span class="co"># - fit model to these variables</span>
 <span class="co"># - get accuracy on validation fold</span>
-fold_acc &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(folds))
+fold_acc =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(folds))
 
-for (i in <span class="kw">seq_along</span>(folds)) {
+for(i in <span class="kw">seq_along</span>(folds)) {
 
   <span class="co"># split for fold i  </span>
-  train_fold &lt;-<span class="st"> </span>train[-folds[[i]],]
-  validate_fold &lt;-<span class="st"> </span>train[folds[[i]],]
+  train_fold =<span class="st"> </span>train[-folds[[i]],]
+  validate_fold =<span class="st"> </span>train[folds[[i]],]
 
   <span class="co"># screening for fold i  </span>
-  correlations &lt;-<span class="st"> </span><span class="kw">apply</span>(train_fold[, -<span class="dv">1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> train_fold[,<span class="dv">1</span>])
-  selected &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>:<span class="dv">25</span>]
-  train_fold_screen &lt;-<span class="st"> </span>train_fold[ ,<span class="kw">c</span>(<span class="dv">1</span>,selected)]
-  validate_fold_screen &lt;-<span class="st"> </span>validate_fold[ ,<span class="kw">c</span>(<span class="dv">1</span>,selected)]
+  correlations =<span class="st"> </span><span class="kw">apply</span>(train_fold[, -<span class="dv">1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> train_fold[,<span class="dv">1</span>])
+  selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>:<span class="dv">25</span>]
+  train_fold_screen =<span class="st"> </span>train_fold[ ,<span class="kw">c</span>(<span class="dv">1</span>,selected)]
+  validate_fold_screen =<span class="st"> </span>validate_fold[ ,<span class="kw">c</span>(<span class="dv">1</span>,selected)]
 
   <span class="co"># accuracy for fold i  </span>
-  glm_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_fold_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
-  glm_pred &lt;-<span class="st"> </span>(<span class="kw">predict</span>(glm_fit, <span class="dt">newdata =</span> validate_fold_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) &gt;<span class="st"> </span><span class="fl">0.5</span>)*<span class="dv">1</span>
-  fold_acc[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(glm_pred ==<span class="st"> </span>validate_fold_screen$y)
+  glm_fit =<span class="st"> </span><span class="kw">glm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_fold_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+  glm_pred =<span class="st"> </span>(<span class="kw">predict</span>(glm_fit, <span class="dt">newdata =</span> validate_fold_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) &gt;<span class="st"> </span><span class="fl">0.5</span>)*<span class="dv">1</span>
+  fold_acc[i] =<span class="st"> </span><span class="kw">mean</span>(glm_pred ==<span class="st"> </span>validate_fold_screen$y)
   
 }
 

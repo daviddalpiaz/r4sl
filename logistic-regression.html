@@ -276,17 +276,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## # ... with 9,990 more rows</code></pre>
 <p>We also repeat the test-train split from the previous chapter.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-default_index &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
-default_train &lt;-<span class="st"> </span>Default[default_index, ]
-default_test  &lt;-<span class="st"> </span>Default[-default_index, ]</code></pre></div>
+default_index =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
+default_train =<span class="st"> </span>Default[default_index, ]
+default_test =<span class="st"> </span>Default[-default_index, ]</code></pre></div>
 <div id="linear-regression" class="section level2">
 <h2><span class="header-section-number">8.1</span> Linear Regression</h2>
 <p>Before moving on to logistic regression, why not plain, old, linear regression?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_train_lm &lt;-<span class="st"> </span>default_train
-default_test_lm  &lt;-<span class="st"> </span>default_test</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_train_lm =<span class="st"> </span>default_train
+default_test_lm =<span class="st"> </span>default_test</code></pre></div>
 <p>Since linear regression expects a numeric response variable, we coerce the response to be numeric. (Notice that we also shift the results, as we require <code>0</code> and <code>1</code>, not <code>1</code> and <code>2</code>.) Notice we have also copied the dataset so that we can return the original data with factors later.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_train_lm$default &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(default_train_lm$default) -<span class="st"> </span><span class="dv">1</span>
-default_test_lm$default  &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(default_test_lm$default) -<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_train_lm$default =<span class="st"> </span><span class="kw">as.numeric</span>(default_train_lm$default) -<span class="st"> </span><span class="dv">1</span>
+default_test_lm$default =<span class="st"> </span><span class="kw">as.numeric</span>(default_test_lm$default) -<span class="st"> </span><span class="dv">1</span></code></pre></div>
 <p>Why would we think this should work? Recall that,</p>
 <p><span class="math display">\[
 \hat{E}[Y \mid X = x] = X\hat{\beta}.
@@ -296,7 +296,7 @@ default_test_lm$default  &lt;-<span class="st"> </span><span class="kw">as.numer
 E[Y \mid X = x] = P[Y = 1 \mid X = x].
 \]</span></p>
 <p>It would then seem reasonable that <span class="math inline">\(X\hat{\beta}\)</span> is a reasonable estimate of <span class="math inline">\(P[Y = 1 \ X = x]\)</span>. We test this on the <code>Default</code> data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_lm &lt;-<span class="st"> </span><span class="kw">lm</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train_lm)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_lm =<span class="st"> </span><span class="kw">lm</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train_lm)</code></pre></div>
 <p>Everything seems to be working, until we plot the results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train_lm, 
      <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(-<span class="fl">0.2</span>, <span class="dv">1</span>),
@@ -355,7 +355,7 @@ p({\bf x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \
 \]</span></p>
 <p>The model is fit by numerically maximizing the likelihood, which we will let <code>R</code> take care of.</p>
 <p>We start with a single predictor example, again using <code>balance</code> as our single predictor.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_glm &lt;-<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_glm =<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre></div>
 <p>Fitting this model looks very similar to fitting a simple linear regression. Instead of <code>lm()</code> we use <code>glm()</code>. The only other difference is the use of <code>family = &quot;binomial&quot;</code> which indicates that we have a two-class categorical response. Using <code>glm()</code> with <code>family = &quot;gaussian&quot;</code> would perform the usual linear regression.</p>
 <p>First, we can obtain the fitted coefficients the same way we did with linear regression.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(model_glm)</code></pre></div>
@@ -384,8 +384,8 @@ p({\bf x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \
 ##         5189 
 ## 6.357530e-04</code></pre>
 <p>Note that these are probabilities, <strong>not</strong> classifications. To obtain classifications, we will need to compare to the correct cutoff value with an <code>ifelse()</code> statement.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_glm_pred &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>) &gt;<span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)
-<span class="co"># model_glm_pred &lt;- ifelse(predict(model_glm, type = &quot;response&quot;) &gt; 0.5, &quot;Yes&quot;, &quot;No&quot;)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_glm_pred =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>) &gt;<span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)
+<span class="co"># model_glm_pred = ifelse(predict(model_glm, type = &quot;response&quot;) &gt; 0.5, &quot;Yes&quot;, &quot;No&quot;)</span></code></pre></div>
 <p>The line that is run is performing</p>
 <p><span class="math display">\[
 \hat{C}(\bf x) = 
@@ -413,18 +413,18 @@ p({\bf x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(model_glm_pred ==<span class="st"> </span>default_train$default) <span class="co"># train accuracy</span></code></pre></div>
 <pre><code>## [1] 0.9722</code></pre>
 <p>As we saw previously, the <code>table()</code> and <code>confusionMatrix()</code> functions can be used to quickly obtain many more metrics.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_tab &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> model_glm_pred, <span class="dt">actual =</span> default_train$default)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_tab =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> model_glm_pred, <span class="dt">actual =</span> default_train$default)
 <span class="kw">library</span>(caret)
-train_con_mat &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(train_tab, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
+train_con_mat =<span class="st"> </span><span class="kw">confusionMatrix</span>(train_tab, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
 <span class="kw">c</span>(train_con_mat$overall[<span class="st">&quot;Accuracy&quot;</span>], 
   train_con_mat$byClass[<span class="st">&quot;Sensitivity&quot;</span>], 
   train_con_mat$byClass[<span class="st">&quot;Specificity&quot;</span>])</code></pre></div>
 <pre><code>##    Accuracy Sensitivity Specificity 
 ##   0.9722000   0.2738095   0.9964818</code></pre>
 <p>As we did with regression, we could also write a custom function for accuracy.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_accuracy &lt;-<span class="st"> </span>function(mod, data, <span class="dt">res =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>, <span class="dt">neg =</span> <span class="dv">0</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>) {
-  probs &lt;-<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> data, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
-  preds &lt;-<span class="st"> </span><span class="kw">ifelse</span>(probs &gt;<span class="st"> </span>cut, pos, neg)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_accuracy =<span class="st"> </span>function(mod, data, <span class="dt">res =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>, <span class="dt">neg =</span> <span class="dv">0</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>) {
+  probs =<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> data, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
+  preds =<span class="st"> </span><span class="kw">ifelse</span>(probs &gt;<span class="st"> </span>cut, pos, neg)
   <span class="kw">mean</span>(data[, res] ==<span class="st"> </span>preds)
 }</code></pre></div>
 <p>This function will be useful later when calculating train and test accuracies for several models at the same time.</p>
@@ -462,25 +462,25 @@ train_con_mat &lt;-<span class="st"> </span><span class="kw">confusionMatrix</sp
 x_1 = \frac{-\hat{\beta}_0}{\hat{\beta}_1}.
 \]</span></p>
 <p>The following is not run, but an alternative way to add the logistic curve to the plot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(default_train$balance), <span class="dt">by =</span> <span class="fl">0.01</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(default_train$balance), <span class="dt">by =</span> <span class="fl">0.01</span>)
 
-sigmoid &lt;-<span class="st"> </span>function(x) {
+sigmoid =<span class="st"> </span>function(x) {
   <span class="dv">1</span> /<span class="st"> </span>(<span class="dv">1</span> +<span class="st"> </span><span class="kw">exp</span>(-x))
 }
 
 <span class="kw">lines</span>(grid, <span class="kw">sigmoid</span>(<span class="kw">coef</span>(model_glm)[<span class="dv">1</span>] +<span class="st"> </span><span class="kw">coef</span>(model_glm)[<span class="dv">2</span>] *<span class="st"> </span>grid), <span class="dt">lwd =</span> <span class="dv">3</span>)</code></pre></div>
 <p>Using the usual formula syntax, it is easy to add complexity to logistic regressions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_1 &lt;-<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
-model_2 &lt;-<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span>., <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
-model_3 &lt;-<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="kw">I</span>(balance ^<span class="st"> </span><span class="dv">2</span>),
-               <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_1 =<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+model_2 =<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span>., <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+model_3 =<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="kw">I</span>(balance ^<span class="st"> </span><span class="dv">2</span>),
+              <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre></div>
 <p>Note that, using polynomial transformations of predictors will allow a linear model to have non-linear decision boundaries.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_list =<span class="st"> </span><span class="kw">list</span>(model_1, model_2, model_3)
 
-train_error &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">sapply</span>(model_list, get_accuracy, <span class="dt">data =</span> default_train, 
-                          <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
-test_error  &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">sapply</span>(model_list, get_accuracy, <span class="dt">data =</span> default_test, 
-                          <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</code></pre></div>
+train_error =<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">sapply</span>(model_list, get_accuracy, <span class="dt">data =</span> default_train, 
+                         <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
+test_error =<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">sapply</span>(model_list, get_accuracy, <span class="dt">data =</span> default_test, 
+                       <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</code></pre></div>
 <p>Here we see the misclassification error rates for each model. The train decreases, and the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(train_error)</code></pre></div>
 <pre><code>## [1] -0.0058 -0.0002</code></pre>
@@ -491,10 +491,10 @@ test_error  &lt;-<span class="st"> </span><span class="dv">1</span> -<span class
 <div id="roc-curves" class="section level2">
 <h2><span class="header-section-number">8.4</span> ROC Curves</h2>
 <p>Let’s return to our simple model with only balance as a predictor.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_glm &lt;-<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_glm =<span class="st"> </span><span class="kw">glm</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre></div>
 <p>We write a function which allows use to make predictions based on different probability cutoffs.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_pred &lt;-<span class="st"> </span>function(mod, data, <span class="dt">res =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>, <span class="dt">neg =</span> <span class="dv">0</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>) {
-  probs &lt;-<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> data, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_pred =<span class="st"> </span>function(mod, data, <span class="dt">res =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>, <span class="dt">neg =</span> <span class="dv">0</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>) {
+  probs =<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> data, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
   <span class="kw">ifelse</span>(probs &gt;<span class="st"> </span>cut, pos, neg)
 }</code></pre></div>
 <p><span class="math display">\[
@@ -505,18 +505,18 @@ test_error  &lt;-<span class="st"> </span><span class="dv">1</span> -<span class
 \end{cases}
 \]</span></p>
 <p>Let’s use this to obtain predictions using a low, medium, and high cutoff. (0.1, 0.5, and 0.9)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred_10 &lt;-<span class="st"> </span><span class="kw">get_pred</span>(model_glm, <span class="dt">data =</span> default_test, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.1</span>)
-test_pred_50 &lt;-<span class="st"> </span><span class="kw">get_pred</span>(model_glm, <span class="dt">data =</span> default_test, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
-test_pred_90 &lt;-<span class="st"> </span><span class="kw">get_pred</span>(model_glm, <span class="dt">data =</span> default_test, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.9</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_pred_10 =<span class="st"> </span><span class="kw">get_pred</span>(model_glm, <span class="dt">data =</span> default_test, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.1</span>)
+test_pred_50 =<span class="st"> </span><span class="kw">get_pred</span>(model_glm, <span class="dt">data =</span> default_test, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
+test_pred_90 =<span class="st"> </span><span class="kw">get_pred</span>(model_glm, <span class="dt">data =</span> default_test, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.9</span>)</code></pre></div>
 <p>Now we evaluate accuracy, sensitivity, and specificity for these classifiers.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_tab_10 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_10, <span class="dt">actual =</span> default_test$default)
-test_tab_50 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_50, <span class="dt">actual =</span> default_test$default)
-test_tab_90 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_90, <span class="dt">actual =</span> default_test$default)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_tab_10 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_10, <span class="dt">actual =</span> default_test$default)
+test_tab_50 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_50, <span class="dt">actual =</span> default_test$default)
+test_tab_90 =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_90, <span class="dt">actual =</span> default_test$default)
 
-test_con_mat_10 &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_10, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
-test_con_mat_50 &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_50, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
-test_con_mat_90 &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_90, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metrics &lt;-<span class="st"> </span><span class="kw">rbind</span>(
+test_con_mat_10 =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_10, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
+test_con_mat_50 =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_50, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
+test_con_mat_90 =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_90, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metrics =<span class="st"> </span><span class="kw">rbind</span>(
   
   <span class="kw">c</span>(test_con_mat_10$overall[<span class="st">&quot;Accuracy&quot;</span>], 
     test_con_mat_10$byClass[<span class="st">&quot;Sensitivity&quot;</span>], 
@@ -532,7 +532,7 @@ test_con_mat_90 &lt;-<span class="st"> </span><span class="kw">confusionMatrix</
 
 )
 
-<span class="kw">rownames</span>(metrics) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;c = 0.10&quot;</span>, <span class="st">&quot;c = 0.50&quot;</span>, <span class="st">&quot;c = 0.90&quot;</span>)
+<span class="kw">rownames</span>(metrics) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;c = 0.10&quot;</span>, <span class="st">&quot;c = 0.50&quot;</span>, <span class="st">&quot;c = 0.90&quot;</span>)
 metrics</code></pre></div>
 <pre><code>##          Accuracy Sensitivity Specificity
 ## c = 0.10   0.9404  0.77575758   0.9460186
@@ -542,8 +542,8 @@ metrics</code></pre></div>
 <p>Note that usually the best accuracy will be seen near <span class="math inline">\(c = 0.50\)</span>.</p>
 <p>Instead of manually checking cutoffs, we can create an ROC curve (receiver operating characteristic curve) which will sweep through all possible cutoffs, and plot the sensitivity and specificity.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pROC)
-test_prob &lt;-<span class="st"> </span><span class="kw">predict</span>(model_glm, <span class="dt">newdata =</span> default_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
-test_roc &lt;-<span class="st"> </span><span class="kw">roc</span>(default_test$default ~<span class="st"> </span>test_prob, <span class="dt">plot =</span> <span class="ot">TRUE</span>, <span class="dt">print.auc =</span> <span class="ot">TRUE</span>)</code></pre></div>
+test_prob =<span class="st"> </span><span class="kw">predict</span>(model_glm, <span class="dt">newdata =</span> default_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
+test_roc =<span class="st"> </span><span class="kw">roc</span>(default_test$default ~<span class="st"> </span>test_prob, <span class="dt">plot =</span> <span class="ot">TRUE</span>, <span class="dt">print.auc =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="08-logistic_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(test_roc$auc)</code></pre></div>
 <pre><code>## [1] 0.9515076</code></pre>
@@ -559,13 +559,13 @@ P[Y = k \mid {\bf X = x}] = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \
 <p>As an example of a dataset with a three category response, we use the <code>iris</code> dataset, which is so famous, it has its own <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia entry</a>. It is also a default dataset in <code>R</code>, so no need to load it.</p>
 <p>Before proceeding, we test-train split this data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
-iris_obs &lt;-<span class="st"> </span><span class="kw">nrow</span>(iris)
-iris_index &lt;-<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
-iris_train &lt;-<span class="st"> </span>iris[iris_index, ]
-iris_test  &lt;-<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
+iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)
+iris_index =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
+iris_train =<span class="st"> </span>iris[iris_index, ]
+iris_test =<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
 <p>To perform multinomial logistic regression, we use the <code>multinom</code> function from the <code>nnet</code> package. Training using <code>multinom()</code> is done using similar syntax to <code>lm()</code> and <code>glm()</code>. We add the <code>trace = FALSE</code> argument to suppress information about updates to the optimization routine as the model is trained.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nnet)
-model_multi &lt;-<span class="st"> </span><span class="kw">multinom</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train, <span class="dt">trace =</span> <span class="ot">FALSE</span>)
+model_multi =<span class="st"> </span><span class="kw">multinom</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train, <span class="dt">trace =</span> <span class="ot">FALSE</span>)
 <span class="kw">summary</span>(model_multi)$coefficients</code></pre></div>
 <pre><code>##            (Intercept) Sepal.Length Sepal.Width Petal.Length Petal.Width
 ## versicolor    26.81602    -6.983313   -16.24574     20.35750    3.218787

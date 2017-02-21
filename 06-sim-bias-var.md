@@ -36,7 +36,7 @@ We will illustrate this decomposition, and the resulting bias-variance tradeoff 
 
 
 ```r
-f <- function(x) {
+f = function(x) {
   x ^ 2
 }
 ```
@@ -56,9 +56,9 @@ We write a function which generates data accordingly.
 
 
 ```r
-get_sim_data <- function(f, sample_size = 100) {
-  x <- runif(n = sample_size, min = 0, max = 1)
-  y <- f(x) + rnorm(n = sample_size, mean = 0, sd = 0.3)
+get_sim_data = function(f, sample_size = 100) {
+  x = runif(n = sample_size, min = 0, max = 1)
+  y = f(x) + rnorm(n = sample_size, mean = 0, sd = 0.3)
   data.frame(x, y)
 }
 ```
@@ -67,12 +67,12 @@ To get a sense of the data, we generate one simulated dataset, and fit the four 
 
 
 ```r
-sim_data <- get_sim_data(f, sample_size = 100)
+sim_data = get_sim_data(f, sample_size = 100)
 
-fit_1 <- lm(y ~ 1, data = sim_data)
-fit_2 <- lm(y ~ poly(x, degree = 1), data = sim_data)
-fit_3 <- lm(y ~ poly(x, degree = 2), data = sim_data)
-fit_4 <- lm(y ~ poly(x, degree = 3), data = sim_data)
+fit_1 = lm(y ~ 1, data = sim_data)
+fit_2 = lm(y ~ poly(x, degree = 1), data = sim_data)
+fit_3 = lm(y ~ poly(x, degree = 2), data = sim_data)
+fit_4 = lm(y ~ poly(x, degree = 3), data = sim_data)
 ```
 
 Plotting these four trained models, we see that the zero predictor model (red) does very poorly. The single predictor model (blue) is reasonable, but we can see that the two (green) and three (orange) predictor models seem more appropriate. Between these latter two, it is hard to see which seems more appropriate.
@@ -103,21 +103,21 @@ We will now use simulation to estimate the bias, variance, and mean squared erro
 
 ```r
 set.seed(1)
-n_sims <- 1000
-n_models <- 4
-x0 <- 0.95
-predictions <- matrix(0, nrow = n_sims, ncol = n_models)
-sim_data <- get_sim_data(f, sample_size = 100)
+n_sims = 1000
+n_models = 4
+x0 = 0.95
+predictions = matrix(0, nrow = n_sims, ncol = n_models)
+sim_data = get_sim_data(f, sample_size = 100)
 plot(y ~ x, data = sim_data, col = "white", xlim = c(0.75, 1), ylim = c(0, 1.5))
 
 for (i in 1:n_sims) {
   
-  sim_data <- get_sim_data(f, sample_size = 100)
+  sim_data = get_sim_data(f, sample_size = 100)
 
-  fit_1 <- lm(y ~ 1, data = sim_data)
-  fit_2 <- lm(y ~ poly(x, degree = 1), data = sim_data)
-  fit_3 <- lm(y ~ poly(x, degree = 2), data = sim_data)
-  fit_4 <- lm(y ~ poly(x, degree = 3), data = sim_data)
+  fit_1 = lm(y ~ 1, data = sim_data)
+  fit_2 = lm(y ~ poly(x, degree = 1), data = sim_data)
+  fit_3 = lm(y ~ poly(x, degree = 2), data = sim_data)
+  fit_4 = lm(y ~ poly(x, degree = 3), data = sim_data)
   
   lines(grid, predict(fit_1, newdata = data.frame(x = grid)), col = "red", lwd = 1)
   # lines(grid, predict(fit_2, newdata = data.frame(x = grid)), col = "blue", lwd = 1)
@@ -146,19 +146,19 @@ To evaluate the bias and variance, we simulate values for the response $y$ at $x
 
 
 ```r
-eps <- rnorm(n = n_sims, mean = 0, sd = 0.3)
-y0  <- f(x0) + eps
+eps = rnorm(n = n_sims, mean = 0, sd = 0.3)
+y0 = f(x0) + eps
 ```
 
 `R` already has a function to calculate variance, however, we add functions for bias and mean squared error.
 
 
 ```r
-get_bias <- function(estimate, truth) {
+get_bias = function(estimate, truth) {
   mean(estimate) - truth
 }
 
-get_mse <- function(estimate, truth) {
+get_mse = function(estimate, truth) {
   mean((estimate - truth) ^ 2)
 }
 ```
@@ -167,9 +167,9 @@ When then use the predictions obtained from the above simulation to estimate the
 
 
 ```r
-bias <- apply(predictions, 2, get_bias, f(x0))
-variance <- apply(predictions, 2, var)
-mse <- apply(predictions, 2, get_mse, y0)
+bias = apply(predictions, 2, get_bias, f(x0))
+variance = apply(predictions, 2, var)
+mse = apply(predictions, 2, get_mse, y0)
 ```
 
 We summarize these results in the following table.
