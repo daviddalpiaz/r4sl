@@ -41,24 +41,24 @@ First, let's return to the usual test-train split procedure that we have used so
 
 ```r
 set.seed(42)
-num_reps = 100
+num_reps <- 100
 
-lin_rmse  = rep(0, times = num_reps)
-quad_rmse = rep(0, times = num_reps)
-huge_rmse = rep(0, times = num_reps)
+lin_rmse  <- rep(0, times = num_reps)
+quad_rmse <- rep(0, times = num_reps)
+huge_rmse <- rep(0, times = num_reps)
 
 for(i in 1:100) {
   
   trainIndex = sample(392, size = 196)
   
-  lin_fit = lm(mpg ~ horsepower, data = Auto, subset = trainIndex)
-  lin_rmse[i] = sqrt(mean((Auto$mpg - predict(lin_fit, Auto))[-trainIndex] ^ 2))
+  lin_fit <- lm(mpg ~ horsepower, data = Auto, subset = trainIndex)
+  lin_rmse[i] <- sqrt(mean((Auto$mpg - predict(lin_fit, Auto))[-trainIndex] ^ 2))
   
-  quad_fit = lm(mpg ~ poly(horsepower, 2), data = Auto, subset = trainIndex)
-  quad_rmse[i] = sqrt(mean((Auto$mpg - predict(quad_fit, Auto))[-trainIndex] ^ 2))
+  quad_fit <- lm(mpg ~ poly(horsepower, 2), data = Auto, subset = trainIndex)
+  quad_rmse[i] <- sqrt(mean((Auto$mpg - predict(quad_fit, Auto))[-trainIndex] ^ 2))
   
-  huge_fit = lm(mpg ~ poly(horsepower, 8), data = Auto, subset = trainIndex)
-  huge_rmse[i] = sqrt(mean((Auto$mpg - predict(huge_fit, Auto))[-trainIndex] ^ 2))
+  huge_fit <- lm(mpg ~ poly(horsepower, 8), data = Auto, subset = trainIndex)
+  huge_rmse[i] <- sqrt(mean((Auto$mpg - predict(huge_fit, Auto))[-trainIndex] ^ 2))
 }
 ```
 
@@ -78,7 +78,7 @@ Some method, for example `glm()` through `cv.glm()` and `knn()` through `knn.cv(
 
 
 ```r
-glm_fit = glm(mpg ~ horsepower, data = Auto)
+glm_fit <- glm(mpg ~ horsepower, data = Auto)
 coef(glm_fit)
 ```
 
@@ -88,7 +88,7 @@ coef(glm_fit)
 ```
 
 ```r
-lm_fit = lm(mpg ~ horsepower, data = Auto)
+lm_fit <- lm(mpg ~ horsepower, data = Auto)
 coef(lm_fit)
 ```
 
@@ -102,8 +102,8 @@ By default, `cv.glm()` will report leave-one-out cross-validation (LOOCV).
 
 ```r
 library(boot)
-glm_fit = glm(mpg ~ horsepower, data = Auto)
-loocv_rmse = sqrt(cv.glm(Auto, glm_fit)$delta)
+glm_fit <- glm(mpg ~ horsepower, data = Auto)
+loocv_rmse <- sqrt(cv.glm(Auto, glm_fit)$delta)
 loocv_rmse
 ```
 
@@ -123,10 +123,10 @@ We are actually given two values. The first is exactly the LOOCV MSE. The second
 
 
 ```r
-loocv_rmse_poly = rep(0, times = 10)
+loocv_rmse_poly <- rep(0, times = 10)
 for (i in seq_along(loocv_rmse_poly)) {
-  glm_fit = glm(mpg ~ poly(horsepower, i), data = Auto)
-  loocv_rmse_poly[i] = sqrt(cv.glm(Auto, glm_fit)$delta[1])
+  glm_fit <- glm(mpg ~ poly(horsepower, i), data = Auto)
+  loocv_rmse_poly[i] <- sqrt(cv.glm(Auto, glm_fit)$delta[1])
 }
 loocv_rmse_poly
 ```
@@ -151,10 +151,10 @@ We could instead use $k$-fold cross-validation.
 
 ```r
 set.seed(17)
-cv_10_rmse_poly = rep(0, times = 10)
+cv_10_rmse_poly <- rep(0, times = 10)
 for (i in seq_along(cv_10_rmse_poly)){
-  glm_fit = glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv_10_rmse_poly[i] = sqrt(cv.glm(Auto, glm_fit, K = 10)$delta[1])
+  glm_fit <- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv_10_rmse_poly[i] <- sqrt(cv.glm(Auto, glm_fit, K = 10)$delta[1])
 }
 cv_10_rmse_poly
 ```
@@ -177,21 +177,21 @@ Here we chose 10-fold cross-validation. Notice it is **much** faster. IN practic
 
 ```r
 set.seed(42)
-num_reps = 100
+num_reps <- 100
 
 
-lin_rmse_10_fold  = rep(0, times = num_reps)
-quad_rmse_10_fold = rep(0, times = num_reps)
-huge_rmse_10_fold = rep(0, times = num_reps)
+lin_rmse_10_fold  <- rep(0, times = num_reps)
+quad_rmse_10_fold <- rep(0, times = num_reps)
+huge_rmse_10_fold <- rep(0, times = num_reps)
 
 for(i in 1:100) {
   
-  lin_fit = glm(mpg ~ poly(horsepower, 1), data = Auto)
-  quad_fit = glm(mpg ~ poly(horsepower, 2), data = Auto)
-  huge_fit = glm(mpg ~ poly(horsepower, 8), data = Auto)
-  lin_rmse_10_fold[i] =  sqrt(cv.glm(Auto, lin_fit, K = 10)$delta[1])
-  quad_rmse_10_fold[i] =  sqrt(cv.glm(Auto, quad_fit, K = 10)$delta[1])
-  huge_rmse_10_fold[i] =  sqrt(cv.glm(Auto, huge_fit, K = 10)$delta[1])
+  lin_fit  <- glm(mpg ~ poly(horsepower, 1), data = Auto)
+  quad_fit <- glm(mpg ~ poly(horsepower, 2), data = Auto)
+  huge_fit <- glm(mpg ~ poly(horsepower, 8), data = Auto)
+  lin_rmse_10_fold[i]  <- sqrt(cv.glm(Auto, lin_fit, K = 10)$delta[1])
+  quad_rmse_10_fold[i] <- sqrt(cv.glm(Auto, quad_fit, K = 10)$delta[1])
+  huge_rmse_10_fold[i] <- sqrt(cv.glm(Auto, huge_fit, K = 10)$delta[1])
 }
 ```
 
@@ -273,7 +273,7 @@ To be specific we will test-train split the data, then perform cross-validation 
 
 
 ```r
-accuracy = function(actual, predicted) {
+accuracy <- function(actual, predicted) {
   mean(actual == predicted)
 }
 ```
@@ -286,11 +286,11 @@ accuracy = function(actual, predicted) {
 # X has no relationship with the response
 # p >>> n
 set.seed(430)
-n = 400
-p = 5000
-X = replicate(p, rnorm(n))
-y = c(rep(0, times = n / 4), rep(1, times = n / 4), 
-      rep(0, times = n / 4), rep(1, times = n / 4))
+n <- 400
+p <- 5000
+X <- replicate(p, rnorm(n))
+y <- c(rep(0, times = n / 4), rep(1, times = n / 4), 
+       rep(0, times = n / 4), rep(1, times = n / 4))
 ```
 
 
@@ -299,9 +299,9 @@ y = c(rep(0, times = n / 4), rep(1, times = n / 4),
 # last n/2 observations used for testing
 # both are 50% 0s and 50% 1s
 # cv will be done inside train data
-full_data = data.frame(y, X)
-train = full_data[1:(n / 2), ]
-test = full_data[((n / 2) + 1):n, ]
+full_data <- data.frame(y, X)
+train <- full_data[1:(n / 2), ]
+test  <- full_data[((n / 2) + 1):n, ]
 ```
 
 First, we use the screen-then-validate approach.
@@ -309,7 +309,7 @@ First, we use the screen-then-validate approach.
 
 ```r
 # find correlation between y and each predictor variable
-correlations = apply(train[, -1], 2, cor, y = train$y)
+correlations <- apply(train[, -1], 2, cor, y = train$y)
 hist(correlations)
 ```
 
@@ -318,7 +318,7 @@ hist(correlations)
 ```r
 # select the 25 largest (absolute) correlation
 # these should be "useful" for prediction
-selected = order(abs(correlations), decreasing = TRUE)[1:25]
+selected <- order(abs(correlations), decreasing = TRUE)[1:25]
 correlations[selected]
 ```
 
@@ -337,14 +337,14 @@ correlations[selected]
 
 ```r
 # subset the test and training data based on the selected predictors
-train_screen = train[c(1, selected)]
-test_screen = test[c(1, selected)]
+train_screen <- train[c(1, selected)]
+test_screen  <- test[c(1, selected)]
 
 # fit an additive logistic regression
 # use 10-fold cross-validation to obtain an estimate of test accuracy
 # horribly optimistic
 library(boot)
-glm_fit = glm(y ~ ., data = train_screen, family = "binomial")
+glm_fit <- glm(y ~ ., data = train_screen, family = "binomial")
 1 - cv.glm(train_screen, glm_fit, K = 10)$delta[1]
 ```
 
@@ -355,7 +355,7 @@ glm_fit = glm(y ~ ., data = train_screen, family = "binomial")
 ```r
 # get test accuracy, which we expect to be 0.50
 # no better than guessing
-glm_pred = (predict(glm_fit, newdata = test_screen, type = "response") > 0.5) * 1
+glm_pred <- (predict(glm_fit, newdata = test_screen, type = "response") > 0.5) * 1
 accuracy(predicted = glm_pred, actual = test_screen$y)
 ```
 
@@ -368,30 +368,30 @@ Now, we will correctly screen-while-validating.
 
 ```r
 # use the caret package to obtain 10 "folds"
-folds = caret::createFolds(train_screen$y)
+folds <- caret::createFolds(train_screen$y)
 
 # for each fold
 # - pre-screen variables on the 9 training folds
 # - fit model to these variables
 # - get accuracy on validation fold
-fold_acc = rep(0, length(folds))
+fold_acc <- rep(0, length(folds))
 
-for(i in seq_along(folds)) {
+for (i in seq_along(folds)) {
 
   # split for fold i  
-  train_fold = train[-folds[[i]],]
-  validate_fold = train[folds[[i]],]
+  train_fold <- train[-folds[[i]],]
+  validate_fold <- train[folds[[i]],]
 
   # screening for fold i  
-  correlations = apply(train_fold[, -1], 2, cor, y = train_fold[,1])
-  selected = order(abs(correlations), decreasing = TRUE)[1:25]
-  train_fold_screen = train_fold[ ,c(1,selected)]
-  validate_fold_screen = validate_fold[ ,c(1,selected)]
+  correlations <- apply(train_fold[, -1], 2, cor, y = train_fold[,1])
+  selected <- order(abs(correlations), decreasing = TRUE)[1:25]
+  train_fold_screen <- train_fold[ ,c(1,selected)]
+  validate_fold_screen <- validate_fold[ ,c(1,selected)]
 
   # accuracy for fold i  
-  glm_fit = glm(y ~ ., data = train_fold_screen, family = "binomial")
-  glm_pred = (predict(glm_fit, newdata = validate_fold_screen, type = "response") > 0.5)*1
-  fold_acc[i] = mean(glm_pred == validate_fold_screen$y)
+  glm_fit <- glm(y ~ ., data = train_fold_screen, family = "binomial")
+  glm_pred <- (predict(glm_fit, newdata = validate_fold_screen, type = "response") > 0.5)*1
+  fold_acc[i] <- mean(glm_pred == validate_fold_screen$y)
   
 }
 

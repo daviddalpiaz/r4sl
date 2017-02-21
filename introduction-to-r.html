@@ -1255,8 +1255,8 @@ mpg %&gt;%<span class="st"> </span><span class="kw">filter</span>(hwy &gt;<span 
 <pre><code>## [1] 11.79982</code></pre>
 <p>Lastly, to generate a random sample of size <code>n = 10</code>, use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
-<pre><code>##  [1]  1.7659707 -0.6618472  2.5689595  7.5779041 -5.9969823  3.3905818
-##  [7]  9.8906963  2.8554843  2.5141652  6.7652997</code></pre>
+<pre><code>##  [1]  8.3009394 -3.6905078  2.9028676 -3.3695043 -5.7341035  6.9804614
+##  [7]  0.5503667 -0.4765760  9.1669911 -8.3851494</code></pre>
 <p>These functions exist for many other distributions, including but not limited to:</p>
 <table>
 <thead>
@@ -1471,11 +1471,11 @@ x</code></pre></div>
 <p>Here the name of the function is <code>standardize</code>, and the function has a single argument <code>x</code> which is used in the body of function. Note that the output of the final line of the body is what is returned by the function. In this case the function returns the vector stored in the variable <code>results</code>.</p>
 <p>To test our function, we will take a random sample of size <code>n = 10</code> from a normal distribution with a mean of <code>2</code> and a standard deviation of <code>5</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(test_sample &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>))</code></pre></div>
-<pre><code>##  [1] -0.1189369  1.5789475 -2.1494567  0.6857848 -5.3463179  8.2265462
-##  [7] -5.8403266 -6.7069541 -2.9437080  4.2540061</code></pre>
+<pre><code>##  [1] -0.5166923  0.5083558  5.6244860  0.1077653 -2.7622070 -1.7229115
+##  [7]  1.7728769 -2.5353075 -3.2815229  1.8543595</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">standardize</span>(<span class="dt">x =</span> test_sample)</code></pre></div>
-<pre><code>##  [1]  0.1510962  0.5088457 -0.2767407  0.3206536 -0.9503293  1.9095156
-##  [7] -1.0544185 -1.2370196 -0.4440919  1.0724890</code></pre>
+<pre><code>##  [1] -0.15515383  0.22206487  2.10480589  0.07464721 -0.98150547
+##  [6] -0.59904370  0.68740989 -0.89800622 -1.17261424  0.71739559</code></pre>
 <p>This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">standardize &lt;-<span class="st"> </span>function(x) {
   (x -<span class="st"> </span><span class="kw">mean</span>(x)) /<span class="st"> </span><span class="kw">sd</span>(x)
@@ -1512,14 +1512,14 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
   (<span class="dv">1</span> /<span class="st"> </span>n) *<span class="st"> </span><span class="kw">sum</span>((x -<span class="st"> </span><span class="kw">mean</span>(x)) ^<span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 22.52465</code></pre>
+<pre><code>## [1] 7.384176</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">biased =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 22.52465</code></pre>
+<pre><code>## [1] 7.384176</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 22.52465</code></pre>
+<pre><code>## [1] 7.384176</code></pre>
 <p>We see the function is working as expected, and when returning the unbiased estimate it matches <code>R</code>’s built in function <code>var()</code>. Finally, let’s examine the biased estimate of <span class="math inline">\(\sigma^2\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">biased =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] 20.27218</code></pre>
+<pre><code>## [1] 6.645758</code></pre>
 </div>
 </div>
 <div id="hypothesis-tests-in-r" class="section level2">

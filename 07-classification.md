@@ -60,9 +60,9 @@ As we did with regression, we test-train split our data. In this case, using 50%
 
 ```r
 set.seed(42)
-train_index = sample(nrow(Default), 5000)
-train_default = Default[train_index, ]
-test_default = Default[-train_index, ]
+train_index   <- sample(nrow(Default), 5000)
+train_default <- Default[train_index, ]
+test_default  <- Default[-train_index, ]
 ```
 
 
@@ -180,7 +180,7 @@ So we predict an individual is a defaulter if their `balance` is above 1400, and
 
 
 ```r
-simple_class = function(x, boundary, above = 1, below = 0) {
+simple_class <- function(x, boundary, above = 1, below = 0) {
   ifelse(x > boundary, above, below)
 }
 ```
@@ -189,10 +189,10 @@ We write a simple `R` function that compares a variable to a boundary, then use 
 
 
 ```r
-train_pred = simple_class(x = train_default$balance, 
+train_pred <- simple_class(x = train_default$balance, 
+                           boundary = 1400, above = "Yes", below = "No")
+test_pred <- simple_class(x = test_default$balance, 
                           boundary = 1400, above = "Yes", below = "No")
-test_pred = simple_class(x = test_default$balance, 
-                         boundary = 1400, above = "Yes", below = "No")
 head(train_pred, n = 10)
 ```
 
@@ -209,7 +209,7 @@ One of the most obvious things to do is arrange predictions and true values in a
 
 
 ```r
-(train_tab = table(predicted = train_pred, actual = train_default$default))
+(train_tab <- table(predicted = train_pred, actual = train_default$default))
 ```
 
 ```
@@ -221,7 +221,7 @@ One of the most obvious things to do is arrange predictions and true values in a
 
 
 ```r
-(test_tab = table(predicted = test_pred, actual = test_default$default))
+(test_tab <- table(predicted = test_pred, actual = test_default$default))
 ```
 
 ```
@@ -241,8 +241,8 @@ The `confusionMatrix()` function from the `caret` package can be used to obtain 
 
 
 ```r
-train_con_mat = confusionMatrix(train_tab, positive = "Yes")
-(test_con_mat = confusionMatrix(test_tab, positive = "Yes"))
+train_con_mat <- confusionMatrix(train_tab, positive = "Yes")
+(test_con_mat <- confusionMatrix(test_tab, positive = "Yes"))
 ```
 
 ```
@@ -395,15 +395,15 @@ This classifier simply classifies all observations as negative cases.
 
 
 ```r
-pred_all_no = simple_class(test_default$balance, 
-                           boundary = 1400, above = "No", below = "No")
-table(predicted = pred_all_no, actual = test_default$default)
+pred_all_no <- simple_class(test_default$balance, 
+                            boundary = 1400, above = "No", below = "No")
+table(predicted <- pred_all_no, actual = test_default$default)
 ```
 
 ```
-##          actual
-## predicted   No  Yes
-##        No 4835  165
+##     actual
+##        No  Yes
+##   No 4835  165
 ```
 
 The `confusionMatrix()` function won't even accept this table as input, because it isn't a full matrix, only one row, so we calculate some metrics "by hand".
