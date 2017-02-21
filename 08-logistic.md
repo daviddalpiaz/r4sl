@@ -31,9 +31,9 @@ We also repeat the test-train split from the previous chapter.
 
 ```r
 set.seed(42)
-default_index <- sample(nrow(Default), 5000)
-default_train <- Default[default_index, ]
-default_test  <- Default[-default_index, ]
+default_index = sample(nrow(Default), 5000)
+default_train = Default[default_index, ]
+default_test = Default[-default_index, ]
 ```
 
 
@@ -43,16 +43,16 @@ Before moving on to logistic regression, why not plain, old, linear regression?
 
 
 ```r
-default_train_lm <- default_train
-default_test_lm  <- default_test
+default_train_lm = default_train
+default_test_lm = default_test
 ```
 
 Since linear regression expects a numeric response variable, we coerce the response to be numeric. (Notice that we also shift the results, as we require `0` and `1`, not `1` and `2`.) Notice we have also copied the dataset so that we can return the original data with factors later.
 
 
 ```r
-default_train_lm$default <- as.numeric(default_train_lm$default) - 1
-default_test_lm$default  <- as.numeric(default_test_lm$default) - 1
+default_train_lm$default = as.numeric(default_train_lm$default) - 1
+default_test_lm$default = as.numeric(default_test_lm$default) - 1
 ```
 
 Why would we think this should work? Recall that,
@@ -71,7 +71,7 @@ It would then seem reasonable that $X\hat{\beta}$ is a reasonable estimate of $P
 
 
 ```r
-model_lm <- lm(default ~ balance, data = default_train_lm)
+model_lm = lm(default ~ balance, data = default_train_lm)
 ```
 
 Everything seems to be working, until we plot the results.
@@ -172,7 +172,7 @@ We start with a single predictor example, again using `balance` as our single pr
 
 
 ```r
-model_glm <- glm(default ~ balance, data = default_train, family = "binomial")
+model_glm = glm(default ~ balance, data = default_train, family = "binomial")
 ```
 
 Fitting this model looks very similar to fitting a simple linear regression. Instead of `lm()` we use `glm()`. The only other difference is the use of `family = "binomial"` which indicates that we have a two-class categorical response. Using `glm()` with `family = "gaussian"` would perform the usual linear regression.
@@ -244,8 +244,8 @@ Note that these are probabilities, **not** classifications. To obtain classifica
 
 
 ```r
-model_glm_pred <- ifelse(predict(model_glm, type = "link") > 0, "Yes", "No")
-# model_glm_pred <- ifelse(predict(model_glm, type = "response") > 0.5, "Yes", "No")
+model_glm_pred = ifelse(predict(model_glm, type = "link") > 0, "Yes", "No")
+# model_glm_pred = ifelse(predict(model_glm, type = "response") > 0.5, "Yes", "No")
 ```
 
 The line that is run is performing
@@ -295,9 +295,9 @@ As we saw previously, the `table()` and `confusionMatrix()` functions can be use
 
 
 ```r
-train_tab <- table(predicted = model_glm_pred, actual = default_train$default)
+train_tab = table(predicted = model_glm_pred, actual = default_train$default)
 library(caret)
-train_con_mat <- confusionMatrix(train_tab, positive = "Yes")
+train_con_mat = confusionMatrix(train_tab, positive = "Yes")
 c(train_con_mat$overall["Accuracy"], 
   train_con_mat$byClass["Sensitivity"], 
   train_con_mat$byClass["Specificity"])
@@ -312,9 +312,9 @@ As we did with regression, we could also write a custom function for accuracy.
 
 
 ```r
-get_accuracy <- function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
-  probs <- predict(mod, newdata = data, type = "response")
-  preds <- ifelse(probs > cut, pos, neg)
+get_accuracy = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
+  probs = predict(mod, newdata = data, type = "response")
+  preds = ifelse(probs > cut, pos, neg)
   mean(data[, res] == preds)
 }
 ```
@@ -378,9 +378,9 @@ The following is not run, but an alternative way to add the logistic curve to th
 
 
 ```r
-grid <- seq(0, max(default_train$balance), by = 0.01)
+grid = seq(0, max(default_train$balance), by = 0.01)
 
-sigmoid <- function(x) {
+sigmoid = function(x) {
   1 / (1 + exp(-x))
 }
 
@@ -392,10 +392,10 @@ Using the usual formula syntax, it is easy to add complexity to logistic regress
 
 
 ```r
-model_1 <- glm(default ~ 1, data = default_train, family = "binomial")
-model_2 <- glm(default ~ ., data = default_train, family = "binomial")
-model_3 <- glm(default ~ . ^ 2 + I(balance ^ 2),
-               data = default_train, family = "binomial")
+model_1 = glm(default ~ 1, data = default_train, family = "binomial")
+model_2 = glm(default ~ ., data = default_train, family = "binomial")
+model_3 = glm(default ~ . ^ 2 + I(balance ^ 2),
+              data = default_train, family = "binomial")
 ```
 
 Note that, using polynomial transformations of predictors will allow a linear model to have non-linear decision boundaries.
@@ -404,10 +404,10 @@ Note that, using polynomial transformations of predictors will allow a linear mo
 ```r
 model_list = list(model_1, model_2, model_3)
 
-train_error <- 1 - sapply(model_list, get_accuracy, data = default_train, 
-                          res = "default", pos = "Yes", neg = "No", cut = 0.5)
-test_error  <- 1 - sapply(model_list, get_accuracy, data = default_test, 
-                          res = "default", pos = "Yes", neg = "No", cut = 0.5)
+train_error = 1 - sapply(model_list, get_accuracy, data = default_train, 
+                         res = "default", pos = "Yes", neg = "No", cut = 0.5)
+test_error = 1 - sapply(model_list, get_accuracy, data = default_test, 
+                       res = "default", pos = "Yes", neg = "No", cut = 0.5)
 ```
 
 Here we see the misclassification error rates for each model. The train decreases, and the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.
@@ -439,15 +439,15 @@ Let's return to our simple model with only balance as a predictor.
 
 
 ```r
-model_glm <- glm(default ~ balance, data = default_train, family = "binomial")
+model_glm = glm(default ~ balance, data = default_train, family = "binomial")
 ```
 
 We write a function which allows use to make predictions based on different probability cutoffs.
 
 
 ```r
-get_pred <- function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
-  probs <- predict(mod, newdata = data, type = "response")
+get_pred = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
+  probs = predict(mod, newdata = data, type = "response")
   ifelse(probs > cut, pos, neg)
 }
 ```
@@ -465,27 +465,27 @@ Let's use this to obtain predictions using a low, medium, and high cutoff. (0.1,
 
 
 ```r
-test_pred_10 <- get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.1)
-test_pred_50 <- get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.5)
-test_pred_90 <- get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.9)
+test_pred_10 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.1)
+test_pred_50 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.5)
+test_pred_90 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.9)
 ```
 
 Now we evaluate accuracy, sensitivity, and specificity for these classifiers.
 
 
 ```r
-test_tab_10 <- table(predicted = test_pred_10, actual = default_test$default)
-test_tab_50 <- table(predicted = test_pred_50, actual = default_test$default)
-test_tab_90 <- table(predicted = test_pred_90, actual = default_test$default)
+test_tab_10 = table(predicted = test_pred_10, actual = default_test$default)
+test_tab_50 = table(predicted = test_pred_50, actual = default_test$default)
+test_tab_90 = table(predicted = test_pred_90, actual = default_test$default)
 
-test_con_mat_10 <- confusionMatrix(test_tab_10, positive = "Yes")
-test_con_mat_50 <- confusionMatrix(test_tab_50, positive = "Yes")
-test_con_mat_90 <- confusionMatrix(test_tab_90, positive = "Yes")
+test_con_mat_10 = confusionMatrix(test_tab_10, positive = "Yes")
+test_con_mat_50 = confusionMatrix(test_tab_50, positive = "Yes")
+test_con_mat_90 = confusionMatrix(test_tab_90, positive = "Yes")
 ```
 
 
 ```r
-metrics <- rbind(
+metrics = rbind(
   
   c(test_con_mat_10$overall["Accuracy"], 
     test_con_mat_10$byClass["Sensitivity"], 
@@ -501,7 +501,7 @@ metrics <- rbind(
 
 )
 
-rownames(metrics) <- c("c = 0.10", "c = 0.50", "c = 0.90")
+rownames(metrics) = c("c = 0.10", "c = 0.50", "c = 0.90")
 metrics
 ```
 
@@ -521,8 +521,8 @@ Instead of manually checking cutoffs, we can create an ROC curve (receiver opera
 
 ```r
 library(pROC)
-test_prob <- predict(model_glm, newdata = default_test, type = "response")
-test_roc <- roc(default_test$default ~ test_prob, plot = TRUE, print.auc = TRUE)
+test_prob = predict(model_glm, newdata = default_test, type = "response")
+test_roc = roc(default_test$default ~ test_prob, plot = TRUE, print.auc = TRUE)
 ```
 
 ![](08-logistic_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
@@ -554,10 +554,10 @@ Before proceeding, we test-train split this data.
 
 ```r
 set.seed(430)
-iris_obs <- nrow(iris)
-iris_index <- sample(iris_obs, size = trunc(0.50 * iris_obs))
-iris_train <- iris[iris_index, ]
-iris_test  <- iris[-iris_index, ]
+iris_obs = nrow(iris)
+iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
+iris_train = iris[iris_index, ]
+iris_test = iris[-iris_index, ]
 ```
 
 To perform multinomial logistic regression, we use the `multinom` function from the `nnet` package. Training using `multinom()` is done using similar syntax to `lm()` and `glm()`. We add the `trace = FALSE` argument to suppress information about updates to the optimization routine as the model is trained.
@@ -565,7 +565,7 @@ To perform multinomial logistic regression, we use the `multinom` function from 
 
 ```r
 library(nnet)
-model_multi <- multinom(Species ~ ., data = iris_train, trace = FALSE)
+model_multi = multinom(Species ~ ., data = iris_train, trace = FALSE)
 summary(model_multi)$coefficients
 ```
 
