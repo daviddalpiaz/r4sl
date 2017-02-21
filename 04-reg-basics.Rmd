@@ -6,7 +6,7 @@ We will use the [Advertising data](data/Advertising.csv) associated with [Introd
 
 ```{r, message = FALSE, warning = FALSE}
 library(readr)
-Advertising <- read_csv("data/Advertising.csv")
+Advertising = read_csv("data/Advertising.csv")
 ```
 
 After loading data into `R`, our first step should **always** be to inspect the data. We will start by simply printing some observations in order to understand the basic structure of the data.
@@ -49,8 +49,8 @@ We see that there is a clear increase in `Sales` as `Radio` or `TV` are increase
 The following code fits an additive **linear model** with `Sales` as the response and each remaining variable as a predictor. Note, by not using `attach()` and instead specifying the `data = ` argument, we are able to specify this model without using each of the variable names directly.
 
 ```{r}
-mod_1 <- lm(Sales ~ ., data = Advertising)
-# mod_1 <- lm(Sales ~ TV + Radio + Newspaper, data = Advertising)
+mod_1 = lm(Sales ~ ., data = Advertising)
+# mod_1 = lm(Sales ~ TV + Radio + Newspaper, data = Advertising)
 ```
 
 Note that the commented line is equivalent to the line that is run, but we will often use the `response ~ .` syntax when possible.
@@ -65,7 +65,7 @@ summary(mod_1)
 ```
 
 ```{r}
-mod_0 <- lm(Sales ~ TV + Radio, data = Advertising)
+mod_0 = lm(Sales ~ TV + Radio, data = Advertising)
 ```
 
 The `anova()` function is useful for comparing two models. Here we compare the full additive model, `mod_1`, to a reduced model `mod_0`. Essentially we are testing for the significance of the `Newspaper` variable in the additive model.
@@ -90,7 +90,7 @@ Note that the effect of the `predict()` function is dependent on the input to th
 We could also specify new data, which should be a data frame or tibble with the same column names as the predictors.
 
 ```{r}
-new_obs <- data.frame(TV = 150, Radio = 40, Newspaper = 1)
+new_obs = data.frame(TV = 150, Radio = 40, Newspaper = 1)
 ```
 
 We can then use the `predict()` function for point estimates, confidence intervals, and prediction intervals.
@@ -142,21 +142,21 @@ Interactions can be introduced to the `lm()` procedure in a number of ways.
 We can use the `:` operator to introduce a single interaction of interest.
 
 ```{r}
-mod_2 <- lm(Sales ~ . + TV:Newspaper, data = Advertising)
+mod_2 = lm(Sales ~ . + TV:Newspaper, data = Advertising)
 coef(mod_2)
 ```
 
 The `response ~ . ^ k` syntax can be used to model all `k`-way interactions. (As well as the appropriate lower order terms.) Here we fit a model with all two-way interactions, and the lower order main effects.
 
 ```{r}
-mod_3 <- lm(Sales ~ . ^ 2, data = Advertising)
+mod_3 = lm(Sales ~ . ^ 2, data = Advertising)
 coef(mod_3)
 ```
 
 The `*` operator can be used to specify all interactions of a certain order, as well as all lower order terms according to the usual hierarchy. Here we see a three-way interaction and all lower order terms.
 
 ```{r}
-mod_4 <- lm(Sales ~ TV * Radio * Newspaper, data = Advertising)
+mod_4 = lm(Sales ~ TV * Radio * Newspaper, data = Advertising)
 coef(mod_4)
 ```
 
@@ -164,7 +164,7 @@ Note that, we have only been dealing with numeric predictors. **Categorical pred
 
 ```{r}
 library(tibble)
-cat_pred <- tibble(
+cat_pred = tibble(
   x1 = factor(c(rep("A", 10), rep("B", 10), rep("C", 10))),
   x2 = runif(n = 30),
   y  = rnorm(n = 30)
@@ -177,12 +177,12 @@ Notice that in this simple simulated tibble, we have coerced `x1` to be a factor
 The following two models illustrate the effect of factor variables on linear models.
 
 ```{r}
-cat_pred_mod_add <- lm(y ~ x1 + x2, data = cat_pred)
+cat_pred_mod_add = lm(y ~ x1 + x2, data = cat_pred)
 coef(cat_pred_mod_add)
 ```
 
 ```{r}
-cat_pred_mod_int <- lm(y ~ x1 * x2, data = cat_pred)
+cat_pred_mod_int = lm(y ~ x1 * x2, data = cat_pred)
 coef(cat_pred_mod_int)
 ```
 
@@ -192,9 +192,9 @@ coef(cat_pred_mod_int)
 Polynomial terms can be specified using the inhibit function `I()` or through the `poly()` function. Note that these two methods produce different coefficients, but the same residuals! This is due to the `poly()` function using orthogonal polynomials by default.
 
 ```{r}
-mod_5 <- lm(Sales ~ TV + I(TV ^ 2), data = Advertising)
+mod_5 = lm(Sales ~ TV + I(TV ^ 2), data = Advertising)
 coef(mod_5)
-mod_6 <- lm(Sales ~ poly(TV, degree = 2), data = Advertising)
+mod_6 = lm(Sales ~ poly(TV, degree = 2), data = Advertising)
 coef(mod_6)
 all.equal(resid(mod_5), resid(mod_6))
 ```
@@ -202,8 +202,8 @@ all.equal(resid(mod_5), resid(mod_6))
 Polynomials and interactions can be mixed to create even more complex models.
 
 ```{r}
-mod_7 <- lm(Sales ~ . ^ 2 + poly(TV, degree = 3), data = Advertising)
-# mod_7 <- lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)
+mod_7 = lm(Sales ~ . ^ 2 + poly(TV, degree = 3), data = Advertising)
+# mod_7 = lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)
 coef(mod_7)
 ```
 
@@ -215,7 +215,7 @@ Notice here that `R` ignores the first order term from `poly(TV, degree = 3)` as
 Note that we could also create more complex models, which allow for non-linearity, using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.
 
 ```{r}
-mod_8 <- lm(log(Sales) ~ ., data = Advertising)
+mod_8 = lm(log(Sales) ~ ., data = Advertising)
 sqrt(mean(resid(mod_8) ^ 2)) # incorrect RMSE for Model 8
 sqrt(mean(resid(mod_7) ^ 2)) # RMSE for Model 7
 sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
