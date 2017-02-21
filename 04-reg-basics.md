@@ -7,7 +7,7 @@ We will use the [Advertising data](data/Advertising.csv) associated with [Introd
 
 ```r
 library(readr)
-Advertising = read_csv("data/Advertising.csv")
+Advertising <- read_csv("data/Advertising.csv")
 ```
 
 After loading data into `R`, our first step should **always** be to inspect the data. We will start by simply printing some observations in order to understand the basic structure of the data.
@@ -78,8 +78,8 @@ The following code fits an additive **linear model** with `Sales` as the respons
 
 
 ```r
-mod_1 = lm(Sales ~ ., data = Advertising)
-# mod_1 = lm(Sales ~ TV + Radio + Newspaper, data = Advertising)
+mod_1 <- lm(Sales ~ ., data = Advertising)
+# mod_1 <- lm(Sales ~ TV + Radio + Newspaper, data = Advertising)
 ```
 
 Note that the commented line is equivalent to the line that is run, but we will often use the `response ~ .` syntax when possible.
@@ -119,7 +119,7 @@ summary(mod_1)
 
 
 ```r
-mod_0 = lm(Sales ~ TV + Radio, data = Advertising)
+mod_0 <- lm(Sales ~ TV + Radio, data = Advertising)
 ```
 
 The `anova()` function is useful for comparing two models. Here we compare the full additive model, `mod_1`, to a reduced model `mod_0`. Essentially we are testing for the significance of the `Newspaper` variable in the additive model.
@@ -164,7 +164,7 @@ We could also specify new data, which should be a data frame or tibble with the 
 
 
 ```r
-new_obs = data.frame(TV = 150, Radio = 40, Newspaper = 1)
+new_obs <- data.frame(TV = 150, Radio = 40, Newspaper = 1)
 ```
 
 We can then use the `predict()` function for point estimates, confidence intervals, and prediction intervals.
@@ -273,7 +273,7 @@ We can use the `:` operator to introduce a single interaction of interest.
 
 
 ```r
-mod_2 = lm(Sales ~ . + TV:Newspaper, data = Advertising)
+mod_2 <- lm(Sales ~ . + TV:Newspaper, data = Advertising)
 coef(mod_2)
 ```
 
@@ -286,7 +286,7 @@ The `response ~ . ^ k` syntax can be used to model all `k`-way interactions. (As
 
 
 ```r
-mod_3 = lm(Sales ~ . ^ 2, data = Advertising)
+mod_3 <- lm(Sales ~ . ^ 2, data = Advertising)
 coef(mod_3)
 ```
 
@@ -301,7 +301,7 @@ The `*` operator can be used to specify all interactions of a certain order, as 
 
 
 ```r
-mod_4 = lm(Sales ~ TV * Radio * Newspaper, data = Advertising)
+mod_4 <- lm(Sales ~ TV * Radio * Newspaper, data = Advertising)
 coef(mod_4)
 ```
 
@@ -319,7 +319,7 @@ Note that, we have only been dealing with numeric predictors. **Categorical pred
 
 ```r
 library(tibble)
-cat_pred = tibble(
+cat_pred <- tibble(
   x1 = factor(c(rep("A", 10), rep("B", 10), rep("C", 10))),
   x2 = runif(n = 30),
   y  = rnorm(n = 30)
@@ -331,16 +331,16 @@ cat_pred
 ## # A tibble: 30 × 3
 ##        x1         x2          y
 ##    <fctr>      <dbl>      <dbl>
-## 1       A 0.08204354  1.0593404
-## 2       A 0.39428697  0.8123836
-## 3       A 0.52496399 -0.9154011
-## 4       A 0.52330543 -0.8808575
-## 5       A 0.77345536  0.4159028
-## 6       A 0.15889147  1.5808181
-## 7       A 0.41127841 -0.8445583
-## 8       A 0.02799144  0.1736775
-## 9       A 0.92495106 -0.1785609
-## 10      A 0.26642318  1.0859243
+## 1       A 0.74217536 -1.6120308
+## 2       A 0.89932036 -1.7425543
+## 3       A 0.32257287 -0.5872377
+## 4       A 0.06169009  0.3362470
+## 5       A 0.40006349 -0.1283366
+## 6       A 0.14505582 -1.1492186
+## 7       A 0.94470924  0.1880081
+## 8       A 0.10799642 -0.9836724
+## 9       A 0.50296194 -1.2576937
+## 10      A 0.35304570 -1.0935176
 ## # ... with 20 more rows
 ```
 
@@ -350,24 +350,24 @@ The following two models illustrate the effect of factor variables on linear mod
 
 
 ```r
-cat_pred_mod_add = lm(y ~ x1 + x2, data = cat_pred)
+cat_pred_mod_add <- lm(y ~ x1 + x2, data = cat_pred)
 coef(cat_pred_mod_add)
 ```
 
 ```
 ## (Intercept)         x1B         x1C          x2 
-##   0.0271578  -0.3192074  -0.4502554   0.4983598
+## -0.82730331  1.27779036  0.83084119  0.05425197
 ```
 
 
 ```r
-cat_pred_mod_int = lm(y ~ x1 * x2, data = cat_pred)
+cat_pred_mod_int <- lm(y ~ x1 * x2, data = cat_pred)
 coef(cat_pred_mod_int)
 ```
 
 ```
 ## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##   0.8345318  -1.9166464  -1.4454635  -1.4768233   3.2712170   2.4291923
+##  -0.5603117   0.5361871   0.6198176  -0.5417658   1.8111322   0.3952638
 ```
 
 
@@ -377,7 +377,7 @@ Polynomial terms can be specified using the inhibit function `I()` or through th
 
 
 ```r
-mod_5 = lm(Sales ~ TV + I(TV ^ 2), data = Advertising)
+mod_5 <- lm(Sales ~ TV + I(TV ^ 2), data = Advertising)
 coef(mod_5)
 ```
 
@@ -387,7 +387,7 @@ coef(mod_5)
 ```
 
 ```r
-mod_6 = lm(Sales ~ poly(TV, degree = 2), data = Advertising)
+mod_6 <- lm(Sales ~ poly(TV, degree = 2), data = Advertising)
 coef(mod_6)
 ```
 
@@ -408,8 +408,8 @@ Polynomials and interactions can be mixed to create even more complex models.
 
 
 ```r
-mod_7 = lm(Sales ~ . ^ 2 + poly(TV, degree = 3), data = Advertising)
-# mod_7 = lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)
+mod_7 <- lm(Sales ~ . ^ 2 + poly(TV, degree = 3), data = Advertising)
+# mod_7 <- lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)
 coef(mod_7)
 ```
 
@@ -433,7 +433,7 @@ Note that we could also create more complex models, which allow for non-linearit
 
 
 ```r
-mod_8 = lm(log(Sales) ~ ., data = Advertising)
+mod_8 <- lm(log(Sales) ~ ., data = Advertising)
 sqrt(mean(resid(mod_8) ^ 2)) # incorrect RMSE for Model 8
 ```
 
