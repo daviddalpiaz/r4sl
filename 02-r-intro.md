@@ -1,20 +1,16 @@
 # Introduction to `R`
 
-> "Measuring programming progress by lines of code is like measuring aircraft building progress by weight."
->
-> --- **Bill Gates**
-
 After reading this chapter you will be able to:
 
 - Interact with `R` using RStudio.
 - Use `R` as a calculator.
-- Work with data as vectors and data frames.
+- Work with data as vectors, lists, and data frames.
 - Make basic data visualizations.
 - Write your own `R` functions.
 - Perform hypothesis tests using `R`.
 - Perform basic simulations in `R`.
 
-## `R` Resources
+## Getting Started
 
 `R` is both a programming language and software environment for statistical computing, which is *free* and *open-source*. To get started, you will need to install two pieces of software:
 
@@ -23,24 +19,13 @@ After reading this chapter you will be able to:
 - [RStudio, an excellent IDE for working with `R`.](http://www.rstudio.com/)
     - Note, you must have `R` installed to use RStudio. RStudio is simply an interface used to interact with `R`.
 
-The popularity of `R` is on the rise, and everyday it becomes a better tool for statistical analysis. It even generated this book! (A skill you will learn in this course.) There are many good resources for learning `R`. They are not necessary for this course, but you may find them useful if you would like a deeper understanding of `R`:
+The popularity of `R` is on the rise, and everyday it becomes a better tool for statistical analysis. It even generated this book! (A skill you will learn in this course.) There are many good resources for learning `R`. 
 
-- [Try R](http://tryr.codeschool.com/) from Code School.
-    - An interactive introduction to the basics of `R`. Could be very useful for getting up to speed on `R`'s syntax.
-- [Quick-R](http://www.statmethods.net/) by Robert Kabacoff.
-    - A good reference for `R` basics.
-- [R Tutorial](http://www.r-tutor.com/) by Chi Yau.
-    - A combination reference and tutorial for `R` basics.
-- [R Markdown](http://rmarkdown.rstudio.com/) from RStudio.
-    - Reference materials for RMarkdown.
-- [The Art of `R` Programming](https://www.nostarch.com/artofr.htm) by Norman Matloff.
-    - Gentle introduction to the programming side of `R`. (Whereas we will focus more on the data analysis side.) A [free electronic version](http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421) is available through the Illinois library.
-- [Advanced `R`](http://adv-r.had.co.nz/) by Hadley Wickham.
-    - From the author of several extremely popular `R` packages. Good follow-up to The Art of `R` Programming. (And more up-to-date material.)
-- [`R` for Data Science](http://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund.
-    - Similar to Advanced `R`, but focuses more on data analysis, while still introducing programming concepts. At the time of writing, currently under development.
-- [The R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) by Patrick Burns.
-    - Likens learning the tricks of `R` to descending through the levels of hell. Very advanced material, but may be important if `R` becomes a part of your everyday toolkit.
+The following few chapters will serve as a whirlwind introduction to `R`. They are by no means meant to be a complete reference for the `R` language, but simply an introduction to the basics that we will need along the way. Several of the more important topics will be re-stressed as they are actually needed for analyses.
+
+These introductory `R` chapters may feel like an overwhelming amount of information. You are not expected to pick up everything the first time through. You should try all of the code from these chapters, then return to them a number of times as you return to the concepts when performing analyses.
+
+`R` is used both for software development and data analysis. We will operate in a grey area, somewhere between these two tasks. Our main goal will be to analyze data, but we will also perform programming exercises that help illustrate certain concepts.
 
 RStudio has a large number of useful keyboard shortcuts. A list of these can be found using a keyboard shortcut -- the keyboard shortcut to rule them all:
 
@@ -148,7 +133,9 @@ library(ggplot2)
 Once you close `R`, all the packages are closed and put back on the imaginary shelf. The next time you open `R`, you do not have to install the package again, but you do have to load any packages you intend to use by invoking `library()`.
 
 
-### Data Types
+# Data and Programing
+
+## Data Types
 
 `R` has a number of basic data *types*.
 
@@ -166,6 +153,8 @@ Once you close `R`, all the packages are closed and put back on the imaginary sh
 - Character
     - Examples: `"a"`, `"Statistics"`, `"1 plus 2."`
 
+## Data Structures
+
 `R` also has a number of basic data *structures*. A data structure is either homogeneous (all elements are of the same data type) or heterogeneous (elements can be of more than one data type).
 
 | Dimension | **Homogeneous** | **Heterogeneous** |
@@ -178,7 +167,7 @@ Once you close `R`, all the packages are closed and put back on the imaginary sh
 
 Many operations in `R` make heavy use of **vectors**. Vectors in `R` are indexed starting at `1`. That is what the `[1]` in the output is indicating, that the first element of the row being displayed is the first element of the vector. Larger vectors will start additional rows with `[*]` where `*` is the index of the first element of the row.
 
-Possibly the most common way to create a vector in `R` is using the `c()` function, which is short for "combine."" As the name suggests, it combines a list of numbers separated by commas. 
+Possibly the most common way to create a vector in `R` is using the `c()` function, which is short for "combine."" As the name suggests, it combines a list of elements separated by commas. 
 
 
 ```r
@@ -207,6 +196,25 @@ The pros and cons of these two are well beyond the scope of this book, but know 
 
 If you wish to use `<-`, you will still need to use `=`, however only for argument passing. Some users like to keep assignment (`<-`) and argument passing (`=`) separate. No matter what you choose, the more important thing is that you **stay consistent**. Also, if working on a larger collaborative project, you should use whatever style is already in place.
 
+- TODO: coercion
+
+
+```r
+c(42, "Statistics", TRUE)
+```
+
+```
+## [1] "42"         "Statistics" "TRUE"
+```
+
+```r
+c(42, TRUE)
+```
+
+```
+## [1] 42  1
+```
+
 Frequently you may wish to create a vector based on a sequence of numbers. The quickest and easiest way to do this is with the `:` operator, which creates a sequence of integers between two specified integers.
 
 
@@ -223,7 +231,106 @@ Frequently you may wish to create a vector based on a sequence of numbers. The q
 ##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
 ```
 
+- TODO: style note
+
 Here we see `R` labeling the rows after the first since this is a large vector. Also, we see that by putting parentheses around the assignment, `R` both stores the vector in a variable called `y` and automatically outputs `y` to the console.
+
+Note that scalars do not exists in `R`. They are simply vectors of length `1`.
+
+
+```r
+2
+```
+
+```
+## [1] 2
+```
+
+If we want to create a sequence that isn't limited to integers and increasing by 1 at a time, we can use the `seq()` function.
+
+
+```r
+seq(from = 1.5, to = 4.2, by = 0.1)
+```
+
+```
+##  [1] 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1
+## [18] 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2
+```
+
+We will discuss functions in detail later, but note here that the input labels `from`, `to`, and `by` are optional.
+
+
+```r
+seq(1.5, 4.2, 0.1)
+```
+
+```
+##  [1] 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1
+## [18] 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2
+```
+
+Another common operation to create a vector is `rep()`, which can repeat a single value a number of times.
+
+
+```r
+rep("A", times = 10)
+```
+
+```
+##  [1] "A" "A" "A" "A" "A" "A" "A" "A" "A" "A"
+```
+
+The `rep()` function can be used to repeat a vector some number of times.
+
+
+```r
+rep(x, times = 3)
+```
+
+```
+##  [1] 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9
+```
+
+We have now seen four different ways to create vectors:
+
+- `c()`
+- `:`
+- `seq()`
+- `rep()`
+
+So far we have mostly used them in isolation, but they are often used together.
+
+
+```r
+c(x, rep(seq(1, 9, 2), 3), c(1, 2, 3), 42, 2:4)
+```
+
+```
+##  [1]  1  3  5  7  8  9  1  3  5  7  9  1  3  5  7  9  1  3  5  7  9  1  2
+## [24]  3 42  2  3  4
+```
+
+The length of a vector can be obtained with the `length()` function.
+
+
+```r
+length(x)
+```
+
+```
+## [1] 6
+```
+
+```r
+length(y)
+```
+
+```
+## [1] 100
+```
+
+#### Subsetting
 
 To subset a vector, we use square brackets, `[]`. 
 
@@ -284,6 +391,29 @@ x[c(1,3,4)]
 
 Lastly we see that we can subset based on a vector of indices.
 
+All of the above are subsetting a vector using a vector of indexes. (Remember a single number is still a vector.) We could instead use a vector of logical values.
+
+
+```r
+z = c(TRUE, TRUE, FALSE, TRUE, TRUE, FALSE)
+z
+```
+
+```
+## [1]  TRUE  TRUE FALSE  TRUE  TRUE FALSE
+```
+
+
+```r
+x[z]
+```
+
+```
+## [1] 1 3 7 8
+```
+
+### Vectorization
+
 One of the biggest strengths of `R` is its use of vectorized operations. (Frequently the lack of understanding of this concept leads of a belief that `R` is *slow*. `R` is not the fastest language, but it has a reputation for being slower than it really is.)
 
 
@@ -333,143 +463,312 @@ log(x)
 We see that when a function like `log()` is called on a vector `x`, a vector is returned which has applied the function to each element of the vector  `x`.
 
 
+### Logical Operators
+
+| Operator | Summary               | Example               | Result |
+|----------|-----------------------|-----------------------|--------|
+| `x < y`  | `x` less than `y`                | `3 < 42`               | TRUE               |
+| `x > y`  | `x` greater than `y`             | `3 > 42`               | FALSE               |
+| `x <= y` | `x` less than or equal to `y`    | `3 <= 42`              | TRUE              |
+| `x >= y` | `x` greater than or equal to `y` | `3 >= 42`              | FALSE              |
+| `x == y` | `x`equal to `y`                  | `3 == 42`              | FALSE              |
+| `x != y` | `x` not equal to `y`             | `3 != 42`              | TRUE              |
+| `!x`     | not `x`                          | `!(3 > 42)`            | TRUE            |
+| `x | y`  | `x` or `y`                       | `(3 > 42) | TRUE`      | TRUE      |
+| `x & y`  | `x` and `y`                      | `(3 < 4) & ( 42 > 13)` | TRUE |
+
+
+- TODO: add narrative, split chunks
+
+In `R`, logical operators are vectorized. 
+
+
 ```r
-vec_1 = 1:10
-vec_2 = 1:1000
-vec_3 = 42
+x = c(1, 3, 5, 7, 8, 9)
 ```
 
-The length of a vector can be obtained with the `length()` function.
+
+```r
+x > 3
+```
+
+```
+## [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+```
+
+```r
+x < 3
+```
+
+```
+## [1]  TRUE FALSE FALSE FALSE FALSE FALSE
+```
+
+```r
+x == 3
+```
+
+```
+## [1] FALSE  TRUE FALSE FALSE FALSE FALSE
+```
+
+```r
+x != 3
+```
+
+```
+## [1]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
+```
+
+```r
+x == 3 & x != 3
+```
+
+```
+## [1] FALSE FALSE FALSE FALSE FALSE FALSE
+```
+
+```r
+x == 3 | x != 3
+```
+
+```
+## [1] TRUE TRUE TRUE TRUE TRUE TRUE
+```
+
+This is extremely useful for subsetting.
 
 
 ```r
-length(vec_1)
+x[x > 3]
+```
+
+```
+## [1] 5 7 8 9
+```
+
+```r
+x[x != 3]
+```
+
+```
+## [1] 1 5 7 8 9
+```
+
+- TODO: coercion
+
+
+```r
+sum(x > 3)
+```
+
+```
+## [1] 4
+```
+
+```r
+as.numeric(x > 3)
+```
+
+```
+## [1] 0 0 1 1 1 1
+```
+
+
+
+```r
+which(x > 3)
+```
+
+```
+## [1] 3 4 5 6
+```
+
+```r
+x[which(x > 3)]
+```
+
+```
+## [1] 5 7 8 9
+```
+
+```r
+max(x)
+```
+
+```
+## [1] 9
+```
+
+```r
+which(x == max(x))
+```
+
+```
+## [1] 6
+```
+
+```r
+which.max(x)
+```
+
+```
+## [1] 6
+```
+
+### More Vectorization
+
+
+```r
+x = c(1, 3, 5, 7, 8, 9)
+y = 1:100
+```
+
+
+```r
+x + 2
+```
+
+```
+## [1]  3  5  7  9 10 11
+```
+
+```r
+x + rep(2, 6)
+```
+
+```
+## [1]  3  5  7  9 10 11
+```
+
+
+```r
+x > 3
+```
+
+```
+## [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+```
+
+```r
+x > rep(3, 6)
+```
+
+```
+## [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+```
+
+
+```r
+x + y
+```
+
+```
+## Warning in x + y: longer object length is not a multiple of shorter object
+## length
+```
+
+```
+##   [1]   2   5   8  11  13  15   8  11  14  17  19  21  14  17  20  23  25
+##  [18]  27  20  23  26  29  31  33  26  29  32  35  37  39  32  35  38  41
+##  [35]  43  45  38  41  44  47  49  51  44  47  50  53  55  57  50  53  56
+##  [52]  59  61  63  56  59  62  65  67  69  62  65  68  71  73  75  68  71
+##  [69]  74  77  79  81  74  77  80  83  85  87  80  83  86  89  91  93  86
+##  [86]  89  92  95  97  99  92  95  98 101 103 105  98 101 104 107
+```
+
+```r
+length(x)
+```
+
+```
+## [1] 6
+```
+
+```r
+length(y)
+```
+
+```
+## [1] 100
+```
+
+```r
+length(y) / length(x)
+```
+
+```
+## [1] 16.66667
+```
+
+```r
+(x + y) - y
+```
+
+```
+## Warning in x + y: longer object length is not a multiple of shorter object
+## length
+```
+
+```
+##   [1] 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8
+##  [36] 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7
+##  [71] 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7 8 9 1 3 5 7
+```
+
+
+```r
+y = 1:60
+x + y
+```
+
+```
+##  [1]  2  5  8 11 13 15  8 11 14 17 19 21 14 17 20 23 25 27 20 23 26 29 31
+## [24] 33 26 29 32 35 37 39 32 35 38 41 43 45 38 41 44 47 49 51 44 47 50 53
+## [47] 55 57 50 53 56 59 61 63 56 59 62 65 67 69
+```
+
+```r
+length(y) / length(x)
 ```
 
 ```
 ## [1] 10
 ```
 
-```r
-length(vec_2)
-```
-
-```
-## [1] 1000
-```
 
 ```r
-length(vec_3)
+rep(x, 10) + y
 ```
 
 ```
-## [1] 1
+##  [1]  2  5  8 11 13 15  8 11 14 17 19 21 14 17 20 23 25 27 20 23 26 29 31
+## [24] 33 26 29 32 35 37 39 32 35 38 41 43 45 38 41 44 47 49 51 44 47 50 53
+## [47] 55 57 50 53 56 59 61 63 56 59 62 65 67 69
 ```
-
-Note that scalars do not exists in `R`. They are simply vectors of length `1`.
-
-If we want to create a sequence that isn't limited to integers and increasing by 1 at a time, we can use the `seq()` function.
 
 
 ```r
-seq(from = 1.5, to = 4.2, by = 0.1)
+all(x + y == rep(x, 10) + y)
 ```
 
 ```
-##  [1] 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1
-## [18] 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2
+## [1] TRUE
 ```
 
-We will discuss functions in detail later, but note here that the input labels `from`, `to`, and `by` are optional.
+```r
+identical(x + y, rep(x, 10) + y)
+```
+
+```
+## [1] TRUE
+```
 
 
 ```r
-seq(1.5, 4.2, 0.1)
+# ?any
+# ?all.equal
 ```
-
-```
-##  [1] 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0 3.1
-## [18] 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2
-```
-
-Another common operation to create a vector is `rep()`, which can repeat a single value a number of times.
-
-
-```r
-rep("A", times = 10)
-```
-
-```
-##  [1] "A" "A" "A" "A" "A" "A" "A" "A" "A" "A"
-```
-
-Or, `rep()` can be used to repeat a vector a number of times.
-
-
-```r
-rep(x, times = 3)
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10  1  2  3  4  5  6  7  8  9 10  1  2  3
-## [24]  4  5  6  7  8  9 10
-```
-
-We have now seen four different ways to create vectors:
-
-- `c()`
-- `:`
-- `seq()`
-- `rep()`
-
-So far we have mostly used them in isolation, but they are often used together.
-
-
-```r
-c(x, rep(seq(1, 9, 2), 3), c(1, 2, 3), 42, 2:4)
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10  1  3  5  7  9  1  3  5  7  9  1  3  5
-## [24]  7  9  1  2  3 42  2  3  4
-```
-
-### Summary Statistics
-
-`R` has built in functions for a large number of summary statistics.
-
-
-```r
-y
-```
-
-```
-##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
-##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
-##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
-##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
-##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
-##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
-```
-
-#### Central Tendency {-}
-
-| Measure | `R`         | Result        |
-|---------|-------------|---------------|
-| Mean    | `mean(y)`   | 50.5   |
-| Median  | `median(y)` | 50.5 |
-
-#### Spread {-}
-
-| Measure            | `R`        | Result       |
-|--------------------|------------|--------------|
-| Variance           | `var(y)`   | 841.6666667   |
-| Standard Deviation | `sd(y)`    | 29.011492    |
-| IQR                | `IQR(y)`   | 49.5   |
-| Minimum            | `min(y)`   | 1   |
-| Maximum            | `max(y)`   | 100   |
-| Range              | `range(y)` | 1, 100 |
-
 
 ### Matrices
 
@@ -604,24 +903,6 @@ rep(1, 9)
 
 
 ```r
-cbind(x, rev(x), rep(1, 9))
-```
-
-```
-##       x    
-##  [1,] 1 9 1
-##  [2,] 2 8 1
-##  [3,] 3 7 1
-##  [4,] 4 6 1
-##  [5,] 5 5 1
-##  [6,] 6 4 1
-##  [7,] 7 3 1
-##  [8,] 8 2 1
-##  [9,] 9 1 1
-```
-
-
-```r
 rbind(x, rev(x), rep(1, 9))
 ```
 
@@ -631,6 +912,26 @@ rbind(x, rev(x), rep(1, 9))
 ##      9    8    7    6    5    4    3    2    1
 ##      1    1    1    1    1    1    1    1    1
 ```
+
+
+```r
+cbind(col_1 = x, col_2 = rev(x), col_3 = rep(1, 9))
+```
+
+```
+##       col_1 col_2 col_3
+##  [1,]     1     9     1
+##  [2,]     2     8     1
+##  [3,]     3     7     1
+##  [4,]     4     6     1
+##  [5,]     5     5     1
+##  [6,]     6     4     1
+##  [7,]     7     3     1
+##  [8,]     8     2     1
+##  [9,]     9     1     1
+```
+
+- TODO: named columns
 
 `R` can then be used to perform matrix calculations.
 
@@ -753,6 +1054,39 @@ solve(Z)
 ## [1,]  0.12931034 -0.05603448 0.01724138
 ## [2,] -0.05603448  0.29094828 0.02586207
 ## [3,]  0.01724138  0.02586207 0.06896552
+```
+
+- TODO: explain
+
+
+```r
+solve(Z) %*% Z
+```
+
+```
+##              [,1]          [,2]         [,3]
+## [1,] 1.000000e+00 -6.245005e-17 0.000000e+00
+## [2,] 8.326673e-17  1.000000e+00 5.551115e-17
+## [3,] 2.775558e-17  0.000000e+00 1.000000e+00
+```
+
+```r
+diag(3)
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    1    0    0
+## [2,]    0    1    0
+## [3,]    0    0    1
+```
+
+```r
+all.equal(solve(Z) %*% Z, diag(3))
+```
+
+```
+## [1] TRUE
 ```
 
 `R` has a number of matrix specific functions for obtaining dimension and summary information.
@@ -1056,6 +1390,142 @@ all.equal(crossprod(C_mat, C_mat), t(C_mat) %*% C_mat)
 ## [1] TRUE
 ```
 
+### Lists
+
+- TODO: explain list stuff below:
+
+
+```r
+# creation
+list(42, "Hello", TRUE)
+```
+
+```
+## [[1]]
+## [1] 42
+## 
+## [[2]]
+## [1] "Hello"
+## 
+## [[3]]
+## [1] TRUE
+```
+
+```r
+ex_list = list(
+  a = c(1, 2, 3, 4),
+  b = TRUE,
+  c = "Hello!",
+  d = function(arg = 42) {print("Hello World!")},
+  e = diag(5)
+)
+```
+
+
+```r
+# subsetting
+ex_list$e
+```
+
+```
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    0    0    0    0
+## [2,]    0    1    0    0    0
+## [3,]    0    0    1    0    0
+## [4,]    0    0    0    1    0
+## [5,]    0    0    0    0    1
+```
+
+```r
+ex_list[1:2]
+```
+
+```
+## $a
+## [1] 1 2 3 4
+## 
+## $b
+## [1] TRUE
+```
+
+```r
+ex_list[1]
+```
+
+```
+## $a
+## [1] 1 2 3 4
+```
+
+```r
+ex_list[[1]]
+```
+
+```
+## [1] 1 2 3 4
+```
+
+```r
+ex_list[c("e", "a")]
+```
+
+```
+## $e
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    0    0    0    0
+## [2,]    0    1    0    0    0
+## [3,]    0    0    1    0    0
+## [4,]    0    0    0    1    0
+## [5,]    0    0    0    0    1
+## 
+## $a
+## [1] 1 2 3 4
+```
+
+```r
+ex_list["e"]
+```
+
+```
+## $e
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    0    0    0    0
+## [2,]    0    1    0    0    0
+## [3,]    0    0    1    0    0
+## [4,]    0    0    0    1    0
+## [5,]    0    0    0    0    1
+```
+
+```r
+ex_list[["e"]]
+```
+
+```
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    0    0    0    0
+## [2,]    0    1    0    0    0
+## [3,]    0    0    1    0    0
+## [4,]    0    0    0    1    0
+## [5,]    0    0    0    0    1
+```
+
+```r
+ex_list$d
+```
+
+```
+## function(arg = 42) {print("Hello World!")}
+```
+
+```r
+ex_list$d(arg = 1)
+```
+
+```
+## [1] "Hello World!"
+```
+
+
 ### Data Frames
 
 We have previously seen vectors and matrices for storing data as we introduced `R`. We will now introduce a **data frame** which will be the most common way that we store and interact with data in this course.
@@ -1086,6 +1556,62 @@ example_data
 ## 8  5 Hello FALSE
 ## 9  7 Hello  TRUE
 ## 10 9 Hello FALSE
+```
+
+- TODO: explain below
+
+
+```r
+example_data$x
+```
+
+```
+##  [1] 1 3 5 7 9 1 3 5 7 9
+```
+
+```r
+all.equal(length(example_data$x),
+          length(example_data$y),
+          length(example_data$z))
+```
+
+```
+## [1] TRUE
+```
+
+```r
+str(example_data)
+```
+
+```
+## 'data.frame':	10 obs. of  3 variables:
+##  $ x: num  1 3 5 7 9 1 3 5 7 9
+##  $ y: Factor w/ 1 level "Hello": 1 1 1 1 1 1 1 1 1 1
+##  $ z: logi  TRUE FALSE TRUE FALSE TRUE FALSE ...
+```
+
+```r
+nrow(example_data)
+```
+
+```
+## [1] 10
+```
+
+```r
+ncol(example_data)
+```
+
+```
+## [1] 3
+```
+
+```r
+dim(example_data)
+```
+
+```
+## [1] 10  3
 ```
 
 The `data.frame()` function above is one way to create a data frame. We can also import data from various file types in into `R`, as well as use data stored in packages.
@@ -1261,7 +1787,7 @@ names(mpg)
 ##  [9] "hwy"          "fl"           "class"
 ```
 
-To access one of the variables as a vector, we use the `$` operator.
+To access one of the variables **as a vector**, we use the `$` operator.
 
 
 ```r
@@ -1371,332 +1897,11 @@ mpg %>% filter(hwy > 35) %>% select(manufacturer, model, year)
 
 All three approaches produce the same results. Which you use will be largely based on a given situation as well as user preference.
 
-### Plotting
+- TODO: general data.frame subsetting
 
-Now that we have some data to work with, and we have learned about the data at the most basic level, our next tasks is to visualize the data. Often, a proper visualization can illuminate features of the data that can inform further analysis.
-
-We will look at three methods of visualizing data that we will use throughout the course:
-
-- Histograms
-- Boxplots
-- Scatterplots
-
-#### Histograms
-
-When visualizing a single numerical variable, a **histogram** will be our go-to tool, which can be created in `R` using the `hist()` function.
-
-
-```r
-hist(mpg$cty)
-```
-
-![](02-r-intro_files/figure-latex/unnamed-chunk-63-1.pdf)<!-- --> 
-
-The histogram function has a number of parameters which can be changed to make our plot look much nicer. Use the `?` operator to read the documentation for the `hist()` to see a full list of these parameters.
-
-
-```r
-hist(mpg$cty,
-     xlab   = "Miles Per Gallon (City)",
-     main   = "Histogram of MPG (City)",
-     breaks = 12,
-     col    = "dodgerblue",
-     border = "darkorange")
-```
-
-![](02-r-intro_files/figure-latex/unnamed-chunk-64-1.pdf)<!-- --> 
-
-Importantly, you should always be sure to label your axes and give the plot a title. The argument `breaks` is specific to `hist()`. Entering an integer will give a suggestion to `R` for how many bars to use for the histogram. By default `R` will attempt to intelligently guess a good number of `breaks`, but as we can see here, it is sometimes useful to modify this yourself.
-
-#### Boxplots
-
-To visualize the relationship between a numerical and categorical variable, we will use a **boxplot**. In the `mpg` dataset, the `drv` variable takes a small, finite number of values. A car can only be front wheel drive, 4 wheel drive, or rear wheel drive.
-
-
-```r
-unique(mpg$drv)
-```
-
-```
-## [1] "f" "4" "r"
-```
-
-First note that we can use a single boxplot as an alternative to a histogram for visualizing a single numerical variable. To do so in `R`, we use the `boxplot()` function.
-
-
-```r
-boxplot(mpg$hwy)
-```
-
-![](02-r-intro_files/figure-latex/unnamed-chunk-66-1.pdf)<!-- --> 
-
-However, more often we will use boxplots to compare a numerical variable for different values of a categorical variable.
-
-
-```r
-boxplot(hwy ~ drv, data = mpg)
-```
-
-![](02-r-intro_files/figure-latex/unnamed-chunk-67-1.pdf)<!-- --> 
-
-Here used the `boxplot()` command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The `R` syntax `hwy ~ drv, data = mpg` reads "Plot the `hwy` variable against the `drv` variable using the dataset `mpg`." We see the use of a `~` (which specifies a formula) and also a `data = ` argument. This will be a syntax that is common to many functions we will use in this course. 
-
-
-```r
-boxplot(hwy ~ drv, data = mpg,
-     xlab   = "Drivetrain (f = FWD, r = RWD, 4 = 4WD)",
-     ylab   = "Miles Per Gallon (Highway)",
-     main   = "MPG (Highway) vs Drivetrain",
-     pch    = 20,
-     cex    = 2,
-     col    = "darkorange",
-     border = "dodgerblue")
-```
-
-![](02-r-intro_files/figure-latex/unnamed-chunk-68-1.pdf)<!-- --> 
-
-Again, `boxplot()` has a number of additional arguments which have the ability to make our plot more visually appealing.
-
-#### Scatterplots
-
-Lastly, to visualize the relationship between two numeric variables we will use a **scatterplot**. This can be done with the `plot()` function and the `~` syntax we just used with a boxplot. (The function `plot()` can also be used more generally; see the documentation for details.)
-
-
-```r
-plot(hwy ~ displ, data = mpg)
-```
-
-![](02-r-intro_files/figure-latex/unnamed-chunk-69-1.pdf)<!-- --> 
-
-
-```r
-plot(hwy ~ displ, data = mpg,
-     xlab = "Engine Displacement (in Liters)",
-     ylab = "Miles Per Gallon (Highway)",
-     main = "MPG (Highway) vs Engine Displacement",
-     pch  = 20,
-     cex  = 2,
-     col  = "dodgerblue")
-```
-
-![](02-r-intro_files/figure-latex/unnamed-chunk-70-1.pdf)<!-- --> 
-
-### Distributions
-
-When working with different statistical distributions, we often want to make probabilistic statements based on the distribution.
-
-We typically want to know one of four things:
-
-* The density (pdf) at a particular value.
-* The distribution (cdf) at a particular value.
-* The quantile value corresponding to a particular probability.
-* A random draw of values from a particular distribution.
-
-This used to be done with statistical tables printed in the back of textbooks. Now, `R` has functions for obtaining density, distribution, quantile and random values.
-
-The general naming structure of the relevant `R` functions is:
-
-* `dname` calculates density (pdf) at input `x`.
-* `pname` calculates distribution (cdf) at input `x`.
-* `qname` calculates the quantile at an input probability.
-* `rname` generates a random draw from a particular distribution.
-
-Note that `name` represents the name of the given distribution.
-
-For example, consider a random variable $X$ which is $N(\mu = 2, \sigma^2 = 25)$. (Note, we are parameterizing using the variance $\sigma^2$. `R` however uses the standard deviation.)
-
-To calculate the value of the pdf at `x = 3`, that is, the height of the curve at `x = 3`, use:
-
-
-```r
-dnorm(x = 3, mean = 2, sd = 5)
-```
-
-```
-## [1] 0.07820854
-```
-
-To calculate the value of the cdf at `x = 3`, that is, $P(X \leq 3)$, the probability that $X$ is less than or equal to `3`, use:
-
-
-```r
-pnorm(q = 3, mean = 2, sd = 5)
-```
-
-```
-## [1] 0.5792597
-```
-
-Or, to calculate the quantile for probability 0.975, use:
-
-
-```r
-qnorm(p = 0.975, mean = 2, sd = 5)
-```
-
-```
-## [1] 11.79982
-```
-
-Lastly, to generate a random sample of size `n = 10`, use:
-
-
-```r
-rnorm(n = 10, mean = 2, sd = 5)
-```
-
-```
-##  [1]  9.6693787 -0.2620754  9.3289446  7.0302631 -4.4540668  3.0129009
-##  [7] -2.4153672  4.7717822 10.0927414 -0.8238706
-```
-
-These functions exist for many other distributions, including but not limited to:
-
-| Command  | Distribution |
-|----------|--------------|
-| `*binom` | Binomial     |
-| `*t`     | t            |
-| `*pois`  | Poisson      |
-| `*f`     | F            |
-| `*chisq` | Chi-Squared  |
-
-Where `*` can be `d`, `p`, `q`, and `r`. Each distribution will have its own set of parameters which need to be passed to the functions as arguments. For example, `dbinom()` would not have arguments for `mean` and `sd`, since those are not parameters of the distribution. Instead a binomial distribution is usually parameterized by $n$ and $p$, however `R` chooses to call them something else. To find the names that `R` uses we would use `?dbinom` and see that `R` instead calls the arguments `size` and `prob`. For example:
-
-
-```r
-dbinom(x = 6, size = 10, prob = 0.75)
-```
-
-```
-## [1] 0.145998
-```
-
-Also note that, when using the `dname` functions with discrete distributions, they are the pmf of the distribution. For example, the above command is $P(Y = 6)$ if $Y \sim b(n = 10, p = 0.75)$. (The probability of flipping an unfair coin `10` times and seeing `6` heads, if the probability of heads is `0.75`.)
+- TODO: difference between data.frame and tibble subsetting
 
 ## Programming Basics
-
-### Logical Operators
-
-| Operator | Summary               | Example               | Result |
-|----------|-----------------------|-----------------------|--------|
-| `x < y`  | `x` less than `y`                | `3 < 42`               | TRUE               |
-| `x > y`  | `x` greater than `y`             | `3 > 42`               | FALSE               |
-| `x <= y` | `x` less than or equal to `y`    | `3 <= 42`              | TRUE              |
-| `x >= y` | `x` greater than or equal to `y` | `3 >= 42`              | FALSE              |
-| `x == y` | `x`equal to `y`                  | `3 == 42`              | FALSE              |
-| `x != y` | `x` not equal to `y`             | `3 != 42`              | TRUE              |
-| `!x`     | not `x`                          | `!(3 > 42)`            | TRUE            |
-| `x | y`  | `x` or `y`                       | `(3 > 42) | TRUE`      | TRUE      |
-| `x & y`  | `x` and `y`                      | `(3 < 4) & ( 42 > 13)` | TRUE |
-
-In `R`, logical operators are vectorized. To demonstrate this, we will use the following height and weight data.
-
-
-```r
-heights = c(110, 120, 115, 136, 205, 156, 175)
-weights = c(64, 67, 62, 60, 77, 70, 66)
-```
-
-First, using the `<` operator, when can find which `heights` are less than `121`. Further, we could also find which `heights` are less than `121` or exactly equal to `156.`
-
-
-```r
-heights < 121
-```
-
-```
-## [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
-```
-
-```r
-heights < 121 | heights == 156
-```
-
-```
-## [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE
-```
-
-Often, a vector of logical values is useful for subsetting a vector. For example, we can find the `heights` that are larger than `150`. We can then use the resulting vector to subset the `heights` vector, thus actually returning the `heights` that are above `150`, instead of a vector of which values are above `150`. Here we also obtain the `weights` corresponding to `heights` above `150`.
-
-
-```r
-heights > 150
-```
-
-```
-## [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
-```
-
-```r
-heights[heights > 150]
-```
-
-```
-## [1] 205 156 175
-```
-
-```r
-weights[heights > 150]
-```
-
-```
-## [1] 77 70 66
-```
-
-When comparing vectors, be sure you are comparing vectors of the same length.
-
-
-```r
-a = 1:10
-b = 2:4
-a < b
-```
-
-```
-## Warning in a < b: longer object length is not a multiple of shorter object
-## length
-```
-
-```
-##  [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-```
-
-What happened here? `R` still performed the operation, but it also gives us a warning. (To perform the operation, `R` automatically made `b` longer by repeating `b` as needed.)
-
-The one exception to this behavior is comparing to a vector of length `1`. `R` does not warn us in this case, as comparing each value of a vector to a single value is a common operation that is usually reasonable to perform.
-
-
-```r
-a > 5
-```
-
-```
-##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-```
-
-Often we will want to convert `TRUE` and `FALSE` values to `1` and `0`. When performing mathematical operations on `TRUE` and `FALSE`, this is done automatically through type coercion.
-
-
-```r
-5 + (a > 5)
-```
-
-```
-##  [1] 5 5 5 5 5 6 6 6 6 6
-```
-
-By calling `sum()` on a vector of logical values, we can essentially count the number of `TRUE` values.
-
-
-```r
-sum(a > 5)
-```
-
-```
-## [1] 5
-```
-
-Here we count the elements of `a` that are larger than `5.` This is an extremely useful feature.
 
 ### Control Flow
 
@@ -1835,8 +2040,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1]  5.134729  5.816321  7.851943  2.385100 10.607671 11.890708  4.920164
-##  [8]  9.633575 -4.305201  7.344234
+##  [1] -9.1527189  1.2519280  2.3380131 -0.7696745  0.4471554 -2.2617413
+##  [7]  2.4402053 -6.4857859  2.6054088  2.0081038
 ```
 
 ```r
@@ -1844,8 +2049,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1] -0.21314311 -0.06687121  0.36998029 -0.80322297  0.96136901
-##  [6]  1.23671306 -0.25918951  0.75232465 -2.23898436  0.26102415
+##  [1] -2.057602663  0.492619856  0.758823864 -0.002883369  0.295366724
+##  [6] -0.368595193  0.783871595 -1.403926216  0.824363681  0.677961722
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -1947,7 +2152,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 21.71334
+## [1] 16.64556
 ```
 
 ```r
@@ -1955,7 +2160,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 21.71334
+## [1] 16.64556
 ```
 
 ```r
@@ -1963,7 +2168,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 21.71334
+## [1] 16.64556
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -1974,10 +2179,298 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 19.54201
+## [1] 14.98101
 ```
 
-## Hypothesis Tests in `R`
+
+# Summarizing Data
+
+## Summary Statistics
+
+`R` has built in functions for a large number of summary statistics.
+
+
+```r
+y
+```
+
+```
+## [1] 3
+```
+
+### Central Tendency {-}
+
+| Measure | `R`         | Result        |
+|---------|-------------|---------------|
+| Mean    | `mean(y)`   | 3   |
+| Median  | `median(y)` | 3 |
+
+### Spread {-}
+
+| Measure            | `R`        | Result       |
+|--------------------|------------|--------------|
+| Variance           | `var(y)`   | NA   |
+| Standard Deviation | `sd(y)`    | NA    |
+| IQR                | `IQR(y)`   | 0   |
+| Minimum            | `min(y)`   | 3   |
+| Maximum            | `max(y)`   | 3   |
+| Range              | `range(y)` | 3, 3 |
+
+- TODO: categorical summary
+
+
+```r
+table(mpg$drv)
+```
+
+```
+## 
+##   4   f   r 
+## 103 106  25
+```
+
+```r
+table(mpg$drv) / nrow(mpg)
+```
+
+```
+## 
+##         4         f         r 
+## 0.4401709 0.4529915 0.1068376
+```
+
+
+## Plotting
+
+Now that we have some data to work with, and we have learned about the data at the most basic level, our next tasks is to visualize the data. Often, a proper visualization can illuminate features of the data that can inform further analysis.
+
+We will look at three methods of visualizing data that we will use throughout the course:
+
+- Histograms
+- Boxplots
+- Scatterplots
+
+### Histograms
+
+When visualizing a single numerical variable, a **histogram** will be our go-to tool, which can be created in `R` using the `hist()` function.
+
+
+```r
+hist(mpg$cty)
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-101-1.pdf)<!-- --> 
+
+The histogram function has a number of parameters which can be changed to make our plot look much nicer. Use the `?` operator to read the documentation for the `hist()` to see a full list of these parameters.
+
+
+```r
+hist(mpg$cty,
+     xlab   = "Miles Per Gallon (City)",
+     main   = "Histogram of MPG (City)",
+     breaks = 12,
+     col    = "dodgerblue",
+     border = "darkorange")
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-102-1.pdf)<!-- --> 
+
+Importantly, you should always be sure to label your axes and give the plot a title. The argument `breaks` is specific to `hist()`. Entering an integer will give a suggestion to `R` for how many bars to use for the histogram. By default `R` will attempt to intelligently guess a good number of `breaks`, but as we can see here, it is sometimes useful to modify this yourself.
+
+### Boxplots
+
+To visualize the relationship between a numerical and categorical variable, we will use a **boxplot**. In the `mpg` dataset, the `drv` variable takes a small, finite number of values. A car can only be front wheel drive, 4 wheel drive, or rear wheel drive.
+
+
+```r
+unique(mpg$drv)
+```
+
+```
+## [1] "f" "4" "r"
+```
+
+First note that we can use a single boxplot as an alternative to a histogram for visualizing a single numerical variable. To do so in `R`, we use the `boxplot()` function.
+
+
+```r
+boxplot(mpg$hwy)
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-104-1.pdf)<!-- --> 
+
+However, more often we will use boxplots to compare a numerical variable for different values of a categorical variable.
+
+
+```r
+boxplot(hwy ~ drv, data = mpg)
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-105-1.pdf)<!-- --> 
+
+Here used the `boxplot()` command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The `R` syntax `hwy ~ drv, data = mpg` reads "Plot the `hwy` variable against the `drv` variable using the dataset `mpg`." We see the use of a `~` (which specifies a formula) and also a `data = ` argument. This will be a syntax that is common to many functions we will use in this course. 
+
+
+```r
+boxplot(hwy ~ drv, data = mpg,
+     xlab   = "Drivetrain (f = FWD, r = RWD, 4 = 4WD)",
+     ylab   = "Miles Per Gallon (Highway)",
+     main   = "MPG (Highway) vs Drivetrain",
+     pch    = 20,
+     cex    = 2,
+     col    = "darkorange",
+     border = "dodgerblue")
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-106-1.pdf)<!-- --> 
+
+Again, `boxplot()` has a number of additional arguments which have the ability to make our plot more visually appealing.
+
+### Scatterplots
+
+Lastly, to visualize the relationship between two numeric variables we will use a **scatterplot**. This can be done with the `plot()` function and the `~` syntax we just used with a boxplot. (The function `plot()` can also be used more generally; see the documentation for details.)
+
+
+```r
+plot(hwy ~ displ, data = mpg)
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-107-1.pdf)<!-- --> 
+
+
+```r
+plot(hwy ~ displ, data = mpg,
+     xlab = "Engine Displacement (in Liters)",
+     ylab = "Miles Per Gallon (Highway)",
+     main = "MPG (Highway) vs Engine Displacement",
+     pch  = 20,
+     cex  = 2,
+     col  = "dodgerblue")
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-108-1.pdf)<!-- --> 
+
+
+
+# `R` Resources
+
+- TODO: triage: beginner, medium, advanced. general strategy for learning `R`.
+
+These resources not necessary for this course, but you may find them useful if you would like a deeper understanding of `R`:
+
+- [Try R](http://tryr.codeschool.com/) from Code School.
+    - An interactive introduction to the basics of `R`. Could be very useful for getting up to speed on `R`'s syntax.
+- [Quick-R](http://www.statmethods.net/) by Robert Kabacoff.
+    - A good reference for `R` basics.
+- [R Tutorial](http://www.r-tutor.com/) by Chi Yau.
+    - A combination reference and tutorial for `R` basics.
+- [R Markdown](http://rmarkdown.rstudio.com/) from RStudio.
+    - Reference materials for RMarkdown.
+- [The Art of `R` Programming](https://www.nostarch.com/artofr.htm) by Norman Matloff.
+    - Gentle introduction to the programming side of `R`. (Whereas we will focus more on the data analysis side.) A [free electronic version](http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421) is available through the Illinois library.
+- [Advanced `R`](http://adv-r.had.co.nz/) by Hadley Wickham.
+    - From the author of several extremely popular `R` packages. Good follow-up to The Art of `R` Programming. (And more up-to-date material.)
+- [`R` for Data Science](http://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund.
+    - Similar to Advanced `R`, but focuses more on data analysis, while still introducing programming concepts. At the time of writing, currently under development.
+- [The R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) by Patrick Burns.
+    - Likens learning the tricks of `R` to descending through the levels of hell. Very advanced material, but may be important if `R` becomes a part of your everyday toolkit.
+
+
+# Probability in `R`
+
+## Distributions
+
+When working with different statistical distributions, we often want to make probabilistic statements based on the distribution.
+
+We typically want to know one of four things:
+
+* The density (pdf) at a particular value.
+* The distribution (cdf) at a particular value.
+* The quantile value corresponding to a particular probability.
+* A random draw of values from a particular distribution.
+
+This used to be done with statistical tables printed in the back of textbooks. Now, `R` has functions for obtaining density, distribution, quantile and random values.
+
+The general naming structure of the relevant `R` functions is:
+
+* `dname` calculates density (pdf) at input `x`.
+* `pname` calculates distribution (cdf) at input `x`.
+* `qname` calculates the quantile at an input probability.
+* `rname` generates a random draw from a particular distribution.
+
+Note that `name` represents the name of the given distribution.
+
+For example, consider a random variable $X$ which is $N(\mu = 2, \sigma^2 = 25)$. (Note, we are parameterizing using the variance $\sigma^2$. `R` however uses the standard deviation.)
+
+To calculate the value of the pdf at `x = 3`, that is, the height of the curve at `x = 3`, use:
+
+
+```r
+dnorm(x = 3, mean = 2, sd = 5)
+```
+
+```
+## [1] 0.07820854
+```
+
+To calculate the value of the cdf at `x = 3`, that is, $P(X \leq 3)$, the probability that $X$ is less than or equal to `3`, use:
+
+
+```r
+pnorm(q = 3, mean = 2, sd = 5)
+```
+
+```
+## [1] 0.5792597
+```
+
+Or, to calculate the quantile for probability 0.975, use:
+
+
+```r
+qnorm(p = 0.975, mean = 2, sd = 5)
+```
+
+```
+## [1] 11.79982
+```
+
+Lastly, to generate a random sample of size `n = 10`, use:
+
+
+```r
+rnorm(n = 10, mean = 2, sd = 5)
+```
+
+```
+##  [1]   1.480630  11.652099   4.886591  -6.001308 -10.465145  -1.516809
+##  [7]   8.957965   3.728568   8.135076  -1.946551
+```
+
+These functions exist for many other distributions, including but not limited to:
+
+| Command  | Distribution |
+|----------|--------------|
+| `*binom` | Binomial     |
+| `*t`     | t            |
+| `*pois`  | Poisson      |
+| `*f`     | F            |
+| `*chisq` | Chi-Squared  |
+
+Where `*` can be `d`, `p`, `q`, and `r`. Each distribution will have its own set of parameters which need to be passed to the functions as arguments. For example, `dbinom()` would not have arguments for `mean` and `sd`, since those are not parameters of the distribution. Instead a binomial distribution is usually parameterized by $n$ and $p$, however `R` chooses to call them something else. To find the names that `R` uses we would use `?dbinom` and see that `R` instead calls the arguments `size` and `prob`. For example:
+
+
+```r
+dbinom(x = 6, size = 10, prob = 0.75)
+```
+
+```
+## [1] 0.145998
+```
+
+Also note that, when using the `dname` functions with discrete distributions, they are the pmf of the distribution. For example, the above command is $P(Y = 6)$ if $Y \sim b(n = 10, p = 0.75)$. (The probability of flipping an unfair coin `10` times and seeing `6` heads, if the probability of heads is `0.75`.)
+
+# Hypothesis Tests in `R`
 
 A prerequisite for STAT 420 is an understanding of the basics of hypothesis testing. Recall the basic structure of hypothesis tests:
 
@@ -2331,7 +2824,7 @@ t.test(values ~ group, data = t_test_data,
 ##              80              72
 ```
 
-## Simulation
+# Simulation
 
 Simulation and model fitting are related but opposite processes.
 
@@ -2464,7 +2957,7 @@ hist(differences, breaks = 20,
      border = "darkorange")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-124-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-138-1.pdf)<!-- --> 
 
 Also the sample mean and variance are very close to to what we would expect.
 
@@ -2559,7 +3052,7 @@ x_bar_hist = hist(x_bars, breaks = 50,
                   xlab = "Sample Means")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-130-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-144-1.pdf)<!-- --> 
 
 Now we will compare sample statistics from the empirical distribution with their known values based on the parent distribution.
 
@@ -2615,4 +3108,7 @@ x_bar_hist = hist(x_bars, breaks = 50, col = shading,
                   xlab = "Sample Means")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-135-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-149-1.pdf)<!-- --> 
+
+
+

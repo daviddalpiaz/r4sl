@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<link rel="prev" href="simulation.html">
-<link rel="next" href="regression-basics-in-r.html">
+<link rel="prev" href="summarizing-data.html">
+<link rel="next" href="probability-in-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -273,31 +273,54 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rstudio-and-rmarkdown" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> RStudio and RMarkdown</h1>
-<p>This chapter will serve as a (currently brief) collection of tutorials for using RStudio and RMarkdown. It will likely be expanded over time. At this time many resources also appear in the previous chapter. Over time some may be moved here.</p>
-<p>The following videos were made as an introduction to <code>R</code>, RStudio, and RMarkdown for STAT 420 at UIUC.</p>
+<div id="r-resources" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> <code>R</code> Resources</h1>
 <ul>
-<li><a href="https://mediaspace.illinois.edu/media/%5BSTAT+420%5D+R+and+RStudio/1_ihjnvfis">RStudio Basics</a></li>
-<li><a href="https://mediaspace.illinois.edu/media/%5BSTAT+420%5D+RMarkdown+Intro/1_36pkjkie">RMarkdown Intro</a></li>
-<li><a href="https://mediaspace.illinois.edu/media/%5BSTAT+420%5D+RMarkdown+Basics/1_u0mk6uaq">RMarkdown Basics</a></li>
-<li><a href="https://mediaspace.illinois.edu/media/%5BSTAT+420%5D+RMarkdown+Tips+and+Tricks/1_ahkzbeka">RMarkdown Tips and Tricks</a></li>
+<li>TODO: triage: beginner, medium, advanced. general strategy for learning <code>R</code>.</li>
 </ul>
-<p>Note that RStudio and RMarkdown and constantly receiving excellent support and updates, so these videos already contain some outdated information. For example, as of recent RStudio versions, the “Import Dataset” functionality has been updated to utilize the <a href="https://github.com/tidyverse/readr"><code>readr</code></a> and <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html"><code>tibble</code></a> packages. Additionally, working interactively with RMarkdown documents in RStudio has a long list of new functionality.</p>
-<p><a href="http://rmarkdown.rstudio.com/">RStudio</a> provides their own <a href="http://rmarkdown.rstudio.com/lesson-1.html">tutorial for RMarkdown</a>. They also have an excellent <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf">RStudio “cheatsheets”</a> which visually identifies many of the features available in the IDE.</p>
-<div id="template" class="section level2">
-<h2><span class="header-section-number">9.1</span> Template</h2>
-<p><a href="https://daviddalpiaz.github.io/stat430sp17/rmd-template/rmd-template.zip">This <code>.zip</code> file</a> contains the files necessary to produce <a href="https://daviddalpiaz.github.io/stat430sp17/rmd-template/rmd-template.html">this rendered document</a>. This document is a more complete version of a template than what is seen in the above videos.</p>
-
-</div>
+<p>These resources not necessary for this course, but you may find them useful if you would like a deeper understanding of <code>R</code>:</p>
+<ul>
+<li><a href="http://tryr.codeschool.com/">Try R</a> from Code School.
+<ul>
+<li>An interactive introduction to the basics of <code>R</code>. Could be very useful for getting up to speed on <code>R</code>’s syntax.</li>
+</ul></li>
+<li><a href="http://www.statmethods.net/">Quick-R</a> by Robert Kabacoff.
+<ul>
+<li>A good reference for <code>R</code> basics.</li>
+</ul></li>
+<li><a href="http://www.r-tutor.com/">R Tutorial</a> by Chi Yau.
+<ul>
+<li>A combination reference and tutorial for <code>R</code> basics.</li>
+</ul></li>
+<li><a href="http://rmarkdown.rstudio.com/">R Markdown</a> from RStudio.
+<ul>
+<li>Reference materials for RMarkdown.</li>
+</ul></li>
+<li><a href="https://www.nostarch.com/artofr.htm">The Art of <code>R</code> Programming</a> by Norman Matloff.
+<ul>
+<li>Gentle introduction to the programming side of <code>R</code>. (Whereas we will focus more on the data analysis side.) A <a href="http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421">free electronic version</a> is available through the Illinois library.</li>
+</ul></li>
+<li><a href="http://adv-r.had.co.nz/">Advanced <code>R</code></a> by Hadley Wickham.
+<ul>
+<li>From the author of several extremely popular <code>R</code> packages. Good follow-up to The Art of <code>R</code> Programming. (And more up-to-date material.)</li>
+</ul></li>
+<li><a href="http://r4ds.had.co.nz/"><code>R</code> for Data Science</a> by Hadley Wickham and Garrett Grolemund.
+<ul>
+<li>Similar to Advanced <code>R</code>, but focuses more on data analysis, while still introducing programming concepts. At the time of writing, currently under development.</li>
+</ul></li>
+<li><a href="http://www.burns-stat.com/documents/books/the-r-inferno/">The R Inferno</a> by Patrick Burns.
+<ul>
+<li>Likens learning the tricks of <code>R</code> to descending through the levels of hell. Very advanced material, but may be important if <code>R</code> becomes a part of your everyday toolkit.</li>
+</ul></li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="simulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="regression-basics-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="summarizing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probability-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -326,7 +349,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/r4sl/edit/master/03-rstudio-rmarkdown.Rmd",
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/02-r-intro.Rmd",
 "text": "Edit"
 },
 "download": null,

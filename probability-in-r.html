@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<link rel="prev" href="simulation.html">
-<link rel="next" href="regression-basics-in-r.html">
+<link rel="prev" href="r-resources.html">
+<link rel="next" href="hypothesis-tests-in-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -273,22 +273,76 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rstudio-and-rmarkdown" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> RStudio and RMarkdown</h1>
-<p>This chapter will serve as a (currently brief) collection of tutorials for using RStudio and RMarkdown. It will likely be expanded over time. At this time many resources also appear in the previous chapter. Over time some may be moved here.</p>
-<p>The following videos were made as an introduction to <code>R</code>, RStudio, and RMarkdown for STAT 420 at UIUC.</p>
+<div id="probability-in-r" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Probability in <code>R</code></h1>
+<div id="distributions-1" class="section level2">
+<h2><span class="header-section-number">6.1</span> Distributions</h2>
+<p>When working with different statistical distributions, we often want to make probabilistic statements based on the distribution.</p>
+<p>We typically want to know one of four things:</p>
 <ul>
-<li><a href="https://mediaspace.illinois.edu/media/%5BSTAT+420%5D+R+and+RStudio/1_ihjnvfis">RStudio Basics</a></li>
-<li><a href="https://mediaspace.illinois.edu/media/%5BSTAT+420%5D+RMarkdown+Intro/1_36pkjkie">RMarkdown Intro</a></li>
-<li><a href="https://mediaspace.illinois.edu/media/%5BSTAT+420%5D+RMarkdown+Basics/1_u0mk6uaq">RMarkdown Basics</a></li>
-<li><a href="https://mediaspace.illinois.edu/media/%5BSTAT+420%5D+RMarkdown+Tips+and+Tricks/1_ahkzbeka">RMarkdown Tips and Tricks</a></li>
+<li>The density (pdf) at a particular value.</li>
+<li>The distribution (cdf) at a particular value.</li>
+<li>The quantile value corresponding to a particular probability.</li>
+<li>A random draw of values from a particular distribution.</li>
 </ul>
-<p>Note that RStudio and RMarkdown and constantly receiving excellent support and updates, so these videos already contain some outdated information. For example, as of recent RStudio versions, the “Import Dataset” functionality has been updated to utilize the <a href="https://github.com/tidyverse/readr"><code>readr</code></a> and <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html"><code>tibble</code></a> packages. Additionally, working interactively with RMarkdown documents in RStudio has a long list of new functionality.</p>
-<p><a href="http://rmarkdown.rstudio.com/">RStudio</a> provides their own <a href="http://rmarkdown.rstudio.com/lesson-1.html">tutorial for RMarkdown</a>. They also have an excellent <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf">RStudio “cheatsheets”</a> which visually identifies many of the features available in the IDE.</p>
-<div id="template" class="section level2">
-<h2><span class="header-section-number">9.1</span> Template</h2>
-<p><a href="https://daviddalpiaz.github.io/stat430sp17/rmd-template/rmd-template.zip">This <code>.zip</code> file</a> contains the files necessary to produce <a href="https://daviddalpiaz.github.io/stat430sp17/rmd-template/rmd-template.html">this rendered document</a>. This document is a more complete version of a template than what is seen in the above videos.</p>
-
+<p>This used to be done with statistical tables printed in the back of textbooks. Now, <code>R</code> has functions for obtaining density, distribution, quantile and random values.</p>
+<p>The general naming structure of the relevant <code>R</code> functions is:</p>
+<ul>
+<li><code>dname</code> calculates density (pdf) at input <code>x</code>.</li>
+<li><code>pname</code> calculates distribution (cdf) at input <code>x</code>.</li>
+<li><code>qname</code> calculates the quantile at an input probability.</li>
+<li><code>rname</code> generates a random draw from a particular distribution.</li>
+</ul>
+<p>Note that <code>name</code> represents the name of the given distribution.</p>
+<p>For example, consider a random variable <span class="math inline">\(X\)</span> which is <span class="math inline">\(N(\mu = 2, \sigma^2 = 25)\)</span>. (Note, we are parameterizing using the variance <span class="math inline">\(\sigma^2\)</span>. <code>R</code> however uses the standard deviation.)</p>
+<p>To calculate the value of the pdf at <code>x = 3</code>, that is, the height of the curve at <code>x = 3</code>, use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dnorm</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 0.07820854</code></pre>
+<p>To calculate the value of the cdf at <code>x = 3</code>, that is, <span class="math inline">\(P(X \leq 3)\)</span>, the probability that <span class="math inline">\(X\)</span> is less than or equal to <code>3</code>, use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 0.5792597</code></pre>
+<p>Or, to calculate the quantile for probability 0.975, use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 11.79982</code></pre>
+<p>Lastly, to generate a random sample of size <code>n = 10</code>, use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>##  [1]  1.8299901  1.7245943 -0.1698410  5.7154332  0.2158521 -0.8931828
+##  [7] -2.5385247 10.2338461  1.3054403  2.1410832</code></pre>
+<p>These functions exist for many other distributions, including but not limited to:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Command</th>
+<th align="left">Distribution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>*binom</code></td>
+<td align="left">Binomial</td>
+</tr>
+<tr class="even">
+<td align="left"><code>*t</code></td>
+<td align="left">t</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>*pois</code></td>
+<td align="left">Poisson</td>
+</tr>
+<tr class="even">
+<td align="left"><code>*f</code></td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>*chisq</code></td>
+<td align="left">Chi-Squared</td>
+</tr>
+</tbody>
+</table>
+<p>Where <code>*</code> can be <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code>. Each distribution will have its own set of parameters which need to be passed to the functions as arguments. For example, <code>dbinom()</code> would not have arguments for <code>mean</code> and <code>sd</code>, since those are not parameters of the distribution. Instead a binomial distribution is usually parameterized by <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, however <code>R</code> chooses to call them something else. To find the names that <code>R</code> uses we would use <code>?dbinom</code> and see that <code>R</code> instead calls the arguments <code>size</code> and <code>prob</code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbinom</span>(<span class="dt">x =</span> <span class="dv">6</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.75</span>)</code></pre></div>
+<pre><code>## [1] 0.145998</code></pre>
+<p>Also note that, when using the <code>dname</code> functions with discrete distributions, they are the pmf of the distribution. For example, the above command is <span class="math inline">\(P(Y = 6)\)</span> if <span class="math inline">\(Y \sim b(n = 10, p = 0.75)\)</span>. (The probability of flipping an unfair coin <code>10</code> times and seeing <code>6</code> heads, if the probability of heads is <code>0.75</code>.)</p>
 </div>
 </div>
             </section>
@@ -296,8 +350,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="simulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="regression-basics-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="r-resources.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hypothesis-tests-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -326,7 +380,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/r4sl/edit/master/03-rstudio-rmarkdown.Rmd",
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/02-r-intro.Rmd",
 "text": "Edit"
 },
 "download": null,
