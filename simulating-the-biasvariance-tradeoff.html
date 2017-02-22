@@ -362,7 +362,7 @@ for (i in <span class="dv">1</span>:n_sims) {
   <span class="co"># lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = &quot;green&quot;, lwd = 1)</span>
   <span class="kw">lines</span>(grid, <span class="kw">predict</span>(fit_4, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> grid)), <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
 
-  predictions[i, ] &lt;-<span class="st"> </span><span class="kw">c</span>(
+  predictions[i, ] =<span class="st"> </span><span class="kw">c</span>(
     <span class="kw">predict</span>(fit_1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> x0)),
     <span class="kw">predict</span>(fit_2, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> x0)),
     <span class="kw">predict</span>(fit_3, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> x0)),

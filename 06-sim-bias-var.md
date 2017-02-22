@@ -124,7 +124,7 @@ for (i in 1:n_sims) {
   # lines(grid, predict(fit_3, newdata = data.frame(x = grid)), col = "green", lwd = 1)
   lines(grid, predict(fit_4, newdata = data.frame(x = grid)), col = "orange", lwd = 1)
 
-  predictions[i, ] <- c(
+  predictions[i, ] = c(
     predict(fit_1, newdata = data.frame(x = x0)),
     predict(fit_2, newdata = data.frame(x = x0)),
     predict(fit_3, newdata = data.frame(x = x0)),
