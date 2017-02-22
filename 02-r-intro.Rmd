@@ -1119,7 +1119,7 @@ plot(hwy ~ displ, data = mpg,
 
 # `R` Resources
 
-- TODO: triage: beginner, medium, advanced. general strategy for learning `R`.
+- TODO: triage: beginner, medium, advanced. general strategy for learning `R`. add roger's book. add efficient `R`.
 
 These resources not necessary for this course, but you may find them useful if you would like a deeper understanding of `R`:
 

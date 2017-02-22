@@ -2040,8 +2040,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1] -6.6653355  1.0085842 -1.4150100  1.1337249  6.0098344  4.5590683
-##  [7] -1.5644957 -0.9392293  4.9995659 -0.4288486
+##  [1]  4.1172549 -4.0548111  8.6959678 -3.1034221 16.8006417  3.6238458
+##  [7] -0.4529512  4.8055805  0.7094163  5.2887736
 ```
 
 ```r
@@ -2049,8 +2049,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1] -1.93254199  0.08926123 -0.54926911  0.12223133  1.40691170
-##  [6]  1.02468675 -0.58865323 -0.42391791  1.14074210 -0.28945088
+##  [1]  0.077951071 -1.265337299  0.830579821 -1.108952152  2.162790578
+##  [6] -0.003153349 -0.673279370  0.191095018 -0.482214499  0.270520180
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2152,7 +2152,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 14.40644
+## [1] 37.01052
 ```
 
 ```r
@@ -2160,7 +2160,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 14.40644
+## [1] 37.01052
 ```
 
 ```r
@@ -2168,7 +2168,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 14.40644
+## [1] 37.01052
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2179,7 +2179,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 12.9658
+## [1] 33.30947
 ```
 
 
@@ -2354,7 +2354,7 @@ plot(hwy ~ displ, data = mpg,
 
 # `R` Resources
 
-- TODO: triage: beginner, medium, advanced. general strategy for learning `R`.
+- TODO: triage: beginner, medium, advanced. general strategy for learning `R`. add roger's book. add efficient `R`.
 
 These resources not necessary for this course, but you may find them useful if you would like a deeper understanding of `R`:
 
@@ -2443,8 +2443,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1]  0.002138068 21.619626743  3.357949374  2.860599126  7.176846977
-##  [6]  6.045249410  4.535279574  8.963653977  5.776044890  2.594140645
+##  [1]  0.2790517 -6.2497328 10.1038973  6.8307136 -3.8848742  2.6327502
+##  [7] -0.1576490 -1.4188367 -2.6020132 -6.5201213
 ```
 
 These functions exist for many other distributions, including but not limited to:
