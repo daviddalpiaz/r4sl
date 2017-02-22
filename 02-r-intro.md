@@ -133,7 +133,7 @@ library(ggplot2)
 Once you close `R`, all the packages are closed and put back on the imaginary shelf. The next time you open `R`, you do not have to install the package again, but you do have to load any packages you intend to use by invoking `library()`.
 
 
-# Data and Programing
+# Data and Programming
 
 ## Data Types
 
@@ -1533,7 +1533,7 @@ We have previously seen vectors and matrices for storing data as we introduced `
 
 ```r
 example_data = data.frame(x = c(1, 3, 5, 7, 9, 1, 3, 5, 7, 9),
-                          y = rep("Hello", 10),
+                          y = c(rep("Hello", 9), "Goodbye"),
                           z = rep(c(TRUE, FALSE), 5))
 ```
 
@@ -1545,17 +1545,17 @@ example_data
 ```
 
 ```
-##    x     y     z
-## 1  1 Hello  TRUE
-## 2  3 Hello FALSE
-## 3  5 Hello  TRUE
-## 4  7 Hello FALSE
-## 5  9 Hello  TRUE
-## 6  1 Hello FALSE
-## 7  3 Hello  TRUE
-## 8  5 Hello FALSE
-## 9  7 Hello  TRUE
-## 10 9 Hello FALSE
+##    x       y     z
+## 1  1   Hello  TRUE
+## 2  3   Hello FALSE
+## 3  5   Hello  TRUE
+## 4  7   Hello FALSE
+## 5  9   Hello  TRUE
+## 6  1   Hello FALSE
+## 7  3   Hello  TRUE
+## 8  5   Hello FALSE
+## 9  7   Hello  TRUE
+## 10 9 Goodbye FALSE
 ```
 
 - TODO: explain below
@@ -1586,7 +1586,7 @@ str(example_data)
 ```
 ## 'data.frame':	10 obs. of  3 variables:
 ##  $ x: num  1 3 5 7 9 1 3 5 7 9
-##  $ y: Factor w/ 1 level "Hello": 1 1 1 1 1 1 1 1 1 1
+##  $ y: Factor w/ 2 levels "Goodbye","Hello": 2 2 2 2 2 2 2 2 2 1
 ##  $ z: logi  TRUE FALSE TRUE FALSE TRUE FALSE ...
 ```
 
@@ -1635,18 +1635,18 @@ example_data_from_csv
 
 ```
 ## # A tibble: 10 × 3
-##        x     y     z
-##    <int> <chr> <lgl>
-## 1      1 Hello  TRUE
-## 2      3 Hello FALSE
-## 3      5 Hello  TRUE
-## 4      7 Hello FALSE
-## 5      9 Hello  TRUE
-## 6      1 Hello FALSE
-## 7      3 Hello  TRUE
-## 8      5 Hello FALSE
-## 9      7 Hello  TRUE
-## 10     9 Hello FALSE
+##        x       y     z
+##    <int>   <chr> <lgl>
+## 1      1   Hello  TRUE
+## 2      3   Hello FALSE
+## 3      5   Hello  TRUE
+## 4      7   Hello FALSE
+## 5      9   Hello  TRUE
+## 6      1   Hello FALSE
+## 7      3   Hello  TRUE
+## 8      5   Hello FALSE
+## 9      7   Hello  TRUE
+## 10     9 Goodbye FALSE
 ```
 
 A tibble is simply a data frame that prints with sanity. Notice in the output above that we are given additional information such as dimension and variable type.
@@ -1662,18 +1662,18 @@ example_data
 
 ```
 ## # A tibble: 10 × 3
-##        x      y     z
-##    <dbl> <fctr> <lgl>
-## 1      1  Hello  TRUE
-## 2      3  Hello FALSE
-## 3      5  Hello  TRUE
-## 4      7  Hello FALSE
-## 5      9  Hello  TRUE
-## 6      1  Hello FALSE
-## 7      3  Hello  TRUE
-## 8      5  Hello FALSE
-## 9      7  Hello  TRUE
-## 10     9  Hello FALSE
+##        x       y     z
+##    <dbl>  <fctr> <lgl>
+## 1      1   Hello  TRUE
+## 2      3   Hello FALSE
+## 3      5   Hello  TRUE
+## 4      7   Hello FALSE
+## 5      9   Hello  TRUE
+## 6      1   Hello FALSE
+## 7      3   Hello  TRUE
+## 8      5   Hello FALSE
+## 9      7   Hello  TRUE
+## 10     9 Goodbye FALSE
 ```
 
 Alternatively, we could use the "Import Dataset" feature in RStudio which can be found in the environment window. (By default, the top-right pane of RStudio.)  Once completed, this process will automatically generate the code to import a file. The resulting code will be shown in the console window. In recent versions of RStudio, `read_csv()` is used by default, thus reading in a tibble.
@@ -2040,8 +2040,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1] -9.1527189  1.2519280  2.3380131 -0.7696745  0.4471554 -2.2617413
-##  [7]  2.4402053 -6.4857859  2.6054088  2.0081038
+##  [1] 15.1919319  0.7196062  4.3610374  3.3593976  3.3354886 -5.9824783
+##  [7]  1.6375946  8.9439130 -1.9134165  3.8137703
 ```
 
 ```r
@@ -2049,8 +2049,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1] -2.057602663  0.492619856  0.758823864 -0.002883369  0.295366724
-##  [6] -0.368595193  0.783871595 -1.403926216  0.824363681  0.677961722
+##  [1]  2.060568725 -0.456999772  0.176454221  0.002211544 -0.001947604
+##  [6] -1.622877116 -0.297308880  0.973679454 -0.915033620  0.081253048
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2152,7 +2152,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 16.64556
+## [1] 33.04563
 ```
 
 ```r
@@ -2160,7 +2160,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 16.64556
+## [1] 33.04563
 ```
 
 ```r
@@ -2168,7 +2168,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 16.64556
+## [1] 33.04563
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2179,7 +2179,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 14.98101
+## [1] 29.74107
 ```
 
 
@@ -2443,8 +2443,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1]   1.480630  11.652099   4.886591  -6.001308 -10.465145  -1.516809
-##  [7]   8.957965   3.728568   8.135076  -1.946551
+##  [1]  8.94298758  0.89928181  4.25260685  4.98019343 -4.19285889
+##  [6]  9.01790571 -6.94463833  0.01279036  5.15459853 -4.48658847
 ```
 
 These functions exist for many other distributions, including but not limited to:
