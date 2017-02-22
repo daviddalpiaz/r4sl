@@ -164,7 +164,7 @@ Once you close `R`, all the packages are closed and put back on the imaginary sh
 
 Many operations in `R` make heavy use of **vectors**. Vectors in `R` are indexed starting at `1`. That is what the `[1]` in the output is indicating, that the first element of the row being displayed is the first element of the vector. Larger vectors will start additional rows with `[*]` where `*` is the index of the first element of the row.
 
-Possibly the most common way to create a vector in `R` is using the `c()` function, which is short for "combine."" As the name suggests, it combines a list of numbers separated by commas. 
+Possibly the most common way to create a vector in `R` is using the `c()` function, which is short for "combine."" As the name suggests, it combines a list of elements separated by commas. 
 
 ```{r}
 c(1, 3, 5, 7, 8, 9)
@@ -183,11 +183,20 @@ The pros and cons of these two are well beyond the scope of this book, but know 
 
 If you wish to use `<-`, you will still need to use `=`, however only for argument passing. Some users like to keep assignment (`<-`) and argument passing (`=`) separate. No matter what you choose, the more important thing is that you **stay consistent**. Also, if working on a larger collaborative project, you should use whatever style is already in place.
 
+- TODO: coercion
+
+```{r}
+c(42, "Statistics", TRUE)
+c(42, TRUE)
+```
+
 Frequently you may wish to create a vector based on a sequence of numbers. The quickest and easiest way to do this is with the `:` operator, which creates a sequence of integers between two specified integers.
 
 ```{r}
 (y = 1:100)
 ```
+
+- TODO: style note
 
 Here we see `R` labeling the rows after the first since this is a large vector. Also, we see that by putting parentheses around the assignment, `R` both stores the vector in a variable called `y` and automatically outputs `y` to the console.
 
@@ -215,7 +224,7 @@ Another common operation to create a vector is `rep()`, which can repeat a singl
 rep("A", times = 10)
 ```
 
-Or, `rep()` can be used to repeat a vector a number of times.
+The `rep()` function can be used to repeat a vector some number of times.
 
 ```{r}
 rep(x, times = 3)
@@ -232,6 +241,13 @@ So far we have mostly used them in isolation, but they are often used together.
 
 ```{r}
 c(x, rep(seq(1, 9, 2), 3), c(1, 2, 3), 42, 2:4)
+```
+
+The length of a vector can be obtained with the `length()` function.
+
+```{r}
+length(x)
+length(y)
 ```
 
 #### Subsetting
@@ -285,15 +301,8 @@ log(x)
 
 We see that when a function like `log()` is called on a vector `x`, a vector is returned which has applied the function to each element of the vector  `x`.
 
-The length of a vector can be obtained with the `length()` function.
 
-```{r}
-length(x)
-length(y)
-length(z)
-```
-
-#### Logical Operators
+### Logical Operators
 
 | Operator | Summary               | Example               | Result |
 |----------|-----------------------|-----------------------|--------|
@@ -324,11 +333,16 @@ x != 3
 
 x == 3 & x != 3
 x == 3 | x != 3
+```
 
+This is extremely useful for subsetting.
+
+```{r}
 x[x > 3]
 x[x != 3]
 ```
 
+- TODO: coercion
 
 ```{r}
 sum(x > 3)
@@ -345,6 +359,7 @@ which(x == max(x))
 which.max(x)
 ```
 
+### More Vectorization
 
 ```{r}
 x = c(1, 3, 5, 7, 8, 9)
@@ -354,27 +369,39 @@ y = 1:100
 ```{r}
 x + 2
 x + rep(2, 6)
+```
 
+```{r}
 x > 3
 x > rep(3, 6)
+```
 
+```{r}
 x + y
 length(x)
 length(y)
 length(y) / length(x)
 (x + y) - y
+```
 
+```{r}
 y = 1:60
 x + y
 length(y) / length(x)
+```
 
+```{r}
 rep(x, 10) + y
+```
 
+```{r}
 all(x + y == rep(x, 10) + y)
 identical(x + y, rep(x, 10) + y)
+```
 
-?any
-?all.equal
+```{r}
+# ?any
+# ?all.equal
 ```
 
 ### Matrices
@@ -435,12 +462,14 @@ rep(1, 9)
 ```
 
 ```{r}
-cbind(x, rev(x), rep(1, 9))
+rbind(x, rev(x), rep(1, 9))
 ```
 
 ```{r}
-rbind(x, rev(x), rep(1, 9))
+cbind(col_1 = x, col_2 = rev(x), col_3 = rep(1, 9))
 ```
+
+- TODO: named columns
 
 `R` can then be used to perform matrix calculations.
 
@@ -511,7 +540,7 @@ Or, lastly, create a square matrix of a certain dimension with `1` for every ele
 diag(5)
 ```
 
-### Calculations with Vectors and Matrices {-}
+#### Calculations with Vectors and Matrices {-}
 
 Certain operations in `R`, for example `%*%` have different behavior on vectors and matrices. To illustrate this, we will first create two vectors.
 
@@ -607,7 +636,7 @@ all.equal(crossprod(C_mat, C_mat), t(C_mat) %*% C_mat)
 - TODO: explain list stuff below:
 
 ```{r}
-creation
+# creation
 list(42, "Hello", TRUE)
 
 ex_list = list(
@@ -634,7 +663,6 @@ ex_list$d
 ex_list$d(arg = 1)
 
 ```
-
 
 
 ### Data Frames
@@ -669,7 +697,6 @@ ncol(example_data)
 dim(example_data)
 
 ```
-
 
 The `data.frame()` function above is one way to create a data frame. We can also import data from various file types in into `R`, as well as use data stored in packages.
 
@@ -750,7 +777,7 @@ To understand more about the data set, we use the `?` operator to pull up the do
 names(mpg)
 ```
 
-To access one of the variables as a vector, we use the `$` operator.
+To access one of the variables **as a vector**, we use the `$` operator.
 
 ```{r}
 mpg$year
@@ -791,7 +818,6 @@ All three approaches produce the same results. Which you use will be largely bas
 - TODO: general data.frame subsetting
 
 - TODO: difference between data.frame and tibble subsetting
-
 
 ## Programming Basics
 
@@ -967,8 +993,6 @@ We see the function is working as expected, and when returning the unbiased esti
 ```{r}
 get_var(test_sample, biased = TRUE)
 ```
-
-
 
 
 # Summarizing Data
