@@ -1005,6 +1005,8 @@ get_var(test_sample, biased = TRUE)
 (y = 1:100)
 ```
 
+TODO: change to mpg$cty, discuss what the results mean
+
 ### Central Tendency {-}
 
 | Measure | `R`         | Result        |
@@ -1030,16 +1032,20 @@ table(mpg$drv)
 table(mpg$drv) / nrow(mpg)
 ```
 
+TODO: discuss relationships found in the data, look at the data.
 
 ## Plotting
 
 Now that we have some data to work with, and we have learned about the data at the most basic level, our next tasks is to visualize the data. Often, a proper visualization can illuminate features of the data that can inform further analysis.
 
-We will look at three methods of visualizing data that we will use throughout the course:
+We will look at four methods of visualizing data that we will use throughout the course:
 
 - Histograms
+- Barplots
 - Boxplots
 - Scatterplots
+
+TODO: discuss relationships found in the data
 
 ### Histograms
 
@@ -1061,6 +1067,23 @@ hist(mpg$cty,
 ```
 
 Importantly, you should always be sure to label your axes and give the plot a title. The argument `breaks` is specific to `hist()`. Entering an integer will give a suggestion to `R` for how many bars to use for the histogram. By default `R` will attempt to intelligently guess a good number of `breaks`, but as we can see here, it is sometimes useful to modify this yourself.
+
+### Barplots
+
+TODO: narrative
+
+```{r}
+barplot(table(mpg$drv))
+```
+
+```{r}
+barplot(table(mpg$drv),
+        xlab   = "Drivetrain (f = FWD, r = RWD, 4 = 4WD)",
+        ylab   = "Frequency",
+        main   = "Drivetrains",
+        col    = "dodgerblue",
+        border = "darkorange")
+```
 
 ### Boxplots
 

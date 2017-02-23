@@ -2040,8 +2040,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1]  3.1146819  3.7229542 -4.7293259 -3.5834949 -2.1582456 -4.1250514
-##  [7]  4.0123107  6.6481010 -0.2982260  0.4442821
+##  [1]  0.667184446 -1.763931109  4.110297318  6.456636368  6.264361501
+##  [6]  3.156389341  4.004328012 -0.008207293 -0.307645947  0.695737030
 ```
 
 ```r
@@ -2049,8 +2049,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1]  0.71218914  0.86636101 -1.27594224 -0.98552151 -0.62427979
-##  [6] -1.12278368  0.93970090  1.60776468 -0.15284178  0.03535329
+##  [1] -0.5798737 -1.4289455  0.6226402  1.4421037  1.3749513  0.2894860
+##  [7]  0.5856302 -0.8157555 -0.9203351 -0.5699016
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2152,7 +2152,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 15.56632
+## [1] 8.198272
 ```
 
 ```r
@@ -2160,7 +2160,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 15.56632
+## [1] 8.198272
 ```
 
 ```r
@@ -2168,7 +2168,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 15.56632
+## [1] 8.198272
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2179,7 +2179,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 14.00969
+## [1] 7.378445
 ```
 
 
@@ -2202,6 +2202,8 @@ get_var(test_sample, biased = TRUE)
 ##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
 ##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
 ```
+
+TODO: change to mpg$cty, discuss what the results mean
 
 ### Central Tendency {-}
 
@@ -2244,16 +2246,20 @@ table(mpg$drv) / nrow(mpg)
 ## 0.4401709 0.4529915 0.1068376
 ```
 
+TODO: discuss relationships found in the data, look at the data.
 
 ## Plotting
 
 Now that we have some data to work with, and we have learned about the data at the most basic level, our next tasks is to visualize the data. Often, a proper visualization can illuminate features of the data that can inform further analysis.
 
-We will look at three methods of visualizing data that we will use throughout the course:
+We will look at four methods of visualizing data that we will use throughout the course:
 
 - Histograms
+- Barplots
 - Boxplots
 - Scatterplots
+
+TODO: discuss relationships found in the data
 
 ### Histograms
 
@@ -2282,6 +2288,29 @@ hist(mpg$cty,
 
 Importantly, you should always be sure to label your axes and give the plot a title. The argument `breaks` is specific to `hist()`. Entering an integer will give a suggestion to `R` for how many bars to use for the histogram. By default `R` will attempt to intelligently guess a good number of `breaks`, but as we can see here, it is sometimes useful to modify this yourself.
 
+### Barplots
+
+TODO: narrative
+
+
+```r
+barplot(table(mpg$drv))
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-103-1.pdf)<!-- --> 
+
+
+```r
+barplot(table(mpg$drv),
+        xlab   = "Drivetrain (f = FWD, r = RWD, 4 = 4WD)",
+        ylab   = "Frequency",
+        main   = "Drivetrains",
+        col    = "dodgerblue",
+        border = "darkorange")
+```
+
+![](02-r-intro_files/figure-latex/unnamed-chunk-104-1.pdf)<!-- --> 
+
 ### Boxplots
 
 To visualize the relationship between a numerical and categorical variable, we will use a **boxplot**. In the `mpg` dataset, the `drv` variable takes a small, finite number of values. A car can only be front wheel drive, 4 wheel drive, or rear wheel drive.
@@ -2302,7 +2331,7 @@ First note that we can use a single boxplot as an alternative to a histogram for
 boxplot(mpg$hwy)
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-104-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-106-1.pdf)<!-- --> 
 
 However, more often we will use boxplots to compare a numerical variable for different values of a categorical variable.
 
@@ -2311,7 +2340,7 @@ However, more often we will use boxplots to compare a numerical variable for dif
 boxplot(hwy ~ drv, data = mpg)
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-105-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-107-1.pdf)<!-- --> 
 
 Here used the `boxplot()` command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The `R` syntax `hwy ~ drv, data = mpg` reads "Plot the `hwy` variable against the `drv` variable using the dataset `mpg`." We see the use of a `~` (which specifies a formula) and also a `data = ` argument. This will be a syntax that is common to many functions we will use in this course. 
 
@@ -2327,7 +2356,7 @@ boxplot(hwy ~ drv, data = mpg,
      border = "dodgerblue")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-106-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-108-1.pdf)<!-- --> 
 
 Again, `boxplot()` has a number of additional arguments which have the ability to make our plot more visually appealing.
 
@@ -2340,7 +2369,7 @@ Lastly, to visualize the relationship between two numeric variables we will use 
 plot(hwy ~ displ, data = mpg)
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-107-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-109-1.pdf)<!-- --> 
 
 
 ```r
@@ -2353,7 +2382,7 @@ plot(hwy ~ displ, data = mpg,
      col  = "dodgerblue")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-108-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-110-1.pdf)<!-- --> 
 
 
 
@@ -2448,8 +2477,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1]  0.1139788 -2.7731738  0.4979843  8.9687237  3.7400849 -2.7522182
-##  [7]  3.1336625 -2.1930895 -2.6174542  6.5292341
+##  [1]  3.988440 -3.100619 -0.910365 -3.051173  3.604384  1.167317 -1.149875
+##  [8]  3.240148  5.642357  1.368748
 ```
 
 These functions exist for many other distributions, including but not limited to:
@@ -2962,7 +2991,7 @@ hist(differences, breaks = 20,
      border = "darkorange")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-138-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-140-1.pdf)<!-- --> 
 
 Also the sample mean and variance are very close to to what we would expect.
 
@@ -3057,7 +3086,7 @@ x_bar_hist = hist(x_bars, breaks = 50,
                   xlab = "Sample Means")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-144-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-146-1.pdf)<!-- --> 
 
 Now we will compare sample statistics from the empirical distribution with their known values based on the parent distribution.
 
@@ -3113,7 +3142,7 @@ x_bar_hist = hist(x_bars, breaks = 50, col = shading,
                   xlab = "Sample Means")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-149-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-151-1.pdf)<!-- --> 
 
 
 

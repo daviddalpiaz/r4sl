@@ -155,8 +155,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="summarizing-data.html"><a href="summarizing-data.html#plotting"><i class="fa fa-check"></i><b>4.2</b> Plotting</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#histograms"><i class="fa fa-check"></i><b>4.2.1</b> Histograms</a></li>
-<li class="chapter" data-level="4.2.2" data-path="summarizing-data.html"><a href="summarizing-data.html#boxplots"><i class="fa fa-check"></i><b>4.2.2</b> Boxplots</a></li>
-<li class="chapter" data-level="4.2.3" data-path="summarizing-data.html"><a href="summarizing-data.html#scatterplots"><i class="fa fa-check"></i><b>4.2.3</b> Scatterplots</a></li>
+<li class="chapter" data-level="4.2.2" data-path="summarizing-data.html"><a href="summarizing-data.html#barplots"><i class="fa fa-check"></i><b>4.2.2</b> Barplots</a></li>
+<li class="chapter" data-level="4.2.3" data-path="summarizing-data.html"><a href="summarizing-data.html#boxplots"><i class="fa fa-check"></i><b>4.2.3</b> Boxplots</a></li>
+<li class="chapter" data-level="4.2.4" data-path="summarizing-data.html"><a href="summarizing-data.html#scatterplots"><i class="fa fa-check"></i><b>4.2.4</b> Scatterplots</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="r-resources.html"><a href="r-resources.html"><i class="fa fa-check"></i><b>5</b> <code>R</code> Resources</a></li>
@@ -446,29 +447,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1         x2           y
-##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1       A 0.80743441  0.77682711
-## 2       A 0.22791699  0.93452164
-## 3       A 0.72121046  0.89194313
-## 4       A 0.03654111 -1.15594649
-## 5       A 0.99456226  0.04877271
-## 6       A 0.92547174 -0.84457319
-## 7       A 0.81255606 -1.15409144
-## 8       A 0.76642123  0.87803470
-## 9       A 0.42474346 -0.95534479
-## 10      A 0.63011817  1.90310062
+##        x1        x2          y
+##    &lt;fctr&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1       A 0.6768858 -0.9758332
+## 2       A 0.2085467  0.3537679
+## 3       A 0.2476197  0.6362010
+## 4       A 0.5073820 -0.4523351
+## 5       A 0.6656520 -1.1769956
+## 6       A 0.5469759 -1.4490818
+## 7       A 0.8100686 -1.8773398
+## 8       A 0.9501054 -0.6566117
+## 9       A 0.8117570  0.3755144
+## 10      A 0.9202787  0.7150001
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  -0.4568146  -0.4941684  -0.5372281   0.9282200</code></pre>
+##   0.4471749   0.5160740   0.1063008  -1.4151423</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.1579676  -0.7957064  -1.0163918   0.4573705   0.4768592   0.8620527</code></pre>
+##  0.13638480  1.21983088  0.05391421 -0.92534443 -1.22058899  0.45063148</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Polynomials</h3>
