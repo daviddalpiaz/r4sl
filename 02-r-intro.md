@@ -2040,8 +2040,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1]  4.1172549 -4.0548111  8.6959678 -3.1034221 16.8006417  3.6238458
-##  [7] -0.4529512  4.8055805  0.7094163  5.2887736
+##  [1]  3.1146819  3.7229542 -4.7293259 -3.5834949 -2.1582456 -4.1250514
+##  [7]  4.0123107  6.6481010 -0.2982260  0.4442821
 ```
 
 ```r
@@ -2049,8 +2049,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1]  0.077951071 -1.265337299  0.830579821 -1.108952152  2.162790578
-##  [6] -0.003153349 -0.673279370  0.191095018 -0.482214499  0.270520180
+##  [1]  0.71218914  0.86636101 -1.27594224 -0.98552151 -0.62427979
+##  [6] -1.12278368  0.93970090  1.60776468 -0.15284178  0.03535329
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2152,7 +2152,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 37.01052
+## [1] 15.56632
 ```
 
 ```r
@@ -2160,7 +2160,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 37.01052
+## [1] 15.56632
 ```
 
 ```r
@@ -2168,7 +2168,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 37.01052
+## [1] 15.56632
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2179,7 +2179,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 33.30947
+## [1] 14.00969
 ```
 
 
@@ -2191,30 +2191,35 @@ get_var(test_sample, biased = TRUE)
 
 
 ```r
-y
+(y = 1:100)
 ```
 
 ```
-## [1] 3
+##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
 ```
 
 ### Central Tendency {-}
 
 | Measure | `R`         | Result        |
 |---------|-------------|---------------|
-| Mean    | `mean(y)`   | 3   |
-| Median  | `median(y)` | 3 |
+| Mean    | `mean(y)`   | 50.5   |
+| Median  | `median(y)` | 50.5 |
 
 ### Spread {-}
 
 | Measure            | `R`        | Result       |
 |--------------------|------------|--------------|
-| Variance           | `var(y)`   | NA   |
-| Standard Deviation | `sd(y)`    | NA    |
-| IQR                | `IQR(y)`   | 0   |
-| Minimum            | `min(y)`   | 3   |
-| Maximum            | `max(y)`   | 3   |
-| Range              | `range(y)` | 3, 3 |
+| Variance           | `var(y)`   | 841.6666667   |
+| Standard Deviation | `sd(y)`    | 29.011492    |
+| IQR                | `IQR(y)`   | 49.5   |
+| Minimum            | `min(y)`   | 1   |
+| Maximum            | `max(y)`   | 100   |
+| Range              | `range(y)` | 1, 100 |
 
 - TODO: categorical summary
 
@@ -2443,8 +2448,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1]  0.2790517 -6.2497328 10.1038973  6.8307136 -3.8848742  2.6327502
-##  [7] -0.1576490 -1.4188367 -2.6020132 -6.5201213
+##  [1]  0.1139788 -2.7731738  0.4979843  8.9687237  3.7400849 -2.7522182
+##  [7]  3.1336625 -2.1930895 -2.6174542  6.5292341
 ```
 
 These functions exist for many other distributions, including but not limited to:

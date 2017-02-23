@@ -1002,7 +1002,7 @@ get_var(test_sample, biased = TRUE)
 `R` has built in functions for a large number of summary statistics.
 
 ```{r}
-y
+(y = 1:100)
 ```
 
 ### Central Tendency {-}
