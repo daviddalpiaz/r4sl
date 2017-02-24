@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-23">
+<meta name="date" content="2017-02-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -311,16 +311,16 @@ huge_rmse =<span class="st"> </span><span class="kw">rep</span>(<span class="dv"
 
 for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
   
-  trainIndex =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">392</span>, <span class="dt">size =</span> <span class="dv">196</span>)
+  train_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">392</span>, <span class="dt">size =</span> <span class="dv">196</span>)
   
-  lin_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
-  lin_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(lin_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+  lin_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>horsepower, <span class="dt">data =</span> Auto, <span class="dt">subset =</span> train_idx)
+  lin_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(lin_fit, Auto))[-train_idx] ^<span class="st"> </span><span class="dv">2</span>))
   
-  quad_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
-  quad_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(quad_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+  quad_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> train_idx)
+  quad_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(quad_fit, Auto))[-train_idx] ^<span class="st"> </span><span class="dv">2</span>))
   
-  huge_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> trainIndex)
-  huge_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(huge_fit, Auto))[-trainIndex] ^<span class="st"> </span><span class="dv">2</span>))
+  huge_fit =<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto, <span class="dt">subset =</span> train_idx)
+  huge_rmse[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Auto$mpg -<span class="st"> </span><span class="kw">predict</span>(huge_fit, Auto))[-train_idx] ^<span class="st"> </span><span class="dv">2</span>))
 }</code></pre></div>
 <p><img src="11-resampling_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
 <p>Notice two things, first that the “Reasonable” model has on average the smallest error. Second, notice large variability in the RMSE. We see this in the “Reasonable” model, but it is very clear in the “Ridiculous” model. Here it is very clear that if we use an “unlucky” split, our test error will be much larger than the likely reality.</p>
@@ -347,7 +347,7 @@ loocv_rmse</code></pre></div>
 <pre><code>## [1] 4.922552 4.922514</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loocv_rmse[<span class="dv">1</span>]</code></pre></div>
 <pre><code>## [1] 4.922552</code></pre>
-<p>We are actually given two values. The first is exactly the LOOCV MSE. The second is a minor correct that we will not worry about. We take a square root to obtain LOOCV-RMSE.</p>
+<p>We are actually given two values. The first is exactly the LOOCV-RMSE. The second is a minor correct that we will not worry about. We take a square root to obtain LOOCV-RMSE.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loocv_rmse_poly =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">10</span>)
 for (i in <span class="kw">seq_along</span>(loocv_rmse_poly)) {
   glm_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, i), <span class="dt">data =</span> Auto)
@@ -359,7 +359,7 @@ loocv_rmse_poly</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(loocv_rmse_poly, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, 
      <span class="dt">main =</span> <span class="st">&quot;LOOCV-RMSE vs Polynomial Degree&quot;</span>, 
      <span class="dt">ylab =</span> <span class="st">&quot;LOOCV-RMSE&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Polynomial Degree&quot;</span>)</code></pre></div>
-<p><img src="11-resampling_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>If you run the above code locally, you will notice that is painfully slow. We are fitting each of the 10 models 392 times, that is, each model <span class="math inline">\(n\)</span> times, once with each data point left out. (Note: in this case, for a linear model, there is actually a shortcut formula which would allow us to obtain LOOCV-RMSE from a single fit to the data. See details in ISL as well as a link below.)</p>
 <p>We could instead use <span class="math inline">\(k\)</span>-fold cross-validation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">17</span>)
@@ -374,8 +374,8 @@ cv_10_rmse_poly</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cv_10_rmse_poly, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>,
      <span class="dt">main =</span> <span class="st">&quot;10 Fold CV-RMSE vs Polynomial Degree&quot;</span>, 
      <span class="dt">ylab =</span> <span class="st">&quot;10 Fold CV-RMSE&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Polynomial Degree&quot;</span>)</code></pre></div>
-<p><img src="11-resampling_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>Here we chose 10-fold cross-validation. Notice it is <strong>much</strong> faster. IN practice, we usually stick to 5 or 10-fold CV.</p>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Here we chose 10-fold cross-validation. Notice it is <strong>much</strong> faster. In practice, we usually stick to 5 or 10-fold CV.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 num_reps =<span class="st"> </span><span class="dv">100</span>
 
@@ -386,15 +386,16 @@ huge_rmse_10_fold =<span class="st"> </span><span class="kw">rep</span>(<span cl
 
 for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
   
-  lin_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">1</span>), <span class="dt">data =</span> Auto)
+  lin_fit  =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">1</span>), <span class="dt">data =</span> Auto)
   quad_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">2</span>), <span class="dt">data =</span> Auto)
   huge_fit =<span class="st"> </span><span class="kw">glm</span>(mpg ~<span class="st"> </span><span class="kw">poly</span>(horsepower, <span class="dv">8</span>), <span class="dt">data =</span> Auto)
-  lin_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, lin_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
-  quad_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, quad_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
-  huge_rmse_10_fold[i] =<span class="st">  </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, huge_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  
+  lin_rmse_10_fold[i]  =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, lin_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  quad_rmse_10_fold[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, quad_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
+  huge_rmse_10_fold[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">cv.glm</span>(Auto, huge_fit, <span class="dt">K =</span> <span class="dv">10</span>)$delta[<span class="dv">1</span>])
 }</code></pre></div>
 <p>Repeating the test-train split analysis from above, this time with 10-fold CV, see that that the resulting RMSE are much less variable. That means, will cross-validation still has some inherent randomness, it has a much smaller effect on the results.</p>
-<p><img src="11-resampling_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
 </div>
 <div id="manual-cross-validation" class="section level3">
 <h3><span class="header-section-number">17.2.2</span> Manual Cross-Validation</h3>
@@ -481,7 +482,7 @@ test =<span class="st"> </span>full_data[((n /<span class="st"> </span><span cla
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correlation between y and each predictor variable</span>
 correlations =<span class="st"> </span><span class="kw">apply</span>(train[, -<span class="dv">1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> train$y)
 <span class="kw">hist</span>(correlations)</code></pre></div>
-<p><img src="11-resampling_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="11-resampling_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select the 25 largest (absolute) correlation</span>
 <span class="co"># these should be &quot;useful&quot; for prediction</span>
 selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>:<span class="dv">25</span>]

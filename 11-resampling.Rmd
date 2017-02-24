@@ -36,16 +36,16 @@ huge_rmse = rep(0, times = num_reps)
 
 for(i in 1:100) {
   
-  trainIndex = sample(392, size = 196)
+  train_idx = sample(392, size = 196)
   
-  lin_fit = lm(mpg ~ horsepower, data = Auto, subset = trainIndex)
-  lin_rmse[i] = sqrt(mean((Auto$mpg - predict(lin_fit, Auto))[-trainIndex] ^ 2))
+  lin_fit = lm(mpg ~ horsepower, data = Auto, subset = train_idx)
+  lin_rmse[i] = sqrt(mean((Auto$mpg - predict(lin_fit, Auto))[-train_idx] ^ 2))
   
-  quad_fit = lm(mpg ~ poly(horsepower, 2), data = Auto, subset = trainIndex)
-  quad_rmse[i] = sqrt(mean((Auto$mpg - predict(quad_fit, Auto))[-trainIndex] ^ 2))
+  quad_fit = lm(mpg ~ poly(horsepower, 2), data = Auto, subset = train_idx)
+  quad_rmse[i] = sqrt(mean((Auto$mpg - predict(quad_fit, Auto))[-train_idx] ^ 2))
   
-  huge_fit = lm(mpg ~ poly(horsepower, 8), data = Auto, subset = trainIndex)
-  huge_rmse[i] = sqrt(mean((Auto$mpg - predict(huge_fit, Auto))[-trainIndex] ^ 2))
+  huge_fit = lm(mpg ~ poly(horsepower, 8), data = Auto, subset = train_idx)
+  huge_rmse[i] = sqrt(mean((Auto$mpg - predict(huge_fit, Auto))[-train_idx] ^ 2))
 }
 ```
 
@@ -86,7 +86,7 @@ loocv_rmse
 loocv_rmse[1]
 ```
 
-We are actually given two values. The first is exactly the LOOCV MSE. The second is a minor correct that we will not worry about. We take a square root to obtain LOOCV-RMSE.
+We are actually given two values. The first is exactly the LOOCV-RMSE. The second is a minor correct that we will not worry about. We take a square root to obtain LOOCV-RMSE.
 
 ```{r}
 loocv_rmse_poly = rep(0, times = 10)
@@ -95,6 +95,9 @@ for (i in seq_along(loocv_rmse_poly)) {
   loocv_rmse_poly[i] = sqrt(cv.glm(Auto, glm_fit)$delta[1])
 }
 loocv_rmse_poly
+```
+
+```{r}
 plot(loocv_rmse_poly, type = "b", col = "dodgerblue", 
      main = "LOOCV-RMSE vs Polynomial Degree", 
      ylab = "LOOCV-RMSE", xlab = "Polynomial Degree")
@@ -112,12 +115,15 @@ for (i in seq_along(cv_10_rmse_poly)){
   cv_10_rmse_poly[i] = sqrt(cv.glm(Auto, glm_fit, K = 10)$delta[1])
 }
 cv_10_rmse_poly
+```
+
+```{r}
 plot(cv_10_rmse_poly, type = "b", col = "dodgerblue",
      main = "10 Fold CV-RMSE vs Polynomial Degree", 
      ylab = "10 Fold CV-RMSE", xlab = "Polynomial Degree")
 ```
 
-Here we chose 10-fold cross-validation. Notice it is **much** faster. IN practice, we usually stick to 5 or 10-fold CV.
+Here we chose 10-fold cross-validation. Notice it is **much** faster. In practice, we usually stick to 5 or 10-fold CV.
 
 ```{r}
 set.seed(42)
@@ -130,12 +136,13 @@ huge_rmse_10_fold = rep(0, times = num_reps)
 
 for(i in 1:100) {
   
-  lin_fit = glm(mpg ~ poly(horsepower, 1), data = Auto)
+  lin_fit  = glm(mpg ~ poly(horsepower, 1), data = Auto)
   quad_fit = glm(mpg ~ poly(horsepower, 2), data = Auto)
   huge_fit = glm(mpg ~ poly(horsepower, 8), data = Auto)
-  lin_rmse_10_fold[i] =  sqrt(cv.glm(Auto, lin_fit, K = 10)$delta[1])
-  quad_rmse_10_fold[i] =  sqrt(cv.glm(Auto, quad_fit, K = 10)$delta[1])
-  huge_rmse_10_fold[i] =  sqrt(cv.glm(Auto, huge_fit, K = 10)$delta[1])
+  
+  lin_rmse_10_fold[i]  = sqrt(cv.glm(Auto, lin_fit, K = 10)$delta[1])
+  quad_rmse_10_fold[i] = sqrt(cv.glm(Auto, quad_fit, K = 10)$delta[1])
+  huge_rmse_10_fold[i] = sqrt(cv.glm(Auto, huge_fit, K = 10)$delta[1])
 }
 
 ```

@@ -49,16 +49,16 @@ huge_rmse = rep(0, times = num_reps)
 
 for(i in 1:100) {
   
-  trainIndex = sample(392, size = 196)
+  train_idx = sample(392, size = 196)
   
-  lin_fit = lm(mpg ~ horsepower, data = Auto, subset = trainIndex)
-  lin_rmse[i] = sqrt(mean((Auto$mpg - predict(lin_fit, Auto))[-trainIndex] ^ 2))
+  lin_fit = lm(mpg ~ horsepower, data = Auto, subset = train_idx)
+  lin_rmse[i] = sqrt(mean((Auto$mpg - predict(lin_fit, Auto))[-train_idx] ^ 2))
   
-  quad_fit = lm(mpg ~ poly(horsepower, 2), data = Auto, subset = trainIndex)
-  quad_rmse[i] = sqrt(mean((Auto$mpg - predict(quad_fit, Auto))[-trainIndex] ^ 2))
+  quad_fit = lm(mpg ~ poly(horsepower, 2), data = Auto, subset = train_idx)
+  quad_rmse[i] = sqrt(mean((Auto$mpg - predict(quad_fit, Auto))[-train_idx] ^ 2))
   
-  huge_fit = lm(mpg ~ poly(horsepower, 8), data = Auto, subset = trainIndex)
-  huge_rmse[i] = sqrt(mean((Auto$mpg - predict(huge_fit, Auto))[-trainIndex] ^ 2))
+  huge_fit = lm(mpg ~ poly(horsepower, 8), data = Auto, subset = train_idx)
+  huge_rmse[i] = sqrt(mean((Auto$mpg - predict(huge_fit, Auto))[-train_idx] ^ 2))
 }
 ```
 
@@ -119,7 +119,7 @@ loocv_rmse[1]
 ## [1] 4.922552
 ```
 
-We are actually given two values. The first is exactly the LOOCV MSE. The second is a minor correct that we will not worry about. We take a square root to obtain LOOCV-RMSE.
+We are actually given two values. The first is exactly the LOOCV-RMSE. The second is a minor correct that we will not worry about. We take a square root to obtain LOOCV-RMSE.
 
 
 ```r
@@ -136,13 +136,14 @@ loocv_rmse_poly
 ##  [8] 4.354440 4.366764 4.414854
 ```
 
+
 ```r
 plot(loocv_rmse_poly, type = "b", col = "dodgerblue", 
      main = "LOOCV-RMSE vs Polynomial Degree", 
      ylab = "LOOCV-RMSE", xlab = "Polynomial Degree")
 ```
 
-![](11-resampling_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
+![](11-resampling_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 If you run the above code locally, you will notice that is painfully slow. We are fitting each of the 10 models 392 times, that is, each model $n$ times, once with each data point left out. (Note: in this case, for a linear model, there is actually a shortcut formula which would allow us to obtain LOOCV-RMSE from a single fit to the data. See details in ISL as well as a link below.)
 
@@ -164,15 +165,16 @@ cv_10_rmse_poly
 ##  [8] 4.439821 4.353321 4.416102
 ```
 
+
 ```r
 plot(cv_10_rmse_poly, type = "b", col = "dodgerblue",
      main = "10 Fold CV-RMSE vs Polynomial Degree", 
      ylab = "10 Fold CV-RMSE", xlab = "Polynomial Degree")
 ```
 
-![](11-resampling_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
+![](11-resampling_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
-Here we chose 10-fold cross-validation. Notice it is **much** faster. IN practice, we usually stick to 5 or 10-fold CV.
+Here we chose 10-fold cross-validation. Notice it is **much** faster. In practice, we usually stick to 5 or 10-fold CV.
 
 
 ```r
@@ -186,18 +188,19 @@ huge_rmse_10_fold = rep(0, times = num_reps)
 
 for(i in 1:100) {
   
-  lin_fit = glm(mpg ~ poly(horsepower, 1), data = Auto)
+  lin_fit  = glm(mpg ~ poly(horsepower, 1), data = Auto)
   quad_fit = glm(mpg ~ poly(horsepower, 2), data = Auto)
   huge_fit = glm(mpg ~ poly(horsepower, 8), data = Auto)
-  lin_rmse_10_fold[i] =  sqrt(cv.glm(Auto, lin_fit, K = 10)$delta[1])
-  quad_rmse_10_fold[i] =  sqrt(cv.glm(Auto, quad_fit, K = 10)$delta[1])
-  huge_rmse_10_fold[i] =  sqrt(cv.glm(Auto, huge_fit, K = 10)$delta[1])
+  
+  lin_rmse_10_fold[i]  = sqrt(cv.glm(Auto, lin_fit, K = 10)$delta[1])
+  quad_rmse_10_fold[i] = sqrt(cv.glm(Auto, quad_fit, K = 10)$delta[1])
+  huge_rmse_10_fold[i] = sqrt(cv.glm(Auto, huge_fit, K = 10)$delta[1])
 }
 ```
 
 Repeating the test-train split analysis from above, this time with 10-fold CV, see that that the resulting RMSE are much less variable. That means, will cross-validation still has some inherent randomness, it has a much smaller effect on the results.
 
-![](11-resampling_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
+![](11-resampling_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 
 ### Manual Cross-Validation
@@ -313,7 +316,7 @@ correlations = apply(train[, -1], 2, cor, y = train$y)
 hist(correlations)
 ```
 
-![](11-resampling_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
+![](11-resampling_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 ```r
 # select the 25 largest (absolute) correlation
