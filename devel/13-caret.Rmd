@@ -1,0 +1,272 @@
+# The `caret` Package
+
+Now that we have seen a number of classificaiton (and regression) methods, and introduced cross-validation, we see the general outline of a predictive analysis:
+
+- Select a method
+- Test-train split the data
+- Decide on a set of candidate models via a tuning parameter
+- Select best model (tuning parameters) via cross-validation
+- Use chosen model to make predictions
+- Calculate relevent metrics on the test data
+
+At face value it would seem like it should be easy to repeat this process for a number of different methods, however we have run into a number of difficulties attempting to do so with `R`.
+
+- The `predict()` function seems to have a different behvaior for each new method we see.
+- Many methods have different cross-validation functions, or worse yet, no build-in process for cross-validation.
+- Different methods have different handling of categorical predictors.
+
+Thankfully, the `R` community has essentailly provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package.
+
+
+- `train()`
+    - formula
+    - data
+    - method
+    
+- `predict()`
+
+
+
+- `createDataPartition()`
+- `trainControl()`
+
+
+- `expand.grid()`
+
+- preProcess()
+
+
+```{r}
+data(Default, package = "ISLR")
+```
+
+```{r, message = FALSE, warning = FALSE}
+library(caret)
+```
+
+
+```{r}
+set.seed(430)
+default_idx = createDataPartition(Default$default, p = 0.75, list = FALSE)
+default_trn = Default[default_idx, ]
+default_tst = Default[-default_idx, ]
+```
+
+```{r}
+default_glm = train(
+  default ~ .,
+  data = default_trn,
+  method = "glm",
+  family = "binomial",
+  trControl = trainControl(method = "cv", number = 5)
+)
+```
+
+```{r}
+default_glm
+```
+
+
+```{r}
+names(default_glm)
+```
+
+
+
+```{r}
+default_glm$results
+```
+
+
+```{r}
+default_glm$finalModel
+```
+
+```{r}
+accuracy = function(actual, predicted) {
+  mean(actual == predicted)
+}
+```
+
+
+```{r}
+# make preds
+
+head(predict(default_glm, newdata = default_trn))
+```
+
+
+
+```{r}
+# train acc
+accuracy(actual = default_trn$default,
+         predicted = predict(default_glm, newdata = default_trn))
+```
+
+```{r}
+# test acc
+accuracy(actual = default_tst$default,
+         predicted = predict(default_glm, newdata = default_tst))
+```
+
+
+
+```{r}
+# get probs
+head(predict(default_glm, newdata = default_trn, type = "prob"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+default_knn = train(
+  default ~ .,
+  data = default_trn,
+  method = "knn",
+  trControl = trainControl(method = "cv", number = 5)
+)
+```
+
+
+
+
+
+```{r}
+default_knn
+```
+
+
+
+
+
+```{r}
+
+```
+
+
+```{r}
+default_grid = expand.grid(k = seq(1, 151, by = 5))
+```
+
+- TODO: returns a data frame, a habit for when we later need multiple tuning parameters
+
+```{r}
+default_knn = train(
+  default ~ .,
+  data = default_trn,
+  method = "knn",
+  trControl = trainControl(method = "cv", number = 5, selectionFunction = "oneSE"),
+  preProcess = c("center", "scale"),
+  tuneGrid = default_grid
+)
+```
+
+
+
+```{r}
+default_knn
+```
+
+
+
+```{r}
+plot(default_knn)
+```
+
+
+
+```{r}
+ggplot(default_knn) + theme_bw()
+```
+
+
+
+
+
+
+```{r}
+default_knn$bestTune
+```
+
+
+```{r}
+get_best_result = function(caret_fit) {
+  best_result = caret_fit$results[as.numeric(rownames(caret_fit$bestTune)), ]
+  rownames(best_result) = NULL
+  best_result
+}
+```
+
+```{r}
+get_best_result(default_knn)
+```
+
+
+
+```{r}
+default_knn$finalModel
+```
+
+
+
+
+
+
+
+
+
+
+less ties with CV
+
+run knn without a grid, notice default grid, also notice preprocess
+
+
+TODO: table with best knn and glm results for train, test, cv
+
+
+
+## External Links
+
+
+[http://topepo.github.io/caret/index.html]
+
+[http://topepo.github.io/caret/available-models.html]()
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+- Base Packages, Attached
+
+```{r, echo = FALSE}
+sessionInfo()$basePkgs
+```
+
+- Additonal Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additonal Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```
+
+
+
+
