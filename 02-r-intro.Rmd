@@ -1139,29 +1139,36 @@ plot(hwy ~ displ, data = mpg,
 ```
 
 
-
 # `R` Resources
 
 - TODO: triage: beginner, medium, advanced. general strategy for learning `R`. add roger's book. add efficient `R`.
 
 These resources not necessary for this course, but you may find them useful if you would like a deeper understanding of `R`:
 
-- [Try R](http://tryr.codeschool.com/) from Code School.
-    - An interactive introduction to the basics of `R`. Could be very useful for getting up to speed on `R`'s syntax.
+## Beginner Tutorials and References
+
+- [Try `R`](http://tryr.codeschool.com/) from Code School.
+    - An interactive introduction to the basics of `R`. Useful for getting up to speed on `R`'s syntax.
 - [Quick-R](http://www.statmethods.net/) by Robert Kabacoff.
     - A good reference for `R` basics.
-- [R Tutorial](http://www.r-tutor.com/) by Chi Yau.
+- [`R` Tutorial](http://www.r-tutor.com/) by Chi Yau.
     - A combination reference and tutorial for `R` basics.
-- [R Markdown](http://rmarkdown.rstudio.com/) from RStudio.
-    - Reference materials for RMarkdown.
-- [The Art of `R` Programming](https://www.nostarch.com/artofr.htm) by Norman Matloff.
-    - Gentle introduction to the programming side of `R`. (Whereas we will focus more on the data analysis side.) A [free electronic version](http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421) is available through the Illinois library.
-- [Advanced `R`](http://adv-r.had.co.nz/) by Hadley Wickham.
-    - From the author of several extremely popular `R` packages. Good follow-up to The Art of `R` Programming. (And more up-to-date material.)
+- [`R` Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/) by Roger Peng
+
+## Intermediate References
+
 - [`R` for Data Science](http://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund.
     - Similar to Advanced `R`, but focuses more on data analysis, while still introducing programming concepts. At the time of writing, currently under development.
-- [The R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) by Patrick Burns.
+- [The Art of `R` Programming](https://www.nostarch.com/artofr.htm) by Norman Matloff.
+    - Gentle introduction to the programming side of `R`. (Whereas we will focus more on the data analysis side.) A [free electronic version](http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421) is available through the Illinois library.
+
+## Advanced References
+
+- [Advanced `R`](http://adv-r.had.co.nz/) by Hadley Wickham.
+    - From the author of several extremely popular `R` packages. Good follow-up to The Art of `R` Programming. (And more up-to-date material.)
+- [The `R` Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) by Patrick Burns.
     - Likens learning the tricks of `R` to descending through the levels of hell. Very advanced material, but may be important if `R` becomes a part of your everyday toolkit.
+- [Efficient `R` Programming](https://csgillespie.github.io/efficientR/) by Colin Gillespie and Robin Lovelace
 
 
 # Probability in `R`
