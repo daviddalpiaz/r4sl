@@ -2040,8 +2040,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1]  8.073961  9.369492 -1.579234  6.282192 -2.093180  7.123919 11.356496
-##  [8]  8.032805 -1.429143  8.964709
+##  [1]  5.419110 -4.233720 -6.593609  3.659893 13.970532  1.923653 -3.083495
+##  [8] -1.858718  7.251167  3.469113
 ```
 
 ```r
@@ -2049,8 +2049,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1]  0.5232237  0.7776957 -1.3728861  0.1712790 -1.4738369  0.3366135
-##  [7]  1.1679892  0.5151397 -1.3434049  0.6981871
+##  [1]  0.55676794 -1.01160967 -1.39504082  0.27093304  1.94619047
+##  [6] -0.01116872 -0.82472276 -0.62572276  0.85443786  0.23993542
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2152,7 +2152,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 25.91882
+## [1] 37.87983
 ```
 
 ```r
@@ -2160,7 +2160,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 25.91882
+## [1] 37.87983
 ```
 
 ```r
@@ -2168,7 +2168,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 25.91882
+## [1] 37.87983
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2179,7 +2179,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 23.32694
+## [1] 34.09185
 ```
 
 
@@ -2385,29 +2385,36 @@ plot(hwy ~ displ, data = mpg,
 ![](02-r-intro_files/figure-latex/unnamed-chunk-110-1.pdf)<!-- --> 
 
 
-
 # `R` Resources
 
 - TODO: triage: beginner, medium, advanced. general strategy for learning `R`. add roger's book. add efficient `R`.
 
 These resources not necessary for this course, but you may find them useful if you would like a deeper understanding of `R`:
 
-- [Try R](http://tryr.codeschool.com/) from Code School.
-    - An interactive introduction to the basics of `R`. Could be very useful for getting up to speed on `R`'s syntax.
+## Beginner Tutorials and References
+
+- [Try `R`](http://tryr.codeschool.com/) from Code School.
+    - An interactive introduction to the basics of `R`. Useful for getting up to speed on `R`'s syntax.
 - [Quick-R](http://www.statmethods.net/) by Robert Kabacoff.
     - A good reference for `R` basics.
-- [R Tutorial](http://www.r-tutor.com/) by Chi Yau.
+- [`R` Tutorial](http://www.r-tutor.com/) by Chi Yau.
     - A combination reference and tutorial for `R` basics.
-- [R Markdown](http://rmarkdown.rstudio.com/) from RStudio.
-    - Reference materials for RMarkdown.
-- [The Art of `R` Programming](https://www.nostarch.com/artofr.htm) by Norman Matloff.
-    - Gentle introduction to the programming side of `R`. (Whereas we will focus more on the data analysis side.) A [free electronic version](http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421) is available through the Illinois library.
-- [Advanced `R`](http://adv-r.had.co.nz/) by Hadley Wickham.
-    - From the author of several extremely popular `R` packages. Good follow-up to The Art of `R` Programming. (And more up-to-date material.)
+- [`R` Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/) by Roger Peng
+
+## Intermediate References
+
 - [`R` for Data Science](http://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund.
     - Similar to Advanced `R`, but focuses more on data analysis, while still introducing programming concepts. At the time of writing, currently under development.
-- [The R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) by Patrick Burns.
+- [The Art of `R` Programming](https://www.nostarch.com/artofr.htm) by Norman Matloff.
+    - Gentle introduction to the programming side of `R`. (Whereas we will focus more on the data analysis side.) A [free electronic version](http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421) is available through the Illinois library.
+
+## Advanced References
+
+- [Advanced `R`](http://adv-r.had.co.nz/) by Hadley Wickham.
+    - From the author of several extremely popular `R` packages. Good follow-up to The Art of `R` Programming. (And more up-to-date material.)
+- [The `R` Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) by Patrick Burns.
     - Likens learning the tricks of `R` to descending through the levels of hell. Very advanced material, but may be important if `R` becomes a part of your everyday toolkit.
+- [Efficient `R` Programming](https://csgillespie.github.io/efficientR/) by Colin Gillespie and Robin Lovelace
 
 
 # Probability in `R`
@@ -2477,8 +2484,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1]  0.2360559  0.5099120  7.5600815  6.6670060 17.2126673  1.7129029
-##  [7]  4.8494709  0.6498858 -2.0323680  7.1648508
+##  [1]  1.78356455  6.99654170 10.87031862  2.62282295  0.03155081
+##  [6]  6.46718255  2.84680855 -0.57507967  5.23187536  4.00565626
 ```
 
 These functions exist for many other distributions, including but not limited to:
