@@ -126,11 +126,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
 <li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started"><i class="fa fa-check"></i><b>2.1</b> Getting Started</a></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-basics"><i class="fa fa-check"></i><b>2.2</b> <code>R</code> Basics</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2.1</b> Basic Calculations</a></li>
-<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting Help</a></li>
-<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.2.3</b> Installing Packages</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2</b> Basic Calculations</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.3</b> Getting Help</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.4</b> Installing Packages</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>3</b> Data and Programming</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>3.1</b> Data Types</a></li>
@@ -320,10 +318,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>For this course, our main deviation from these two guides is the use of <code>=</code> in place of <code>&lt;-</code>. (More on that later.)</p>
 </div>
-<div id="r-basics" class="section level2">
-<h2><span class="header-section-number">2.2</span> <code>R</code> Basics</h2>
-<div id="basic-calculations" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Basic Calculations</h3>
+<div id="basic-calculations" class="section level2">
+<h2><span class="header-section-number">2.2</span> Basic Calculations</h2>
 <p>To get started, we’ll use <code>R</code> like a simple calculator.</p>
 <div id="addition-subtraction-multiplication-and-division" class="section level4 unnumbered">
 <h4>Addition, Subtraction, Multiplication and Division</h4>
@@ -477,8 +473,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </table>
 </div>
 </div>
-<div id="getting-help" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Getting Help</h3>
+<div id="getting-help" class="section level2">
+<h2><span class="header-section-number">2.3</span> Getting Help</h2>
 <p>In using <code>R</code> as a calculator, we have seen a number of functions: <code>sqrt()</code>, <code>exp()</code>, <code>log()</code> and <code>sin()</code>. To get documentation about a function in <code>R</code>, simply put a question mark in front of the function name and RStudio will display the documentation, for example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?log
 ?sin
@@ -494,15 +490,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>If you follow these steps, you will get your issue resolved much quicker, and possibly learn more in the process. Do not be discouraged by running into errors and difficulties when learning <code>R</code>. (Or any technical skill.) It is simply part of the learning process.</p>
 </div>
-<div id="installing-packages" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Installing Packages</h3>
-<p><code>R</code> comes with a number of built-in functions and datasets, but one of the main strengths of <code>R</code> as an open-source project is its package system. Packages add additional functions and data. Frequently if you want to do something in <code>R</code>, and it isn’t available by default, there is a good chance that there is a package that will fulfill your needs.</p>
+<div id="installing-packages" class="section level2">
+<h2><span class="header-section-number">2.4</span> Installing Packages</h2>
+<p><code>R</code> comes with a number of built-in functions and datasets, but one of the main strengths of <code>R</code> as an open-source project is its package system. Packages add additional functions and data. Frequently if you want to do something in <code>R</code>, and it is not available by default, there is a good chance that there is a package that will fulfill your needs.</p>
 <p>To install a package, use the <code>install.packages()</code> function. Think of this as buying a recipe book from the store, bringing it home, and putting it on your shelf.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</code></pre></div>
 <p>Once a package is installed, it must be loaded into your current <code>R</code> session before being used. Think of this as taking the book off of the shelf and opening it up to read.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
 <p>Once you close <code>R</code>, all the packages are closed and put back on the imaginary shelf. The next time you open <code>R</code>, you do not have to install the package again, but you do have to load any packages you intend to use by invoking <code>library()</code>.</p>
-</div>
 </div>
 </div>
             </section>

@@ -41,9 +41,7 @@ When programming, it is often a good practice to follow a style guide. (Where do
 
 For this course, our main deviation from these two guides is the use of `=` in place of `<-`. (More on that later.)
 
-## `R` Basics
-
-### Basic Calculations
+## Basic Calculations
 
 To get started, we'll use `R` like a simple calculator.
 
@@ -90,7 +88,7 @@ Note that we will use $\ln$ and $\log$ interchangeably to mean the natural logar
 | $\sin(\pi / 2)$ | `sin(pi / 2)` | `r sin(pi / 2)` |
 | $\cos(0)$       | `cos(0)`      | `r cos(0)`      |
 
-### Getting Help
+## Getting Help
 
 In using `R` as a calculator, we have seen a number of functions: `sqrt()`, `exp()`, `log()` and `sin()`. To get documentation about a function in `R`, simply put a question mark in front of the function name and RStudio will display the documentation, for example: 
 
@@ -111,9 +109,9 @@ Frequently one of the most difficult things to do when learning `R` is asking fo
 
 If you follow these steps, you will get your issue resolved much quicker, and possibly learn more in the process. Do not be discouraged by running into errors and difficulties when learning `R`. (Or any technical skill.) It is simply part of the learning process.
 
-### Installing Packages
+## Installing Packages
 
-`R` comes with a number of built-in functions and datasets, but one of the main strengths of `R` as an open-source project is its package system. Packages add additional functions and data. Frequently if you want to do something in `R`, and it isn't available by default, there is a good chance that there is a package that will fulfill your needs.
+`R` comes with a number of built-in functions and datasets, but one of the main strengths of `R` as an open-source project is its package system. Packages add additional functions and data. Frequently if you want to do something in `R`, and it is not available by default, there is a good chance that there is a package that will fulfill your needs.
 
 To install a package, use the `install.packages()` function. Think of this as buying a recipe book from the store, bringing it home, and putting it on your shelf.
 
@@ -330,7 +328,9 @@ x > 3
 x < 3
 x == 3
 x != 3
+```
 
+```{r}
 x == 3 & x != 3
 x == 3 | x != 3
 ```
@@ -454,6 +454,8 @@ X[2, c(1, 3)]
 ```
 
 Matrices can also be created by combining vectors as columns, using `cbind`, or combining vectors as rows, using `rbind`.
+
+- TODO: some subsetting returns vectors.
 
 ```{r}
 x = 1:9
@@ -661,7 +663,6 @@ ex_list[["e"]]
 
 ex_list$d
 ex_list$d(arg = 1)
-
 ```
 
 
@@ -817,7 +818,7 @@ All three approaches produce the same results. Which you use will be largely bas
 
 - TODO: general data.frame subsetting
 
-- TODO: difference between data.frame and tibble subsetting
+- TODO: difference between data.frame (more like matrix) and tibble (more like list) subsetting
 
 ## Programming Basics
 

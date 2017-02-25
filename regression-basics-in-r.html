@@ -126,11 +126,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
 <li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started"><i class="fa fa-check"></i><b>2.1</b> Getting Started</a></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-basics"><i class="fa fa-check"></i><b>2.2</b> <code>R</code> Basics</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2.1</b> Basic Calculations</a></li>
-<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting Help</a></li>
-<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.2.3</b> Installing Packages</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2</b> Basic Calculations</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.3</b> Getting Help</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.4</b> Installing Packages</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>3</b> Data and Programming</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>3.1</b> Data Types</a></li>
@@ -451,29 +449,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1         x2           y
-##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1       A 0.15435148  0.02457100
-## 2       A 0.96223754 -0.12605111
-## 3       A 0.20221793 -1.26598013
-## 4       A 0.01341616  0.59771077
-## 5       A 0.20870966 -1.88724973
-## 6       A 0.03092040 -0.09640874
-## 7       A 0.08270246  0.04858937
-## 8       A 0.65525540 -0.04201756
-## 9       A 0.15214124 -0.21950099
-## 10      A 0.98042125  1.25834931
+##        x1        x2           y
+##    &lt;fctr&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1       A 0.2095697  1.41698848
+## 2       A 0.2226800 -0.24998074
+## 3       A 0.5373775 -1.69948587
+## 4       A 0.6816722 -0.83143059
+## 5       A 0.8798229  1.31836601
+## 6       A 0.3404746 -0.42463924
+## 7       A 0.5428323  0.14672102
+## 8       A 0.7137651  0.85611005
+## 9       A 0.2244732 -0.36343554
+## 10      A 0.6356865  0.09496057
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-## -0.40553548  0.03546203 -0.57968188  0.68190363</code></pre>
+##  0.05083373 -0.50212822  0.02919337 -0.04894664</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.4423130   0.3955938  -0.8941584   0.7887413  -0.8984831   0.4560118</code></pre>
+##  -0.2827141   0.6081409  -0.4607119   0.6197064  -2.5009044   0.9066051</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Polynomials</h3>

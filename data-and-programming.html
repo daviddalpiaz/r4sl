@@ -126,11 +126,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
 <li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started"><i class="fa fa-check"></i><b>2.1</b> Getting Started</a></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-basics"><i class="fa fa-check"></i><b>2.2</b> <code>R</code> Basics</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2.1</b> Basic Calculations</a></li>
-<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.2.2</b> Getting Help</a></li>
-<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.2.3</b> Installing Packages</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2</b> Basic Calculations</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.3</b> Getting Help</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.4</b> Installing Packages</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>3</b> Data and Programming</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>3.1</b> Data Types</a></li>
@@ -656,6 +654,9 @@ Z</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X[<span class="dv">2</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</code></pre></div>
 <pre><code>## [1] 2 8</code></pre>
 <p>Matrices can also be created by combining vectors as columns, using <code>cbind</code>, or combining vectors as rows, using <code>rbind</code>.</p>
+<ul>
+<li>TODO: some subsetting returns vectors.</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="dv">1</span>:<span class="dv">9</span>
 <span class="kw">rev</span>(x)</code></pre></div>
 <pre><code>## [1] 9 8 7 6 5 4 3 2 1</code></pre>
@@ -1144,7 +1145,7 @@ mpg %&gt;%<span class="st"> </span><span class="kw">filter</span>(hwy &gt;<span 
 <p>All three approaches produce the same results. Which you use will be largely based on a given situation as well as user preference.</p>
 <ul>
 <li><p>TODO: general data.frame subsetting</p></li>
-<li><p>TODO: difference between data.frame and tibble subsetting</p></li>
+<li><p>TODO: difference between data.frame (more like matrix) and tibble (more like list) subsetting</p></li>
 </ul>
 </div>
 </div>
@@ -1217,11 +1218,11 @@ x</code></pre></div>
 <p>Here the name of the function is <code>standardize</code>, and the function has a single argument <code>x</code> which is used in the body of function. Note that the output of the final line of the body is what is returned by the function. In this case the function returns the vector stored in the variable <code>results</code>.</p>
 <p>To test our function, we will take a random sample of size <code>n = 10</code> from a normal distribution with a mean of <code>2</code> and a standard deviation of <code>5</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">test_sample =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>))</code></pre></div>
-<pre><code>##  [1] 12.4151966  3.9156449  5.3181267 -3.7132189  5.2645095 -5.0056862
-##  [7]  7.2060934  0.1464036  3.1053288  1.0871914</code></pre>
+<pre><code>##  [1]  -2.0943249 -11.4729145   9.2245401  12.2569510  14.0141933
+##  [6]   4.1211435   3.6693858   8.5697579  -0.2450294  -2.4746420</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">standardize</span>(<span class="dt">x =</span> test_sample)</code></pre></div>
-<pre><code>##  [1]  1.83348335  0.18287491  0.45523613 -1.29864641  0.44482370
-##  [6] -1.54964287  0.82187826 -0.54910976  0.02551194 -0.36640926</code></pre>
+<pre><code>##  [1] -0.72205924 -1.92036406  0.72415507  1.11160699  1.33613029
+##  [6]  0.07209276  0.01437156  0.64049337 -0.48577428 -0.77065245</code></pre>
 <p>This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">standardize =<span class="st"> </span>function(x) {
   (x -<span class="st"> </span><span class="kw">mean</span>(x)) /<span class="st"> </span><span class="kw">sd</span>(x)
@@ -1258,14 +1259,14 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
   (<span class="dv">1</span> /<span class="st"> </span>n) *<span class="st"> </span><span class="kw">sum</span>((x -<span class="st"> </span><span class="kw">mean</span>(x)) ^<span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 26.51575</code></pre>
+<pre><code>## [1] 61.25485</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">biased =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 26.51575</code></pre>
+<pre><code>## [1] 61.25485</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 26.51575</code></pre>
+<pre><code>## [1] 61.25485</code></pre>
 <p>We see the function is working as expected, and when returning the unbiased estimate it matches <code>R</code>’s built in function <code>var()</code>. Finally, let’s examine the biased estimate of <span class="math inline">\(\sigma^2\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">biased =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] 23.86418</code></pre>
+<pre><code>## [1] 55.12936</code></pre>
 </div>
 </div>
 </div>

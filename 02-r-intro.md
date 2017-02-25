@@ -41,9 +41,7 @@ When programming, it is often a good practice to follow a style guide. (Where do
 
 For this course, our main deviation from these two guides is the use of `=` in place of `<-`. (More on that later.)
 
-## `R` Basics
-
-### Basic Calculations
+## Basic Calculations
 
 To get started, we'll use `R` like a simple calculator.
 
@@ -90,7 +88,7 @@ Note that we will use $\ln$ and $\log$ interchangeably to mean the natural logar
 | $\sin(\pi / 2)$ | `sin(pi / 2)` | 1 |
 | $\cos(0)$       | `cos(0)`      | 1      |
 
-### Getting Help
+## Getting Help
 
 In using `R` as a calculator, we have seen a number of functions: `sqrt()`, `exp()`, `log()` and `sin()`. To get documentation about a function in `R`, simply put a question mark in front of the function name and RStudio will display the documentation, for example: 
 
@@ -112,9 +110,9 @@ Frequently one of the most difficult things to do when learning `R` is asking fo
 
 If you follow these steps, you will get your issue resolved much quicker, and possibly learn more in the process. Do not be discouraged by running into errors and difficulties when learning `R`. (Or any technical skill.) It is simply part of the learning process.
 
-### Installing Packages
+## Installing Packages
 
-`R` comes with a number of built-in functions and datasets, but one of the main strengths of `R` as an open-source project is its package system. Packages add additional functions and data. Frequently if you want to do something in `R`, and it isn't available by default, there is a good chance that there is a package that will fulfill your needs.
+`R` comes with a number of built-in functions and datasets, but one of the main strengths of `R` as an open-source project is its package system. Packages add additional functions and data. Frequently if you want to do something in `R`, and it is not available by default, there is a good chance that there is a package that will fulfill your needs.
 
 To install a package, use the `install.packages()` function. Think of this as buying a recipe book from the store, bringing it home, and putting it on your shelf.
 
@@ -520,6 +518,7 @@ x != 3
 ## [1]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
 ```
 
+
 ```r
 x == 3 & x != 3
 ```
@@ -882,6 +881,8 @@ X[2, c(1, 3)]
 ```
 
 Matrices can also be created by combining vectors as columns, using `cbind`, or combining vectors as rows, using `rbind`.
+
+- TODO: some subsetting returns vectors.
 
 
 ```r
@@ -1899,7 +1900,7 @@ All three approaches produce the same results. Which you use will be largely bas
 
 - TODO: general data.frame subsetting
 
-- TODO: difference between data.frame and tibble subsetting
+- TODO: difference between data.frame (more like matrix) and tibble (more like list) subsetting
 
 ## Programming Basics
 
@@ -2040,8 +2041,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1]  5.419110 -4.233720 -6.593609  3.659893 13.970532  1.923653 -3.083495
-##  [8] -1.858718  7.251167  3.469113
+##  [1]  2.7828270  6.7987483 11.4712571  0.5437773 -3.1025041 -8.4556174
+##  [7]  2.3987173  3.1457668 -1.9958718  9.9904558
 ```
 
 ```r
@@ -2049,8 +2050,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1]  0.55676794 -1.01160967 -1.39504082  0.27093304  1.94619047
-##  [6] -0.01116872 -0.82472276 -0.62572276  0.85443786  0.23993542
+##  [1]  0.070110345  0.732487637  1.503161033 -0.299193629 -0.900603313
+##  [6] -1.783534136  0.006756124  0.129972845 -0.718077802  1.258920896
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2152,7 +2153,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 37.87983
+## [1] 36.75865
 ```
 
 ```r
@@ -2160,7 +2161,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 37.87983
+## [1] 36.75865
 ```
 
 ```r
@@ -2168,7 +2169,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 37.87983
+## [1] 36.75865
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2179,7 +2180,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 34.09185
+## [1] 33.08278
 ```
 
 
@@ -2270,7 +2271,7 @@ When visualizing a single numerical variable, a **histogram** will be our go-to 
 hist(mpg$cty)
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-101-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-102-1.pdf)<!-- --> 
 
 The histogram function has a number of parameters which can be changed to make our plot look much nicer. Use the `?` operator to read the documentation for the `hist()` to see a full list of these parameters.
 
@@ -2284,7 +2285,7 @@ hist(mpg$cty,
      border = "darkorange")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-102-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-103-1.pdf)<!-- --> 
 
 Importantly, you should always be sure to label your axes and give the plot a title. The argument `breaks` is specific to `hist()`. Entering an integer will give a suggestion to `R` for how many bars to use for the histogram. By default `R` will attempt to intelligently guess a good number of `breaks`, but as we can see here, it is sometimes useful to modify this yourself.
 
@@ -2297,7 +2298,7 @@ TODO: narrative
 barplot(table(mpg$drv))
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-103-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-104-1.pdf)<!-- --> 
 
 
 ```r
@@ -2309,7 +2310,7 @@ barplot(table(mpg$drv),
         border = "darkorange")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-104-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-105-1.pdf)<!-- --> 
 
 ### Boxplots
 
@@ -2331,7 +2332,7 @@ First note that we can use a single boxplot as an alternative to a histogram for
 boxplot(mpg$hwy)
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-106-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-107-1.pdf)<!-- --> 
 
 However, more often we will use boxplots to compare a numerical variable for different values of a categorical variable.
 
@@ -2340,7 +2341,7 @@ However, more often we will use boxplots to compare a numerical variable for dif
 boxplot(hwy ~ drv, data = mpg)
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-107-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-108-1.pdf)<!-- --> 
 
 Here used the `boxplot()` command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The `R` syntax `hwy ~ drv, data = mpg` reads "Plot the `hwy` variable against the `drv` variable using the dataset `mpg`." We see the use of a `~` (which specifies a formula) and also a `data = ` argument. This will be a syntax that is common to many functions we will use in this course. 
 
@@ -2356,7 +2357,7 @@ boxplot(hwy ~ drv, data = mpg,
      border = "dodgerblue")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-108-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-109-1.pdf)<!-- --> 
 
 Again, `boxplot()` has a number of additional arguments which have the ability to make our plot more visually appealing.
 
@@ -2369,7 +2370,7 @@ Lastly, to visualize the relationship between two numeric variables we will use 
 plot(hwy ~ displ, data = mpg)
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-109-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-110-1.pdf)<!-- --> 
 
 
 ```r
@@ -2382,7 +2383,7 @@ plot(hwy ~ displ, data = mpg,
      col  = "dodgerblue")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-110-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-111-1.pdf)<!-- --> 
 
 
 # `R` Resources
@@ -2484,8 +2485,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1]  1.78356455  6.99654170 10.87031862  2.62282295  0.03155081
-##  [6]  6.46718255  2.84680855 -0.57507967  5.23187536  4.00565626
+##  [1] 11.4593878  3.0954973  4.9590036  3.0537270  2.9430532  9.6588185
+##  [7]  0.2947647 -6.8181038 -3.0764780 12.2147781
 ```
 
 These functions exist for many other distributions, including but not limited to:
@@ -2998,7 +2999,7 @@ hist(differences, breaks = 20,
      border = "darkorange")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-140-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-141-1.pdf)<!-- --> 
 
 Also the sample mean and variance are very close to to what we would expect.
 
@@ -3093,7 +3094,7 @@ x_bar_hist = hist(x_bars, breaks = 50,
                   xlab = "Sample Means")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-146-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-147-1.pdf)<!-- --> 
 
 Now we will compare sample statistics from the empirical distribution with their known values based on the parent distribution.
 
@@ -3149,7 +3150,7 @@ x_bar_hist = hist(x_bars, breaks = 50, col = shading,
                   xlab = "Sample Means")
 ```
 
-![](02-r-intro_files/figure-latex/unnamed-chunk-151-1.pdf)<!-- --> 
+![](02-r-intro_files/figure-latex/unnamed-chunk-152-1.pdf)<!-- --> 
 
 
 
