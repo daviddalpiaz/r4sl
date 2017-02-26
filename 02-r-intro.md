@@ -2041,8 +2041,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1] -9.01216675 -2.07762462  2.64802406  1.84551267  1.19300190
-##  [6]  1.48931657  2.46907005  3.04318551  5.71377221  0.03915968
+##  [1]  2.75349189 -1.21215544  4.57585735  2.43630713  1.13428382
+##  [6]  2.66033982  8.36678723 -4.01564177 -3.90529997 -0.09983395
 ```
 
 ```r
@@ -2050,8 +2050,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1] -2.4522245 -0.7076318  0.4812473  0.2793514  0.1151927  0.1897395
-##  [7]  0.4362260  0.5806620  1.2525284 -0.1750910
+##  [1]  0.39114202 -0.65403959  0.87144264  0.30754516 -0.03561466
+##  [6]  0.36659097  1.87057591 -1.39292333 -1.36384177 -0.36087737
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2153,7 +2153,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 15.79965
+## [1] 14.39609
 ```
 
 ```r
@@ -2161,7 +2161,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 15.79965
+## [1] 14.39609
 ```
 
 ```r
@@ -2169,7 +2169,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 15.79965
+## [1] 14.39609
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2180,7 +2180,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 14.21969
+## [1] 12.95648
 ```
 
 
@@ -2485,8 +2485,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1] -4.5375645  6.0700762  3.8859984  0.2990343 -6.0075058  4.9115372
-##  [7]  0.4496861  5.5199789 10.8689557  8.8926694
+##  [1] -5.7294110 -1.5320177 11.2686717 12.9572329 -3.1668789 -7.1288961
+##  [7]  1.9875963 -0.7360236 -3.3579507 10.8840672
 ```
 
 These functions exist for many other distributions, including but not limited to:
