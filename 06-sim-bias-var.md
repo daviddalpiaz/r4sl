@@ -1,3 +1,8 @@
+
+```r
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE)
+```
+
 # Simulating the Bias–Variance Tradeoff
 
 Consider the general regression setup 
@@ -96,7 +101,7 @@ legend(x = 0.75, y = 0,
        col = c("red", "blue", "green", "orange", "black"), lty = c(2, 3, 4, 5, 1), lwd = 2)
 ```
 
-![](06-sim-bias-var_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
+![](06-sim-bias-var_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 We will now use simulation to estimate the bias, variance, and mean squared error for the estimates for $f(x)$ given by these models at the point $x_0 = 0.95$. We use simulation to complete this task, as performing the exact calculations are always difficult, and often impossible.
 
@@ -135,7 +140,7 @@ for (i in 1:n_sims) {
 points(x0, f(x0), col = "black", pch = "x", cex = 2)
 ```
 
-![](06-sim-bias-var_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+![](06-sim-bias-var_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 The above plot shows the 1000 trained models for each of the zero predictor and three predictor models. (We have exlcuded the one and two predictor models for clarity of the plot.) The truth at $x_0 = 0.95$ is given by a black "X". We see that the red lines for the zero predictor model are on average wrong, with some variability. The orange lines for the three predictor model are on average correct, but with more variance.
 
