@@ -3,20 +3,19 @@
 Now that we have seen a number of classificaiton (and regression) methods, and introduced cross-validation, we see the general outline of a predictive analysis:
 
 - Select a method
-- Test-train split the data
-- Decide on a set of candidate models via a tuning parameter
-- Select best model (tuning parameters) via cross-validation
+- Test-train split the availible data
+- Decide on a set of candidate models via tuning parameters
+- Select the best model (tuning parameters) using a cross-validated metric
 - Use chosen model to make predictions
 - Calculate relevent metrics on the test data
 
 At face value it would seem like it should be easy to repeat this process for a number of different methods, however we have run into a number of difficulties attempting to do so with `R`.
 
 - The `predict()` function seems to have a different behvaior for each new method we see.
-- Many methods have different cross-validation functions, or worse yet, no build-in process for cross-validation.
+- Many methods have different cross-validation functions, or worse yet, no built-in process for cross-validation.
 - Different methods have different handling of categorical predictors.
 
 Thankfully, the `R` community has essentailly provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package.
-
 
 - `train()`
     - formula
@@ -43,7 +42,6 @@ data(Default, package = "ISLR")
 ```{r, message = FALSE, warning = FALSE}
 library(caret)
 ```
-
 
 ```{r}
 set.seed(430)
@@ -87,7 +85,6 @@ accuracy = function(actual, predicted) {
   mean(actual == predicted)
 }
 ```
-
 
 ```{r}
 # make preds
@@ -156,9 +153,8 @@ default_knn
 ```
 
 
-```{r}
-default_grid = expand.grid(k = seq(1, 151, by = 5))
-```
+
+
 
 - TODO: returns a data frame, a habit for when we later need multiple tuning parameters
 
@@ -167,12 +163,11 @@ default_knn = train(
   default ~ .,
   data = default_trn,
   method = "knn",
-  trControl = trainControl(method = "cv", number = 5, selectionFunction = "oneSE"),
+  trControl = trainControl(method = "cv", number = 5),
   preProcess = c("center", "scale"),
-  tuneGrid = default_grid
+  tuneGrid = expand.grid(k = seq(1, 100, by = 1))
 )
 ```
-
 
 
 ```{r}
