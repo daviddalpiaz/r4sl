@@ -13,6 +13,10 @@ description: ""
 favicon: "favicon.ico"
 ---
 
+```{r}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE)
+```
+
 
 # Introduction {-}
 
