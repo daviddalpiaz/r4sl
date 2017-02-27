@@ -1,7 +1,7 @@
 --- 
 title: "R for Statistical Learning"
 author: "David Dalpiaz"
-date: "2017-02-26"
+date: "2017-02-27"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -13,10 +13,6 @@ description: ""
 favicon: "favicon.ico"
 ---
 
-
-```r
-knitr::opts_chunk$set(cache = TRUE, autodep = TRUE)
-```
 
 
 # Introduction {-}

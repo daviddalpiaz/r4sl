@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-26">
+<meta name="date" content="2017-02-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -341,7 +341,7 @@ grid =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from
 <span class="kw">legend</span>(<span class="dt">x =</span> <span class="fl">0.75</span>, <span class="dt">y =</span> <span class="dv">0</span>, 
        <span class="kw">c</span>(<span class="st">&quot;y ~ 1&quot;</span>, <span class="st">&quot;y ~ poly(x, 1)&quot;</span>, <span class="st">&quot;y ~ poly(x, 2)&quot;</span>,  <span class="st">&quot;y ~ poly(x, 3)&quot;</span>, <span class="st">&quot;truth&quot;</span>), 
        <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>), <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="06-sim-bias-var_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+<p><img src="06-sim-bias-var_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
 <p>We will now use simulation to estimate the bias, variance, and mean squared error for the estimates for <span class="math inline">\(f(x)\)</span> given by these models at the point <span class="math inline">\(x_0 = 0.95\)</span>. We use simulation to complete this task, as performing the exact calculations are always difficult, and often impossible.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
 n_sims =<span class="st"> </span><span class="dv">1000</span>
@@ -374,7 +374,7 @@ for (i in <span class="dv">1</span>:n_sims) {
 }
 
 <span class="kw">points</span>(x0, <span class="kw">f</span>(x0), <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">pch =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="06-sim-bias-var_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
+<p><img src="06-sim-bias-var_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
 <p>The above plot shows the 1000 trained models for each of the zero predictor and three predictor models. (We have exlcuded the one and two predictor models for clarity of the plot.) The truth at <span class="math inline">\(x_0 = 0.95\)</span> is given by a black “X”. We see that the red lines for the zero predictor model are on average wrong, with some variability. The orange lines for the three predictor model are on average correct, but with more variance.</p>
 </div>
 <div id="bias-variance-tradeoff" class="section level2">
