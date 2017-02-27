@@ -216,12 +216,6 @@ default_knn$finalModel
 
 
 
-```{r}
-print("Testing Travis Building with Caching, Again!")
-```
-
-
-
 
 
 

@@ -1,7 +1,3 @@
-```{r}
-knitr::opts_chunk$set(cache = TRUE, autodep = TRUE)
-```
-
 # Simulating the Bias–Variance Tradeoff
 
 Consider the general regression setup 
