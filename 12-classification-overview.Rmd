@@ -15,7 +15,7 @@ $$
 ### The Bias-Variance Tradeoff {-}
 
 - As model complexity increases, **bias** decreases.
-- As model complexity decreases, **variance** increases.
+- As model complexity increases., **variance** increases.
 - As a result, there is a model somewhere in the middle with the best accuracy. (Or lowest RMSE for regression.)
 
 ### The Test-Train Split {-}
