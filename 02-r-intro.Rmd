@@ -1142,9 +1142,7 @@ plot(hwy ~ displ, data = mpg,
 
 # `R` Resources
 
-- TODO: triage: beginner, medium, advanced. general strategy for learning `R`. add roger's book. add efficient `R`.
-
-These resources not necessary for this course, but you may find them useful if you would like a deeper understanding of `R`:
+So far, we have seen a lot of `R`, and a lot of `R` quickly. Again, the preceding chapters were in no way meant to be a complete reference for the `R` language, but rather an introduction to many of the concepts we will need in this text. The following resources are not necessary for the remainder of this text, but you may find them useful if you would like a deeper understanding of `R`:
 
 ## Beginner Tutorials and References
 
@@ -1155,11 +1153,12 @@ These resources not necessary for this course, but you may find them useful if y
 - [`R` Tutorial](http://www.r-tutor.com/) by Chi Yau.
     - A combination reference and tutorial for `R` basics.
 - [`R` Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/) by Roger Peng
+    - A great text for `R` programming beginners. Discusses `R` from the ground up, highlighting programming details we might not discuss.
 
 ## Intermediate References
 
 - [`R` for Data Science](http://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund.
-    - Similar to Advanced `R`, but focuses more on data analysis, while still introducing programming concepts. At the time of writing, currently under development.
+    - Similar to Advanced `R`, but focuses more on data analysis, while still introducing programming concepts. Especially useful for working in the [tidyverse](http://tidyverse.org/). 
 - [The Art of `R` Programming](https://www.nostarch.com/artofr.htm) by Norman Matloff.
     - Gentle introduction to the programming side of `R`. (Whereas we will focus more on the data analysis side.) A [free electronic version](http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421) is available through the Illinois library.
 
@@ -1170,6 +1169,7 @@ These resources not necessary for this course, but you may find them useful if y
 - [The `R` Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) by Patrick Burns.
     - Likens learning the tricks of `R` to descending through the levels of hell. Very advanced material, but may be important if `R` becomes a part of your everyday toolkit.
 - [Efficient `R` Programming](https://csgillespie.github.io/efficientR/) by Colin Gillespie and Robin Lovelace
+    - Discusses both efficient `R` programs, as well as programming in `R` efficiently.
 
 
 # Probability in `R`

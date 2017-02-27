@@ -2041,8 +2041,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1] -1.5430693 16.5465033  6.3340109 -0.9704621 -2.7454188 -5.6585457
-##  [7] -3.9189783 -7.4287105 -6.5541532 -0.8447367
+##  [1]  5.2579411 -0.2415559  7.9278180 -4.1803583 -3.1519052  4.8535446
+##  [7]  1.2853838  8.3904366  6.9645510 -1.6752993
 ```
 
 ```r
@@ -2050,8 +2050,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1] -0.12011983  2.39275508  0.97410820 -0.04057730 -0.28714167
-##  [6] -0.69181256 -0.45016422 -0.93771129 -0.81622400 -0.02311242
+##  [1]  0.5756073 -0.5903906  1.1416719 -1.4254915 -1.2074399  0.4898676
+##  [7] -0.2666503  1.2397559  0.9374410 -0.8943714
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2153,7 +2153,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 51.82208
+## [1] 22.24592
 ```
 
 ```r
@@ -2161,7 +2161,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 51.82208
+## [1] 22.24592
 ```
 
 ```r
@@ -2169,7 +2169,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 51.82208
+## [1] 22.24592
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2180,7 +2180,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 46.63988
+## [1] 20.02133
 ```
 
 
@@ -2388,9 +2388,7 @@ plot(hwy ~ displ, data = mpg,
 
 # `R` Resources
 
-- TODO: triage: beginner, medium, advanced. general strategy for learning `R`. add roger's book. add efficient `R`.
-
-These resources not necessary for this course, but you may find them useful if you would like a deeper understanding of `R`:
+So far, we have seen a lot of `R`, and a lot of `R` quickly. Again, the preceding chapters were in no way meant to be a complete reference for the `R` language, but rather an introduction to many of the concepts we will need in this text. The following resources are not necessary for the remainder of this text, but you may find them useful if you would like a deeper understanding of `R`:
 
 ## Beginner Tutorials and References
 
@@ -2401,11 +2399,12 @@ These resources not necessary for this course, but you may find them useful if y
 - [`R` Tutorial](http://www.r-tutor.com/) by Chi Yau.
     - A combination reference and tutorial for `R` basics.
 - [`R` Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/) by Roger Peng
+    - A great text for `R` programming beginners. Discusses `R` from the ground up, highlighting programming details we might not discuss.
 
 ## Intermediate References
 
 - [`R` for Data Science](http://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund.
-    - Similar to Advanced `R`, but focuses more on data analysis, while still introducing programming concepts. At the time of writing, currently under development.
+    - Similar to Advanced `R`, but focuses more on data analysis, while still introducing programming concepts. Especially useful for working in the [tidyverse](http://tidyverse.org/). 
 - [The Art of `R` Programming](https://www.nostarch.com/artofr.htm) by Norman Matloff.
     - Gentle introduction to the programming side of `R`. (Whereas we will focus more on the data analysis side.) A [free electronic version](http://vufind.carli.illinois.edu/vf-uiu/Record/uiu_6955421) is available through the Illinois library.
 
@@ -2416,6 +2415,7 @@ These resources not necessary for this course, but you may find them useful if y
 - [The `R` Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/) by Patrick Burns.
     - Likens learning the tricks of `R` to descending through the levels of hell. Very advanced material, but may be important if `R` becomes a part of your everyday toolkit.
 - [Efficient `R` Programming](https://csgillespie.github.io/efficientR/) by Colin Gillespie and Robin Lovelace
+    - Discusses both efficient `R` programs, as well as programming in `R` efficiently.
 
 
 # Probability in `R`
@@ -2485,8 +2485,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1]  6.2466623 -0.5289317 -2.0747688  0.3844002  4.7093395  4.0682855
-##  [7]  0.2439317 -6.2054569  2.9118098  5.6301936
+##  [1] -3.308557  5.429751  1.031457  1.398521  7.476840  5.415392  2.194339
+##  [8]  3.073036  5.863733  6.377336
 ```
 
 These functions exist for many other distributions, including but not limited to:
