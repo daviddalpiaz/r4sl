@@ -1,11 +1,12 @@
 # Shrinkage Methods
 
-
+We will use the `Hitters` dataset from the `ISLR` package to explore two shrinkage methods: **ridge** and **lasso**. These are otherwise known as **penalized regression** methods.
 
 ```{r}
 data(Hitters, package = "ISLR")
 ```
 
+This dataset has some missing data in the response `Salaray`. We use the `na.omit()` function the clean the dataset.
 
 ```{r}
 sum(is.na(Hitters))
@@ -14,14 +15,13 @@ Hitters = na.omit(Hitters)
 sum(is.na(Hitters))
 ```
 
+The dataset contains a number of offensive statistics as predictor variables.
 
+```{r}
+names(Hitters)
+```
 
-
-
-
-
-
-We will use `glmnet()` and `cv.glmnet()` in the `glmnet` package to fit penalized regressions.
+We use the `glmnet()` and `cv.glmnet()` functions in the `glmnet` package to fit penalized regressions.
 
 ```{r}
 library(glmnet)
@@ -29,14 +29,14 @@ library(glmnet)
 
 The `glmnet` function does not allow the use of model formulas, so we setup the data for ease of use with `glmnet`.
 
-```{r glmnet_setup}
+```{r}
 X = model.matrix(Salary ~ ., Hitters)[, -1]
 y = Hitters$Salary
 ```
 
 First, we fit a regular linear regression, and note the size of the predictors' coefficients, and predictors' coefficients squared. (The two penalties we will use.)
 
-```{r fit_lm}
+```{r}
 fit = lm(Salary ~ ., Hitters)
 coef(fit)
 sum(abs(coef(fit)[-1]))
@@ -44,28 +44,35 @@ sum(coef(fit)[-1] ^ 2)
 ```
 
 
-# Ridge Regression
+## Ridge Regression
 
-We will now use **ridge regression**, which can be fit using `glmnet()` with `alpha = 0`. The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
+We first illustrate **ridge regression**, which can be fit using `glmnet()` with `alpha = 0` and seeks to minimize
 
-```{r ridge}
+$$
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
+$$
+
+Notice that the intercept is **not** penalized. Also, note that that ridge regression is **not** scale invariant like the usual unpenalized regression. Thankfully, `glmnet()` takes care of this internally. It automatically standardizes input for fitting, then reports fitted coefficient using the original scale.
+
+The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
+
+```{r}
 fit_ridge = glmnet(X, y, alpha = 0)
 plot(fit_ridge)
 plot(fit_ridge, xvar = "lambda", label = TRUE)
 dim(coef(fit_ridge))
 ```
 
-
 We use cross-validation to select a good $\lambda$ value. The `cv.glmnet()`function uses 10 folds by default. The plot illustrates the MSE for the $\lambda$s considered. Two lines are drawn. The first is the $\lambda$ that gives the smallest MSE. The second is the $\lambda$ that gives an MSE within one standard error of the smallest.
 
-```{r ridge_cv_plot}
+```{r}
 fit_ridge_cv = cv.glmnet(X, y, alpha = 0)
 plot(fit_ridge_cv)
 ```
 
 The `cv.glmnet()` function returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)
 
-```{r ridge_cv_details}
+```{r}
 coef(fit_ridge_cv)
 coef(fit_ridge_cv, s = "lambda.min")
 sum(coef(fit_ridge_cv, s = "lambda.min")[-1] ^ 2) # penalty term for lambda minimum
@@ -79,44 +86,36 @@ sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min]) # CV-RMSE
 sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) # CV-RMSE one SE
 ```
 
+
+## Lasso
+
+We now illustrate **lasso**, which can be fit using `glmnet()` with `alpha = 1` and seeks to minimize
+
+$$
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} |\beta_j| .
+$$
+
+Like ridge, lasso is not scale invariant.
+
+The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice some of the coefficients are forced to be zero.
+
 ```{r}
-library(caret)
-```
-
-- TODO: can use carte train to use model formula, results are different due to randomization
-
-```{r}
-train(Salary ~ .,data = Hitters,
-      method = "glmnet",
-      trControl = trainControl(method = "cv", number = 10),
-      tuneGrid = expand.grid(
-        alpha = 0, 
-        lambda = c(fit_ridge_cv$lambda.min, fit_ridge_cv$lambda.1se))
-)
-```
-
-
-# Lasso
-
-We will now use lasso, which can be fit using `glmnet()` with `alpha = 1`. The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice some of the coefficients are forced to be zero.
-
-```{r lasso}
 fit_lasso = glmnet(X, y, alpha = 1)
 plot(fit_lasso)
 plot(fit_lasso, xvar = "lambda", label = TRUE)
 dim(coef(fit_lasso))
 ```
 
-Again, to actually pick a $\lambda$, we will use cross-validation. `cv.glmnet()` by default uses 10 folds. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)
+Again, to actually pick a $\lambda$, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)
 
-```{r lasso_cv_plot}
+```{r}
 fit_lasso_cv = cv.glmnet(X, y, alpha = 1)
 plot(fit_lasso_cv)
 ```
 
 `cv.glmnet()` returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.
 
-```{r lasso_cv_details}
+```{r}
 coef(fit_lasso_cv)
 coef(fit_lasso_cv, s = "lambda.min")
 sum(abs(coef(fit_lasso_cv, s = "lambda.min")[-1])) # penalty term for lambda minimum
@@ -130,9 +129,11 @@ sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min]) # CV-RMSE
 sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]) # CV-RMSE one SE
 ```
 
+## `broom`
+
 Sometimes, the output from `glmnet()` can be overwhelming. The `broom` package can help with that.
 
-```{r broom}
+```{r}
 library(broom)
 #lassoModCV
 tidy(fit_lasso_cv)
@@ -140,24 +141,9 @@ glance(fit_lasso_cv) # the two lambda values of interest
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Simulation Study, p > n
+
+Aside from simply shrinking coefficients (ridge) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the $p > n$ case.
 
 ```{r}
 set.seed(1234)
@@ -170,7 +156,20 @@ prob = exp(z) / (1 + exp(z))
 y = rbinom(length(z), size = 1, prob = prob)
 ```
 
+We first simulate a classification example where $p > n$.
 
+```{r}
+# glm(y ~ X, family = "binomial")
+# will not converge
+```
+
+We then use a lasso penalty to fit penalized logistic regression. This minimizes
+
+$$
+\sum_{i=1}^{n} L\left(y_i, \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
+$$
+
+where $L$ is the appropriate negative log-likelihood.
 
 ```{r}
 library(glmnet)
@@ -186,34 +185,33 @@ head(coef(fit_cv), n = 10)
 fit_cv$nzero
 ```
 
+Notice, only the first three predictors generated are truly significant, and that is exactly what the suggested model finds.
+
 ```{r}
 fit_1se = glmnet(X, y, family = "binomial", lambda = fit_cv$lambda.1se)
 which(as.vector(as.matrix(fit_1se$beta)) != 0)
 ```
 
-
-
+We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.
 
 ```{r}
 plot(glmnet(X, y, family = "binomial"))
 ```
 
-
 ```{r}
 plot(glmnet(X, y, family = "binomial"), xvar = "lambda")
 ```
 
-
-
+We can extracting the two relevant $\lambda$ values.
 
 ```{r}
 fit_cv$lambda.min
 fit_cv$lambda.1se
 ```
 
+Since `cv.glmnet()` does not calculate prediction accuracy for classification, we take the $\lambda$ values and create a grid for `caret` to search in order to obtain prediction accuracy with `train()`. We set $\alpha = 1$ in this grid, as `glmnet` can actually tune over the $\alpha = 1$ parameter. (More on that later.)
 
-
-
+Note that we have to force `y` to be a factor, so that `train()` recognizes we want to have a binomial response. The `train()` function in `caret` use the type of variable in `y` to determine if you want to use `family = "binomial"` or `family = "gaussian"`.
 
 ```{r}
 library(caret)
@@ -225,8 +223,8 @@ lasso_grid
 
 ```{r}
 fit_lasso = train(
-  X,
-  as.factor(y),
+  x = X,
+  y = as.factor(y),
   method = "glmnet",
   trControl = cv_5,
   tuneGrid = lasso_grid
@@ -235,21 +233,10 @@ fit_lasso$results
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
 ## External Links
 
-- [`glmnet` Web Vingette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html) - Deatils from the package developers.
-- https://github.com/topepo/caret/issues/116
+- [`glmnet` Web Vingette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html) - Details from the package developers.
+- [`glmnet` with `caret`](https://github.com/topepo/caret/issues/116) - Some details on Elastic Net tuning in the `caret` package. TODO: move this to elastic net chapter.
 
 
 ## RMarkdown
@@ -262,13 +249,13 @@ The RMarkdown file for this chapter can be found [**here**](15-shrink.Rmd). The 
 sessionInfo()$basePkgs
 ```
 
-- Additonal Packages, Attached
+- Additional Packages, Attached
 
 ```{r, echo = FALSE}
 names(sessionInfo()$otherPkgs)
 ```
 
-- Additonal Packages, Not Attached
+- Additional Packages, Not Attached
 
 ```{r, echo = FALSE}
 names(sessionInfo()$loadedOnly)
