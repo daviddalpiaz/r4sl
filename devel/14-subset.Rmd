@@ -1,0 +1,253 @@
+# Subset Selection
+
+```{r}
+data(Hitters, package = "ISLR")
+```
+
+
+```{r}
+sum(is.na(Hitters))
+sum(is.na(Hitters$Salary))
+Hitters = na.omit(Hitters)
+sum(is.na(Hitters))
+```
+
+
+
+
+
+
+```{r, message = FALSE, warning = FALSE}
+library(leaps)
+```
+
+
+```{r}
+
+fit_all = regsubsets(Salary ~ ., Hitters)
+summary(fit_all)
+```
+
+
+
+```{r}
+fit_all = regsubsets(Salary ~ ., data = Hitters, nvmax = 19)
+fit_all_sum = summary(fit_all)
+names(fit_all_sum)
+```
+
+
+```{r}
+fit_all_sum$bic
+```
+
+
+
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit_all_sum$rss, xlab = "Number of Variables", ylab = "RSS", type = "b")
+
+plot(fit_all_sum$adjr2, xlab = "Number of Variables", ylab = "Adjusted RSq", type = "b")
+best_adj_r2 = which.max(fit_all_sum$adjr2)
+points(best_adj_r2, fit_all_sum$adjr2[best_adj_r2],
+       col = "red",cex = 2, pch = 20)
+
+plot(fit_all_sum$cp, xlab = "Number of Variables", ylab = "Cp", type = 'b')
+best_cp = which.min(fit_all_sum$cp)
+points(best_cp, fit_all_sum$cp[best_cp], 
+       col = "red", cex = 2, pch = 20)
+
+plot(fit_all_sum$bic, xlab = "Number of Variables", ylab = "BIC", type = 'b')
+best_bic = which.min(fit_all_sum$bic)
+points(best_bic, fit_all_sum$bic[best_bic], 
+       col = "red", cex = 2, pch = 20)
+```
+
+
+
+
+
+
+
+
+
+```{r}
+fit_fwd = regsubsets(Salary ~ ., data = Hitters, nvmax = 19, method = "forward")
+fit_fwd_sum = summary(fit_fwd)
+```
+
+
+```{r}
+fit_bwd = regsubsets(Salary ~ ., data = Hitters, nvmax = 19, method = "backward")
+fit_bwd_sum = summary(fit_bwd)
+```
+
+
+
+```{r}
+coef(fit_fwd, 7)
+coef(fit_bwd, 7)
+coef(fit_all, 7)
+```
+
+
+```{r}
+fit_bwd_sum = summary(fit_bwd)
+which.min(fit_bwd_sum$cp)
+
+coef(fit_bwd, which.min(fit_bwd_sum$cp))
+
+```
+
+
+
+
+```{r}
+fit = lm(Salary ~ ., data = Hitters)
+fit_aic_back = step(fit, trace = FALSE)
+coef(fit_aic_back)
+```
+
+
+
+
+```{r}
+set.seed(42)
+num_vars = ncol(Hitters) - 1
+trn_idx = sample(c(TRUE, FALSE), nrow(Hitters), rep = TRUE)
+tst_idx = (!trn_idx)
+
+fit_all = regsubsets(Salary ~ ., data = Hitters[trn_idx, ], nvmax = num_vars)
+test_mat = model.matrix(Salary ~ ., data = Hitters[tst_idx, ])
+
+test_err = rep(0, times = num_vars)
+for (i in seq_along(test_err)) {
+  coefs = coef(fit_all, id = i)
+  pred = test_mat[, names(coefs)] %*% coefs
+  test_err[i] <- sqrt(mean((Hitters$Salary[tst_idx] - pred) ^ 2))
+}
+test_err
+```
+
+
+
+```{r}
+plot(test_err, type='b', ylab = "Test Set RMSE", xlab = "Number of Predictors")
+```
+
+
+```{r}
+which.min(test_err)
+coef(fit_all, which.min(test_err))
+```
+
+
+
+```{r}
+class(fit_all)
+```
+
+
+
+```{r}
+predict.regsubsets = function(object, newdata, id, ...) {
+  
+  form  = as.formula(object$call[[2]])
+  mat   = model.matrix(form, newdata)
+  coefs = coef(object, id = id)
+  xvars = names(coefs)
+  
+  mat[, xvars] %*% coefs
+}
+
+```
+
+```{r}
+rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+num_folds = 5
+num_vars  = 19
+set.seed(1)
+folds = caret::createFolds(Hitters$Salary, k = num_folds)
+fold_error = matrix(0, nrow = num_folds, ncol = num_vars, 
+                    dimnames = list(paste(1:5), paste(1:19)))
+
+for(j in 1:num_folds) {
+  
+  train_fold    = Hitters[-folds[[j]], ]
+  validate_fold = Hitters[ folds[[j]], ]
+
+  
+  best_fit = regsubsets(Salary ~ ., data = train_fold, nvmax = 19)
+  
+  for (i in 1:num_vars) {
+    
+    pred = predict(best_fit, validate_fold, id = i)
+    
+    fold_error[j, i] = rmse(actual = validate_fold$Salary,
+                            predicted = pred)
+  }
+  
+}
+
+cv_error = apply(fold_error, 2, mean)
+cv_error
+```
+
+
+
+
+
+```{r}
+plot(cv_error, type='b', ylab = "Corss-Validated RMSE", xlab = "Number of Predictors")
+
+```
+
+
+
+```{r}
+fit_all = regsubsets(Salary ~ ., data = Hitters, nvmax = num_vars)
+coef(fit_all, which.min(cv_error))
+```
+
+
+
+## External Links
+
+- []() - 
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+- Base Packages, Attached
+
+```{r, echo = FALSE}
+sessionInfo()$basePkgs
+```
+
+- Additonal Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additonal Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```
+
+
