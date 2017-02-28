@@ -331,13 +331,13 @@ The RMarkdown file for this chapter can be found [**here**](09-generative.Rmd). 
 sessionInfo()$basePkgs
 ```
 
-- Additonal Packages, Attached
+- Additional Packages, Attached
 
 ```{r, echo = FALSE}
 names(sessionInfo()$otherPkgs)
 ```
 
-- Additonal Packages, Not Attached
+- Additional Packages, Not Attached
 
 ```{r, echo = FALSE}
 names(sessionInfo()$loadedOnly)
