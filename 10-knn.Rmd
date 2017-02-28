@@ -1,5 +1,11 @@
 # k-Nearest Neighbors
 
+```{r setup, purl = FALSE, echo = FALSE}
+knitr::knit_hooks$set(purl = hook_purl)
+knitr::opts_template$set(nopurl = list(purl=FALSE))
+knitr::opts_template$set(dopurl = list(purl=TRUE))
+```
+
 In this chapter we introduce our first **non-parametric** method, $k$-nearest neighbors, which can be used for both classification and regression.
 
 Each method we have seen so far has been parametric. For example, logistic regression had the form
