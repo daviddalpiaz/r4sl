@@ -15,7 +15,7 @@ Hitters = na.omit(Hitters)
 sum(is.na(Hitters))
 ```
 
-The dataset contains a number of offensive statistics as predictor variables.
+The predictors variables are offensive and defensive statistics for a number of baseball players.
 
 ```{r}
 names(Hitters)
@@ -23,7 +23,7 @@ names(Hitters)
 
 We use the `glmnet()` and `cv.glmnet()` functions in the `glmnet` package to fit penalized regressions.
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(glmnet)
 ```
 
@@ -133,7 +133,7 @@ sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]) # CV-RMSE
 
 Sometimes, the output from `glmnet()` can be overwhelming. The `broom` package can help with that.
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(broom)
 #lassoModCV
 tidy(fit_lasso_cv)
@@ -213,7 +213,7 @@ Since `cv.glmnet()` does not calculate prediction accuracy for classification, w
 
 Note that we have to force `y` to be a factor, so that `train()` recognizes we want to have a binomial response. The `train()` function in `caret` use the type of variable in `y` to determine if you want to use `family = "binomial"` or `family = "gaussian"`.
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(caret)
 cv_5 = trainControl(method = "cv", number = 5)
 lasso_grid = expand.grid(alpha = 1, 
