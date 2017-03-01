@@ -15,25 +15,25 @@ At face value it would seem like it should be easy to repeat this process for a 
 - Many methods have different cross-validation functions, or worse yet, no built-in process for cross-validation.
 - Different methods have different handling of categorical predictors.
 
-Thankfully, the `R` community has essentially provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package.
+Thankfully, the `R` community has essentially provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package. Returning to the above list, we will see that a number of these tasks are directly addressed in the `caret` package.
 
-- `train()`
-    - formula
-    - data
-    - method
-    
-- `predict()`
+- Test-train split the available data
+    - `createDataPartition()` will take the place of our manual data splitting. It will also do some extra work to ensure that the train and test samples are somewhat similiar.
+- Decide on a set of candidate models via tuning parameters
+    - `expand.grid()` is not a function in `caret`, but we will get in the habbit of using it to specify a grid of tuning parameters.
+- Select the best model (tuning parameters) using a cross-validated metric
+    - `trainControl()` will setup cross-validation
+    - `train()` is the workhorse of `caret`. It takes the following information then trains the requested model:
+        - `form`, a formula, such as `y ~ .`
+        - `data`
+        - `method`, from a long list of possibilities
+        - `preProcess` which allows for specification of things such as centering and scaling
+        - `tuneGrid` which specifies the tuning parameters to train over
+        - `trControl` which specifies the resampling scheme, that is, how cross-validation should be performed
+- Use chosen model to make predictions
+    - `predict()` used on objects of type `train` will be magical!
 
-
-
-- `createDataPartition()`
-- `trainControl()`
-
-
-- `expand.grid()`
-
-- preProcess()
-
+To illustrate `caret`, we return to our familiar `Default` data.
 
 ```{r}
 data(Default, package = "ISLR")
@@ -42,6 +42,8 @@ data(Default, package = "ISLR")
 ```{r, message = FALSE, warning = FALSE}
 library(caret)
 ```
+
+We first test-train split the data using `createDataPartition`. Here we are using 75% of the data for training.
 
 ```{r}
 set.seed(430)
@@ -52,7 +54,7 @@ default_tst = Default[-default_idx, ]
 
 ```{r}
 default_glm = train(
-  default ~ .,
+  form = default ~ .,
   data = default_trn,
   method = "glm",
   family = "binomial",
@@ -64,17 +66,13 @@ default_glm = train(
 default_glm
 ```
 
-
 ```{r}
 names(default_glm)
 ```
 
-
-
 ```{r}
 default_glm$results
 ```
-
 
 ```{r}
 default_glm$finalModel
@@ -87,12 +85,9 @@ accuracy = function(actual, predicted) {
 ```
 
 ```{r}
-# make preds
-
+# make predictions
 head(predict(default_glm, newdata = default_trn))
 ```
-
-
 
 ```{r}
 # train acc
@@ -106,26 +101,10 @@ accuracy(actual = default_tst$default,
          predicted = predict(default_glm, newdata = default_tst))
 ```
 
-
-
 ```{r}
 # get probs
 head(predict(default_glm, newdata = default_trn, type = "prob"))
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ```{r}
 default_knn = train(
@@ -136,27 +115,9 @@ default_knn = train(
 )
 ```
 
-
-
-
-
 ```{r}
 default_knn
 ```
-
-
-
-
-
-```{r}
-
-```
-
-
-
-
-
-- TODO: returns a data frame, a habit for when we later need multiple tuning parameters
 
 ```{r}
 default_knn = train(
@@ -169,32 +130,21 @@ default_knn = train(
 )
 ```
 
-
 ```{r}
 default_knn
 ```
-
-
 
 ```{r}
 plot(default_knn)
 ```
 
-
-
 ```{r}
 ggplot(default_knn) + theme_bw()
 ```
 
-
-
-
-
-
 ```{r}
 default_knn$bestTune
 ```
-
 
 ```{r}
 get_best_result = function(caret_fit) {
@@ -208,33 +158,21 @@ get_best_result = function(caret_fit) {
 get_best_result(default_knn)
 ```
 
-
-
 ```{r}
 default_knn$finalModel
 ```
 
+Notes to add later:
 
-
-
-
-
-
-less ties with CV
-
-run knn without a grid, notice default grid, also notice preprocess
-
-
-TODO: table with best knn and glm results for train, test, cv
-
+- Fewer ties with CV than simple test-train approach
+- Default grid vs specified grid. `tuneLength`
+- Create table summarizing results for `knn()` and `glm()`. Test, train, and CV accuracy. Maybe also show SD for CV.
 
 
 ## External Links
 
-
-[http://topepo.github.io/caret/index.html]
-
-[http://topepo.github.io/caret/available-models.html]()
+- [The `caret` Package](http://topepo.github.io/caret/index.html) - Reference documentation for the `caret` package in `bookdown` format.
+- [`caret` Model List](http://topepo.github.io/caret/available-models.html) - List of availible models in `caret`.
 
 
 ## RMarkdown

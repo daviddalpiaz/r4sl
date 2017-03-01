@@ -4,7 +4,6 @@
 data(Hitters, package = "ISLR")
 ```
 
-
 ```{r}
 sum(is.na(Hitters))
 sum(is.na(Hitters$Salary))
@@ -12,15 +11,15 @@ Hitters = na.omit(Hitters)
 sum(is.na(Hitters))
 ```
 
+## AIC, BIC, and Cp
 
-
-
-
+### `leaps` Package
 
 ```{r, message = FALSE, warning = FALSE}
 library(leaps)
 ```
 
+### Best Subset
 
 ```{r}
 
@@ -28,21 +27,15 @@ fit_all = regsubsets(Salary ~ ., Hitters)
 summary(fit_all)
 ```
 
-
-
 ```{r}
 fit_all = regsubsets(Salary ~ ., data = Hitters, nvmax = 19)
 fit_all_sum = summary(fit_all)
 names(fit_all_sum)
 ```
 
-
 ```{r}
 fit_all_sum$bic
 ```
-
-
-
 
 ```{r}
 par(mfrow = c(2, 2))
@@ -64,26 +57,17 @@ points(best_bic, fit_all_sum$bic[best_bic],
        col = "red", cex = 2, pch = 20)
 ```
 
-
-
-
-
-
-
-
+### Stepwise Methods
 
 ```{r}
 fit_fwd = regsubsets(Salary ~ ., data = Hitters, nvmax = 19, method = "forward")
 fit_fwd_sum = summary(fit_fwd)
 ```
 
-
 ```{r}
 fit_bwd = regsubsets(Salary ~ ., data = Hitters, nvmax = 19, method = "backward")
 fit_bwd_sum = summary(fit_bwd)
 ```
-
-
 
 ```{r}
 coef(fit_fwd, 7)
@@ -91,17 +75,11 @@ coef(fit_bwd, 7)
 coef(fit_all, 7)
 ```
 
-
 ```{r}
 fit_bwd_sum = summary(fit_bwd)
 which.min(fit_bwd_sum$cp)
-
 coef(fit_bwd, which.min(fit_bwd_sum$cp))
-
 ```
-
-
-
 
 ```{r}
 fit = lm(Salary ~ ., data = Hitters)
@@ -109,8 +87,7 @@ fit_aic_back = step(fit, trace = FALSE)
 coef(fit_aic_back)
 ```
 
-
-
+## Validated RMSE
 
 ```{r}
 set.seed(42)
@@ -130,25 +107,18 @@ for (i in seq_along(test_err)) {
 test_err
 ```
 
-
-
 ```{r}
 plot(test_err, type='b', ylab = "Test Set RMSE", xlab = "Number of Predictors")
 ```
-
 
 ```{r}
 which.min(test_err)
 coef(fit_all, which.min(test_err))
 ```
 
-
-
 ```{r}
 class(fit_all)
 ```
-
-
 
 ```{r}
 predict.regsubsets = function(object, newdata, id, ...) {
@@ -168,12 +138,6 @@ rmse = function(actual, predicted) {
   sqrt(mean((actual - predicted) ^ 2))
 }
 ```
-
-
-```{r}
-
-```
-
 
 ```{r}
 num_folds = 5
@@ -205,16 +169,10 @@ cv_error = apply(fold_error, 2, mean)
 cv_error
 ```
 
-
-
-
-
 ```{r}
 plot(cv_error, type='b', ylab = "Corss-Validated RMSE", xlab = "Number of Predictors")
 
 ```
-
-
 
 ```{r}
 fit_all = regsubsets(Salary ~ ., data = Hitters, nvmax = num_vars)
