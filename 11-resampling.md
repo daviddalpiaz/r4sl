@@ -207,7 +207,7 @@ Repeating the test-train split analysis from above, this time with 10-fold CV, s
 
 For methods that do not have a built-in ability to perform cross-validation, or for methods that have limited cross-validation capability, we will need to write our own code for cross-validation. (Spoiler: This is not true, but let's pretend it is, so we can see how to perform cross-validation from scratch.)
 
-This essentially ammounts to randomly splitting the data, then looping over the splits. The `createFolds()` function from teh `caret()` package will make this much easier.
+This essentially amounts to randomly splitting the data, then looping over the splits. The `createFolds()` function from the `caret()` package will make this much easier.
 
 
 ```r
@@ -443,14 +443,14 @@ The RMarkdown file for this chapter can be found [**here**](11-resampling.Rmd). 
 ## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
 ```
 
-- Additonal Packages, Attached
+- Additional Packages, Attached
 
 
 ```
 ## [1] "boot" "ISLR"
 ```
 
-- Additonal Packages, Not Attached
+- Additional Packages, Not Attached
 
 
 ```

@@ -370,14 +370,14 @@ The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The fil
 ## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
 ```
 
-- Additonal Packages, Attached
+- Additional Packages, Attached
 
 
 ```
 ## [1] "MASS"  "class" "ISLR"
 ```
 
-- Additonal Packages, Not Attached
+- Additional Packages, Not Attached
 
 
 ```

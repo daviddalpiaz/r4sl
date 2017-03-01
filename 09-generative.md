@@ -640,14 +640,14 @@ The RMarkdown file for this chapter can be found [**here**](09-generative.Rmd). 
 ## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
 ```
 
-- Additonal Packages, Attached
+- Additional Packages, Attached
 
 
 ```
 ## [1] "e1071" "MASS"
 ```
 
-- Additonal Packages, Not Attached
+- Additional Packages, Not Attached
 
 
 ```

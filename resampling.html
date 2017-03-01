@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-02-27">
+<meta name="date" content="2017-03-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -402,7 +402,7 @@ for(i in <span class="dv">1</span>:<span class="dv">100</span>) {
 <div id="manual-cross-validation" class="section level3">
 <h3><span class="header-section-number">17.2.2</span> Manual Cross-Validation</h3>
 <p>For methods that do not have a built-in ability to perform cross-validation, or for methods that have limited cross-validation capability, we will need to write our own code for cross-validation. (Spoiler: This is not true, but let’s pretend it is, so we can see how to perform cross-validation from scratch.)</p>
-<p>This essentially ammounts to randomly splitting the data, then looping over the splits. The <code>createFolds()</code> function from teh <code>caret()</code> package will make this much easier.</p>
+<p>This essentially amounts to randomly splitting the data, then looping over the splits. The <code>createFolds()</code> function from the <code>caret()</code> package will make this much easier.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">createFolds</span>(Auto$mpg)</code></pre></div>
 <pre><code>## $Fold01
 ##  [1]   8  16  23  34  38  43  57  73  81 107 123 127 141 162 174 177 180
@@ -578,11 +578,11 @@ fold_acc</code></pre></div>
 </ul>
 <pre><code>## [1] &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;base&quot;</code></pre>
 <ul>
-<li>Additonal Packages, Attached</li>
+<li>Additional Packages, Attached</li>
 </ul>
 <pre><code>## [1] &quot;boot&quot; &quot;ISLR&quot;</code></pre>
 <ul>
-<li>Additonal Packages, Not Attached</li>
+<li>Additional Packages, Not Attached</li>
 </ul>
 <pre><code>##  [1] &quot;Rcpp&quot;         &quot;nloptr&quot;       &quot;plyr&quot;         &quot;methods&quot;     
 ##  [5] &quot;iterators&quot;    &quot;tools&quot;        &quot;digest&quot;       &quot;lme4&quot;        
