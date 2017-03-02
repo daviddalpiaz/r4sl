@@ -1,5 +1,7 @@
 # Subset Selection
 
+**Instructor's Note: This chapter is currently missing the usual narrative text. Hopefully it will be added later.**
+
 ```{r}
 data(Hitters, package = "ISLR")
 ```
@@ -178,7 +180,6 @@ plot(cv_error, type='b', ylab = "Corss-Validated RMSE", xlab = "Number of Predic
 fit_all = regsubsets(Salary ~ ., data = Hitters, nvmax = num_vars)
 coef(fit_all, which.min(cv_error))
 ```
-
 
 
 ## External Links

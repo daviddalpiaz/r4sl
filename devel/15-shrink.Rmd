@@ -166,7 +166,7 @@ We first simulate a classification example where $p > n$.
 We then use a lasso penalty to fit penalized logistic regression. This minimizes
 
 $$
-\sum_{i=1}^{n} L\left(y_i, \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
+\sum_{i=1}^{n} L\left(y_i, \beta_0 + \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
 $$
 
 where $L$ is the appropriate negative log-likelihood.

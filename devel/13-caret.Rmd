@@ -1,5 +1,7 @@
 # The `caret` Package
 
+**Instructor's Note: This chapter is currently missing the usual narrative text. Hopefully it will be added later.**
+
 Now that we have seen a number of classification (and regression) methods, and introduced cross-validation, we see the general outline of a predictive analysis:
 
 - Select a method
@@ -18,9 +20,9 @@ At face value it would seem like it should be easy to repeat this process for a 
 Thankfully, the `R` community has essentially provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package. Returning to the above list, we will see that a number of these tasks are directly addressed in the `caret` package.
 
 - Test-train split the available data
-    - `createDataPartition()` will take the place of our manual data splitting. It will also do some extra work to ensure that the train and test samples are somewhat similiar.
+    - `createDataPartition()` will take the place of our manual data splitting. It will also do some extra work to ensure that the train and test samples are somewhat similar.
 - Decide on a set of candidate models via tuning parameters
-    - `expand.grid()` is not a function in `caret`, but we will get in the habbit of using it to specify a grid of tuning parameters.
+    - `expand.grid()` is not a function in `caret`, but we will get in the habit of using it to specify a grid of tuning parameters.
 - Select the best model (tuning parameters) using a cross-validated metric
     - `trainControl()` will setup cross-validation
     - `train()` is the workhorse of `caret`. It takes the following information then trains the requested model:
@@ -172,7 +174,7 @@ Notes to add later:
 ## External Links
 
 - [The `caret` Package](http://topepo.github.io/caret/index.html) - Reference documentation for the `caret` package in `bookdown` format.
-- [`caret` Model List](http://topepo.github.io/caret/available-models.html) - List of availible models in `caret`.
+- [`caret` Model List](http://topepo.github.io/caret/available-models.html) - List of available models in `caret`.
 
 
 ## RMarkdown
