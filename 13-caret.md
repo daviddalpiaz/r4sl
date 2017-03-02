@@ -15,6 +15,7 @@ At face value it would seem like it should be easy to repeat this process for a 
 
 - The `predict()` function seems to have a different behavior for each new method we see.
 - Many methods have different cross-validation functions, or worse yet, no built-in process for cross-validation.
+- Not all methods expect the same data format. Some methods do not use formula syntax.
 - Different methods have different handling of categorical predictors.
 
 Thankfully, the `R` community has essentially provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package. Returning to the above list, we will see that a number of these tasks are directly addressed in the `caret` package.
