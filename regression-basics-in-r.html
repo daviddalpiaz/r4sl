@@ -256,6 +256,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="18.1" data-path="classification-overview.html"><a href="classification-overview.html#external-links-2"><i class="fa fa-check"></i><b>18.1</b> External Links</a></li>
 <li class="chapter" data-level="18.2" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>18.2</b> RMarkdown</a></li>
 </ul></li>
+<li class="chapter" data-level="19" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>19</b> The <code>caret</code> Package</a><ul>
+<li class="chapter" data-level="19.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-3"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
+<li class="chapter" data-level="19.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-4"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>20</b> Subset Selection</a><ul>
+<li class="chapter" data-level="20.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>20.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="20.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>20.1.1</b> <code>leaps</code> Package</a></li>
+<li class="chapter" data-level="20.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>20.1.2</b> Best Subset</a></li>
+<li class="chapter" data-level="20.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>20.1.3</b> Stepwise Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="subset-selection.html"><a href="subset-selection.html#validated-rmse"><i class="fa fa-check"></i><b>20.2</b> Validated RMSE</a></li>
+<li class="chapter" data-level="20.3" data-path="subset-selection.html"><a href="subset-selection.html#external-links-4"><i class="fa fa-check"></i><b>20.3</b> External Links</a></li>
+<li class="chapter" data-level="20.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-5"><i class="fa fa-check"></i><b>20.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html"><i class="fa fa-check"></i><b>21</b> Shrinkage Methods</a><ul>
+<li class="chapter" data-level="21.1" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ridge-regression"><i class="fa fa-check"></i><b>21.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="21.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#lasso"><i class="fa fa-check"></i><b>21.2</b> Lasso</a></li>
+<li class="chapter" data-level="21.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#broom"><i class="fa fa-check"></i><b>21.3</b> <code>broom</code></a></li>
+<li class="chapter" data-level="21.4" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#simulation-study-p-n"><i class="fa fa-check"></i><b>21.4</b> Simulation Study, p &gt; n</a></li>
+<li class="chapter" data-level="21.5" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#external-links-5"><i class="fa fa-check"></i><b>21.5</b> External Links</a></li>
+<li class="chapter" data-level="21.6" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#rmarkdown-6"><i class="fa fa-check"></i><b>21.6</b> RMarkdown</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
 
@@ -449,29 +471,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1         x2          y
-##    &lt;fctr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1       A 0.28764159 -0.4137010
-## 2       A 0.02444761 -1.6621546
-## 3       A 0.99295079 -0.2540599
-## 4       A 0.67343313  0.3797246
-## 5       A 0.65799541 -0.2469258
-## 6       A 0.17909011 -0.7736321
-## 7       A 0.45014577  0.9959677
-## 8       A 0.47247667  0.5983967
-## 9       A 0.43913646  1.4232366
-## 10      A 0.34295975 -0.4228438
+##        x1        x2           y
+##    &lt;fctr&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1       A 0.5032468 -1.61636198
+## 2       A 0.8634004 -0.02056677
+## 3       A 0.5708808  1.35172966
+## 4       A 0.5004854  0.86891901
+## 5       A 0.7860935 -1.25661627
+## 6       A 0.4392897  1.66149932
+## 7       A 0.7068335  2.23136104
+## 8       A 0.1845709  0.85338530
+## 9       A 0.7805220  0.90374826
+## 10      A 0.9374840 -2.38310432
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
-<pre><code>##  (Intercept)          x1B          x1C           x2 
-##  0.029689344 -0.001804464 -0.510765157 -0.148859236</code></pre>
+<pre><code>## (Intercept)         x1B         x1C          x2 
+##   1.0500603  -0.1476343  -0.4911957  -1.2604580</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.6509004   0.9804532   0.8036394   1.3567780  -2.0537943  -2.4440788</code></pre>
+##    1.988442   -1.166443   -1.985408   -2.756409    1.704423    2.783716</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Polynomials</h3>
