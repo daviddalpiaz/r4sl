@@ -153,7 +153,7 @@ X = replicate(p, rnorm(n = n))
 beta = c(1, 1, 1, rep(0, 5497))
 z = X %*% beta
 prob = exp(z) / (1 + exp(z))
-y = rbinom(length(z), size = 1, prob = prob)
+y = as.factor(rbinom(length(z), size = 1, prob = prob))
 ```
 
 We first simulate a classification example where $p > n$.
@@ -224,11 +224,11 @@ lasso_grid
 ```{r}
 fit_lasso = train(
   x = X,
-  y = as.factor(y),
+  y = y,
   method = "glmnet",
   trControl = cv_5,
   tuneGrid = lasso_grid
-  )
+)
 fit_lasso$results
 ```
 
