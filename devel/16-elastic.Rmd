@@ -1,0 +1,93 @@
+# Elastic-Net
+
+$$
+\sum_{i=1}^{n} L(y_i, \beta_0+\beta^T x_i) + \lambda\left[(1-\alpha)||\beta||_2^2/2 + \alpha ||\beta||_1\right],
+$$
+
+
+```{r}
+data(Hitters, package = "ISLR")
+```
+
+
+
+
+```{r}
+sum(is.na(Hitters))
+sum(is.na(Hitters$Salary))
+Hitters = na.omit(Hitters)
+sum(is.na(Hitters))
+```
+
+
+```{r, message = FALSE, warning = FALSE}
+library(glmnet)
+```
+
+
+```{r}
+library(caret)
+cv_5 = trainControl(method = "cv", number = 5)
+fit_elnet = train(Salary ~ ., data = Hitters,
+                  method = "glmnet", trControl = cv_5)
+```
+
+```{r}
+fit_elnet
+```
+
+
+```{r, fig.height = 10, fig.width = 10}
+plot(fit_elnet)
+```
+
+
+
+
+
+
+```{r, fig.height=10, fig.width=10}
+set.seed(1234)
+n = 1000
+p = 5500
+X = replicate(p, rnorm(n = n))
+beta = c(1, 1, 1, rep(0, 5497))
+z = X %*% beta
+prob = exp(z) / (1 + exp(z))
+y = as.factor(rbinom(length(z), size = 1, prob = prob))
+
+
+fit_elnet = train(
+  x = X,
+  y = y,
+  method = "glmnet",
+  trControl = cv_5
+)
+plot(fit_elnet)
+fit_elnet$bestTune
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
