@@ -236,7 +236,6 @@ fit_lasso$results
 ## External Links
 
 - [`glmnet` Web Vingette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html) - Details from the package developers.
-- [`glmnet` with `caret`](https://github.com/topepo/caret/issues/116) - Some details on Elastic Net tuning in the `caret` package. TODO: move this to elastic net chapter.
 
 
 ## RMarkdown
