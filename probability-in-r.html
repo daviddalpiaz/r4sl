@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="R for Statistical Learning">
-  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.11 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-03-03">
+<meta name="date" content="2017-03-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -278,6 +278,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="21.5" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#external-links-5"><i class="fa fa-check"></i><b>21.5</b> External Links</a></li>
 <li class="chapter" data-level="21.6" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#rmarkdown-6"><i class="fa fa-check"></i><b>21.6</b> RMarkdown</a></li>
 </ul></li>
+<li class="chapter" data-level="22" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>22</b> Elastic Net</a><ul>
+<li class="chapter" data-level="22.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>22.1</b> Hitters Data</a></li>
+<li class="chapter" data-level="22.2" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-regression"><i class="fa fa-check"></i><b>22.2</b> Elastic Net for Regression</a></li>
+<li class="chapter" data-level="22.3" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-classification"><i class="fa fa-check"></i><b>22.3</b> Elastic Net for Classification</a></li>
+<li class="chapter" data-level="22.4" data-path="elastic-net.html"><a href="elastic-net.html#external-links-6"><i class="fa fa-check"></i><b>22.4</b> External Links</a></li>
+<li class="chapter" data-level="22.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-7"><i class="fa fa-check"></i><b>22.5</b> RMarkdown</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
 
@@ -331,8 +338,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 11.79982</code></pre>
 <p>Lastly, to generate a random sample of size <code>n = 10</code>, use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
-<pre><code>##  [1] -7.9440320 -6.1789413  1.7153666 -2.0019048  0.1083898 -0.1124214
-##  [7]  7.0731695  4.4967474 -3.2186097  8.7502419</code></pre>
+<pre><code>##  [1]  5.950981  7.833717  1.511472  7.425248  2.614302  2.604492  2.992842
+##  [8] -9.403461  0.123198 13.463293</code></pre>
 <p>These functions exist for many other distributions, including but not limited to:</p>
 <table>
 <thead>
