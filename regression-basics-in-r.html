@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="R for Statistical Learning">
-  <meta name="generator" content="bookdown 0.3.11 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.12 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -478,29 +478,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1          x2           y
-##    &lt;fctr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1       A 0.416905726 -0.01922847
-## 2       A 0.312474614 -0.83990758
-## 3       A 0.037769870 -1.75581640
-## 4       A 0.406843729  1.55359193
-## 5       A 0.461133174 -0.46379204
-## 6       A 0.007442076  1.27489252
-## 7       A 0.592734487  1.58155292
-## 8       A 0.996284547 -0.08694968
-## 9       A 0.002472752  1.06839934
-## 10      A 0.971640140 -0.13608515
+##        x1        x2           y
+##    &lt;fctr&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1       A 0.3661037 -0.40448318
+## 2       A 0.4573675 -0.61688413
+## 3       A 0.8213919  2.56875516
+## 4       A 0.8958307 -0.03029863
+## 5       A 0.8968478  0.18497475
+## 6       A 0.7084870 -0.80212698
+## 7       A 0.3375771  0.21540400
+## 8       A 0.9348275  1.97341416
+## 9       A 0.3511444 -0.58024530
+## 10      A 0.7549465 -0.11283345
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  0.09513542 -0.76860595 -0.13794556  0.29134339</code></pre>
+##  0.20736949 -0.19853439 -0.22583850  0.04934943</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  0.25478915 -0.89786222 -0.59949036 -0.08826926  0.31944314  0.97826310</code></pre>
+##   -1.318757    1.901328    1.746221    2.388411   -3.459661   -3.448541</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Polynomials</h3>
