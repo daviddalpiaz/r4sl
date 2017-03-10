@@ -12,15 +12,9 @@ library(klaR)
 data(Sonar)
 ```
 
-
 ```{r}
 #View(Sonar)
 ```
-
-```{r}
-
-```
-
 
 ```{r}
 set.seed(1337)
