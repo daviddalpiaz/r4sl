@@ -26,6 +26,8 @@ Imports:
   gbm, 
   extraTrees, 
   kernlab, 
-  sparcl
+  sparcl,
+  mlbench,
+  klaR
 Remotes: 
   rstudio/bookdown
