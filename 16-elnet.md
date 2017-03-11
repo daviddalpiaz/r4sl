@@ -2,7 +2,6 @@
 
 
 
-
 We again use the `Hitters` dataset from the `ISLR` package to explore another shrinkage method, **elastic net**, which combines the *ridge* and *lasso* methods from the previous chapter.
 
 ## Hitters Data
@@ -328,7 +327,7 @@ accuracy(actual = default_tst$default,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](15-shrink.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The file was created using `R` version 3.3.2 and the following packages:
 
 - Base Packages, Attached
 
