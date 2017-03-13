@@ -135,7 +135,7 @@ Sometimes, the output from `glmnet()` can be overwhelming. The `broom` package c
 
 ```{r, message = FALSE, warning = FALSE}
 library(broom)
-#lassoModCV
+#fit_lasso_cv
 tidy(fit_lasso_cv)
 glance(fit_lasso_cv) # the two lambda values of interest
 ```
@@ -202,7 +202,7 @@ plot(glmnet(X, y, family = "binomial"))
 plot(glmnet(X, y, family = "binomial"), xvar = "lambda")
 ```
 
-We can extracting the two relevant $\lambda$ values.
+We can extract the two relevant $\lambda$ values.
 
 ```{r}
 fit_cv$lambda.min
