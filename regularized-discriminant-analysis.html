@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="R for Statistical Learning">
-  <meta name="generator" content="bookdown 0.3.13 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.14 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-03-14">
+<meta name="date" content="2017-03-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -404,7 +404,8 @@ fit_rda_grid</code></pre></div>
 <h2><span class="header-section-number">23.4</span> RDA with Random Search Search</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
 cv_5_rand =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>, <span class="dt">search =</span> <span class="st">&quot;random&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_rda_rand =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;rda&quot;</span>, <span class="dt">trControl =</span> cv_5_rand, <span class="dt">tuneLength =</span> <span class="dv">9</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_rda_rand =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;rda&quot;</span>, 
+                     <span class="dt">trControl =</span> cv_5_rand, <span class="dt">tuneLength =</span> <span class="dv">9</span>)
 fit_rda_rand</code></pre></div>
 <pre><code>## Regularized Discriminant Analysis 
 ## 
@@ -437,9 +438,11 @@ fit_rda_rand</code></pre></div>
 <div id="comparison-to-elastic-net" class="section level2">
 <h2><span class="header-section-number">23.5</span> Comparison to Elastic Net</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
-fit_elnet_grid =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="dt">trControl =</span> cv_5_grid, <span class="dt">tuneLength =</span> <span class="dv">10</span>)</code></pre></div>
+fit_elnet_grid =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, 
+                       <span class="dt">trControl =</span> cv_5_grid, <span class="dt">tuneLength =</span> <span class="dv">10</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
-fit_elnet_int_grid =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="dt">trControl =</span> cv_5_grid, <span class="dt">tuneLength =</span> <span class="dv">10</span>)</code></pre></div>
+fit_elnet_int_grid =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>. ^<span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, 
+                           <span class="dt">trControl =</span> cv_5_grid, <span class="dt">tuneLength =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="results" class="section level2">
 <h2><span class="header-section-number">23.6</span> Results</h2>

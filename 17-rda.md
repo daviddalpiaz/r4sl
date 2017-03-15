@@ -125,7 +125,8 @@ cv_5_rand = trainControl(method = "cv", number = 5, search = "random")
 
 
 ```r
-fit_rda_rand = train(Class ~ ., data = Sonar, method = "rda", trControl = cv_5_rand, tuneLength = 9)
+fit_rda_rand = train(Class ~ ., data = Sonar, method = "rda", 
+                     trControl = cv_5_rand, tuneLength = 9)
 fit_rda_rand
 ```
 
@@ -165,33 +166,24 @@ ggplot(fit_rda_rand)
 ![](17-rda_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 
-
-
 ## Comparison to Elastic Net
 
 
 ```r
 set.seed(1337)
-fit_elnet_grid = train(Class ~ ., data = Sonar, method = "glmnet", trControl = cv_5_grid, tuneLength = 10)
+fit_elnet_grid = train(Class ~ ., data = Sonar, method = "glmnet", 
+                       trControl = cv_5_grid, tuneLength = 10)
 ```
 
 
 ```r
 set.seed(1337)
-fit_elnet_int_grid = train(Class ~ . ^ 2, data = Sonar, method = "glmnet", trControl = cv_5_grid, tuneLength = 10)
+fit_elnet_int_grid = train(Class ~ . ^ 2, data = Sonar, method = "glmnet", 
+                           trControl = cv_5_grid, tuneLength = 10)
 ```
 
 
-
-
-
-
-
 ## Results
-
-
-
-
 
 
 ```r
@@ -201,7 +193,6 @@ get_best_result = function(caret_fit) {
   best_result
 }
 ```
-
 
 
 ```r

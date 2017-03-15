@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="R for Statistical Learning">
-  <meta name="generator" content="bookdown 0.3.13 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.14 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-03-14">
+<meta name="date" content="2017-03-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -391,26 +391,26 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept) 213.066443434
-## AtBat         0.090095728
-## Hits          0.371252756
-## HmRun         1.180126956
-## Runs          0.596298287
-## RBI           0.594502390
-## Walks         0.772525466
-## Years         2.473494238
-## CAtBat        0.007597952
-## CHits         0.029272172
-## CHmRun        0.217335716
-## CRuns         0.058705097
-## CRBI          0.060722036
-## CWalks        0.058698830
-## LeagueN       3.276567828
-## DivisionW   -21.889942619
-## PutOuts       0.052667119
-## Assists       0.007463678
-## Errors       -0.145121336
-## NewLeagueN    2.972759126</code></pre>
+## (Intercept) 226.844379273
+## AtBat         0.086613903
+## Hits          0.352962516
+## HmRun         1.144213853
+## Runs          0.569353374
+## RBI           0.570074068
+## Walks         0.735072620
+## Years         2.397356093
+## CAtBat        0.007295083
+## CHits         0.027995153
+## CHmRun        0.208112350
+## CRuns         0.056146220
+## CRBI          0.058060281
+## CWalks        0.056586702
+## LeagueN       2.850306112
+## DivisionW   -20.329125702
+## PutOuts       0.049296951
+## Assists       0.007063169
+## Errors       -0.128066381
+## NewLeagueN    2.654025563</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
@@ -439,52 +439,52 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept) 213.066443434
-## AtBat         0.090095728
-## Hits          0.371252756
-## HmRun         1.180126956
-## Runs          0.596298287
-## RBI           0.594502390
-## Walks         0.772525466
-## Years         2.473494238
-## CAtBat        0.007597952
-## CHits         0.029272172
-## CHmRun        0.217335716
-## CRuns         0.058705097
-## CRBI          0.060722036
-## CWalks        0.058698830
-## LeagueN       3.276567828
-## DivisionW   -21.889942619
-## PutOuts       0.052667119
-## Assists       0.007463678
-## Errors       -0.145121336
-## NewLeagueN    2.972759126</code></pre>
+## (Intercept) 226.844379273
+## AtBat         0.086613903
+## Hits          0.352962516
+## HmRun         1.144213853
+## Runs          0.569353374
+## RBI           0.570074068
+## Walks         0.735072620
+## Years         2.397356093
+## CAtBat        0.007295083
+## CHits         0.027995153
+## CHmRun        0.208112350
+## CRuns         0.056146220
+## CRBI          0.058060281
+## CWalks        0.056586702
+## LeagueN       2.850306112
+## DivisionW   -20.329125702
+## PutOuts       0.049296951
+## Assists       0.007063169
+## Errors       -0.128066381
+## NewLeagueN    2.654025563</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># penalty term for lambda one SE</span></code></pre></div>
-<pre><code>## [1] 507.788</code></pre>
+<pre><code>## [1] 436.8923</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#predict(fit_ridge_cv, X, s = &quot;lambda.min&quot;)</span>
 <span class="co">#predict(fit_ridge_cv, X)</span>
 <span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># &quot;train error&quot;</span></code></pre></div>
-<pre><code>## [1] 132355.6</code></pre>
+<pre><code>## [1] 134397.5</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm) <span class="co"># CV-RMSEs</span></code></pre></div>
-<pre><code>##  [1] 451.5352 450.1028 449.3826 449.0094 448.7231 448.4102 448.0685
-##  [8] 447.6954 447.2884 446.8445 446.3607 445.8339 445.2605 444.6370
-## [15] 443.9594 443.2239 442.4264 441.5625 440.6280 439.6182 438.5289
-## [22] 437.3554 436.0934 434.7388 433.2876 431.7363 430.0817 428.3213
-## [29] 426.4534 424.4771 422.3925 420.2008 417.9046 415.5079 413.0160
-## [36] 410.4360 407.7767 405.0481 402.2618 399.4313 396.5708 393.6958
-## [43] 390.8226 387.9676 385.1476 382.3788 379.6768 377.0561 374.5299
-## [50] 372.1092 369.8037 367.6210 365.5661 363.6428 361.8523 360.1941
-## [57] 358.6660 357.2646 355.9850 354.8218 353.7687 352.8191 351.9659
-## [64] 351.2008 350.5203 349.9206 349.3895 348.9211 348.5128 348.1600
-## [71] 347.8575 347.5997 347.3774 347.1945 347.0438 346.9204 346.8233
-## [78] 346.7457 346.6860 346.6383 346.6047 346.5774 346.5573 346.5407
-## [85] 346.5231 346.5045 346.4824 346.4503 346.4235 346.3723 346.3276
-## [92] 346.2549 346.1936 346.0971 346.0156 345.8976 345.7976 345.6600
-## [99] 345.5469</code></pre>
+<pre><code>##  [1] 453.7049 452.1240 451.3604 451.0353 450.7407 450.4187 450.0671
+##  [8] 449.6833 449.2645 448.8077 448.3099 447.7677 447.1776 446.5358
+## [15] 445.8384 445.0812 444.2601 443.3706 442.4082 441.3683 440.2463
+## [22] 439.0374 437.7372 436.3413 434.8456 433.2464 431.5404 429.7249
+## [29] 427.7982 425.7591 423.6076 421.3451 418.9740 416.4983 413.9235
+## [36] 411.2568 408.5073 405.6850 402.8021 399.8723 396.9105 393.9326
+## [43] 390.9556 387.9965 385.0728 382.2014 379.3988 376.6800 374.0588
+## [50] 371.5476 369.1559 366.8909 364.7600 362.7662 360.9110 359.1941
+## [57] 357.6134 356.1651 354.8444 353.6456 352.5620 351.5866 350.7122
+## [64] 349.9297 349.2336 348.6225 348.0868 347.6150 347.2008 346.8430
+## [71] 346.5397 346.2790 346.0615 345.8809 345.7292 345.6071 345.5111
+## [78] 345.4341 345.3767 345.3350 345.3030 345.2804 345.2669 345.2555
+## [85] 345.2486 345.2389 345.2332 345.2241 345.2129 345.1952 345.1747
+## [92] 345.1521 345.1222 345.0882 345.0502 345.0103 344.9634 344.9181
+## [99] 344.8695</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre></div>
-<pre><code>## [1] 345.5469</code></pre>
+<pre><code>## [1] 344.8695</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.1se]) <span class="co"># CV-RMSE one SE</span></code></pre></div>
-<pre><code>## [1] 372.1092</code></pre>
+<pre><code>## [1] 374.0588</code></pre>
 </div>
 <div id="lasso" class="section level2">
 <h2><span class="header-section-number">21.2</span> Lasso</h2>
@@ -508,97 +508,96 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 <p><code>cv.glmnet()</code> returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                       1
-## (Intercept) 251.4491563
-## AtBat         .        
-## Hits          1.0036044
-## HmRun         .        
-## Runs          .        
-## RBI           .        
-## Walks         0.9857987
-## Years         .        
-## CAtBat        .        
-## CHits         .        
-## CHmRun        .        
-## CRuns         0.1094218
-## CRBI          0.2911570
-## CWalks        .        
-## LeagueN       .        
-## DivisionW     .        
-## PutOuts       .        
-## Assists       .        
-## Errors        .        
-## NewLeagueN    .</code></pre>
+##                        1
+## (Intercept) 2.220974e+02
+## AtBat       .           
+## Hits        1.129009e+00
+## HmRun       .           
+## Runs        .           
+## RBI         .           
+## Walks       1.172062e+00
+## Years       .           
+## CAtBat      .           
+## CHits       .           
+## CHmRun      .           
+## CRuns       1.147170e-01
+## CRBI        3.085475e-01
+## CWalks      .           
+## LeagueN     .           
+## DivisionW   .           
+## PutOuts     1.763115e-03
+## Assists     .           
+## Errors      .           
+## NewLeagueN  .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                       1
-## (Intercept)  24.8990715
-## AtBat         .        
-## Hits          1.8487366
-## HmRun         .        
-## Runs          .        
-## RBI           .        
-## Walks         2.1945815
-## Years         .        
-## CAtBat        .        
-## CHits         .        
-## CHmRun        .        
-## CRuns         0.2059445
-## CRBI          0.4092047
-## CWalks        .        
-## LeagueN       .        
-## DivisionW   -99.7364356
-## PutOuts       0.2155667
-## Assists       .        
-## Errors        .        
-## NewLeagueN    .</code></pre>
+##                        1
+## (Intercept)  123.7520756
+## AtBat         -1.5473426
+## Hits           5.6608972
+## HmRun          .        
+## Runs           .        
+## RBI            .        
+## Walks          4.7296908
+## Years         -9.5958375
+## CAtBat         .        
+## CHits          .        
+## CHmRun         0.5108207
+## CRuns          0.6594856
+## CRBI           0.3927505
+## CWalks        -0.5291586
+## LeagueN       32.0650811
+## DivisionW   -119.2990171
+## PutOuts        0.2724045
+## Assists        0.1732025
+## Errors        -2.0585083
+## NewLeagueN     .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>])) <span class="co"># penalty term for lambda minimum</span></code></pre></div>
-<pre><code>## [1] 104.6105</code></pre>
+<pre><code>## [1] 177.4942</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                       1
-## (Intercept) 251.4491563
-## AtBat         .        
-## Hits          1.0036044
-## HmRun         .        
-## Runs          .        
-## RBI           .        
-## Walks         0.9857987
-## Years         .        
-## CAtBat        .        
-## CHits         .        
-## CHmRun        .        
-## CRuns         0.1094218
-## CRBI          0.2911570
-## CWalks        .        
-## LeagueN       .        
-## DivisionW     .        
-## PutOuts       .        
-## Assists       .        
-## Errors        .        
-## NewLeagueN    .</code></pre>
+##                        1
+## (Intercept) 2.220974e+02
+## AtBat       .           
+## Hits        1.129009e+00
+## HmRun       .           
+## Runs        .           
+## RBI         .           
+## Walks       1.172062e+00
+## Years       .           
+## CAtBat      .           
+## CHits       .           
+## CHmRun      .           
+## CRuns       1.147170e-01
+## CRBI        3.085475e-01
+## CWalks      .           
+## LeagueN     .           
+## DivisionW   .           
+## PutOuts     1.763115e-03
+## Assists     .           
+## Errors      .           
+## NewLeagueN  .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>])) <span class="co"># penalty term for lambda one SE</span></code></pre></div>
-<pre><code>## [1] 2.389982</code></pre>
+<pre><code>## [1] 2.726099</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#predict(fit_lasso_cv, X, s = &quot;lambda.min&quot;)</span>
 <span class="co">#predict(fit_lasso_cv, X)</span>
 <span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># &quot;train error&quot;</span></code></pre></div>
-<pre><code>## [1] 134647.7</code></pre>
+<pre><code>## [1] 130946.2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm)</code></pre></div>
-<pre><code>##  [1] 450.1891 441.5339 431.2190 422.2800 413.9331 405.2865 397.0325
-##  [8] 389.4747 382.8643 377.1377 372.3241 367.9763 364.1607 360.8243
-## [15] 357.8736 355.3960 353.2551 351.1322 349.0503 347.3191 345.8868
-## [22] 344.7591 343.9406 343.3064 342.8013 342.4150 342.1483 341.9686
-## [29] 341.8818 341.9010 341.9624 342.0461 342.1845 342.4517 342.7775
-## [36] 343.2562 343.9897 344.6888 345.1411 345.3727 345.1930 344.9885
-## [43] 344.9032 344.7507 344.4278 344.0336 343.6526 343.4288 343.2398
-## [50] 343.0885 343.0139 343.0262 343.1525 343.4066 343.6755 343.9570
-## [57] 344.3233 344.6350 344.9456 345.2691 345.6184 345.9727 346.3295
-## [64] 346.6710 346.9480 347.1878 347.4218 347.6669 347.8996 348.1454
-## [71] 348.3598 348.5577</code></pre>
+<pre><code>##  [1] 449.2502 439.2084 428.8904 420.2077 412.5361 404.7854 397.3716
+##  [8] 390.2792 384.2724 378.9961 374.6820 370.9689 367.6651 364.7304
+## [15] 362.2064 359.9289 357.7334 355.7354 354.0730 352.7365 351.6735
+## [22] 350.8696 350.2308 349.7320 349.3540 349.1056 348.9358 348.8252
+## [29] 348.8037 348.8423 348.9138 349.0043 349.0898 349.1814 349.4265
+## [36] 349.9960 350.7546 351.3129 351.6464 351.6916 351.5767 351.2528
+## [43] 350.7353 350.1255 349.4323 348.8915 348.4632 348.1248 347.8757
+## [50] 347.7762 347.9586 348.2573 348.4700 348.6179 348.7098 348.7819
+## [57] 348.9289 349.0891 349.2232 349.4300 349.6636 349.8851 350.1145
+## [64] 350.3539 350.5080 350.6479 350.8116 350.9644 351.1002 351.2419</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre></div>
-<pre><code>## [1] 341.8818</code></pre>
+<pre><code>## [1] 347.7762</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.1se]) <span class="co"># CV-RMSE one SE</span></code></pre></div>
-<pre><code>## [1] 377.1377</code></pre>
+<pre><code>## [1] 374.682</code></pre>
 </div>
 <div id="broom" class="section level2">
 <h2><span class="header-section-number">21.3</span> <code>broom</code></h2>
@@ -606,82 +605,80 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 <span class="co">#fit_lasso_cv</span>
 <span class="kw">tidy</span>(fit_lasso_cv)</code></pre></div>
-<pre><code>##         lambda estimate std.error conf.high  conf.low nzero
-## 1  255.2820965 202670.2  30085.09  232755.3 172585.10     0
-## 2  232.6035386 194952.2  30230.15  225182.4 164722.06     1
-## 3  211.9396813 185949.8  29453.06  215402.9 156496.74     2
-## 4  193.1115442 178320.4  28754.86  207075.3 149565.58     2
-## 5  175.9560468 171340.6  28226.49  199567.1 143114.11     3
-## 6  160.3245966 164257.1  27979.42  192236.5 136277.69     4
-## 7  146.0818013 157634.8  27824.41  185459.2 129810.43     4
-## 8  133.1042967 151690.5  27652.57  179343.1 124037.97     4
-## 9  121.2796778 146585.1  27520.97  174106.0 119064.10     4
-## 10 110.5055255 142232.8  27424.74  169657.6 114808.09     4
-## 11 100.6885192 138625.2  27334.15  165959.4 111291.05     5
-## 12  91.7436287 135406.5  27313.08  162719.6 108093.47     5
-## 13  83.5933775 132613.0  27346.57  159959.6 105266.44     5
-## 14  76.1671723 130194.2  27391.72  157585.9 102802.45     5
-## 15  69.4006906 128073.5  27397.36  155470.9 100676.16     6
-## 16  63.2353245 126306.3  27384.53  153690.9  98921.80     6
-## 17  57.6176726 124789.2  27366.47  152155.6  97422.68     6
-## 18  52.4990774 123293.8  27256.14  150550.0  96037.69     6
-## 19  47.8352040 121836.1  27039.61  148875.7  94796.52     6
-## 20  43.5856563 120630.6  26852.42  147483.0  93778.14     6
-## 21  39.7136268 119637.7  26688.18  146325.9  92949.53     6
-## 22  36.1855776 118858.8  26561.23  145420.1  92297.61     6
-## 23  32.9709506 118295.2  26481.39  144776.5  91813.77     6
-## 24  30.0419022 117859.3  26418.25  144277.5  91441.03     6
-## 25  27.3730624 117512.7  26364.19  143876.9  91148.52     6
-## 26  24.9413150 117248.1  26317.19  143565.3  90930.87     6
-## 27  22.7255973 117065.5  26273.54  143339.0  90791.92     6
-## 28  20.7067179 116942.5  26234.97  143177.5  90707.54     6
-## 29  18.8671902 116883.1  26207.36  143090.5  90675.78     6
-## 30  17.1910810 116896.3  26196.44  143092.7  90699.84     7
-## 31  15.6638727 116938.3  26191.31  143129.6  90746.97     7
-## 32  14.2723374 116995.5  26182.62  143178.1  90812.88     7
-## 33  13.0044223 117090.2  26156.80  143247.0  90933.44     9
-## 34  11.8491453 117273.2  26111.49  143384.7  91161.70     9
-## 35  10.7964999 117496.4  26066.29  143562.7  91430.14     9
-## 36   9.8373686 117824.8  26025.43  143850.2  91799.36     9
-## 37   8.9634439 118328.9  25992.22  144321.1  92336.69     9
-## 38   8.1671562 118810.4  25955.00  144765.4  92855.37    11
-## 39   7.4416086 119122.4  25926.35  145048.7  93196.03    11
-## 40   6.7805166 119282.3  25844.41  145126.7  93437.86    12
-## 41   6.1781542 119158.2  25645.58  144803.8  93512.61    12
-## 42   5.6293040 119017.1  25419.86  144437.0  93597.24    13
-## 43   5.1292121 118958.2  25238.37  144196.6  93719.81    13
-## 44   4.6735471 118853.1  25033.75  143886.8  93819.30    13
-## 45   4.2583620 118630.5  24789.21  143419.7  93841.34    13
-## 46   3.8800609 118359.1  24566.32  142925.4  93792.77    13
-## 47   3.5353670 118097.1  24394.41  142491.5  93702.69    13
-## 48   3.2212947 117943.3  24231.85  142175.2  93711.48    13
-## 49   2.9351238 117813.5  24076.32  141889.9  93737.22    13
-## 50   2.6743755 117709.7  23919.02  141628.7  93790.68    13
-## 51   2.4367913 117658.5  23787.71  141446.2  93870.80    13
-## 52   2.2203135 117667.0  23664.36  141331.3  94002.61    14
-## 53   2.0230670 117753.6  23548.92  141302.6  94204.72    15
-## 54   1.8433433 117928.1  23440.72  141368.8  94487.37    15
-## 55   1.6795857 118112.9  23350.18  141463.0  94762.67    17
-## 56   1.5303760 118306.4  23278.42  141584.9  95028.03    17
-## 57   1.3944216 118558.5  23199.42  141758.0  95359.11    17
-## 58   1.2705450 118773.3  23102.82  141876.1  95670.44    17
-## 59   1.1576733 118987.5  22996.02  141983.5  95991.45    17
-## 60   1.0548288 119210.7  22914.85  142125.6  96295.87    17
-## 61   0.9611207 119452.1  22838.86  142290.9  96613.22    17
-## 62   0.8757374 119697.1  22769.98  142467.1  96927.16    17
-## 63   0.7979393 119944.1  22706.78  142650.9  97237.33    17
-## 64   0.7270526 120180.8  22647.71  142828.5  97533.07    17
-## 65   0.6624632 120372.9  22584.08  142957.0  97788.86    18
-## 66   0.6036118 120539.4  22519.96  143059.3  98019.41    18
-## 67   0.5499886 120701.9  22461.29  143163.2  98240.63    18
-## 68   0.5011291 120872.3  22402.43  143274.7  98469.83    17
-## 69   0.4566102 121034.1  22356.26  143390.4  98677.87    18
-## 70   0.4160462 121205.2  22309.47  143514.7  98895.74    18
-## 71   0.3790858 121354.6  22277.62  143632.2  99076.94    18
-## 72   0.3454089 121492.5  22235.58  143728.1  99256.89    18</code></pre>
+<pre><code>##         lambda estimate std.error conf.high conf.low nzero
+## 1  255.2820965 201825.8  21782.59  223608.4 180043.2     0
+## 2  232.6035386 192904.0  21765.78  214669.8 171138.2     1
+## 3  211.9396813 183947.0  21347.67  205294.6 162599.3     2
+## 4  193.1115442 176574.5  21090.98  197665.5 155483.6     2
+## 5  175.9560468 170186.0  21035.74  191221.8 149150.3     3
+## 6  160.3245966 163851.2  21170.29  185021.5 142680.9     4
+## 7  146.0818013 157904.2  21150.27  179054.4 136753.9     4
+## 8  133.1042967 152317.8  20963.89  173281.7 131354.0     4
+## 9  121.2796778 147665.3  20833.70  168499.0 126831.6     4
+## 10 110.5055255 143638.1  20786.35  164424.4 122851.7     4
+## 11 100.6885192 140386.6  20806.65  161193.3 119579.9     5
+## 12  91.7436287 137617.9  20825.42  158443.3 116792.5     5
+## 13  83.5933775 135177.6  20778.91  155956.5 114398.7     5
+## 14  76.1671723 133028.3  20762.23  153790.5 112266.1     5
+## 15  69.4006906 131193.4  20797.82  151991.3 110395.6     6
+## 16  63.2353245 129548.8  20846.19  150395.0 108702.6     6
+## 17  57.6176726 127973.2  20831.91  148805.1 107141.3     6
+## 18  52.4990774 126547.7  20746.74  147294.4 105800.9     6
+## 19  47.8352040 125367.7  20658.95  146026.6 104708.7     6
+## 20  43.5856563 124423.0  20596.48  145019.5 103826.5     6
+## 21  39.7136268 123674.2  20554.51  144228.8 103119.7     6
+## 22  36.1855776 123109.5  20527.83  143637.3 102581.6     6
+## 23  32.9709506 122661.6  20514.11  143175.8 102147.5     6
+## 24  30.0419022 122312.4  20510.99  142823.4 101801.5     6
+## 25  27.3730624 122048.2  20515.72  142563.9 101532.5     6
+## 26  24.9413150 121874.7  20518.86  142393.6 101355.8     6
+## 27  22.7255973 121756.2  20523.16  142279.4 101233.1     6
+## 28  20.7067179 121679.0  20530.63  142209.7 101148.4     6
+## 29  18.8671902 121664.0  20538.06  142202.1 101125.9     6
+## 30  17.1910810 121691.0  20546.78  142237.8 101144.2     7
+## 31  15.6638727 121740.8  20558.46  142299.3 101182.3     7
+## 32  14.2723374 121804.0  20573.36  142377.3 101230.6     7
+## 33  13.0044223 121863.7  20588.38  142452.1 101275.3     9
+## 34  11.8491453 121927.7  20626.97  142554.6 101300.7     9
+## 35  10.7964999 122098.9  20729.28  142828.1 101369.6     9
+## 36   9.8373686 122497.2  20858.63  143355.8 101638.6     9
+## 37   8.9634439 123028.8  20973.00  144001.8 102055.8     9
+## 38   8.1671562 123420.7  21012.90  144433.6 102407.8    11
+## 39   7.4416086 123655.2  20982.49  144637.7 102672.7    11
+## 40   6.7805166 123687.0  21011.47  144698.5 102675.5    12
+## 41   6.1781542 123606.2  21006.09  144612.3 102600.1    12
+## 42   5.6293040 123378.5  20944.42  144323.0 102434.1    13
+## 43   5.1292121 123015.2  20854.30  143869.5 102160.9    13
+## 44   4.6735471 122587.9  20746.53  143334.4 101841.4    13
+## 45   4.2583620 122102.9  20641.33  142744.3 101461.6    13
+## 46   3.8800609 121725.3  20550.39  142275.7 101174.9    13
+## 47   3.5353670 121426.6  20470.39  141897.0 100956.2    13
+## 48   3.2212947 121190.9  20393.92  141584.8 100796.9    13
+## 49   2.9351238 121017.5  20319.50  141337.0 100698.0    13
+## 50   2.6743755 120948.3  20259.95  141208.2 100688.3    13
+## 51   2.4367913 121075.2  20201.28  141276.4 100873.9    13
+## 52   2.2203135 121283.1  20146.07  141429.2 101137.0    14
+## 53   2.0230670 121431.4  20096.53  141527.9 101334.8    15
+## 54   1.8433433 121534.5  20053.48  141587.9 101481.0    15
+## 55   1.6795857 121598.5  20023.41  141621.9 101575.1    17
+## 56   1.5303760 121648.8  20002.39  141651.2 101646.4    17
+## 57   1.3944216 121751.4  19969.70  141721.1 101781.7    17
+## 58   1.2705450 121863.2  19923.99  141787.2 101939.2    17
+## 59   1.1576733 121956.9  19873.21  141830.1 102083.7    17
+## 60   1.0548288 122101.3  19827.06  141928.4 102274.3    17
+## 61   0.9611207 122264.6  19781.03  142045.7 102483.6    17
+## 62   0.8757374 122419.6  19742.32  142161.9 102677.3    17
+## 63   0.7979393 122580.1  19702.78  142282.9 102877.4    17
+## 64   0.7270526 122747.8  19664.56  142412.4 103083.3    17
+## 65   0.6624632 122855.8  19634.07  142489.9 103221.8    18
+## 66   0.6036118 122953.9  19605.22  142559.2 103348.7    18
+## 67   0.5499886 123068.8  19581.20  142650.0 103487.6    18
+## 68   0.5011291 123176.0  19558.59  142734.6 103617.4    17
+## 69   0.4566102 123271.4  19540.64  142812.0 103730.7    18
+## 70   0.4160462 123370.9  19519.74  142890.6 103851.1    18</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glance</span>(fit_lasso_cv) <span class="co"># the two lambda values of interest</span></code></pre></div>
 <pre><code>##   lambda.min lambda.1se
-## 1   18.86719   110.5055</code></pre>
+## 1   2.674375   100.6885</code></pre>
 </div>
 <div id="simulation-study-p-n" class="section level2">
 <h2><span class="header-section-number">21.4</span> Simulation Study, p &gt; n</h2>
