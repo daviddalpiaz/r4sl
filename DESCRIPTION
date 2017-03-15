@@ -28,6 +28,7 @@ Imports:
   kernlab, 
   sparcl,
   mlbench,
-  klaR
+  klaR,
+  rpart.plot
 Remotes: 
   rstudio/bookdown
