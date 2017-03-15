@@ -562,10 +562,12 @@ local_span_09 =<span class="st"> </span><span class="kw">loess</span>(wage ~<spa
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gam_log =<span class="st"> </span><span class="kw">gam</span>(<span class="kw">I</span>(wage &gt;<span class="st"> </span><span class="dv">250</span>) ~<span class="st"> </span><span class="kw">s</span>(age, <span class="dv">4</span>) +<span class="st"> </span><span class="kw">s</span>(year, <span class="dv">4</span>) +<span class="st"> </span>education,
               <span class="dt">family =</span> binomial, <span class="dt">data =</span> Wage)
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
 <span class="kw">plot</span>(gam_log)</code></pre></div>
-<p><img src="18-nonlin_files/figure-html/unnamed-chunk-7-1.png" width="672" /><img src="18-nonlin_files/figure-html/unnamed-chunk-7-2.png" width="672" /><img src="18-nonlin_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(gam_log, <span class="dt">se =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</code></pre></div>
-<p><img src="18-nonlin_files/figure-html/unnamed-chunk-7-4.png" width="672" /><img src="18-nonlin_files/figure-html/unnamed-chunk-7-5.png" width="672" /><img src="18-nonlin_files/figure-html/unnamed-chunk-7-6.png" width="672" /></p>
+<p><img src="18-nonlin_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
+<span class="kw">plot</span>(gam_log, <span class="dt">se =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</code></pre></div>
+<p><img src="18-nonlin_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
 <div id="gams-in-caret" class="section level3">
 <h3><span class="header-section-number">24.5.1</span> GAMs in <code>caret</code></h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
@@ -576,7 +578,8 @@ bos_trn =<span class="st"> </span>Boston[bos_idx, ]
 bos_tst =<span class="st"> </span>Boston[-bos_idx, ]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cv_5 =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)
 gam_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">df =</span> <span class="dv">1</span>:<span class="dv">10</span>)
-gam_train =<span class="st"> </span><span class="kw">train</span>(medv ~<span class="st"> </span>., <span class="dt">data =</span> bos_trn, <span class="dt">trControl =</span> cv_5, <span class="dt">method =</span> <span class="st">&quot;gamSpline&quot;</span>, <span class="dt">tuneGrid =</span> gam_grid)
+gam_train =<span class="st"> </span><span class="kw">train</span>(medv ~<span class="st"> </span>., <span class="dt">data =</span> bos_trn, <span class="dt">trControl =</span> cv_5, 
+                  <span class="dt">method =</span> <span class="st">&quot;gamSpline&quot;</span>, <span class="dt">tuneGrid =</span> gam_grid)
 <span class="kw">plot</span>(gam_train)</code></pre></div>
 <p><img src="18-nonlin_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gam_train</code></pre></div>

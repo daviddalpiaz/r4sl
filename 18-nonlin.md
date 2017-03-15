@@ -357,16 +357,18 @@ anova(gam_fit_small, gam_fit, test = "F")
 ```r
 gam_log = gam(I(wage > 250) ~ s(age, 4) + s(year, 4) + education,
               family = binomial, data = Wage)
+par(mfrow = c(1, 3))
 plot(gam_log)
 ```
 
-![](18-nonlin_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> ![](18-nonlin_files/figure-latex/unnamed-chunk-7-2.pdf)<!-- --> ![](18-nonlin_files/figure-latex/unnamed-chunk-7-3.pdf)<!-- --> 
+![](18-nonlin_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 ```r
+par(mfrow = c(1, 3))
 plot(gam_log, se = TRUE, col = "dodgerblue")
 ```
 
-![](18-nonlin_files/figure-latex/unnamed-chunk-7-4.pdf)<!-- --> ![](18-nonlin_files/figure-latex/unnamed-chunk-7-5.pdf)<!-- --> ![](18-nonlin_files/figure-latex/unnamed-chunk-7-6.pdf)<!-- --> 
+![](18-nonlin_files/figure-latex/unnamed-chunk-7-2.pdf)<!-- --> 
 
 
 
@@ -386,7 +388,8 @@ bos_tst = Boston[-bos_idx, ]
 ```r
 cv_5 = trainControl(method = "cv", number = 5)
 gam_grid = expand.grid(df = 1:10)
-gam_train = train(medv ~ ., data = bos_trn, trControl = cv_5, method = "gamSpline", tuneGrid = gam_grid)
+gam_train = train(medv ~ ., data = bos_trn, trControl = cv_5, 
+                  method = "gamSpline", tuneGrid = gam_grid)
 plot(gam_train)
 ```
 
