@@ -58,7 +58,7 @@ anova(fit_a, fit_b, fit_c, fit_d)
 ## Logistic Regression, Polynomial Terms
 
 ```{r logistic}
-glm_poly_4 = glm(I(wage > 250) ~ poly(age, 3), data = Wage, family = binomial)
+glm_poly_4 = glm(I(wage > 250) ~ poly(age, 4), data = Wage, family = binomial)
 summary(glm_poly_4)
 ```
 
