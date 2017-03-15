@@ -153,36 +153,37 @@ anova(fit_a, fit_b, fit_c, fit_d)
 
 
 ```r
-glm_poly_4 = glm(I(wage > 250) ~ poly(age, 3), data = Wage, family = binomial)
+glm_poly_4 = glm(I(wage > 250) ~ poly(age, 4), data = Wage, family = binomial)
 summary(glm_poly_4)
 ```
 
 ```
 ## 
 ## Call:
-## glm(formula = I(wage > 250) ~ poly(age, 3), family = binomial, 
+## glm(formula = I(wage > 250) ~ poly(age, 4), family = binomial, 
 ##     data = Wage)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -0.2808  -0.2736  -0.2487  -0.1758   3.2868  
+## -0.3110  -0.2607  -0.2488  -0.1791   3.7859  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)    -3.8486     0.1597 -24.100  < 2e-16 ***
-## poly(age, 3)1  37.8846    11.4818   3.300 0.000968 ***
-## poly(age, 3)2 -29.5129    10.5626  -2.794 0.005205 ** 
-## poly(age, 3)3   9.7966     8.9990   1.089 0.276317    
+## (Intercept)    -4.3012     0.3451 -12.465  < 2e-16 ***
+## poly(age, 4)1  71.9642    26.1176   2.755  0.00586 ** 
+## poly(age, 4)2 -85.7729    35.9043  -2.389  0.01690 *  
+## poly(age, 4)3  34.1626    19.6890   1.735  0.08272 .  
+## poly(age, 4)4 -47.4008    24.0909  -1.968  0.04912 *  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 730.53  on 2999  degrees of freedom
-## Residual deviance: 707.92  on 2996  degrees of freedom
-## AIC: 715.92
+## Residual deviance: 701.22  on 2995  degrees of freedom
+## AIC: 711.22
 ## 
-## Number of Fisher Scoring iterations: 8
+## Number of Fisher Scoring iterations: 9
 ```
 
 
