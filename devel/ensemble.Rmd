@@ -1,0 +1,369 @@
+# Ensemble Methods
+
+We'll now consider ensembles of trees. 
+
+## Regression
+
+We'll first consider the regression case. We first consider the regression case, using the `Boston` data from the `MASS` package. We will use RMSE as our metric, so we write a function which will help us along the way.
+
+```{r}
+rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+```
+
+We also load all of the packages that we will need.
+
+```{r, message = FALSE, warning = FALSE}
+library(tree)
+library(MASS)
+library(ISLR)
+library(randomForest)
+library(gbm)
+library(caret)
+```
+
+We first test-train split the data and fit the same pruned tree as before. (Note: When pruning the tree, the best tree is actually the unpruned tree. View the results of `cv.tree` to see this. However, we select the tree of size 7 as the best of the pruned trees.)
+
+```{r}
+set.seed(18)
+boston_idx = sample(1:nrow(Boston), nrow(Boston) / 2)
+boston_trn = Boston[boston_idx,]
+boston_tst = Boston[-boston_idx,]
+```
+
+### Tree Model
+
+```{r}
+boston_tree = tree(medv ~ ., data = boston_trn)
+set.seed(18)
+boston_tree_cv = cv.tree(boston_tree)
+boston_tree_prune = prune.tree(boston_tree, best = 7)
+boston_prune_tst_pred = predict(boston_tree_prune, newdata = boston_tst)
+plot(boston_prune_tst_pred, boston_tst$medv, 
+     xlab = "Predicted", ylab = "Actual", 
+     main = "Predicted vs Actual: Tree, Test Data")
+abline(0, 1, col = "red", lwd = 2)
+(tree_tst_rmse = rmse(boston_prune_tst_pred, boston_tst$medv))
+```
+
+### Linear Model
+
+Last time, we also fit an additive linear model, which we found to work better than the tree. The test RMSE is lower, and the predicted vs actual plot looks much better.
+
+```{r}
+bostom_lm = lm(medv ~ ., data = boston_trn)
+boston_lm_tst_pred = predict(bostom_lm, newdata = boston_tst)
+plot(boston_lm_tst_pred, boston_tst$medv,
+     xlab = "Predicted", ylab = "Actual",
+     main = "Predicted vs Actual: Linear Model, Test Data"
+)
+abline(0, 1, col = "red", lwd = 2)
+(lm_tst_rmse = rmse(boston_lm_tst_pred, boston_tst$medv))
+```
+
+### Bagging
+
+We now fit a bagged model, using the `randomForest` package. Bagging is actually a special case of a random forest where `mtry` is equal to $p$, the number of predictors.
+
+```{r, message = FALSE, warning = FALSE}
+boston_bag = randomForest(medv ~ ., data = boston_trn, mtry = 13, 
+                          importance = TRUE, ntrees = 500)
+boston_bag
+boston_bag_tst_pred = predict(boston_bag, newdata = boston_tst)
+plot(boston_bag_tst_pred,boston_tst$medv,
+     xlab = "Predicted", ylab = "Actual",
+     main = "Predicted vs Actual: Bagged Model, Test Data"
+)
+abline(0, 1, col = "red", lwd = 2)
+(bag_tst_rmse = rmse(boston_bag_tst_pred, boston_tst$medv))
+```
+
+Here we see two interesting results. First, the predicted versus actual plot no longer has a small number of predicted values. Second, our test error has dropped dramatically. Also note that the "Mean of squared residuals" which is output by `randomForest` is the **Out of Bag** estimate of the error.
+
+```{r}
+plot(boston_bag)
+```
+
+
+### Random Forest
+
+We now try a random forest. For regression, the suggestion is to use `mtry` equal to $p/3$.
+
+```{r}
+boston_forest = randomForest(medv ~ ., data = boston_trn, mtry = 4, 
+                             importance = TRUE, ntrees = 500)
+boston_forest
+#importance(boston_forest)
+#varImpPlot(boston_forest)
+boston_forest_tst_pred = predict(boston_forest, newdata = boston_tst)
+plot(boston_forest_tst_pred, boston_tst$medv,
+     xlab = "Predicted", ylab = "Actual",
+     main = "Predicted vs Actual: Random Forest, Test Data"
+)
+abline(0, 1, col = "red", lwd = 2)
+(forest_tst_rmse = rmse(boston_forest_tst_pred, boston_tst$medv))
+boston_forest_trn_pred = predict(boston_forest, newdata = boston_trn)
+forest_trn_rmse = rmse(boston_forest_trn_pred, boston_trn$medv)
+forest_oob_rmse = rmse(boston_forest$predicted, boston_trn$medv)
+```
+
+Here we note three RMSEs. The training RMSE (which is optimistic), the OOB RMSE (which is a good estimate of the test error) and the test RMSE. Also note that variables importance was calculated, however, the results are not shown here. (The code to view the results is commented out.)
+
+```{r, echo = FALSE}
+(forst_errors = data.frame(
+  Data = c("Training", "OOB", "Test"),
+  Error = c(forest_trn_rmse, forest_oob_rmse, forest_tst_rmse)
+  )
+)
+```
+
+
+### Boosting
+
+Lastly, we try a boosted model, which by default will produce a nice **variable importance** plot as well as plots of the marginal effects of the predictors. We use the `gbm` package.
+
+```{r, fig.height = 6, fig.width = 8, message = FALSE, warning = FALSE}
+booston_boost = gbm(medv ~ ., data = boston_trn, distribution = "gaussian", 
+                   n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
+booston_boost
+summary(booston_boost)
+par(mfrow = c(1, 2))
+plot(booston_boost, i = "rm")
+plot(booston_boost, i = "lstat")
+boston_boost_tst_pred = predict(booston_boost, newdata = boston_tst, n.trees = 5000)
+(boost_tst_rmse = rmse(boston_boost_tst_pred, boston_tst$medv))
+```
+
+```{r}
+plot(boston_boost_tst_pred, boston_tst$medv,
+     xlab = "Predicted", ylab = "Actual", 
+     main = "Predicted vs Actual: Boosted Model, Test Data"
+)
+abline(0, 1, col = "red", lwd = 2)
+```
+
+### Results
+
+```{r}
+(boston_rmse = data.frame(
+  Model = c("Single Tree", "Linear Model", "Bagging",  "Random Forest",  "Boosting"),
+  TestError = c(tree_tst_rmse, lm_tst_rmse, bag_tst_rmse, forest_tst_rmse, boost_tst_rmse)
+  )
+)
+```
+
+While a single tree does not beat linear regression, each of the ensemble methods perform much better!
+
+
+## Classification
+
+We now return to the `Carseats` dataset and the classification setting. We see that an additive logistic regression performs much better than a single tree, but we expect ensemble methods to bring trees closer to the logistic regression. Can they do better?
+
+We now use prediction accuracy as our metric:
+
+```{r}
+accuracy = function(actual, predicted) {
+  mean(actual == predicted)
+}
+```
+
+
+```{r}
+data(Carseats)
+Carseats$Sales = as.factor(ifelse(Carseats$Sales <= 8, "Low", "High"))
+set.seed(2)
+seat_idx = sample(1:nrow(Carseats), 200)
+seat_trn = Carseats[seat_idx,]
+seat_tst = Carseats[-seat_idx,]
+```
+
+### Tree Model
+
+```{r}
+seat_tree = tree(Sales ~ ., data = seat_trn)
+set.seed(3)
+seat_tree_cv = cv.tree(seat_tree, FUN = prune.misclass)
+
+seat_tree_prune = prune.misclass(seat_tree, best = 9)
+seat_prune_tst_pred = predict(seat_tree_prune, seat_tst, type = "class")
+
+table(predicted = seat_prune_tst_pred, actual = seat_tst$Sales)
+(tree_tst_acc = accuracy(predicted = seat_prune_tst_pred, actual = seat_tst$Sales))
+```
+
+
+### Logistic Regression
+
+
+```{r}
+seat_glm = glm(Sales ~ ., data = seat_trn, family = "binomial")
+seat_glm_tst_pred = ifelse(predict(seat_glm, seat_tst, "response") > 0.5, 
+                           "Low", "High")
+table(predicted = seat_glm_tst_pred, actual = seat_tst$Sales)
+(glm_tst_acc = accuracy(predicted = seat_glm_tst_pred, actual = seat_tst$Sales))
+```
+
+### Bagging
+
+```{r, message = FALSE, warning = FALSE}
+seat_bag = randomForest(Sales ~ ., data = seat_trn, mtry = 10, 
+                        importance = TRUE, ntrees = 500)
+seat_bag
+seat_bag_tst_pred = predict(seat_bag, newdata = seat_tst)
+table(predicted = seat_bag_tst_pred, actual = seat_tst$Sales)
+(bag_tst_acc = accuracy(predicted = seat_bag_tst_pred, actual = seat_tst$Sales))
+```
+
+### Random Forest
+
+For classification, the suggested `mtry` for a random forest is $\sqrt{p}.$
+
+```{r}
+seat_forest = randomForest(Sales ~ ., data = seat_trn, mtry = 3, importance = TRUE, ntrees = 500)
+seat_forest
+seat_forest_tst_perd = predict(seat_forest, newdata = seat_tst)
+table(predicted = seat_forest_tst_perd, actual = seat_tst$Sales)
+(forest_tst_acc = accuracy(predicted = seat_forest_tst_perd, actual = seat_tst$Sales))
+```
+
+### Boosting
+
+To perform boosting, we modify the response to be `0` and `1` to work with `gbm`. Later we will use `caret` to fit `gbm` models, which will avoid this annoyance.
+
+```{r}
+seat_trn_mod = seat_trn
+seat_trn_mod$Sales = as.numeric(ifelse(seat_trn_mod$Sales == "Low", "0", "1"))
+
+seat_boost = gbm(Sales ~ ., data = seat_trn_mod, distribution = "bernoulli", 
+                 n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
+seat_boost
+seat_boost_tst_pred = ifelse(predict(seat_boost, seat_tst, n.trees = 5000, "response") > 0.5, 
+                             "High", "Low")
+table(predicted = seat_boost_tst_pred, actual = seat_tst$Sales)
+(boost_tst_acc = accuracy(predicted = seat_boost_tst_pred, actual = seat_tst$Sales))
+```
+
+
+### Results
+
+```{r}
+(seat_acc = data.frame(
+  Model = c("Single Tree", "Logistic Regression", "Bagging",  "Random Forest",  "Boosting"),
+  TestAccuracy = c(tree_tst_acc, glm_tst_acc, bag_tst_acc, forest_tst_acc, boost_tst_acc)
+  )
+)
+```
+
+Here we see each of the ensemble methods performing better than a single tree, however, they still fall behind logistic regression. Sometimes a simple linear model will beat more complicated models! This is why you should always try a logistic regression for classification.
+
+
+
+
+## Tuning
+
+So far we fit bagging, boosting and random forest models, but did not tune any of them, we simply used certain, somewhat arbitrary, parameters. Now we will see how to modify the tuning parameters to make these models better.
+
+- Bagging: Actually just a subset of Random Forest with `mtry` = $p$.
+- Random Forest: `mtry`
+- Boosting: `n.trees`, `interaction.depth`, `shrinkage`, `n.minobsinnode`
+
+We will use the `caret` package to accomplish this. Technically `ntrees` is a tuning parameter for both bagging and random forest, but `caret` will use 500 by default and there is no easy way to tune it. This will not make a big difference since for both we simply need "enough" and 500 seems to do the trick.
+
+While `mtry` is a tuning parameter, there are suggested values for classification and regression:
+
+- Regression: `mtry` = $p/3.$
+- Classification: `mtry` = $\sqrt{p}.$
+
+Also note that with these tree-based ensemble methods there are two resampling solutions for tuning the model:
+
+- Out of Bag 
+- Cross-Validation
+
+Using Out of Bag samples is advantageous with these methods as compared to Cross-Validation since it removes the need to refit the model and is thus much more computationally efficient. Unfortunately OOB methods cannot be used with `gbm` models. See the [`caret` documentation](http://topepo.github.io/caret/training.html) for details.
+
+
+
+
+### Random Forest and Bagging
+
+Here we setup training control for both OOB and Cross-Validation methods. Note we specify `verbose = FALSE` which suppresses output related to progress. You may wish to set this to `TRUE` when first tuning a model since it will give you an idea of how long the tuning process will take. (Which can sometimes be a long time.)
+
+```{r}
+oobControl = trainControl(method = "oob", verbose = FALSE)
+cvControl = trainControl(method = "cv", number = 5, verbose = FALSE)
+```
+
+To tune a Random Forest in `caret` we will use `method = "rf"` which uses the `randomForest` function in the background. Here we elect to use the OOB training control that we created. We could also use Cross-Validation, however it will likely select a similar model, however, requiring more time.
+
+We setup a grid of `mtry` values which include all possible values since there are $10$ predictors in the dataset. An `mtry` of $10$ is actually bagging.
+
+```{r}
+dim(seat_trn)
+rfGrid =  expand.grid(mtry = 1:10)
+set.seed(825)
+rfFit = train(Sales ~ ., data = seat_trn,
+               method = "rf",
+               trControl = oobControl,
+               verbose = FALSE,
+               tuneGrid = rfGrid)
+rfFit
+getACC(predict(rfFit, seat_tst), seat_tst$Sales)
+```
+
+The results returned are based on the OOB samples. (Coincidentally, the test accuracy is the same as the best accuracy found using OOB samples.) Note that when using OOB, for some reason the default plot is not what you would expect and is not at all useful. (Which is why it is omitted here.)
+
+```{r}
+rfFit$bestTune
+```
+
+Based on these results, we would select the random forest model with an `mtry` of `r as.numeric(rfFit$bestTune)`. Note that based on the OOB estimates, the bagging model is expected to perform worse than this select model, however, based on our results above, that is not what we find to be true in our test set.
+
+Also note that `method = "ranger"` would also fit a random forest model. [Ranger](http://arxiv.org/pdf/1508.04409.pdf) is a newer `R` package for random forests that has been shown to be much faster, especially when there are a larger number of predictors.
+
+
+### Boosting
+
+We now tune a boosted tree model. We will use the Cross-Validation tune control setup above. We will fit the model using `gbm` with `caret`.
+
+To setup the tuning grid, we must specify four parameters to tune:
+
+- `interaction.depth`: How many splits to use with each tree.
+- `n.trees`: The number of trees to use.
+- `shrinkage`: The shrinkage parameters, which controls how fast the method learns.
+- `n.minobsinnode`: The minimum number of observations in a node of the tree. (`caret` requires us to specify this. This is actually a tuning parameter of the trees, not boosting, and we would normally just accept the default.)
+
+Finally, `expand.grid` comes in handy, as we can specify a vector of values for each parameter, then we get back a matrix of all possible combinations.
+
+```{r}
+gbmGrid =  expand.grid(interaction.depth = 1:5,
+                        n.trees = (1:6) * 500,
+                        shrinkage = c(0.001, 0.01, 0.1),
+                        n.minobsinnode = 10)
+```
+
+We now train the model using all possible combinations of the tuning parameters we just specified.
+
+```{r, message=FALSE, warning=FALSE}
+gbmFit = train(Sales ~ ., data = seat_trn,
+                method = "gbm",
+                trControl = cvControl,
+                verbose = FALSE,
+                tuneGrid = gbmGrid)
+```
+
+The additional `verbose = FALSE` in the `train` call suppresses additional output from each `gbm` call.
+
+By default, calling `plot` here will produce a nice graphic of the results.
+
+```{r}
+#gbmFit
+plot(gbmFit)
+getACC(predict(gbmFit, seat_tst), seat_tst$Sales)
+```
+
+We see our tuned model does no better on the test set than the arbitrary boosted model we had fit above, with the slightly different parameters seen below. We could perhaps try a larger tuning grid, but at this point it seems unlikely that we could find a much better model. There seems to be no way to get a tree method to out-perform logistic regression in this dataset.
+
+```{r}
+gbmFit$bestTune
+```
