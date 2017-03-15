@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Statistical Learning</title>
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown 0.3.14 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/r4sl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/r4sl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz">
+
+
+<meta name="date" content="2017-03-15">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="prev" href="non-linear-models.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.2</b> Caveat Emptor</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.3</b> Conventions</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>1</b> Probability Review</a><ul>
+<li class="chapter" data-level="1.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>1.1</b> Probability Models</a></li>
+<li class="chapter" data-level="1.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>1.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="1.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>1.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="1.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>1.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>1.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>1.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="1.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="1.4.4" data-path="probability-review.html"><a href="probability-review.html#several-random-variables"><i class="fa fa-check"></i><b>1.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>1.5</b> Expectations</a></li>
+<li class="chapter" data-level="1.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>1.6</b> Likelihood</a></li>
+<li class="chapter" data-level="1.7" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>1.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started"><i class="fa fa-check"></i><b>2.1</b> Getting Started</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2</b> Basic Calculations</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.3</b> Getting Help</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.4</b> Installing Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>3</b> Data and Programming</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>3.1</b> Data Types</a></li>
+<li class="chapter" data-level="3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#data-structures"><i class="fa fa-check"></i><b>3.2</b> Data Structures</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-and-programming.html"><a href="data-and-programming.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-and-programming.html"><a href="data-and-programming.html#vectorization"><i class="fa fa-check"></i><b>3.2.2</b> Vectorization</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-and-programming.html"><a href="data-and-programming.html#logical-operators"><i class="fa fa-check"></i><b>3.2.3</b> Logical Operators</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-and-programming.html"><a href="data-and-programming.html#more-vectorization"><i class="fa fa-check"></i><b>3.2.4</b> More Vectorization</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-and-programming.html"><a href="data-and-programming.html#matrices"><i class="fa fa-check"></i><b>3.2.5</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.6" data-path="data-and-programming.html"><a href="data-and-programming.html#lists"><i class="fa fa-check"></i><b>3.2.6</b> Lists</a></li>
+<li class="chapter" data-level="3.2.7" data-path="data-and-programming.html"><a href="data-and-programming.html#data-frames"><i class="fa fa-check"></i><b>3.2.7</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-and-programming.html"><a href="data-and-programming.html#programming-basics"><i class="fa fa-check"></i><b>3.3</b> Programming Basics</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#control-flow"><i class="fa fa-check"></i><b>3.3.1</b> Control Flow</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#functions"><i class="fa fa-check"></i><b>3.3.2</b> Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="summarizing-data.html"><a href="summarizing-data.html"><i class="fa fa-check"></i><b>4</b> Summarizing Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="summarizing-data.html"><a href="summarizing-data.html#summary-statistics"><i class="fa fa-check"></i><b>4.1</b> Summary Statistics</a><ul>
+<li class="chapter" data-level="" data-path="summarizing-data.html"><a href="summarizing-data.html#central-tendency"><i class="fa fa-check"></i>Central Tendency</a></li>
+<li class="chapter" data-level="" data-path="summarizing-data.html"><a href="summarizing-data.html#spread"><i class="fa fa-check"></i>Spread</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="summarizing-data.html"><a href="summarizing-data.html#plotting"><i class="fa fa-check"></i><b>4.2</b> Plotting</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#histograms"><i class="fa fa-check"></i><b>4.2.1</b> Histograms</a></li>
+<li class="chapter" data-level="4.2.2" data-path="summarizing-data.html"><a href="summarizing-data.html#barplots"><i class="fa fa-check"></i><b>4.2.2</b> Barplots</a></li>
+<li class="chapter" data-level="4.2.3" data-path="summarizing-data.html"><a href="summarizing-data.html#boxplots"><i class="fa fa-check"></i><b>4.2.3</b> Boxplots</a></li>
+<li class="chapter" data-level="4.2.4" data-path="summarizing-data.html"><a href="summarizing-data.html#scatterplots"><i class="fa fa-check"></i><b>4.2.4</b> Scatterplots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-resources.html"><a href="r-resources.html"><i class="fa fa-check"></i><b>5</b> <code>R</code> Resources</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-resources.html"><a href="r-resources.html#beginner-tutorials-and-references"><i class="fa fa-check"></i><b>5.1</b> Beginner Tutorials and References</a></li>
+<li class="chapter" data-level="5.2" data-path="r-resources.html"><a href="r-resources.html#intermediate-references"><i class="fa fa-check"></i><b>5.2</b> Intermediate References</a></li>
+<li class="chapter" data-level="5.3" data-path="r-resources.html"><a href="r-resources.html#advanced-references"><i class="fa fa-check"></i><b>5.3</b> Advanced References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="probability-in-r.html"><a href="probability-in-r.html"><i class="fa fa-check"></i><b>6</b> Probability in <code>R</code></a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-in-r.html"><a href="probability-in-r.html#distributions-1"><i class="fa fa-check"></i><b>6.1</b> Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html"><i class="fa fa-check"></i><b>7</b> Hypothesis Tests in <code>R</code></a><ul>
+<li class="chapter" data-level="7.0.1" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html#one-sample-t-test-review"><i class="fa fa-check"></i><b>7.0.1</b> One Sample t-Test: Review</a></li>
+<li class="chapter" data-level="7.0.2" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html#one-sample-t-test-example"><i class="fa fa-check"></i><b>7.0.2</b> One Sample t-Test: Example</a></li>
+<li class="chapter" data-level="7.0.3" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html#two-sample-t-test-review"><i class="fa fa-check"></i><b>7.0.3</b> Two Sample t-Test: Review</a></li>
+<li class="chapter" data-level="7.0.4" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html#two-sample-t-test-example"><i class="fa fa-check"></i><b>7.0.4</b> Two Sample t-Test: Example</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>8</b> Simulation</a><ul>
+<li class="chapter" data-level="8.0.1" data-path="simulation.html"><a href="simulation.html#paired-differences"><i class="fa fa-check"></i><b>8.0.1</b> Paired Differences</a></li>
+<li class="chapter" data-level="8.0.2" data-path="simulation.html"><a href="simulation.html#distribution-of-a-sample-mean"><i class="fa fa-check"></i><b>8.0.2</b> Distribution of a Sample Mean</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html"><i class="fa fa-check"></i><b>9</b> RStudio and RMarkdown</a><ul>
+<li class="chapter" data-level="9.1" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html#template"><i class="fa fa-check"></i><b>9.1</b> Template</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html"><i class="fa fa-check"></i><b>10</b> Regression Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="10.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>10.1</b> Visualization for Regression</a></li>
+<li class="chapter" data-level="10.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>10.2</b> The <code>lm()</code> Function</a></li>
+<li class="chapter" data-level="10.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>10.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="10.4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>10.4</b> Prediction</a></li>
+<li class="chapter" data-level="10.5" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>10.5</b> Unusual Observations</a></li>
+<li class="chapter" data-level="10.6" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>10.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>10.6.1</b> Interactions</a></li>
+<li class="chapter" data-level="10.6.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>10.6.2</b> Polynomials</a></li>
+<li class="chapter" data-level="10.6.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>10.6.3</b> Transformations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html"><i class="fa fa-check"></i><b>11</b> Regression for Statistical Learning</a><ul>
+<li class="chapter" data-level="11.1" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>11.1</b> Assesing Model Accuracy</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#model-complexity"><i class="fa fa-check"></i><b>11.2</b> Model Complexity</a></li>
+<li class="chapter" data-level="11.3" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#test-train-split"><i class="fa fa-check"></i><b>11.3</b> Test-Train Split</a></li>
+<li class="chapter" data-level="11.4" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>11.4</b> Adding Flexibility to Linear Models</a></li>
+<li class="chapter" data-level="11.5" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#choosing-a-model"><i class="fa fa-check"></i><b>11.5</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>12</b> Simulating the Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="12.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>12.1</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="12.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation-1"><i class="fa fa-check"></i><b>12.2</b> Simulation</a></li>
+<li class="chapter" data-level="12.3" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>12.3</b> Bias-Variance Tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>13</b> Classification</a><ul>
+<li class="chapter" data-level="13.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>13.1</b> Visualization for Classification</a></li>
+<li class="chapter" data-level="13.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>13.2</b> A Simple Classifier</a></li>
+<li class="chapter" data-level="13.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>13.3</b> Metrics for Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>14</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="14.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="14.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>14.2</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="14.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>14.3</b> Logistic Regression with <code>glm()</code></a></li>
+<li class="chapter" data-level="14.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>14.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="14.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>14.5</b> Multinomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>15</b> Generative Models</a><ul>
+<li class="chapter" data-level="15.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>15.1</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="15.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>15.2</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="15.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>15.3</b> Naive Bayes</a></li>
+<li class="chapter" data-level="15.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>15.4</b> Discrete Inputs</a></li>
+<li class="chapter" data-level="15.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown"><i class="fa fa-check"></i><b>15.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html"><i class="fa fa-check"></i><b>16</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="16.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#classification-1"><i class="fa fa-check"></i><b>16.1</b> Classification</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#default-data"><i class="fa fa-check"></i><b>16.1.1</b> Default Data</a></li>
+<li class="chapter" data-level="16.1.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#iris-data"><i class="fa fa-check"></i><b>16.1.2</b> Iris Data</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#regression"><i class="fa fa-check"></i><b>16.2</b> Regression</a></li>
+<li class="chapter" data-level="16.3" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#external-links"><i class="fa fa-check"></i><b>16.3</b> External Links</a></li>
+<li class="chapter" data-level="16.4" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#rmarkdown-1"><i class="fa fa-check"></i><b>16.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>17</b> Resampling</a><ul>
+<li class="chapter" data-level="17.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>17.1</b> Test-Train Split</a></li>
+<li class="chapter" data-level="17.2" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>17.2</b> Cross-Validation</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="resampling.html"><a href="resampling.html#method-specific"><i class="fa fa-check"></i><b>17.2.1</b> Method Specific</a></li>
+<li class="chapter" data-level="17.2.2" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>17.2.2</b> Manual Cross-Validation</a></li>
+<li class="chapter" data-level="17.2.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>17.2.3</b> Test Data</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>17.3</b> Bootstrap</a></li>
+<li class="chapter" data-level="17.4" data-path="resampling.html"><a href="resampling.html#external-links-1"><i class="fa fa-check"></i><b>17.4</b> External Links</a></li>
+<li class="chapter" data-level="17.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-2"><i class="fa fa-check"></i><b>17.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>18</b> Classification Overview</a><ul>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#classification-methods"><i class="fa fa-check"></i>Classification Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#discriminative-versus-generative-methods"><i class="fa fa-check"></i>Discriminative versus Generative Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#parametric-and-non-parametric-methods"><i class="fa fa-check"></i>Parametric and Non-Parametric Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#tuning-parameters"><i class="fa fa-check"></i>Tuning Parameters</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#cross-validation-1"><i class="fa fa-check"></i>Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i>Curse of Dimensionality</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#no-free-lunch-theorem"><i class="fa fa-check"></i>No-Free-Lunch Theorem</a></li>
+<li class="chapter" data-level="18.1" data-path="classification-overview.html"><a href="classification-overview.html#external-links-2"><i class="fa fa-check"></i><b>18.1</b> External Links</a></li>
+<li class="chapter" data-level="18.2" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>18.2</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>19</b> The <code>caret</code> Package</a><ul>
+<li class="chapter" data-level="19.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-3"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
+<li class="chapter" data-level="19.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-4"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>20</b> Subset Selection</a><ul>
+<li class="chapter" data-level="20.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>20.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="20.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>20.1.1</b> <code>leaps</code> Package</a></li>
+<li class="chapter" data-level="20.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>20.1.2</b> Best Subset</a></li>
+<li class="chapter" data-level="20.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>20.1.3</b> Stepwise Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="subset-selection.html"><a href="subset-selection.html#validated-rmse"><i class="fa fa-check"></i><b>20.2</b> Validated RMSE</a></li>
+<li class="chapter" data-level="20.3" data-path="subset-selection.html"><a href="subset-selection.html#external-links-4"><i class="fa fa-check"></i><b>20.3</b> External Links</a></li>
+<li class="chapter" data-level="20.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-5"><i class="fa fa-check"></i><b>20.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html"><i class="fa fa-check"></i><b>21</b> Shrinkage Methods</a><ul>
+<li class="chapter" data-level="21.1" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ridge-regression"><i class="fa fa-check"></i><b>21.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="21.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#lasso"><i class="fa fa-check"></i><b>21.2</b> Lasso</a></li>
+<li class="chapter" data-level="21.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#broom"><i class="fa fa-check"></i><b>21.3</b> <code>broom</code></a></li>
+<li class="chapter" data-level="21.4" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#simulation-study-p-n"><i class="fa fa-check"></i><b>21.4</b> Simulation Study, p &gt; n</a></li>
+<li class="chapter" data-level="21.5" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#external-links-5"><i class="fa fa-check"></i><b>21.5</b> External Links</a></li>
+<li class="chapter" data-level="21.6" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#rmarkdown-6"><i class="fa fa-check"></i><b>21.6</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>22</b> Elastic Net</a><ul>
+<li class="chapter" data-level="22.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>22.1</b> Hitters Data</a></li>
+<li class="chapter" data-level="22.2" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-regression"><i class="fa fa-check"></i><b>22.2</b> Elastic Net for Regression</a></li>
+<li class="chapter" data-level="22.3" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-classification"><i class="fa fa-check"></i><b>22.3</b> Elastic Net for Classification</a></li>
+<li class="chapter" data-level="22.4" data-path="elastic-net.html"><a href="elastic-net.html#external-links-6"><i class="fa fa-check"></i><b>22.4</b> External Links</a></li>
+<li class="chapter" data-level="22.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-7"><i class="fa fa-check"></i><b>22.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>23</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="23.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>23.1</b> Sonar Data</a></li>
+<li class="chapter" data-level="23.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>23.2</b> RDA</a></li>
+<li class="chapter" data-level="23.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>23.3</b> RDA with Grid Search</a></li>
+<li class="chapter" data-level="23.4" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-random-search-search"><i class="fa fa-check"></i><b>23.4</b> RDA with Random Search Search</a></li>
+<li class="chapter" data-level="23.5" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#comparison-to-elastic-net"><i class="fa fa-check"></i><b>23.5</b> Comparison to Elastic Net</a></li>
+<li class="chapter" data-level="23.6" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#results"><i class="fa fa-check"></i><b>23.6</b> Results</a></li>
+<li class="chapter" data-level="23.7" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#external-links-7"><i class="fa fa-check"></i><b>23.7</b> External Links</a></li>
+<li class="chapter" data-level="23.8" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rmarkdown-8"><i class="fa fa-check"></i><b>23.8</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>24</b> Non-Linear Models</a><ul>
+<li class="chapter" data-level="24.1" data-path="non-linear-models.html"><a href="non-linear-models.html#polynomial-regression"><i class="fa fa-check"></i><b>24.1</b> Polynomial Regression</a><ul>
+<li class="chapter" data-level="24.1.1" data-path="non-linear-models.html"><a href="non-linear-models.html#anova"><i class="fa fa-check"></i><b>24.1.1</b> ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="non-linear-models.html"><a href="non-linear-models.html#logistic-regression-polynomial-terms"><i class="fa fa-check"></i><b>24.2</b> Logistic Regression, Polynomial Terms</a></li>
+<li class="chapter" data-level="24.3" data-path="non-linear-models.html"><a href="non-linear-models.html#step-functions"><i class="fa fa-check"></i><b>24.3</b> Step Functions</a><ul>
+<li class="chapter" data-level="24.3.1" data-path="non-linear-models.html"><a href="non-linear-models.html#smoothing-splines"><i class="fa fa-check"></i><b>24.3.1</b> Smoothing Splines</a></li>
+</ul></li>
+<li class="chapter" data-level="24.4" data-path="non-linear-models.html"><a href="non-linear-models.html#local-regression"><i class="fa fa-check"></i><b>24.4</b> Local Regression</a></li>
+<li class="chapter" data-level="24.5" data-path="non-linear-models.html"><a href="non-linear-models.html#generalized-additive-models-gams"><i class="fa fa-check"></i><b>24.5</b> Generalized Additive Models (GAMs)</a><ul>
+<li class="chapter" data-level="24.5.1" data-path="non-linear-models.html"><a href="non-linear-models.html#gams-in-caret"><i class="fa fa-check"></i><b>24.5.1</b> GAMs in <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="24.6" data-path="non-linear-models.html"><a href="non-linear-models.html#external-links-8"><i class="fa fa-check"></i><b>24.6</b> External Links</a></li>
+<li class="chapter" data-level="24.7" data-path="non-linear-models.html"><a href="non-linear-models.html#rmarkdown-9"><i class="fa fa-check"></i><b>24.7</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>25</b> Trees</a><ul>
+<li class="chapter" data-level="25.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>25.1</b> Classification Trees</a></li>
+<li class="chapter" data-level="25.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>25.2</b> Regression Trees</a></li>
+<li class="chapter" data-level="25.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>25.3</b> <code>rpart</code> Package</a></li>
+<li class="chapter" data-level="25.4" data-path="trees.html"><a href="trees.html#external-links-9"><i class="fa fa-check"></i><b>25.4</b> External Links</a></li>
+<li class="chapter" data-level="25.5" data-path="trees.html"><a href="trees.html#rmarkdown-10"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="trees" class="section level1">
+<h1><span class="header-section-number">Chapter 25</span> Trees</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tree)</code></pre></div>
+<p>In this document, we will use the package <code>tree</code> for both classification and regression trees. Note that there are many packages to do this in <code>R</code>. <a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf"><code>rpart</code></a> may be the most common, however, we will use <code>tree</code> for simplicity.</p>
+<div id="classification-trees" class="section level2">
+<h2><span class="header-section-number">25.1</span> Classification Trees</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)</code></pre></div>
+<p>To understand classification trees, we will use the <code>Carseat</code> dataset from the <code>ISLR</code> package. We will first modify the response variable <code>Sales</code> from its original use as a numerical variable, to a categorical variable with <code>High</code> for high sales, and <code>Low</code> for low sales.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Carseats)
+<span class="co">#?Carseats</span>
+<span class="kw">str</span>(Carseats)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    400 obs. of  11 variables:
+##  $ Sales      : num  9.5 11.22 10.06 7.4 4.15 ...
+##  $ CompPrice  : num  138 111 113 117 141 124 115 136 132 132 ...
+##  $ Income     : num  73 48 35 100 64 113 105 81 110 113 ...
+##  $ Advertising: num  11 16 10 4 3 13 0 15 0 0 ...
+##  $ Population : num  276 260 269 466 340 501 45 425 108 131 ...
+##  $ Price      : num  120 83 80 97 128 72 108 120 124 124 ...
+##  $ ShelveLoc  : Factor w/ 3 levels &quot;Bad&quot;,&quot;Good&quot;,&quot;Medium&quot;: 1 2 3 3 1 1 3 2 3 3 ...
+##  $ Age        : num  42 65 59 55 38 78 71 67 76 76 ...
+##  $ Education  : num  17 10 12 14 13 16 15 10 10 17 ...
+##  $ Urban      : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 2 1 1 ...
+##  $ US         : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 1 2 1 2 1 2 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Carseats$Sales =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">ifelse</span>(Carseats$Sales &lt;=<span class="st"> </span><span class="dv">8</span>, <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>))
+<span class="kw">str</span>(Carseats)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    400 obs. of  11 variables:
+##  $ Sales      : Factor w/ 2 levels &quot;High&quot;,&quot;Low&quot;: 1 1 1 2 2 1 2 1 2 2 ...
+##  $ CompPrice  : num  138 111 113 117 141 124 115 136 132 132 ...
+##  $ Income     : num  73 48 35 100 64 113 105 81 110 113 ...
+##  $ Advertising: num  11 16 10 4 3 13 0 15 0 0 ...
+##  $ Population : num  276 260 269 466 340 501 45 425 108 131 ...
+##  $ Price      : num  120 83 80 97 128 72 108 120 124 124 ...
+##  $ ShelveLoc  : Factor w/ 3 levels &quot;Bad&quot;,&quot;Good&quot;,&quot;Medium&quot;: 1 2 3 3 1 1 3 2 3 3 ...
+##  $ Age        : num  42 65 59 55 38 78 71 67 76 76 ...
+##  $ Education  : num  17 10 12 14 13 16 15 10 10 17 ...
+##  $ Urban      : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 2 1 1 ...
+##  $ US         : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 1 2 1 2 1 2 ...</code></pre>
+<p>We first fit an unpruned classification tree using all of the predictors. Details of this process can be found using <code>?tree</code> and <code>?tree.control</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_tree =<span class="st"> </span><span class="kw">tree</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> Carseats)
+<span class="co"># seat_tree = tree(Sales ~ ., data = Carseats, </span>
+<span class="co">#                  control = tree.control(nobs = nrow(Carseats), minsize = 10))</span>
+<span class="kw">summary</span>(seat_tree)</code></pre></div>
+<pre><code>## 
+## Classification tree:
+## tree(formula = Sales ~ ., data = Carseats)
+## Variables actually used in tree construction:
+## [1] &quot;ShelveLoc&quot;   &quot;Price&quot;       &quot;US&quot;          &quot;Income&quot;      &quot;CompPrice&quot;  
+## [6] &quot;Population&quot;  &quot;Advertising&quot; &quot;Age&quot;        
+## Number of terminal nodes:  27 
+## Residual mean deviance:  0.4575 = 170.7 / 373 
+## Misclassification error rate: 0.09 = 36 / 400</code></pre>
+<p>We see this tree has 27 terminal nodes and a misclassification rate of 0.09.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree)
+<span class="kw">text</span>(seat_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
+<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Classification Tree&quot;</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-5-1.png" width="2304" /></p>
+<p>Above we plot the tree. Below we output the details of the splits.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_tree</code></pre></div>
+<pre><code>## node), split, n, deviance, yval, (yprob)
+##       * denotes terminal node
+## 
+##   1) root 400 541.500 Low ( 0.41000 0.59000 )  
+##     2) ShelveLoc: Good 85  90.330 High ( 0.77647 0.22353 )  
+##       4) Price &lt; 135 68  49.260 High ( 0.88235 0.11765 )  
+##         8) US: No 17  22.070 High ( 0.64706 0.35294 )  
+##          16) Price &lt; 109 8   0.000 High ( 1.00000 0.00000 ) *
+##          17) Price &gt; 109 9  11.460 Low ( 0.33333 0.66667 ) *
+##         9) US: Yes 51  16.880 High ( 0.96078 0.03922 ) *
+##       5) Price &gt; 135 17  22.070 Low ( 0.35294 0.64706 )  
+##        10) Income &lt; 46 6   0.000 Low ( 0.00000 1.00000 ) *
+##        11) Income &gt; 46 11  15.160 High ( 0.54545 0.45455 ) *
+##     3) ShelveLoc: Bad,Medium 315 390.600 Low ( 0.31111 0.68889 )  
+##       6) Price &lt; 92.5 46  56.530 High ( 0.69565 0.30435 )  
+##        12) Income &lt; 57 10  12.220 Low ( 0.30000 0.70000 )  
+##          24) CompPrice &lt; 110.5 5   0.000 Low ( 0.00000 1.00000 ) *
+##          25) CompPrice &gt; 110.5 5   6.730 High ( 0.60000 0.40000 ) *
+##        13) Income &gt; 57 36  35.470 High ( 0.80556 0.19444 )  
+##          26) Population &lt; 207.5 16  21.170 High ( 0.62500 0.37500 ) *
+##          27) Population &gt; 207.5 20   7.941 High ( 0.95000 0.05000 ) *
+##       7) Price &gt; 92.5 269 299.800 Low ( 0.24535 0.75465 )  
+##        14) Advertising &lt; 13.5 224 213.200 Low ( 0.18304 0.81696 )  
+##          28) CompPrice &lt; 124.5 96  44.890 Low ( 0.06250 0.93750 )  
+##            56) Price &lt; 106.5 38  33.150 Low ( 0.15789 0.84211 )  
+##             112) Population &lt; 177 12  16.300 Low ( 0.41667 0.58333 )  
+##               224) Income &lt; 60.5 6   0.000 Low ( 0.00000 1.00000 ) *
+##               225) Income &gt; 60.5 6   5.407 High ( 0.83333 0.16667 ) *
+##             113) Population &gt; 177 26   8.477 Low ( 0.03846 0.96154 ) *
+##            57) Price &gt; 106.5 58   0.000 Low ( 0.00000 1.00000 ) *
+##          29) CompPrice &gt; 124.5 128 150.200 Low ( 0.27344 0.72656 )  
+##            58) Price &lt; 122.5 51  70.680 High ( 0.50980 0.49020 )  
+##             116) ShelveLoc: Bad 11   6.702 Low ( 0.09091 0.90909 ) *
+##             117) ShelveLoc: Medium 40  52.930 High ( 0.62500 0.37500 )  
+##               234) Price &lt; 109.5 16   7.481 High ( 0.93750 0.06250 ) *
+##               235) Price &gt; 109.5 24  32.600 Low ( 0.41667 0.58333 )  
+##                 470) Age &lt; 49.5 13  16.050 High ( 0.69231 0.30769 ) *
+##                 471) Age &gt; 49.5 11   6.702 Low ( 0.09091 0.90909 ) *
+##            59) Price &gt; 122.5 77  55.540 Low ( 0.11688 0.88312 )  
+##             118) CompPrice &lt; 147.5 58  17.400 Low ( 0.03448 0.96552 ) *
+##             119) CompPrice &gt; 147.5 19  25.010 Low ( 0.36842 0.63158 )  
+##               238) Price &lt; 147 12  16.300 High ( 0.58333 0.41667 )  
+##                 476) CompPrice &lt; 152.5 7   5.742 High ( 0.85714 0.14286 ) *
+##                 477) CompPrice &gt; 152.5 5   5.004 Low ( 0.20000 0.80000 ) *
+##               239) Price &gt; 147 7   0.000 Low ( 0.00000 1.00000 ) *
+##        15) Advertising &gt; 13.5 45  61.830 High ( 0.55556 0.44444 )  
+##          30) Age &lt; 54.5 25  25.020 High ( 0.80000 0.20000 )  
+##            60) CompPrice &lt; 130.5 14  18.250 High ( 0.64286 0.35714 )  
+##             120) Income &lt; 100 9  12.370 Low ( 0.44444 0.55556 ) *
+##             121) Income &gt; 100 5   0.000 High ( 1.00000 0.00000 ) *
+##            61) CompPrice &gt; 130.5 11   0.000 High ( 1.00000 0.00000 ) *
+##          31) Age &gt; 54.5 20  22.490 Low ( 0.25000 0.75000 )  
+##            62) CompPrice &lt; 122.5 10   0.000 Low ( 0.00000 1.00000 ) *
+##            63) CompPrice &gt; 122.5 10  13.860 Low ( 0.50000 0.50000 )  
+##             126) Price &lt; 125 5   0.000 High ( 1.00000 0.00000 ) *
+##             127) Price &gt; 125 5   0.000 Low ( 0.00000 1.00000 ) *</code></pre>
+<p>We now test-train split the data so we can evaluate how well our tree is working. We use 200 observations for each.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Carseats)</code></pre></div>
+<pre><code>## [1] 400  11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2</span>)
+seat_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nrow</span>(Carseats), <span class="dv">200</span>)
+seat_trn =<span class="st"> </span>Carseats[seat_idx,]
+seat_tst =<span class="st"> </span>Carseats[-seat_idx,]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_tree =<span class="st"> </span><span class="kw">tree</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> seat_trn)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(seat_tree)</code></pre></div>
+<pre><code>## 
+## Classification tree:
+## tree(formula = Sales ~ ., data = seat_trn)
+## Variables actually used in tree construction:
+## [1] &quot;ShelveLoc&quot;   &quot;Price&quot;       &quot;Population&quot;  &quot;Advertising&quot; &quot;Income&quot;     
+## [6] &quot;Age&quot;         &quot;CompPrice&quot;  
+## Number of terminal nodes:  19 
+## Residual mean deviance:  0.4282 = 77.51 / 181 
+## Misclassification error rate: 0.105 = 21 / 200</code></pre>
+<p>Note that, the tree is not using all of the available variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(seat_tree)$used</code></pre></div>
+<pre><code>## [1] ShelveLoc   Price       Population  Advertising Income      Age        
+## [7] CompPrice  
+## 11 Levels: &lt;leaf&gt; CompPrice Income Advertising Population ... US</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Carseats)[<span class="kw">which</span>(!(<span class="kw">names</span>(Carseats) %in%<span class="kw">summary</span>(seat_tree)$used))]</code></pre></div>
+<pre><code>## [1] &quot;Sales&quot;     &quot;Education&quot; &quot;Urban&quot;     &quot;US&quot;</code></pre>
+<p>Also notice that, this new tree is slightly different than the tree fit to all of the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree)
+<span class="kw">text</span>(seat_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
+<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Classification Tree&quot;</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-11-1.png" width="2304" /></p>
+<p>When using the <code>predict()</code> function on a tree, the default <code>type</code> is <code>vector</code> which gives predicted probabilities for both classes. We will use <code>type = class</code> to directly obtain classes. We first fit the tree using the training data (above), then obtain predictions on both the train and test set, then view the confusion matrix for both.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_trn_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
+seat_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
+<span class="co">#predict(seat_tree, seat_trn, type = &quot;vector&quot;)</span>
+<span class="co">#predict(seat_tree, seat_tst, type = &quot;vector&quot;)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train confusion</span>
+<span class="kw">table</span>(<span class="dt">predicted =</span> seat_trn_pred, <span class="dt">actual =</span> seat_trn$Sales)</code></pre></div>
+<pre><code>##          actual
+## predicted High Low
+##      High   66  10
+##      Low    14 110</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test confusion</span>
+<span class="kw">table</span>(<span class="dt">predicted =</span> seat_tst_pred, <span class="dt">actual =</span> seat_tst$Sales)</code></pre></div>
+<pre><code>##          actual
+## predicted High Low
+##      High   57  29
+##      Low    27  87</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
+  <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train acc</span>
+<span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_trn_pred, <span class="dt">actual =</span> seat_trn$Sales)</code></pre></div>
+<pre><code>## [1] 0.88</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test acc</span>
+<span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_tst_pred, <span class="dt">actual =</span> seat_tst$Sales)</code></pre></div>
+<pre><code>## [1] 0.72</code></pre>
+<p>Here it is easy to see that the tree has been over-fit. The train set performs much better than the test set.</p>
+<p>We will now use cross-validation to find a tree by considering trees of different sizes which have been pruned from our original tree.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">3</span>)
+seat_tree_cv =<span class="st"> </span><span class="kw">cv.tree</span>(seat_tree, <span class="dt">FUN =</span> prune.misclass)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># index of tree with minimum error</span>
+min_idx =<span class="st"> </span><span class="kw">which.min</span>(seat_tree_cv$dev)
+min_idx</code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># number of terminal nodes in that tree</span>
+seat_tree_cv$size[min_idx]</code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># misclassification rate of each tree</span>
+seat_tree_cv$dev /<span class="st"> </span><span class="kw">length</span>(seat_idx)</code></pre></div>
+<pre><code>## [1] 0.275 0.275 0.265 0.260 0.250 0.280 0.345 0.325 0.400</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="co"># default plot</span>
+<span class="kw">plot</span>(seat_tree_cv)
+<span class="co"># better plot</span>
+<span class="kw">plot</span>(seat_tree_cv$size, seat_tree_cv$dev /<span class="st"> </span><span class="kw">nrow</span>(seat_trn), <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>,
+     <span class="dt">xlab =</span> <span class="st">&quot;Tree Size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;CV Misclassification Rate&quot;</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>It appears that a tree of size 9 has the fewest misclassifications of the considered trees, via cross-validation.</p>
+<p>We use <code>prune.misclass()</code> to obtain that tree from our original tree, and plot this smaller tree.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_tree_prune =<span class="st"> </span><span class="kw">prune.misclass</span>(seat_tree, <span class="dt">best =</span> <span class="dv">9</span>)
+<span class="kw">summary</span>(seat_tree_prune)</code></pre></div>
+<pre><code>## 
+## Classification tree:
+## snip.tree(tree = seat_tree, nodes = c(223L, 4L, 12L, 54L))
+## Variables actually used in tree construction:
+## [1] &quot;ShelveLoc&quot;   &quot;Price&quot;       &quot;Advertising&quot; &quot;Age&quot;         &quot;CompPrice&quot;  
+## Number of terminal nodes:  9 
+## Residual mean deviance:  0.8103 = 154.8 / 191 
+## Misclassification error rate: 0.155 = 31 / 200</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree_prune)
+<span class="kw">text</span>(seat_tree_prune, <span class="dt">pretty =</span> <span class="dv">0</span>)
+<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Pruned Classification Tree&quot;</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-22-1.png" width="1152" /></p>
+<p>We again obtain predictions using this smaller tree, and evaluate on the test and train sets.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train</span>
+seat_prune_trn_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree_prune, seat_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
+<span class="kw">table</span>(<span class="dt">predicted =</span> seat_prune_trn_pred, <span class="dt">actual =</span> seat_trn$Sales)</code></pre></div>
+<pre><code>##          actual
+## predicted High Low
+##      High   59  10
+##      Low    21 110</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_prune_trn_pred, <span class="dt">actual =</span> seat_trn$Sales)</code></pre></div>
+<pre><code>## [1] 0.845</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test</span>
+seat_prune_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree_prune, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
+<span class="kw">table</span>(<span class="dt">predicted =</span> seat_prune_tst_pred, <span class="dt">actual =</span> seat_tst$Sales)</code></pre></div>
+<pre><code>##          actual
+## predicted High Low
+##      High   60  22
+##      Low    24  94</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_prune_tst_pred, <span class="dt">actual =</span> seat_tst$Sales)</code></pre></div>
+<pre><code>## [1] 0.77</code></pre>
+<p>The train set has performed almost as well as before, and there was a <strong>small</strong> improvement in the test set, but it is still obvious that we have over-fit. Trees tend to do this. We will look at several ways to fix this, including: bagging, boosting and random forests.</p>
+</div>
+<div id="regression-trees" class="section level2">
+<h2><span class="header-section-number">25.2</span> Regression Trees</h2>
+<p>To demonstrate regression trees, we will use the <code>Boston</code> data. Recall <code>medv</code> is the response. We first split the data in half.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
+<span class="kw">set.seed</span>(<span class="dv">18</span>)
+boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston) /<span class="st"> </span><span class="dv">2</span>)
+boston_trn =<span class="st"> </span>Boston[boston_idx,]
+boston_tst =<span class="st"> </span>Boston[-boston_idx,]</code></pre></div>
+<p>Then fit an unpruned regression tree to the training data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boston_tree =<span class="st"> </span><span class="kw">tree</span>(medv ~<span class="st"> </span>., <span class="dt">data =</span> boston_trn)
+<span class="kw">summary</span>(boston_tree)</code></pre></div>
+<pre><code>## 
+## Regression tree:
+## tree(formula = medv ~ ., data = boston_trn)
+## Variables actually used in tree construction:
+## [1] &quot;rm&quot;    &quot;lstat&quot; &quot;crim&quot; 
+## Number of terminal nodes:  9 
+## Residual mean deviance:  12.35 = 3013 / 244 
+## Distribution of residuals:
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -13.600  -1.832  -0.120   0.000   1.348  26.350</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_tree)
+<span class="kw">text</span>(boston_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
+<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Regression Tree&quot;</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-27-1.png" width="1152" /></p>
+<p>As with classification trees, we can use cross-validation to select a good pruning of the tree.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">18</span>)
+boston_tree_cv =<span class="st"> </span><span class="kw">cv.tree</span>(boston_tree)
+<span class="kw">plot</span>(boston_tree_cv$size, <span class="kw">sqrt</span>(boston_tree_cv$dev /<span class="st"> </span><span class="kw">nrow</span>(boston_trn)), <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>,
+     <span class="dt">xlab =</span> <span class="st">&quot;Tree Size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;CV-RMSE&quot;</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>While the tree of size 9 does have the lowest RMSE, we’ll prune to a size of 7 as it seems to perform just as well. (Otherwise we would not be pruning.) The pruned tree is, as expected, smaller and easier to interpret.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boston_tree_prune =<span class="st"> </span><span class="kw">prune.tree</span>(boston_tree, <span class="dt">best =</span> <span class="dv">7</span>)
+<span class="kw">summary</span>(boston_tree_prune)</code></pre></div>
+<pre><code>## 
+## Regression tree:
+## snip.tree(tree = boston_tree, nodes = c(11L, 8L))
+## Variables actually used in tree construction:
+## [1] &quot;rm&quot;    &quot;lstat&quot; &quot;crim&quot; 
+## Number of terminal nodes:  7 
+## Residual mean deviance:  14.05 = 3455 / 246 
+## Distribution of residuals:
+##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## -13.60000  -2.12000   0.01731   0.00000   1.88000  28.02000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_tree_prune)
+<span class="kw">text</span>(boston_tree_prune, <span class="dt">pretty =</span> <span class="dv">0</span>)
+<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Pruned Regression Tree&quot;</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-30-1.png" width="1152" /></p>
+<p>Let’s compare this regression tree to an additive linear model and use RMSE as our metric.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span>function(actual, predicted) {
+  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual -<span class="st"> </span>predicted) ^<span class="st"> </span><span class="dv">2</span>))
+}</code></pre></div>
+<p>We obtain predictions on the train and test sets from the pruned tree. We also plot actual vs predicted. This plot may look odd. We’ll compare it to a plot for linear regression below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># training RMSE two ways</span>
+<span class="kw">sqrt</span>(<span class="kw">summary</span>(boston_tree_prune)$dev /<span class="st"> </span><span class="kw">nrow</span>(boston_trn))</code></pre></div>
+<pre><code>## [1] 3.695598</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boston_prune_trn_pred =<span class="st"> </span><span class="kw">predict</span>(boston_tree_prune, <span class="dt">newdata =</span> boston_trn)
+<span class="kw">rmse</span>(boston_prune_trn_pred, boston_trn$medv)</code></pre></div>
+<pre><code>## [1] 3.695598</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test RMSE</span>
+boston_prune_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_tree_prune, <span class="dt">newdata =</span> boston_tst)
+<span class="kw">rmse</span>(boston_prune_tst_pred, boston_tst$medv)</code></pre></div>
+<pre><code>## [1] 5.331457</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_prune_tst_pred, boston_tst$medv, <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>Here, using an additive linear regression the actual vs predicted looks much more like what we are used to.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bostom_lm =<span class="st"> </span><span class="kw">lm</span>(medv ~<span class="st"> </span>., <span class="dt">data =</span> boston_trn)
+boston_lm_pred =<span class="st"> </span><span class="kw">predict</span>(bostom_lm, <span class="dt">newdata =</span> boston_tst)
+<span class="kw">plot</span>(boston_lm_pred, boston_tst$medv, <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmse</span>(boston_lm_pred, boston_tst$medv)</code></pre></div>
+<pre><code>## [1] 5.125877</code></pre>
+<p>We also see a lower test RMSE. The most obvious linear regression beats the tree! Again, we’ll improve on this tree soon. Also note the summary of the additive linear regression below. Which is easier to interpret, that output, or the small tree above?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(bostom_lm)</code></pre></div>
+<pre><code>##   (Intercept)          crim            zn         indus          chas 
+##  43.340158284  -0.113490889   0.046881038   0.018046856   3.557944155 
+##           nox            rm           age           dis           rad 
+## -21.904534125   3.486780787  -0.010592511  -1.766227892   0.354167931 
+##           tax       ptratio         black         lstat 
+##  -0.015036451  -0.830144898   0.003722857  -0.576134200</code></pre>
+</div>
+<div id="rpart-package" class="section level2">
+<h2><span class="header-section-number">25.3</span> <code>rpart</code> Package</h2>
+<p>The <code>rpart</code> package is an alternative method for fitting trees in <code>R</code>. It is much more feature rich, including fitting multiple cost complexities and performing cross-validation by default. It also has the ability to produce much nicer trees. Based on its default settings, it will often result in smaller trees than using the <code>tree</code> package. See the references below for more information. <code>rpart</code> can also be tuned via <code>caret</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)
+<span class="kw">set.seed</span>(<span class="dv">430</span>)
+<span class="co"># Fit a decision tree using rpart</span>
+<span class="co"># Note: when you fit a tree using rpart, the fitting routine automatically</span>
+<span class="co"># performs 10-fold CV and stores the errors for later use </span>
+<span class="co"># (such as for pruning the tree)</span>
+
+<span class="co"># fit a tree using rpart</span>
+seat_rpart =<span class="st"> </span><span class="kw">rpart</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>)
+
+<span class="co"># plot the cv error curve for the tree</span>
+<span class="co"># rpart tries different cost-complexities by default</span>
+<span class="co"># also stores cv results</span>
+<span class="kw">plotcp</span>(seat_rpart)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find best value of cp</span>
+min_cp =<span class="st"> </span>seat_rpart$cptable[<span class="kw">which.min</span>(seat_rpart$cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>]
+min_cp</code></pre></div>
+<pre><code>## [1] 0.02083333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># prunce tree using best cp</span>
+seat_rpart_prune =<span class="st"> </span><span class="kw">prune</span>(seat_rpart, <span class="dt">cp =</span> min_cp)
+
+<span class="co"># nicer plots</span>
+<span class="kw">library</span>(rpart.plot)
+<span class="kw">prp</span>(seat_rpart_prune)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-37-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(seat_rpart_prune, <span class="dt">type =</span> <span class="dv">4</span>)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-37-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rpart.plot</span>(seat_rpart_prune)</code></pre></div>
+<p><img src="19-tree_files/figure-html/unnamed-chunk-37-4.png" width="672" /></p>
+</div>
+<div id="external-links-9" class="section level2">
+<h2><span class="header-section-number">25.4</span> External Links</h2>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf">An Introduction to Recursive Partitioning Using the <code>rpart</code> Routines</a> - Details of the <code>rpart</code> package.</li>
+<li><a href="http://www.milbo.org/doc/prp.pdf"><code>rpart.plot</code> Package</a> - Detailed manual on plotting with <code>rpart</code> using the <code>rpart.plot</code> package.</li>
+</ul>
+</div>
+<div id="rmarkdown-10" class="section level2">
+<h2><span class="header-section-number">25.5</span> RMarkdown</h2>
+<p>The RMarkdown file for this chapter can be found <a href="19-tree.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.3.2 and the following packages:</p>
+<ul>
+<li>Base Packages, Attached</li>
+</ul>
+<pre><code>## [1] &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;base&quot;</code></pre>
+<ul>
+<li>Additional Packages, Attached</li>
+</ul>
+<pre><code>## [1] &quot;rpart.plot&quot; &quot;rpart&quot;      &quot;MASS&quot;       &quot;ISLR&quot;       &quot;tree&quot;</code></pre>
+<ul>
+<li>Additional Packages, Not Attached</li>
+</ul>
+<pre><code>##  [1] &quot;Rcpp&quot;      &quot;bookdown&quot;  &quot;digest&quot;    &quot;rprojroot&quot; &quot;backports&quot;
+##  [6] &quot;magrittr&quot;  &quot;evaluate&quot;  &quot;stringi&quot;   &quot;rmarkdown&quot; &quot;tools&quot;    
+## [11] &quot;stringr&quot;   &quot;yaml&quot;      &quot;htmltools&quot; &quot;knitr&quot;     &quot;methods&quot;</code></pre>
+
+<div id="refs" class="references">
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="non-linear-models.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/19-tree.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
