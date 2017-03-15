@@ -275,6 +275,8 @@ coef(bostom_lm)
 
 ## `rpart` Package
 
+The `rpart` package is an alternative method for fitting trees in `R`. It is much more feature rich, including fitting multiple cost complexities and performing cross-validation by default. It also has the ability to produce much nicer trees. Based on its default settings, it will often result in smaller trees than using the `tree` package. See the references below for more information. `rpart` can also be tuned via `caret`.
+
 ```{r}
 library(rpart)
 set.seed(430)
@@ -304,4 +306,34 @@ prp(seat_rpart_prune)
 prp(seat_rpart_prune, type = 4)
 rpart.plot(seat_rpart_prune)
 ```
+
+## External Links
+
+- [An Introduction to Recursive Partitioning Using the `rpart` Routines](https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf) - Details of the `rpart` package.
+- [`rpart.plot` Package](http://www.milbo.org/doc/prp.pdf) - Detailed manual on plotting with `rpart` using the `rpart.plot` package.
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](19-tree.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+- Base Packages, Attached
+
+```{r, echo = FALSE}
+sessionInfo()$basePkgs
+```
+
+- Additional Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additional Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```
+
+
 
