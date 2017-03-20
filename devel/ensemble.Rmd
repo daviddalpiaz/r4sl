@@ -367,3 +367,42 @@ We see our tuned model does no better on the test set than the arbitrary boosted
 ```{r}
 seat_gbm_tune$bestTune
 ```
+
+
+## External Links
+
+- [Classification and Regression by `randomForest`](http://www.bios.unc.edu/~dzeng/BIOS740/randomforest.pdf) - Introduction to the `randomForest` package in `R` news.
+- [`ranger`: A Fast Implementation of Random Forests](https://github.com/imbs-hl/ranger) - Alternative package for fitting random forests with potentially better speed.
+- [Extremely Randomized Trees](https://pdfs.semanticscholar.org/336a/165c17c9c56160d332b9f4a2b403fccbdbfb.pdf)
+- [`extraTrees` Method for Classificationand Regression](https://cran.r-project.org/web/packages/extraTrees/vignettes/extraTrees.pdf)
+- [XGBoost](http://xgboost.readthedocs.io/en/latest/) - Scalable and Flexible Gradient Boosting
+- [XGBoost `R` Tutorial](http://xgboost.readthedocs.io/en/latest/R-package/xgboostPresentation.html)
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+- Base Packages, Attached
+
+```{r, echo = FALSE}
+sessionInfo()$basePkgs
+```
+
+- Additional Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additional Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```
+
+
+
+
+
+
