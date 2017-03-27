@@ -317,6 +317,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="25.4" data-path="trees.html"><a href="trees.html#external-links-9"><i class="fa fa-check"></i><b>25.4</b> External Links</a></li>
 <li class="chapter" data-level="25.5" data-path="trees.html"><a href="trees.html#rmarkdown-10"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
 </ul></li>
+<li class="chapter" data-level="26" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>26</b> Ensemble Methods</a><ul>
+<li class="chapter" data-level="26.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-1"><i class="fa fa-check"></i><b>26.1</b> Regression</a><ul>
+<li class="chapter" data-level="26.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>26.1.1</b> Tree Model</a></li>
+<li class="chapter" data-level="26.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>26.1.2</b> Linear Model</a></li>
+<li class="chapter" data-level="26.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>26.1.3</b> Bagging</a></li>
+<li class="chapter" data-level="26.1.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest"><i class="fa fa-check"></i><b>26.1.4</b> Random Forest</a></li>
+<li class="chapter" data-level="26.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>26.1.5</b> Boosting</a></li>
+<li class="chapter" data-level="26.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>26.1.6</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>26.2</b> Classification</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>26.2.1</b> Tree Model</a></li>
+<li class="chapter" data-level="26.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>26.2.2</b> Logistic Regression</a></li>
+<li class="chapter" data-level="26.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>26.2.3</b> Bagging</a></li>
+<li class="chapter" data-level="26.2.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-1"><i class="fa fa-check"></i><b>26.2.4</b> Random Forest</a></li>
+<li class="chapter" data-level="26.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>26.2.5</b> Boosting</a></li>
+<li class="chapter" data-level="26.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-2"><i class="fa fa-check"></i><b>26.2.6</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning"><i class="fa fa-check"></i><b>26.3</b> Tuning</a><ul>
+<li class="chapter" data-level="26.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>26.3.1</b> Random Forest and Bagging</a></li>
+<li class="chapter" data-level="26.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>26.3.2</b> Boosting</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>26.4</b> Tree versus Ensemble Boundaries</a></li>
+<li class="chapter" data-level="26.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-10"><i class="fa fa-check"></i><b>26.5</b> External Links</a></li>
+<li class="chapter" data-level="26.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-11"><i class="fa fa-check"></i><b>26.6</b> RMarkdown</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
 
@@ -370,8 +395,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 11.79982</code></pre>
 <p>Lastly, to generate a random sample of size <code>n = 10</code>, use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
-<pre><code>##  [1]  0.35449274 10.45756901 -7.44457775 12.25577634  5.80572074
-##  [6]  3.09598777  4.99946295  0.09037869 -6.89893872  6.10370547</code></pre>
+<pre><code>##  [1] -1.9466474  7.4562864  1.4236708  0.9175046 -5.9149002 11.1427127
+##  [7] -2.3822531  4.3634704  1.4984165  4.6589873</code></pre>
 <p>These functions exist for many other distributions, including but not limited to:</p>
 <table>
 <thead>

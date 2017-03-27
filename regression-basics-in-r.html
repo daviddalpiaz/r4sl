@@ -317,6 +317,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="25.4" data-path="trees.html"><a href="trees.html#external-links-9"><i class="fa fa-check"></i><b>25.4</b> External Links</a></li>
 <li class="chapter" data-level="25.5" data-path="trees.html"><a href="trees.html#rmarkdown-10"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
 </ul></li>
+<li class="chapter" data-level="26" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>26</b> Ensemble Methods</a><ul>
+<li class="chapter" data-level="26.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-1"><i class="fa fa-check"></i><b>26.1</b> Regression</a><ul>
+<li class="chapter" data-level="26.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>26.1.1</b> Tree Model</a></li>
+<li class="chapter" data-level="26.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>26.1.2</b> Linear Model</a></li>
+<li class="chapter" data-level="26.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>26.1.3</b> Bagging</a></li>
+<li class="chapter" data-level="26.1.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest"><i class="fa fa-check"></i><b>26.1.4</b> Random Forest</a></li>
+<li class="chapter" data-level="26.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>26.1.5</b> Boosting</a></li>
+<li class="chapter" data-level="26.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>26.1.6</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>26.2</b> Classification</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>26.2.1</b> Tree Model</a></li>
+<li class="chapter" data-level="26.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>26.2.2</b> Logistic Regression</a></li>
+<li class="chapter" data-level="26.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>26.2.3</b> Bagging</a></li>
+<li class="chapter" data-level="26.2.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-1"><i class="fa fa-check"></i><b>26.2.4</b> Random Forest</a></li>
+<li class="chapter" data-level="26.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>26.2.5</b> Boosting</a></li>
+<li class="chapter" data-level="26.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-2"><i class="fa fa-check"></i><b>26.2.6</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning"><i class="fa fa-check"></i><b>26.3</b> Tuning</a><ul>
+<li class="chapter" data-level="26.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>26.3.1</b> Random Forest and Bagging</a></li>
+<li class="chapter" data-level="26.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>26.3.2</b> Boosting</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>26.4</b> Tree versus Ensemble Boundaries</a></li>
+<li class="chapter" data-level="26.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-10"><i class="fa fa-check"></i><b>26.5</b> External Links</a></li>
+<li class="chapter" data-level="26.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-11"><i class="fa fa-check"></i><b>26.6</b> RMarkdown</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
 
@@ -510,29 +535,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1        x2            y
-##    &lt;fctr&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-## 1       A 0.1061076 -0.021246998
-## 2       A 0.5720434 -0.789616556
-## 3       A 0.7475622 -1.223931764
-## 4       A 0.1944384 -0.004058892
-## 5       A 0.9360319  0.273038418
-## 6       A 0.1633431 -0.525802784
-## 7       A 0.9452935  1.221439717
-## 8       A 0.3702179  0.990086117
-## 9       A 0.5795439  0.449494377
-## 10      A 0.3163595 -0.594606826
+##        x1          x2           y
+##    &lt;fctr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+## 1       A 0.338352404 -1.55165211
+## 2       A 0.169816753  0.05216502
+## 3       A 0.515135953  2.29357438
+## 4       A 0.705300567  0.63354446
+## 5       A 0.477993304 -0.77462752
+## 6       A 0.355912107  0.02340456
+## 7       A 0.878824375  1.56546101
+## 8       A 0.827626519  1.39555030
+## 9       A 0.803490465  1.20087588
+## 10      A 0.007204669  1.02641229
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  0.04923591  0.14148403  0.09961539 -0.14552278</code></pre>
+##  -0.2116302  -0.1424366  -0.5777752   1.5711711</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.3074732   1.3204163   0.4404417   0.5778871  -2.0675913  -0.6878236</code></pre>
+##  -0.2391885   0.2954166  -1.0201440   1.6254233  -0.8872918   0.7237075</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Polynomials</h3>
