@@ -4,7 +4,7 @@ We'll now consider ensembles of trees.
 
 ## Regression
 
-We'll first consider the regression case. We first consider the regression case, using the `Boston` data from the `MASS` package. We will use RMSE as our metric, so we write a function which will help us along the way.
+We first consider the regression case, using the `Boston` data from the `MASS` package. We will use RMSE as our metric, so we write a function which will help us along the way.
 
 ```{r}
 rmse = function(actual, predicted) {
@@ -125,7 +125,7 @@ Lastly, we try a boosted model, which by default will produce a nice **variable 
 
 ```{r, fig.height = 6, fig.width = 8, message = FALSE, warning = FALSE}
 booston_boost = gbm(medv ~ ., data = boston_trn, distribution = "gaussian", 
-                   n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
+                    n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
 booston_boost
 summary(booston_boost)
 par(mfrow = c(1, 2))
@@ -366,6 +366,84 @@ We see our tuned model does no better on the test set than the arbitrary boosted
 
 ```{r}
 seat_gbm_tune$bestTune
+```
+
+
+
+## Tree versus Ensemble Boundaries
+
+```{r}
+library(mlbench)
+set.seed(42)
+sim_trn = mlbench.circle(n = 1000, d = 2)
+sim_trn = data.frame(sim_trn$x, class = as.factor(sim_trn$classes))
+sim_tst = mlbench.circle(n = 1000, d = 2)
+sim_tst = data.frame(sim_tst$x, class = as.factor(sim_tst$classes))
+```
+
+```{r}
+plot(sim_trn$X1, sim_trn$X2, col = sim_trn$class,
+     xlab = "X1", ylab = "X2")
+```
+
+```{r}
+cv_5 = trainControl(method = "cv", number = 5)
+oob  = trainControl(method = "oob")
+```
+
+```{r}
+sim_tree_cv = train(class ~ .,
+                    data = sim_trn,
+                    trControl = cv_5,
+                    method = "rpart")
+```
+
+```{r, message = FALSE, warning = FALSE}
+library(rpart.plot)
+prp(sim_tree_cv$finalModel)
+```
+
+```{r}
+rf_grid = expand.grid(mtry = c(1, 2))
+sim_rf_oob = train(class ~ .,
+                   data = sim_trn,
+                   trControl = oob,
+                   tuneGrid = rf_grid)
+```
+
+```{r}
+gbm_grid =  expand.grid(interaction.depth = 1:5,
+                        n.trees = (1:6) * 500,
+                        shrinkage = c(0.001, 0.01, 0.1),
+                        n.minobsinnode = 10)
+
+sim_gbm_cv = train(class ~ ., 
+                   data = sim_trn,
+                   method = "gbm",
+                   trControl = cv_5,
+                   verbose = FALSE,
+                   tuneGrid = gbm_grid)
+```
+
+```{r}
+plot_grid = expand.grid(
+  X1 = seq(min(sim_tst$X1), max(sim_tst$X1), by = 0.01),
+  X2 = seq(min(sim_tst$X2), max(sim_tst$X2), by = 0.01)
+)
+
+tree_pred = predict(sim_tree_cv, plot_grid)
+rf_pred   = predict(sim_rf_oob, plot_grid)
+gbm_pred  = predict(sim_gbm_cv, plot_grid)
+```
+
+```{r}
+par(mfrow = c(1, 3))
+plot(plot_grid$X1, plot_grid$X2, col = tree_pred,
+     xlab = "X1", ylab = "X2", pch = 20, main = "Single Tree")
+plot(plot_grid$X1, plot_grid$X2, col = rf_pred,
+     xlab = "X1", ylab = "X2", pch = 20, main = "Random Forest")
+plot(plot_grid$X1, plot_grid$X2, col = gbm_pred,
+     xlab = "X1", ylab = "X2", pch = 20, main = "Boosted Trees")
 ```
 
 
