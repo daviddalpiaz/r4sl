@@ -134,7 +134,7 @@ lines(age_grid, predict(local_span_01, data.frame(age = age_grid)),
       col = "darkorange", lwd = 2)
 lines(age_grid, predict(local_span_09, data.frame(age = age_grid)),
       col = "dodgerblue", lwd = 2)
-legend("topright", legend = c("Span = 0.2", "Span = 0.5"),
+legend("topright", legend = c("Span = 0.1", "Span = 0.9"),
        col = c("darkorange", "dodgerblue"), lty = 1, lwd = 2, cex = .8)
 ```
 
