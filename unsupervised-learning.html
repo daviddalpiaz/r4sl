@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Statistical Learning</title>
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/r4sl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/r4sl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz">
+
+
+<meta name="date" content="2017-03-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="prev" href="support-vector-machines.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.2</b> Caveat Emptor</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.3</b> Conventions</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>1</b> Probability Review</a><ul>
+<li class="chapter" data-level="1.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>1.1</b> Probability Models</a></li>
+<li class="chapter" data-level="1.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>1.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="1.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>1.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="1.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>1.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>1.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>1.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="1.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="1.4.4" data-path="probability-review.html"><a href="probability-review.html#several-random-variables"><i class="fa fa-check"></i><b>1.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>1.5</b> Expectations</a></li>
+<li class="chapter" data-level="1.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>1.6</b> Likelihood</a></li>
+<li class="chapter" data-level="1.7" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>1.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to <code>R</code></a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started"><i class="fa fa-check"></i><b>2.1</b> Getting Started</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-calculations"><i class="fa fa-check"></i><b>2.2</b> Basic Calculations</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.3</b> Getting Help</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-packages"><i class="fa fa-check"></i><b>2.4</b> Installing Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>3</b> Data and Programming</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>3.1</b> Data Types</a></li>
+<li class="chapter" data-level="3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#data-structures"><i class="fa fa-check"></i><b>3.2</b> Data Structures</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-and-programming.html"><a href="data-and-programming.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-and-programming.html"><a href="data-and-programming.html#vectorization"><i class="fa fa-check"></i><b>3.2.2</b> Vectorization</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-and-programming.html"><a href="data-and-programming.html#logical-operators"><i class="fa fa-check"></i><b>3.2.3</b> Logical Operators</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-and-programming.html"><a href="data-and-programming.html#more-vectorization"><i class="fa fa-check"></i><b>3.2.4</b> More Vectorization</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-and-programming.html"><a href="data-and-programming.html#matrices"><i class="fa fa-check"></i><b>3.2.5</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.6" data-path="data-and-programming.html"><a href="data-and-programming.html#lists"><i class="fa fa-check"></i><b>3.2.6</b> Lists</a></li>
+<li class="chapter" data-level="3.2.7" data-path="data-and-programming.html"><a href="data-and-programming.html#data-frames"><i class="fa fa-check"></i><b>3.2.7</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-and-programming.html"><a href="data-and-programming.html#programming-basics"><i class="fa fa-check"></i><b>3.3</b> Programming Basics</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#control-flow"><i class="fa fa-check"></i><b>3.3.1</b> Control Flow</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#functions"><i class="fa fa-check"></i><b>3.3.2</b> Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="summarizing-data.html"><a href="summarizing-data.html"><i class="fa fa-check"></i><b>4</b> Summarizing Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="summarizing-data.html"><a href="summarizing-data.html#summary-statistics"><i class="fa fa-check"></i><b>4.1</b> Summary Statistics</a><ul>
+<li class="chapter" data-level="" data-path="summarizing-data.html"><a href="summarizing-data.html#central-tendency"><i class="fa fa-check"></i>Central Tendency</a></li>
+<li class="chapter" data-level="" data-path="summarizing-data.html"><a href="summarizing-data.html#spread"><i class="fa fa-check"></i>Spread</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="summarizing-data.html"><a href="summarizing-data.html#plotting"><i class="fa fa-check"></i><b>4.2</b> Plotting</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#histograms"><i class="fa fa-check"></i><b>4.2.1</b> Histograms</a></li>
+<li class="chapter" data-level="4.2.2" data-path="summarizing-data.html"><a href="summarizing-data.html#barplots"><i class="fa fa-check"></i><b>4.2.2</b> Barplots</a></li>
+<li class="chapter" data-level="4.2.3" data-path="summarizing-data.html"><a href="summarizing-data.html#boxplots"><i class="fa fa-check"></i><b>4.2.3</b> Boxplots</a></li>
+<li class="chapter" data-level="4.2.4" data-path="summarizing-data.html"><a href="summarizing-data.html#scatterplots"><i class="fa fa-check"></i><b>4.2.4</b> Scatterplots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-resources.html"><a href="r-resources.html"><i class="fa fa-check"></i><b>5</b> <code>R</code> Resources</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-resources.html"><a href="r-resources.html#beginner-tutorials-and-references"><i class="fa fa-check"></i><b>5.1</b> Beginner Tutorials and References</a></li>
+<li class="chapter" data-level="5.2" data-path="r-resources.html"><a href="r-resources.html#intermediate-references"><i class="fa fa-check"></i><b>5.2</b> Intermediate References</a></li>
+<li class="chapter" data-level="5.3" data-path="r-resources.html"><a href="r-resources.html#advanced-references"><i class="fa fa-check"></i><b>5.3</b> Advanced References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="probability-in-r.html"><a href="probability-in-r.html"><i class="fa fa-check"></i><b>6</b> Probability in <code>R</code></a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-in-r.html"><a href="probability-in-r.html#distributions-1"><i class="fa fa-check"></i><b>6.1</b> Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html"><i class="fa fa-check"></i><b>7</b> Hypothesis Tests in <code>R</code></a><ul>
+<li class="chapter" data-level="7.0.1" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html#one-sample-t-test-review"><i class="fa fa-check"></i><b>7.0.1</b> One Sample t-Test: Review</a></li>
+<li class="chapter" data-level="7.0.2" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html#one-sample-t-test-example"><i class="fa fa-check"></i><b>7.0.2</b> One Sample t-Test: Example</a></li>
+<li class="chapter" data-level="7.0.3" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html#two-sample-t-test-review"><i class="fa fa-check"></i><b>7.0.3</b> Two Sample t-Test: Review</a></li>
+<li class="chapter" data-level="7.0.4" data-path="hypothesis-tests-in-r.html"><a href="hypothesis-tests-in-r.html#two-sample-t-test-example"><i class="fa fa-check"></i><b>7.0.4</b> Two Sample t-Test: Example</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>8</b> Simulation</a><ul>
+<li class="chapter" data-level="8.0.1" data-path="simulation.html"><a href="simulation.html#paired-differences"><i class="fa fa-check"></i><b>8.0.1</b> Paired Differences</a></li>
+<li class="chapter" data-level="8.0.2" data-path="simulation.html"><a href="simulation.html#distribution-of-a-sample-mean"><i class="fa fa-check"></i><b>8.0.2</b> Distribution of a Sample Mean</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html"><i class="fa fa-check"></i><b>9</b> RStudio and RMarkdown</a><ul>
+<li class="chapter" data-level="9.1" data-path="rstudio-and-rmarkdown.html"><a href="rstudio-and-rmarkdown.html#template"><i class="fa fa-check"></i><b>9.1</b> Template</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html"><i class="fa fa-check"></i><b>10</b> Regression Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="10.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>10.1</b> Visualization for Regression</a></li>
+<li class="chapter" data-level="10.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>10.2</b> The <code>lm()</code> Function</a></li>
+<li class="chapter" data-level="10.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>10.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="10.4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>10.4</b> Prediction</a></li>
+<li class="chapter" data-level="10.5" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>10.5</b> Unusual Observations</a></li>
+<li class="chapter" data-level="10.6" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>10.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>10.6.1</b> Interactions</a></li>
+<li class="chapter" data-level="10.6.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>10.6.2</b> Polynomials</a></li>
+<li class="chapter" data-level="10.6.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>10.6.3</b> Transformations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html"><i class="fa fa-check"></i><b>11</b> Regression for Statistical Learning</a><ul>
+<li class="chapter" data-level="11.1" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>11.1</b> Assesing Model Accuracy</a></li>
+<li class="chapter" data-level="11.2" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#model-complexity"><i class="fa fa-check"></i><b>11.2</b> Model Complexity</a></li>
+<li class="chapter" data-level="11.3" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#test-train-split"><i class="fa fa-check"></i><b>11.3</b> Test-Train Split</a></li>
+<li class="chapter" data-level="11.4" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>11.4</b> Adding Flexibility to Linear Models</a></li>
+<li class="chapter" data-level="11.5" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#choosing-a-model"><i class="fa fa-check"></i><b>11.5</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>12</b> Simulating the Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="12.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>12.1</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="12.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation-1"><i class="fa fa-check"></i><b>12.2</b> Simulation</a></li>
+<li class="chapter" data-level="12.3" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>12.3</b> Bias-Variance Tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>13</b> Classification</a><ul>
+<li class="chapter" data-level="13.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>13.1</b> Visualization for Classification</a></li>
+<li class="chapter" data-level="13.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>13.2</b> A Simple Classifier</a></li>
+<li class="chapter" data-level="13.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>13.3</b> Metrics for Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>14</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="14.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="14.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>14.2</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="14.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>14.3</b> Logistic Regression with <code>glm()</code></a></li>
+<li class="chapter" data-level="14.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>14.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="14.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>14.5</b> Multinomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>15</b> Generative Models</a><ul>
+<li class="chapter" data-level="15.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>15.1</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="15.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>15.2</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="15.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>15.3</b> Naive Bayes</a></li>
+<li class="chapter" data-level="15.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>15.4</b> Discrete Inputs</a></li>
+<li class="chapter" data-level="15.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown"><i class="fa fa-check"></i><b>15.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html"><i class="fa fa-check"></i><b>16</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="16.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#classification-1"><i class="fa fa-check"></i><b>16.1</b> Classification</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#default-data"><i class="fa fa-check"></i><b>16.1.1</b> Default Data</a></li>
+<li class="chapter" data-level="16.1.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#iris-data"><i class="fa fa-check"></i><b>16.1.2</b> Iris Data</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#regression"><i class="fa fa-check"></i><b>16.2</b> Regression</a></li>
+<li class="chapter" data-level="16.3" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#external-links"><i class="fa fa-check"></i><b>16.3</b> External Links</a></li>
+<li class="chapter" data-level="16.4" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#rmarkdown-1"><i class="fa fa-check"></i><b>16.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>17</b> Resampling</a><ul>
+<li class="chapter" data-level="17.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>17.1</b> Test-Train Split</a></li>
+<li class="chapter" data-level="17.2" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>17.2</b> Cross-Validation</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="resampling.html"><a href="resampling.html#method-specific"><i class="fa fa-check"></i><b>17.2.1</b> Method Specific</a></li>
+<li class="chapter" data-level="17.2.2" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>17.2.2</b> Manual Cross-Validation</a></li>
+<li class="chapter" data-level="17.2.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>17.2.3</b> Test Data</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>17.3</b> Bootstrap</a></li>
+<li class="chapter" data-level="17.4" data-path="resampling.html"><a href="resampling.html#external-links-1"><i class="fa fa-check"></i><b>17.4</b> External Links</a></li>
+<li class="chapter" data-level="17.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-2"><i class="fa fa-check"></i><b>17.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>18</b> Classification Overview</a><ul>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#classification-methods"><i class="fa fa-check"></i>Classification Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#discriminative-versus-generative-methods"><i class="fa fa-check"></i>Discriminative versus Generative Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#parametric-and-non-parametric-methods"><i class="fa fa-check"></i>Parametric and Non-Parametric Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#tuning-parameters"><i class="fa fa-check"></i>Tuning Parameters</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#cross-validation-1"><i class="fa fa-check"></i>Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i>Curse of Dimensionality</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#no-free-lunch-theorem"><i class="fa fa-check"></i>No-Free-Lunch Theorem</a></li>
+<li class="chapter" data-level="18.1" data-path="classification-overview.html"><a href="classification-overview.html#external-links-2"><i class="fa fa-check"></i><b>18.1</b> External Links</a></li>
+<li class="chapter" data-level="18.2" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>18.2</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>19</b> The <code>caret</code> Package</a><ul>
+<li class="chapter" data-level="19.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-3"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
+<li class="chapter" data-level="19.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-4"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>20</b> Subset Selection</a><ul>
+<li class="chapter" data-level="20.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>20.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="20.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>20.1.1</b> <code>leaps</code> Package</a></li>
+<li class="chapter" data-level="20.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>20.1.2</b> Best Subset</a></li>
+<li class="chapter" data-level="20.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>20.1.3</b> Stepwise Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="subset-selection.html"><a href="subset-selection.html#validated-rmse"><i class="fa fa-check"></i><b>20.2</b> Validated RMSE</a></li>
+<li class="chapter" data-level="20.3" data-path="subset-selection.html"><a href="subset-selection.html#external-links-4"><i class="fa fa-check"></i><b>20.3</b> External Links</a></li>
+<li class="chapter" data-level="20.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-5"><i class="fa fa-check"></i><b>20.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html"><i class="fa fa-check"></i><b>21</b> Shrinkage Methods</a><ul>
+<li class="chapter" data-level="21.1" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ridge-regression"><i class="fa fa-check"></i><b>21.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="21.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#lasso"><i class="fa fa-check"></i><b>21.2</b> Lasso</a></li>
+<li class="chapter" data-level="21.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#broom"><i class="fa fa-check"></i><b>21.3</b> <code>broom</code></a></li>
+<li class="chapter" data-level="21.4" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#simulation-study-p-n"><i class="fa fa-check"></i><b>21.4</b> Simulation Study, p &gt; n</a></li>
+<li class="chapter" data-level="21.5" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#external-links-5"><i class="fa fa-check"></i><b>21.5</b> External Links</a></li>
+<li class="chapter" data-level="21.6" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#rmarkdown-6"><i class="fa fa-check"></i><b>21.6</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>22</b> Elastic Net</a><ul>
+<li class="chapter" data-level="22.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>22.1</b> Hitters Data</a></li>
+<li class="chapter" data-level="22.2" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-regression"><i class="fa fa-check"></i><b>22.2</b> Elastic Net for Regression</a></li>
+<li class="chapter" data-level="22.3" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-classification"><i class="fa fa-check"></i><b>22.3</b> Elastic Net for Classification</a></li>
+<li class="chapter" data-level="22.4" data-path="elastic-net.html"><a href="elastic-net.html#external-links-6"><i class="fa fa-check"></i><b>22.4</b> External Links</a></li>
+<li class="chapter" data-level="22.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-7"><i class="fa fa-check"></i><b>22.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>23</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="23.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>23.1</b> Sonar Data</a></li>
+<li class="chapter" data-level="23.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>23.2</b> RDA</a></li>
+<li class="chapter" data-level="23.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>23.3</b> RDA with Grid Search</a></li>
+<li class="chapter" data-level="23.4" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-random-search-search"><i class="fa fa-check"></i><b>23.4</b> RDA with Random Search Search</a></li>
+<li class="chapter" data-level="23.5" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#comparison-to-elastic-net"><i class="fa fa-check"></i><b>23.5</b> Comparison to Elastic Net</a></li>
+<li class="chapter" data-level="23.6" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#results"><i class="fa fa-check"></i><b>23.6</b> Results</a></li>
+<li class="chapter" data-level="23.7" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#external-links-7"><i class="fa fa-check"></i><b>23.7</b> External Links</a></li>
+<li class="chapter" data-level="23.8" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rmarkdown-8"><i class="fa fa-check"></i><b>23.8</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>24</b> Non-Linear Models</a><ul>
+<li class="chapter" data-level="24.1" data-path="non-linear-models.html"><a href="non-linear-models.html#polynomial-regression"><i class="fa fa-check"></i><b>24.1</b> Polynomial Regression</a><ul>
+<li class="chapter" data-level="24.1.1" data-path="non-linear-models.html"><a href="non-linear-models.html#anova"><i class="fa fa-check"></i><b>24.1.1</b> ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="non-linear-models.html"><a href="non-linear-models.html#logistic-regression-polynomial-terms"><i class="fa fa-check"></i><b>24.2</b> Logistic Regression, Polynomial Terms</a></li>
+<li class="chapter" data-level="24.3" data-path="non-linear-models.html"><a href="non-linear-models.html#step-functions"><i class="fa fa-check"></i><b>24.3</b> Step Functions</a><ul>
+<li class="chapter" data-level="24.3.1" data-path="non-linear-models.html"><a href="non-linear-models.html#smoothing-splines"><i class="fa fa-check"></i><b>24.3.1</b> Smoothing Splines</a></li>
+</ul></li>
+<li class="chapter" data-level="24.4" data-path="non-linear-models.html"><a href="non-linear-models.html#local-regression"><i class="fa fa-check"></i><b>24.4</b> Local Regression</a></li>
+<li class="chapter" data-level="24.5" data-path="non-linear-models.html"><a href="non-linear-models.html#generalized-additive-models-gams"><i class="fa fa-check"></i><b>24.5</b> Generalized Additive Models (GAMs)</a><ul>
+<li class="chapter" data-level="24.5.1" data-path="non-linear-models.html"><a href="non-linear-models.html#gams-in-caret"><i class="fa fa-check"></i><b>24.5.1</b> GAMs in <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="24.6" data-path="non-linear-models.html"><a href="non-linear-models.html#external-links-8"><i class="fa fa-check"></i><b>24.6</b> External Links</a></li>
+<li class="chapter" data-level="24.7" data-path="non-linear-models.html"><a href="non-linear-models.html#rmarkdown-9"><i class="fa fa-check"></i><b>24.7</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>25</b> Trees</a><ul>
+<li class="chapter" data-level="25.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>25.1</b> Classification Trees</a></li>
+<li class="chapter" data-level="25.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>25.2</b> Regression Trees</a></li>
+<li class="chapter" data-level="25.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>25.3</b> <code>rpart</code> Package</a></li>
+<li class="chapter" data-level="25.4" data-path="trees.html"><a href="trees.html#external-links-9"><i class="fa fa-check"></i><b>25.4</b> External Links</a></li>
+<li class="chapter" data-level="25.5" data-path="trees.html"><a href="trees.html#rmarkdown-10"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>26</b> Ensemble Methods</a><ul>
+<li class="chapter" data-level="26.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-1"><i class="fa fa-check"></i><b>26.1</b> Regression</a><ul>
+<li class="chapter" data-level="26.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>26.1.1</b> Tree Model</a></li>
+<li class="chapter" data-level="26.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>26.1.2</b> Linear Model</a></li>
+<li class="chapter" data-level="26.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>26.1.3</b> Bagging</a></li>
+<li class="chapter" data-level="26.1.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest"><i class="fa fa-check"></i><b>26.1.4</b> Random Forest</a></li>
+<li class="chapter" data-level="26.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>26.1.5</b> Boosting</a></li>
+<li class="chapter" data-level="26.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>26.1.6</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>26.2</b> Classification</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>26.2.1</b> Tree Model</a></li>
+<li class="chapter" data-level="26.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>26.2.2</b> Logistic Regression</a></li>
+<li class="chapter" data-level="26.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>26.2.3</b> Bagging</a></li>
+<li class="chapter" data-level="26.2.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-1"><i class="fa fa-check"></i><b>26.2.4</b> Random Forest</a></li>
+<li class="chapter" data-level="26.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>26.2.5</b> Boosting</a></li>
+<li class="chapter" data-level="26.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-2"><i class="fa fa-check"></i><b>26.2.6</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning"><i class="fa fa-check"></i><b>26.3</b> Tuning</a><ul>
+<li class="chapter" data-level="26.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>26.3.1</b> Random Forest and Bagging</a></li>
+<li class="chapter" data-level="26.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>26.3.2</b> Boosting</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>26.4</b> Tree versus Ensemble Boundaries</a></li>
+<li class="chapter" data-level="26.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-10"><i class="fa fa-check"></i><b>26.5</b> External Links</a></li>
+<li class="chapter" data-level="26.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-11"><i class="fa fa-check"></i><b>26.6</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>27</b> Support Vector Machines</a><ul>
+<li class="chapter" data-level="27.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#r-packages"><i class="fa fa-check"></i><b>27.1</b> <code>R</code> Packages</a></li>
+<li class="chapter" data-level="27.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#classification-3"><i class="fa fa-check"></i><b>27.2</b> Classification</a></li>
+<li class="chapter" data-level="27.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-separable-example"><i class="fa fa-check"></i><b>27.3</b> Linear, Separable Example</a><ul>
+<li class="chapter" data-level="27.3.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#data-simulation"><i class="fa fa-check"></i><b>27.3.1</b> Data Simulation</a></li>
+<li class="chapter" data-level="27.3.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-parameter-c"><i class="fa fa-check"></i><b>27.3.2</b> Linear Kernel, Parameter <code>C</code></a></li>
+<li class="chapter" data-level="27.3.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel"><i class="fa fa-check"></i><b>27.3.3</b> Radial Kernel</a></li>
+<li class="chapter" data-level="27.3.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#tuning-with-caret"><i class="fa fa-check"></i><b>27.3.4</b> Tuning with <code>caret</code></a></li>
+<li class="chapter" data-level="27.3.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest"><i class="fa fa-check"></i><b>27.3.5</b> Compare: Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="27.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#non-linear-non-separable-example"><i class="fa fa-check"></i><b>27.4</b> Non-Linear, Non-Separable Example</a><ul>
+<li class="chapter" data-level="27.4.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#data-simulation-1"><i class="fa fa-check"></i><b>27.4.1</b> Data Simulation</a></li>
+<li class="chapter" data-level="27.4.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-parameter-c"><i class="fa fa-check"></i><b>27.4.2</b> Radial Kernel, Parameter <code>C</code></a></li>
+<li class="chapter" data-level="27.4.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-parameter-sigma"><i class="fa fa-check"></i><b>27.4.3</b> Radial Kernel, Parameter <code>sigma</code></a></li>
+<li class="chapter" data-level="27.4.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-tuning"><i class="fa fa-check"></i><b>27.4.4</b> Radial Kernel, Tuning</a></li>
+<li class="chapter" data-level="27.4.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#polynomial-kernel-tuning"><i class="fa fa-check"></i><b>27.4.5</b> Polynomial Kernel, Tuning</a></li>
+<li class="chapter" data-level="27.4.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-tuning"><i class="fa fa-check"></i><b>27.4.6</b> Linear Kernel, Tuning</a></li>
+<li class="chapter" data-level="27.4.7" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest-1"><i class="fa fa-check"></i><b>27.4.7</b> Compare: Random Forest</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>28</b> Unsupervised Learning</a><ul>
+<li class="chapter" data-level="28.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#methods"><i class="fa fa-check"></i><b>28.1</b> Methods</a><ul>
+<li class="chapter" data-level="28.1.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#principal-component-analysis"><i class="fa fa-check"></i><b>28.1.1</b> Principal Component Analysis</a></li>
+<li class="chapter" data-level="28.1.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#k-means-clustering"><i class="fa fa-check"></i><b>28.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
+<li class="chapter" data-level="28.1.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#hierarchical-clustering"><i class="fa fa-check"></i><b>28.1.3</b> Hierarchical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="28.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#examples"><i class="fa fa-check"></i><b>28.2</b> Examples</a><ul>
+<li class="chapter" data-level="28.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#us-arrests"><i class="fa fa-check"></i><b>28.2.1</b> US Arrests</a></li>
+<li class="chapter" data-level="28.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#simulated-data"><i class="fa fa-check"></i><b>28.2.2</b> Simulated Data</a></li>
+<li class="chapter" data-level="28.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#iris-data-1"><i class="fa fa-check"></i><b>28.2.3</b> Iris Data</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="unsupervised-learning" class="section level1">
+<h1><span class="header-section-number">Chapter 28</span> Unsupervised Learning</h1>
+<div id="methods" class="section level2">
+<h2><span class="header-section-number">28.1</span> Methods</h2>
+<div id="principal-component-analysis" class="section level3">
+<h3><span class="header-section-number">28.1.1</span> Principal Component Analysis</h3>
+<p>To perform PCA in <code>R</code> we will use <code>prcomp()</code>. See <code>?prcomp()</code> for details.</p>
+</div>
+<div id="k-means-clustering" class="section level3">
+<h3><span class="header-section-number">28.1.2</span> <span class="math inline">\(k\)</span>-Means Clustering</h3>
+<p>To perform <span class="math inline">\(k\)</span>-means in <code>R</code> we will use <code>kmeans()</code>. See <code>?kmeans()</code> for details.</p>
+</div>
+<div id="hierarchical-clustering" class="section level3">
+<h3><span class="header-section-number">28.1.3</span> Hierarchical Clustering</h3>
+<p>To perform hierarchical clustering in <code>R</code> we will use <code>hclust()</code>. See <code>?hclust()</code> for details.</p>
+</div>
+</div>
+<div id="examples" class="section level2">
+<h2><span class="header-section-number">28.2</span> Examples</h2>
+<div id="us-arrests" class="section level3">
+<h3><span class="header-section-number">28.2.1</span> US Arrests</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
+<span class="kw">data</span>(USArrests)
+<span class="kw">apply</span>(USArrests, <span class="dv">2</span>, mean)</code></pre></div>
+<pre><code>##   Murder  Assault UrbanPop     Rape 
+##    7.788  170.760   65.540   21.232</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(USArrests, <span class="dv">2</span>, sd)</code></pre></div>
+<pre><code>##    Murder   Assault  UrbanPop      Rape 
+##  4.355510 83.337661 14.474763  9.366385</code></pre>
+<p>“Before” performing PCA, we will scale the data. (This will actually happen inside the <code>prcomp()</code> function.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca =<span class="st"> </span><span class="kw">prcomp</span>(USArrests, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>A large amount of information is stored in the output of <code>prcomp()</code>, some of which can neatly be displayed with <code>summary()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(USArrests_pca)</code></pre></div>
+<pre><code>## [1] &quot;sdev&quot;     &quot;rotation&quot; &quot;center&quot;   &quot;scale&quot;    &quot;x&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(USArrests_pca)</code></pre></div>
+<pre><code>## Importance of components:
+##                           PC1    PC2     PC3     PC4
+## Standard deviation     1.5749 0.9949 0.59713 0.41645
+## Proportion of Variance 0.6201 0.2474 0.08914 0.04336
+## Cumulative Proportion  0.6201 0.8675 0.95664 1.00000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$center</code></pre></div>
+<pre><code>##   Murder  Assault UrbanPop     Rape 
+##    7.788  170.760   65.540   21.232</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$scale</code></pre></div>
+<pre><code>##    Murder   Assault  UrbanPop      Rape 
+##  4.355510 83.337661 14.474763  9.366385</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$rotation</code></pre></div>
+<pre><code>##                 PC1        PC2        PC3         PC4
+## Murder   -0.5358995  0.4181809 -0.3412327  0.64922780
+## Assault  -0.5831836  0.1879856 -0.2681484 -0.74340748
+## UrbanPop -0.2781909 -0.8728062 -0.3780158  0.13387773
+## Rape     -0.5434321 -0.1673186  0.8177779  0.08902432</code></pre>
+<p>We see that <code>$center</code> and <code>$scale</code> give the mean and standard deviations for the original variables. <code>$rotation</code> gives the loading vectors that are used to rotate the original data to obtain the principal components.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(USArrests_pca$x)</code></pre></div>
+<pre><code>## [1] 50  4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(USArrests)</code></pre></div>
+<pre><code>## [1] 50  4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(USArrests_pca$x)</code></pre></div>
+<pre><code>##                   PC1        PC2         PC3          PC4
+## Alabama    -0.9756604  1.1220012 -0.43980366  0.154696581
+## Alaska     -1.9305379  1.0624269  2.01950027 -0.434175454
+## Arizona    -1.7454429 -0.7384595  0.05423025 -0.826264240
+## Arkansas    0.1399989  1.1085423  0.11342217 -0.180973554
+## California -2.4986128 -1.5274267  0.59254100 -0.338559240
+## Colorado   -1.4993407 -0.9776297  1.08400162  0.001450164</code></pre>
+<p>The dimension of the principal components is the same as the original data. The principal components are stored in <code>$x</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">1</span>]</code></pre></div>
+<pre><code>##            [,1]
+## [1,] -0.9756604</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">2</span>]</code></pre></div>
+<pre><code>##          [,1]
+## [1,] 1.122001</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">3</span>]</code></pre></div>
+<pre><code>##            [,1]
+## [1,] -0.4398037</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">4</span>]</code></pre></div>
+<pre><code>##           [,1]
+## [1,] 0.1546966</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests)) %*%<span class="st"> </span>USArrests_pca$rotation[,<span class="dv">1</span>])</code></pre></div>
+<pre><code>##                  [,1]
+## Alabama    -0.9756604
+## Alaska     -1.9305379
+## Arizona    -1.7454429
+## Arkansas    0.1399989
+## California -2.4986128
+## Colorado   -1.4993407</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(USArrests_pca$x[, <span class="dv">1</span>])</code></pre></div>
+<pre><code>##    Alabama     Alaska    Arizona   Arkansas California   Colorado 
+## -0.9756604 -1.9305379 -1.7454429  0.1399989 -2.4986128 -1.4993407</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(USArrests_pca$rotation[, <span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$rotation[, <span class="dv">1</span>] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">2</span>]</code></pre></div>
+<pre><code>##               [,1]
+## [1,] -1.387779e-16</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$rotation[, <span class="dv">1</span>] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">3</span>]</code></pre></div>
+<pre><code>##               [,1]
+## [1,] -5.551115e-17</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$x[, <span class="dv">1</span>] %*%<span class="st"> </span>USArrests_pca$x[, <span class="dv">2</span>]</code></pre></div>
+<pre><code>##               [,1]
+## [1,] -2.062239e-14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$x[, <span class="dv">1</span>] %*%<span class="st"> </span>USArrests_pca$x[, <span class="dv">3</span>]</code></pre></div>
+<pre><code>##              [,1]
+## [1,] 5.384582e-15</code></pre>
+<p>The above verifies some of the “math” of PCA. We see how the loadings obtain the principal components from the original data. We check that the loading vectors are normalized. We also check for orthogonality of both the loading vectors and the principal components. (Note the above inner products aren’t exactly 0, but that is simply a numerical issue.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(USArrests_pca, <span class="dt">scale =</span> <span class="dv">0</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
+<p>A <code>biplot</code> can be used to visualize both the principal component scores and the principal component loadings. (Note the two scales for each axis.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$sdev</code></pre></div>
+<pre><code>## [1] 1.5748783 0.9948694 0.5971291 0.4164494</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$sdev ^<span class="st"> </span><span class="dv">2</span> /<span class="st"> </span><span class="kw">sum</span>(USArrests_pca$sdev ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
+<p>Frequently we will be interested in the proportion of variance explained by a principal component.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_PVE =<span class="st"> </span>function(pca_out) {
+  pca_out$sdev ^<span class="st"> </span><span class="dv">2</span> /<span class="st"> </span><span class="kw">sum</span>(pca_out$sdev ^<span class="st"> </span><span class="dv">2</span>)
+}</code></pre></div>
+<p>So frequently, we would be smart to write a function to do so.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pve =<span class="st"> </span><span class="kw">get_PVE</span>(USArrests_pca)
+
+pve</code></pre></div>
+<pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  pve,
+  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Proportion of Variance Explained&quot;</span>,
+  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
+)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>We can then plot the proportion of variance explained for each PC. As expected, we see the PVE decrease.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(pve)</code></pre></div>
+<pre><code>## [1] 0.6200604 0.8675017 0.9566425 1.0000000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  <span class="kw">cumsum</span>(pve),
+  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
+  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
+)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Often we are interested in the cumulative proportion. A common use of PCA outside of visualization is dimension reduction for modeling. If <span class="math inline">\(p\)</span> is large, PCA is performed, and the principal components that account for a large proportion of variation, say 95%, are used for further analysis. In certain situations that can reduce the dimensionality of data significantly. This can be done almost automatically using <code>caret</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre></div>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mlbench)
+<span class="kw">data</span>(Sonar)
+<span class="kw">set.seed</span>(<span class="dv">18</span>)
+using_pca =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
+                  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>), 
+                  <span class="dt">preProcess =</span> <span class="st">&quot;pca&quot;</span>,
+                  <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)))
+regular_scaling =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
+                        <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>), 
+                        <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>), 
+                        <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)))
+<span class="kw">max</span>(using_pca$results$Accuracy)</code></pre></div>
+<pre><code>## [1] 0.8652729</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(regular_scaling$results$Accuracy)</code></pre></div>
+<pre><code>## [1] 0.8558653</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">using_pca$preProcess</code></pre></div>
+<pre><code>## Created from 208 samples and 60 variables
+## 
+## Pre-processing:
+##   - centered (60)
+##   - ignored (0)
+##   - principal component signal extraction (60)
+##   - scaled (60)
+## 
+## PCA needed 30 components to capture 95 percent of the variance</code></pre>
+<p>It won’t always outperform simply using the original predictors, but here using 30 of 60 principal comments shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.</p>
+</div>
+<div id="simulated-data" class="section level3">
+<h3><span class="header-section-number">28.2.2</span> Simulated Data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
+<span class="kw">set.seed</span>(<span class="dv">42</span>)
+n =<span class="st"> </span><span class="dv">180</span>
+p =<span class="st"> </span><span class="dv">10</span>
+clust_data =<span class="st"> </span><span class="kw">rbind</span>(
+  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n /<span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),
+  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n /<span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),
+  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n /<span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p))
+)</code></pre></div>
+<p>Above we simulate data for clustering. Note that, we did this in a way that will result in three clusters.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">true_clusters =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>, n /<span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">1</span>, n /<span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">2</span>, n /<span class="st"> </span><span class="dv">3</span>))</code></pre></div>
+<p>We label the true clusters 1, 2, and 3 in a way that will “match” output from <span class="math inline">\(k\)</span>-means. (Which is somewhat arbitrary.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmean_out =<span class="st"> </span><span class="kw">kmeans</span>(clust_data, <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+<span class="kw">names</span>(kmean_out)</code></pre></div>
+<pre><code>## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+## [9] &quot;ifault&quot;</code></pre>
+<p>Notice that we used <code>nstart = 10</code> which will give us a more stable solution by attempting 10 random starting positions for the means. Also notice we chose to use <code>centers = 3</code>. (The <span class="math inline">\(k\)</span> in <span class="math inline">\(k\)</span>-mean). How did we know to do this? We’ll find out on the homework. (It will involve looking at <code>tot.withinss</code>)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmean_out</code></pre></div>
+<pre><code>## K-means clustering with 3 clusters of sizes 61, 60, 59
+## 
+## Cluster means:
+##       [,1]     [,2]      [,3]     [,4]     [,5]      [,6]     [,7]
+## 1 3.997352 4.085592 0.7846534 2.136643 4.059886 3.2490887 1.747697
+## 2 1.008138 2.881229 4.3102354 4.094867 3.022989 0.8878413 4.002270
+## 3 3.993468 4.049505 1.9553560 4.037748 2.825907 2.9960855 3.026397
+##        [,8]      [,9]    [,10]
+## 1 1.8341976 0.8193371 4.043725
+## 2 3.8085492 2.0905060 0.977065
+## 3 0.8992179 3.0041820 2.931030
+## 
+## Clustering vector:
+##   [1] 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [36] 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 1 1 1 1 1 1 1 1 1 1
+##  [71] 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+## [106] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [141] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [176] 2 2 2 2 2
+## 
+## Within cluster sum of squares by cluster:
+## [1] 609.2674 581.8780 568.3845
+##  (between_SS / total_SS =  54.0 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+## [9] &quot;ifault&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmeans_clusters =<span class="st"> </span>kmean_out$cluster
+
+<span class="kw">table</span>(true_clusters, kmeans_clusters)</code></pre></div>
+<pre><code>##              kmeans_clusters
+## true_clusters  1  2  3
+##             1 58  0  2
+##             2  0 60  0
+##             3  3  0 57</code></pre>
+<p>We check how well the clustering is working.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(clust_data)</code></pre></div>
+<pre><code>## [1] 180  10</code></pre>
+<p>This data is “high dimensional” so it is difficult to visualize. (Anything more than 2 is hard to visualize.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  clust_data[, <span class="dv">1</span>],
+  clust_data[, <span class="dv">2</span>],
+  <span class="dt">pch =</span> <span class="dv">20</span>,
+  <span class="dt">xlab =</span> <span class="st">&quot;First Variable&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Second Variable&quot;</span>
+)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Plotting the first and second variables simply results in a blob.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  clust_data[, <span class="dv">1</span>],
+  clust_data[, <span class="dv">2</span>],
+  <span class="dt">col =</span> true_clusters,
+  <span class="dt">pch =</span> <span class="dv">20</span>,
+  <span class="dt">xlab =</span> <span class="st">&quot;First Variable&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Second Variable&quot;</span>
+)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Even when using their true clusters for coloring, this plot isn’t very helpful.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_pca =<span class="st"> </span><span class="kw">prcomp</span>(clust_data, <span class="dt">scale =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">plot</span>(
+  clust_data_pca$x[, <span class="dv">1</span>],
+  clust_data_pca$x[, <span class="dv">2</span>],
+  <span class="dt">pch =</span> <span class="dv">0</span>,
+  <span class="dt">xlab =</span> <span class="st">&quot;First Principal Component&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span>
+)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>If we instead plot the first two principal components, we see, even without coloring, once blob that is clearly separate from the rest.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  clust_data_pca$x[, <span class="dv">1</span>],
+  clust_data_pca$x[, <span class="dv">2</span>],
+  <span class="dt">col =</span> true_clusters,
+  <span class="dt">pch =</span> <span class="dv">0</span>,
+  <span class="dt">xlab =</span> <span class="st">&quot;First Principal Component&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span>,
+  <span class="dt">cex =</span> <span class="dv">2</span>
+)
+<span class="kw">points</span>(clust_data_pca$x[, <span class="dv">1</span>], clust_data_pca$x[, <span class="dv">2</span>], <span class="dt">col =</span> kmeans_clusters, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Now adding the true colors (boxes) and the <span class="math inline">\(k\)</span>-means results (circles), we obtain a nice visualization.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_pve =<span class="st"> </span><span class="kw">get_PVE</span>(clust_data_pca)
+
+<span class="kw">plot</span>(
+  <span class="kw">cumsum</span>(clust_data_pve),
+  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
+  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
+)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>The above visualization works well because the first two PCs explain a large proportion of the variance.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&#39;sparcl&#39;)</span>
+<span class="kw">library</span>(sparcl)</code></pre></div>
+<p>To create colored dendrograms we will use <code>ColorDendrogram()</code> in the <code>sparcl</code> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
+clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
+<span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
+                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
+                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Complete Linkage&quot;</span>,
+                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Here we apply hierarchical clustering to the <strong>scaled</strong> data. The <code>dist()</code> function is used to calculate pairwise distances between the (scaled in this case) observations. We use complete linkage. We then use the <code>cutree()</code> function to cluster the data into <code>3</code> clusters. The <code>ColorDendrogram()</code> function is then used to plot the dendrogram. Note that the <code>branchlength</code> argument is somewhat arbitrary (the length of the colored bar) and will need to be modified for each dendrogram.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre></div>
+<pre><code>##              clust_data_cut
+## true_clusters  1  2  3
+##             1  9 51  0
+##             2  1  0 59
+##             3 59  1  0</code></pre>
+<p>We see in this case hierarchical clustering doesn’t “work” as well as <span class="math inline">\(k\)</span>-means.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
+clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
+<span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
+                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
+                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Single Linkage&quot;</span>,
+                <span class="dt">branchlength =</span> <span class="fl">0.5</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre></div>
+<pre><code>##              clust_data_cut
+## true_clusters  1  2  3
+##             1 59  1  0
+##             2 59  0  1
+##             3 60  0  0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
+clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
+<span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
+                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
+                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Average Linkage&quot;</span>,
+                <span class="dt">branchlength =</span> <span class="dv">1</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre></div>
+<pre><code>##              clust_data_cut
+## true_clusters  1  2  3
+##             1  1 59  0
+##             2  1  0 59
+##             3 58  2  0</code></pre>
+<p>We also try single and average linkage. Single linkage seems to perform poorly here, while average linkage seems to be working well.</p>
+</div>
+<div id="iris-data-1" class="section level3">
+<h3><span class="header-section-number">28.2.3</span> Iris Data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(iris)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_pca =<span class="st"> </span><span class="kw">prcomp</span>(iris[,-<span class="dv">5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
+iris_pca$rotation</code></pre></div>
+<pre><code>##                     PC1         PC2        PC3        PC4
+## Sepal.Length  0.5210659 -0.37741762  0.7195664  0.2612863
+## Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096
+## Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492
+## Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lab_to_col =<span class="st"> </span>function (labels){
+  cols =<span class="st"> </span><span class="kw">rainbow</span> (<span class="kw">length</span>(<span class="kw">unique</span>(labels)))
+  cols[<span class="kw">as.numeric</span> (<span class="kw">as.factor</span>(labels))]
+}
+
+<span class="kw">plot</span>(iris_pca$x[,<span class="dv">1</span>], iris_pca$x[,<span class="dv">2</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris$Species), <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(iris_pca$x[,<span class="dv">3</span>], iris_pca$x[,<span class="dv">4</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris$Species), <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_pve =<span class="st"> </span><span class="kw">get_PVE</span>(iris_pca)
+
+<span class="kw">plot</span>(
+  <span class="kw">cumsum</span>(iris_pve),
+  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
+  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
+)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-29-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_kmeans =<span class="st"> </span><span class="kw">kmeans</span>(iris[,-<span class="dv">5</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+<span class="kw">table</span>(iris_kmeans$clust, iris[,<span class="dv">5</span>])</code></pre></div>
+<pre><code>##    
+##     setosa versicolor virginica
+##   1      0         48        14
+##   2      0          2        36
+##   3     50          0         0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,-<span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
+iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
+<span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
+                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
+                <span class="dt">main =</span> <span class="st">&quot;Iris, Complete Linkage&quot;</span>,
+                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-29-4.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris_cut, iris[,<span class="dv">5</span>])</code></pre></div>
+<pre><code>##         
+## iris_cut setosa versicolor virginica
+##        1     49          0         0
+##        2      1         21         2
+##        3      0         29        48</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris_cut, iris_kmeans$clust)</code></pre></div>
+<pre><code>##         
+## iris_cut  1  2  3
+##        1  0  0 49
+##        2 23  0  1
+##        3 39 38  0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,-<span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
+iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
+<span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
+                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
+                <span class="dt">main =</span> <span class="st">&quot;Iris, Single Linkage&quot;</span>,
+                <span class="dt">branchlength =</span> <span class="fl">0.3</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-29-5.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,-<span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
+iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
+<span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
+                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
+                <span class="dt">main =</span> <span class="st">&quot;Iris, Average Linkage&quot;</span>,
+                <span class="dt">branchlength =</span> <span class="dv">1</span>)</code></pre></div>
+<p><img src="22-unsupervised_files/figure-html/unnamed-chunk-29-6.png" width="672" /></p>
+
+<div id="refs" class="references">
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="support-vector-machines.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/22-unsupervised.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
