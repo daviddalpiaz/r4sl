@@ -805,6 +805,7 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_pred,
 
 - [Classification and Regression by `randomForest`](http://www.bios.unc.edu/~dzeng/BIOS740/randomforest.pdf) - Introduction to the `randomForest` package in `R` news.
 - [`ranger`: A Fast Implementation of Random Forests](https://github.com/imbs-hl/ranger) - Alternative package for fitting random forests with potentially better speed.
+- [On `ranger`'s respect.unordered.factors Argument](http://www.win-vector.com/blog/2016/05/on-ranger-respect-unordered-factors/) - A note on handling of categorical variables with random forests.
 - [Extremely Randomized Trees](https://pdfs.semanticscholar.org/336a/165c17c9c56160d332b9f4a2b403fccbdbfb.pdf)
 - [`extraTrees` Method for Classificationand Regression](https://cran.r-project.org/web/packages/extraTrees/vignettes/extraTrees.pdf)
 - [XGBoost](http://xgboost.readthedocs.io/en/latest/) - Scalable and Flexible Gradient Boosting
