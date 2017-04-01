@@ -729,3 +729,50 @@ accuracy(actual = test_data$y,
 ## [1] 0.809
 ```
 
+
+
+## External Links
+
+- [SVM with Polynomial Kernel Visualization](https://www.youtube.com/watch?v=3liCbRZPrZA) - The kernel idea in one simple video.
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](21-svm.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+
+- Base Packages, Attached
+
+
+```
+## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+## [7] "base"
+```
+
+- Additional Packages, Attached
+
+
+```
+## [1] "kernlab"      "caret"        "ggplot2"      "lattice"     
+## [5] "randomForest"
+```
+
+- Additional Packages, Not Attached
+
+
+```
+##  [1] "Rcpp"         "compiler"     "nloptr"       "plyr"        
+##  [5] "class"        "iterators"    "tools"        "digest"      
+##  [9] "lme4"         "evaluate"     "tibble"       "gtable"      
+## [13] "nlme"         "mgcv"         "Matrix"       "foreach"     
+## [17] "yaml"         "parallel"     "SparseM"      "e1071"       
+## [21] "stringr"      "knitr"        "MatrixModels" "stats4"      
+## [25] "rprojroot"    "grid"         "nnet"         "rmarkdown"   
+## [29] "bookdown"     "minqa"        "reshape2"     "car"         
+## [33] "magrittr"     "backports"    "scales"       "codetools"   
+## [37] "ModelMetrics" "htmltools"    "MASS"         "splines"     
+## [41] "assertthat"   "pbkrtest"     "colorspace"   "quantreg"    
+## [45] "stringi"      "lazyeval"     "munsell"
+```
+
+
+

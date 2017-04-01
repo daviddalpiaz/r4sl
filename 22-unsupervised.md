@@ -792,3 +792,50 @@ ColorDendrogram(iris_hc, y = iris_cut,
 
 ![](22-unsupervised_files/figure-latex/unnamed-chunk-29-6.pdf)<!-- --> 
 
+## External Links
+
+- [Hierarchical Cluster Analysis on Famous Ddata Sets](https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html) - Using the `dendextend` package for in depth hierarchical cluster
+- [K-means Clustering is Not a Free Lunch](http://varianceexplained.org/r/kmeans-free-lunch/) - Comments on the assumptions made by $K$-means clustering.
+
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+
+- Base Packages, Attached
+
+
+```
+## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+## [7] "base"
+```
+
+- Additional Packages, Attached
+
+
+```
+## [1] "sparcl"  "MASS"    "mlbench" "caret"   "ggplot2" "lattice" "ISLR"
+```
+
+- Additional Packages, Not Attached
+
+
+```
+##  [1] "Rcpp"         "compiler"     "nloptr"       "plyr"        
+##  [5] "class"        "iterators"    "tools"        "digest"      
+##  [9] "lme4"         "evaluate"     "tibble"       "gtable"      
+## [13] "nlme"         "mgcv"         "Matrix"       "foreach"     
+## [17] "parallel"     "yaml"         "SparseM"      "e1071"       
+## [21] "stringr"      "knitr"        "MatrixModels" "stats4"      
+## [25] "rprojroot"    "grid"         "nnet"         "rmarkdown"   
+## [29] "bookdown"     "minqa"        "reshape2"     "car"         
+## [33] "magrittr"     "backports"    "scales"       "codetools"   
+## [37] "ModelMetrics" "htmltools"    "splines"      "assertthat"  
+## [41] "pbkrtest"     "colorspace"   "quantreg"     "stringi"     
+## [45] "lazyeval"     "munsell"
+```
+
+
+
+

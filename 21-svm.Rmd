@@ -347,3 +347,34 @@ accuracy(actual = test_data$y,
          predicted = predict(rf_fit, test_data))
 ```
 
+
+
+## External Links
+
+- [SVM with Polynomial Kernel Visualization](https://www.youtube.com/watch?v=3liCbRZPrZA) - The kernel idea in one simple video.
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](21-svm.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+- Base Packages, Attached
+
+```{r, echo = FALSE}
+sessionInfo()$basePkgs
+```
+
+- Additional Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additional Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```
+
+
+

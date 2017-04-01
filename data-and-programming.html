@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-03-28">
+<meta name="date" content="2017-04-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -361,6 +361,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="27.4.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-tuning"><i class="fa fa-check"></i><b>27.4.6</b> Linear Kernel, Tuning</a></li>
 <li class="chapter" data-level="27.4.7" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest-1"><i class="fa fa-check"></i><b>27.4.7</b> Compare: Random Forest</a></li>
 </ul></li>
+<li class="chapter" data-level="27.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#external-links-11"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
+<li class="chapter" data-level="27.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#rmarkdown-12"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>28</b> Unsupervised Learning</a><ul>
 <li class="chapter" data-level="28.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#methods"><i class="fa fa-check"></i><b>28.1</b> Methods</a><ul>
@@ -373,6 +375,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="28.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#simulated-data"><i class="fa fa-check"></i><b>28.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="28.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#iris-data-1"><i class="fa fa-check"></i><b>28.2.3</b> Iris Data</a></li>
 </ul></li>
+<li class="chapter" data-level="28.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#external-links-12"><i class="fa fa-check"></i><b>28.3</b> External Links</a></li>
+<li class="chapter" data-level="28.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#rmarkdown-13"><i class="fa fa-check"></i><b>28.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -1336,11 +1340,11 @@ x</code></pre></div>
 <p>Here the name of the function is <code>standardize</code>, and the function has a single argument <code>x</code> which is used in the body of function. Note that the output of the final line of the body is what is returned by the function. In this case the function returns the vector stored in the variable <code>results</code>.</p>
 <p>To test our function, we will take a random sample of size <code>n = 10</code> from a normal distribution with a mean of <code>2</code> and a standard deviation of <code>5</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">test_sample =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>))</code></pre></div>
-<pre><code>##  [1]  3.9445903 -0.1837075  5.8308413 -0.5031906 -5.9907911 -4.2521926
-##  [7] 10.5654249 -0.7443754  7.8458557  0.6739409</code></pre>
+<pre><code>##  [1] -6.5202540 -4.0127098 -4.0324107  6.8216682  2.5896183 11.0343206
+##  [7] 15.8848589  0.9957084 -1.6326924 -0.6340276</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">standardize</span>(<span class="dt">x =</span> test_sample)</code></pre></div>
-<pre><code>##  [1]  0.4236403 -0.3620525  0.7826294 -0.4228561 -1.4672498 -1.1363617
-##  [7]  1.6837098 -0.4687581  1.1661246 -0.1988258</code></pre>
+<pre><code>##  [1] -1.19317479 -0.84404334 -0.84678634  0.66445335  0.07521478
+##  [6]  1.25099114  1.92634334 -0.14670915 -0.51266776 -0.37362123</code></pre>
 <p>This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">standardize =<span class="st"> </span>function(x) {
   (x -<span class="st"> </span><span class="kw">mean</span>(x)) /<span class="st"> </span><span class="kw">sd</span>(x)
@@ -1377,14 +1381,14 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
   (<span class="dv">1</span> /<span class="st"> </span>n) *<span class="st"> </span><span class="kw">sum</span>((x -<span class="st"> </span><span class="kw">mean</span>(x)) ^<span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 27.6081</code></pre>
+<pre><code>## [1] 51.5845</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">biased =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 27.6081</code></pre>
+<pre><code>## [1] 51.5845</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 27.6081</code></pre>
+<pre><code>## [1] 51.5845</code></pre>
 <p>We see the function is working as expected, and when returning the unbiased estimate it matches <code>R</code>’s built in function <code>var()</code>. Finally, let’s examine the biased estimate of <span class="math inline">\(\sigma^2\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">biased =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] 24.84729</code></pre>
+<pre><code>## [1] 46.42605</code></pre>
 </div>
 </div>
 </div>

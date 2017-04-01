@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-03-28">
+<meta name="date" content="2017-04-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -361,6 +361,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="27.4.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-tuning"><i class="fa fa-check"></i><b>27.4.6</b> Linear Kernel, Tuning</a></li>
 <li class="chapter" data-level="27.4.7" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest-1"><i class="fa fa-check"></i><b>27.4.7</b> Compare: Random Forest</a></li>
 </ul></li>
+<li class="chapter" data-level="27.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#external-links-11"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
+<li class="chapter" data-level="27.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#rmarkdown-12"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>28</b> Unsupervised Learning</a><ul>
 <li class="chapter" data-level="28.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#methods"><i class="fa fa-check"></i><b>28.1</b> Methods</a><ul>
@@ -373,6 +375,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="28.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#simulated-data"><i class="fa fa-check"></i><b>28.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="28.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#iris-data-1"><i class="fa fa-check"></i><b>28.2.3</b> Iris Data</a></li>
 </ul></li>
+<li class="chapter" data-level="28.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#external-links-12"><i class="fa fa-check"></i><b>28.3</b> External Links</a></li>
+<li class="chapter" data-level="28.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#rmarkdown-13"><i class="fa fa-check"></i><b>28.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -766,8 +770,43 @@ rf_fit$bestTune</code></pre></div>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> test_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rf_fit, test_data))</code></pre></div>
 <pre><code>## [1] 0.809</code></pre>
-
 </div>
+</div>
+<div id="external-links-11" class="section level2">
+<h2><span class="header-section-number">27.5</span> External Links</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=3liCbRZPrZA">SVM with Polynomial Kernel Visualization</a> - The kernel idea in one simple video.</li>
+</ul>
+</div>
+<div id="rmarkdown-12" class="section level2">
+<h2><span class="header-section-number">27.6</span> RMarkdown</h2>
+<p>The RMarkdown file for this chapter can be found <a href="21-svm.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.3.2 and the following packages:</p>
+<ul>
+<li>Base Packages, Attached</li>
+</ul>
+<pre><code>## [1] &quot;methods&quot;   &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
+## [7] &quot;base&quot;</code></pre>
+<ul>
+<li>Additional Packages, Attached</li>
+</ul>
+<pre><code>## [1] &quot;kernlab&quot;      &quot;caret&quot;        &quot;ggplot2&quot;      &quot;lattice&quot;     
+## [5] &quot;randomForest&quot;</code></pre>
+<ul>
+<li>Additional Packages, Not Attached</li>
+</ul>
+<pre><code>##  [1] &quot;Rcpp&quot;         &quot;compiler&quot;     &quot;nloptr&quot;       &quot;plyr&quot;        
+##  [5] &quot;class&quot;        &quot;iterators&quot;    &quot;tools&quot;        &quot;digest&quot;      
+##  [9] &quot;lme4&quot;         &quot;evaluate&quot;     &quot;tibble&quot;       &quot;gtable&quot;      
+## [13] &quot;nlme&quot;         &quot;mgcv&quot;         &quot;Matrix&quot;       &quot;foreach&quot;     
+## [17] &quot;yaml&quot;         &quot;parallel&quot;     &quot;SparseM&quot;      &quot;e1071&quot;       
+## [21] &quot;stringr&quot;      &quot;knitr&quot;        &quot;MatrixModels&quot; &quot;stats4&quot;      
+## [25] &quot;rprojroot&quot;    &quot;grid&quot;         &quot;nnet&quot;         &quot;rmarkdown&quot;   
+## [29] &quot;bookdown&quot;     &quot;minqa&quot;        &quot;reshape2&quot;     &quot;car&quot;         
+## [33] &quot;magrittr&quot;     &quot;backports&quot;    &quot;scales&quot;       &quot;codetools&quot;   
+## [37] &quot;ModelMetrics&quot; &quot;htmltools&quot;    &quot;MASS&quot;         &quot;splines&quot;     
+## [41] &quot;assertthat&quot;   &quot;pbkrtest&quot;     &quot;colorspace&quot;   &quot;quantreg&quot;    
+## [45] &quot;stringi&quot;      &quot;lazyeval&quot;     &quot;munsell&quot;</code></pre>
+
 </div>
 </div>
             </section>

@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-03-28">
+<meta name="date" content="2017-04-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -361,6 +361,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="27.4.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-tuning"><i class="fa fa-check"></i><b>27.4.6</b> Linear Kernel, Tuning</a></li>
 <li class="chapter" data-level="27.4.7" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest-1"><i class="fa fa-check"></i><b>27.4.7</b> Compare: Random Forest</a></li>
 </ul></li>
+<li class="chapter" data-level="27.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#external-links-11"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
+<li class="chapter" data-level="27.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#rmarkdown-12"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>28</b> Unsupervised Learning</a><ul>
 <li class="chapter" data-level="28.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#methods"><i class="fa fa-check"></i><b>28.1</b> Methods</a><ul>
@@ -373,6 +375,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="28.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#simulated-data"><i class="fa fa-check"></i><b>28.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="28.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#iris-data-1"><i class="fa fa-check"></i><b>28.2.3</b> Iris Data</a></li>
 </ul></li>
+<li class="chapter" data-level="28.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#external-links-12"><i class="fa fa-check"></i><b>28.3</b> External Links</a></li>
+<li class="chapter" data-level="28.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#rmarkdown-13"><i class="fa fa-check"></i><b>28.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -567,29 +571,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 × 3
-##        x1        x2          y
-##    &lt;fctr&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-## 1       A 0.3245079 -0.4030466
-## 2       A 0.8493495  0.2981723
-## 3       A 0.7507770 -2.1084063
-## 4       A 0.1113182  1.7326743
-## 5       A 0.8926763  0.6246448
-## 6       A 0.4898621 -0.4817257
-## 7       A 0.5062368 -1.0290943
-## 8       A 0.3291591  0.4467750
-## 9       A 0.7810175  0.1635842
-## 10      A 0.7370701  0.1878280
+##        x1        x2             y
+##    &lt;fctr&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+## 1       A 0.5000935 -0.2755378225
+## 2       A 0.9454163  0.1940300600
+## 3       A 0.6047598 -0.2465294198
+## 4       A 0.4848498  2.1698107775
+## 5       A 0.6243790 -0.0006300274
+## 6       A 0.8468283 -0.9326568359
+## 7       A 0.5394725 -0.5461256439
+## 8       A 0.3105325 -0.1500322194
+## 9       A 0.1229627 -1.2293471909
+## 10      A 0.5989029 -0.4688299971
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a cateogical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##   0.2018408  -0.3481030  -0.1584864  -0.4482006</code></pre>
+## -0.16747263  0.08434739  0.13638240  0.03386004</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##   0.6121691  -1.0155824  -0.5110797  -1.1590981   1.3110454   0.6058872</code></pre>
+##  -0.3867798   0.7299590  -0.1360911   0.4270106  -1.0722127   0.3589689</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Polynomials</h3>
