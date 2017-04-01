@@ -368,3 +368,35 @@ ColorDendrogram(iris_hc, y = iris_cut,
                 branchlength = 1)
 ```
 
+## External Links
+
+- [Hierarchical Cluster Analysis on Famous Ddata Sets](https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html) - Using the `dendextend` package for in depth hierarchical cluster
+- [K-means Clustering is Not a Free Lunch](http://varianceexplained.org/r/kmeans-free-lunch/) - Comments on the assumptions made by $K$-means clustering.
+
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+- Base Packages, Attached
+
+```{r, echo = FALSE}
+sessionInfo()$basePkgs
+```
+
+- Additional Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additional Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```
+
+
+
+
