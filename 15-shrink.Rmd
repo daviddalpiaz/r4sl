@@ -58,8 +58,8 @@ The two plots illustrate how much the coefficients are penalized for different v
 
 ```{r}
 fit_ridge = glmnet(X, y, alpha = 0)
-plot(fit_ridge)
-plot(fit_ridge, xvar = "lambda", label = TRUE)
+# plot(fit_ridge)
+# plot(fit_ridge, xvar = "lambda", label = TRUE)
 # dim(coef(fit_ridge))
 ```
 
@@ -101,8 +101,8 @@ The two plots illustrate how much the coefficients are penalized for different v
 
 ```{r}
 fit_lasso = glmnet(X, y, alpha = 1)
-plot(fit_lasso)
-plot(fit_lasso, xvar = "lambda", label = TRUE)
+# plot(fit_lasso)
+# plot(fit_lasso, xvar = "lambda", label = TRUE)
 # dim(coef(fit_lasso))
 ```
 
