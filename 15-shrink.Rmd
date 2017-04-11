@@ -56,10 +56,8 @@ Notice that the intercept is **not** penalized. Also, note that that ridge regre
 
 The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
 
-```{r}
-print("test1")
+```{r bad}
 fit_ridge = glmnet(X, y, alpha = 0)
-print("test2")
 plot(fit_ridge)
 plot(fit_ridge, xvar = "lambda", label = TRUE)
 dim(coef(fit_ridge))
