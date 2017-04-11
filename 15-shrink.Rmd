@@ -57,33 +57,33 @@ Notice that the intercept is **not** penalized. Also, note that that ridge regre
 The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
 
 ```{r bad}
-fit_ridge = glmnet(X, y, alpha = 0)
-plot(fit_ridge)
-plot(fit_ridge, xvar = "lambda", label = TRUE)
-dim(coef(fit_ridge))
+# fit_ridge = glmnet(X, y, alpha = 0)
+# plot(fit_ridge)
+# plot(fit_ridge, xvar = "lambda", label = TRUE)
+# dim(coef(fit_ridge))
 ```
 
 We use cross-validation to select a good $\lambda$ value. The `cv.glmnet()`function uses 10 folds by default. The plot illustrates the MSE for the $\lambda$s considered. Two lines are drawn. The first is the $\lambda$ that gives the smallest MSE. The second is the $\lambda$ that gives an MSE within one standard error of the smallest.
 
 ```{r}
-fit_ridge_cv = cv.glmnet(X, y, alpha = 0)
-plot(fit_ridge_cv)
+# fit_ridge_cv = cv.glmnet(X, y, alpha = 0)
+# plot(fit_ridge_cv)
 ```
 
 The `cv.glmnet()` function returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)
 
 ```{r}
-coef(fit_ridge_cv)
-coef(fit_ridge_cv, s = "lambda.min")
-sum(coef(fit_ridge_cv, s = "lambda.min")[-1] ^ 2) # penalty term for lambda minimum
-coef(fit_ridge_cv, s = "lambda.1se")
-sum(coef(fit_ridge_cv, s = "lambda.1se")[-1] ^ 2) # penalty term for lambda one SE
-#predict(fit_ridge_cv, X, s = "lambda.min")
-#predict(fit_ridge_cv, X)
-mean((y - predict(fit_ridge_cv, X)) ^ 2) # "train error"
-sqrt(fit_ridge_cv$cvm) # CV-RMSEs
-sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min]) # CV-RMSE minimum
-sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) # CV-RMSE one SE
+# coef(fit_ridge_cv)
+# coef(fit_ridge_cv, s = "lambda.min")
+# sum(coef(fit_ridge_cv, s = "lambda.min")[-1] ^ 2) # penalty term for lambda minimum
+# coef(fit_ridge_cv, s = "lambda.1se")
+# sum(coef(fit_ridge_cv, s = "lambda.1se")[-1] ^ 2) # penalty term for lambda one SE
+# #predict(fit_ridge_cv, X, s = "lambda.min")
+# #predict(fit_ridge_cv, X)
+# mean((y - predict(fit_ridge_cv, X)) ^ 2) # "train error"
+# sqrt(fit_ridge_cv$cvm) # CV-RMSEs
+# sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min]) # CV-RMSE minimum
+# sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) # CV-RMSE one SE
 ```
 
 
@@ -99,7 +99,7 @@ Like ridge, lasso is not scale invariant.
 
 The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice some of the coefficients are forced to be zero.
 
-```{r}
+```{r lasso}
 fit_lasso = glmnet(X, y, alpha = 1)
 plot(fit_lasso)
 plot(fit_lasso, xvar = "lambda", label = TRUE)
