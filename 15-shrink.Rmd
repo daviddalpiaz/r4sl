@@ -57,10 +57,12 @@ Notice that the intercept is **not** penalized. Also, note that that ridge regre
 The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
 
 ```{r}
+print("test1")
 fit_ridge = glmnet(X, y, alpha = 0)
-# plot(fit_ridge)
-# plot(fit_ridge, xvar = "lambda", label = TRUE)
-# dim(coef(fit_ridge))
+print("test2")
+plot(fit_ridge)
+plot(fit_ridge, xvar = "lambda", label = TRUE)
+dim(coef(fit_ridge))
 ```
 
 We use cross-validation to select a good $\lambda$ value. The `cv.glmnet()`function uses 10 folds by default. The plot illustrates the MSE for the $\lambda$s considered. Two lines are drawn. The first is the $\lambda$ that gives the smallest MSE. The second is the $\lambda$ that gives an MSE within one standard error of the smallest.
@@ -101,9 +103,9 @@ The two plots illustrate how much the coefficients are penalized for different v
 
 ```{r}
 fit_lasso = glmnet(X, y, alpha = 1)
-# plot(fit_lasso)
-# plot(fit_lasso, xvar = "lambda", label = TRUE)
-# dim(coef(fit_lasso))
+plot(fit_lasso)
+plot(fit_lasso, xvar = "lambda", label = TRUE)
+dim(coef(fit_lasso))
 ```
 
 Again, to actually pick a $\lambda$, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)
