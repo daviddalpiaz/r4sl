@@ -23,6 +23,12 @@ names(Hitters)
 
 We use the `glmnet()` and `cv.glmnet()` functions in the `glmnet` package to fit penalized regressions.
 
+```{r}
+# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
+# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
+library(methods)
+```
+
 ```{r, message = FALSE, warning = FALSE}
 library(glmnet)
 ```
@@ -55,13 +61,6 @@ $$
 Notice that the intercept is **not** penalized. Also, note that that ridge regression is **not** scale invariant like the usual unpenalized regression. Thankfully, `glmnet()` takes care of this internally. It automatically standardizes input for fitting, then reports fitted coefficient using the original scale.
 
 The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
-
-```{r}
-# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
-# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
-library(methods)
-```
-
 
 ```{r ridge}
 fit_ridge = glmnet(X, y, alpha = 0)
