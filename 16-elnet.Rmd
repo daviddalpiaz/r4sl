@@ -25,6 +25,12 @@ dim(Hitters)
 
 Because this dataset isn't particularly large, we will forego a test-train split, and simply use all of the data as training data.
 
+```{r}
+# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
+# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
+library(methods)
+```
+
 ```{r, message = FALSE, warning = FALSE}
 library(caret)
 library(glmnet)

@@ -382,7 +382,7 @@ coef(fit_all, which.min(cv_error))
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 
@@ -412,8 +412,8 @@ The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The 
 ## [29] "bookdown"     "minqa"        "ggplot2"      "reshape2"    
 ## [33] "car"          "magrittr"     "backports"    "scales"      
 ## [37] "codetools"    "ModelMetrics" "htmltools"    "MASS"        
-## [41] "splines"      "assertthat"   "pbkrtest"     "colorspace"  
-## [45] "quantreg"     "stringi"      "lazyeval"     "munsell"
+## [41] "splines"      "pbkrtest"     "colorspace"   "quantreg"    
+## [45] "stringi"      "lazyeval"     "munsell"
 ```
 
 

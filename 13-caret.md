@@ -432,7 +432,7 @@ Notes to add later:
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 
@@ -463,8 +463,8 @@ The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). T
 ## [29] "bookdown"     "minqa"        "reshape2"     "car"         
 ## [33] "magrittr"     "backports"    "scales"       "codetools"   
 ## [37] "ModelMetrics" "htmltools"    "MASS"         "splines"     
-## [41] "assertthat"   "pbkrtest"     "colorspace"   "labeling"    
-## [45] "quantreg"     "stringi"      "lazyeval"     "munsell"
+## [41] "pbkrtest"     "colorspace"   "labeling"     "quantreg"    
+## [45] "stringi"      "lazyeval"     "munsell"
 ```
 
 

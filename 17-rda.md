@@ -6,6 +6,13 @@ We now use the  `Sonar` dataset from the `mlbench` package to explore a new regu
 
 
 ```r
+# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
+# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
+library(methods)
+```
+
+
+```r
 library(mlbench)
 library(caret)
 library(glmnet)
@@ -41,7 +48,6 @@ ncol(Sonar) - 1
 ```
 ## [1] 60
 ```
-
 
 ## RDA
 
@@ -112,7 +118,7 @@ fit_rda_grid
 plot(fit_rda_grid)
 ```
 
-![](17-rda_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
+![](17-rda_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 ## RDA with Random Search Search
 
@@ -163,7 +169,7 @@ fit_rda_rand
 ggplot(fit_rda_rand)
 ```
 
-![](17-rda_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
+![](17-rda_files/figure-latex/unnamed-chunk-12-1.pdf)<!-- --> 
 
 
 ## Comparison to Elastic Net
@@ -239,7 +245,7 @@ alpha & lambda & Accuracy & Kappa & AccuracySD & KappaSD\\
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](17-rda.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](17-rda.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 
@@ -270,8 +276,8 @@ The RMarkdown file for this chapter can be found [**here**](17-rda.Rmd). The fil
 ## [25] "grid"         "nnet"         "rmarkdown"    "bookdown"    
 ## [29] "minqa"        "reshape2"     "car"          "magrittr"    
 ## [33] "backports"    "scales"       "codetools"    "ModelMetrics"
-## [37] "htmltools"    "splines"      "assertthat"   "pbkrtest"    
-## [41] "colorspace"   "labeling"     "quantreg"     "stringi"     
-## [45] "lazyeval"     "munsell"
+## [37] "htmltools"    "splines"      "pbkrtest"     "colorspace"  
+## [41] "labeling"     "quantreg"     "stringi"      "lazyeval"    
+## [45] "munsell"
 ```
 

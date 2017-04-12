@@ -15,7 +15,7 @@ After reading this chapter you will be able to:
 `R` is both a programming language and software environment for statistical computing, which is *free* and *open-source*. To get started, you will need to install two pieces of software:
 
 - [`R`, the actual programming language.](http://cran.r-project.org/)
-    - Chose your operating system, and select the most recent version, 3.3.2.
+    - Chose your operating system, and select the most recent version, 3.3.3.
 - [RStudio, an excellent IDE for working with `R`.](http://www.rstudio.com/)
     - Note, you must have `R` installed to use RStudio. RStudio is simply an interface used to interact with `R`.
 
@@ -2041,8 +2041,8 @@ To test our function, we will take a random sample of size `n = 10` from a norma
 ```
 
 ```
-##  [1]   2.2984147   0.4468406   4.8747498   8.4585697   3.4764522
-##  [6]  -0.2710456 -10.2026604   2.1425675  -0.7178074   6.6874609
+##  [1]  2.7781450  2.7653212  3.5195754  3.7390947  0.4717788  5.1795743
+##  [7]  0.3327529 -5.1614233  5.1148079 -0.9870475
 ```
 
 ```r
@@ -2050,8 +2050,8 @@ standardize(x = test_sample)
 ```
 
 ```
-##  [1]  0.11276772 -0.24781254  0.61448978  1.31241197  0.34218175
-##  [6] -0.38761553 -2.32172346  0.08241764 -0.47461906  0.96750174
+##  [1]  0.3151251  0.3110956  0.5480958  0.6170727 -0.4095765  1.0696972
+##  [7] -0.4532609 -2.1796295  1.0493464 -0.8679658
 ```
 
 This function could be written much more succinctly, simply performing all the operations on one line and immediately returning the result, without storing any of the intermediate results.
@@ -2153,7 +2153,7 @@ get_var(test_sample)
 ```
 
 ```
-## [1] 26.36807
+## [1] 10.12834
 ```
 
 ```r
@@ -2161,7 +2161,7 @@ get_var(test_sample, biased = FALSE)
 ```
 
 ```
-## [1] 26.36807
+## [1] 10.12834
 ```
 
 ```r
@@ -2169,7 +2169,7 @@ var(test_sample)
 ```
 
 ```
-## [1] 26.36807
+## [1] 10.12834
 ```
 
 We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
@@ -2180,7 +2180,7 @@ get_var(test_sample, biased = TRUE)
 ```
 
 ```
-## [1] 23.73126
+## [1] 9.115503
 ```
 
 
@@ -2485,8 +2485,8 @@ rnorm(n = 10, mean = 2, sd = 5)
 ```
 
 ```
-##  [1] -5.374539  3.812660 -5.451870  7.043276  1.726589  1.181266  5.881330
-##  [8]  1.889187  4.847807  1.755563
+##  [1]  5.69528606  4.27524092 11.47277002 -2.46160110 12.27561964
+##  [6]  2.86065571  8.99335244 -3.08655074 -6.88564638 -0.05712938
 ```
 
 These functions exist for many other distributions, including but not limited to:

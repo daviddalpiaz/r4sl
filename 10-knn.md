@@ -361,7 +361,7 @@ We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 

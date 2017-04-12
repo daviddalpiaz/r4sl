@@ -664,7 +664,7 @@ rpart.plot(seat_rpart_prune)
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](19-tree.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](19-tree.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 

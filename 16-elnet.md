@@ -51,6 +51,13 @@ Because this dataset isn't particularly large, we will forego a test-train split
 
 
 ```r
+# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
+# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
+library(methods)
+```
+
+
+```r
 library(caret)
 library(glmnet)
 ```
@@ -62,7 +69,7 @@ Since he have loaded `caret`, we also have access to the `lattice` package which
 histogram(Hitters$Salary, xlab = "Salary, $1000s", main = "Baseball Salaries, 1986 - 1987")
 ```
 
-![](16-elnet_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+![](16-elnet_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 ## Elastic Net for Regression
 
@@ -327,7 +334,7 @@ accuracy(actual = default_tst$default,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 
@@ -357,7 +364,6 @@ The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The f
 ## [25] "nnet"         "rmarkdown"    "bookdown"     "minqa"       
 ## [29] "reshape2"     "car"          "magrittr"     "backports"   
 ## [33] "scales"       "codetools"    "ModelMetrics" "htmltools"   
-## [37] "MASS"         "splines"      "assertthat"   "pbkrtest"    
-## [41] "colorspace"   "quantreg"     "stringi"      "lazyeval"    
-## [45] "munsell"
+## [37] "MASS"         "splines"      "pbkrtest"     "colorspace"  
+## [41] "quantreg"     "stringi"      "lazyeval"     "munsell"
 ```

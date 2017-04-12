@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="R for Statistical Learning">
-  <meta name="generator" content="bookdown 0.3.16 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.18 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-04-01">
+<meta name="date" content="2017-04-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -426,11 +426,14 @@ Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</code
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Hitters)</code></pre></div>
 <pre><code>## [1] 263  20</code></pre>
 <p>Because this dataset isn’t particularly large, we will forego a test-train split, and simply use all of the data as training data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3</span>
+<span class="co"># see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console</span>
+<span class="kw">library</span>(methods)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
 <span class="kw">library</span>(glmnet)</code></pre></div>
 <p>Since he have loaded <code>caret</code>, we also have access to the <code>lattice</code> package which has a nice histogram function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(Hitters$Salary, <span class="dt">xlab =</span> <span class="st">&quot;Salary, $1000s&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Baseball Salaries, 1986 - 1987&quot;</span>)</code></pre></div>
-<p><img src="16-elnet_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="16-elnet_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="elastic-net-for-regression" class="section level2">
 <h2><span class="header-section-number">22.2</span> Elastic Net for Regression</h2>
@@ -586,7 +589,7 @@ def_elnet</code></pre></div>
 </div>
 <div id="rmarkdown-7" class="section level2">
 <h2><span class="header-section-number">22.5</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="16-elnet.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.3.2 and the following packages:</p>
+<p>The RMarkdown file for this chapter can be found <a href="16-elnet.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.3.3 and the following packages:</p>
 <ul>
 <li>Base Packages, Attached</li>
 </ul>
@@ -608,9 +611,8 @@ def_elnet</code></pre></div>
 ## [25] &quot;nnet&quot;         &quot;rmarkdown&quot;    &quot;bookdown&quot;     &quot;minqa&quot;       
 ## [29] &quot;reshape2&quot;     &quot;car&quot;          &quot;magrittr&quot;     &quot;backports&quot;   
 ## [33] &quot;scales&quot;       &quot;codetools&quot;    &quot;ModelMetrics&quot; &quot;htmltools&quot;   
-## [37] &quot;MASS&quot;         &quot;splines&quot;      &quot;assertthat&quot;   &quot;pbkrtest&quot;    
-## [41] &quot;colorspace&quot;   &quot;quantreg&quot;     &quot;stringi&quot;      &quot;lazyeval&quot;    
-## [45] &quot;munsell&quot;</code></pre>
+## [37] &quot;MASS&quot;         &quot;splines&quot;      &quot;pbkrtest&quot;     &quot;colorspace&quot;  
+## [41] &quot;quantreg&quot;     &quot;stringi&quot;      &quot;lazyeval&quot;     &quot;munsell&quot;</code></pre>
 
 </div>
 </div>

@@ -437,7 +437,7 @@ gam_train
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](18-nonlin.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](18-nonlin.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 
@@ -461,14 +461,14 @@ The RMarkdown file for this chapter can be found [**here**](18-nonlin.Rmd). The 
 ##  [1] "Rcpp"         "compiler"     "nloptr"       "plyr"        
 ##  [5] "iterators"    "tools"        "digest"       "lme4"        
 ##  [9] "evaluate"     "tibble"       "gtable"       "nlme"        
-## [13] "mgcv"         "Matrix"       "parallel"     "yaml"        
+## [13] "mgcv"         "Matrix"       "yaml"         "parallel"    
 ## [17] "SparseM"      "stringr"      "knitr"        "MatrixModels"
 ## [21] "stats4"       "rprojroot"    "grid"         "nnet"        
 ## [25] "rmarkdown"    "bookdown"     "minqa"        "reshape2"    
 ## [29] "car"          "magrittr"     "backports"    "scales"      
-## [33] "codetools"    "ModelMetrics" "htmltools"    "assertthat"  
-## [37] "pbkrtest"     "colorspace"   "quantreg"     "stringi"     
-## [41] "lazyeval"     "munsell"
+## [33] "codetools"    "ModelMetrics" "htmltools"    "pbkrtest"    
+## [37] "colorspace"   "quantreg"     "stringi"      "lazyeval"    
+## [41] "munsell"
 ```
 
 

@@ -434,7 +434,7 @@ For fun, write-up a simulation study which compares the strategy in the bias-var
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](11-resampling.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](11-resampling.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 
@@ -464,6 +464,6 @@ The RMarkdown file for this chapter can be found [**here**](11-resampling.Rmd). 
 ## [29] "bookdown"     "minqa"        "ggplot2"      "reshape2"    
 ## [33] "car"          "magrittr"     "backports"    "scales"      
 ## [37] "codetools"    "ModelMetrics" "htmltools"    "MASS"        
-## [41] "splines"      "assertthat"   "pbkrtest"     "colorspace"  
-## [45] "quantreg"     "stringi"      "lazyeval"     "munsell"
+## [41] "splines"      "pbkrtest"     "colorspace"   "quantreg"    
+## [45] "stringi"      "lazyeval"     "munsell"
 ```

@@ -794,14 +794,13 @@ ColorDendrogram(iris_hc, y = iris_cut,
 
 ## External Links
 
-- [Hierarchical Cluster Analysis on Famous Ddata Sets](https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html) - Using the `dendextend` package for in depth hierarchical cluster
+- [Hierarchical Cluster Analysis on Famous Data Sets](https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html) - Using the `dendextend` package for in depth hierarchical cluster
 - [K-means Clustering is Not a Free Lunch](http://varianceexplained.org/r/kmeans-free-lunch/) - Comments on the assumptions made by $K$-means clustering.
-
-
+- [Principal Component Analysis - Explained Visually](http://varianceexplained.org/r/kmeans-free-lunch/) - Interactive PCA visualizations.
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 
@@ -831,9 +830,9 @@ The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd)
 ## [25] "rprojroot"    "grid"         "nnet"         "rmarkdown"   
 ## [29] "bookdown"     "minqa"        "reshape2"     "car"         
 ## [33] "magrittr"     "backports"    "scales"       "codetools"   
-## [37] "ModelMetrics" "htmltools"    "splines"      "assertthat"  
-## [41] "pbkrtest"     "colorspace"   "quantreg"     "stringi"     
-## [45] "lazyeval"     "munsell"
+## [37] "ModelMetrics" "htmltools"    "splines"      "pbkrtest"    
+## [41] "colorspace"   "quantreg"     "stringi"      "lazyeval"    
+## [45] "munsell"
 ```
 
 

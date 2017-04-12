@@ -814,7 +814,7 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_pred,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). The file was created using `R` version 3.3.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). The file was created using `R` version 3.3.3 and the following packages:
 
 - Base Packages, Attached
 
@@ -845,10 +845,10 @@ The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). Th
 ## [17] "SparseM"      "e1071"        "stringr"      "knitr"       
 ## [21] "MatrixModels" "stats4"       "nnet"         "rprojroot"   
 ## [25] "grid"         "rmarkdown"    "bookdown"     "minqa"       
-## [29] "car"          "reshape2"     "magrittr"     "backports"   
+## [29] "reshape2"     "car"          "magrittr"     "backports"   
 ## [33] "scales"       "codetools"    "ModelMetrics" "htmltools"   
-## [37] "pbkrtest"     "assertthat"   "colorspace"   "quantreg"    
-## [41] "stringi"      "lazyeval"     "munsell"
+## [37] "pbkrtest"     "colorspace"   "quantreg"     "stringi"     
+## [41] "lazyeval"     "munsell"
 ```
 
 
