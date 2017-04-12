@@ -4,6 +4,12 @@ We now use the  `Sonar` dataset from the `mlbench` package to explore a new regu
 
 ## Sonar Data
 
+```{r}
+# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
+# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
+library(methods)
+```
+
 ```{r, message = FALSE, warning = FALSE}
 library(mlbench)
 library(caret)
@@ -26,7 +32,6 @@ table(Sonar$Class) / nrow(Sonar)
 ```{r}
 ncol(Sonar) - 1
 ```
-
 
 ## RDA
 
