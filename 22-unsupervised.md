@@ -334,17 +334,6 @@ Often we are interested in the cumulative proportion. A common use of PCA outsid
 
 ```r
 library(caret)
-```
-
-```
-## Loading required package: lattice
-```
-
-```
-## Loading required package: ggplot2
-```
-
-```r
 library(mlbench)
 data(Sonar)
 set.seed(18)
@@ -387,7 +376,7 @@ using_pca$preProcess
 ## PCA needed 30 components to capture 95 percent of the variance
 ```
 
-It won't always outperform simply using the original predictors, but here using 30 of 60 principal comments shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.
+It won't always outperform simply using the original predictors, but here using 30 of 60 principal components shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.
 
 ### Simulated Data
 

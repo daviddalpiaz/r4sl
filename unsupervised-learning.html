@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-04-12">
+<meta name="date" content="2017-04-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -538,10 +538,8 @@ pve</code></pre></div>
 )</code></pre></div>
 <p><img src="22-unsupervised_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Often we are interested in the cumulative proportion. A common use of PCA outside of visualization is dimension reduction for modeling. If <span class="math inline">\(p\)</span> is large, PCA is performed, and the principal components that account for a large proportion of variation, say 95%, are used for further analysis. In certain situations that can reduce the dimensionality of data significantly. This can be done almost automatically using <code>caret</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre></div>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mlbench)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+<span class="kw">library</span>(mlbench)
 <span class="kw">data</span>(Sonar)
 <span class="kw">set.seed</span>(<span class="dv">18</span>)
 using_pca =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
@@ -566,7 +564,7 @@ regular_scaling =<span class="st"> </span><span class="kw">train</span>(Class ~<
 ##   - scaled (60)
 ## 
 ## PCA needed 30 components to capture 95 percent of the variance</code></pre>
-<p>It won’t always outperform simply using the original predictors, but here using 30 of 60 principal comments shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.</p>
+<p>It won’t always outperform simply using the original predictors, but here using 30 of 60 principal components shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.</p>
 </div>
 <div id="simulated-data" class="section level3">
 <h3><span class="header-section-number">28.2.2</span> Simulated Data</h3>
