@@ -128,7 +128,7 @@ plot(
 
 Often we are interested in the cumulative proportion. A common use of PCA outside of visualization is dimension reduction for modeling. If $p$ is large, PCA is performed, and the principal components that account for a large proportion of variation, say 95%, are used for further analysis. In certain situations that can reduce the dimensionality of data significantly. This can be done almost automatically using `caret`:
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(caret)
 library(mlbench)
 data(Sonar)
@@ -147,7 +147,7 @@ max(regular_scaling$results$Accuracy)
 using_pca$preProcess
 ```
 
-It won't always outperform simply using the original predictors, but here using 30 of 60 principal comments shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.
+It won't always outperform simply using the original predictors, but here using 30 of 60 principal components shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.
 
 ### Simulated Data
 
