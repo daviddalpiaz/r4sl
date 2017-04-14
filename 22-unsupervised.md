@@ -404,7 +404,7 @@ We label the true clusters 1, 2, and 3 in a way that will "match" output from $k
 
 
 ```r
-kmean_out = kmeans(clust_data, 3, nstart = 10)
+kmean_out = kmeans(clust_data, centers = 3, nstart = 10)
 names(kmean_out)
 ```
 
@@ -526,7 +526,7 @@ plot(
 
 ![](22-unsupervised_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
-If we instead plot the first two principal components, we see, even without coloring, once blob that is clearly separate from the rest.
+If we instead plot the first two principal components, we see, even without coloring, one blob that is clearly separate from the rest.
 
 
 ```r

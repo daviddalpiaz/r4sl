@@ -580,7 +580,7 @@ clust_data =<span class="st"> </span><span class="kw">rbind</span>(
 <p>Above we simulate data for clustering. Note that, we did this in a way that will result in three clusters.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">true_clusters =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>, n /<span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">1</span>, n /<span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">2</span>, n /<span class="st"> </span><span class="dv">3</span>))</code></pre></div>
 <p>We label the true clusters 1, 2, and 3 in a way that will “match” output from <span class="math inline">\(k\)</span>-means. (Which is somewhat arbitrary.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmean_out =<span class="st"> </span><span class="kw">kmeans</span>(clust_data, <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmean_out =<span class="st"> </span><span class="kw">kmeans</span>(clust_data, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
 <span class="kw">names</span>(kmean_out)</code></pre></div>
 <pre><code>## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
 ## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
@@ -657,7 +657,7 @@ clust_data =<span class="st"> </span><span class="kw">rbind</span>(
   <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span>
 )</code></pre></div>
 <p><img src="22-unsupervised_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<p>If we instead plot the first two principal components, we see, even without coloring, once blob that is clearly separate from the rest.</p>
+<p>If we instead plot the first two principal components, we see, even without coloring, one blob that is clearly separate from the rest.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
   clust_data_pca$x[, <span class="dv">1</span>],
   clust_data_pca$x[, <span class="dv">2</span>],
