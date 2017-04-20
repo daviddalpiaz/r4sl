@@ -228,9 +228,9 @@ lasso_grid
 ```
 
 ```{r}
+sim_data = data.frame(y, X)
 fit_lasso = train(
-  x = X,
-  y = y,
+  y ~ ., data = sim_data,
   method = "glmnet",
   trControl = cv_5,
   tuneGrid = lasso_grid
