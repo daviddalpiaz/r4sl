@@ -88,8 +88,6 @@ default_glm
 ## 
 ##   Accuracy   Kappa    
 ##   0.9729372  0.4147209
-## 
-## 
 ```
 
 
