@@ -108,7 +108,7 @@ This becomes the new multiplication rule for independent events.
 A collection of events $E_1, E_2, \ldots E_n$ is said to be independent if
 
 $$
-P\left[\bigcup_{i \in S} E_i \right] = \prod_{i \in S}P[A_i]
+P\left[\bigcap_{i \in S} E_i \right] = \prod_{i \in S}P[A_i]
 $$
 
 for every subset $S$ of $\{1, 2, \ldots n\}$.
