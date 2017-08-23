@@ -1,6 +1,6 @@
 --- 
-title: "R for Statistical Learning"
-author: "David Dalpiaz"
+title: "`R` for Statistical Learning"
+author: "[David Dalpiaz](https://daviddalpiaz.com/)"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -12,8 +12,6 @@ url: 'http\://daviddalpiaz.github.io/r4sl/'
 description: ""
 favicon: "favicon.ico"
 ---
-
-
 
 # Introduction {-}
 
