@@ -1,9 +1,12 @@
 language: r
+sudo: false
 cache:
   packages: true
   directories:
   - $TRAVIS_BUILD_DIR/_bookdown_files
-sudo: false
+env:
+  global:
+  - secure: ESaBJEx6it4VtkA6c7ECY2ycJiuZhQ2rdNDMObgvmY32wm+apKm3LmlYzutfxBDiqa25B67Wk0Nm9PFb5REHykkbSk0hZwGe1w/xqyvQStQxGXy+NcqPSm7W6Oak7CV9+CIgj7oCjMdmLZI2liSMYfEV9473pQFFQOyXzLzmuMZB7G/WVG/+U6jbi1ik4KbiFx/8dPUr8CsuE3C4U1H8bqRh+twa3FMNLxKTBMn/YJ75IxMwwAdjAX6YNOb96CacL7J7PnTouVUKYzYJzn+sCjvGcckAa6HxurhUmVxYLPupesl0yA6rizmCybQ1WcVrHgrffETknNc4xbAPRxIDj/SV9N9Y65gY/bSzRTwAGaMoLmxcoMdVDNro+nqSwqleUsPTrWosJN+m1vKIR4dfJ98i9bDzqitnzN0knPJAT/nn1OThHoPHQd84gYWEs2Pws1ahSlOC7BxyVEm7VLfDChr9LI68TT9tx4LPrxDsX5o8t/zuYjrw2BqNEIRzNk/REFfmTwzNZLvGv5ZAPqXFu2D806krrJV6lZo8jj+BpXW63UyGRHLCc0lYcXUVJs4RugxMQv0+ovkfVGWwfOqpU96LlJzPjSOs2L6QMo7/CegX1UqeenEteuGlGPUyXM6E4WZNYMSlf78hI9BAiBuZqMXlrsngaX1Tx/MH49Du7uo=
 before_script:
 - chmod +x ./deployment/_build.sh
 - chmod +x ./deployment/_deploy.sh
@@ -12,6 +15,3 @@ script:
 after_success:
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
   deployment/_deploy.sh
-env:
-  global:
-  - secure: ESaBJEx6it4VtkA6c7ECY2ycJiuZhQ2rdNDMObgvmY32wm+apKm3LmlYzutfxBDiqa25B67Wk0Nm9PFb5REHykkbSk0hZwGe1w/xqyvQStQxGXy+NcqPSm7W6Oak7CV9+CIgj7oCjMdmLZI2liSMYfEV9473pQFFQOyXzLzmuMZB7G/WVG/+U6jbi1ik4KbiFx/8dPUr8CsuE3C4U1H8bqRh+twa3FMNLxKTBMn/YJ75IxMwwAdjAX6YNOb96CacL7J7PnTouVUKYzYJzn+sCjvGcckAa6HxurhUmVxYLPupesl0yA6rizmCybQ1WcVrHgrffETknNc4xbAPRxIDj/SV9N9Y65gY/bSzRTwAGaMoLmxcoMdVDNro+nqSwqleUsPTrWosJN+m1vKIR4dfJ98i9bDzqitnzN0knPJAT/nn1OThHoPHQd84gYWEs2Pws1ahSlOC7BxyVEm7VLfDChr9LI68TT9tx4LPrxDsX5o8t/zuYjrw2BqNEIRzNk/REFfmTwzNZLvGv5ZAPqXFu2D806krrJV6lZo8jj+BpXW63UyGRHLCc0lYcXUVJs4RugxMQv0+ovkfVGWwfOqpU96LlJzPjSOs2L6QMo7/CegX1UqeenEteuGlGPUyXM6E4WZNYMSlf78hI9BAiBuZqMXlrsngaX1Tx/MH49Du7uo=
