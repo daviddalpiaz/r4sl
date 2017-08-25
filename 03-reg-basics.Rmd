@@ -1,0 +1,222 @@
+# Regression Basics in `R`
+
+This chapter will recap the basics of performing regression analyses in `R`. For more detailed coverage, see [Applied Statistics with `R`](http://daviddalpiaz.github.io/appliedstats/).
+
+We will use the [Advertising data](data/Advertising.csv) associated with [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/data.html).
+
+```{r, message = FALSE, warning = FALSE}
+library(readr)
+Advertising = read_csv("data/Advertising.csv")
+```
+
+After loading data into `R`, our first step should **always** be to inspect the data. We will start by simply printing some observations in order to understand the basic structure of the data.
+
+```{r}
+Advertising
+```
+
+Because the data was read using `read_csv()`, `Advertising` is a tibble. We see that there are a total of `r nrow(Advertising)` observations and `r ncol(Advertising)` variables, each of which is numeric. (Specifically double-precision vectors, but more importantly they are numbers.) For the purpose of this analysis, `Sales` will be the **response variable**. That is, we seek to understand the relationship between `Sales`, and the **predictor variables**: `TV`, `Radio`, and `Newspaper`.
+
+## Visualization for Regression
+
+After investigating the structure of the data, the next step should be to visualize the data. Since we have only numeric variables, we should consider **scatter plots**.
+
+We could do so for any individual predictor.
+
+```{r}
+plot(Sales ~ TV, data = Advertising, col = "dodgerblue", pch = 20, cex = 1.5,
+     main = "Sales vs Television Advertising")
+```
+
+The `pairs()` function is a useful way to quickly visualize a number of scatter plots.
+
+```{r}
+pairs(Advertising)
+```
+
+Often, we will be most interested in only the relationship between each predictor and the response. For this, we can use the `featurePlot()` function from the `caret` package. (We will use the `caret` package more and more frequently as we introduce new topics.)
+
+```{r, fig.height = 4, fig.width = 10, message = FALSE, warning = FALSE}
+library(caret)
+featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$Sales)
+```
+
+We see that there is a clear increase in `Sales` as `Radio` or `TV` are increased. The relationship between `Sales` and `Newspaper` is less clear. How all of the predictors work together is also unclear, as there is some obvious correlation between `Radio` and `TV`. To investigate further, we will need to model the data.
+
+
+## The `lm()` Function
+
+The following code fits an additive **linear model** with `Sales` as the response and each remaining variable as a predictor. Note, by not using `attach()` and instead specifying the `data = ` argument, we are able to specify this model without using each of the variable names directly.
+
+```{r}
+mod_1 = lm(Sales ~ ., data = Advertising)
+# mod_1 = lm(Sales ~ TV + Radio + Newspaper, data = Advertising)
+```
+
+Note that the commented line is equivalent to the line that is run, but we will often use the `response ~ .` syntax when possible.
+
+
+## Hypothesis Testing
+
+The `summary()` function will return a large amount of useful information about a model fit using `lm()`. Much of it will be helpful for hypothesis testing including individual tests about each predictor, as well as the significance of the regression test.
+
+```{r}
+summary(mod_1)
+```
+
+```{r}
+mod_0 = lm(Sales ~ TV + Radio, data = Advertising)
+```
+
+The `anova()` function is useful for comparing two models. Here we compare the full additive model, `mod_1`, to a reduced model `mod_0`. Essentially we are testing for the significance of the `Newspaper` variable in the additive model.
+
+```{r}
+anova(mod_0, mod_1)
+```
+
+Note that hypothesis testing is *not* our focus, so we omit many details.
+
+
+## Prediction
+
+The `predict()` function is an extremely versatile function, for, prediction. When used on the result of a model fit using `lm()` it will, by default, return predictions for each of the data points used to fit the model. (Here, we limit the printed result to the first 10.)
+
+```{r}
+head(predict(mod_1), n = 10)
+```
+
+Note that the effect of the `predict()` function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class `lm`. Because of this, `predict()` then runs the `predict.lm()` function. Thus, we should use `?predict.lm()` for details.
+
+We could also specify new data, which should be a data frame or tibble with the same column names as the predictors.
+
+```{r}
+new_obs = data.frame(TV = 150, Radio = 40, Newspaper = 1)
+```
+
+We can then use the `predict()` function for point estimates, confidence intervals, and prediction intervals.
+
+Using only the first two arguments, `R` will simply return a point estimate, that is, the "predicted value," $\hat{y}$.
+
+```{r}
+predict(mod_1, newdata = new_obs)
+```
+
+If we specify an additional argument `interval` with a value of `"confidence"`, `R` will return a 95% confidence interval for the mean response at the specified point. Note that here `R` also gives the point estimate as `fit`.
+
+```{r}
+predict(mod_1, newdata = new_obs, interval = "confidence")
+```
+
+Lastly, we can alter the level using the `level` argument. Here we report a prediction interval instead of a confidence interval.
+
+```{r}
+predict(mod_1, newdata = new_obs, interval = "prediction", level = 0.99)
+```
+
+
+## Unusual Observations
+
+`R` provides several functions for obtaining metrics related to unusual observations.
+
+- `resid()` provides the residual for each observation
+- `hatvalues()` gives the leverage of each observation
+- `rstudent()` give the studentized residual for each observation
+- `cooks.distance()` calculates the influence of each observation
+
+```{r}
+head(resid(mod_1), n = 10)
+head(hatvalues(mod_1), n = 10)
+head(rstudent(mod_1), n = 10)
+head(cooks.distance(mod_1), n = 10)
+```
+
+
+## Adding Complexity
+
+We have a number of ways to add complexity to a linear model, even allowing a linear model to be used to model non-linear relationships.
+
+### Interactions
+
+Interactions can be introduced to the `lm()` procedure in a number of ways.
+
+We can use the `:` operator to introduce a single interaction of interest.
+
+```{r}
+mod_2 = lm(Sales ~ . + TV:Newspaper, data = Advertising)
+coef(mod_2)
+```
+
+The `response ~ . ^ k` syntax can be used to model all `k`-way interactions. (As well as the appropriate lower order terms.) Here we fit a model with all two-way interactions, and the lower order main effects.
+
+```{r}
+mod_3 = lm(Sales ~ . ^ 2, data = Advertising)
+coef(mod_3)
+```
+
+The `*` operator can be used to specify all interactions of a certain order, as well as all lower order terms according to the usual hierarchy. Here we see a three-way interaction and all lower order terms.
+
+```{r}
+mod_4 = lm(Sales ~ TV * Radio * Newspaper, data = Advertising)
+coef(mod_4)
+```
+
+Note that, we have only been dealing with numeric predictors. **Categorical predictors** are often recorded as **factor** variables in `R`. 
+
+```{r}
+library(tibble)
+cat_pred = tibble(
+  x1 = factor(c(rep("A", 10), rep("B", 10), rep("C", 10))),
+  x2 = runif(n = 30),
+  y  = rnorm(n = 30)
+)
+cat_pred
+```
+
+Notice that in this simple simulated tibble, we have coerced `x1` to be a factor variable, although this is not strictly necessary since the variable took values `A`, `B`, and `C`. When using `lm()`, even if not a factor, `R` would have treated `x1` as such. Coercion to factor is more important if a cateogical variable is coded for example as `1`, `2` and `3`. Otherwise it is treated as numeric, which creates a difference in the regression model.
+
+The following two models illustrate the effect of factor variables on linear models.
+
+```{r}
+cat_pred_mod_add = lm(y ~ x1 + x2, data = cat_pred)
+coef(cat_pred_mod_add)
+```
+
+```{r}
+cat_pred_mod_int = lm(y ~ x1 * x2, data = cat_pred)
+coef(cat_pred_mod_int)
+```
+
+
+### Polynomials
+
+Polynomial terms can be specified using the inhibit function `I()` or through the `poly()` function. Note that these two methods produce different coefficients, but the same residuals! This is due to the `poly()` function using orthogonal polynomials by default.
+
+```{r}
+mod_5 = lm(Sales ~ TV + I(TV ^ 2), data = Advertising)
+coef(mod_5)
+mod_6 = lm(Sales ~ poly(TV, degree = 2), data = Advertising)
+coef(mod_6)
+all.equal(resid(mod_5), resid(mod_6))
+```
+
+Polynomials and interactions can be mixed to create even more complex models.
+
+```{r}
+mod_7 = lm(Sales ~ . ^ 2 + poly(TV, degree = 3), data = Advertising)
+# mod_7 = lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)
+coef(mod_7)
+```
+
+Notice here that `R` ignores the first order term from `poly(TV, degree = 3)` as it is already in the model. We could consider using the commented line instead.
+
+
+### Transformations
+
+Note that we could also create more complex models, which allow for non-linearity, using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.
+
+```{r}
+mod_8 = lm(log(Sales) ~ ., data = Advertising)
+sqrt(mean(resid(mod_8) ^ 2)) # incorrect RMSE for Model 8
+sqrt(mean(resid(mod_7) ^ 2)) # RMSE for Model 7
+sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
+```

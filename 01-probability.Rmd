@@ -108,7 +108,7 @@ This becomes the new multiplication rule for independent events.
 A collection of events $E_1, E_2, \ldots E_n$ is said to be independent if
 
 $$
-P\left[\bigcup_{i \in S} E_i \right] = \prod_{i \in S}P[A_i]
+P\left[\bigcap_{i \in S} E_i \right] = \prod_{i \in S}P[A_i]
 $$
 
 for every subset $S$ of $\{1, 2, \ldots n\}$.
@@ -156,7 +156,7 @@ $$
 
 This line conveys a large ammount of information.
 
-- The function $p(x | n, p)$ is the mass function. It is a function of $x$, the possible values of the random variable $X$. It is conditional on the **paramters** $n$ and $p$. Different values of these parameters specify different binomial distributions.
+- The function $p(x | n, p)$ is the mass function. It is a function of $x$, the possible values of the random variable $X$. It is conditional on the **parameters** $n$ and $p$. Different values of these parameters specify different binomial distributions.
 - $x = 0, 1, \ldots, n$ indicates the **sample space**, that is, the possible values of the random variable.
 - $n \in \mathbb{N}$ and $0 < p < 1$ specify the **parameter spaces**. These are the possible values of the parameters that give a valid binomial distribution.
 

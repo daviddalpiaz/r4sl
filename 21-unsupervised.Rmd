@@ -1,0 +1,401 @@
+# Unsupervised Learning
+
+
+## Methods
+
+### Principal Component Analysis
+
+To perform PCA in `R` we will use `prcomp()`. See `?prcomp()` for details.
+
+### $k$-Means Clustering
+
+To perform $k$-means in `R` we will use `kmeans()`. See `?kmeans()` for details.
+
+### Hierarchical Clustering
+
+To perform hierarchical clustering in `R` we will use `hclust()`. See `?hclust()` for details.
+
+
+
+## Examples
+
+### US Arrests
+
+```{r}
+library(ISLR)
+data(USArrests)
+apply(USArrests, 2, mean)
+apply(USArrests, 2, sd)
+```
+
+"Before" performing PCA, we will scale the data. (This will actually happen inside the `prcomp()` function.)
+
+```{r}
+USArrests_pca = prcomp(USArrests, scale = TRUE)
+```
+
+A large amount of information is stored in the output of `prcomp()`, some of which can neatly be displayed with `summary()`.
+
+```{r}
+names(USArrests_pca)
+summary(USArrests_pca)
+```
+
+```{r}
+USArrests_pca$center
+USArrests_pca$scale
+USArrests_pca$rotation
+```
+
+We see that `$center` and `$scale` give the mean and standard deviations for the original variables. `$rotation` gives the loading vectors that are used to rotate the original data to obtain the principal components.
+
+```{r}
+dim(USArrests_pca$x)
+dim(USArrests)
+head(USArrests_pca$x)
+```
+
+The dimension of the principal components is the same as the original data. The principal components are stored in `$x`.
+
+```{r}
+scale(as.matrix(USArrests))[1, ] %*% USArrests_pca$rotation[, 1]
+scale(as.matrix(USArrests))[1, ] %*% USArrests_pca$rotation[, 2]
+scale(as.matrix(USArrests))[1, ] %*% USArrests_pca$rotation[, 3]
+scale(as.matrix(USArrests))[1, ] %*% USArrests_pca$rotation[, 4]
+```
+
+```{r}
+head(scale(as.matrix(USArrests)) %*% USArrests_pca$rotation[,1])
+head(USArrests_pca$x[, 1])
+```
+
+```{r}
+sum(USArrests_pca$rotation[, 1] ^ 2)
+USArrests_pca$rotation[, 1] %*% USArrests_pca$rotation[, 2]
+USArrests_pca$rotation[, 1] %*% USArrests_pca$rotation[, 3]
+USArrests_pca$x[, 1] %*% USArrests_pca$x[, 2]
+USArrests_pca$x[, 1] %*% USArrests_pca$x[, 3]
+```
+
+The above verifies some of the "math" of PCA. We see how the loadings obtain the principal components from the original data. We check that the loading vectors are normalized. We also check for orthogonality of both the loading vectors and the principal components. (Note the above inner products aren't exactly 0, but that is simply a numerical issue.)
+
+```{r, fig.height=8, fig.width=8}
+biplot(USArrests_pca, scale = 0, cex = 0.5)
+```
+
+A `biplot` can be used to visualize both the principal component scores and the principal component loadings. (Note the two scales for each axis.)
+
+```{r}
+USArrests_pca$sdev
+USArrests_pca$sdev ^ 2 / sum(USArrests_pca$sdev ^ 2)
+```
+
+Frequently we will be interested in the proportion of variance explained by a principal component.
+
+```{r}
+get_PVE = function(pca_out) {
+  pca_out$sdev ^ 2 / sum(pca_out$sdev ^ 2)
+}
+```
+
+So frequently, we would be smart to write a function to do so.
+
+```{r}
+pve = get_PVE(USArrests_pca)
+
+pve
+plot(
+  pve,
+  xlab = "Principal Component",
+  ylab = "Proportion of Variance Explained",
+  ylim = c(0, 1),
+  type = 'b'
+)
+```
+
+We can then plot the proportion of variance explained for each PC. As expected, we see the PVE decrease.
+
+```{r}
+cumsum(pve)
+plot(
+  cumsum(pve),
+  xlab = "Principal Component",
+  ylab = "Cumulative Proportion of Variance Explained",
+  ylim = c(0, 1),
+  type = 'b'
+)
+```
+
+Often we are interested in the cumulative proportion. A common use of PCA outside of visualization is dimension reduction for modeling. If $p$ is large, PCA is performed, and the principal components that account for a large proportion of variation, say 95%, are used for further analysis. In certain situations that can reduce the dimensionality of data significantly. This can be done almost automatically using `caret`:
+
+```{r, message = FALSE, warning = FALSE}
+library(caret)
+library(mlbench)
+data(Sonar)
+set.seed(18)
+using_pca = train(Class ~ ., data = Sonar, method = "knn", 
+                  trControl = trainControl(method = "cv", number = 5), 
+                  preProcess = "pca",
+                  tuneGrid = expand.grid(k = c(1, 3, 5, 7, 9)))
+regular_scaling = train(Class ~ ., data = Sonar, method = "knn", 
+                        trControl = trainControl(method = "cv", number = 5), 
+                        preProcess = c("center", "scale"), 
+                        tuneGrid = expand.grid(k = c(1, 3, 5, 7, 9)))
+max(using_pca$results$Accuracy)
+max(regular_scaling$results$Accuracy)
+
+using_pca$preProcess
+```
+
+It won't always outperform simply using the original predictors, but here using 30 of 60 principal components shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.
+
+### Simulated Data
+
+```{r}
+library(MASS)
+set.seed(42)
+n = 180
+p = 10
+clust_data = rbind(
+  mvrnorm(n = n / 3, sample(c(1, 2, 3, 4), p, replace = TRUE), diag(p)),
+  mvrnorm(n = n / 3, sample(c(1, 2, 3, 4), p, replace = TRUE), diag(p)),
+  mvrnorm(n = n / 3, sample(c(1, 2, 3, 4), p, replace = TRUE), diag(p))
+)
+```
+
+Above we simulate data for clustering. Note that, we did this in a way that will result in three clusters.
+
+```{r}
+true_clusters = c(rep(3, n / 3), rep(1, n / 3), rep(2, n / 3))
+```
+
+We label the true clusters 1, 2, and 3 in a way that will "match" output from $k$-means. (Which is somewhat arbitrary.)
+
+```{r}
+kmean_out = kmeans(clust_data, centers = 3, nstart = 10)
+names(kmean_out)
+```
+
+Notice that we used `nstart = 10` which will give us a more stable solution by attempting 10 random starting positions for the means. Also notice we chose to use `centers = 3`. (The $k$ in $k$-mean). How did we know to do this? We'll find out on the homework. (It will involve looking at `tot.withinss`)
+
+```{r}
+kmean_out
+kmeans_clusters = kmean_out$cluster
+
+table(true_clusters, kmeans_clusters)
+```
+
+We check how well the clustering is working.
+
+```{r}
+dim(clust_data)
+```
+
+This data is "high dimensional" so it is difficult to visualize. (Anything more than 2 is hard to visualize.)
+
+```{r}
+plot(
+  clust_data[, 1],
+  clust_data[, 2],
+  pch = 20,
+  xlab = "First Variable",
+  ylab = "Second Variable"
+)
+```
+
+Plotting the first and second variables simply results in a blob.
+
+```{r}
+plot(
+  clust_data[, 1],
+  clust_data[, 2],
+  col = true_clusters,
+  pch = 20,
+  xlab = "First Variable",
+  ylab = "Second Variable"
+)
+```
+
+Even when using their true clusters for coloring, this plot isn't very helpful.
+
+```{r}
+clust_data_pca = prcomp(clust_data, scale = TRUE)
+
+plot(
+  clust_data_pca$x[, 1],
+  clust_data_pca$x[, 2],
+  pch = 0,
+  xlab = "First Principal Component",
+  ylab = "Second Principal Component"
+)
+```
+
+If we instead plot the first two principal components, we see, even without coloring, one blob that is clearly separate from the rest.
+
+```{r}
+plot(
+  clust_data_pca$x[, 1],
+  clust_data_pca$x[, 2],
+  col = true_clusters,
+  pch = 0,
+  xlab = "First Principal Component",
+  ylab = "Second Principal Component",
+  cex = 2
+)
+points(clust_data_pca$x[, 1], clust_data_pca$x[, 2], col = kmeans_clusters, pch = 20, cex = 1.5)
+```
+
+Now adding the true colors (boxes) and the $k$-means results (circles), we obtain a nice visualization.
+
+```{r}
+clust_data_pve = get_PVE(clust_data_pca)
+
+plot(
+  cumsum(clust_data_pve),
+  xlab = "Principal Component",
+  ylab = "Cumulative Proportion of Variance Explained",
+  ylim = c(0, 1),
+  type = 'b'
+)
+```
+
+The above visualization works well because the first two PCs explain a large proportion of the variance.
+
+```{r}
+#install.packages('sparcl')
+library(sparcl)
+```
+
+To create colored dendrograms we will use `ColorDendrogram()` in the `sparcl` package.
+
+```{r}
+clust_data_hc = hclust(dist(scale(clust_data)), method = "complete")
+clust_data_cut = cutree(clust_data_hc , 3)
+ColorDendrogram(clust_data_hc, y = clust_data_cut,
+                labels = names(clust_data_cut),
+                main = "Simulated Data, Complete Linkage",
+                branchlength = 1.5)
+```
+
+Here we apply hierarchical clustering to the **scaled** data. The `dist()` function is used to calculate pairwise distances between the (scaled in this case) observations. We use complete linkage. We then use the `cutree()` function to cluster the data into `3` clusters. The `ColorDendrogram()` function is then used to plot the dendrogram. Note that the `branchlength` argument is somewhat arbitrary (the length of the colored bar) and will need to be modified for each dendrogram.
+
+```{r}
+table(true_clusters, clust_data_cut)
+```
+
+We see in this case hierarchical clustering doesn't "work" as well as $k$-means.
+
+```{r}
+clust_data_hc = hclust(dist(scale(clust_data)), method = "single")
+clust_data_cut = cutree(clust_data_hc , 3)
+ColorDendrogram(clust_data_hc, y = clust_data_cut,
+                labels = names(clust_data_cut),
+                main = "Simulated Data, Single Linkage",
+                branchlength = 0.5)
+
+table(true_clusters, clust_data_cut)
+
+
+clust_data_hc = hclust(dist(scale(clust_data)), method = "average")
+clust_data_cut = cutree(clust_data_hc , 3)
+ColorDendrogram(clust_data_hc, y = clust_data_cut,
+                labels = names(clust_data_cut),
+                main = "Simulated Data, Average Linkage",
+                branchlength = 1)
+
+table(true_clusters, clust_data_cut)
+```
+
+We also try single and average linkage. Single linkage seems to perform poorly here, while average linkage seems to be working well.
+
+
+### Iris Data
+
+
+```{r}
+str(iris)
+iris_pca = prcomp(iris[,-5], scale = TRUE)
+iris_pca$rotation
+
+lab_to_col = function (labels){
+  cols = rainbow (length(unique(labels)))
+  cols[as.numeric (as.factor(labels))]
+}
+
+plot(iris_pca$x[,1], iris_pca$x[,2], col = lab_to_col(iris$Species), pch = 20)
+plot(iris_pca$x[,3], iris_pca$x[,4], col = lab_to_col(iris$Species), pch = 20)
+
+
+iris_pve = get_PVE(iris_pca)
+
+plot(
+  cumsum(iris_pve),
+  xlab = "Principal Component",
+  ylab = "Cumulative Proportion of Variance Explained",
+  ylim = c(0, 1),
+  type = 'b'
+)
+
+
+iris_kmeans = kmeans(iris[,-5], centers = 3, nstart = 10)
+table(iris_kmeans$clust, iris[,5])
+
+
+
+iris_hc = hclust(dist(scale(iris[,-5])), method = "complete")
+iris_cut = cutree(iris_hc , 3)
+ColorDendrogram(iris_hc, y = iris_cut,
+                labels = names(iris_cut),
+                main = "Iris, Complete Linkage",
+                branchlength = 1.5)
+
+table(iris_cut, iris[,5])
+table(iris_cut, iris_kmeans$clust)
+
+
+iris_hc = hclust(dist(scale(iris[,-5])), method = "single")
+iris_cut = cutree(iris_hc , 3)
+ColorDendrogram(iris_hc, y = iris_cut,
+                labels = names(iris_cut),
+                main = "Iris, Single Linkage",
+                branchlength = 0.3)
+
+iris_hc = hclust(dist(scale(iris[,-5])), method = "average")
+iris_cut = cutree(iris_hc , 3)
+ColorDendrogram(iris_hc, y = iris_cut,
+                labels = names(iris_cut),
+                main = "Iris, Average Linkage",
+                branchlength = 1)
+```
+
+## External Links
+
+- [Hierarchical Cluster Analysis on Famous Data Sets](https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html) - Using the `dendextend` package for in depth hierarchical cluster
+- [K-means Clustering is Not a Free Lunch](http://varianceexplained.org/r/kmeans-free-lunch/) - Comments on the assumptions made by $K$-means clustering.
+- [Principal Component Analysis - Explained Visually](http://varianceexplained.org/r/kmeans-free-lunch/) - Interactive PCA visualizations.
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+- Base Packages, Attached
+
+```{r, echo = FALSE}
+sessionInfo()$basePkgs
+```
+
+- Additional Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additional Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```
+
+
+
+

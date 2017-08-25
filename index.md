@@ -1,7 +1,7 @@
 --- 
-title: "R for Statistical Learning"
-author: "David Dalpiaz"
-date: "2017-04-20"
+title: "`R` for Statistical Learning"
+author: "[David Dalpiaz](https://daviddalpiaz.com/)"
+date: "2017-08-25"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -12,8 +12,6 @@ url: 'http\://daviddalpiaz.github.io/r4sl/'
 description: ""
 favicon: "favicon.ico"
 ---
-
-
 
 # Introduction {-}
 
@@ -81,6 +79,7 @@ Your name could be here! Suggest an edit! Correct a typo! If you submit a correc
 - [James Balamuta](http://www.thecoatlessprofessor.com/), Summer 2016 - ??? 
 - Korawat Tanwisuth, Spring 2017
 - [Yiming Gao](https://www.linkedin.com/in/yiming-gao), Spring 2017
+- [Binxiang Ni](https://github.com/binxiangni), Summer 2017
 
 
 ## License
