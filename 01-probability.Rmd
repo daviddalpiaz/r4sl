@@ -271,6 +271,14 @@ Whereas a probability is a function of a possible observed value given a particu
 
 Maximumizing likelihood is a common techinque for fitting a model to data.
 
+## Videos
+
+The YouTube channel [mathematicalmonk](https://www.youtube.com/user/mathematicalmonk) has a great [Probability Primer playlist](https://www.youtube.com/playlist?list=PL17567A1A3F5DB5E4) containing lectures on many fundamental probability concepts. Some of the more important concepts are covered in the following videos:
+
+- [Conditional Probability](https://www.youtube.com/watch?v=5BWk5qe5EJ8&index=11&list=PL17567A1A3F5DB5E4)
+- [Independence](https://www.youtube.com/watch?v=KK9jvGl9FY0&index=12&list=PL17567A1A3F5DB5E4)
+- [More Independence](https://www.youtube.com/watch?v=RMS-WglZP-c&index=13&list=PL17567A1A3F5DB5E4)
+- [Bayes Rule](https://www.youtube.com/watch?v=cM1BqBv11U8&index=14&list=PL17567A1A3F5DB5E4)
 
 ## References
 
