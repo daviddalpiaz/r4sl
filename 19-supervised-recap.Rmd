@@ -1,4 +1,4 @@
-# Classification Overview
+# Supervised Learning Overview
 
 At this point, you should know...
 
