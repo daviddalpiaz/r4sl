@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Statistical Learning</title>
+  <meta name="description" content="<code>R</code> for Statistical Learning">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/r4sl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/r4sl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz">
+
+
+<meta name="date" content="2017-09-05">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="prev" href="modern-overview.html">
+<link rel="next" href="elastic-net.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i><b>0.2</b> Organization</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.3</b> Who?</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.4</b> Caveat Emptor</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.5</b> Conventions</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.7</b> License</a></li>
+</ul></li>
+<li class="part"><span><b>I Prerequisites</b></span></li>
+<li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
+<li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="2.4.4" data-path="probability-review.html"><a href="probability-review.html#several-random-variables"><i class="fa fa-check"></i><b>2.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>2.5</b> Expectations</a></li>
+<li class="chapter" data-level="2.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>2.6</b> Likelihood</a></li>
+<li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
+<li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
+<li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
+<li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
+<li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
+<li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
+<li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Regression</b></span></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>5.1</b> Assesing Model Accuracy</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#model-complexity"><i class="fa fa-check"></i><b>5.2</b> Model Complexity</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#test-train-split"><i class="fa fa-check"></i><b>5.3</b> Test-Train Split</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>5.4</b> Adding Flexibility to Linear Models</a></li>
+<li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#choosing-a-model"><i class="fa fa-check"></i><b>5.5</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a></li>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="8" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Simulating the Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.1</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="8.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.2</b> Simulation</a></li>
+<li class="chapter" data-level="8.3" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>8.3</b> Bias-Variance Tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>9</b> Classification</a><ul>
+<li class="chapter" data-level="9.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
+<li class="chapter" data-level="9.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
+<li class="chapter" data-level="9.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
+<li class="chapter" data-level="10.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>10.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
+<li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
+<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#classification-1"><i class="fa fa-check"></i><b>12.1</b> Classification</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="knn-class.html"><a href="knn-class.html#default-data"><i class="fa fa-check"></i><b>12.1.1</b> Default Data</a></li>
+<li class="chapter" data-level="12.1.2" data-path="knn-class.html"><a href="knn-class.html#iris-data"><i class="fa fa-check"></i><b>12.1.2</b> Iris Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#regression"><i class="fa fa-check"></i><b>12.2</b> Regression</a></li>
+<li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
+<li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-1"><i class="fa fa-check"></i><b>12.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="part"><span><b>III Unsupervised Learning</b></span></li>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
+<li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
+<li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
+<li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
+<li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data-1"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#external-links-1"><i class="fa fa-check"></i><b>13.3</b> External Links</a></li>
+<li class="chapter" data-level="13.4" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#rmarkdown-2"><i class="fa fa-check"></i><b>13.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i><b>14</b> Principal Component Analysis</a></li>
+<li class="chapter" data-level="15" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>15</b> k-Means</a></li>
+<li class="chapter" data-level="16" data-path="mixture-models.html"><a href="mixture-models.html"><i class="fa fa-check"></i><b>16</b> Mixture Models</a></li>
+<li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
+<li class="part"><span><b>IV In Practice</b></span></li>
+<li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
+<li class="chapter" data-level="19" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>19</b> Classification Overview</a><ul>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#classification-methods"><i class="fa fa-check"></i>Classification Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#discriminative-versus-generative-methods"><i class="fa fa-check"></i>Discriminative versus Generative Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#parametric-and-non-parametric-methods"><i class="fa fa-check"></i>Parametric and Non-Parametric Methods</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#tuning-parameters"><i class="fa fa-check"></i>Tuning Parameters</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#cross-validation"><i class="fa fa-check"></i>Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i>Curse of Dimensionality</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#no-free-lunch-theorem"><i class="fa fa-check"></i>No-Free-Lunch Theorem</a></li>
+<li class="chapter" data-level="19.1" data-path="classification-overview.html"><a href="classification-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
+<li class="chapter" data-level="19.2" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>20.1</b> Test-Train Split</a></li>
+<li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a><ul>
+<li class="chapter" data-level="20.2.1" data-path="resampling.html"><a href="resampling.html#method-specific"><i class="fa fa-check"></i><b>20.2.1</b> Method Specific</a></li>
+<li class="chapter" data-level="20.2.2" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>20.2.2</b> Manual Cross-Validation</a></li>
+<li class="chapter" data-level="20.2.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.2.3</b> Test Data</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.3</b> Bootstrap</a></li>
+<li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.4</b> External Links</a></li>
+<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-4"><i class="fa fa-check"></i><b>20.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.1</b> External Links</a></li>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-5"><i class="fa fa-check"></i><b>21.2</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
+<li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
+<li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="subset-selection.html"><a href="subset-selection.html#validated-rmse"><i class="fa fa-check"></i><b>22.2</b> Validated RMSE</a></li>
+<li class="chapter" data-level="22.3" data-path="subset-selection.html"><a href="subset-selection.html#external-links-5"><i class="fa fa-check"></i><b>22.3</b> External Links</a></li>
+<li class="chapter" data-level="22.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-6"><i class="fa fa-check"></i><b>22.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="part"><span><b>V The Modern Era</b></span></li>
+<li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
+<li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
+<li class="chapter" data-level="24.4" data-path="regularization.html"><a href="regularization.html#simulation-study-p-n"><i class="fa fa-check"></i><b>24.4</b> Simulation Study, p &gt; n</a></li>
+<li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
+<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-7"><i class="fa fa-check"></i><b>24.6</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>25.1</b> Hitters Data</a></li>
+<li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-regression"><i class="fa fa-check"></i><b>25.2</b> Elastic Net for Regression</a></li>
+<li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-classification"><i class="fa fa-check"></i><b>25.3</b> Elastic Net for Classification</a></li>
+<li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.4</b> External Links</a></li>
+<li class="chapter" data-level="25.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-8"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
+<li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
+<li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
+<li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
+<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-9"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-1"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
+<li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
+<li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
+<li class="chapter" data-level="27.1.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest"><i class="fa fa-check"></i><b>27.1.4</b> Random Forest</a></li>
+<li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
+<li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
+<li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
+<li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
+<li class="chapter" data-level="27.2.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-1"><i class="fa fa-check"></i><b>27.2.4</b> Random Forest</a></li>
+<li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
+<li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
+<li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
+</ul></li>
+<li class="chapter" data-level="27.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>27.4</b> Tree versus Ensemble Boundaries</a></li>
+<li class="chapter" data-level="27.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-9"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
+<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-10"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="artificial-neural-networks.html"><a href="artificial-neural-networks.html"><i class="fa fa-check"></i><b>28</b> Artificial Neural Networks</a></li>
+<li class="part"><span><b>VI Appendix</b></span></li>
+<li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
+<li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a><ul>
+<li class="chapter" data-level="30.1" data-path="non-linear-models.html"><a href="non-linear-models.html#polynomial-regression"><i class="fa fa-check"></i><b>30.1</b> Polynomial Regression</a><ul>
+<li class="chapter" data-level="30.1.1" data-path="non-linear-models.html"><a href="non-linear-models.html#anova"><i class="fa fa-check"></i><b>30.1.1</b> ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="30.2" data-path="non-linear-models.html"><a href="non-linear-models.html#logistic-regression-polynomial-terms"><i class="fa fa-check"></i><b>30.2</b> Logistic Regression, Polynomial Terms</a></li>
+<li class="chapter" data-level="30.3" data-path="non-linear-models.html"><a href="non-linear-models.html#step-functions"><i class="fa fa-check"></i><b>30.3</b> Step Functions</a><ul>
+<li class="chapter" data-level="30.3.1" data-path="non-linear-models.html"><a href="non-linear-models.html#smoothing-splines"><i class="fa fa-check"></i><b>30.3.1</b> Smoothing Splines</a></li>
+</ul></li>
+<li class="chapter" data-level="30.4" data-path="non-linear-models.html"><a href="non-linear-models.html#local-regression"><i class="fa fa-check"></i><b>30.4</b> Local Regression</a></li>
+<li class="chapter" data-level="30.5" data-path="non-linear-models.html"><a href="non-linear-models.html#generalized-additive-models-gams"><i class="fa fa-check"></i><b>30.5</b> Generalized Additive Models (GAMs)</a><ul>
+<li class="chapter" data-level="30.5.1" data-path="non-linear-models.html"><a href="non-linear-models.html#gams-in-caret"><i class="fa fa-check"></i><b>30.5.1</b> GAMs in <code>caret</code></a></li>
+</ul></li>
+<li class="chapter" data-level="30.6" data-path="non-linear-models.html"><a href="non-linear-models.html#external-links-10"><i class="fa fa-check"></i><b>30.6</b> External Links</a></li>
+<li class="chapter" data-level="30.7" data-path="non-linear-models.html"><a href="non-linear-models.html#rmarkdown-11"><i class="fa fa-check"></i><b>30.7</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
+<li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
+<li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
+<li class="chapter" data-level="31.4" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-random-search-search"><i class="fa fa-check"></i><b>31.4</b> RDA with Random Search Search</a></li>
+<li class="chapter" data-level="31.5" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#comparison-to-elastic-net"><i class="fa fa-check"></i><b>31.5</b> Comparison to Elastic Net</a></li>
+<li class="chapter" data-level="31.6" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#results-2"><i class="fa fa-check"></i><b>31.6</b> Results</a></li>
+<li class="chapter" data-level="31.7" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#external-links-11"><i class="fa fa-check"></i><b>31.7</b> External Links</a></li>
+<li class="chapter" data-level="31.8" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rmarkdown-12"><i class="fa fa-check"></i><b>31.8</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>32</b> Support Vector Machines</a><ul>
+<li class="chapter" data-level="32.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#r-packages"><i class="fa fa-check"></i><b>32.1</b> <code>R</code> Packages</a></li>
+<li class="chapter" data-level="32.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#classification-3"><i class="fa fa-check"></i><b>32.2</b> Classification</a></li>
+<li class="chapter" data-level="32.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-separable-example"><i class="fa fa-check"></i><b>32.3</b> Linear, Separable Example</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#data-simulation"><i class="fa fa-check"></i><b>32.3.1</b> Data Simulation</a></li>
+<li class="chapter" data-level="32.3.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-parameter-c"><i class="fa fa-check"></i><b>32.3.2</b> Linear Kernel, Parameter <code>C</code></a></li>
+<li class="chapter" data-level="32.3.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel"><i class="fa fa-check"></i><b>32.3.3</b> Radial Kernel</a></li>
+<li class="chapter" data-level="32.3.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#tuning-with-caret"><i class="fa fa-check"></i><b>32.3.4</b> Tuning with <code>caret</code></a></li>
+<li class="chapter" data-level="32.3.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest"><i class="fa fa-check"></i><b>32.3.5</b> Compare: Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="32.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#non-linear-non-separable-example"><i class="fa fa-check"></i><b>32.4</b> Non-Linear, Non-Separable Example</a><ul>
+<li class="chapter" data-level="32.4.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#data-simulation-1"><i class="fa fa-check"></i><b>32.4.1</b> Data Simulation</a></li>
+<li class="chapter" data-level="32.4.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-parameter-c"><i class="fa fa-check"></i><b>32.4.2</b> Radial Kernel, Parameter <code>C</code></a></li>
+<li class="chapter" data-level="32.4.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-parameter-sigma"><i class="fa fa-check"></i><b>32.4.3</b> Radial Kernel, Parameter <code>sigma</code></a></li>
+<li class="chapter" data-level="32.4.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-tuning"><i class="fa fa-check"></i><b>32.4.4</b> Radial Kernel, Tuning</a></li>
+<li class="chapter" data-level="32.4.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#polynomial-kernel-tuning"><i class="fa fa-check"></i><b>32.4.5</b> Polynomial Kernel, Tuning</a></li>
+<li class="chapter" data-level="32.4.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-tuning"><i class="fa fa-check"></i><b>32.4.6</b> Linear Kernel, Tuning</a></li>
+<li class="chapter" data-level="32.4.7" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest-1"><i class="fa fa-check"></i><b>32.4.7</b> Compare: Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="32.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#external-links-12"><i class="fa fa-check"></i><b>32.5</b> External Links</a></li>
+<li class="chapter" data-level="32.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#rmarkdown-13"><i class="fa fa-check"></i><b>32.6</b> RMarkdown</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regularization" class="section level1">
+<h1><span class="header-section-number">Chapter 24</span> Regularization</h1>
+<p><strong>TODO:</strong> Introduce regularization as a concept.</p>
+<p>We will use the <code>Hitters</code> dataset from the <code>ISLR</code> package to explore two shrinkage methods: <strong>ridge</strong> and <strong>lasso</strong>. These are otherwise known as <strong>penalized regression</strong> methods.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</code></pre></div>
+<p>This dataset has some missing data in the response <code>Salaray</code>. We use the <code>na.omit()</code> function the clean the dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</code></pre></div>
+<pre><code>## [1] 59</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters$Salary))</code></pre></div>
+<pre><code>## [1] 59</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)
+<span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>The predictors variables are offensive and defensive statistics for a number of baseball players.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Hitters)</code></pre></div>
+<pre><code>##  [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;HmRun&quot;     &quot;Runs&quot;      &quot;RBI&quot;      
+##  [6] &quot;Walks&quot;     &quot;Years&quot;     &quot;CAtBat&quot;    &quot;CHits&quot;     &quot;CHmRun&quot;   
+## [11] &quot;CRuns&quot;     &quot;CRBI&quot;      &quot;CWalks&quot;    &quot;League&quot;    &quot;Division&quot; 
+## [16] &quot;PutOuts&quot;   &quot;Assists&quot;   &quot;Errors&quot;    &quot;Salary&quot;    &quot;NewLeague&quot;</code></pre>
+<p>We use the <code>glmnet()</code> and <code>cv.glmnet()</code> functions in the <code>glmnet</code> package to fit penalized regressions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3</span>
+<span class="co"># see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console</span>
+<span class="kw">library</span>(methods)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(glmnet)</code></pre></div>
+<p>The <code>glmnet</code> function does not allow the use of model formulas, so we setup the data for ease of use with <code>glmnet</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X =<span class="st"> </span><span class="kw">model.matrix</span>(Salary ~<span class="st"> </span>., Hitters)[, -<span class="dv">1</span>]
+y =<span class="st"> </span>Hitters$Salary</code></pre></div>
+<p>First, we fit a regular linear regression, and note the size of the predictors’ coefficients, and predictors’ coefficients squared. (The two penalties we will use.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit =<span class="st"> </span><span class="kw">lm</span>(Salary ~<span class="st"> </span>., Hitters)
+<span class="kw">coef</span>(fit)</code></pre></div>
+<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs 
+##  163.1035878   -1.9798729    7.5007675    4.3308829   -2.3762100 
+##          RBI        Walks        Years       CAtBat        CHits 
+##   -1.0449620    6.2312863   -3.4890543   -0.1713405    0.1339910 
+##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
+##   -0.1728611    1.4543049    0.8077088   -0.8115709   62.5994230 
+##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
+## -116.8492456    0.2818925    0.3710692   -3.3607605  -24.7623251</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit)[-<span class="dv">1</span>]))</code></pre></div>
+<pre><code>## [1] 238.7295</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 18337.3</code></pre>
+<div id="ridge-regression" class="section level2">
+<h2><span class="header-section-number">24.1</span> Ridge Regression</h2>
+<p>We first illustrate <strong>ridge regression</strong>, which can be fit using <code>glmnet()</code> with <code>alpha = 0</code> and seeks to minimize</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
+\]</span></p>
+<p>Notice that the intercept is <strong>not</strong> penalized. Also, note that that ridge regression is <strong>not</strong> scale invariant like the usual unpenalized regression. Thankfully, <code>glmnet()</code> takes care of this internally. It automatically standardizes input for fitting, then reports fitted coefficient using the original scale.</p>
+<p>The two plots illustrate how much the coefficients are penalized for different values of <span class="math inline">\(\lambda\)</span>. Notice none of the coefficients are forced to be zero.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_ridge =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)
+<span class="kw">plot</span>(fit_ridge)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/ridge-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit_ridge, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/ridge-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(<span class="kw">coef</span>(fit_ridge))</code></pre></div>
+<pre><code>## [1]  20 100</code></pre>
+<p>We use cross-validation to select a good <span class="math inline">\(\lambda\)</span> value. The <code>cv.glmnet()</code>function uses 10 folds by default. The plot illustrates the MSE for the <span class="math inline">\(\lambda\)</span>s considered. Two lines are drawn. The first is the <span class="math inline">\(\lambda\)</span> that gives the smallest MSE. The second is the <span class="math inline">\(\lambda\)</span> that gives an MSE within one standard error of the smallest.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_ridge_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)
+<span class="kw">plot</span>(fit_ridge_cv)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>The <code>cv.glmnet()</code> function returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv)</code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                         1
+## (Intercept) 199.418112992
+## AtBat         0.093426871
+## Hits          0.389767264
+## HmRun         1.212875008
+## Runs          0.623229049
+## RBI           0.618547530
+## Walks         0.810467709
+## Years         2.544170913
+## CAtBat        0.007897059
+## CHits         0.030554662
+## CHmRun        0.226545984
+## CRuns         0.061265846
+## CRBI          0.063384832
+## CWalks        0.060720300
+## LeagueN       3.743295054
+## DivisionW   -23.545192371
+## PutOuts       0.056202373
+## Assists       0.007879196
+## Errors       -0.164203268
+## NewLeagueN    3.313773178</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                         1
+## (Intercept)  7.645824e+01
+## AtBat       -6.315180e-01
+## Hits         2.642160e+00
+## HmRun       -1.388233e+00
+## Runs         1.045729e+00
+## RBI          7.315713e-01
+## Walks        3.278001e+00
+## Years       -8.723734e+00
+## CAtBat       1.256354e-04
+## CHits        1.318975e-01
+## CHmRun       6.895578e-01
+## CRuns        2.830055e-01
+## CRBI         2.514905e-01
+## CWalks      -2.599851e-01
+## LeagueN      5.233720e+01
+## DivisionW   -1.224170e+02
+## PutOuts      2.623667e-01
+## Assists      1.629044e-01
+## Errors      -3.644002e+00
+## NewLeagueN  -1.702598e+01</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># penalty term for lambda minimum</span></code></pre></div>
+<pre><code>## [1] 18126.85</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                         1
+## (Intercept) 199.418112992
+## AtBat         0.093426871
+## Hits          0.389767264
+## HmRun         1.212875008
+## Runs          0.623229049
+## RBI           0.618547530
+## Walks         0.810467709
+## Years         2.544170913
+## CAtBat        0.007897059
+## CHits         0.030554662
+## CHmRun        0.226545984
+## CRuns         0.061265846
+## CRBI          0.063384832
+## CWalks        0.060720300
+## LeagueN       3.743295054
+## DivisionW   -23.545192371
+## PutOuts       0.056202373
+## Assists       0.007879196
+## Errors       -0.164203268
+## NewLeagueN    3.313773178</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># penalty term for lambda one SE</span></code></pre></div>
+<pre><code>## [1] 588.9958</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#predict(fit_ridge_cv, X, s = &quot;lambda.min&quot;)</span>
+<span class="co">#predict(fit_ridge_cv, X)</span>
+<span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># &quot;train error&quot;</span></code></pre></div>
+<pre><code>## [1] 130404.9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm) <span class="co"># CV-RMSEs</span></code></pre></div>
+<pre><code>##  [1] 452.1202 450.7310 449.7200 449.4533 449.1617 448.8431 448.4951
+##  [8] 448.1151 447.7005 447.2483 446.7554 446.2186 445.6342 444.9987
+## [15] 444.3079 443.5579 442.7445 441.8632 440.9096 439.8789 438.7666
+## [22] 437.5681 436.2786 434.8940 433.4099 431.8227 430.1289 428.3258
+## [29] 426.4113 424.3843 422.2446 419.9932 417.6322 415.1655 412.5981
+## [36] 409.9370 407.1906 404.3687 401.4831 398.5469 395.5747 392.5819
+## [43] 389.5850 386.6009 383.6466 380.7390 377.8942 375.1274 372.4525
+## [50] 369.8816 367.4250 365.0905 362.8854 360.8135 358.8769 357.0758
+## [57] 355.4088 353.8727 352.4634 351.1756 350.0032 348.9396 347.9780
+## [64] 347.1109 346.3339 345.6380 345.0193 344.4673 343.9778 343.5463
+## [71] 343.1665 342.8318 342.5412 342.2880 342.0641 341.8679 341.7021
+## [78] 341.5513 341.4216 341.3012 341.1937 341.0939 340.9997 340.9078
+## [85] 340.8179 340.7261 340.6337 340.5368 340.4348 340.3281 340.2177
+## [92] 340.1001 339.9773 339.8493 339.7180 339.5813 339.4421 339.3012
+## [99] 339.1587</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre></div>
+<pre><code>## [1] 339.1587</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.1se]) <span class="co"># CV-RMSE one SE</span></code></pre></div>
+<pre><code>## [1] 367.425</code></pre>
+</div>
+<div id="lasso" class="section level2">
+<h2><span class="header-section-number">24.2</span> Lasso</h2>
+<p>We now illustrate <strong>lasso</strong>, which can be fit using <code>glmnet()</code> with <code>alpha = 1</code> and seeks to minimize</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} |\beta_j| .
+\]</span></p>
+<p>Like ridge, lasso is not scale invariant.</p>
+<p>The two plots illustrate how much the coefficients are penalized for different values of <span class="math inline">\(\lambda\)</span>. Notice some of the coefficients are forced to be zero.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_lasso =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)
+<span class="kw">plot</span>(fit_lasso)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/lasso-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit_lasso, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/lasso-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(<span class="kw">coef</span>(fit_lasso))</code></pre></div>
+<pre><code>## [1] 20 80</code></pre>
+<p>Again, to actually pick a <span class="math inline">\(\lambda\)</span>, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_lasso_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)
+<span class="kw">plot</span>(fit_lasso_cv)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><code>cv.glmnet()</code> returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv)</code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        1
+## (Intercept) 127.95694754
+## AtBat         .         
+## Hits          1.42342566
+## HmRun         .         
+## Runs          .         
+## RBI           .         
+## Walks         1.58214111
+## Years         .         
+## CAtBat        .         
+## CHits         .         
+## CHmRun        .         
+## CRuns         0.16027975
+## CRBI          0.33667715
+## CWalks        .         
+## LeagueN       .         
+## DivisionW    -8.06171262
+## PutOuts       0.08393604
+## Assists       .         
+## Errors        .         
+## NewLeagueN    .</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        1
+## (Intercept)  110.6899329
+## AtBat         -1.3941293
+## Hits           5.3222676
+## HmRun          .        
+## Runs           .        
+## RBI            .        
+## Walks          4.4559020
+## Years         -8.7478268
+## CAtBat         .        
+## CHits          .        
+## CHmRun         0.4476611
+## CRuns          0.6091444
+## CRBI           0.3987243
+## CWalks        -0.4665820
+## LeagueN       31.1402195
+## DivisionW   -119.1992215
+## PutOuts        0.2682614
+## Assists        0.1444617
+## Errors        -1.8154257
+## NewLeagueN     .</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>])) <span class="co"># penalty term for lambda minimum</span></code></pre></div>
+<pre><code>## [1] 174.4098</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        1
+## (Intercept) 127.95694754
+## AtBat         .         
+## Hits          1.42342566
+## HmRun         .         
+## Runs          .         
+## RBI           .         
+## Walks         1.58214111
+## Years         .         
+## CAtBat        .         
+## CHits         .         
+## CHmRun        .         
+## CRuns         0.16027975
+## CRBI          0.33667715
+## CWalks        .         
+## LeagueN       .         
+## DivisionW    -8.06171262
+## PutOuts       0.08393604
+## Assists       .         
+## Errors        .         
+## NewLeagueN    .</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>])) <span class="co"># penalty term for lambda one SE</span></code></pre></div>
+<pre><code>## [1] 11.64817</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#predict(fit_lasso_cv, X, s = &quot;lambda.min&quot;)</span>
+<span class="co">#predict(fit_lasso_cv, X)</span>
+<span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># &quot;train error&quot;</span></code></pre></div>
+<pre><code>## [1] 118581.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm)</code></pre></div>
+<pre><code>##  [1] 450.5160 441.7848 431.8043 423.3651 415.0111 405.5632 396.7232
+##  [8] 389.2630 383.0990 378.0342 373.8673 370.2537 366.8657 363.5255
+## [15] 360.1805 356.9209 354.0572 351.6407 349.6733 348.0192 346.6524
+## [22] 345.5246 344.6286 343.9017 343.3342 342.9462 342.7178 342.5802
+## [29] 342.5049 342.4854 342.5402 342.6322 342.6974 342.7896 342.9741
+## [36] 343.3694 343.8431 344.1631 344.3553 344.2823 343.5921 342.7806
+## [43] 342.0299 341.2730 340.6442 340.2080 339.9154 339.8295 339.9741
+## [50] 340.1623 340.4306 340.8117 341.2610 341.7219 342.2204 342.7403
+## [57] 343.3072 343.7985 344.2161 344.5358 344.8319 345.1012 345.3356
+## [64] 345.5174 345.6868 345.8074 345.9693 346.0881 346.2609 346.3519
+## [71] 346.5242 346.6125 346.7653 346.8589</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre></div>
+<pre><code>## [1] 339.8295</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.1se]) <span class="co"># CV-RMSE one SE</span></code></pre></div>
+<pre><code>## [1] 360.1805</code></pre>
+</div>
+<div id="broom" class="section level2">
+<h2><span class="header-section-number">24.3</span> <code>broom</code></h2>
+<p>Sometimes, the output from <code>glmnet()</code> can be overwhelming. The <code>broom</code> package can help with that.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+<span class="co">#fit_lasso_cv</span>
+<span class="kw">tidy</span>(fit_lasso_cv)</code></pre></div>
+<pre><code>##         lambda estimate std.error conf.high  conf.low nzero
+## 1  255.2820965 202964.7  20634.63  223599.3 182330.02     0
+## 2  232.6035386 195173.8  20777.50  215951.3 174396.35     1
+## 3  211.9396813 186455.0  20050.59  206505.6 166404.40     2
+## 4  193.1115442 179238.0  19423.68  198661.7 159814.34     2
+## 5  175.9560468 172234.2  18817.67  191051.9 153416.53     3
+## 6  160.3245966 164481.5  18206.10  182687.6 146275.41     4
+## 7  146.0818013 157389.3  17721.14  175110.4 139668.14     4
+## 8  133.1042967 151525.7  17341.28  168867.0 134184.41     4
+## 9  121.2796778 146764.8  17054.58  163819.4 129710.27     4
+## 10 110.5055255 142909.8  16866.96  159776.8 126042.88     4
+## 11 100.6885192 139776.8  16754.72  156531.5 123022.06     5
+## 12  91.7436287 137087.8  16671.61  153759.4 120416.16     5
+## 13  83.5933775 134590.4  16560.21  151150.7 118030.24     5
+## 14  76.1671723 132150.8  16465.03  148615.8 115685.77     5
+## 15  69.4006906 129730.0  16481.10  146211.1 113248.87     6
+## 16  63.2353245 127392.6  16511.33  143903.9 110881.22     6
+## 17  57.6176726 125356.5  16496.98  141853.5 108859.49     6
+## 18  52.4990774 123651.2  16481.87  140133.1 107169.34     6
+## 19  47.8352040 122271.4  16506.79  138778.2 105764.61     6
+## 20  43.5856563 121117.4  16556.42  137673.8 104560.94     6
+## 21  39.7136268 120167.9  16618.17  136786.0 103549.68     6
+## 22  36.1855776 119387.2  16687.75  136075.0 102699.49     6
+## 23  32.9709506 118768.9  16763.36  135532.2 102005.51     6
+## 24  30.0419022 118268.4  16842.22  135110.6 101426.17     6
+## 25  27.3730624 117878.3  16922.86  134801.2 100955.48     6
+## 26  24.9413150 117612.1  17005.79  134617.9 100606.33     6
+## 27  22.7255973 117455.5  17086.76  134542.2 100368.69     6
+## 28  20.7067179 117361.2  17161.17  134522.4 100200.04     6
+## 29  18.8671902 117309.6  17232.05  134541.6 100077.54     6
+## 30  17.1910810 117296.3  17299.91  134596.2  99996.35     7
+## 31  15.6638727 117333.8  17362.35  134696.1  99971.46     7
+## 32  14.2723374 117396.8  17419.46  134816.3  99977.34     7
+## 33  13.0044223 117441.5  17481.03  134922.6  99960.50     9
+## 34  11.8491453 117504.7  17541.58  135046.3  99963.16     9
+## 35  10.7964999 117631.2  17609.42  135240.6 100021.81     9
+## 36   9.8373686 117902.5  17671.85  135574.4 100230.69     9
+## 37   8.9634439 118228.1  17715.68  135943.7 100512.38     9
+## 38   8.1671562 118448.3  17748.54  136196.8 100699.73    11
+## 39   7.4416086 118580.6  17830.45  136411.0 100750.15    11
+## 40   6.7805166 118530.3  17876.13  136406.5 100654.20    12
+## 41   6.1781542 118055.5  17691.38  135746.9 100364.16    12
+## 42   5.6293040 117498.6  17401.74  134900.3 100096.81    13
+## 43   5.1292121 116984.4  17179.41  134163.8  99805.02    13
+## 44   4.6735471 116467.3  16993.14  133460.4  99474.12    13
+## 45   4.2583620 116038.5  16830.03  132868.5  99208.43    13
+## 46   3.8800609 115741.5  16707.92  132449.4  99033.58    13
+## 47   3.5353670 115542.5  16616.65  132159.2  98925.86    13
+## 48   3.2212947 115484.1  16548.54  132032.6  98935.56    13
+## 49   2.9351238 115582.4  16497.11  132079.5  99085.28    13
+## 50   2.6743755 115710.4  16457.10  132167.5  99253.30    13
+## 51   2.4367913 115893.0  16431.20  132324.2  99461.82    13
+## 52   2.2203135 116152.6  16416.42  132569.0  99736.19    14
+## 53   2.0230670 116459.1  16412.10  132871.2 100046.99    15
+## 54   1.8433433 116773.9  16414.39  133188.2 100359.47    15
+## 55   1.6795857 117114.8  16423.02  133537.8 100691.81    17
+## 56   1.5303760 117470.9  16439.73  133910.7 101031.20    17
+## 57   1.3944216 117859.8  16468.61  134328.4 101391.19    17
+## 58   1.2705450 118197.4  16493.39  134690.8 101703.99    17
+## 59   1.1576733 118484.7  16528.92  135013.6 101955.78    17
+## 60   1.0548288 118704.9  16549.44  135254.3 102155.44    17
+## 61   0.9611207 118909.0  16575.00  135484.0 102334.02    17
+## 62   0.8757374 119094.9  16602.19  135697.1 102492.67    17
+## 63   0.7979393 119256.7  16587.40  135844.1 102669.29    17
+## 64   0.7270526 119382.3  16562.55  135944.8 102819.73    17
+## 65   0.6624632 119499.3  16542.88  136042.2 102956.46    18
+## 66   0.6036118 119582.7  16525.40  136108.1 103057.33    18
+## 67   0.5499886 119694.8  16503.76  136198.5 103191.00    18
+## 68   0.5011291 119776.9  16496.30  136273.2 103280.65    17
+## 69   0.4566102 119896.6  16482.53  136379.1 103414.07    18
+## 70   0.4160462 119959.6  16484.94  136444.6 103474.70    18
+## 71   0.3790858 120079.0  16479.85  136558.9 103599.17    18
+## 72   0.3454089 120140.3  16481.43  136621.7 103658.82    18
+## 73   0.3147237 120246.2  16479.38  136725.5 103766.78    18
+## 74   0.2867645 120311.1  16480.98  136792.1 103830.14    18</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glance</span>(fit_lasso_cv) <span class="co"># the two lambda values of interest</span></code></pre></div>
+<pre><code>##   lambda.min lambda.1se
+## 1   3.221295   69.40069</code></pre>
+</div>
+<div id="simulation-study-p-n" class="section level2">
+<h2><span class="header-section-number">24.4</span> Simulation Study, p &gt; n</h2>
+<p>Aside from simply shrinking coefficients (ridge) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the <span class="math inline">\(p &gt; n\)</span> case.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+n =<span class="st"> </span><span class="dv">1000</span>
+p =<span class="st"> </span><span class="dv">5500</span>
+X =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(<span class="dt">n =</span> n))
+beta =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">5497</span>))
+z =<span class="st"> </span>X %*%<span class="st"> </span>beta
+prob =<span class="st"> </span><span class="kw">exp</span>(z) /<span class="st"> </span>(<span class="dv">1</span> +<span class="st"> </span><span class="kw">exp</span>(z))
+y =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(z), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> prob))</code></pre></div>
+<p>We first simulate a classification example where <span class="math inline">\(p &gt; n\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># glm(y ~ X, family = &quot;binomial&quot;)</span>
+<span class="co"># will not converge</span></code></pre></div>
+<p>We then use a lasso penalty to fit penalized logistic regression. This minimizes</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} L\left(y_i, \beta_0 + \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
+\]</span></p>
+<p>where <span class="math inline">\(L\)</span> is the appropriate <em>negative</em> <strong>log</strong>-likelihood.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(glmnet)
+fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>)
+<span class="kw">plot</span>(fit_cv)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">coef</span>(fit_cv), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>## 10 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                      1
+## (Intercept) 0.02397452
+## V1          0.59674958
+## V2          0.56251761
+## V3          0.60065105
+## V4          .         
+## V5          .         
+## V6          .         
+## V7          .         
+## V8          .         
+## V9          .</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_cv$nzero</code></pre></div>
+<pre><code>##  s0  s1  s2  s3  s4  s5  s6  s7  s8  s9 s10 s11 s12 s13 s14 s15 s16 s17 
+##   0   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3 
+## s18 s19 s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 s32 s33 s34 s35 
+##   3   3   3   3   3   3   3   3   3   3   3   3   4   6   7  10  18  24 
+## s36 s37 s38 s39 s40 s41 s42 s43 s44 s45 s46 s47 s48 s49 s50 s51 s52 s53 
+##  35  54  65  75  86 100 110 129 147 168 187 202 221 241 254 269 283 298 
+## s54 s55 s56 s57 s58 s59 s60 s61 s62 s63 s64 s65 s66 s67 s68 s69 s70 s71 
+## 310 324 333 350 364 375 387 400 411 429 435 445 453 455 462 466 475 481 
+## s72 s73 s74 s75 s76 s77 s78 s79 s80 s81 s82 s83 s84 s85 s86 s87 s88 s89 
+## 487 491 496 498 502 504 512 518 523 526 528 536 543 550 559 561 563 566 
+## s90 s91 s92 s93 s94 s95 s96 s97 s98 
+## 570 571 576 582 586 590 596 596 600</code></pre>
+<p>Notice, only the first three predictors generated are truly significant, and that is exactly what the suggested model finds.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_1se =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">lambda =</span> fit_cv$lambda.1se)
+<span class="kw">which</span>(<span class="kw">as.vector</span>(<span class="kw">as.matrix</span>(fit_1se$beta)) !=<span class="st"> </span><span class="dv">0</span>)</code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<p>We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>))</code></pre></div>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>We can extract the two relevant <span class="math inline">\(\lambda\)</span> values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_cv$lambda.min</code></pre></div>
+<pre><code>## [1] 0.03087158</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_cv$lambda.1se</code></pre></div>
+<pre><code>## [1] 0.0514969</code></pre>
+<p>Since <code>cv.glmnet()</code> does not calculate prediction accuracy for classification, we take the <span class="math inline">\(\lambda\)</span> values and create a grid for <code>caret</code> to search in order to obtain prediction accuracy with <code>train()</code>. We set <span class="math inline">\(\alpha = 1\)</span> in this grid, as <code>glmnet</code> can actually tune over the <span class="math inline">\(\alpha = 1\)</span> parameter. (More on that later.)</p>
+<p>Note that we have to force <code>y</code> to be a factor, so that <code>train()</code> recognizes we want to have a binomial response. The <code>train()</code> function in <code>caret</code> use the type of variable in <code>y</code> to determine if you want to use <code>family = &quot;binomial&quot;</code> or <code>family = &quot;gaussian&quot;</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+cv_5 =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)
+lasso_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">alpha =</span> <span class="dv">1</span>, 
+                         <span class="dt">lambda =</span> <span class="kw">c</span>(fit_cv$lambda.min, fit_cv$lambda.1se))
+lasso_grid</code></pre></div>
+<pre><code>##   alpha     lambda
+## 1     1 0.03087158
+## 2     1 0.05149690</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_data =<span class="st"> </span><span class="kw">data.frame</span>(y, X)
+fit_lasso =<span class="st"> </span><span class="kw">train</span>(
+  y ~<span class="st"> </span>., <span class="dt">data =</span> sim_data,
+  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
+  <span class="dt">trControl =</span> cv_5,
+  <span class="dt">tuneGrid =</span> lasso_grid
+)
+fit_lasso$results</code></pre></div>
+<pre><code>##   alpha     lambda  Accuracy     Kappa AccuracySD    KappaSD
+## 1     1 0.03087158 0.7609903 0.5218887 0.01486223 0.03000986
+## 2     1 0.05149690 0.7659604 0.5319189 0.01807380 0.03594319</code></pre>
+</div>
+<div id="external-links-6" class="section level2">
+<h2><span class="header-section-number">24.5</span> External Links</h2>
+<ul>
+<li><a href="https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html"><code>glmnet</code> Web Vingette</a> - Details from the package developers.</li>
+</ul>
+</div>
+<div id="rmarkdown-7" class="section level2">
+<h2><span class="header-section-number">24.6</span> RMarkdown</h2>
+<p>The RMarkdown file for this chapter can be found <a href="15-shrink.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.1 and the following packages:</p>
+<ul>
+<li>Base Packages, Attached</li>
+</ul>
+<pre><code>## [1] &quot;methods&quot;   &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
+## [7] &quot;base&quot;</code></pre>
+<ul>
+<li>Additional Packages, Attached</li>
+</ul>
+<pre><code>## [1] &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot; &quot;broom&quot;   &quot;glmnet&quot;  &quot;foreach&quot; &quot;Matrix&quot;</code></pre>
+<ul>
+<li>Additional Packages, Not Attached</li>
+</ul>
+<pre><code>##  [1] &quot;reshape2&quot;     &quot;splines&quot;      &quot;colorspace&quot;   &quot;htmltools&quot;   
+##  [5] &quot;stats4&quot;       &quot;yaml&quot;         &quot;mgcv&quot;         &quot;rlang&quot;       
+##  [9] &quot;ModelMetrics&quot; &quot;e1071&quot;        &quot;nloptr&quot;       &quot;foreign&quot;     
+## [13] &quot;glue&quot;         &quot;bindrcpp&quot;     &quot;bindr&quot;        &quot;plyr&quot;        
+## [17] &quot;stringr&quot;      &quot;MatrixModels&quot; &quot;munsell&quot;      &quot;gtable&quot;      
+## [21] &quot;codetools&quot;    &quot;psych&quot;        &quot;evaluate&quot;     &quot;knitr&quot;       
+## [25] &quot;SparseM&quot;      &quot;class&quot;        &quot;quantreg&quot;     &quot;pbkrtest&quot;    
+## [29] &quot;parallel&quot;     &quot;Rcpp&quot;         &quot;backports&quot;    &quot;scales&quot;      
+## [33] &quot;lme4&quot;         &quot;mnormt&quot;       &quot;digest&quot;       &quot;stringi&quot;     
+## [37] &quot;bookdown&quot;     &quot;dplyr&quot;        &quot;grid&quot;         &quot;rprojroot&quot;   
+## [41] &quot;tools&quot;        &quot;magrittr&quot;     &quot;lazyeval&quot;     &quot;tibble&quot;      
+## [45] &quot;tidyr&quot;        &quot;car&quot;          &quot;pkgconfig&quot;    &quot;MASS&quot;        
+## [49] &quot;assertthat&quot;   &quot;minqa&quot;        &quot;rmarkdown&quot;    &quot;iterators&quot;   
+## [53] &quot;R6&quot;           &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="modern-overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="elastic-net.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/24-regularization.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

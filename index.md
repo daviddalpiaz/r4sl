@@ -1,7 +1,7 @@
 --- 
 title: "`R` for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2017-08-28"
+date: "2017-09-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -13,6 +13,7 @@ description: ""
 favicon: "favicon.ico"
 ---
 
+
 # Introduction {-}
 
 Welcome to `R` for Statistical Learning!
@@ -22,10 +23,31 @@ Welcome to `R` for Statistical Learning!
 
 This book will serve as a supplement to [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/) for [STAT 430 - Basics of Statistical Learning](https://go.illinois.edu/stat430) at the [University of Illinois at Urbana-Champaign](http://illinois.edu/).
 
-The end of each chapter will contain:
+Currently the focus of this text is to expand on ISL's introduction to using `R` for statistical learning. Eventually the text may become more self-contained.
 
-- Annotated links to additional information and resources.
-- A link to the RMarkdown file that generates the chapter.
+
+## Organization
+
+The text is organized into seven parts.
+
+1. Prerequisites
+2. (Supervised Learning) Regression
+3. (Supervised Learning) Classification
+4. Unsupervised Learning
+5. (Statistical Learning) in Practice
+6. (Statistical Learning) in The Modern Era
+7. Appendix
+
+Part 1 details the assumed prerequisite knowledge required to read the text. It recaps some of the more important bits of information.
+
+Parts 2, 3, and 4 discuss the theory of statistical learning. Several methods are introduced throughout to highlight different theoretical concepts.
+
+Parts 5 and 6 highlight the use of statistical learning in practice. Part 5 focuses on practical usage of the techniques seen in Parts 2, 3, and 4. Part 6 introduces techniques that are most commonly used in practice today.
+
+
+## Who?
+
+This book is targeted at advanced undergraduate or first year MS students in Statistics who have no prior statistical learning experience. While both will be discussed in great detail, previous experience with both statistical modeling and `R` are assumed.
 
 
 ## Caveat Emptor
@@ -35,6 +57,8 @@ The end of each chapter will contain:
 When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a [**pdf version** is continuously maintained](http://daviddalpiaz.github.io/r4sl/r4sl.pdf).
 
 Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (`dalpiaz2 AT illinois DOT edu`) Or, if you know RMarkdown and are familiar with GitHub, [make a pull request and fix an issue yourself!](https://github.com/daviddalpiaz/r4sl) This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We'll also link to your GitHub account, or personal website upon request.
+
+You will often see "**TODO**" scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.
 
 
 ## Conventions

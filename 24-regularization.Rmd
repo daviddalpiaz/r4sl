@@ -1,0 +1,269 @@
+# Regularization
+
+**TODO:** Introduce regularization as a concept.
+
+We will use the `Hitters` dataset from the `ISLR` package to explore two shrinkage methods: **ridge** and **lasso**. These are otherwise known as **penalized regression** methods.
+
+```{r}
+data(Hitters, package = "ISLR")
+```
+
+This dataset has some missing data in the response `Salaray`. We use the `na.omit()` function the clean the dataset.
+
+```{r}
+sum(is.na(Hitters))
+sum(is.na(Hitters$Salary))
+Hitters = na.omit(Hitters)
+sum(is.na(Hitters))
+```
+
+The predictors variables are offensive and defensive statistics for a number of baseball players.
+
+```{r}
+names(Hitters)
+```
+
+We use the `glmnet()` and `cv.glmnet()` functions in the `glmnet` package to fit penalized regressions.
+
+```{r}
+# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
+# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
+library(methods)
+```
+
+```{r, message = FALSE, warning = FALSE}
+library(glmnet)
+```
+
+The `glmnet` function does not allow the use of model formulas, so we setup the data for ease of use with `glmnet`.
+
+```{r}
+X = model.matrix(Salary ~ ., Hitters)[, -1]
+y = Hitters$Salary
+```
+
+First, we fit a regular linear regression, and note the size of the predictors' coefficients, and predictors' coefficients squared. (The two penalties we will use.)
+
+```{r}
+fit = lm(Salary ~ ., Hitters)
+coef(fit)
+sum(abs(coef(fit)[-1]))
+sum(coef(fit)[-1] ^ 2)
+```
+
+
+## Ridge Regression
+
+We first illustrate **ridge regression**, which can be fit using `glmnet()` with `alpha = 0` and seeks to minimize
+
+$$
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
+$$
+
+Notice that the intercept is **not** penalized. Also, note that that ridge regression is **not** scale invariant like the usual unpenalized regression. Thankfully, `glmnet()` takes care of this internally. It automatically standardizes input for fitting, then reports fitted coefficient using the original scale.
+
+The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
+
+```{r ridge}
+fit_ridge = glmnet(X, y, alpha = 0)
+plot(fit_ridge)
+plot(fit_ridge, xvar = "lambda", label = TRUE)
+dim(coef(fit_ridge))
+```
+
+We use cross-validation to select a good $\lambda$ value. The `cv.glmnet()`function uses 10 folds by default. The plot illustrates the MSE for the $\lambda$s considered. Two lines are drawn. The first is the $\lambda$ that gives the smallest MSE. The second is the $\lambda$ that gives an MSE within one standard error of the smallest.
+
+```{r}
+fit_ridge_cv = cv.glmnet(X, y, alpha = 0)
+plot(fit_ridge_cv)
+```
+
+The `cv.glmnet()` function returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)
+
+```{r}
+coef(fit_ridge_cv)
+coef(fit_ridge_cv, s = "lambda.min")
+sum(coef(fit_ridge_cv, s = "lambda.min")[-1] ^ 2) # penalty term for lambda minimum
+coef(fit_ridge_cv, s = "lambda.1se")
+sum(coef(fit_ridge_cv, s = "lambda.1se")[-1] ^ 2) # penalty term for lambda one SE
+#predict(fit_ridge_cv, X, s = "lambda.min")
+#predict(fit_ridge_cv, X)
+mean((y - predict(fit_ridge_cv, X)) ^ 2) # "train error"
+sqrt(fit_ridge_cv$cvm) # CV-RMSEs
+sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min]) # CV-RMSE minimum
+sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) # CV-RMSE one SE
+```
+
+
+## Lasso
+
+We now illustrate **lasso**, which can be fit using `glmnet()` with `alpha = 1` and seeks to minimize
+
+$$
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} |\beta_j| .
+$$
+
+Like ridge, lasso is not scale invariant.
+
+The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice some of the coefficients are forced to be zero.
+
+```{r lasso}
+fit_lasso = glmnet(X, y, alpha = 1)
+plot(fit_lasso)
+plot(fit_lasso, xvar = "lambda", label = TRUE)
+dim(coef(fit_lasso))
+```
+
+Again, to actually pick a $\lambda$, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)
+
+```{r}
+fit_lasso_cv = cv.glmnet(X, y, alpha = 1)
+plot(fit_lasso_cv)
+```
+
+`cv.glmnet()` returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.
+
+```{r}
+coef(fit_lasso_cv)
+coef(fit_lasso_cv, s = "lambda.min")
+sum(abs(coef(fit_lasso_cv, s = "lambda.min")[-1])) # penalty term for lambda minimum
+coef(fit_lasso_cv, s = "lambda.1se")
+sum(abs(coef(fit_lasso_cv, s = "lambda.1se")[-1])) # penalty term for lambda one SE
+#predict(fit_lasso_cv, X, s = "lambda.min")
+#predict(fit_lasso_cv, X)
+mean((y - predict(fit_lasso_cv, X)) ^ 2) # "train error"
+sqrt(fit_lasso_cv$cvm)
+sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min]) # CV-RMSE minimum
+sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]) # CV-RMSE one SE
+```
+
+## `broom`
+
+Sometimes, the output from `glmnet()` can be overwhelming. The `broom` package can help with that.
+
+```{r, message = FALSE, warning = FALSE}
+library(broom)
+#fit_lasso_cv
+tidy(fit_lasso_cv)
+glance(fit_lasso_cv) # the two lambda values of interest
+```
+
+
+## Simulation Study, p > n
+
+Aside from simply shrinking coefficients (ridge) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the $p > n$ case.
+
+```{r}
+set.seed(1234)
+n = 1000
+p = 5500
+X = replicate(p, rnorm(n = n))
+beta = c(1, 1, 1, rep(0, 5497))
+z = X %*% beta
+prob = exp(z) / (1 + exp(z))
+y = as.factor(rbinom(length(z), size = 1, prob = prob))
+```
+
+We first simulate a classification example where $p > n$.
+
+```{r}
+# glm(y ~ X, family = "binomial")
+# will not converge
+```
+
+We then use a lasso penalty to fit penalized logistic regression. This minimizes
+
+$$
+\sum_{i=1}^{n} L\left(y_i, \beta_0 + \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
+$$
+
+where $L$ is the appropriate *negative* **log**-likelihood.
+
+```{r}
+library(glmnet)
+fit_cv = cv.glmnet(X, y, family = "binomial", alpha = 1)
+plot(fit_cv)
+```
+
+```{r}
+head(coef(fit_cv), n = 10)
+```
+
+```{r}
+fit_cv$nzero
+```
+
+Notice, only the first three predictors generated are truly significant, and that is exactly what the suggested model finds.
+
+```{r}
+fit_1se = glmnet(X, y, family = "binomial", lambda = fit_cv$lambda.1se)
+which(as.vector(as.matrix(fit_1se$beta)) != 0)
+```
+
+We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.
+
+```{r}
+plot(glmnet(X, y, family = "binomial"))
+```
+
+```{r}
+plot(glmnet(X, y, family = "binomial"), xvar = "lambda")
+```
+
+We can extract the two relevant $\lambda$ values.
+
+```{r}
+fit_cv$lambda.min
+fit_cv$lambda.1se
+```
+
+Since `cv.glmnet()` does not calculate prediction accuracy for classification, we take the $\lambda$ values and create a grid for `caret` to search in order to obtain prediction accuracy with `train()`. We set $\alpha = 1$ in this grid, as `glmnet` can actually tune over the $\alpha = 1$ parameter. (More on that later.)
+
+Note that we have to force `y` to be a factor, so that `train()` recognizes we want to have a binomial response. The `train()` function in `caret` use the type of variable in `y` to determine if you want to use `family = "binomial"` or `family = "gaussian"`.
+
+```{r, message = FALSE, warning = FALSE}
+library(caret)
+cv_5 = trainControl(method = "cv", number = 5)
+lasso_grid = expand.grid(alpha = 1, 
+                         lambda = c(fit_cv$lambda.min, fit_cv$lambda.1se))
+lasso_grid
+```
+
+```{r}
+sim_data = data.frame(y, X)
+fit_lasso = train(
+  y ~ ., data = sim_data,
+  method = "glmnet",
+  trControl = cv_5,
+  tuneGrid = lasso_grid
+)
+fit_lasso$results
+```
+
+
+## External Links
+
+- [`glmnet` Web Vingette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html) - Details from the package developers.
+
+
+## RMarkdown
+
+The RMarkdown file for this chapter can be found [**here**](15-shrink.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
+
+- Base Packages, Attached
+
+```{r, echo = FALSE}
+sessionInfo()$basePkgs
+```
+
+- Additional Packages, Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+- Additional Packages, Not Attached
+
+```{r, echo = FALSE}
+names(sessionInfo()$loadedOnly)
+```

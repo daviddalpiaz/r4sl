@@ -25,15 +25,15 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-08-28">
+<meta name="date" content="2017-09-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<link rel="prev" href="ensemble-methods.html">
-<link rel="next" href="unsupervised-learning.html">
+<link rel="prev" href="regularized-discriminant-analysis.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -105,94 +105,111 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.2</b> Caveat Emptor</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.3</b> Conventions</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.4</b> Acknowledgements</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i><b>0.2</b> Organization</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.3</b> Who?</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.4</b> Caveat Emptor</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.5</b> Conventions</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.7</b> License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>1</b> Probability Review</a><ul>
-<li class="chapter" data-level="1.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>1.1</b> Probability Models</a></li>
-<li class="chapter" data-level="1.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>1.2</b> Probability Axioms</a></li>
-<li class="chapter" data-level="1.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>1.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="1.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>1.4</b> Random Variables</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>1.4.1</b> Distributions</a></li>
-<li class="chapter" data-level="1.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>1.4.2</b> Discrete Random Variables</a></li>
-<li class="chapter" data-level="1.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.4.3</b> Continuous Random Variables</a></li>
-<li class="chapter" data-level="1.4.4" data-path="probability-review.html"><a href="probability-review.html#several-random-variables"><i class="fa fa-check"></i><b>1.4.4</b> Several Random Variables</a></li>
+<li class="part"><span><b>I Prerequisites</b></span></li>
+<li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
+<li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="2.4.4" data-path="probability-review.html"><a href="probability-review.html#several-random-variables"><i class="fa fa-check"></i><b>2.4.4</b> Several Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>1.5</b> Expectations</a></li>
-<li class="chapter" data-level="1.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>1.6</b> Likelihood</a></li>
-<li class="chapter" data-level="1.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>1.7</b> Videos</a></li>
-<li class="chapter" data-level="1.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
+<li class="chapter" data-level="2.5" data-path="probability-review.html"><a href="probability-review.html#expectations"><i class="fa fa-check"></i><b>2.5</b> Expectations</a></li>
+<li class="chapter" data-level="2.6" data-path="probability-review.html"><a href="probability-review.html#likelihood"><i class="fa fa-check"></i><b>2.6</b> Likelihood</a></li>
+<li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
+<li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>2</b> <code>R</code>, RStudio, RMarkdown</a><ul>
-<li class="chapter" data-level="2.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>2.1</b> Videos</a></li>
-<li class="chapter" data-level="2.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>2.2</b> Template</a></li>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
+<li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html"><i class="fa fa-check"></i><b>3</b> Regression Basics in <code>R</code></a><ul>
-<li class="chapter" data-level="3.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>3.1</b> Visualization for Regression</a></li>
-<li class="chapter" data-level="3.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>3.2</b> The <code>lm()</code> Function</a></li>
-<li class="chapter" data-level="3.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>3.3</b> Hypothesis Testing</a></li>
-<li class="chapter" data-level="3.4" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>3.4</b> Prediction</a></li>
-<li class="chapter" data-level="3.5" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>3.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="3.6" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>3.6</b> Adding Complexity</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>3.6.1</b> Interactions</a></li>
-<li class="chapter" data-level="3.6.2" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>3.6.2</b> Polynomials</a></li>
-<li class="chapter" data-level="3.6.3" data-path="regression-basics-in-r.html"><a href="regression-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>3.6.3</b> Transformations</a></li>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
+<li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
+<li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
+<li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
+<li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html"><i class="fa fa-check"></i><b>4</b> Regression for Statistical Learning</a><ul>
-<li class="chapter" data-level="4.1" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>4.1</b> Assesing Model Accuracy</a></li>
-<li class="chapter" data-level="4.2" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#model-complexity"><i class="fa fa-check"></i><b>4.2</b> Model Complexity</a></li>
-<li class="chapter" data-level="4.3" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#test-train-split"><i class="fa fa-check"></i><b>4.3</b> Test-Train Split</a></li>
-<li class="chapter" data-level="4.4" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>4.4</b> Adding Flexibility to Linear Models</a></li>
-<li class="chapter" data-level="4.5" data-path="regression-for-statistical-learning.html"><a href="regression-for-statistical-learning.html#choosing-a-model"><i class="fa fa-check"></i><b>4.5</b> Choosing a Model</a></li>
+<li class="part"><span><b>II Regression</b></span></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>5.1</b> Assesing Model Accuracy</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#model-complexity"><i class="fa fa-check"></i><b>5.2</b> Model Complexity</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#test-train-split"><i class="fa fa-check"></i><b>5.3</b> Test-Train Split</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>5.4</b> Adding Flexibility to Linear Models</a></li>
+<li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#choosing-a-model"><i class="fa fa-check"></i><b>5.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>5</b> Simulating the Bias–Variance Tradeoff</a><ul>
-<li class="chapter" data-level="5.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>5.1</b> Bias-Variance Decomposition</a></li>
-<li class="chapter" data-level="5.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>5.2</b> Simulation</a></li>
-<li class="chapter" data-level="5.3" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>5.3</b> Bias-Variance Tradeoff</a></li>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a></li>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="8" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Simulating the Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.1</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="8.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.2</b> Simulation</a></li>
+<li class="chapter" data-level="8.3" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>8.3</b> Bias-Variance Tradeoff</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
-<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>6.1</b> Visualization for Classification</a></li>
-<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>6.2</b> A Simple Classifier</a></li>
-<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>6.3</b> Metrics for Classification</a></li>
+<li class="chapter" data-level="9" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>9</b> Classification</a><ul>
+<li class="chapter" data-level="9.1" data-path="classification.html"><a href="classification.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
+<li class="chapter" data-level="9.2" data-path="classification.html"><a href="classification.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
+<li class="chapter" data-level="9.3" data-path="classification.html"><a href="classification.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="7.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear Regression</a></li>
-<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>7.2</b> Bayes Classifier</a></li>
-<li class="chapter" data-level="7.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>7.3</b> Logistic Regression with <code>glm()</code></a></li>
-<li class="chapter" data-level="7.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>7.4</b> ROC Curves</a></li>
-<li class="chapter" data-level="7.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>7.5</b> Multinomial Logistic Regression</a></li>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
+<li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
+<li class="chapter" data-level="10.4" data-path="logistic-regression.html"><a href="logistic-regression.html#roc-curves"><i class="fa fa-check"></i><b>10.4</b> ROC Curves</a></li>
+<li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>8</b> Generative Models</a><ul>
-<li class="chapter" data-level="8.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>8.1</b> Linear Discriminant Analysis</a></li>
-<li class="chapter" data-level="8.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>8.2</b> Quadratic Discriminant Analysis</a></li>
-<li class="chapter" data-level="8.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>8.3</b> Naive Bayes</a></li>
-<li class="chapter" data-level="8.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>8.4</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="8.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown"><i class="fa fa-check"></i><b>8.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
+<li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
+<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html"><i class="fa fa-check"></i><b>9</b> k-Nearest Neighbors</a><ul>
-<li class="chapter" data-level="9.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#classification-1"><i class="fa fa-check"></i><b>9.1</b> Classification</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#default-data"><i class="fa fa-check"></i><b>9.1.1</b> Default Data</a></li>
-<li class="chapter" data-level="9.1.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#iris-data"><i class="fa fa-check"></i><b>9.1.2</b> Iris Data</a></li>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#classification-1"><i class="fa fa-check"></i><b>12.1</b> Classification</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="knn-class.html"><a href="knn-class.html#default-data"><i class="fa fa-check"></i><b>12.1.1</b> Default Data</a></li>
+<li class="chapter" data-level="12.1.2" data-path="knn-class.html"><a href="knn-class.html#iris-data"><i class="fa fa-check"></i><b>12.1.2</b> Iris Data</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#regression"><i class="fa fa-check"></i><b>9.2</b> Regression</a></li>
-<li class="chapter" data-level="9.3" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#external-links"><i class="fa fa-check"></i><b>9.3</b> External Links</a></li>
-<li class="chapter" data-level="9.4" data-path="k-nearest-neighbors.html"><a href="k-nearest-neighbors.html#rmarkdown-1"><i class="fa fa-check"></i><b>9.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#regression"><i class="fa fa-check"></i><b>12.2</b> Regression</a></li>
+<li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
+<li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-1"><i class="fa fa-check"></i><b>12.4</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>10</b> Resampling</a><ul>
-<li class="chapter" data-level="10.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>10.1</b> Test-Train Split</a></li>
-<li class="chapter" data-level="10.2" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>10.2</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="resampling.html"><a href="resampling.html#method-specific"><i class="fa fa-check"></i><b>10.2.1</b> Method Specific</a></li>
-<li class="chapter" data-level="10.2.2" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>10.2.2</b> Manual Cross-Validation</a></li>
-<li class="chapter" data-level="10.2.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>10.2.3</b> Test Data</a></li>
+<li class="part"><span><b>III Unsupervised Learning</b></span></li>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
+<li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
+<li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>10.3</b> Bootstrap</a></li>
-<li class="chapter" data-level="10.4" data-path="resampling.html"><a href="resampling.html#external-links-1"><i class="fa fa-check"></i><b>10.4</b> External Links</a></li>
-<li class="chapter" data-level="10.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-2"><i class="fa fa-check"></i><b>10.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
+<li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
+<li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data-1"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>11</b> Classification Overview</a><ul>
+<li class="chapter" data-level="13.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#external-links-1"><i class="fa fa-check"></i><b>13.3</b> External Links</a></li>
+<li class="chapter" data-level="13.4" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#rmarkdown-2"><i class="fa fa-check"></i><b>13.4</b> RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i><b>14</b> Principal Component Analysis</a></li>
+<li class="chapter" data-level="15" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>15</b> k-Means</a></li>
+<li class="chapter" data-level="16" data-path="mixture-models.html"><a href="mixture-models.html"><i class="fa fa-check"></i><b>16</b> Mixture Models</a></li>
+<li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
+<li class="part"><span><b>IV In Practice</b></span></li>
+<li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
+<li class="chapter" data-level="19" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>19</b> Classification Overview</a><ul>
 <li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -200,133 +217,135 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#discriminative-versus-generative-methods"><i class="fa fa-check"></i>Discriminative versus Generative Methods</a></li>
 <li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#parametric-and-non-parametric-methods"><i class="fa fa-check"></i>Parametric and Non-Parametric Methods</a></li>
 <li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#tuning-parameters"><i class="fa fa-check"></i>Tuning Parameters</a></li>
-<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#cross-validation-1"><i class="fa fa-check"></i>Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#cross-validation"><i class="fa fa-check"></i>Cross-Validation</a></li>
 <li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i>Curse of Dimensionality</a></li>
 <li class="chapter" data-level="" data-path="classification-overview.html"><a href="classification-overview.html#no-free-lunch-theorem"><i class="fa fa-check"></i>No-Free-Lunch Theorem</a></li>
-<li class="chapter" data-level="11.1" data-path="classification-overview.html"><a href="classification-overview.html#external-links-2"><i class="fa fa-check"></i><b>11.1</b> External Links</a></li>
-<li class="chapter" data-level="11.2" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>11.2</b> RMarkdown</a></li>
+<li class="chapter" data-level="19.1" data-path="classification-overview.html"><a href="classification-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
+<li class="chapter" data-level="19.2" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>12</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="12.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-3"><i class="fa fa-check"></i><b>12.1</b> External Links</a></li>
-<li class="chapter" data-level="12.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-4"><i class="fa fa-check"></i><b>12.2</b> RMarkdown</a></li>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>20.1</b> Test-Train Split</a></li>
+<li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a><ul>
+<li class="chapter" data-level="20.2.1" data-path="resampling.html"><a href="resampling.html#method-specific"><i class="fa fa-check"></i><b>20.2.1</b> Method Specific</a></li>
+<li class="chapter" data-level="20.2.2" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>20.2.2</b> Manual Cross-Validation</a></li>
+<li class="chapter" data-level="20.2.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.2.3</b> Test Data</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>13</b> Subset Selection</a><ul>
-<li class="chapter" data-level="13.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>13.1</b> AIC, BIC, and Cp</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>13.1.1</b> <code>leaps</code> Package</a></li>
-<li class="chapter" data-level="13.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>13.1.2</b> Best Subset</a></li>
-<li class="chapter" data-level="13.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>13.1.3</b> Stepwise Methods</a></li>
+<li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.3</b> Bootstrap</a></li>
+<li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.4</b> External Links</a></li>
+<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-4"><i class="fa fa-check"></i><b>20.5</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="subset-selection.html"><a href="subset-selection.html#validated-rmse"><i class="fa fa-check"></i><b>13.2</b> Validated RMSE</a></li>
-<li class="chapter" data-level="13.3" data-path="subset-selection.html"><a href="subset-selection.html#external-links-4"><i class="fa fa-check"></i><b>13.3</b> External Links</a></li>
-<li class="chapter" data-level="13.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-5"><i class="fa fa-check"></i><b>13.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.1</b> External Links</a></li>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-5"><i class="fa fa-check"></i><b>21.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html"><i class="fa fa-check"></i><b>14</b> Shrinkage Methods</a><ul>
-<li class="chapter" data-level="14.1" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ridge-regression"><i class="fa fa-check"></i><b>14.1</b> Ridge Regression</a></li>
-<li class="chapter" data-level="14.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#lasso"><i class="fa fa-check"></i><b>14.2</b> Lasso</a></li>
-<li class="chapter" data-level="14.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#broom"><i class="fa fa-check"></i><b>14.3</b> <code>broom</code></a></li>
-<li class="chapter" data-level="14.4" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#simulation-study-p-n"><i class="fa fa-check"></i><b>14.4</b> Simulation Study, p &gt; n</a></li>
-<li class="chapter" data-level="14.5" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#external-links-5"><i class="fa fa-check"></i><b>14.5</b> External Links</a></li>
-<li class="chapter" data-level="14.6" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#rmarkdown-6"><i class="fa fa-check"></i><b>14.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
+<li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
+<li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>15</b> Elastic Net</a><ul>
-<li class="chapter" data-level="15.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>15.1</b> Hitters Data</a></li>
-<li class="chapter" data-level="15.2" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-regression"><i class="fa fa-check"></i><b>15.2</b> Elastic Net for Regression</a></li>
-<li class="chapter" data-level="15.3" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-classification"><i class="fa fa-check"></i><b>15.3</b> Elastic Net for Classification</a></li>
-<li class="chapter" data-level="15.4" data-path="elastic-net.html"><a href="elastic-net.html#external-links-6"><i class="fa fa-check"></i><b>15.4</b> External Links</a></li>
-<li class="chapter" data-level="15.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-7"><i class="fa fa-check"></i><b>15.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="22.2" data-path="subset-selection.html"><a href="subset-selection.html#validated-rmse"><i class="fa fa-check"></i><b>22.2</b> Validated RMSE</a></li>
+<li class="chapter" data-level="22.3" data-path="subset-selection.html"><a href="subset-selection.html#external-links-5"><i class="fa fa-check"></i><b>22.3</b> External Links</a></li>
+<li class="chapter" data-level="22.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-6"><i class="fa fa-check"></i><b>22.4</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>16</b> Regularized Discriminant Analysis</a><ul>
-<li class="chapter" data-level="16.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>16.1</b> Sonar Data</a></li>
-<li class="chapter" data-level="16.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>16.2</b> RDA</a></li>
-<li class="chapter" data-level="16.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>16.3</b> RDA with Grid Search</a></li>
-<li class="chapter" data-level="16.4" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-random-search-search"><i class="fa fa-check"></i><b>16.4</b> RDA with Random Search Search</a></li>
-<li class="chapter" data-level="16.5" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#comparison-to-elastic-net"><i class="fa fa-check"></i><b>16.5</b> Comparison to Elastic Net</a></li>
-<li class="chapter" data-level="16.6" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#results"><i class="fa fa-check"></i><b>16.6</b> Results</a></li>
-<li class="chapter" data-level="16.7" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#external-links-7"><i class="fa fa-check"></i><b>16.7</b> External Links</a></li>
-<li class="chapter" data-level="16.8" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rmarkdown-8"><i class="fa fa-check"></i><b>16.8</b> RMarkdown</a></li>
+<li class="part"><span><b>V The Modern Era</b></span></li>
+<li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
+<li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
+<li class="chapter" data-level="24.4" data-path="regularization.html"><a href="regularization.html#simulation-study-p-n"><i class="fa fa-check"></i><b>24.4</b> Simulation Study, p &gt; n</a></li>
+<li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
+<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-7"><i class="fa fa-check"></i><b>24.6</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>17</b> Non-Linear Models</a><ul>
-<li class="chapter" data-level="17.1" data-path="non-linear-models.html"><a href="non-linear-models.html#polynomial-regression"><i class="fa fa-check"></i><b>17.1</b> Polynomial Regression</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="non-linear-models.html"><a href="non-linear-models.html#anova"><i class="fa fa-check"></i><b>17.1.1</b> ANOVA</a></li>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>25.1</b> Hitters Data</a></li>
+<li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-regression"><i class="fa fa-check"></i><b>25.2</b> Elastic Net for Regression</a></li>
+<li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-classification"><i class="fa fa-check"></i><b>25.3</b> Elastic Net for Classification</a></li>
+<li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.4</b> External Links</a></li>
+<li class="chapter" data-level="25.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-8"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="non-linear-models.html"><a href="non-linear-models.html#logistic-regression-polynomial-terms"><i class="fa fa-check"></i><b>17.2</b> Logistic Regression, Polynomial Terms</a></li>
-<li class="chapter" data-level="17.3" data-path="non-linear-models.html"><a href="non-linear-models.html#step-functions"><i class="fa fa-check"></i><b>17.3</b> Step Functions</a><ul>
-<li class="chapter" data-level="17.3.1" data-path="non-linear-models.html"><a href="non-linear-models.html#smoothing-splines"><i class="fa fa-check"></i><b>17.3.1</b> Smoothing Splines</a></li>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
+<li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
+<li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
+<li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
+<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-9"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="17.4" data-path="non-linear-models.html"><a href="non-linear-models.html#local-regression"><i class="fa fa-check"></i><b>17.4</b> Local Regression</a></li>
-<li class="chapter" data-level="17.5" data-path="non-linear-models.html"><a href="non-linear-models.html#generalized-additive-models-gams"><i class="fa fa-check"></i><b>17.5</b> Generalized Additive Models (GAMs)</a><ul>
-<li class="chapter" data-level="17.5.1" data-path="non-linear-models.html"><a href="non-linear-models.html#gams-in-caret"><i class="fa fa-check"></i><b>17.5.1</b> GAMs in <code>caret</code></a></li>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-1"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
+<li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
+<li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
+<li class="chapter" data-level="27.1.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest"><i class="fa fa-check"></i><b>27.1.4</b> Random Forest</a></li>
+<li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
+<li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="17.6" data-path="non-linear-models.html"><a href="non-linear-models.html#external-links-8"><i class="fa fa-check"></i><b>17.6</b> External Links</a></li>
-<li class="chapter" data-level="17.7" data-path="non-linear-models.html"><a href="non-linear-models.html#rmarkdown-9"><i class="fa fa-check"></i><b>17.7</b> RMarkdown</a></li>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
+<li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
+<li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
+<li class="chapter" data-level="27.2.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-1"><i class="fa fa-check"></i><b>27.2.4</b> Random Forest</a></li>
+<li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
+<li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>18</b> Trees</a><ul>
-<li class="chapter" data-level="18.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>18.1</b> Classification Trees</a></li>
-<li class="chapter" data-level="18.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>18.2</b> Regression Trees</a></li>
-<li class="chapter" data-level="18.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>18.3</b> <code>rpart</code> Package</a></li>
-<li class="chapter" data-level="18.4" data-path="trees.html"><a href="trees.html#external-links-9"><i class="fa fa-check"></i><b>18.4</b> External Links</a></li>
-<li class="chapter" data-level="18.5" data-path="trees.html"><a href="trees.html#rmarkdown-10"><i class="fa fa-check"></i><b>18.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
+<li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>19</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="19.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-1"><i class="fa fa-check"></i><b>19.1</b> Regression</a><ul>
-<li class="chapter" data-level="19.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>19.1.1</b> Tree Model</a></li>
-<li class="chapter" data-level="19.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>19.1.2</b> Linear Model</a></li>
-<li class="chapter" data-level="19.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>19.1.3</b> Bagging</a></li>
-<li class="chapter" data-level="19.1.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest"><i class="fa fa-check"></i><b>19.1.4</b> Random Forest</a></li>
-<li class="chapter" data-level="19.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>19.1.5</b> Boosting</a></li>
-<li class="chapter" data-level="19.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>19.1.6</b> Results</a></li>
+<li class="chapter" data-level="27.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>27.4</b> Tree versus Ensemble Boundaries</a></li>
+<li class="chapter" data-level="27.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-9"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
+<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-10"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="19.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>19.2</b> Classification</a><ul>
-<li class="chapter" data-level="19.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>19.2.1</b> Tree Model</a></li>
-<li class="chapter" data-level="19.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>19.2.2</b> Logistic Regression</a></li>
-<li class="chapter" data-level="19.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>19.2.3</b> Bagging</a></li>
-<li class="chapter" data-level="19.2.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-1"><i class="fa fa-check"></i><b>19.2.4</b> Random Forest</a></li>
-<li class="chapter" data-level="19.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>19.2.5</b> Boosting</a></li>
-<li class="chapter" data-level="19.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-2"><i class="fa fa-check"></i><b>19.2.6</b> Results</a></li>
+<li class="chapter" data-level="28" data-path="artificial-neural-networks.html"><a href="artificial-neural-networks.html"><i class="fa fa-check"></i><b>28</b> Artificial Neural Networks</a></li>
+<li class="part"><span><b>VI Appendix</b></span></li>
+<li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
+<li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a><ul>
+<li class="chapter" data-level="30.1" data-path="non-linear-models.html"><a href="non-linear-models.html#polynomial-regression"><i class="fa fa-check"></i><b>30.1</b> Polynomial Regression</a><ul>
+<li class="chapter" data-level="30.1.1" data-path="non-linear-models.html"><a href="non-linear-models.html#anova"><i class="fa fa-check"></i><b>30.1.1</b> ANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="19.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning"><i class="fa fa-check"></i><b>19.3</b> Tuning</a><ul>
-<li class="chapter" data-level="19.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>19.3.1</b> Random Forest and Bagging</a></li>
-<li class="chapter" data-level="19.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>19.3.2</b> Boosting</a></li>
+<li class="chapter" data-level="30.2" data-path="non-linear-models.html"><a href="non-linear-models.html#logistic-regression-polynomial-terms"><i class="fa fa-check"></i><b>30.2</b> Logistic Regression, Polynomial Terms</a></li>
+<li class="chapter" data-level="30.3" data-path="non-linear-models.html"><a href="non-linear-models.html#step-functions"><i class="fa fa-check"></i><b>30.3</b> Step Functions</a><ul>
+<li class="chapter" data-level="30.3.1" data-path="non-linear-models.html"><a href="non-linear-models.html#smoothing-splines"><i class="fa fa-check"></i><b>30.3.1</b> Smoothing Splines</a></li>
 </ul></li>
-<li class="chapter" data-level="19.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>19.4</b> Tree versus Ensemble Boundaries</a></li>
-<li class="chapter" data-level="19.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-10"><i class="fa fa-check"></i><b>19.5</b> External Links</a></li>
-<li class="chapter" data-level="19.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-11"><i class="fa fa-check"></i><b>19.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="30.4" data-path="non-linear-models.html"><a href="non-linear-models.html#local-regression"><i class="fa fa-check"></i><b>30.4</b> Local Regression</a></li>
+<li class="chapter" data-level="30.5" data-path="non-linear-models.html"><a href="non-linear-models.html#generalized-additive-models-gams"><i class="fa fa-check"></i><b>30.5</b> Generalized Additive Models (GAMs)</a><ul>
+<li class="chapter" data-level="30.5.1" data-path="non-linear-models.html"><a href="non-linear-models.html#gams-in-caret"><i class="fa fa-check"></i><b>30.5.1</b> GAMs in <code>caret</code></a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>20</b> Support Vector Machines</a><ul>
-<li class="chapter" data-level="20.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#r-packages"><i class="fa fa-check"></i><b>20.1</b> <code>R</code> Packages</a></li>
-<li class="chapter" data-level="20.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#classification-3"><i class="fa fa-check"></i><b>20.2</b> Classification</a></li>
-<li class="chapter" data-level="20.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-separable-example"><i class="fa fa-check"></i><b>20.3</b> Linear, Separable Example</a><ul>
-<li class="chapter" data-level="20.3.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#data-simulation"><i class="fa fa-check"></i><b>20.3.1</b> Data Simulation</a></li>
-<li class="chapter" data-level="20.3.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-parameter-c"><i class="fa fa-check"></i><b>20.3.2</b> Linear Kernel, Parameter <code>C</code></a></li>
-<li class="chapter" data-level="20.3.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel"><i class="fa fa-check"></i><b>20.3.3</b> Radial Kernel</a></li>
-<li class="chapter" data-level="20.3.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#tuning-with-caret"><i class="fa fa-check"></i><b>20.3.4</b> Tuning with <code>caret</code></a></li>
-<li class="chapter" data-level="20.3.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest"><i class="fa fa-check"></i><b>20.3.5</b> Compare: Random Forest</a></li>
+<li class="chapter" data-level="30.6" data-path="non-linear-models.html"><a href="non-linear-models.html#external-links-10"><i class="fa fa-check"></i><b>30.6</b> External Links</a></li>
+<li class="chapter" data-level="30.7" data-path="non-linear-models.html"><a href="non-linear-models.html#rmarkdown-11"><i class="fa fa-check"></i><b>30.7</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#non-linear-non-separable-example"><i class="fa fa-check"></i><b>20.4</b> Non-Linear, Non-Separable Example</a><ul>
-<li class="chapter" data-level="20.4.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#data-simulation-1"><i class="fa fa-check"></i><b>20.4.1</b> Data Simulation</a></li>
-<li class="chapter" data-level="20.4.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-parameter-c"><i class="fa fa-check"></i><b>20.4.2</b> Radial Kernel, Parameter <code>C</code></a></li>
-<li class="chapter" data-level="20.4.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-parameter-sigma"><i class="fa fa-check"></i><b>20.4.3</b> Radial Kernel, Parameter <code>sigma</code></a></li>
-<li class="chapter" data-level="20.4.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-tuning"><i class="fa fa-check"></i><b>20.4.4</b> Radial Kernel, Tuning</a></li>
-<li class="chapter" data-level="20.4.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#polynomial-kernel-tuning"><i class="fa fa-check"></i><b>20.4.5</b> Polynomial Kernel, Tuning</a></li>
-<li class="chapter" data-level="20.4.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-tuning"><i class="fa fa-check"></i><b>20.4.6</b> Linear Kernel, Tuning</a></li>
-<li class="chapter" data-level="20.4.7" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest-1"><i class="fa fa-check"></i><b>20.4.7</b> Compare: Random Forest</a></li>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
+<li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
+<li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
+<li class="chapter" data-level="31.4" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-random-search-search"><i class="fa fa-check"></i><b>31.4</b> RDA with Random Search Search</a></li>
+<li class="chapter" data-level="31.5" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#comparison-to-elastic-net"><i class="fa fa-check"></i><b>31.5</b> Comparison to Elastic Net</a></li>
+<li class="chapter" data-level="31.6" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#results-2"><i class="fa fa-check"></i><b>31.6</b> Results</a></li>
+<li class="chapter" data-level="31.7" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#external-links-11"><i class="fa fa-check"></i><b>31.7</b> External Links</a></li>
+<li class="chapter" data-level="31.8" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rmarkdown-12"><i class="fa fa-check"></i><b>31.8</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#external-links-11"><i class="fa fa-check"></i><b>20.5</b> External Links</a></li>
-<li class="chapter" data-level="20.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#rmarkdown-12"><i class="fa fa-check"></i><b>20.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="32" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>32</b> Support Vector Machines</a><ul>
+<li class="chapter" data-level="32.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#r-packages"><i class="fa fa-check"></i><b>32.1</b> <code>R</code> Packages</a></li>
+<li class="chapter" data-level="32.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#classification-3"><i class="fa fa-check"></i><b>32.2</b> Classification</a></li>
+<li class="chapter" data-level="32.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-separable-example"><i class="fa fa-check"></i><b>32.3</b> Linear, Separable Example</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#data-simulation"><i class="fa fa-check"></i><b>32.3.1</b> Data Simulation</a></li>
+<li class="chapter" data-level="32.3.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-parameter-c"><i class="fa fa-check"></i><b>32.3.2</b> Linear Kernel, Parameter <code>C</code></a></li>
+<li class="chapter" data-level="32.3.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel"><i class="fa fa-check"></i><b>32.3.3</b> Radial Kernel</a></li>
+<li class="chapter" data-level="32.3.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#tuning-with-caret"><i class="fa fa-check"></i><b>32.3.4</b> Tuning with <code>caret</code></a></li>
+<li class="chapter" data-level="32.3.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest"><i class="fa fa-check"></i><b>32.3.5</b> Compare: Random Forest</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>21</b> Unsupervised Learning</a><ul>
-<li class="chapter" data-level="21.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#methods"><i class="fa fa-check"></i><b>21.1</b> Methods</a><ul>
-<li class="chapter" data-level="21.1.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#principal-component-analysis"><i class="fa fa-check"></i><b>21.1.1</b> Principal Component Analysis</a></li>
-<li class="chapter" data-level="21.1.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#k-means-clustering"><i class="fa fa-check"></i><b>21.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
-<li class="chapter" data-level="21.1.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#hierarchical-clustering"><i class="fa fa-check"></i><b>21.1.3</b> Hierarchical Clustering</a></li>
+<li class="chapter" data-level="32.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#non-linear-non-separable-example"><i class="fa fa-check"></i><b>32.4</b> Non-Linear, Non-Separable Example</a><ul>
+<li class="chapter" data-level="32.4.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#data-simulation-1"><i class="fa fa-check"></i><b>32.4.1</b> Data Simulation</a></li>
+<li class="chapter" data-level="32.4.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-parameter-c"><i class="fa fa-check"></i><b>32.4.2</b> Radial Kernel, Parameter <code>C</code></a></li>
+<li class="chapter" data-level="32.4.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-parameter-sigma"><i class="fa fa-check"></i><b>32.4.3</b> Radial Kernel, Parameter <code>sigma</code></a></li>
+<li class="chapter" data-level="32.4.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#radial-kernel-tuning"><i class="fa fa-check"></i><b>32.4.4</b> Radial Kernel, Tuning</a></li>
+<li class="chapter" data-level="32.4.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#polynomial-kernel-tuning"><i class="fa fa-check"></i><b>32.4.5</b> Polynomial Kernel, Tuning</a></li>
+<li class="chapter" data-level="32.4.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#linear-kernel-tuning"><i class="fa fa-check"></i><b>32.4.6</b> Linear Kernel, Tuning</a></li>
+<li class="chapter" data-level="32.4.7" data-path="support-vector-machines.html"><a href="support-vector-machines.html#compare-random-forest-1"><i class="fa fa-check"></i><b>32.4.7</b> Compare: Random Forest</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#examples"><i class="fa fa-check"></i><b>21.2</b> Examples</a><ul>
-<li class="chapter" data-level="21.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#us-arrests"><i class="fa fa-check"></i><b>21.2.1</b> US Arrests</a></li>
-<li class="chapter" data-level="21.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#simulated-data"><i class="fa fa-check"></i><b>21.2.2</b> Simulated Data</a></li>
-<li class="chapter" data-level="21.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#iris-data-1"><i class="fa fa-check"></i><b>21.2.3</b> Iris Data</a></li>
-</ul></li>
-<li class="chapter" data-level="21.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#external-links-12"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
-<li class="chapter" data-level="21.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#rmarkdown-13"><i class="fa fa-check"></i><b>21.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="32.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#external-links-12"><i class="fa fa-check"></i><b>32.5</b> External Links</a></li>
+<li class="chapter" data-level="32.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#rmarkdown-13"><i class="fa fa-check"></i><b>32.6</b> RMarkdown</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -349,25 +368,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="support-vector-machines" class="section level1">
-<h1><span class="header-section-number">Chapter 20</span> Support Vector Machines</h1>
+<h1><span class="header-section-number">Chapter 32</span> Support Vector Machines</h1>
 <div id="r-packages" class="section level2">
-<h2><span class="header-section-number">20.1</span> <code>R</code> Packages</h2>
+<h2><span class="header-section-number">32.1</span> <code>R</code> Packages</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randomForest)
 <span class="kw">library</span>(caret)
 <span class="kw">library</span>(kernlab)</code></pre></div>
 <p>For working with SVMs in <code>R</code> we will use the <a href="https://cran.r-project.org/web/packages/kernlab/vignettes/kernlab.pdf">kernlab package</a> instead of <code>e1071</code>. For examples of <code>e1071</code> see the relevant chapter in ISL. We do not discuss the details of the method, however show how the method can be tuned.</p>
 </div>
 <div id="classification-3" class="section level2">
-<h2><span class="header-section-number">20.2</span> Classification</h2>
+<h2><span class="header-section-number">32.2</span> Classification</h2>
 <p>SVMs are mostly used for classification. Note that they can be modified for regression but we will not do that here. Since we are performing classification, we will use accuracy as our metric.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
   <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
 }</code></pre></div>
 </div>
 <div id="linear-separable-example" class="section level2">
-<h2><span class="header-section-number">20.3</span> Linear, Separable Example</h2>
+<h2><span class="header-section-number">32.3</span> Linear, Separable Example</h2>
 <div id="data-simulation" class="section level3">
-<h3><span class="header-section-number">20.3.1</span> Data Simulation</h3>
+<h3><span class="header-section-number">32.3.1</span> Data Simulation</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_sep =<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">1000</span>) {
   x1 =<span class="st"> </span><span class="kw">runif</span>(n)
   x2 =<span class="st"> </span><span class="kw">runif</span>(n)
@@ -381,7 +400,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 train_data =<span class="st"> </span><span class="kw">sim_sep</span>(<span class="dt">n =</span> <span class="dv">50</span>)
 <span class="kw">plot</span>(x2 ~<span class="st"> </span>x1, <span class="dt">data =</span> train_data, <span class="dt">col =</span> <span class="kw">as.character</span>(y), <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_data =<span class="st"> </span><span class="kw">sim_sep</span>(<span class="dt">n =</span> <span class="dv">500</span>)
 <span class="kw">str</span>(train_data)</code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    41 obs. of  3 variables:
@@ -390,11 +409,11 @@ train_data =<span class="st"> </span><span class="kw">sim_sep</span>(<span class
 ##  $ x2: num  0.3334 0.3467 0.3985 0.0389 0.7488 ...</code></pre>
 </div>
 <div id="linear-kernel-parameter-c" class="section level3">
-<h3><span class="header-section-number">20.3.2</span> Linear Kernel, Parameter <code>C</code></h3>
+<h3><span class="header-section-number">32.3.2</span> Linear Kernel, Parameter <code>C</code></h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lin_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;vanilladot&#39;</span>, <span class="dt">C =</span> <span class="fl">0.1</span>)</code></pre></div>
 <pre><code>##  Setting default kernel parameters</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(lin_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(lin_svm_fit, train_data))</code></pre></div>
@@ -406,7 +425,7 @@ train_data =<span class="st"> </span><span class="kw">sim_sep</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lin_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;vanilladot&#39;</span>, <span class="dt">C =</span> <span class="dv">1</span>)</code></pre></div>
 <pre><code>##  Setting default kernel parameters</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(lin_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(lin_svm_fit, train_data))</code></pre></div>
@@ -418,7 +437,7 @@ train_data =<span class="st"> </span><span class="kw">sim_sep</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lin_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;vanilladot&#39;</span>, <span class="dt">C =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>##  Setting default kernel parameters</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(lin_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(lin_svm_fit, train_data))</code></pre></div>
@@ -429,11 +448,11 @@ train_data =<span class="st"> </span><span class="kw">sim_sep</span>(<span class
 <pre><code>## [1] 1</code></pre>
 </div>
 <div id="radial-kernel" class="section level3">
-<h3><span class="header-section-number">20.3.3</span> Radial Kernel</h3>
+<h3><span class="header-section-number">32.3.3</span> Radial Kernel</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>, <span class="dt">C =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rad_svm_fit, train_data))</code></pre></div>
@@ -444,7 +463,7 @@ rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~<span clas
 <pre><code>## [1] 1</code></pre>
 </div>
 <div id="tuning-with-caret" class="section level3">
-<h3><span class="header-section-number">20.3.4</span> Tuning with <code>caret</code></h3>
+<h3><span class="header-section-number">32.3.4</span> Tuning with <code>caret</code></h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svm_grid =<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">C =</span> <span class="kw">c</span>(<span class="dv">2</span> ^<span class="st"> </span>(-<span class="dv">5</span>:<span class="dv">5</span>)))
 svm_control =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>, 
                            <span class="dt">returnResamp =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
@@ -493,7 +512,7 @@ lin_svm_fit</code></pre></div>
 <pre><code>## [1] 1</code></pre>
 </div>
 <div id="compare-random-forest" class="section level3">
-<h3><span class="header-section-number">20.3.5</span> Compare: Random Forest</h3>
+<h3><span class="header-section-number">32.3.5</span> Compare: Random Forest</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 rf_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">mtry =</span> <span class="dv">1</span>:<span class="dv">2</span>)
 rf_fit  =<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_data, <span class="dt">method =</span> <span class="st">&quot;rf&quot;</span>,
@@ -512,9 +531,9 @@ rf_fit$bestTune</code></pre></div>
 </div>
 </div>
 <div id="non-linear-non-separable-example" class="section level2">
-<h2><span class="header-section-number">20.4</span> Non-Linear, Non-Separable Example</h2>
+<h2><span class="header-section-number">32.4</span> Non-Linear, Non-Separable Example</h2>
 <div id="data-simulation-1" class="section level3">
-<h3><span class="header-section-number">20.4.1</span> Data Simulation</h3>
+<h3><span class="header-section-number">32.4.1</span> Data Simulation</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_rad =<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">1000</span>) {
   x1 =<span class="st"> </span><span class="kw">runif</span>(n, -<span class="dv">1</span>, <span class="dv">1</span>)
   x2 =<span class="st"> </span><span class="kw">runif</span>(n, -<span class="dv">1</span>, <span class="dv">1</span>)
@@ -525,15 +544,15 @@ rf_fit$bestTune</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 train_data =<span class="st"> </span><span class="kw">sim_rad</span>(<span class="dt">n =</span> <span class="dv">250</span>)
 <span class="kw">plot</span>(x2 ~<span class="st"> </span>x1, <span class="dt">data =</span> train_data, <span class="dt">col =</span> <span class="kw">as.character</span>(y), <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_data =<span class="st"> </span><span class="kw">sim_rad</span>(<span class="dt">n =</span> <span class="dv">2000</span>)</code></pre></div>
 </div>
 <div id="radial-kernel-parameter-c" class="section level3">
-<h3><span class="header-section-number">20.4.2</span> Radial Kernel, Parameter <code>C</code></h3>
+<h3><span class="header-section-number">32.4.2</span> Radial Kernel, Parameter <code>C</code></h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>, 
                    <span class="dt">C =</span> <span class="fl">0.1</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">sigma =</span> <span class="dv">1</span>))
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rad_svm_fit, train_data))</code></pre></div>
@@ -545,7 +564,7 @@ train_data =<span class="st"> </span><span class="kw">sim_rad</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>, 
                    <span class="dt">C =</span> <span class="dv">1</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">sigma =</span> <span class="dv">1</span>))
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rad_svm_fit, train_data))</code></pre></div>
@@ -557,7 +576,7 @@ train_data =<span class="st"> </span><span class="kw">sim_rad</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>, 
                    <span class="dt">C =</span> <span class="dv">10</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">sigma =</span> <span class="dv">1</span>))
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rad_svm_fit, train_data))</code></pre></div>
@@ -568,11 +587,11 @@ train_data =<span class="st"> </span><span class="kw">sim_rad</span>(<span class
 <pre><code>## [1] 0.8285</code></pre>
 </div>
 <div id="radial-kernel-parameter-sigma" class="section level3">
-<h3><span class="header-section-number">20.4.3</span> Radial Kernel, Parameter <code>sigma</code></h3>
+<h3><span class="header-section-number">32.4.3</span> Radial Kernel, Parameter <code>sigma</code></h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>, 
                    <span class="dt">C =</span> <span class="dv">1</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">sigma =</span> <span class="fl">0.5</span>))
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rad_svm_fit, train_data))</code></pre></div>
@@ -584,7 +603,7 @@ train_data =<span class="st"> </span><span class="kw">sim_rad</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>, 
                    <span class="dt">C =</span> <span class="dv">1</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">sigma =</span> <span class="dv">1</span>))
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rad_svm_fit, train_data))</code></pre></div>
@@ -596,7 +615,7 @@ train_data =<span class="st"> </span><span class="kw">sim_rad</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>, 
                    <span class="dt">C =</span> <span class="dv">1</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">sigma =</span> <span class="dv">2</span>))
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rad_svm_fit, train_data))</code></pre></div>
@@ -607,7 +626,7 @@ train_data =<span class="st"> </span><span class="kw">sim_rad</span>(<span class
 <pre><code>## [1] 0.828</code></pre>
 </div>
 <div id="radial-kernel-tuning" class="section level3">
-<h3><span class="header-section-number">20.4.4</span> Radial Kernel, Tuning</h3>
+<h3><span class="header-section-number">32.4.4</span> Radial Kernel, Tuning</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svm_grid =<span class="st"> </span><span class="kw">expand.grid</span>(   <span class="dt">C =</span> <span class="kw">c</span>(<span class="dv">2</span> ^<span class="st"> </span>(-<span class="dv">5</span>:<span class="dv">5</span>)),
                       <span class="dt">sigma =</span> <span class="kw">c</span>(<span class="dv">2</span> ^<span class="st"> </span>(-<span class="dv">3</span>:<span class="dv">3</span>)))
 
@@ -621,7 +640,7 @@ rad_svm_fit$bestTune</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>,
                   <span class="dt">C =</span> <span class="dv">16</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">sigma =</span> <span class="fl">0.25</span>))
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rad_svm_fit, train_data))</code></pre></div>
@@ -632,7 +651,7 @@ rad_svm_fit$bestTune</code></pre></div>
 <pre><code>## [1] 0.838</code></pre>
 </div>
 <div id="polynomial-kernel-tuning" class="section level3">
-<h3><span class="header-section-number">20.4.5</span> Polynomial Kernel, Tuning</h3>
+<h3><span class="header-section-number">32.4.5</span> Polynomial Kernel, Tuning</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 poly_svm_fit =<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_data, <span class="dt">method =</span> <span class="st">&quot;svmPoly&quot;</span>,
                      <span class="dt">trControl =</span> svm_control)
@@ -643,7 +662,7 @@ poly_svm_fit$bestTune</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">poly_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;polydot&#39;</span>, 
                     <span class="dt">C =</span> <span class="dv">1</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">scale =</span> <span class="fl">0.1</span>, <span class="dt">degree =</span> <span class="dv">3</span>))
 <span class="kw">plot</span>(poly_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(poly_svm_fit, train_data))</code></pre></div>
@@ -654,7 +673,7 @@ poly_svm_fit$bestTune</code></pre></div>
 <pre><code>## [1] 0.8425</code></pre>
 </div>
 <div id="linear-kernel-tuning" class="section level3">
-<h3><span class="header-section-number">20.4.6</span> Linear Kernel, Tuning</h3>
+<h3><span class="header-section-number">32.4.6</span> Linear Kernel, Tuning</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svm_grid =<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">C =</span> <span class="kw">c</span>(<span class="dv">2</span> ^<span class="st"> </span>(-<span class="dv">5</span>:<span class="dv">5</span>)))
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
 lin_svm_fit =<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_data, <span class="dt">method =</span> <span class="st">&quot;svmLinear&quot;</span>,
@@ -693,7 +712,7 @@ lin_svm_fit</code></pre></div>
                    <span class="dt">C =</span> lin_svm_fit$bestTune)</code></pre></div>
 <pre><code>##  Setting default kernel parameters</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(lin_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
-<p><img src="20-svm_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="32-svm_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(lin_svm_fit, train_data))</code></pre></div>
@@ -704,7 +723,7 @@ lin_svm_fit</code></pre></div>
 <pre><code>## [1] 0.6005</code></pre>
 </div>
 <div id="compare-random-forest-1" class="section level3">
-<h3><span class="header-section-number">20.4.7</span> Compare: Random Forest</h3>
+<h3><span class="header-section-number">32.4.7</span> Compare: Random Forest</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 rf_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">mtry =</span> <span class="dv">1</span>:<span class="dv">2</span>)
 rf_fit =<span class="st"> </span><span class="kw">train</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> train_data, <span class="dt">method =</span> <span class="st">&quot;rf&quot;</span>,
@@ -722,14 +741,14 @@ rf_fit$bestTune</code></pre></div>
 <pre><code>## [1] 0.809</code></pre>
 </div>
 </div>
-<div id="external-links-11" class="section level2">
-<h2><span class="header-section-number">20.5</span> External Links</h2>
+<div id="external-links-12" class="section level2">
+<h2><span class="header-section-number">32.5</span> External Links</h2>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=3liCbRZPrZA">SVM with Polynomial Kernel Visualization</a> - The kernel idea in one simple video.</li>
 </ul>
 </div>
-<div id="rmarkdown-12" class="section level2">
-<h2><span class="header-section-number">20.6</span> RMarkdown</h2>
+<div id="rmarkdown-13" class="section level2">
+<h2><span class="header-section-number">32.6</span> RMarkdown</h2>
 <p>The RMarkdown file for this chapter can be found <a href="21-svm.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.1 and the following packages:</p>
 <ul>
 <li>Base Packages, Attached</li>
@@ -757,6 +776,9 @@ rf_fit$bestTune</code></pre></div>
 ## [41] &quot;splines&quot;      &quot;pbkrtest&quot;     &quot;colorspace&quot;   &quot;quantreg&quot;    
 ## [45] &quot;stringi&quot;      &quot;lazyeval&quot;     &quot;munsell&quot;</code></pre>
 
+<div id="refs" class="references">
+
+</div>
 </div>
 </div>
             </section>
@@ -764,8 +786,8 @@ rf_fit$bestTune</code></pre></div>
           </div>
         </div>
       </div>
-<a href="ensemble-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="unsupervised-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="regularized-discriminant-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -794,7 +816,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/r4sl/edit/master/20-svm.Rmd",
+"link": "https://github.com/daviddalpiaz/r4sl/edit/master/32-svm.Rmd",
 "text": "Edit"
 },
 "download": null,
