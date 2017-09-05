@@ -1,4 +1,4 @@
-# k-Nearest Neighbors
+# k-Nearest Neighbors {#knn-class}
 
 In this chapter we introduce our first **non-parametric** method, $k$-nearest neighbors, which can be used for both classification and regression.
 

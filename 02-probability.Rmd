@@ -108,7 +108,7 @@ This becomes the new multiplication rule for independent events.
 A collection of events $E_1, E_2, \ldots E_n$ is said to be independent if
 
 $$
-P\left[\bigcap_{i \in S} E_i \right] = \prod_{i \in S}P[A_i]
+P\left[\bigcap_{i \in S} E_i \right] = \prod_{i \in S}P[E_i]
 $$
 
 for every subset $S$ of $\{1, 2, \ldots n\}$.
@@ -116,7 +116,7 @@ for every subset $S$ of $\{1, 2, \ldots n\}$.
 If this is the case, then the chain rule is greatly simplified to:
 
 $$
-P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[A_i]
+P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[E_i]
 $$
 
 

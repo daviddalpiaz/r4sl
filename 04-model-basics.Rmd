@@ -1,4 +1,6 @@
-# Regression Basics in `R`
+# Modeling Basics in `R`
+
+**TODO:** Instead of specifically considering regression, change the focus of this chapter to modeling, with regression as an example.
 
 This chapter will recap the basics of performing regression analyses in `R`. For more detailed coverage, see [Applied Statistics with `R`](http://daviddalpiaz.github.io/appliedstats/).
 

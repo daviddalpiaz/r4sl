@@ -1,4 +1,6 @@
-# Shrinkage Methods
+# Regularization
+
+**TODO:** Introduce regularization as a concept.
 
 We will use the `Hitters` dataset from the `ISLR` package to explore two shrinkage methods: **ridge** and **lasso**. These are otherwise known as **penalized regression** methods.
 
