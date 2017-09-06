@@ -331,22 +331,22 @@ cat_pred
 
 ```
 ## # A tibble: 30 x 3
-##        x1         x2          y
-##    <fctr>      <dbl>      <dbl>
-##  1      A 0.96840700 -0.1956630
-##  2      A 0.01399059  0.9270260
-##  3      A 0.76306605  0.1348841
-##  4      A 0.49028249 -2.0719983
-##  5      A 0.01322629  0.9449941
-##  6      A 0.04120396  0.4813981
-##  7      A 0.13637850 -0.5289976
-##  8      A 0.98110462 -0.3852263
-##  9      A 0.45756085 -0.6591606
-## 10      A 0.95354366 -0.2129489
+##        x1        x2          y
+##    <fctr>     <dbl>      <dbl>
+##  1      A 0.2052098 -1.8040138
+##  2      A 0.8877738 -0.2429693
+##  3      A 0.2297112 -0.3918225
+##  4      A 0.4892865 -0.2951428
+##  5      A 0.4808117  1.0370049
+##  6      A 0.1944973 -0.5677518
+##  7      A 0.8606504 -0.8161189
+##  8      A 0.5955893  0.1602896
+##  9      A 0.9118577 -0.8065162
+## 10      A 0.2664716 -1.1055386
 ## # ... with 20 more rows
 ```
 
-Notice that in this simple simulated tibble, we have coerced `x1` to be a factor variable, although this is not strictly necessary since the variable took values `A`, `B`, and `C`. When using `lm()`, even if not a factor, `R` would have treated `x1` as such. Coercion to factor is more important if a cateogical variable is coded for example as `1`, `2` and `3`. Otherwise it is treated as numeric, which creates a difference in the regression model.
+Notice that in this simple simulated tibble, we have coerced `x1` to be a factor variable, although this is not strictly necessary since the variable took values `A`, `B`, and `C`. When using `lm()`, even if not a factor, `R` would have treated `x1` as such. Coercion to factor is more important if a categorical variable is coded for example as `1`, `2` and `3`. Otherwise it is treated as numeric, which creates a difference in the regression model.
 
 The following two models illustrate the effect of factor variables on linear models.
 
@@ -357,8 +357,8 @@ coef(cat_pred_mod_add)
 ```
 
 ```
-##  (Intercept)          x1B          x1C           x2 
-##  0.064856853  0.608629266 -0.001529057 -0.459508096
+## (Intercept)         x1B         x1C          x2 
+##  -0.3121170   0.3245148   0.5165438  -0.3341382
 ```
 
 
@@ -369,7 +369,7 @@ coef(cat_pred_mod_int)
 
 ```
 ## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##   0.2368154   0.2256305  -0.2612850  -0.8163600   0.7974583   0.5308429
+##  -0.7547813   1.1311859   0.9602050   0.5301265  -1.6210769  -0.8663240
 ```
 
 
@@ -457,4 +457,13 @@ sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
 
 ```
 ## [1] 1.023205
+```
+
+## `rmarkdown`
+
+The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded in this file:
+
+
+```
+## [1] "tibble"  "caret"   "ggplot2" "lattice" "readr"
 ```

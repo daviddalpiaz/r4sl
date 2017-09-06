@@ -174,7 +174,7 @@ cat_pred = tibble(
 cat_pred
 ```
 
-Notice that in this simple simulated tibble, we have coerced `x1` to be a factor variable, although this is not strictly necessary since the variable took values `A`, `B`, and `C`. When using `lm()`, even if not a factor, `R` would have treated `x1` as such. Coercion to factor is more important if a cateogical variable is coded for example as `1`, `2` and `3`. Otherwise it is treated as numeric, which creates a difference in the regression model.
+Notice that in this simple simulated tibble, we have coerced `x1` to be a factor variable, although this is not strictly necessary since the variable took values `A`, `B`, and `C`. When using `lm()`, even if not a factor, `R` would have treated `x1` as such. Coercion to factor is more important if a categorical variable is coded for example as `1`, `2` and `3`. Otherwise it is treated as numeric, which creates a difference in the regression model.
 
 The following two models illustrate the effect of factor variables on linear models.
 
@@ -221,4 +221,12 @@ mod_8 = lm(log(Sales) ~ ., data = Advertising)
 sqrt(mean(resid(mod_8) ^ 2)) # incorrect RMSE for Model 8
 sqrt(mean(resid(mod_7) ^ 2)) # RMSE for Model 7
 sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
+```
+
+## `rmarkdown`
+
+The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`. The following packages (and their dependencies) were loaded in this file:
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
 ```
