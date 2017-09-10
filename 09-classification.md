@@ -205,7 +205,7 @@ head(train_pred, n = 10)
 
 ## Metrics for Classification
 
-In the classification setting, there are a large number of metrics to asses how well a classifier is performing.
+In the classification setting, there are a large number of metrics to assess how well a classifier is performing.
 
 One of the most obvious things to do is arrange predictions and true values in a cross table.
 

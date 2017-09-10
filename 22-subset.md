@@ -402,19 +402,23 @@ The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The 
 
 
 ```
-##  [1] "Rcpp"         "nloptr"       "compiler"     "plyr"        
-##  [5] "methods"      "iterators"    "tools"        "digest"      
-##  [9] "lme4"         "evaluate"     "tibble"       "gtable"      
-## [13] "nlme"         "lattice"      "mgcv"         "rlang"       
-## [17] "Matrix"       "foreach"      "parallel"     "yaml"        
-## [21] "SparseM"      "stringr"      "knitr"        "MatrixModels"
-## [25] "stats4"       "rprojroot"    "grid"         "caret"       
-## [29] "nnet"         "rmarkdown"    "bookdown"     "minqa"       
-## [33] "ggplot2"      "reshape2"     "car"          "magrittr"    
-## [37] "backports"    "scales"       "codetools"    "ModelMetrics"
-## [41] "htmltools"    "MASS"         "splines"      "pbkrtest"    
-## [45] "colorspace"   "quantreg"     "stringi"      "lazyeval"    
-## [49] "munsell"
+##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
+##  [5] "lattice"      "colorspace"   "stats4"       "htmltools"   
+##  [9] "yaml"         "survival"     "prodlim"      "rlang"       
+## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
+## [17] "foreach"      "plyr"         "bindr"        "dimRed"      
+## [21] "lava"         "robustbase"   "stringr"      "timeDate"    
+## [25] "munsell"      "gtable"       "recipes"      "codetools"   
+## [29] "evaluate"     "knitr"        "caret"        "class"       
+## [33] "DEoptimR"     "methods"      "Rcpp"         "scales"      
+## [37] "backports"    "ipred"        "CVST"         "ggplot2"     
+## [41] "digest"       "stringi"      "bookdown"     "dplyr"       
+## [45] "RcppRoll"     "ddalpha"      "grid"         "rprojroot"   
+## [49] "tools"        "magrittr"     "lazyeval"     "tibble"      
+## [53] "DRR"          "pkgconfig"    "MASS"         "Matrix"      
+## [57] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
+## [61] "iterators"    "R6"           "rpart"        "nnet"        
+## [65] "nlme"         "compiler"
 ```
 
 

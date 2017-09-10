@@ -130,22 +130,22 @@ hit_elnet
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 211, 211, 210, 210, 210 
+## Summary of sample sizes: 210, 211, 210, 211, 210 
 ## Resampling results across tuning parameters:
 ## 
-##   alpha  lambda   RMSE   Rsquared
-##   0.10    0.5106  346.2  0.4628  
-##   0.10    5.1056  342.6  0.4709  
-##   0.10   51.0564  339.2  0.4767  
-##   0.55    0.5106  346.7  0.4617  
-##   0.55    5.1056  342.5  0.4697  
-##   0.55   51.0564  338.2  0.4831  
-##   1.00    0.5106  347.1  0.4606  
-##   1.00    5.1056  342.6  0.4677  
-##   1.00   51.0564  344.9  0.4703  
+##   alpha  lambda   RMSE   Rsquared  MAE  
+##   0.10    0.5106  340.7  0.4463    242.4
+##   0.10    5.1056  340.5  0.4441    241.2
+##   0.10   51.0564  344.7  0.4329    237.3
+##   0.55    0.5106  340.3  0.4468    242.1
+##   0.55    5.1056  341.2  0.4426    239.3
+##   0.55   51.0564  346.0  0.4345    238.6
+##   1.00    0.5106  339.9  0.4475    241.7
+##   1.00    5.1056  342.2  0.4400    237.9
+##   1.00   51.0564  355.4  0.4162    246.3
 ## 
 ## RMSE was used to select the optimal model using  the smallest value.
-## The final values used for the model were alpha = 0.55 and lambda = 51.06.
+## The final values used for the model were alpha = 1 and lambda = 0.5106.
 ```
 
 Notice a few things with these results. First, we have tried three $\alpha$ values, `0.1`, `0.55`, and `1`. It is not entirely clear why `caret` doesn't use `0`. It likely uses `0.1` to fit a model close to ridge, but with some potential for sparsity.
@@ -186,8 +186,8 @@ get_best_result(hit_elnet_int)
 ```
 
 ```
-##   alpha lambda  RMSE Rsquared RMSESD RsquaredSD
-## 1     1  4.135 313.9   0.5476  29.05     0.1232
+##   alpha lambda  RMSE Rsquared   MAE RMSESD RsquaredSD MAESD
+## 1     1  4.135 295.5   0.5808 196.8     50     0.1525 11.49
 ```
 
 We see that the best result uses $\alpha = 1$, which makes since. With $\alpha = 1$, many of the added interaction coefficients are likely set to zero. (Unfortunately, obtaining this information after using `caret` with `glmnet` isn't easy. The two don't actually play very nice together. We'll use `cv.glmnet()` with the expanded feature space to explore this.)
@@ -257,22 +257,23 @@ def_elnet
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 6000, 6001, 6001, 6001, 6001 
+## Summary of sample sizes: 6001, 6001, 6000, 6001, 6001 
 ## Resampling results across tuning parameters:
 ## 
 ##   alpha  lambda     Accuracy  Kappa  
-##   0.10   0.0001242  0.9725    0.39713
-##   0.10   0.0012424  0.9725    0.36692
-##   0.10   0.0124239  0.9679    0.09249
-##   0.55   0.0001242  0.9727    0.40200
-##   0.55   0.0012424  0.9724    0.37378
-##   0.55   0.0124239  0.9685    0.12567
-##   1.00   0.0001242  0.9728    0.40289
-##   1.00   0.0012424  0.9724    0.38125
-##   1.00   0.0124239  0.9689    0.15106
+##   0.10   0.0001242  0.9733    0.40751
+##   0.10   0.0012424  0.9727    0.36354
+##   0.10   0.0124239  0.9676    0.07718
+##   0.55   0.0001242  0.9732    0.40600
+##   0.55   0.0012424  0.9724    0.36841
+##   0.55   0.0124239  0.9684    0.12506
+##   1.00   0.0001242  0.9732    0.40600
+##   1.00   0.0012424  0.9727    0.38095
+##   1.00   0.0124239  0.9689    0.15170
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final values used for the model were alpha = 1 and lambda = 0.0001242.
+## The final values used for the model were alpha = 0.1 and lambda
+##  = 0.0001242.
 ```
 
 Since the best model used $\alpha = 1$, this is a lasso model.
@@ -299,8 +300,8 @@ get_best_result(def_elnet_int)
 ```
 
 ```
-##   alpha    lambda Accuracy Kappa AccuracySD KappaSD
-## 1   0.3 0.0008174   0.9732   0.4   0.001275 0.01547
+##   alpha   lambda Accuracy  Kappa AccuracySD KappaSD
+## 1     1 0.001888   0.9728 0.3906   0.002509 0.07252
 ```
 
 Here we see $\alpha = 0.3$, which is a mix between ridge and lasso.
@@ -322,7 +323,7 @@ accuracy(actual = default_tst$default,
 ```
 
 ```
-## [1] 0.9752
+## [1] 0.9744
 ```
 
 
@@ -355,16 +356,20 @@ The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The f
 
 
 ```
-##  [1] "Rcpp"         "compiler"     "nloptr"       "plyr"        
-##  [5] "class"        "iterators"    "tools"        "digest"      
-##  [9] "lme4"         "evaluate"     "tibble"       "gtable"      
-## [13] "nlme"         "mgcv"         "rlang"        "yaml"        
-## [17] "parallel"     "SparseM"      "e1071"        "stringr"     
-## [21] "knitr"        "MatrixModels" "stats4"       "rprojroot"   
-## [25] "grid"         "nnet"         "rmarkdown"    "bookdown"    
-## [29] "minqa"        "reshape2"     "car"          "magrittr"    
-## [33] "backports"    "scales"       "codetools"    "ModelMetrics"
-## [37] "htmltools"    "MASS"         "splines"      "pbkrtest"    
-## [41] "colorspace"   "quantreg"     "stringi"      "lazyeval"    
-## [45] "munsell"
+##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
+##  [5] "colorspace"   "htmltools"    "stats4"       "yaml"        
+##  [9] "survival"     "prodlim"      "rlang"        "e1071"       
+## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
+## [17] "plyr"         "bindr"        "dimRed"       "lava"        
+## [21] "robustbase"   "stringr"      "timeDate"     "munsell"     
+## [25] "gtable"       "recipes"      "codetools"    "evaluate"    
+## [29] "knitr"        "class"        "DEoptimR"     "Rcpp"        
+## [33] "scales"       "backports"    "ipred"        "CVST"        
+## [37] "digest"       "stringi"      "bookdown"     "dplyr"       
+## [41] "RcppRoll"     "ddalpha"      "grid"         "rprojroot"   
+## [45] "tools"        "magrittr"     "lazyeval"     "tibble"      
+## [49] "DRR"          "pkgconfig"    "MASS"         "lubridate"   
+## [53] "gower"        "assertthat"   "rmarkdown"    "iterators"   
+## [57] "R6"           "rpart"        "nnet"         "nlme"        
+## [61] "compiler"
 ```

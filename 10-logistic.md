@@ -67,7 +67,7 @@ $$
 E[Y \mid X = x] = P[Y = 1 \mid X = x].
 $$
 
-It would then seem reasonable that $X\hat{\beta}$ is a reasonable estimate of $P[Y = 1 \ X = x]$. We test this on the `Default` data.
+It would then seem reasonable that $X\hat{\beta}$ is a reasonable estimate of $P[Y = 1 \mid X = x]$. We test this on the `Default` data.
 
 
 ```r

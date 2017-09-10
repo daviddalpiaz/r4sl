@@ -220,7 +220,7 @@ diff(mse)
 ## [1] -0.305625170 -0.011386537  0.002230515
 ```
 
-Notice that the table lacks a column for the variance of the noise. Add this to squared bias and variance would give the mean squared error. However, notice that we are simulation to estiamte the bias and variance, so the relationship is not exact. If we used more replications of the simulation, these two values would move closer together.
+Notice that the table lacks a column for the variance of the noise. Add this to squared bias and variance would give the mean squared error. However, notice that we are simulating to estiamte the bias and variance, so the relationship is not exact. If we used more replications of the simulation, these two values would move closer together.
 
 
 ```r

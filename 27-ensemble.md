@@ -599,19 +599,19 @@ seat_rf_tune
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy  Kappa    
-##    1    0.750     0.4318182
-##    2    0.785     0.5295405
-##    3    0.785     0.5315904
-##    4    0.805     0.5824411
-##    5    0.785     0.5356371
-##    6    0.810     0.5957447
-##    7    0.810     0.5922747
-##    8    0.805     0.5842217
-##    9    0.785     0.5396146
-##   10    0.795     0.5591398
+##    1    0.730     0.3807339
+##    2    0.775     0.5033113
+##    3    0.795     0.5591398
+##    4    0.790     0.5474138
+##    5    0.795     0.5610278
+##    6    0.790     0.5512821
+##    7    0.805     0.5806452
+##    8    0.795     0.5628998
+##    9    0.785     0.5376344
+##   10    0.775     0.5202559
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was mtry = 6.
+## The final value used for the model was mtry = 7.
 ```
 
 ```r
@@ -619,7 +619,7 @@ accuracy(predict(seat_rf_tune, seat_tst), seat_tst$Sales)
 ```
 
 ```
-## [1] 0.81
+## [1] 0.795
 ```
 
 The results returned are based on the OOB samples. (Coincidentally, the test accuracy is the same as the best accuracy found using OOB samples.) Note that when using OOB, for some reason the default plot is not what you would expect and is not at all useful. (Which is why it is omitted here.)
@@ -631,10 +631,10 @@ seat_rf_tune$bestTune
 
 ```
 ##   mtry
-## 6    6
+## 7    7
 ```
 
-Based on these results, we would select the random forest model with an `mtry` of 6. Note that based on the OOB estimates, the bagging model is expected to perform worse than this select model, however, based on our results above, that is not what we find to be true in our test set.
+Based on these results, we would select the random forest model with an `mtry` of 7. Note that based on the OOB estimates, the bagging model is expected to perform worse than this select model, however, based on our results above, that is not what we find to be true in our test set.
 
 Also note that `method = "ranger"` would also fit a random forest model. [Ranger](http://arxiv.org/pdf/1508.04409.pdf) is a newer `R` package for random forests that has been shown to be much faster, especially when there are a larger number of predictors.
 
@@ -739,10 +739,6 @@ sim_tree_cv = train(class ~ .,
                     method = "rpart")
 ```
 
-```
-## Loading required package: rpart
-```
-
 
 ```r
 library(rpart.plot)
@@ -838,17 +834,21 @@ The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). Th
 
 
 ```
-##  [1] "Rcpp"         "nloptr"       "compiler"     "class"       
-##  [5] "iterators"    "tools"        "lme4"         "digest"      
-##  [9] "evaluate"     "tibble"       "gtable"       "nlme"        
-## [13] "mgcv"         "rlang"        "Matrix"       "foreach"     
-## [17] "yaml"         "SparseM"      "e1071"        "stringr"     
-## [21] "knitr"        "MatrixModels" "stats4"       "nnet"        
-## [25] "rprojroot"    "grid"         "rmarkdown"    "bookdown"    
-## [29] "minqa"        "car"          "reshape2"     "magrittr"    
-## [33] "backports"    "scales"       "codetools"    "ModelMetrics"
-## [37] "htmltools"    "pbkrtest"     "colorspace"   "quantreg"    
-## [41] "stringi"      "lazyeval"     "munsell"
+##  [1] "Rcpp"         "lubridate"    "class"        "assertthat"  
+##  [5] "rprojroot"    "digest"       "ipred"        "foreach"     
+##  [9] "R6"           "backports"    "stats4"       "evaluate"    
+## [13] "e1071"        "rlang"        "lazyeval"     "kernlab"     
+## [17] "Matrix"       "rmarkdown"    "CVST"         "ddalpha"     
+## [21] "gower"        "stringr"      "munsell"      "compiler"    
+## [25] "pkgconfig"    "dimRed"       "htmltools"    "nnet"        
+## [29] "tibble"       "prodlim"      "DRR"          "bookdown"    
+## [33] "codetools"    "RcppRoll"     "dplyr"        "withr"       
+## [37] "recipes"      "ModelMetrics" "grid"         "nlme"        
+## [41] "gtable"       "magrittr"     "scales"       "stringi"     
+## [45] "reshape2"     "bindrcpp"     "timeDate"     "robustbase"  
+## [49] "lava"         "iterators"    "tools"        "glue"        
+## [53] "DEoptimR"     "purrr"        "yaml"         "colorspace"  
+## [57] "knitr"        "bindr"
 ```
 
 

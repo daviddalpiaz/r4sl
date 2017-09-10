@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-05">
+<meta name="date" content="2017-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -483,16 +483,16 @@ lin_svm_fit</code></pre></div>
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 33, 33, 33, 33, 32 
+## Summary of sample sizes: 33, 33, 33, 32, 33 
 ## Resampling results across tuning parameters:
 ## 
 ##   C         Accuracy  Kappa    
 ##    0.03125  0.850     0.6197802
-##    0.06250  0.950     0.8928571
+##    0.06250  1.000     1.0000000
 ##    0.12500  0.975     0.9500000
 ##    0.25000  0.975     0.9500000
 ##    0.50000  0.975     0.9500000
-##    1.00000  1.000     1.0000000
+##    1.00000  0.975     0.9500000
 ##    2.00000  0.975     0.9500000
 ##    4.00000  1.000     1.0000000
 ##    8.00000  1.000     1.0000000
@@ -500,10 +500,10 @@ lin_svm_fit</code></pre></div>
 ##   32.00000  1.000     1.0000000
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was C = 1.</code></pre>
+## The final value used for the model was C = 0.0625.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lin_svm_fit$bestTune</code></pre></div>
-<pre><code>##   C
-## 6 1</code></pre>
+<pre><code>##        C
+## 2 0.0625</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(lin_svm_fit, train_data))</code></pre></div>
@@ -511,7 +511,7 @@ lin_svm_fit</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> test_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(lin_svm_fit, test_data))</code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>## [1] 0.994898</code></pre>
 </div>
 <div id="compare-random-forest" class="section level3">
 <h3><span class="header-section-number">32.3.5</span> Compare: Random Forest</h3>
@@ -529,7 +529,7 @@ rf_fit$bestTune</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> test_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rf_fit, test_data))</code></pre></div>
-<pre><code>## [1] 0.9591837</code></pre>
+<pre><code>## [1] 0.9770408</code></pre>
 </div>
 </div>
 <div id="non-linear-non-separable-example" class="section level2">
@@ -638,7 +638,7 @@ rad_svm_fit =<span class="st"> </span><span class="kw">train</span>(y ~<span cla
 <span class="co">#rad_svm_fit</span>
 rad_svm_fit$bestTune</code></pre></div>
 <pre><code>##    sigma  C
-## 65  0.25 16</code></pre>
+## 70     8 16</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rad_svm_fit =<span class="st"> </span><span class="kw">ksvm</span>(y ~., <span class="dt">data =</span> train_data, <span class="dt">kernel =</span> <span class="st">&#39;rbfdot&#39;</span>,
                   <span class="dt">C =</span> <span class="dv">16</span>, <span class="dt">kpar =</span> <span class="kw">list</span>(<span class="dt">sigma =</span> <span class="fl">0.25</span>))
 <span class="kw">plot</span>(rad_svm_fit, <span class="dt">data =</span> train_data)</code></pre></div>
@@ -689,21 +689,21 @@ lin_svm_fit</code></pre></div>
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 200, 200, 201, 199, 200 
+## Summary of sample sizes: 200, 200, 200, 200, 200 
 ## Resampling results across tuning parameters:
 ## 
-##   C         Accuracy   Kappa
-##    0.03125  0.5920144  0    
-##    0.06250  0.5920144  0    
-##    0.12500  0.5920144  0    
-##    0.25000  0.5920144  0    
-##    0.50000  0.5920144  0    
-##    1.00000  0.5920144  0    
-##    2.00000  0.5920144  0    
-##    4.00000  0.5920144  0    
-##    8.00000  0.5920144  0    
-##   16.00000  0.5920144  0    
-##   32.00000  0.5920144  0    
+##   C         Accuracy  Kappa
+##    0.03125  0.592     0    
+##    0.06250  0.592     0    
+##    0.12500  0.592     0    
+##    0.25000  0.592     0    
+##    0.50000  0.592     0    
+##    1.00000  0.592     0    
+##    2.00000  0.592     0    
+##    4.00000  0.592     0    
+##    8.00000  0.592     0    
+##   16.00000  0.592     0    
+##   32.00000  0.592     0    
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was C = 0.03125.</code></pre>
@@ -732,7 +732,7 @@ rf_fit =<span class="st"> </span><span class="kw">train</span>(y ~<span class="s
                <span class="dt">trControl =</span> svm_control, <span class="dt">tuneGrid =</span> rf_grid)
 rf_fit$bestTune</code></pre></div>
 <pre><code>##   mtry
-## 2    2</code></pre>
+## 1    1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> train_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rf_fit, train_data))</code></pre></div>
@@ -740,7 +740,7 @@ rf_fit$bestTune</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test accuracy</span>
 <span class="kw">accuracy</span>(<span class="dt">actual =</span> test_data$y,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(rf_fit, test_data))</code></pre></div>
-<pre><code>## [1] 0.809</code></pre>
+<pre><code>## [1] 0.8125</code></pre>
 </div>
 </div>
 <div id="external-links-12" class="section level2">
@@ -765,18 +765,22 @@ rf_fit$bestTune</code></pre></div>
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;Rcpp&quot;         &quot;nloptr&quot;       &quot;compiler&quot;     &quot;plyr&quot;        
-##  [5] &quot;class&quot;        &quot;iterators&quot;    &quot;tools&quot;        &quot;digest&quot;      
-##  [9] &quot;lme4&quot;         &quot;evaluate&quot;     &quot;tibble&quot;       &quot;gtable&quot;      
-## [13] &quot;nlme&quot;         &quot;mgcv&quot;         &quot;rlang&quot;        &quot;Matrix&quot;      
-## [17] &quot;foreach&quot;      &quot;parallel&quot;     &quot;yaml&quot;         &quot;SparseM&quot;     
-## [21] &quot;e1071&quot;        &quot;stringr&quot;      &quot;knitr&quot;        &quot;MatrixModels&quot;
-## [25] &quot;stats4&quot;       &quot;rprojroot&quot;    &quot;grid&quot;         &quot;nnet&quot;        
-## [29] &quot;rmarkdown&quot;    &quot;bookdown&quot;     &quot;minqa&quot;        &quot;reshape2&quot;    
-## [33] &quot;car&quot;          &quot;magrittr&quot;     &quot;backports&quot;    &quot;scales&quot;      
-## [37] &quot;codetools&quot;    &quot;ModelMetrics&quot; &quot;htmltools&quot;    &quot;MASS&quot;        
-## [41] &quot;splines&quot;      &quot;pbkrtest&quot;     &quot;colorspace&quot;   &quot;quantreg&quot;    
-## [45] &quot;stringi&quot;      &quot;lazyeval&quot;     &quot;munsell&quot;</code></pre>
+<pre><code>##  [1] &quot;purrr&quot;        &quot;reshape2&quot;     &quot;splines&quot;      &quot;colorspace&quot;  
+##  [5] &quot;stats4&quot;       &quot;htmltools&quot;    &quot;yaml&quot;         &quot;survival&quot;    
+##  [9] &quot;prodlim&quot;      &quot;rlang&quot;        &quot;e1071&quot;        &quot;ModelMetrics&quot;
+## [13] &quot;withr&quot;        &quot;glue&quot;         &quot;bindrcpp&quot;     &quot;foreach&quot;     
+## [17] &quot;plyr&quot;         &quot;bindr&quot;        &quot;dimRed&quot;       &quot;lava&quot;        
+## [21] &quot;robustbase&quot;   &quot;stringr&quot;      &quot;timeDate&quot;     &quot;munsell&quot;     
+## [25] &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;    &quot;evaluate&quot;    
+## [29] &quot;knitr&quot;        &quot;class&quot;        &quot;DEoptimR&quot;     &quot;Rcpp&quot;        
+## [33] &quot;scales&quot;       &quot;backports&quot;    &quot;ipred&quot;        &quot;CVST&quot;        
+## [37] &quot;digest&quot;       &quot;stringi&quot;      &quot;bookdown&quot;     &quot;dplyr&quot;       
+## [41] &quot;RcppRoll&quot;     &quot;ddalpha&quot;      &quot;grid&quot;         &quot;rprojroot&quot;   
+## [45] &quot;tools&quot;        &quot;magrittr&quot;     &quot;lazyeval&quot;     &quot;tibble&quot;      
+## [49] &quot;DRR&quot;          &quot;pkgconfig&quot;    &quot;MASS&quot;         &quot;Matrix&quot;      
+## [53] &quot;lubridate&quot;    &quot;gower&quot;        &quot;assertthat&quot;   &quot;rmarkdown&quot;   
+## [57] &quot;iterators&quot;    &quot;R6&quot;           &quot;rpart&quot;        &quot;nnet&quot;        
+## [61] &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
 
 <div id="refs" class="references">
 

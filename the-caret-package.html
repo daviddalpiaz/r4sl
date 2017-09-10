@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-05">
+<meta name="date" content="2017-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -440,11 +440,11 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 6000, 6001, 6001, 6001, 6001 
+## Summary of sample sizes: 6001, 6001, 6000, 6001, 6001 
 ## Resampling results:
 ## 
 ##   Accuracy   Kappa    
-##   0.9729372  0.4147209</code></pre>
+##   0.9733372  0.4174282</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(default_glm)</code></pre></div>
 <pre><code>##  [1] &quot;method&quot;       &quot;modelInfo&quot;    &quot;modelType&quot;    &quot;results&quot;     
 ##  [5] &quot;pred&quot;         &quot;bestTune&quot;     &quot;call&quot;         &quot;dots&quot;        
@@ -453,8 +453,8 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## [17] &quot;maximize&quot;     &quot;yLimits&quot;      &quot;times&quot;        &quot;levels&quot;      
 ## [21] &quot;terms&quot;        &quot;coefnames&quot;    &quot;contrasts&quot;    &quot;xlevels&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_glm$results</code></pre></div>
-<pre><code>##   parameter  Accuracy     Kappa  AccuracySD    KappaSD
-## 1      none 0.9729372 0.4147209 0.001527574 0.04620646</code></pre>
+<pre><code>##   parameter  Accuracy     Kappa AccuracySD   KappaSD
+## 1      none 0.9733372 0.4174282 0.00358649 0.1180854</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_glm$finalModel</code></pre></div>
 <pre><code>## 
 ## Call:  NULL
@@ -505,13 +505,13 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 6000, 6001, 6001, 6001, 6001 
+## Summary of sample sizes: 6001, 6000, 6001, 6001, 6001 
 ## Resampling results across tuning parameters:
 ## 
-##   k  Accuracy   Kappa    
-##   5  0.9656046  0.1770996
-##   7  0.9657378  0.1295425
-##   9  0.9676045  0.1092291
+##   k  Accuracy   Kappa     
+##   5  0.9660044  0.14910366
+##   7  0.9654711  0.08890944
+##   9  0.9660044  0.03400684
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was k = 9.</code></pre>
@@ -532,120 +532,120 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## 
 ## Pre-processing: centered (3), scaled (3) 
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 6001, 6001, 6001, 6001, 6000 
+## Summary of sample sizes: 6001, 6000, 6001, 6001, 6001 
 ## Resampling results across tuning parameters:
 ## 
-##   k    Accuracy   Kappa        
-##     1  0.9566725   0.3102526809
-##     2  0.9557393   0.3105592402
-##     3  0.9676047   0.3737110726
-##     4  0.9688045   0.3905217578
-##     5  0.9693378   0.3720650032
-##     6  0.9706708   0.3878199028
-##     7  0.9705374   0.3805478527
-##     8  0.9708038   0.3847869416
-##     9  0.9718704   0.4008912524
-##    10  0.9716037   0.3887596806
-##    11  0.9718702   0.3893164746
-##    12  0.9720036   0.4017431900
-##    13  0.9722702   0.3885361750
-##    14  0.9722703   0.3944481266
-##    15  0.9730702   0.4007241418
-##    16  0.9720039   0.3811342289
-##    17  0.9722703   0.3792775497
-##    18  0.9720038   0.3788523329
-##    19  0.9720038   0.3697985519
-##    20  0.9721370   0.3740347410
-##    21  0.9718704   0.3615639366
-##    22  0.9718705   0.3680145319
-##    23  0.9717371   0.3539511129
-##    24  0.9717371   0.3541232524
-##    25  0.9717371   0.3499644208
-##    26  0.9716037   0.3455285320
-##    27  0.9720037   0.3528854219
-##    28  0.9722703   0.3638828006
-##    29  0.9724036   0.3687985599
-##    30  0.9726703   0.3779447479
-##    31  0.9722704   0.3584335333
-##    32  0.9721371   0.3547676501
-##    33  0.9718704   0.3473184965
-##    34  0.9713372   0.3291867049
-##    35  0.9718703   0.3367666962
-##    36  0.9716038   0.3260879521
-##    37  0.9717371   0.3320811820
-##    38  0.9716037   0.3215128939
-##    39  0.9716037   0.3219513284
-##    40  0.9717371   0.3276712249
-##    41  0.9718704   0.3277674417
-##    42  0.9717371   0.3188637072
-##    43  0.9714704   0.3066997114
-##    44  0.9714704   0.3077206051
-##    45  0.9710704   0.2961400483
-##    46  0.9712037   0.2961184626
-##    47  0.9710704   0.2914235196
-##    48  0.9709372   0.2860070606
-##    49  0.9708037   0.2847306864
-##    50  0.9708037   0.2847306864
-##    51  0.9708036   0.2812029517
-##    52  0.9710703   0.2867649638
-##    53  0.9708037   0.2771131971
-##    54  0.9709372   0.2817510947
-##    55  0.9709371   0.2781721329
-##    56  0.9709371   0.2774089321
-##    57  0.9706705   0.2714234284
-##    58  0.9706704   0.2638759429
-##    59  0.9706703   0.2638759634
-##    60  0.9706703   0.2585241342
-##    61  0.9701371   0.2368125620
-##    62  0.9701372   0.2327890464
-##    63  0.9701372   0.2327890464
-##    64  0.9701372   0.2279714026
-##    65  0.9697372   0.2110842159
-##    66  0.9694708   0.1945370488
-##    67  0.9697372   0.1951671666
-##    68  0.9700038   0.2030358192
-##    69  0.9696040   0.1849170701
-##    70  0.9693373   0.1717143623
-##    71  0.9690708   0.1588168415
-##    72  0.9690708   0.1593832545
-##    73  0.9688041   0.1399844247
-##    74  0.9684042   0.1264961122
-##    75  0.9684041   0.1201537186
-##    76  0.9682708   0.1133391796
-##    77  0.9681375   0.1068555860
-##    78  0.9677375   0.0857547640
-##    79  0.9677376   0.0921848301
-##    80  0.9677376   0.0853775175
-##    81  0.9680043   0.0866367370
-##    82  0.9677377   0.0790611308
-##    83  0.9677376   0.0725173945
-##    84  0.9676043   0.0658085644
-##    85  0.9676043   0.0651989918
-##    86  0.9674709   0.0578805892
-##    87  0.9676043   0.0651989918
-##    88  0.9674709   0.0584901617
-##    89  0.9676043   0.0651989918
-##    90  0.9670710   0.0362615841
-##    91  0.9669378   0.0277870004
-##    92  0.9669377   0.0286699611
-##    93  0.9668044   0.0210781703
-##    94  0.9666711   0.0141321593
-##    95  0.9666711   0.0073298429
-##    96  0.9666711   0.0073298429
-##    97  0.9665378  -0.0002617801
-##    98  0.9665378  -0.0002617801
-##    99  0.9666711   0.0000000000
-##   100  0.9666711   0.0000000000
+##   k    Accuracy   Kappa      
+##     1  0.9556062  0.298089557
+##     2  0.9534727  0.278858080
+##     3  0.9676048  0.375302287
+##     4  0.9684043  0.392531223
+##     5  0.9701374  0.404022317
+##     6  0.9710706  0.423064304
+##     7  0.9706704  0.390664155
+##     8  0.9712037  0.399173401
+##     9  0.9720034  0.409106426
+##    10  0.9712037  0.386139169
+##    11  0.9717367  0.391087258
+##    12  0.9718700  0.382391562
+##    13  0.9720034  0.383930148
+##    14  0.9718700  0.385920266
+##    15  0.9718701  0.379873523
+##    16  0.9713369  0.377628107
+##    17  0.9720036  0.380320495
+##    18  0.9716036  0.373394281
+##    19  0.9716036  0.365929261
+##    20  0.9718700  0.368421254
+##    21  0.9720035  0.364668426
+##    22  0.9716036  0.362097470
+##    23  0.9714701  0.356376683
+##    24  0.9714701  0.355664780
+##    25  0.9717365  0.350899581
+##    26  0.9714701  0.345911449
+##    27  0.9718700  0.353134003
+##    28  0.9714703  0.345081109
+##    29  0.9713370  0.343455277
+##    30  0.9712036  0.339093085
+##    31  0.9712037  0.339182082
+##    32  0.9714703  0.342168206
+##    33  0.9717369  0.352226337
+##    34  0.9713370  0.341045339
+##    35  0.9713370  0.334327819
+##    36  0.9714703  0.339159698
+##    37  0.9717369  0.338120724
+##    38  0.9718701  0.338963642
+##    39  0.9713369  0.326523756
+##    40  0.9716036  0.328850300
+##    41  0.9716035  0.325286501
+##    42  0.9714701  0.319449330
+##    43  0.9713370  0.311058773
+##    44  0.9713369  0.314958826
+##    45  0.9710704  0.304969687
+##    46  0.9712037  0.310515120
+##    47  0.9712036  0.305970685
+##    48  0.9714702  0.307416051
+##    49  0.9713370  0.303143005
+##    50  0.9712036  0.297926950
+##    51  0.9710704  0.287872960
+##    52  0.9709372  0.282257433
+##    53  0.9710705  0.283589156
+##    54  0.9709371  0.282226306
+##    55  0.9706705  0.266533647
+##    56  0.9708038  0.271977860
+##    57  0.9706706  0.261835380
+##    58  0.9701372  0.249188016
+##    59  0.9702706  0.250148772
+##    60  0.9702706  0.250114697
+##    61  0.9701372  0.239629655
+##    62  0.9702708  0.240658770
+##    63  0.9698707  0.222966445
+##    64  0.9701372  0.234377021
+##    65  0.9698705  0.217685465
+##    66  0.9698706  0.213155702
+##    67  0.9694707  0.199923192
+##    68  0.9692041  0.187559137
+##    69  0.9690708  0.181218961
+##    70  0.9692041  0.182387968
+##    71  0.9690708  0.176074591
+##    72  0.9690709  0.170120508
+##    73  0.9688042  0.163573197
+##    74  0.9684042  0.150065236
+##    75  0.9688042  0.152290768
+##    76  0.9686708  0.151535913
+##    77  0.9688042  0.151657123
+##    78  0.9684043  0.138012553
+##    79  0.9686709  0.139859409
+##    80  0.9685375  0.127092858
+##    81  0.9685375  0.121296450
+##    82  0.9677376  0.085964305
+##    83  0.9680043  0.093510882
+##    84  0.9677376  0.085481828
+##    85  0.9676043  0.072888526
+##    86  0.9676044  0.077956439
+##    87  0.9672044  0.050919251
+##    88  0.9672044  0.043952211
+##    89  0.9668044  0.028789826
+##    90  0.9670711  0.029972813
+##    91  0.9673377  0.044609786
+##    92  0.9669378  0.022381190
+##    93  0.9669377  0.022513257
+##    94  0.9668044  0.014921466
+##    95  0.9666711  0.007329843
+##    96  0.9666711  0.007329843
+##    97  0.9666711  0.007329843
+##    98  0.9666711  0.007329843
+##    99  0.9666711  0.007329843
+##   100  0.9666711  0.007329843
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was k = 15.</code></pre>
+## The final value used for the model was k = 17.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(default_knn)</code></pre></div>
 <p><img src="21-caret_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(default_knn) +<span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
 <p><img src="21-caret_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_knn$bestTune</code></pre></div>
 <pre><code>##     k
-## 15 15</code></pre>
+## 17 17</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_best_result =<span class="st"> </span>function(caret_fit) {
   best_result =<span class="st"> </span>caret_fit$results[<span class="kw">as.numeric</span>(<span class="kw">rownames</span>(caret_fit$bestTune)), ]
   <span class="kw">rownames</span>(best_result) =<span class="st"> </span><span class="ot">NULL</span>
@@ -653,9 +653,9 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_best_result</span>(default_knn)</code></pre></div>
 <pre><code>##    k  Accuracy     Kappa  AccuracySD    KappaSD
-## 1 15 0.9730702 0.4007241 0.002241574 0.08402323</code></pre>
+## 1 17 0.9720036 0.3803205 0.002404977 0.05972573</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_knn$finalModel</code></pre></div>
-<pre><code>## 15-nearest neighbor classification model
+<pre><code>## 17-nearest neighbor classification model
 ## Training set class distribution:
 ## 
 ##   No  Yes 
@@ -688,18 +688,22 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;Rcpp&quot;         &quot;nloptr&quot;       &quot;compiler&quot;     &quot;plyr&quot;        
-##  [5] &quot;class&quot;        &quot;iterators&quot;    &quot;tools&quot;        &quot;digest&quot;      
-##  [9] &quot;lme4&quot;         &quot;evaluate&quot;     &quot;tibble&quot;       &quot;gtable&quot;      
-## [13] &quot;nlme&quot;         &quot;mgcv&quot;         &quot;rlang&quot;        &quot;Matrix&quot;      
-## [17] &quot;foreach&quot;      &quot;parallel&quot;     &quot;yaml&quot;         &quot;SparseM&quot;     
-## [21] &quot;e1071&quot;        &quot;stringr&quot;      &quot;knitr&quot;        &quot;MatrixModels&quot;
-## [25] &quot;stats4&quot;       &quot;rprojroot&quot;    &quot;grid&quot;         &quot;nnet&quot;        
-## [29] &quot;rmarkdown&quot;    &quot;bookdown&quot;     &quot;minqa&quot;        &quot;reshape2&quot;    
-## [33] &quot;car&quot;          &quot;magrittr&quot;     &quot;backports&quot;    &quot;scales&quot;      
-## [37] &quot;codetools&quot;    &quot;ModelMetrics&quot; &quot;htmltools&quot;    &quot;MASS&quot;        
-## [41] &quot;splines&quot;      &quot;pbkrtest&quot;     &quot;colorspace&quot;   &quot;labeling&quot;    
-## [45] &quot;quantreg&quot;     &quot;stringi&quot;      &quot;lazyeval&quot;     &quot;munsell&quot;</code></pre>
+<pre><code>##  [1] &quot;reshape2&quot;     &quot;kernlab&quot;      &quot;purrr&quot;        &quot;splines&quot;     
+##  [5] &quot;colorspace&quot;   &quot;stats4&quot;       &quot;htmltools&quot;    &quot;yaml&quot;        
+##  [9] &quot;survival&quot;     &quot;prodlim&quot;      &quot;rlang&quot;        &quot;e1071&quot;       
+## [13] &quot;ModelMetrics&quot; &quot;withr&quot;        &quot;glue&quot;         &quot;bindrcpp&quot;    
+## [17] &quot;foreach&quot;      &quot;plyr&quot;         &quot;bindr&quot;        &quot;dimRed&quot;      
+## [21] &quot;lava&quot;         &quot;robustbase&quot;   &quot;stringr&quot;      &quot;timeDate&quot;    
+## [25] &quot;munsell&quot;      &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;   
+## [29] &quot;evaluate&quot;     &quot;labeling&quot;     &quot;knitr&quot;        &quot;class&quot;       
+## [33] &quot;DEoptimR&quot;     &quot;Rcpp&quot;         &quot;scales&quot;       &quot;backports&quot;   
+## [37] &quot;ipred&quot;        &quot;CVST&quot;         &quot;digest&quot;       &quot;stringi&quot;     
+## [41] &quot;bookdown&quot;     &quot;dplyr&quot;        &quot;RcppRoll&quot;     &quot;ddalpha&quot;     
+## [45] &quot;grid&quot;         &quot;rprojroot&quot;    &quot;tools&quot;        &quot;magrittr&quot;    
+## [49] &quot;lazyeval&quot;     &quot;tibble&quot;       &quot;DRR&quot;          &quot;pkgconfig&quot;   
+## [53] &quot;MASS&quot;         &quot;Matrix&quot;       &quot;lubridate&quot;    &quot;gower&quot;       
+## [57] &quot;assertthat&quot;   &quot;rmarkdown&quot;    &quot;iterators&quot;    &quot;R6&quot;          
+## [61] &quot;rpart&quot;        &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
 
 </div>
 </div>

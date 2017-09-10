@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-05">
+<meta name="date" content="2017-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -629,23 +629,23 @@ gam_train =<span class="st"> </span><span class="kw">train</span>(medv ~<span cl
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 306, 304, 306, 304, 304 
+## Summary of sample sizes: 305, 304, 304, 305, 306 
 ## Resampling results across tuning parameters:
 ## 
-##   df  RMSE      Rsquared 
-##    1  4.804025  0.7249995
-##    2  3.885811  0.8137612
-##    3  3.737718  0.8278223
-##    4  3.719837  0.8296394
-##    5  3.739772  0.8277413
-##    6  3.789250  0.8229085
-##    7  3.858568  0.8160195
-##    8  3.940364  0.8078791
-##    9  4.028412  0.7993586
-##   10  4.116986  0.7912003
+##   df  RMSE      Rsquared   MAE     
+##    1  4.679761  0.7293721  3.257149
+##    2  3.840212  0.8173392  2.675829
+##    3  3.699260  0.8308477  2.634352
+##    4  3.672467  0.8339625  2.636641
+##    5  3.665862  0.8353164  2.643544
+##    6  3.678085  0.8350136  2.640547
+##    7  3.702144  0.8335998  2.633954
+##    8  3.735082  0.8313497  2.624165
+##    9  3.778876  0.8281397  2.622959
+##   10  3.832765  0.8240573  2.640324
 ## 
 ## RMSE was used to select the optimal model using  the smallest value.
-## The final value used for the model was df = 4.</code></pre>
+## The final value used for the model was df = 5.</code></pre>
 </div>
 </div>
 <div id="external-links-10" class="section level2">
@@ -669,17 +669,21 @@ gam_train =<span class="st"> </span><span class="kw">train</span>(medv ~<span cl
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;Rcpp&quot;         &quot;nloptr&quot;       &quot;compiler&quot;     &quot;plyr&quot;        
-##  [5] &quot;iterators&quot;    &quot;tools&quot;        &quot;digest&quot;       &quot;lme4&quot;        
-##  [9] &quot;evaluate&quot;     &quot;tibble&quot;       &quot;gtable&quot;       &quot;nlme&quot;        
-## [13] &quot;mgcv&quot;         &quot;rlang&quot;        &quot;Matrix&quot;       &quot;parallel&quot;    
-## [17] &quot;yaml&quot;         &quot;SparseM&quot;      &quot;stringr&quot;      &quot;knitr&quot;       
-## [21] &quot;MatrixModels&quot; &quot;stats4&quot;       &quot;rprojroot&quot;    &quot;grid&quot;        
-## [25] &quot;nnet&quot;         &quot;rmarkdown&quot;    &quot;bookdown&quot;     &quot;minqa&quot;       
-## [29] &quot;reshape2&quot;     &quot;car&quot;          &quot;magrittr&quot;     &quot;backports&quot;   
-## [33] &quot;scales&quot;       &quot;codetools&quot;    &quot;ModelMetrics&quot; &quot;htmltools&quot;   
-## [37] &quot;pbkrtest&quot;     &quot;colorspace&quot;   &quot;quantreg&quot;     &quot;stringi&quot;     
-## [41] &quot;lazyeval&quot;     &quot;munsell&quot;</code></pre>
+<pre><code>##  [1] &quot;purrr&quot;        &quot;reshape2&quot;     &quot;kernlab&quot;      &quot;colorspace&quot;  
+##  [5] &quot;stats4&quot;       &quot;htmltools&quot;    &quot;yaml&quot;         &quot;survival&quot;    
+##  [9] &quot;prodlim&quot;      &quot;rlang&quot;        &quot;ModelMetrics&quot; &quot;withr&quot;       
+## [13] &quot;glue&quot;         &quot;bindrcpp&quot;     &quot;plyr&quot;         &quot;bindr&quot;       
+## [17] &quot;dimRed&quot;       &quot;lava&quot;         &quot;robustbase&quot;   &quot;stringr&quot;     
+## [21] &quot;timeDate&quot;     &quot;munsell&quot;      &quot;gtable&quot;       &quot;recipes&quot;     
+## [25] &quot;codetools&quot;    &quot;evaluate&quot;     &quot;knitr&quot;        &quot;class&quot;       
+## [29] &quot;DEoptimR&quot;     &quot;Rcpp&quot;         &quot;scales&quot;       &quot;backports&quot;   
+## [33] &quot;ipred&quot;        &quot;CVST&quot;         &quot;digest&quot;       &quot;stringi&quot;     
+## [37] &quot;bookdown&quot;     &quot;dplyr&quot;        &quot;RcppRoll&quot;     &quot;ddalpha&quot;     
+## [41] &quot;grid&quot;         &quot;rprojroot&quot;    &quot;tools&quot;        &quot;magrittr&quot;    
+## [45] &quot;lazyeval&quot;     &quot;tibble&quot;       &quot;DRR&quot;          &quot;pkgconfig&quot;   
+## [49] &quot;Matrix&quot;       &quot;lubridate&quot;    &quot;gower&quot;        &quot;assertthat&quot;  
+## [53] &quot;rmarkdown&quot;    &quot;iterators&quot;    &quot;R6&quot;           &quot;rpart&quot;       
+## [57] &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
 
 </div>
 </div>

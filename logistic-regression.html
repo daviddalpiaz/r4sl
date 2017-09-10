@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-05">
+<meta name="date" content="2017-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -410,7 +410,7 @@ default_test_lm$default =<span class="st"> </span><span class="kw">as.numeric</s
 <p><span class="math display">\[
 E[Y \mid X = x] = P[Y = 1 \mid X = x].
 \]</span></p>
-<p>It would then seem reasonable that <span class="math inline">\(X\hat{\beta}\)</span> is a reasonable estimate of <span class="math inline">\(P[Y = 1 \ X = x]\)</span>. We test this on the <code>Default</code> data.</p>
+<p>It would then seem reasonable that <span class="math inline">\(X\hat{\beta}\)</span> is a reasonable estimate of <span class="math inline">\(P[Y = 1 \mid X = x]\)</span>. We test this on the <code>Default</code> data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_lm =<span class="st"> </span><span class="kw">lm</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train_lm)</code></pre></div>
 <p>Everything seems to be working, until we plot the results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train_lm, 

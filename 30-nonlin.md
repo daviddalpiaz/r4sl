@@ -409,23 +409,23 @@ gam_train
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 306, 304, 306, 304, 304 
+## Summary of sample sizes: 305, 304, 304, 305, 306 
 ## Resampling results across tuning parameters:
 ## 
-##   df  RMSE      Rsquared 
-##    1  4.804025  0.7249995
-##    2  3.885811  0.8137612
-##    3  3.737718  0.8278223
-##    4  3.719837  0.8296394
-##    5  3.739772  0.8277413
-##    6  3.789250  0.8229085
-##    7  3.858568  0.8160195
-##    8  3.940364  0.8078791
-##    9  4.028412  0.7993586
-##   10  4.116986  0.7912003
+##   df  RMSE      Rsquared   MAE     
+##    1  4.679761  0.7293721  3.257149
+##    2  3.840212  0.8173392  2.675829
+##    3  3.699260  0.8308477  2.634352
+##    4  3.672467  0.8339625  2.636641
+##    5  3.665862  0.8353164  2.643544
+##    6  3.678085  0.8350136  2.640547
+##    7  3.702144  0.8335998  2.633954
+##    8  3.735082  0.8313497  2.624165
+##    9  3.778876  0.8281397  2.622959
+##   10  3.832765  0.8240573  2.640324
 ## 
 ## RMSE was used to select the optimal model using  the smallest value.
-## The final value used for the model was df = 4.
+## The final value used for the model was df = 5.
 ```
 
 
@@ -458,17 +458,21 @@ The RMarkdown file for this chapter can be found [**here**](18-nonlin.Rmd). The 
 
 
 ```
-##  [1] "Rcpp"         "nloptr"       "compiler"     "plyr"        
-##  [5] "iterators"    "tools"        "digest"       "lme4"        
-##  [9] "evaluate"     "tibble"       "gtable"       "nlme"        
-## [13] "mgcv"         "rlang"        "Matrix"       "parallel"    
-## [17] "yaml"         "SparseM"      "stringr"      "knitr"       
-## [21] "MatrixModels" "stats4"       "rprojroot"    "grid"        
-## [25] "nnet"         "rmarkdown"    "bookdown"     "minqa"       
-## [29] "reshape2"     "car"          "magrittr"     "backports"   
-## [33] "scales"       "codetools"    "ModelMetrics" "htmltools"   
-## [37] "pbkrtest"     "colorspace"   "quantreg"     "stringi"     
-## [41] "lazyeval"     "munsell"
+##  [1] "purrr"        "reshape2"     "kernlab"      "colorspace"  
+##  [5] "stats4"       "htmltools"    "yaml"         "survival"    
+##  [9] "prodlim"      "rlang"        "ModelMetrics" "withr"       
+## [13] "glue"         "bindrcpp"     "plyr"         "bindr"       
+## [17] "dimRed"       "lava"         "robustbase"   "stringr"     
+## [21] "timeDate"     "munsell"      "gtable"       "recipes"     
+## [25] "codetools"    "evaluate"     "knitr"        "class"       
+## [29] "DEoptimR"     "Rcpp"         "scales"       "backports"   
+## [33] "ipred"        "CVST"         "digest"       "stringi"     
+## [37] "bookdown"     "dplyr"        "RcppRoll"     "ddalpha"     
+## [41] "grid"         "rprojroot"    "tools"        "magrittr"    
+## [45] "lazyeval"     "tibble"       "DRR"          "pkgconfig"   
+## [49] "Matrix"       "lubridate"    "gower"        "assertthat"  
+## [53] "rmarkdown"    "iterators"    "R6"           "rpart"       
+## [57] "nnet"         "nlme"         "compiler"
 ```
 
 

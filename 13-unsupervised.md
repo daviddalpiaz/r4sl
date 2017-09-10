@@ -352,7 +352,7 @@ max(using_pca$results$Accuracy)
 ```
 
 ```
-## [1] 0.8652729
+## [1] 0.8656997
 ```
 
 ```r
@@ -360,7 +360,7 @@ max(regular_scaling$results$Accuracy)
 ```
 
 ```
-## [1] 0.8558653
+## [1] 0.8609378
 ```
 
 ```r
@@ -813,18 +813,22 @@ The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd)
 
 
 ```
-##  [1] "Rcpp"         "nloptr"       "compiler"     "plyr"        
-##  [5] "class"        "iterators"    "tools"        "digest"      
-##  [9] "lme4"         "evaluate"     "tibble"       "gtable"      
-## [13] "nlme"         "mgcv"         "rlang"        "Matrix"      
-## [17] "foreach"      "parallel"     "yaml"         "SparseM"     
-## [21] "e1071"        "stringr"      "knitr"        "MatrixModels"
-## [25] "stats4"       "rprojroot"    "grid"         "nnet"        
-## [29] "rmarkdown"    "bookdown"     "minqa"        "reshape2"    
-## [33] "car"          "magrittr"     "backports"    "scales"      
-## [37] "codetools"    "ModelMetrics" "htmltools"    "splines"     
-## [41] "pbkrtest"     "colorspace"   "quantreg"     "stringi"     
-## [45] "lazyeval"     "munsell"
+##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
+##  [5] "colorspace"   "stats4"       "htmltools"    "yaml"        
+##  [9] "survival"     "prodlim"      "rlang"        "e1071"       
+## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
+## [17] "foreach"      "plyr"         "bindr"        "dimRed"      
+## [21] "lava"         "robustbase"   "stringr"      "timeDate"    
+## [25] "munsell"      "gtable"       "recipes"      "codetools"   
+## [29] "evaluate"     "knitr"        "class"        "DEoptimR"    
+## [33] "Rcpp"         "scales"       "backports"    "ipred"       
+## [37] "CVST"         "digest"       "stringi"      "bookdown"    
+## [41] "dplyr"        "RcppRoll"     "ddalpha"      "grid"        
+## [45] "rprojroot"    "tools"        "magrittr"     "lazyeval"    
+## [49] "tibble"       "DRR"          "pkgconfig"    "Matrix"      
+## [53] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
+## [57] "iterators"    "R6"           "rpart"        "nnet"        
+## [61] "nlme"         "compiler"
 ```
 
 

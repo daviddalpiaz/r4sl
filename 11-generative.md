@@ -651,19 +651,23 @@ The RMarkdown file for this chapter can be found [**here**](09-generative.Rmd). 
 
 
 ```
-##  [1] "Rcpp"         "compiler"     "nloptr"       "plyr"        
-##  [5] "class"        "methods"      "iterators"    "tools"       
-##  [9] "digest"       "lme4"         "evaluate"     "tibble"      
-## [13] "gtable"       "nlme"         "lattice"      "mgcv"        
-## [17] "rlang"        "Matrix"       "foreach"      "parallel"    
-## [21] "yaml"         "SparseM"      "stringr"      "knitr"       
-## [25] "MatrixModels" "stats4"       "rprojroot"    "grid"        
-## [29] "caret"        "nnet"         "ellipse"      "rmarkdown"   
-## [33] "bookdown"     "minqa"        "ggplot2"      "reshape2"    
-## [37] "car"          "magrittr"     "backports"    "scales"      
-## [41] "codetools"    "ModelMetrics" "htmltools"    "splines"     
-## [45] "pbkrtest"     "colorspace"   "quantreg"     "stringi"     
-## [49] "lazyeval"     "munsell"
+##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
+##  [5] "lattice"      "colorspace"   "stats4"       "htmltools"   
+##  [9] "yaml"         "survival"     "prodlim"      "rlang"       
+## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
+## [17] "foreach"      "plyr"         "bindr"        "dimRed"      
+## [21] "lava"         "robustbase"   "stringr"      "timeDate"    
+## [25] "munsell"      "gtable"       "recipes"      "codetools"   
+## [29] "evaluate"     "knitr"        "caret"        "class"       
+## [33] "DEoptimR"     "methods"      "Rcpp"         "scales"      
+## [37] "backports"    "ipred"        "CVST"         "ellipse"     
+## [41] "ggplot2"      "digest"       "stringi"      "bookdown"    
+## [45] "dplyr"        "RcppRoll"     "ddalpha"      "grid"        
+## [49] "rprojroot"    "tools"        "magrittr"     "lazyeval"    
+## [53] "tibble"       "DRR"          "pkgconfig"    "Matrix"      
+## [57] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
+## [61] "iterators"    "R6"           "rpart"        "nnet"        
+## [65] "nlme"         "compiler"
 ```
 
 

@@ -95,22 +95,22 @@ fit_rda_grid
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 166, 167, 166, 167, 166 
+## Summary of sample sizes: 166, 166, 167, 166, 167 
 ## Resampling results across tuning parameters:
 ## 
 ##   gamma  lambda  Accuracy   Kappa    
-##   0.0    0.0     0.7261324  0.4397685
-##   0.0    0.5     0.7648084  0.5279282
-##   0.0    1.0     0.7406504  0.4796821
-##   0.5    0.0     0.7842044  0.5641761
-##   0.5    0.5     0.8130081  0.6226443
-##   0.5    1.0     0.7649245  0.5284504
-##   1.0    0.0     0.6873403  0.3728292
-##   1.0    0.5     0.6922184  0.3830140
-##   1.0    1.0     0.6922184  0.3829488
+##   0.0    0.0     0.7013937  0.3841061
+##   0.0    0.5     0.7739837  0.5473212
+##   0.0    1.0     0.7411150  0.4789646
+##   0.5    0.0     0.8217189  0.6390489
+##   0.5    0.5     0.8077816  0.6095537
+##   0.5    1.0     0.7845528  0.5670147
+##   1.0    0.0     0.6778165  0.3535033
+##   1.0    0.5     0.6875726  0.3738076
+##   1.0    1.0     0.6875726  0.3738076
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final values used for the model were gamma = 0.5 and lambda = 0.5.
+## The final values used for the model were gamma = 0.5 and lambda = 0.
 ```
 
 
@@ -145,23 +145,23 @@ fit_rda_rand
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 166, 167, 166, 167, 166 
+## Summary of sample sizes: 166, 166, 167, 166, 167 
 ## Resampling results across tuning parameters:
 ## 
-##   gamma      lambda     Accuracy   Kappa    
-##   0.2091218  0.9853343  0.7986063  0.5944959
-##   0.2306276  0.8632831  0.8177700  0.6328588
-##   0.3223120  0.3194769  0.8275261  0.6509822
-##   0.5074480  0.8843909  0.7842044  0.5654024
-##   0.5274011  0.4747535  0.8178862  0.6323459
-##   0.6146998  0.6471883  0.7937282  0.5828269
-##   0.7031213  0.1969985  0.8178862  0.6304034
-##   0.7363932  0.2499440  0.8177700  0.6295909
-##   0.9860836  0.2297174  0.7207898  0.4384828
+##   gamma       lambda      Accuracy   Kappa    
+##   0.07399023  0.99371759  0.7796748  0.5556869
+##   0.14604362  0.33913968  0.8362369  0.6705529
+##   0.24540405  0.92379666  0.8133566  0.6231035
+##   0.28111731  0.97238848  0.7989547  0.5939312
+##   0.33131745  0.98132543  0.7941928  0.5848112
+##   0.37327926  0.19398230  0.8169570  0.6298688
+##   0.45386562  0.82735873  0.8178862  0.6318771
+##   0.56474213  0.97943029  0.7940767  0.5857574
+##   0.94763002  0.02522857  0.7740999  0.5435202
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final values used for the model were gamma = 0.322312 and lambda
-##  = 0.3194769.
+## The final values used for the model were gamma = 0.1460436 and lambda
+##  = 0.3391397.
 ```
 
 
@@ -212,9 +212,9 @@ knitr::kable(rbind(
 \hline
 gamma & lambda & Accuracy & Kappa & AccuracySD & KappaSD\\
 \hline
-0.500000 & 0.5000000 & 0.8130081 & 0.6226443 & 0.0553439 & 0.1099849\\
+0.5000000 & 0.0000000 & 0.8217189 & 0.6390489 & 0.0455856 & 0.0926920\\
 \hline
-0.322312 & 0.3194769 & 0.8275261 & 0.6509822 & 0.0650432 & 0.1322546\\
+0.1460436 & 0.3391397 & 0.8362369 & 0.6705529 & 0.0631932 & 0.1255389\\
 \hline
 \end{tabular}
 
@@ -230,9 +230,9 @@ knitr::kable(rbind(
 \hline
 alpha & lambda & Accuracy & Kappa & AccuracySD & KappaSD\\
 \hline
-1.0 & 0.0350306 & 0.7984901 & 0.5953995 & 0.0652593 & 0.1311529\\
+0.4 & 0.0065641 & 0.8034843 & 0.6041866 & 0.0645470 & 0.1297952\\
 \hline
-0.1 & 0.0243225 & 0.8321719 & 0.6617794 & 0.0744795 & 0.1480774\\
+0.1 & 0.0243225 & 0.8418118 & 0.6809599 & 0.0539204 & 0.1088486\\
 \hline
 \end{tabular}
 
@@ -267,17 +267,21 @@ The RMarkdown file for this chapter can be found [**here**](17-rda.Rmd). The fil
 
 
 ```
-##  [1] "Rcpp"         "nloptr"       "compiler"     "plyr"        
-##  [5] "class"        "iterators"    "tools"        "digest"      
-##  [9] "lme4"         "evaluate"     "tibble"       "gtable"      
-## [13] "nlme"         "mgcv"         "rlang"        "parallel"    
-## [17] "yaml"         "SparseM"      "e1071"        "stringr"     
-## [21] "knitr"        "MatrixModels" "combinat"     "stats4"      
-## [25] "rprojroot"    "grid"         "nnet"         "rmarkdown"   
-## [29] "bookdown"     "minqa"        "reshape2"     "car"         
-## [33] "magrittr"     "backports"    "scales"       "codetools"   
-## [37] "ModelMetrics" "htmltools"    "splines"      "pbkrtest"    
-## [41] "colorspace"   "labeling"     "quantreg"     "stringi"     
-## [45] "lazyeval"     "munsell"
+##  [1] "purrr"        "reshape2"     "kernlab"      "splines"     
+##  [5] "colorspace"   "stats4"       "htmltools"    "yaml"        
+##  [9] "survival"     "prodlim"      "rlang"        "e1071"       
+## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
+## [17] "plyr"         "bindr"        "dimRed"       "lava"        
+## [21] "robustbase"   "stringr"      "timeDate"     "combinat"    
+## [25] "munsell"      "gtable"       "recipes"      "codetools"   
+## [29] "evaluate"     "labeling"     "knitr"        "class"       
+## [33] "DEoptimR"     "Rcpp"         "scales"       "backports"   
+## [37] "ipred"        "CVST"         "digest"       "stringi"     
+## [41] "bookdown"     "dplyr"        "RcppRoll"     "ddalpha"     
+## [45] "grid"         "rprojroot"    "tools"        "magrittr"    
+## [49] "lazyeval"     "tibble"       "DRR"          "pkgconfig"   
+## [53] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
+## [57] "iterators"    "R6"           "rpart"        "nnet"        
+## [61] "nlme"         "compiler"
 ```
 

@@ -223,16 +223,16 @@ lin_svm_fit
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 33, 33, 33, 33, 32 
+## Summary of sample sizes: 33, 33, 33, 32, 33 
 ## Resampling results across tuning parameters:
 ## 
 ##   C         Accuracy  Kappa    
 ##    0.03125  0.850     0.6197802
-##    0.06250  0.950     0.8928571
+##    0.06250  1.000     1.0000000
 ##    0.12500  0.975     0.9500000
 ##    0.25000  0.975     0.9500000
 ##    0.50000  0.975     0.9500000
-##    1.00000  1.000     1.0000000
+##    1.00000  0.975     0.9500000
 ##    2.00000  0.975     0.9500000
 ##    4.00000  1.000     1.0000000
 ##    8.00000  1.000     1.0000000
@@ -240,7 +240,7 @@ lin_svm_fit
 ##   32.00000  1.000     1.0000000
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was C = 1.
+## The final value used for the model was C = 0.0625.
 ```
 
 ```r
@@ -248,8 +248,8 @@ lin_svm_fit$bestTune
 ```
 
 ```
-##   C
-## 6 1
+##        C
+## 2 0.0625
 ```
 
 ```r
@@ -269,7 +269,7 @@ accuracy(actual = test_data$y,
 ```
 
 ```
-## [1] 1
+## [1] 0.994898
 ```
 
 ### Compare: Random Forest
@@ -305,7 +305,7 @@ accuracy(actual = test_data$y,
 ```
 
 ```
-## [1] 0.9591837
+## [1] 0.9770408
 ```
 
 ## Non-Linear, Non-Separable Example
@@ -531,7 +531,7 @@ rad_svm_fit$bestTune
 
 ```
 ##    sigma  C
-## 65  0.25 16
+## 70     8 16
 ```
 
 
@@ -628,21 +628,21 @@ lin_svm_fit
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 200, 200, 201, 199, 200 
+## Summary of sample sizes: 200, 200, 200, 200, 200 
 ## Resampling results across tuning parameters:
 ## 
-##   C         Accuracy   Kappa
-##    0.03125  0.5920144  0    
-##    0.06250  0.5920144  0    
-##    0.12500  0.5920144  0    
-##    0.25000  0.5920144  0    
-##    0.50000  0.5920144  0    
-##    1.00000  0.5920144  0    
-##    2.00000  0.5920144  0    
-##    4.00000  0.5920144  0    
-##    8.00000  0.5920144  0    
-##   16.00000  0.5920144  0    
-##   32.00000  0.5920144  0    
+##   C         Accuracy  Kappa
+##    0.03125  0.592     0    
+##    0.06250  0.592     0    
+##    0.12500  0.592     0    
+##    0.25000  0.592     0    
+##    0.50000  0.592     0    
+##    1.00000  0.592     0    
+##    2.00000  0.592     0    
+##    4.00000  0.592     0    
+##    8.00000  0.592     0    
+##   16.00000  0.592     0    
+##   32.00000  0.592     0    
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was C = 0.03125.
@@ -706,7 +706,7 @@ rf_fit$bestTune
 
 ```
 ##   mtry
-## 2    2
+## 1    1
 ```
 
 ```r
@@ -726,7 +726,7 @@ accuracy(actual = test_data$y,
 ```
 
 ```
-## [1] 0.809
+## [1] 0.8125
 ```
 
 
@@ -760,18 +760,22 @@ The RMarkdown file for this chapter can be found [**here**](21-svm.Rmd). The fil
 
 
 ```
-##  [1] "Rcpp"         "nloptr"       "compiler"     "plyr"        
-##  [5] "class"        "iterators"    "tools"        "digest"      
-##  [9] "lme4"         "evaluate"     "tibble"       "gtable"      
-## [13] "nlme"         "mgcv"         "rlang"        "Matrix"      
-## [17] "foreach"      "parallel"     "yaml"         "SparseM"     
-## [21] "e1071"        "stringr"      "knitr"        "MatrixModels"
-## [25] "stats4"       "rprojroot"    "grid"         "nnet"        
-## [29] "rmarkdown"    "bookdown"     "minqa"        "reshape2"    
-## [33] "car"          "magrittr"     "backports"    "scales"      
-## [37] "codetools"    "ModelMetrics" "htmltools"    "MASS"        
-## [41] "splines"      "pbkrtest"     "colorspace"   "quantreg"    
-## [45] "stringi"      "lazyeval"     "munsell"
+##  [1] "purrr"        "reshape2"     "splines"      "colorspace"  
+##  [5] "stats4"       "htmltools"    "yaml"         "survival"    
+##  [9] "prodlim"      "rlang"        "e1071"        "ModelMetrics"
+## [13] "withr"        "glue"         "bindrcpp"     "foreach"     
+## [17] "plyr"         "bindr"        "dimRed"       "lava"        
+## [21] "robustbase"   "stringr"      "timeDate"     "munsell"     
+## [25] "gtable"       "recipes"      "codetools"    "evaluate"    
+## [29] "knitr"        "class"        "DEoptimR"     "Rcpp"        
+## [33] "scales"       "backports"    "ipred"        "CVST"        
+## [37] "digest"       "stringi"      "bookdown"     "dplyr"       
+## [41] "RcppRoll"     "ddalpha"      "grid"         "rprojroot"   
+## [45] "tools"        "magrittr"     "lazyeval"     "tibble"      
+## [49] "DRR"          "pkgconfig"    "MASS"         "Matrix"      
+## [53] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
+## [57] "iterators"    "R6"           "rpart"        "nnet"        
+## [61] "nlme"         "compiler"
 ```
 
 

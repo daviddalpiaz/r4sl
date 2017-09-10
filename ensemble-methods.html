@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-05">
+<meta name="date" content="2017-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -721,26 +721,26 @@ seat_rf_tune</code></pre></div>
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy  Kappa    
-##    1    0.750     0.4318182
-##    2    0.785     0.5295405
-##    3    0.785     0.5315904
-##    4    0.805     0.5824411
-##    5    0.785     0.5356371
-##    6    0.810     0.5957447
-##    7    0.810     0.5922747
-##    8    0.805     0.5842217
-##    9    0.785     0.5396146
-##   10    0.795     0.5591398
+##    1    0.730     0.3807339
+##    2    0.775     0.5033113
+##    3    0.795     0.5591398
+##    4    0.790     0.5474138
+##    5    0.795     0.5610278
+##    6    0.790     0.5512821
+##    7    0.805     0.5806452
+##    8    0.795     0.5628998
+##    9    0.785     0.5376344
+##   10    0.775     0.5202559
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was mtry = 6.</code></pre>
+## The final value used for the model was mtry = 7.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="kw">predict</span>(seat_rf_tune, seat_tst), seat_tst$Sales)</code></pre></div>
-<pre><code>## [1] 0.81</code></pre>
+<pre><code>## [1] 0.795</code></pre>
 <p>The results returned are based on the OOB samples. (Coincidentally, the test accuracy is the same as the best accuracy found using OOB samples.) Note that when using OOB, for some reason the default plot is not what you would expect and is not at all useful. (Which is why it is omitted here.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_rf_tune$bestTune</code></pre></div>
 <pre><code>##   mtry
-## 6    6</code></pre>
-<p>Based on these results, we would select the random forest model with an <code>mtry</code> of 6. Note that based on the OOB estimates, the bagging model is expected to perform worse than this select model, however, based on our results above, that is not what we find to be true in our test set.</p>
+## 7    7</code></pre>
+<p>Based on these results, we would select the random forest model with an <code>mtry</code> of 7. Note that based on the OOB estimates, the bagging model is expected to perform worse than this select model, however, based on our results above, that is not what we find to be true in our test set.</p>
 <p>Also note that <code>method = &quot;ranger&quot;</code> would also fit a random forest model. <a href="http://arxiv.org/pdf/1508.04409.pdf">Ranger</a> is a newer <code>R</code> package for random forests that has been shown to be much faster, especially when there are a larger number of predictors.</p>
 </div>
 <div id="boosting-2" class="section level3">
@@ -794,7 +794,6 @@ oob  =<span class="st"> </span><span class="kw">trainControl</span>(<span class=
                     <span class="dt">data =</span> sim_trn,
                     <span class="dt">trControl =</span> cv_5,
                     <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>)</code></pre></div>
-<pre><code>## Loading required package: rpart</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart.plot)
 <span class="kw">prp</span>(sim_tree_cv$finalModel)</code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
@@ -861,17 +860,21 @@ gbm_pred  =<span class="st"> </span><span class="kw">predict</span>(sim_gbm_cv, 
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;Rcpp&quot;         &quot;nloptr&quot;       &quot;compiler&quot;     &quot;class&quot;       
-##  [5] &quot;iterators&quot;    &quot;tools&quot;        &quot;lme4&quot;         &quot;digest&quot;      
-##  [9] &quot;evaluate&quot;     &quot;tibble&quot;       &quot;gtable&quot;       &quot;nlme&quot;        
-## [13] &quot;mgcv&quot;         &quot;rlang&quot;        &quot;Matrix&quot;       &quot;foreach&quot;     
-## [17] &quot;yaml&quot;         &quot;SparseM&quot;      &quot;e1071&quot;        &quot;stringr&quot;     
-## [21] &quot;knitr&quot;        &quot;MatrixModels&quot; &quot;stats4&quot;       &quot;nnet&quot;        
-## [25] &quot;rprojroot&quot;    &quot;grid&quot;         &quot;rmarkdown&quot;    &quot;bookdown&quot;    
-## [29] &quot;minqa&quot;        &quot;car&quot;          &quot;reshape2&quot;     &quot;magrittr&quot;    
-## [33] &quot;backports&quot;    &quot;scales&quot;       &quot;codetools&quot;    &quot;ModelMetrics&quot;
-## [37] &quot;htmltools&quot;    &quot;pbkrtest&quot;     &quot;colorspace&quot;   &quot;quantreg&quot;    
-## [41] &quot;stringi&quot;      &quot;lazyeval&quot;     &quot;munsell&quot;</code></pre>
+<pre><code>##  [1] &quot;Rcpp&quot;         &quot;lubridate&quot;    &quot;class&quot;        &quot;assertthat&quot;  
+##  [5] &quot;rprojroot&quot;    &quot;digest&quot;       &quot;ipred&quot;        &quot;foreach&quot;     
+##  [9] &quot;R6&quot;           &quot;backports&quot;    &quot;stats4&quot;       &quot;evaluate&quot;    
+## [13] &quot;e1071&quot;        &quot;rlang&quot;        &quot;lazyeval&quot;     &quot;kernlab&quot;     
+## [17] &quot;Matrix&quot;       &quot;rmarkdown&quot;    &quot;CVST&quot;         &quot;ddalpha&quot;     
+## [21] &quot;gower&quot;        &quot;stringr&quot;      &quot;munsell&quot;      &quot;compiler&quot;    
+## [25] &quot;pkgconfig&quot;    &quot;dimRed&quot;       &quot;htmltools&quot;    &quot;nnet&quot;        
+## [29] &quot;tibble&quot;       &quot;prodlim&quot;      &quot;DRR&quot;          &quot;bookdown&quot;    
+## [33] &quot;codetools&quot;    &quot;RcppRoll&quot;     &quot;dplyr&quot;        &quot;withr&quot;       
+## [37] &quot;recipes&quot;      &quot;ModelMetrics&quot; &quot;grid&quot;         &quot;nlme&quot;        
+## [41] &quot;gtable&quot;       &quot;magrittr&quot;     &quot;scales&quot;       &quot;stringi&quot;     
+## [45] &quot;reshape2&quot;     &quot;bindrcpp&quot;     &quot;timeDate&quot;     &quot;robustbase&quot;  
+## [49] &quot;lava&quot;         &quot;iterators&quot;    &quot;tools&quot;        &quot;glue&quot;        
+## [53] &quot;DEoptimR&quot;     &quot;purrr&quot;        &quot;yaml&quot;         &quot;colorspace&quot;  
+## [57] &quot;knitr&quot;        &quot;bindr&quot;</code></pre>
 
 </div>
 </div>
