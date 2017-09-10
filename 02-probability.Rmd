@@ -154,7 +154,7 @@ $$
 p(x | n, p) = {n \choose x} p^x(1 - p)^{n - x}, \ \ \ x = 0, 1, \ldots, n, \ n \in \mathbb{N}, \ 0 < p < 1.
 $$
 
-This line conveys a large ammount of information.
+This line conveys a large amount of information.
 
 - The function $p(x | n, p)$ is the mass function. It is a function of $x$, the possible values of the random variable $X$. It is conditional on the **parameters** $n$ and $p$. Different values of these parameters specify different binomial distributions.
 - $x = 0, 1, \ldots, n$ indicates the **sample space**, that is, the possible values of the random variable.

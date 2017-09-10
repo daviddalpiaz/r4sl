@@ -2,7 +2,7 @@
 
 # Overview {#regression-overview}
 
-**TODO:** Generalize this chpater. Move some specifics to following chapter on use of linear models.
+**TODO:** Generalize this chapter. Move some specifics to following chapter on use of linear models.
 
 When using linear models in the past, we often emphasized distributional results, which were useful for creating and performing hypothesis tests. Frequently, when developing a linear regression model, part of our goal was to **explain** a relationship.
 
