@@ -98,6 +98,7 @@ Your name could be here! Suggest an edit! Correct a typo! Pull requests encourag
 - Korawat Tanwisuth, Spring 2017
 - [Yiming Gao](https://www.linkedin.com/in/yiming-gao), Spring 2017
 - [Binxiang Ni](https://github.com/binxiangni), Summer 2017
+- [Ruiqi (Zoe) Li](https://github.com/ruiqili2), Summer 2017
 
 
 ## License
