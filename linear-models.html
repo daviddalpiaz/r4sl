@@ -147,14 +147,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>5.1</b> Assesing Model Accuracy</a></li>
-<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#model-complexity"><i class="fa fa-check"></i><b>5.2</b> Model Complexity</a></li>
-<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#test-train-split"><i class="fa fa-check"></i><b>5.3</b> Test-Train Split</a></li>
-<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>5.4</b> Adding Flexibility to Linear Models</a></li>
-<li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#choosing-a-model"><i class="fa fa-check"></i><b>5.5</b> Choosing a Model</a></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
+<li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
+<li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
+<li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
+<li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a></li>
 <li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="8" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Simulating the Bias–Variance Tradeoff</a><ul>
 <li class="chapter" data-level="8.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.1</b> Bias-Variance Decomposition</a></li>
@@ -371,8 +371,233 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="linear-models" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Linear Models</h1>
-<p><strong>TODO:</strong> Move contents of previous chapter.</p>
+<p><strong>TODO:</strong> Ungeneralize this chapter. Move some specifics to following chapter on use of linear models.</p>
+<p><strong>NOTE:</strong> This chapter has previously existed. Eventually the concepts will be first introduced in the preceding chapter.</p>
+<p>When using linear models in the past, we often emphasized distributional results, which were useful for creating and performing hypothesis tests. Frequently, when developing a linear regression model, part of our goal was to <strong>explain</strong> a relationship.</p>
+<p>Now, we will ignore much of what we have learned and instead simply use regression as a tool to <strong>predict</strong>. Instead of a model which explains relationships, we seek a model which minimizes errors.</p>
+<div class="figure">
+<img src="images/regression.png" alt="" />
 
+</div>
+<p>First, note that a linear model is one of many methods used in regression.</p>
+<p>To discuss linear models in the context of prediction, we return to the <code>Advertising</code> data from the previous chapter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Advertising</code></pre></div>
+<pre><code>## # A tibble: 200 x 4
+##       TV Radio Newspaper Sales
+##    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+##  1 230.1  37.8      69.2  22.1
+##  2  44.5  39.3      45.1  10.4
+##  3  17.2  45.9      69.3   9.3
+##  4 151.5  41.3      58.5  18.5
+##  5 180.8  10.8      58.4  12.9
+##  6   8.7  48.9      75.0   7.2
+##  7  57.5  32.8      23.5  11.8
+##  8 120.2  19.6      11.6  13.2
+##  9   8.6   2.1       1.0   4.8
+## 10 199.8   2.6      21.2  10.6
+## # ... with 190 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+<span class="kw">featurePlot</span>(<span class="dt">x =</span> Advertising[ , <span class="kw">c</span>(<span class="st">&quot;TV&quot;</span>, <span class="st">&quot;Radio&quot;</span>, <span class="st">&quot;Newspaper&quot;</span>)], <span class="dt">y =</span> Advertising$Sales)</code></pre></div>
+<p><img src="06-linear_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
+<div id="assesing-model-accuracy" class="section level2">
+<h2><span class="header-section-number">6.1</span> Assesing Model Accuracy</h2>
+<p>There are many metrics to assess the accuracy of a regression model. Most of these measure in some way the average error that the model makes. The metric that we will be most interested in is the root-mean-square error.</p>
+<p><span class="math display">\[
+\text{RMSE}(\hat{f}, \text{Data}) = \sqrt{\frac{1}{n}\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
+\]</span></p>
+<p>While for the sake of comparing models, the choice between RMSE and MSE is arbitrary, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context MSE refers to an average, whereas in an ANOVA context, the denominator for MSE may not be <span class="math inline">\(n\)</span>.</p>
+<p>For a linear model , the estimate of <span class="math inline">\(f\)</span>, <span class="math inline">\(\hat{f}\)</span>, is given by the fitted regression line.</p>
+<p><span class="math display">\[
+\hat{y}(\bf{x}_i) = \hat{f}(\bf{x}_i)
+\]</span></p>
+<p>We can write an <code>R</code> function that will be useful for performing this calculation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span>function(actual, predicted) {
+  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual -<span class="st"> </span>predicted) ^<span class="st"> </span><span class="dv">2</span>))
+}</code></pre></div>
+</div>
+<div id="model-complexity" class="section level2">
+<h2><span class="header-section-number">6.2</span> Model Complexity</h2>
+<p>Aside from how well a model predicts, we will also be very interested in the complexity (flexibility) of a model. For now, we will only considered nested linear models for simplicity. Then in that case, the more predictors that a model has, the more complex the model. For the sake of assigning a numerical value to the complexity of a linear model, we will use the number of predictors, <span class="math inline">\(p\)</span>.</p>
+<p>We write a simple <code>R</code> function to extract this information from a model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_complexity =<span class="st"> </span>function(model) {
+  <span class="kw">length</span>(<span class="kw">coef</span>(model)) -<span class="st"> </span><span class="dv">1</span>
+}</code></pre></div>
+</div>
+<div id="test-train-split" class="section level2">
+<h2><span class="header-section-number">6.3</span> Test-Train Split</h2>
+<p>There is an issue with fitting a model to all available data then using RMSE to determine how well the model predicts. It is essentially cheating! As a linear model becomes more complex, the RSS, thus RMSE, can never go up. It will only go down, or in very specific cases, stay the same.</p>
+<p>This would suggest that to predict well, we should use the largest possible model! However, in reality we have hard fit to a specific dataset, but as soon as we see new data, a large model may in fact predict poorly. This is called <strong>overfitting</strong>.</p>
+<p>Frequently we will take a dataset of interest and split it in two. One part of the datasets will be used to fit (train) a model, which we will call the <strong>training</strong> data. The remainder of the original data will be used to assess how well the model is predicting, which we will call the <strong>test</strong> data. Test data should <em>never</em> be used to train a model.</p>
+<p>Note that sometimes the terms <em>evaluation set</em> and <em>test set</em> are used interchangeably. We will give somewhat specific definitions to these later. For now we will simply use a single test set for a training set.</p>
+<p>Here we use the <code>sample()</code> function to obtain a random sample of the rows of the original data. We then use those row numbers (and remaining row numbers) to split the data accordingly. Notice we used the <code>set.seed()</code> function to allow use to reproduce the same random split each time we perform this analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">9</span>)
+num_obs =<span class="st"> </span><span class="kw">nrow</span>(Advertising)
+
+train_index =<span class="st"> </span><span class="kw">sample</span>(num_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>num_obs))
+train_data =<span class="st"> </span>Advertising[train_index, ]
+test_data =<span class="st"> </span>Advertising[-train_index, ]</code></pre></div>
+<p>We will look at two measures that assess how well a model is predicting, the <strong>train RMSE</strong> and the <strong>test RMSE</strong>.</p>
+<p><span class="math display">\[
+\text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Tr}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
+\]</span></p>
+<p>Here <span class="math inline">\(n_{Tr}\)</span> is the number of observations in the train set. Train RMSE will still always go down (or stay the same) as the complexity of a linear model increases. That means train RMSE will not be useful for comparing models, but checking that it decreases is a useful sanity check.</p>
+<p><span class="math display">\[
+\text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Test Data}) = \sqrt{\frac{1}{n_{\text{Te}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
+\]</span></p>
+<p>Here <span class="math inline">\(n_{Te}\)</span> is the number of observations in the test set. Test RMSE uses the model fit to the training data, but evaluated on the unused test data. This is a measure of how well the fitted model will predict <strong>in general</strong>, not simply how well it fits data used to train the model, as is the case with train RMSE. What happens to test RMSE as the size of the model increases? That is what we will investigate.</p>
+<p>We will start with the simplest possible linear model, that is, a model with no predictors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_0 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_0)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train RMSE</span>
+<span class="kw">sqrt</span>(<span class="kw">mean</span>((train_data$Sales -<span class="st"> </span><span class="kw">predict</span>(fit_0, train_data)) ^<span class="st"> </span><span class="dv">2</span>))</code></pre></div>
+<pre><code>## [1] 4.788513</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test RMSE</span>
+<span class="kw">sqrt</span>(<span class="kw">mean</span>((test_data$Sales -<span class="st"> </span><span class="kw">predict</span>(fit_0, test_data)) ^<span class="st"> </span><span class="dv">2</span>)) </code></pre></div>
+<pre><code>## [1] 5.643574</code></pre>
+<p>The previous two operations obtain the train and test RMSE. Since these are operations we are about to use repeatedly, we should use the function that we happen to have already written.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train RMSE</span>
+<span class="kw">rmse</span>(<span class="dt">actual =</span> train_data$Sales, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit_0, train_data))</code></pre></div>
+<pre><code>## [1] 4.788513</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test RMSE</span>
+<span class="kw">rmse</span>(<span class="dt">actual =</span> test_data$Sales, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit_0, test_data))</code></pre></div>
+<pre><code>## [1] 5.643574</code></pre>
+<p>This function can actually be improved for the inputs that we are using. We would like to obtain train and test RMSE for a fitted model, given a train or test dataset, and the appropriate response variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_rmse =<span class="st"> </span>function(model, data, response) {
+  <span class="kw">rmse</span>(<span class="dt">actual =</span> data[, response], 
+       <span class="dt">predicted =</span> <span class="kw">predict</span>(model, data))
+}</code></pre></div>
+<p>By using this function, our code becomes easier to read, and it is more obvious what task we are accomplishing.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_0, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre><code>## [1] 4.788513</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_0, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre><code>## [1] 5.643574</code></pre>
+</div>
+<div id="adding-flexibility-to-linear-models" class="section level2">
+<h2><span class="header-section-number">6.4</span> Adding Flexibility to Linear Models</h2>
+<p>Each successive model we fit will be more and more flexible using both interactions and polynomial terms. We will see the training error decrease each time the model is made more flexible. We expect the test error to decrease a number of times, then eventually start going up, as a result of overfitting.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_1 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_1)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_1, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre><code>## [1] 1.637699</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_1, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre><code>## [1] 1.737574</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_2 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV, <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_2)</code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_2, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre><code>## [1] 0.7797226</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_2, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre><code>## [1] 1.110372</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_3 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +<span class="st"> </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_3)</code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_3, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre><code>## [1] 0.4960149</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_3, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre><code>## [1] 0.7320758</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_4 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +<span class="st"> </span>
+<span class="st">           </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="kw">I</span>(Radio ^<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="kw">I</span>(Newspaper ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_4)</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_4, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre><code>## [1] 0.488771</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_4, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre><code>## [1] 0.7466312</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_5 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +
+<span class="st">           </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>) *<span class="st"> </span><span class="kw">I</span>(Radio ^<span class="st"> </span><span class="dv">2</span>) *<span class="st"> </span><span class="kw">I</span>(Newspaper ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_5)</code></pre></div>
+<pre><code>## [1] 14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_5, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre><code>## [1] 0.4705201</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_5, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre><code>## [1] 0.8425384</code></pre>
+</div>
+<div id="choosing-a-model" class="section level2">
+<h2><span class="header-section-number">6.5</span> Choosing a Model</h2>
+<p>To better understand the relationship between train RMSE, test RMSE, and model complexity, we summarize our results, as the above is somewhat cluttered.</p>
+<p>First, we recap the models that we have fit.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_1 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> train_data)
+fit_2 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV, <span class="dt">data =</span> train_data)
+fit_3 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +<span class="st"> </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+fit_4 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +<span class="st"> </span>
+<span class="st">           </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="kw">I</span>(Radio ^<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="kw">I</span>(Newspaper ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+fit_5 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +
+<span class="st">           </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>) *<span class="st"> </span><span class="kw">I</span>(Radio ^<span class="st"> </span><span class="dv">2</span>) *<span class="st"> </span><span class="kw">I</span>(Newspaper ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)</code></pre></div>
+<p>Next, we create a list of the models fit.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_list =<span class="st"> </span><span class="kw">list</span>(fit_1, fit_2, fit_3, fit_4, fit_5)</code></pre></div>
+<p>We then obtain train RMSE, test RMSE, and model complexity for each.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_rmse =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_rmse, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>)
+test_rmse =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_rmse, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>)
+model_complexity =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_complexity)</code></pre></div>
+<p>We then plot the results. The train RMSE can be seen in blue, while the test RMSE is given in orange.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(model_complexity, train_rmse, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, 
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">c</span>(train_rmse, test_rmse)) -<span class="st"> </span><span class="fl">0.02</span>, 
+              <span class="kw">max</span>(<span class="kw">c</span>(train_rmse, test_rmse)) +<span class="st"> </span><span class="fl">0.02</span>), 
+     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, 
+     <span class="dt">xlab =</span> <span class="st">&quot;Model Size&quot;</span>,
+     <span class="dt">ylab =</span> <span class="st">&quot;RMSE&quot;</span>)
+<span class="kw">lines</span>(model_complexity, test_rmse, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</code></pre></div>
+<p><img src="06-linear_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>We also summarize the results as a table. <code>fit_1</code> is the least flexible, and <code>fit_5</code> is the most flexible. We see the Train RMSE decrease as flexibility increases. We see that the Test RMSE is smallest for <code>fit_3</code>, thus is the model we believe will perform the best on future data not used to train the model. Note this may not be the best model, but it is the best model of the models we have seen in this example.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Model</th>
+<th align="left">Train RMSE</th>
+<th align="left">Test RMSE</th>
+<th align="left">Predictors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>fit_1</code></td>
+<td align="left">1.6376991</td>
+<td align="left">1.7375736</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left"><code>fit_2</code></td>
+<td align="left">0.7797226</td>
+<td align="left">1.1103716</td>
+<td align="left">7</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>fit_3</code></td>
+<td align="left">0.4960149</td>
+<td align="left">0.7320758</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left"><code>fit_4</code></td>
+<td align="left">0.488771</td>
+<td align="left">0.7466312</td>
+<td align="left">10</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>fit_5</code></td>
+<td align="left">0.4705201</td>
+<td align="left">0.8425384</td>
+<td align="left">14</td>
+</tr>
+</tbody>
+</table>
+<p>To summarize:</p>
+<ul>
+<li><strong>Underfitting models:</strong> In general <em>High</em> Train RMSE, <em>High</em> Test RMSE. Seen in <code>fit_1</code> and <code>fit_2</code>.</li>
+<li><strong>Overfitting models:</strong> In general <em>Low</em> Train RMSE, <em>High</em> Test RMSE. Seen in <code>fit_4</code> and <code>fit_5</code>.</li>
+</ul>
+<p>Specifically, we say that a model is overfitting if there exists a less complex model with lower Test RMSE. Then a model is underfitting if there exists a more complex model with lower Test RMSE.</p>
+<p>A number of notes on these results:</p>
+<ul>
+<li>The labels of under and overfitting are <em>relative</em> to the best model we see, <code>fit_3</code>. Any model more complex with higher Test RMSE is overfitting. Any model less complex with higher Test RMSE is underfitting.</li>
+<li>The train RMSE is guaranteed to follow this non-increasing pattern. The same is not true of test RMSE. Here we see a nice U-shaped curve. There are theoretical reasons why we should expect this, but that is on average. Because of the randomness of one test-train split, we may not always see this result. Re-perform this analysis with a different seed value and the pattern may not hold. We will discuss why we expect this next chapter. We will discuss how we can help create this U-shape much later.</li>
+<li>Often we expect train RMSE to be lower than test RMSE. Again, due to the randomness of the split, you may get lucky and this will not be true.</li>
+</ul>
+<p>A final note on the analysis performed here; we paid no attention whatsoever to the “assumptions” of a linear model. We only sought a model that <strong>predicted</strong> well, and paid no attention to a model for <strong>explaination</strong>. Hypothesis testing did not play a role in deciding the model, only prediction accuracy. Collinearity? We don’t care. Assumptions? Still don’t care. Diagnostics? Never heard of them. (These statements are a little over the top, and not completely true, but just to drive home the point that we only care about prediction. Often we latch onto methods that we have seen before, even when they are not needed.)</p>
+
+</div>
 </div>
             </section>
 
