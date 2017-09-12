@@ -2,4 +2,4 @@
 
 # Overview {#appendix-overview}
 
-**TODO:** Discussion of necessary knowledge before reading book. Explain what will be recapped along the way.
+**TODO:** Add a section about "coding" tips and tricks. For example: beware when using code you found on the internet.
