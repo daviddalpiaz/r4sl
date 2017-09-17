@@ -1,7 +1,7 @@
 --- 
 title: "`R` for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2017-09-12"
+date: "2017-09-17"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -99,6 +99,7 @@ Your name could be here! Suggest an edit! Correct a typo! Pull requests encourag
 - [Yiming Gao](https://www.linkedin.com/in/yiming-gao), Spring 2017
 - [Binxiang Ni](https://github.com/binxiangni), Summer 2017
 - [Ruiqi (Zoe) Li](https://github.com/ruiqili2), Summer 2017
+- [Rachel Banoff](https://www.linkedin.com/in/rachelbanoff/%E2%80%8B), Fall 2017
 
 
 ## License

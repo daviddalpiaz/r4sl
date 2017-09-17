@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-12">
+<meta name="date" content="2017-09-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -432,7 +432,7 @@ p({\bf x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(model_glm)</code></pre></div>
 <pre><code>##   (Intercept)       balance 
 ## -10.452182876   0.005367655</code></pre>
-<p>The next thing we should understand is how the <code>predict()</code> function works with <code>glm()</code>. So, let’s look a some predictions.</p>
+<p>The next thing we should understand is how the <code>predict()</code> function works with <code>glm()</code>. So, let’s look at some predictions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(model_glm))</code></pre></div>
 <pre><code>##       9149       9370       2861       8302       6415       5189 
 ## -6.9616496 -0.7089539 -4.8936916 -9.4123620 -9.0416096 -7.3600645</code></pre>

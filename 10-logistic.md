@@ -189,7 +189,7 @@ coef(model_glm)
 ## -10.452182876   0.005367655
 ```
 
-The next thing we should understand is how the `predict()` function works with `glm()`. So, let's look a some predictions.
+The next thing we should understand is how the `predict()` function works with `glm()`. So, let's look at some predictions.
 
 
 ```r

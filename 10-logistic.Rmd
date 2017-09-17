@@ -147,7 +147,7 @@ First, we can obtain the fitted coefficients the same way we did with linear reg
 coef(model_glm)
 ```
 
-The next thing we should understand is how the `predict()` function works with `glm()`. So, let's look a some predictions.
+The next thing we should understand is how the `predict()` function works with `glm()`. So, let's look at some predictions.
 
 ```{r}
 head(predict(model_glm))
