@@ -2,3 +2,5 @@
 
 
 **TODO:** Parameteric vs Non-Parametric. Linear vs Non-Linear.
+
+- curse of dimensionality
