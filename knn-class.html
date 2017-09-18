@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-17">
+<meta name="date" content="2017-09-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>7.1</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a></li>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#knn-in-r"><i class="fa fa-check"></i><b>7.2</b> KNN in <code>R</code></a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Simulating the Bias–Variance Tradeoff</a><ul>
 <li class="chapter" data-level="8.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.1</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.2</b> Simulation</a></li>
@@ -500,7 +503,7 @@ y_iris_test =<span class="st"> </span>iris_test$Species</code></pre></div>
 </div>
 <div id="regression" class="section level2">
 <h2><span class="header-section-number">12.2</span> Regression</h2>
-<p>We quickly illustrate KNN for regression using the <code>Boston</code> data. We’ll only use <code>lstat</code> as a predictor, and <code>medv</code> as the response. We won’t test-train split for this example since won’t be checking RMSE, but instead plotting fitted models. There is also no need to worry about scaling since there is only one predictor.</p>
+<p>We quickly illustrate KNN for regression using the <code>Boston</code> data. We’ll only use <code>lstat</code> as a predictor, and <code>medv</code> as the response. We won’t test-train split for this example since we won’t be checking RMSE, but instead plotting fitted models. To make plotting easier, we won’t scale the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_boston =<span class="st"> </span>Boston[<span class="st">&quot;lstat&quot;</span>]
 y_boston =<span class="st"> </span>Boston$medv</code></pre></div>
 <p>We create a “test” set, that is a grid of <code>lstat</code> values at which we will predict <code>medv</code>.</p>
@@ -512,7 +515,7 @@ pred_010 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span cl
 pred_050 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">50</span>)
 pred_100 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">100</span>)
 pred_506 =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> X_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_boston, <span class="dt">k =</span> <span class="dv">506</span>)</code></pre></div>
-<p>We make predictions for various values of <code>k</code>. Note that <code>506</code> is the number of observations in this dataset.</p>
+<p>We make predictions for various values of <code>k</code>. Note that <code>506</code> is the total number of observations in this dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>))
 
 <span class="kw">plot</span>(medv ~<span class="st"> </span>lstat, <span class="dt">data =</span> Boston, <span class="dt">cex =</span> .<span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;k = 1&quot;</span>)

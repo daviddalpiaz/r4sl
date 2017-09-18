@@ -197,7 +197,7 @@ attributes(iris_pred)$prob
 
 ## Regression
 
-We quickly illustrate KNN for regression using the `Boston` data. We'll only use `lstat` as a predictor, and `medv` as the response. We won't test-train split for this example since won't be checking RMSE, but instead plotting fitted models. There is also no need to worry about scaling since there is only one predictor.
+We quickly illustrate KNN for regression using the `Boston` data. We'll only use `lstat` as a predictor, and `medv` as the response. We won't test-train split for this example since we won't be checking RMSE, but instead plotting fitted models. To make plotting easier, we won't scale the data.
 
 ```{r}
 X_boston = Boston["lstat"]
@@ -221,7 +221,7 @@ pred_100 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 1
 pred_506 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 506)
 ```
 
-We make predictions for various values of `k`. Note that `506` is the number of observations in this dataset.
+We make predictions for various values of `k`. Note that `506` is the total number of observations in this dataset.
 
 ```{r, fig.height = 10, fig.width = 8}
 par(mfrow = c(3, 2))

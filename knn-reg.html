@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-17">
+<meta name="date" content="2017-09-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>7.1</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a></li>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#knn-in-r"><i class="fa fa-check"></i><b>7.2</b> KNN in <code>R</code></a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Simulating the Bias–Variance Tradeoff</a><ul>
 <li class="chapter" data-level="8.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.1</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.2</b> Simulation</a></li>
@@ -326,12 +329,117 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="knn-reg" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> k-Nearest Neighbors</h1>
-<p><strong>TODO:</strong> Parameteric vs Non-Parametric. Linear vs Non-Linear.</p>
-<ul>
-<li>curse of dimensionality</li>
-</ul>
+<h1><span class="header-section-number">Chapter 7</span> <span class="math inline">\(k\)</span>-Nearest Neighbors</h1>
+<!-- ## Regression Setup -->
+<!-- - $\mathbf{X}$ = $n \times p$ data matrix -->
+<!-- - $\mathbf{x}_j$ = column of data matrix. vector of length $n$. $n$ observations of predictors $j$. -->
+<!-- - $X$ = random variable. vector of length $p$, which could be 1 (not bold) -->
+<!-- - $x_i$ = predictor values for observation $i$. vector of length $p$. realization of random variable $X$. (not bold) -->
+<!-- - $Y$ = random variable. scalar. (not bold) -->
+<!-- - $y_i$ = response for observation $i$. scalar. realization of random variable $Y$. (not bold) -->
+<!-- - $i$ is for observations, of which there are $n$ -->
+<!-- - $j$ is for predictors (features), of which there are $p$ -->
+<!-- - $\mathcal{D}_{\texttt{trn}}$ is training data -->
+<!-- - $n_{\texttt{trn}}$ is size of training data -->
+<!-- - $\mathcal{D}_{\texttt{tst}}$ is training data -->
+<!-- - $n_{\texttt{tst}}$ is size of training data -->
+<!-- $$ -->
+<!-- (X, Y) \in \mathbb{R}^p \times \mathbb{R} -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- \mathcal{D} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R} -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- x_i^T = [x_{i1}, x_{i2}, \ldots x_{ip}] -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- x^T = [x_{1}, x_{2}, \ldots x_{p}] -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- \mathbf{x}_j = \begin{bmatrix} x_{1j} \\ x_{2j} \\ \vdots\\ x_{nj} \end{bmatrix} -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- \mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p] -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- \mathbf{X} = \begin{bmatrix} x_1^T \\ x_2^T \\ \vdots\\ x_n^T \end{bmatrix} -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- \mathbf{X} = [\mathbf{1}, \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p] -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots\\ y_n \end{bmatrix} -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- \mathbb{E}[(Y - f(X))^2] -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- Y = f(X) + \epsilon -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- f(x) = \mathbb{E}(Y \mid X = x) -->
+<!-- $$ -->
+<!-- ## Parametric versus Non-Parametric Models -->
+<!-- $$ -->
+<!-- f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p -->
+<!-- $$ -->
+<!-- ## Local Approaches -->
+<!-- ### Neighbors -->
+<!-- ### Neighborhoods -->
+<div id="k-nearest-neighbors" class="section level2">
+<h2><span class="header-section-number">7.1</span> <span class="math inline">\(k\)</span>-Nearest Neighbors</h2>
+<p><span class="math display">\[
+\hat{f}(x) = \frac{1}{k} \sum_{i \in \mathcal{N}_k(x, \mathcal{D})} y_i
+\]</span></p>
+</div>
+<div id="knn-in-r" class="section level2">
+<h2><span class="header-section-number">7.2</span> KNN in <code>R</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FNN)
+<span class="kw">library</span>(MASS)
+<span class="kw">data</span>(Boston)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">420</span>)
+boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nrow</span>(Boston), <span class="dt">size =</span> <span class="dv">250</span>)
+trn_boston =<span class="st"> </span>Boston[boston_idx, ]
+tst_boston  =<span class="st"> </span>Boston[-boston_idx, ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;lstat&quot;</span>]
+X_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;lstat&quot;</span>]
+y_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;medv&quot;</span>]
+y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</code></pre></div>
+<p>We create an additional “test” set <code>lstat_grid</code>, that is a grid of <code>lstat</code> values at which we will predict <code>medv</code> in order to create graphics.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_trn_boston_min =<span class="st"> </span><span class="kw">min</span>(X_trn_boston)
+X_trn_boston_max =<span class="st"> </span><span class="kw">max</span>(X_trn_boston)
+lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">seq</span>(X_trn_boston_min, X_trn_boston_max, 
+                                    <span class="dt">by =</span> <span class="fl">0.01</span>))</code></pre></div>
+<p>To perform KNN for regression, we will need <code>knn.reg()</code> from the <code>FNN</code> package. Notice that, we do <strong>not</strong> load this package, but instead use <code>FNN::knn.reg</code> to access the function. Note that, in the future, we’ll need to be care full about loading the <code>FNN</code> package as it also contains a function called <code>knn</code>. This function also appears in the <code>class</code> package which we will likely use later.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_001 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">1</span>)
+pred_005 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">5</span>)
+pred_010 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)
+pred_050 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">50</span>)
+pred_100 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">100</span>)
+pred_250 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">250</span>)</code></pre></div>
+<!-- - `train`: asdf  -->
+<!-- - `test`: asdf -->
+<!-- - `y`: ascdf -->
+<!-- - the output of `knn.reg()` is  exactly $\hat{f}(x)$ -->
+<!-- - $\hat{f}$ is estimated using `train` ($x_{\texttt{trn}}$) and `y` ($y_{\texttt{trn}}$) which together make up the training data -->
+<!-- - $x$, the values we want to predict at, is `test` -->
+<p>We make predictions for various values of <code>k</code>. Note that <code>250</code> is the total number of observations in this training dataset.</p>
+<p><img src="07-knn-reg_files/figure-html/unnamed-chunk-6-1.png" width="576" /></p>
+<!-- Orange "curve" is $\hat{f}(x)$. -->
+<p>We see that <code>k = 1</code> is clearly overfitting, as <code>k = 1</code> is a very complex, highly variable model. Conversely, <code>k = 506</code> is clearly underfitting the data, as <code>k = 506</code> is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.</p>
+<!-- - low `k` = very complex model. very wiggly. specifically jagged -->
+<!-- - high `k` = very inflexible model. very smooth. -->
+<!-- ## Choosing $k$ -->
+<!-- ## Scaling Data -->
+<!-- ## Tuning Parameters versus Model Parameters -->
+<!-- - tune/hyper = how to learn from the data, user specified -->
+<!-- - model = learned from the data, users specificies how many and form -->
+<!-- ## Linear versus Non-Linear -->
+<!-- ## Curse of Dimensionality -->
+<!-- ## Train Time versus Test Time -->
+<!-- ## Interpretability -->
 
+</div>
 </div>
             </section>
 

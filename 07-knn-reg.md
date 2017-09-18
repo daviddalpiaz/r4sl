@@ -1,6 +1,189 @@
-# k-Nearest Neighbors {#knn-reg}
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# $k$-Nearest Neighbors {#knn-reg}
+
+<!-- ## Regression Setup -->
 
 
-**TODO:** Parameteric vs Non-Parametric. Linear vs Non-Linear.
+<!-- - $\mathbf{X}$ = $n \times p$ data matrix -->
+<!-- - $\mathbf{x}_j$ = column of data matrix. vector of length $n$. $n$ observations of predictors $j$. -->
+<!-- - $X$ = random variable. vector of length $p$, which could be 1 (not bold) -->
+<!-- - $x_i$ = predictor values for observation $i$. vector of length $p$. realization of random variable $X$. (not bold) -->
+<!-- - $Y$ = random variable. scalar. (not bold) -->
+<!-- - $y_i$ = response for observation $i$. scalar. realization of random variable $Y$. (not bold) -->
 
-- curse of dimensionality
+<!-- - $i$ is for observations, of which there are $n$ -->
+<!-- - $j$ is for predictors (features), of which there are $p$ -->
+
+
+<!-- - $\mathcal{D}_{\texttt{trn}}$ is training data -->
+<!-- - $n_{\texttt{trn}}$ is size of training data -->
+<!-- - $\mathcal{D}_{\texttt{tst}}$ is training data -->
+<!-- - $n_{\texttt{tst}}$ is size of training data -->
+
+<!-- $$ -->
+<!-- (X, Y) \in \mathbb{R}^p \times \mathbb{R} -->
+<!-- $$ -->
+
+
+
+<!-- $$ -->
+<!-- \mathcal{D} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R} -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- x_i^T = [x_{i1}, x_{i2}, \ldots x_{ip}] -->
+<!-- $$ -->
+
+
+<!-- $$ -->
+<!-- x^T = [x_{1}, x_{2}, \ldots x_{p}] -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- \mathbf{x}_j = \begin{bmatrix} x_{1j} \\ x_{2j} \\ \vdots\\ x_{nj} \end{bmatrix} -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- \mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p] -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- \mathbf{X} = \begin{bmatrix} x_1^T \\ x_2^T \\ \vdots\\ x_n^T \end{bmatrix} -->
+<!-- $$ -->
+
+
+<!-- $$ -->
+<!-- \mathbf{X} = [\mathbf{1}, \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p] -->
+<!-- $$ -->
+
+
+<!-- $$ -->
+<!-- \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots\\ y_n \end{bmatrix} -->
+<!-- $$ -->
+
+
+<!-- $$ -->
+<!-- \mathbb{E}[(Y - f(X))^2] -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- Y = f(X) + \epsilon -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- f(x) = \mathbb{E}(Y \mid X = x) -->
+<!-- $$ -->
+
+
+
+<!-- ## Parametric versus Non-Parametric Models -->
+
+<!-- $$ -->
+<!-- f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p -->
+<!-- $$ -->
+
+
+<!-- ## Local Approaches -->
+
+
+<!-- ### Neighbors -->
+
+<!-- ### Neighborhoods -->
+
+
+## $k$-Nearest Neighbors
+
+$$
+\hat{f}(x) = \frac{1}{k} \sum_{i \in \mathcal{N}_k(x, \mathcal{D})} y_i
+$$
+
+
+## KNN in `R`
+
+
+```r
+library(FNN)
+library(MASS)
+data(Boston)
+```
+
+
+```r
+set.seed(420)
+boston_idx = sample(1:nrow(Boston), size = 250)
+trn_boston = Boston[boston_idx, ]
+tst_boston  = Boston[-boston_idx, ]
+```
+
+
+```r
+X_trn_boston = trn_boston["lstat"]
+X_tst_boston = tst_boston["lstat"]
+y_trn_boston = trn_boston["medv"]
+y_tst_boston = tst_boston["medv"]
+```
+
+We create an additional "test" set `lstat_grid`, that is a grid of `lstat` values at which we will predict `medv` in order to create graphics.
+
+
+```r
+X_trn_boston_min = min(X_trn_boston)
+X_trn_boston_max = max(X_trn_boston)
+lstat_grid = data.frame(lstat = seq(X_trn_boston_min, X_trn_boston_max, 
+                                    by = 0.01))
+```
+
+
+To perform KNN for regression, we will need `knn.reg()` from the `FNN` package. Notice that, we do **not** load this package, but instead use `FNN::knn.reg` to access the function. Note that, in the future, we'll need to be care full about loading the `FNN` package as it also contains a function called `knn`. This function also appears in the `class` package which we will likely use later.
+
+
+```r
+pred_001 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 1)
+pred_005 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 5)
+pred_010 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 10)
+pred_050 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 50)
+pred_100 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 100)
+pred_250 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 250)
+```
+
+<!-- - `train`: asdf  -->
+<!-- - `test`: asdf -->
+<!-- - `y`: ascdf -->
+
+<!-- - the output of `knn.reg()` is  exactly $\hat{f}(x)$ -->
+
+<!-- - $\hat{f}$ is estimated using `train` ($x_{\texttt{trn}}$) and `y` ($y_{\texttt{trn}}$) which together make up the training data -->
+<!-- - $x$, the values we want to predict at, is `test` -->
+
+We make predictions for various values of `k`. Note that `250` is the total number of observations in this training dataset.
+
+![](07-knn-reg_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+
+<!-- Orange "curve" is $\hat{f}(x)$. -->
+
+We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly variable model. Conversely, `k = 506` is clearly underfitting the data, as `k = 506` is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.
+
+
+<!-- - low `k` = very complex model. very wiggly. specifically jagged -->
+<!-- - high `k` = very inflexible model. very smooth. -->
+
+<!-- ## Choosing $k$ -->
+
+<!-- ## Scaling Data -->
+
+<!-- ## Tuning Parameters versus Model Parameters -->
+
+<!-- - tune/hyper = how to learn from the data, user specified -->
+<!-- - model = learned from the data, users specificies how many and form -->
+
+<!-- ## Linear versus Non-Linear -->
+
+<!-- ## Curse of Dimensionality -->
+
+<!-- ## Train Time versus Test Time -->
+
+<!-- ## Interpretability -->

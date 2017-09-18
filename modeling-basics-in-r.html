@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-17">
+<meta name="date" content="2017-09-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>7.1</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a></li>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#knn-in-r"><i class="fa fa-check"></i><b>7.2</b> KNN in <code>R</code></a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Simulating the Bias–Variance Tradeoff</a><ul>
 <li class="chapter" data-level="8.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.1</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.2" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.2</b> Simulation</a></li>
@@ -499,29 +502,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
-##        x1          x2         y
-##    &lt;fctr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
-##  1      A 0.568521267 0.6708344
-##  2      A 0.006749976 2.5336392
-##  3      A 0.136926670 0.6591628
-##  4      A 0.870414968 0.7581333
-##  5      A 0.655191995 0.5908502
-##  6      A 0.091077439 2.1540999
-##  7      A 0.057576359 1.1379180
-##  8      A 0.945734637 0.8039938
-##  9      A 0.238569764 0.3463936
-## 10      A 0.865996571 0.1603419
+##        x1         x2           y
+##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+##  1      A 0.22244173  1.00909081
+##  2      A 0.66909752 -0.08004807
+##  3      A 0.70285076  1.09606635
+##  4      A 0.87550659 -0.97704067
+##  5      A 0.48356697 -0.49419979
+##  6      A 0.16838118  0.26515790
+##  7      A 0.39020172 -1.06754155
+##  8      A 0.57838316 -0.04523129
+##  9      A 0.28909347  1.70737867
+## 10      A 0.08010117 -1.15575068
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##   1.1076076  -1.0011712  -0.8555905  -0.2841509</code></pre>
+##   0.5238567   0.0837818  -0.1266128  -1.1168397</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##    1.530514   -1.787939   -1.612600   -1.237338    1.728631    1.636258</code></pre>
+##   0.2203444  -0.2524179   1.0646377  -0.4362615   0.6570643  -2.8043651</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
