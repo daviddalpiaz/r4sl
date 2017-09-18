@@ -159,22 +159,22 @@ We make predictions for various values of `k`. Note that `250` is the total numb
 ```{r, fig.height = 8, fig.width = 6, echo = FALSE}
 par(mfrow = c(3, 2))
 
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 1")
+plot(medv ~ lstat, data = trn_boston, cex = .8, col = "dodgerblue", main = "k = 1")
 lines(lstat_grid$lstat, pred_001$pred, col = "darkorange", lwd = 0.25)
 
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 5")
+plot(medv ~ lstat, data = trn_boston, cex = .8, col = "dodgerblue", main = "k = 5")
 lines(lstat_grid$lstat, pred_005$pred, col = "darkorange", lwd = 0.75)
 
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 10")
+plot(medv ~ lstat, data = trn_boston, cex = .8, col = "dodgerblue", main = "k = 10")
 lines(lstat_grid$lstat, pred_010$pred, col = "darkorange", lwd = 1)
 
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 25")
+plot(medv ~ lstat, data = trn_boston, cex = .8, col = "dodgerblue", main = "k = 25")
 lines(lstat_grid$lstat, pred_050$pred, col = "darkorange", lwd = 1.5)
 
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 50")
+plot(medv ~ lstat, data = trn_boston, cex = .8, col = "dodgerblue", main = "k = 50")
 lines(lstat_grid$lstat, pred_100$pred, col = "darkorange", lwd = 2)
 
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 250")
+plot(medv ~ lstat, data = trn_boston, cex = .8, col = "dodgerblue", main = "k = 250")
 lines(lstat_grid$lstat, pred_250$pred, col = "darkorange", lwd = 2)
 ```
 
