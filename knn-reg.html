@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-18">
+<meta name="date" content="2017-09-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -397,7 +397,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FNN)
 <span class="kw">library</span>(MASS)
 <span class="kw">data</span>(Boston)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">420</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nrow</span>(Boston), <span class="dt">size =</span> <span class="dv">250</span>)
 trn_boston =<span class="st"> </span>Boston[boston_idx, ]
 tst_boston  =<span class="st"> </span>Boston[-boston_idx, ]</code></pre></div>
@@ -410,7 +410,7 @@ y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&qu
 X_trn_boston_max =<span class="st"> </span><span class="kw">max</span>(X_trn_boston)
 lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">seq</span>(X_trn_boston_min, X_trn_boston_max, 
                                     <span class="dt">by =</span> <span class="fl">0.01</span>))</code></pre></div>
-<p>To perform KNN for regression, we will need <code>knn.reg()</code> from the <code>FNN</code> package. Notice that, we do <strong>not</strong> load this package, but instead use <code>FNN::knn.reg</code> to access the function. Note that, in the future, we’ll need to be care full about loading the <code>FNN</code> package as it also contains a function called <code>knn</code>. This function also appears in the <code>class</code> package which we will likely use later.</p>
+<p>To perform KNN for regression, we will need <code>knn.reg()</code> from the <code>FNN</code> package. Notice that, we do <strong>not</strong> load this package, but instead use <code>FNN::knn.reg</code> to access the function. Note that, in the future, we’ll need to be careful about loading the <code>FNN</code> package as it also contains a function called <code>knn</code>. This function also appears in the <code>class</code> package which we will likely use later.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_001 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">1</span>)
 pred_005 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">5</span>)
 pred_010 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)
@@ -426,7 +426,7 @@ pred_250 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="
 <p>We make predictions for various values of <code>k</code>. Note that <code>250</code> is the total number of observations in this training dataset.</p>
 <p><img src="07-knn-reg_files/figure-html/unnamed-chunk-6-1.png" width="576" /></p>
 <!-- Orange "curve" is $\hat{f}(x)$. -->
-<p>We see that <code>k = 1</code> is clearly overfitting, as <code>k = 1</code> is a very complex, highly variable model. Conversely, <code>k = 506</code> is clearly underfitting the data, as <code>k = 506</code> is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.</p>
+<p>We see that <code>k = 1</code> is clearly overfitting, as <code>k = 1</code> is a very complex, highly variable model. Conversely, <code>k = 250</code> is clearly underfitting the data, as <code>k = 250</code> is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.</p>
 <!-- - low `k` = very complex model. very wiggly. specifically jagged -->
 <!-- - high `k` = very inflexible model. very smooth. -->
 <!-- ## Choosing $k$ -->

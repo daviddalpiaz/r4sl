@@ -113,7 +113,7 @@ data(Boston)
 
 
 ```r
-set.seed(420)
+set.seed(42)
 boston_idx = sample(1:nrow(Boston), size = 250)
 trn_boston = Boston[boston_idx, ]
 tst_boston  = Boston[-boston_idx, ]
@@ -138,7 +138,7 @@ lstat_grid = data.frame(lstat = seq(X_trn_boston_min, X_trn_boston_max,
 ```
 
 
-To perform KNN for regression, we will need `knn.reg()` from the `FNN` package. Notice that, we do **not** load this package, but instead use `FNN::knn.reg` to access the function. Note that, in the future, we'll need to be care full about loading the `FNN` package as it also contains a function called `knn`. This function also appears in the `class` package which we will likely use later.
+To perform KNN for regression, we will need `knn.reg()` from the `FNN` package. Notice that, we do **not** load this package, but instead use `FNN::knn.reg` to access the function. Note that, in the future, we'll need to be careful about loading the `FNN` package as it also contains a function called `knn`. This function also appears in the `class` package which we will likely use later.
 
 
 ```r
@@ -165,7 +165,7 @@ We make predictions for various values of `k`. Note that `250` is the total numb
 
 <!-- Orange "curve" is $\hat{f}(x)$. -->
 
-We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly variable model. Conversely, `k = 506` is clearly underfitting the data, as `k = 506` is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.
+We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly variable model. Conversely, `k = 250` is clearly underfitting the data, as `k = 250` is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.
 
 
 <!-- - low `k` = very complex model. very wiggly. specifically jagged -->
