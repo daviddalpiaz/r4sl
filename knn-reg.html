@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-19">
+<meta name="date" content="2017-09-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -158,6 +158,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>7.1</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a></li>
 <li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#knn-in-r"><i class="fa fa-check"></i><b>7.2</b> KNN in <code>R</code></a></li>
+<li class="chapter" data-level="7.3" data-path="knn-reg.html"><a href="knn-reg.html#choosing-k"><i class="fa fa-check"></i><b>7.3</b> Choosing <span class="math inline">\(k\)</span></a></li>
+<li class="chapter" data-level="7.4" data-path="knn-reg.html"><a href="knn-reg.html#scaling-data"><i class="fa fa-check"></i><b>7.4</b> Scaling Data</a></li>
+<li class="chapter" data-level="7.5" data-path="knn-reg.html"><a href="knn-reg.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>7.5</b> Curse of Dimensionality</a></li>
+<li class="chapter" data-level="7.6" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Simulating the Bias–Variance Tradeoff</a><ul>
 <li class="chapter" data-level="8.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.1</b> Bias-Variance Decomposition</a></li>
@@ -182,7 +186,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-1"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-2"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#classification"><i class="fa fa-check"></i><b>12.1</b> Classification</a><ul>
@@ -191,7 +195,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#regression"><i class="fa fa-check"></i><b>12.2</b> Regression</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
-<li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-2"><i class="fa fa-check"></i><b>12.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-3"><i class="fa fa-check"></i><b>12.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
 <li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
@@ -206,7 +210,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data-1"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#external-links-1"><i class="fa fa-check"></i><b>13.3</b> External Links</a></li>
-<li class="chapter" data-level="13.4" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>13.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="13.4" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#rmarkdown-4"><i class="fa fa-check"></i><b>13.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i><b>14</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="15" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>15</b> k-Means</a></li>
@@ -223,10 +227,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#parametric-and-non-parametric-methods"><i class="fa fa-check"></i>Parametric and Non-Parametric Methods</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#tuning-parameters"><i class="fa fa-check"></i>Tuning Parameters</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#cross-validation"><i class="fa fa-check"></i>Cross-Validation</a></li>
-<li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i>Curse of Dimensionality</a></li>
+<li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#curse-of-dimensionality-1"><i class="fa fa-check"></i>Curse of Dimensionality</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#no-free-lunch-theorem"><i class="fa fa-check"></i>No-Free-Lunch Theorem</a></li>
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
-<li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-4"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
+<li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-5"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>20.1</b> Test-Train Split</a></li>
@@ -237,11 +241,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.3</b> Bootstrap</a></li>
 <li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.4</b> External Links</a></li>
-<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-5"><i class="fa fa-check"></i><b>20.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-6"><i class="fa fa-check"></i><b>20.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
 <li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.1</b> External Links</a></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-6"><i class="fa fa-check"></i><b>21.2</b> RMarkdown</a></li>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-7"><i class="fa fa-check"></i><b>21.2</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
 <li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
@@ -251,7 +255,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="22.2" data-path="subset-selection.html"><a href="subset-selection.html#validated-rmse"><i class="fa fa-check"></i><b>22.2</b> Validated RMSE</a></li>
 <li class="chapter" data-level="22.3" data-path="subset-selection.html"><a href="subset-selection.html#external-links-5"><i class="fa fa-check"></i><b>22.3</b> External Links</a></li>
-<li class="chapter" data-level="22.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-7"><i class="fa fa-check"></i><b>22.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="22.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-8"><i class="fa fa-check"></i><b>22.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
@@ -261,21 +265,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
 <li class="chapter" data-level="24.4" data-path="regularization.html"><a href="regularization.html#simulation-study-p-n"><i class="fa fa-check"></i><b>24.4</b> Simulation Study, p &gt; n</a></li>
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
-<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-8"><i class="fa fa-check"></i><b>24.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-9"><i class="fa fa-check"></i><b>24.6</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>25.1</b> Hitters Data</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-regression"><i class="fa fa-check"></i><b>25.2</b> Elastic Net for Regression</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-classification"><i class="fa fa-check"></i><b>25.3</b> Elastic Net for Classification</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.4</b> External Links</a></li>
-<li class="chapter" data-level="25.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-9"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="25.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-10"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
-<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-10"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-11"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
 <li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-1"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
@@ -300,7 +304,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="27.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>27.4</b> Tree versus Ensemble Boundaries</a></li>
 <li class="chapter" data-level="27.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-9"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
-<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-11"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-12"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="artificial-neural-networks.html"><a href="artificial-neural-networks.html"><i class="fa fa-check"></i><b>28</b> Artificial Neural Networks</a></li>
 <li class="part"><span><b>VII Appendix</b></span></li>
@@ -330,62 +334,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="knn-reg" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> <span class="math inline">\(k\)</span>-Nearest Neighbors</h1>
-<!-- ## Regression Setup -->
-<!-- - $\mathbf{X}$ = $n \times p$ data matrix -->
-<!-- - $\mathbf{x}_j$ = column of data matrix. vector of length $n$. $n$ observations of predictors $j$. -->
-<!-- - $X$ = random variable. vector of length $p$, which could be 1 (not bold) -->
-<!-- - $x_i$ = predictor values for observation $i$. vector of length $p$. realization of random variable $X$. (not bold) -->
-<!-- - $Y$ = random variable. scalar. (not bold) -->
-<!-- - $y_i$ = response for observation $i$. scalar. realization of random variable $Y$. (not bold) -->
-<!-- - $i$ is for observations, of which there are $n$ -->
-<!-- - $j$ is for predictors (features), of which there are $p$ -->
-<!-- - $\mathcal{D}_{\texttt{trn}}$ is training data -->
-<!-- - $n_{\texttt{trn}}$ is size of training data -->
-<!-- - $\mathcal{D}_{\texttt{tst}}$ is training data -->
-<!-- - $n_{\texttt{tst}}$ is size of training data -->
-<!-- $$ -->
-<!-- (X, Y) \in \mathbb{R}^p \times \mathbb{R} -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \mathcal{D} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R} -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- x_i^T = [x_{i1}, x_{i2}, \ldots x_{ip}] -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- x^T = [x_{1}, x_{2}, \ldots x_{p}] -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \mathbf{x}_j = \begin{bmatrix} x_{1j} \\ x_{2j} \\ \vdots\\ x_{nj} \end{bmatrix} -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p] -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \mathbf{X} = \begin{bmatrix} x_1^T \\ x_2^T \\ \vdots\\ x_n^T \end{bmatrix} -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \mathbf{X} = [\mathbf{1}, \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p] -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots\\ y_n \end{bmatrix} -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \mathbb{E}[(Y - f(X))^2] -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- Y = f(X) + \epsilon -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- f(x) = \mathbb{E}(Y \mid X = x) -->
-<!-- $$ -->
-<!-- ## Parametric versus Non-Parametric Models -->
-<!-- $$ -->
-<!-- f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p -->
-<!-- $$ -->
-<!-- ## Local Approaches -->
-<!-- ### Neighbors -->
-<!-- ### Neighborhoods -->
 <div id="k-nearest-neighbors" class="section level2">
 <h2><span class="header-section-number">7.1</span> <span class="math inline">\(k\)</span>-Nearest Neighbors</h2>
 <p><span class="math display">\[
@@ -417,27 +365,40 @@ pred_010 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="
 pred_050 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">50</span>)
 pred_100 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">100</span>)
 pred_250 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">250</span>)</code></pre></div>
-<!-- - `train`: asdf  -->
-<!-- - `test`: asdf -->
-<!-- - `y`: ascdf -->
-<!-- - the output of `knn.reg()` is  exactly $\hat{f}(x)$ -->
-<!-- - $\hat{f}$ is estimated using `train` ($x_{\texttt{trn}}$) and `y` ($y_{\texttt{trn}}$) which together make up the training data -->
-<!-- - $x$, the values we want to predict at, is `test` -->
 <p>We make predictions for various values of <code>k</code>. Note that <code>250</code> is the total number of observations in this training dataset.</p>
 <p><img src="07-knn-reg_files/figure-html/unnamed-chunk-6-1.png" width="576" /></p>
-<!-- Orange "curve" is $\hat{f}(x)$. -->
 <p>We see that <code>k = 1</code> is clearly overfitting, as <code>k = 1</code> is a very complex, highly variable model. Conversely, <code>k = 250</code> is clearly underfitting the data, as <code>k = 250</code> is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.</p>
-<!-- - low `k` = very complex model. very wiggly. specifically jagged -->
-<!-- - high `k` = very inflexible model. very smooth. -->
-<!-- ## Choosing $k$ -->
-<!-- ## Scaling Data -->
-<!-- ## Tuning Parameters versus Model Parameters -->
-<!-- - tune/hyper = how to learn from the data, user specified -->
-<!-- - model = learned from the data, users specificies how many and form -->
-<!-- ## Linear versus Non-Linear -->
-<!-- ## Curse of Dimensionality -->
-<!-- ## Train Time versus Test Time -->
-<!-- ## Interpretability -->
+</div>
+<div id="choosing-k" class="section level2">
+<h2><span class="header-section-number">7.3</span> Choosing <span class="math inline">\(k\)</span></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate train RMSE</span>
+<span class="co"># calculate test RMSE</span></code></pre></div>
+</div>
+<div id="scaling-data" class="section level2">
+<h2><span class="header-section-number">7.4</span> Scaling Data</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_knn_data =<span class="st"> </span>function(<span class="dt">n_obs =</span> <span class="dv">50</span>) {
+  x1 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dt">length.out =</span> n_obs)
+  x2 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>)
+  x3 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
+  x4 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>)
+  x5 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>)
+  y =<span class="st"> </span>x1 ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_obs)
+  <span class="kw">data.frame</span>(y, x1, x2, x3,x4, x5)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+knn_data =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre></div>
+<p><img src="07-knn-reg_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="curse-of-dimensionality" class="section level2">
+<h2><span class="header-section-number">7.5</span> Curse of Dimensionality</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+knn_data_trn =<span class="st"> </span><span class="kw">sim_knn_data</span>()
+knn_data_tst =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre></div>
+</div>
+<div id="rmarkdown-1" class="section level2">
+<h2><span class="header-section-number">7.6</span> <code>rmarkdown</code></h2>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="07-knn-reg.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<pre><code>## [1] &quot;MASS&quot; &quot;FNN&quot;</code></pre>
 
 </div>
 </div>

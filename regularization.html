@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-19">
+<meta name="date" content="2017-09-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -158,6 +158,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>7.1</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a></li>
 <li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#knn-in-r"><i class="fa fa-check"></i><b>7.2</b> KNN in <code>R</code></a></li>
+<li class="chapter" data-level="7.3" data-path="knn-reg.html"><a href="knn-reg.html#choosing-k"><i class="fa fa-check"></i><b>7.3</b> Choosing <span class="math inline">\(k\)</span></a></li>
+<li class="chapter" data-level="7.4" data-path="knn-reg.html"><a href="knn-reg.html#scaling-data"><i class="fa fa-check"></i><b>7.4</b> Scaling Data</a></li>
+<li class="chapter" data-level="7.5" data-path="knn-reg.html"><a href="knn-reg.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>7.5</b> Curse of Dimensionality</a></li>
+<li class="chapter" data-level="7.6" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Simulating the Bias–Variance Tradeoff</a><ul>
 <li class="chapter" data-level="8.1" data-path="simulating-the-biasvariance-tradeoff.html"><a href="simulating-the-biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.1</b> Bias-Variance Decomposition</a></li>
@@ -182,7 +186,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-1"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-2"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#classification"><i class="fa fa-check"></i><b>12.1</b> Classification</a><ul>
@@ -191,7 +195,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#regression"><i class="fa fa-check"></i><b>12.2</b> Regression</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
-<li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-2"><i class="fa fa-check"></i><b>12.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-3"><i class="fa fa-check"></i><b>12.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
 <li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
@@ -206,7 +210,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data-1"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#external-links-1"><i class="fa fa-check"></i><b>13.3</b> External Links</a></li>
-<li class="chapter" data-level="13.4" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>13.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="13.4" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#rmarkdown-4"><i class="fa fa-check"></i><b>13.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="principal-component-analysis-1.html"><a href="principal-component-analysis-1.html"><i class="fa fa-check"></i><b>14</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="15" data-path="k-means.html"><a href="k-means.html"><i class="fa fa-check"></i><b>15</b> k-Means</a></li>
@@ -223,10 +227,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#parametric-and-non-parametric-methods"><i class="fa fa-check"></i>Parametric and Non-Parametric Methods</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#tuning-parameters"><i class="fa fa-check"></i>Tuning Parameters</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#cross-validation"><i class="fa fa-check"></i>Cross-Validation</a></li>
-<li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i>Curse of Dimensionality</a></li>
+<li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#curse-of-dimensionality-1"><i class="fa fa-check"></i>Curse of Dimensionality</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#no-free-lunch-theorem"><i class="fa fa-check"></i>No-Free-Lunch Theorem</a></li>
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
-<li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-4"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
+<li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-5"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>20.1</b> Test-Train Split</a></li>
@@ -237,11 +241,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.3</b> Bootstrap</a></li>
 <li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.4</b> External Links</a></li>
-<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-5"><i class="fa fa-check"></i><b>20.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-6"><i class="fa fa-check"></i><b>20.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
 <li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.1</b> External Links</a></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-6"><i class="fa fa-check"></i><b>21.2</b> RMarkdown</a></li>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-7"><i class="fa fa-check"></i><b>21.2</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
 <li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
@@ -251,7 +255,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="22.2" data-path="subset-selection.html"><a href="subset-selection.html#validated-rmse"><i class="fa fa-check"></i><b>22.2</b> Validated RMSE</a></li>
 <li class="chapter" data-level="22.3" data-path="subset-selection.html"><a href="subset-selection.html#external-links-5"><i class="fa fa-check"></i><b>22.3</b> External Links</a></li>
-<li class="chapter" data-level="22.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-7"><i class="fa fa-check"></i><b>22.4</b> RMarkdown</a></li>
+<li class="chapter" data-level="22.4" data-path="subset-selection.html"><a href="subset-selection.html#rmarkdown-8"><i class="fa fa-check"></i><b>22.4</b> RMarkdown</a></li>
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
@@ -261,21 +265,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
 <li class="chapter" data-level="24.4" data-path="regularization.html"><a href="regularization.html#simulation-study-p-n"><i class="fa fa-check"></i><b>24.4</b> Simulation Study, p &gt; n</a></li>
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
-<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-8"><i class="fa fa-check"></i><b>24.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-9"><i class="fa fa-check"></i><b>24.6</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>25.1</b> Hitters Data</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-regression"><i class="fa fa-check"></i><b>25.2</b> Elastic Net for Regression</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#elastic-net-for-classification"><i class="fa fa-check"></i><b>25.3</b> Elastic Net for Classification</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.4</b> External Links</a></li>
-<li class="chapter" data-level="25.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-9"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="25.5" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-10"><i class="fa fa-check"></i><b>25.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
-<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-10"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-11"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
 <li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-1"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
@@ -300,7 +304,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="27.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>27.4</b> Tree versus Ensemble Boundaries</a></li>
 <li class="chapter" data-level="27.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-9"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
-<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-11"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-12"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="artificial-neural-networks.html"><a href="artificial-neural-networks.html"><i class="fa fa-check"></i><b>28</b> Artificial Neural Networks</a></li>
 <li class="part"><span><b>VII Appendix</b></span></li>
@@ -393,100 +397,99 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept) 185.946731847
-## AtBat         0.096634022
-## Hits          0.408580478
-## HmRun         1.242303539
-## Runs          0.650047295
-## RBI           0.642033635
-## Walks         0.848737422
-## Years         2.608433226
-## CAtBat        0.008188531
-## CHits         0.031829975
-## CHmRun        0.235663247
-## CRuns         0.063816873
-## CRBI          0.066045116
-## CWalks        0.062642350
-## LeagueN       4.252099497
-## DivisionW   -25.296959330
-## PutOuts       0.059902888
-## Assists       0.008305300
-## Errors       -0.185603402
-## NewLeagueN    3.676189338</code></pre>
+## (Intercept) 213.066443434
+## AtBat         0.090095728
+## Hits          0.371252756
+## HmRun         1.180126956
+## Runs          0.596298287
+## RBI           0.594502390
+## Walks         0.772525466
+## Years         2.473494238
+## CAtBat        0.007597952
+## CHits         0.029272172
+## CHmRun        0.217335716
+## CRuns         0.058705097
+## CRBI          0.060722036
+## CWalks        0.058698830
+## LeagueN       3.276567828
+## DivisionW   -21.889942619
+## PutOuts       0.052667119
+## Assists       0.007463678
+## Errors       -0.145121336
+## NewLeagueN    2.972759126</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept)  7.645824e+01
-## AtBat       -6.315180e-01
-## Hits         2.642160e+00
-## HmRun       -1.388233e+00
-## Runs         1.045729e+00
-## RBI          7.315713e-01
-## Walks        3.278001e+00
-## Years       -8.723734e+00
-## CAtBat       1.256354e-04
-## CHits        1.318975e-01
-## CHmRun       6.895578e-01
-## CRuns        2.830055e-01
-## CRBI         2.514905e-01
-## CWalks      -2.599851e-01
-## LeagueN      5.233720e+01
-## DivisionW   -1.224170e+02
-## PutOuts      2.623667e-01
-## Assists      1.629044e-01
-## Errors      -3.644002e+00
-## NewLeagueN  -1.702598e+01</code></pre>
+## (Intercept)   71.78758429
+## AtBat         -0.58269657
+## Hits           2.51715272
+## HmRun         -1.39973428
+## Runs           1.07259572
+## RBI            0.74825248
+## Walks          3.17950553
+## Years         -8.35976899
+## CAtBat         0.00133718
+## CHits          0.12772556
+## CHmRun         0.68074413
+## CRuns          0.27080732
+## CRBI           0.24581306
+## CWalks        -0.24120197
+## LeagueN       51.41107146
+## DivisionW   -121.93563378
+## PutOuts        0.26073685
+## Assists        0.15595798
+## Errors        -3.59749877
+## NewLeagueN   -15.89754187</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># penalty term for lambda minimum</span></code></pre></div>
-<pre><code>## [1] 18126.85</code></pre>
+<pre><code>## [1] 17868.18</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept) 185.946731847
-## AtBat         0.096634022
-## Hits          0.408580478
-## HmRun         1.242303539
-## Runs          0.650047295
-## RBI           0.642033635
-## Walks         0.848737422
-## Years         2.608433226
-## CAtBat        0.008188531
-## CHits         0.031829975
-## CHmRun        0.235663247
-## CRuns         0.063816873
-## CRBI          0.066045116
-## CWalks        0.062642350
-## LeagueN       4.252099497
-## DivisionW   -25.296959330
-## PutOuts       0.059902888
-## Assists       0.008305300
-## Errors       -0.185603402
-## NewLeagueN    3.676189338</code></pre>
+## (Intercept) 213.066443434
+## AtBat         0.090095728
+## Hits          0.371252756
+## HmRun         1.180126956
+## Runs          0.596298287
+## RBI           0.594502390
+## Walks         0.772525466
+## Years         2.473494238
+## CAtBat        0.007597952
+## CHits         0.029272172
+## CHmRun        0.217335716
+## CRuns         0.058705097
+## CRBI          0.060722036
+## CWalks        0.058698830
+## LeagueN       3.276567828
+## DivisionW   -21.889942619
+## PutOuts       0.052667119
+## Assists       0.007463678
+## Errors       -0.145121336
+## NewLeagueN    2.972759126</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># penalty term for lambda one SE</span></code></pre></div>
-<pre><code>## [1] 681.7166</code></pre>
+<pre><code>## [1] 507.788</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#predict(fit_ridge_cv, X, s = &quot;lambda.min&quot;)</span>
 <span class="co">#predict(fit_ridge_cv, X)</span>
 <span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># &quot;train error&quot;</span></code></pre></div>
-<pre><code>## [1] 128551</code></pre>
+<pre><code>## [1] 132355.6</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm) <span class="co"># CV-RMSEs</span></code></pre></div>
-<pre><code>##  [1] 450.2517 448.5989 447.8475 447.5788 447.2851 446.9642 446.6137
-##  [8] 446.2311 445.8136 445.3583 444.8620 444.3215 443.7333 443.0935
-## [15] 442.3983 441.6435 440.8250 439.9384 438.9791 437.9426 436.8241
-## [22] 435.6191 434.3231 432.9317 431.4409 429.8468 428.1463 426.3367
-## [29] 424.4162 422.3836 420.2389 417.9835 415.6197 413.1515 410.5843
-## [36] 407.9253 405.1833 402.3684 399.4927 396.5695 393.6138 390.6413
-## [43] 387.6685 384.7126 381.7908 378.9197 376.1156 373.3935 370.7670
-## [50] 368.2484 365.8460 363.5690 361.4231 359.4118 357.5366 355.7970
-## [57] 354.1911 352.7152 351.3646 350.1336 349.0159 348.0046 347.0928
-## [64] 346.2705 345.5379 344.8875 344.3073 343.7937 343.3374 342.9423
-## [71] 342.5997 342.3011 342.0418 341.8248 341.6400 341.4827 341.3582
-## [78] 341.2516 341.1683 341.0991 341.0465 341.0025 340.9696 340.9428
-## [85] 340.9204 340.8997 340.8814 340.8603 340.8397 340.8158 340.7874
-## [92] 340.7557 340.7172 340.6776 340.6309 340.5823 340.5277 340.4724
-## [99] 340.4125</code></pre>
+<pre><code>##  [1] 452.8167 451.9123 450.5270 450.2644 449.9774 449.6637 449.3212
+##  [8] 448.9471 448.5390 448.0939 447.6088 447.0804 446.5052 445.8797
+## [15] 445.1999 444.4618 443.6613 442.7941 441.8558 440.8417 439.7474
+## [22] 438.5683 437.2999 435.9380 434.4784 432.9175 431.2520 429.4793
+## [29] 427.5973 425.6051 423.5023 421.2902 418.9709 416.5481 414.0270
+## [36] 411.4145 408.7189 405.9500 403.1193 400.2398 397.3257 394.3924
+## [43] 391.4558 388.5327 385.6395 382.7926 380.0079 377.2998 374.6820
+## [50] 372.1656 369.7609 367.4753 365.3134 363.2810 361.3789 359.6067
+## [57] 357.9625 356.4431 355.0438 353.7591 352.5828 351.5083 350.5286
+## [64] 349.6341 348.8239 348.0899 347.4286 346.8250 346.2733 345.7796
+## [71] 345.3342 344.9260 344.5571 344.2301 343.9210 343.6446 343.3930
+## [78] 343.1536 342.9343 342.7318 342.5383 342.3526 342.1741 341.9986
+## [85] 341.8285 341.6585 341.4858 341.3148 341.1415 340.9640 340.7851
+## [92] 340.6021 340.4174 340.2260 340.0363 339.8411 339.6462 339.4520</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre></div>
-<pre><code>## [1] 340.4125</code></pre>
+<pre><code>## [1] 339.452</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.1se]) <span class="co"># CV-RMSE one SE</span></code></pre></div>
-<pre><code>## [1] 363.569</code></pre>
+<pre><code>## [1] 372.1656</code></pre>
 </div>
 <div id="lasso" class="section level2">
 <h2><span class="header-section-number">24.2</span> Lasso</h2>
@@ -510,97 +513,97 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 <p><code>cv.glmnet()</code> returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                       1
-## (Intercept) 251.4491563
-## AtBat         .        
-## Hits          1.0036044
-## HmRun         .        
-## Runs          .        
-## RBI           .        
-## Walks         0.9857987
-## Years         .        
-## CAtBat        .        
-## CHits         .        
-## CHmRun        .        
-## CRuns         0.1094218
-## CRBI          0.2911570
-## CWalks        .        
-## LeagueN       .        
-## DivisionW     .        
-## PutOuts       .        
-## Assists       .        
-## Errors        .        
-## NewLeagueN    .</code></pre>
+##                        1
+## (Intercept) 2.220974e+02
+## AtBat       .           
+## Hits        1.129009e+00
+## HmRun       .           
+## Runs        .           
+## RBI         .           
+## Walks       1.172062e+00
+## Years       .           
+## CAtBat      .           
+## CHits       .           
+## CHmRun      .           
+## CRuns       1.147170e-01
+## CRBI        3.085475e-01
+## CWalks      .           
+## LeagueN     .           
+## DivisionW   .           
+## PutOuts     1.763115e-03
+## Assists     .           
+## Errors      .           
+## NewLeagueN  .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                       1
-## (Intercept)  32.7706512
-## AtBat         .        
-## Hits          1.8163016
-## HmRun         .        
-## Runs          .        
-## RBI           .        
-## Walks         2.1477573
-## Years         .        
-## CAtBat        .        
-## CHits         .        
-## CHmRun        .        
-## CRuns         0.2023860
-## CRBI          0.4037369
-## CWalks        .        
-## LeagueN       .        
-## DivisionW   -92.7379602
-## PutOuts       0.2055130
-## Assists       .        
-## Errors        .        
-## NewLeagueN    .</code></pre>
+##                        1
+## (Intercept)  123.7520756
+## AtBat         -1.5473426
+## Hits           5.6608972
+## HmRun          .        
+## Runs           .        
+## RBI            .        
+## Walks          4.7296908
+## Years         -9.5958375
+## CAtBat         .        
+## CHits          .        
+## CHmRun         0.5108207
+## CRuns          0.6594856
+## CRBI           0.3927505
+## CWalks        -0.5291586
+## LeagueN       32.0650811
+## DivisionW   -119.2990171
+## PutOuts        0.2724045
+## Assists        0.1732025
+## Errors        -2.0585083
+## NewLeagueN     .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>])) <span class="co"># penalty term for lambda minimum</span></code></pre></div>
-<pre><code>## [1] 97.51365</code></pre>
+<pre><code>## [1] 177.4942</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                       1
-## (Intercept) 251.4491563
-## AtBat         .        
-## Hits          1.0036044
-## HmRun         .        
-## Runs          .        
-## RBI           .        
-## Walks         0.9857987
-## Years         .        
-## CAtBat        .        
-## CHits         .        
-## CHmRun        .        
-## CRuns         0.1094218
-## CRBI          0.2911570
-## CWalks        .        
-## LeagueN       .        
-## DivisionW     .        
-## PutOuts       .        
-## Assists       .        
-## Errors        .        
-## NewLeagueN    .</code></pre>
+##                        1
+## (Intercept) 2.220974e+02
+## AtBat       .           
+## Hits        1.129009e+00
+## HmRun       .           
+## Runs        .           
+## RBI         .           
+## Walks       1.172062e+00
+## Years       .           
+## CAtBat      .           
+## CHits       .           
+## CHmRun      .           
+## CRuns       1.147170e-01
+## CRBI        3.085475e-01
+## CWalks      .           
+## LeagueN     .           
+## DivisionW   .           
+## PutOuts     1.763115e-03
+## Assists     .           
+## Errors      .           
+## NewLeagueN  .</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>])) <span class="co"># penalty term for lambda one SE</span></code></pre></div>
-<pre><code>## [1] 2.389982</code></pre>
+<pre><code>## [1] 2.726099</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#predict(fit_lasso_cv, X, s = &quot;lambda.min&quot;)</span>
 <span class="co">#predict(fit_lasso_cv, X)</span>
 <span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># &quot;train error&quot;</span></code></pre></div>
-<pre><code>## [1] 134647.7</code></pre>
+<pre><code>## [1] 130946.2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm)</code></pre></div>
-<pre><code>##  [1] 451.3735 443.2663 432.9563 423.9398 415.5175 406.0348 397.0740
-##  [8] 389.1412 382.4962 376.9255 372.2385 367.8489 363.7419 360.1882
-## [15] 356.9974 354.1421 351.6801 349.5928 347.7003 346.1425 344.8748
-## [22] 343.8431 343.0068 342.3316 341.8490 341.5578 341.4207 341.4222
-## [29] 341.4828 341.6101 341.8085 342.0102 342.2200 342.3968 342.6883
-## [36] 343.2905 344.1009 344.7910 345.2106 345.3800 345.2739 345.0829
-## [43] 344.7544 344.3415 343.9460 343.3417 342.9988 342.7789 342.6161
-## [50] 342.5975 342.7232 342.8502 342.9784 343.1723 343.2837 343.3792
-## [57] 343.4259 343.3984 343.3456 343.3112 343.3341 343.3873 343.5089
-## [64] 343.6419 343.8110 343.9698 344.1442 344.3279 344.4327 344.6200
-## [71] 344.6952 344.8466 344.8768 344.9581</code></pre>
+<pre><code>##  [1] 451.2732 440.9818 430.3942 421.7172 414.1446 406.4761 398.3409
+##  [8] 390.9581 384.6689 379.5181 375.2554 371.5409 368.3482 365.4372
+## [15] 362.5450 359.5039 356.6528 354.1993 352.1572 350.4533 349.0347
+## [22] 347.8522 346.8681 346.0520 345.3742 344.8147 344.3661 344.0419
+## [29] 343.8275 343.6819 343.6025 343.5300 343.4754 343.5088 343.6888
+## [36] 343.8517 344.2022 344.5988 345.0574 345.5338 345.6408 344.9717
+## [43] 344.0318 343.0558 342.1892 341.5264 341.0644 340.7629 340.5415
+## [50] 340.4919 340.5518 340.7961 341.1241 341.5593 342.0566 342.5641
+## [57] 343.0200 343.4095 343.7087 344.0094 344.3105 344.5515 344.7959
+## [64] 345.0784 345.2938 345.4863 345.7220 345.9328 346.1071 346.2647
+## [71] 346.4508 346.6102 346.7429 346.8593 346.9704 347.1419</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre></div>
-<pre><code>## [1] 341.4207</code></pre>
+<pre><code>## [1] 340.4919</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.1se]) <span class="co"># CV-RMSE one SE</span></code></pre></div>
-<pre><code>## [1] 376.9255</code></pre>
+<pre><code>## [1] 375.2554</code></pre>
 </div>
 <div id="broom" class="section level2">
 <h2><span class="header-section-number">24.3</span> <code>broom</code></h2>
@@ -609,83 +612,85 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 <span class="co">#fit_lasso_cv</span>
 <span class="kw">tidy</span>(fit_lasso_cv)</code></pre></div>
 <pre><code>##         lambda estimate std.error conf.high  conf.low nzero
-## 1  255.2820965 203738.0  40937.37  244675.4 162800.68     0
-## 2  232.6035386 196485.0  41261.64  237746.6 155223.34     1
-## 3  211.9396813 187451.2  39855.69  227306.9 147595.51     2
-## 4  193.1115442 179725.0  38545.89  218270.9 141179.08     2
-## 5  175.9560468 172654.8  37333.58  209988.4 135321.23     3
-## 6  160.3245966 164864.2  36209.18  201073.4 128655.07     4
-## 7  146.0818013 157667.7  35196.79  192864.5 122470.94     4
-## 8  133.1042967 151430.9  34287.31  185718.2 117143.58     4
-## 9  121.2796778 146303.3  33558.33  179861.7 112745.01     4
-## 10 110.5055255 142072.9  33002.39  175075.3 109070.48     4
-## 11 100.6885192 138561.5  32526.40  171087.9 106035.08     5
-## 12  91.7436287 135312.8  32086.30  167399.1 103226.53     5
-## 13  83.5933775 132308.2  31746.71  164054.9 100561.45     5
-## 14  76.1671723 129735.6  31473.82  161209.4  98261.75     5
-## 15  69.4006906 127447.2  31267.52  158714.7  96179.65     6
-## 16  63.2353245 125416.6  31097.86  156514.5  94318.79     6
-## 17  57.6176726 123678.9  30958.31  154637.2  92720.58     6
-## 18  52.4990774 122215.1  30783.36  152998.5  91431.74     6
-## 19  47.8352040 120895.5  30501.53  151397.0  90393.95     6
-## 20  43.5856563 119814.6  30242.70  150057.3  89571.90     6
-## 21  39.7136268 118938.6  30013.78  148952.4  88924.86     6
-## 22  36.1855776 118228.1  29810.51  148038.6  88417.56     6
-## 23  32.9709506 117653.6  29630.05  147283.7  88023.60     6
-## 24  30.0419022 117190.9  29469.18  146660.1  87721.75     6
-## 25  27.3730624 116860.8  29320.02  146180.8  87540.74     6
-## 26  24.9413150 116661.7  29177.33  145839.1  87484.42     6
-## 27  22.7255973 116568.1  29044.46  145612.6  87523.64     6
-## 28  20.7067179 116569.1  28923.68  145492.8  87645.41     6
-## 29  18.8671902 116610.5  28819.72  145430.2  87790.75     6
-## 30  17.1910810 116697.5  28742.55  145440.0  87954.91     7
-## 31  15.6638727 116833.1  28694.94  145528.0  88138.14     7
-## 32  14.2723374 116971.0  28658.37  145629.3  88312.61     7
-## 33  13.0044223 117114.5  28625.44  145740.0  88489.08     9
-## 34  11.8491453 117235.6  28598.65  145834.2  88636.93     9
-## 35  10.7964999 117435.3  28568.65  146003.9  88866.61     9
-## 36   9.8373686 117848.4  28538.31  146386.7  89310.09     9
-## 37   8.9634439 118405.5  28521.60  146927.1  89883.86     9
-## 38   8.1671562 118880.8  28515.31  147396.2  90365.54    11
-## 39   7.4416086 119170.3  28514.02  147684.4  90656.32    11
-## 40   6.7805166 119287.3  28455.09  147742.4  90832.24    12
-## 41   6.1781542 119214.1  28279.36  147493.5  90934.74    12
-## 42   5.6293040 119082.2  28093.67  147175.9  90988.54    13
-## 43   5.1292121 118855.6  27836.65  146692.2  91018.95    13
-## 44   4.6735471 118571.1  27504.79  146075.9  91066.29    13
-## 45   4.2583620 118298.9  27207.50  145506.4  91091.38    13
-## 46   3.8800609 117883.5  26960.00  144843.5  90923.51    13
-## 47   3.5353670 117648.2  26777.64  144425.8  90870.57    13
-## 48   3.2212947 117497.4  26636.17  144133.6  90861.21    13
-## 49   2.9351238 117385.8  26511.38  143897.1  90874.38    13
-## 50   2.6743755 117373.1  26379.34  143752.4  90993.72    13
-## 51   2.4367913 117459.2  26244.50  143703.7  91214.69    13
-## 52   2.2203135 117546.3  26110.10  143656.4  91436.17    14
-## 53   2.0230670 117634.2  25991.02  143625.2  91643.17    15
-## 54   1.8433433 117767.2  25921.05  143688.3  91846.18    15
-## 55   1.6795857 117843.7  25868.51  143712.2  91975.18    17
-## 56   1.5303760 117909.3  25815.54  143724.8  92093.72    17
-## 57   1.3944216 117941.4  25749.01  143690.4  92192.37    17
-## 58   1.2705450 117922.4  25679.16  143601.6  92243.28    17
-## 59   1.1576733 117886.2  25629.03  143515.2  92257.16    17
-## 60   1.0548288 117862.6  25595.45  143458.0  92267.12    17
-## 61   0.9611207 117878.3  25565.28  143443.6  92313.04    17
-## 62   0.8757374 117914.9  25538.17  143453.0  92376.70    17
-## 63   0.7979393 117998.4  25524.04  143522.4  92474.35    17
-## 64   0.7270526 118089.7  25534.04  143623.8  92555.68    17
-## 65   0.6624632 118206.0  25551.64  143757.7  92654.39    18
-## 66   0.6036118 118315.2  25567.20  143882.4  92748.00    18
-## 67   0.5499886 118435.3  25581.84  144017.1  92853.41    18
-## 68   0.5011291 118561.7  25593.26  144155.0  92968.47    17
-## 69   0.4566102 118633.9  25614.00  144247.9  93019.88    18
-## 70   0.4160462 118763.0  25613.37  144376.3  93149.60    18
-## 71   0.3790858 118814.8  25630.45  144445.2  93184.34    18
-## 72   0.3454089 118919.1  25634.81  144554.0  93284.34    18
-## 73   0.3147237 118940.0  25647.55  144587.6  93292.49    18
-## 74   0.2867645 118996.1  25659.44  144655.5  93336.63    18</code></pre>
+## 1  255.2820965 203647.5  32102.12  235749.6 171545.36     0
+## 2  232.6035386 194465.0  32003.90  226468.9 162461.05     1
+## 3  211.9396813 185239.2  31485.81  216725.0 153753.39     2
+## 4  193.1115442 177845.4  31185.66  209031.1 146659.74     2
+## 5  175.9560468 171515.7  31067.70  202583.4 140448.05     3
+## 6  160.3245966 165222.8  30956.12  196178.9 134266.71     4
+## 7  146.0818013 158675.4  30827.76  189503.2 127847.68     4
+## 8  133.1042967 152848.3  30710.92  183559.2 122137.33     4
+## 9  121.2796778 147970.1  30645.06  178615.2 117325.09     4
+## 10 110.5055255 144034.0  30514.18  174548.2 113519.83     4
+## 11 100.6885192 140816.6  30383.98  171200.6 110432.62     5
+## 12  91.7436287 138042.7  30288.68  168331.3 107753.97     5
+## 13  83.5933775 135680.4  30239.63  165920.1 105440.80     5
+## 14  76.1671723 133544.4  30218.24  163762.6 103326.12     5
+## 15  69.4006906 131438.9  30026.76  161465.7 101412.13     6
+## 16  63.2353245 129243.0  29759.97  159003.0  99483.05     6
+## 17  57.6176726 127201.2  29516.92  156718.1  97684.28     6
+## 18  52.4990774 125457.2  29325.06  154782.2  96132.09     6
+## 19  47.8352040 124014.7  29167.93  153182.7  94846.79     6
+## 20  43.5856563 122817.5  29036.21  151853.7  93781.33     6
+## 21  39.7136268 121825.2  28925.34  150750.6  92899.90     6
+## 22  36.1855776 121001.1  28831.59  149832.7  92169.56     6
+## 23  32.9709506 120317.5  28752.61  149070.1  91564.86     6
+## 24  30.0419022 119752.0  28686.40  148438.4  91065.60     6
+## 25  27.3730624 119283.3  28630.60  147913.9  90652.72     6
+## 26  24.9413150 118897.2  28583.59  147480.8  90313.59     6
+## 27  22.7255973 118588.0  28543.43  147131.4  90044.56     6
+## 28  20.7067179 118364.8  28517.90  146882.7  89846.93     6
+## 29  18.8671902 118217.3  28494.70  146712.0  89722.62     6
+## 30  17.1910810 118117.3  28474.84  146592.1  89642.43     7
+## 31  15.6638727 118062.7  28458.74  146521.4  89603.93     7
+## 32  14.2723374 118012.9  28450.34  146463.2  89562.51     7
+## 33  13.0044223 117975.4  28440.12  146415.5  89535.25     9
+## 34  11.8491453 117998.3  28414.70  146413.0  89583.59     9
+## 35  10.7964999 118122.0  28376.34  146498.4  89745.68     9
+## 36   9.8373686 118234.0  28334.64  146568.6  89899.36     9
+## 37   8.9634439 118475.1  28274.17  146749.3  90200.98     9
+## 38   8.1671562 118748.3  28222.00  146970.3  90526.32    11
+## 39   7.4416086 119064.6  28190.16  147254.8  90874.44    11
+## 40   6.7805166 119393.6  28129.63  147523.3  91263.99    12
+## 41   6.1781542 119467.5  27964.46  147432.0  91503.08    12
+## 42   5.6293040 119005.5  27634.70  146640.2  91370.79    13
+## 43   5.1292121 118357.9  27298.78  145656.7  91059.12    13
+## 44   4.6735471 117687.3  27009.67  144697.0  90677.64    13
+## 45   4.2583620 117093.5  26731.19  143824.6  90362.27    13
+## 46   3.8800609 116640.3  26516.45  143156.8  90123.86    13
+## 47   3.5353670 116324.9  26357.36  142682.3  89967.55    13
+## 48   3.2212947 116119.3  26218.88  142338.2  89900.46    13
+## 49   2.9351238 115968.5  26096.06  142064.6  89872.46    13
+## 50   2.6743755 115934.7  25974.08  141908.8  89960.63    13
+## 51   2.4367913 115975.6  25819.00  141794.6  90156.56    13
+## 52   2.2203135 116142.0  25655.55  141797.5  90486.41    14
+## 53   2.0230670 116365.7  25505.05  141870.7  90860.61    15
+## 54   1.8433433 116662.8  25375.60  142038.4  91287.16    15
+## 55   1.6795857 117002.7  25255.54  142258.3  91747.18    17
+## 56   1.5303760 117350.1  25154.07  142504.2  92196.07    17
+## 57   1.3944216 117662.7  25070.76  142733.5  92591.97    17
+## 58   1.2705450 117930.1  24993.67  142923.7  92936.39    17
+## 59   1.1576733 118135.7  24924.09  143059.8  93211.60    17
+## 60   1.0548288 118342.5  24863.46  143205.9  93479.00    17
+## 61   0.9611207 118549.7  24810.04  143359.7  93739.65    17
+## 62   0.8757374 118715.7  24766.53  143482.3  93949.21    17
+## 63   0.7979393 118884.2  24726.89  143611.1  94157.33    17
+## 64   0.7270526 119079.1  24688.30  143767.4  94390.80    17
+## 65   0.6624632 119227.8  24608.94  143836.7  94618.84    18
+## 66   0.6036118 119360.8  24522.53  143883.3  94838.23    18
+## 67   0.5499886 119523.7  24467.10  143990.8  95056.60    18
+## 68   0.5011291 119669.5  24390.51  144060.0  95278.96    17
+## 69   0.4566102 119790.1  24341.38  144131.5  95448.75    18
+## 70   0.4160462 119899.2  24293.99  144193.2  95605.22    18
+## 71   0.3790858 120028.2  24243.76  144271.9  95784.42    18
+## 72   0.3454089 120138.6  24208.75  144347.4  95929.85    18
+## 73   0.3147237 120230.6  24166.40  144397.0  96064.22    18
+## 74   0.2867645 120311.4  24142.01  144453.4  96169.39    18
+## 75   0.2612891 120388.5  24106.93  144495.4  96281.56    18
+## 76   0.2380769 120507.5  24083.90  144591.4  96423.62    18</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glance</span>(fit_lasso_cv) <span class="co"># the two lambda values of interest</span></code></pre></div>
 <pre><code>##   lambda.min lambda.1se
-## 1    22.7256   110.5055</code></pre>
+## 1   2.674375   100.6885</code></pre>
 </div>
 <div id="simulation-study-p-n" class="section level2">
 <h2><span class="header-section-number">24.4</span> Simulation Study, p &gt; n</h2>
@@ -778,7 +783,7 @@ fit_lasso$results</code></pre></div>
 <li><a href="https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html"><code>glmnet</code> Web Vingette</a> - Details from the package developers.</li>
 </ul>
 </div>
-<div id="rmarkdown-8" class="section level2">
+<div id="rmarkdown-9" class="section level2">
 <h2><span class="header-section-number">24.6</span> RMarkdown</h2>
 <p>The RMarkdown file for this chapter can be found <a href="15-shrink.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.1 and the following packages:</p>
 <ul>
