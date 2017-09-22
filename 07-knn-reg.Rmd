@@ -1,10 +1,77 @@
 # $k$-Nearest Neighbors {#knn-reg}
 
-## $k$-Nearest Neighbors
+**Chapter Status:** Under Constructions. Main ideas in place but lack narrative. Functional version of much of the code exist but will be cleaned up. Some code and simulation examples need to be expanded.
+
+- TODO: last chapter..
+
+- TODO: recall goal
+    - frame around estimating regression function
+
+
+## Parametric versus Non-Parametric Models
+
+- TODO: How they estimate...
 
 $$
-\hat{f}(x) = \frac{1}{k} \sum_{i \in \mathcal{N}_k(x, \mathcal{D})} y_i
+f(x) = \mathbb{E}[Y \mid X = x]
 $$
+
+- TODO: parametric approaches assume form
+
+$$
+f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p
+$$
+
+- TODO: non-parametric methods consider locality
+
+$$
+\hat{f}(x) = \text{average}(\{ y_i : x_i = x \})
+$$
+
+- TODO: since often no points will satisfy that requirement
+
+$$
+\hat{f}(x) = \text{average}( \{ y_i : x_i \text{ equal to (or very close to) x} \} )
+$$
+
+
+## Local Approaches
+
+- TODO: how do you figure out what is local? what is "close to"?
+
+
+### Neighbors
+
+- example: knn
+
+
+### Neighborhoods
+
+- example: trees
+
+
+## $k$-Nearest Neighbors
+
+- TODO: for a concrete example of a non-parametric method...
+
+$$
+\hat{f}_k(x) = \frac{1}{k} \sum_{i \in \mathcal{N}_k(x, \mathcal{D})} y_i
+$$
+
+- TODO: how is nearest defined?
+    - usually euclidean, but could be any distance
+- TODO: implicit minimization (compared to explicit minimization in lm())
+    - fitting really just amounts to picking a k, and seeing the training data
+- TODO: basic picture
+    - for various k's?
+
+
+## Tuning Parameters versus Model Parameters
+
+- tune (hyper) = how to learn from the data, user specified
+    - not specific to non-parametric methods
+- model = learned from the data, user specifies how many and form
+
 
 ## KNN in `R`
 
@@ -39,6 +106,21 @@ lstat_grid = data.frame(lstat = seq(X_trn_boston_min, X_trn_boston_max,
 
 To perform KNN for regression, we will need `knn.reg()` from the `FNN` package. Notice that, we do **not** load this package, but instead use `FNN::knn.reg` to access the function. Note that, in the future, we'll need to be careful about loading the `FNN` package as it also contains a function called `knn`. This function also appears in the `class` package which we will likely use later.
 
+```{r, eval = FALSE}
+knn.reg(train = ?, test = ?, y = ?, k = ?)
+```
+
+INPUT
+
+- `train`: the predictors of the training data
+- `test`: the predictor values, $x$, at which we would like to make predictions
+- `y`: the response for the training data
+- `k`: the number of neighbors to consider
+
+OUTPUT
+
+- the output of `knn.reg()` is exactly $\hat{f}_k(x)$
+
 ```{r}
 pred_001 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 1)
 pred_005 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 5)
@@ -48,7 +130,7 @@ pred_100 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k 
 pred_250 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k = 250)
 ```
 
-We make predictions for various values of `k`. Note that `250` is the total number of observations in this training dataset.
+We make predictions for a large number of possible values of `lstat`, for different values of `k`. Note that `250` is the total number of observations in this training dataset.
 
 ```{r, fig.height = 8, fig.width = 6, echo = FALSE}
 par(mfrow = c(3, 2))
@@ -72,18 +154,98 @@ plot(medv ~ lstat, data = trn_boston, cex = .8, col = "dodgerblue", main = "k = 
 lines(lstat_grid$lstat, pred_250$pred, col = "darkorange", lwd = 2)
 ```
 
+- TODO: Orange "curves" are $\hat{f}_k(x)$ where $x$ are the values we defined in `lstat_grid`. So really a bunch of predictions with interpolated lines, but you can't really tell...
+
 We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly variable model. Conversely, `k = 250` is clearly underfitting the data, as `k = 250` is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.
 
 
 ## Choosing $k$
 
+- low `k` = very complex model. very wiggly. specifically jagged
+- high `k` = very inflexible model. very smooth.
+
+- want: something in the middle which predicts well on unseen data
+- that is, want $\hat{f}_k$ to minimize
+
+$$
+\text{EPE}\left(Y, \hat{f}_k(X)\right) = 
+\mathbb{E}_{X, Y, \mathcal{D}} \left[  (Y - \hat{f}_k(X))^2 \right]
+$$
+
+- TODO: Test MSE is an estimate of this. So finding best test RMSE will be our strategy. (Best test RMSE is same as best MSE, but with more understandable units.)
+
 ```{r}
-# calculate train RMSE
-# calculate test RMSE
+rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
 ```
 
+```{r}
+# define helper function for getting knn.reg predictions
+# note: this function is highly specific to this situation and dataset
+make_knn_pred = function(k = 1, training, predicting) {
+  pred = FNN::knn.reg(train = training["lstat"], 
+                      test = predicting["lstat"], 
+                      y = training$medv, k = k)$pred
+  act  = predicting$medv
+  rmse(predicted = pred, actual = act)
+}
+```
+
+```{r}
+# define values of k to evaluate
+k = c(1, 5, 10, 25, 50, 250)
+```
+
+```{r}
+# get requested train RMSEs
+knn_trn_rmse = sapply(k, make_knn_pred, 
+                      training = trn_boston, 
+                      predicting = trn_boston)
+# get requested test RMSEs
+knn_tst_rmse = sapply(k, make_knn_pred, 
+                      training = trn_boston, 
+                      predicting = tst_boston)
+
+# determine "best" k
+best_k = k[which.min(knn_tst_rmse)]
+
+# find overfitting, underfitting, and "best"" k
+fit_status = ifelse(k < best_k, "Over", ifelse(k == best_k, "Best", "Under"))
+```
+
+```{r}
+# summarize results
+knn_results = data.frame(
+  k,
+  round(knn_trn_rmse, 2),
+  round(knn_tst_rmse, 2),
+  fit_status
+)
+colnames(knn_results) = c("k", "Train RMSE", "Test RMSE", "Fit?")
+
+# display results
+knitr::kable(knn_results)
+```
+
+- TODO: What about ties? why isn't k = 1 give 0 training error? There are some non-unique $x_i$ values in the training data. How do we predict when this is the case?
+
+
+## Linear versus Non-Linear
+
+- TODO; linear relationship example
+    - lm() works well
+    - knn "automatically" approximates
+    
+- TODO: very non-linear example
+    - lm() fails badly
+        - could work if ...
+    - knn "automatically" approximates
+    
 
 ## Scaling Data
+
+- TODO: Sometimes "scale" differentiates between center and scale. `R` function `scale()` does both by default. Outputs variables with mean = 0, var = 1.
 
 ```{r}
 sim_knn_data = function(n_obs = 50) {
@@ -111,6 +273,15 @@ plot(scale(x1) ~ scale(x2), data = knn_data, xlim = c(-2, 2), ylim = c(-2, 10), 
 points((1.7 - 1.197685) / 0.6072974, (10 - 5) / 2.974975)
 ```
 
+- TODO: How should we scale the test data?
+
+- TODO: Show that linear regression is invariant to scaling. KNN is not.
+		- y = b0 + b1x1 + b2x2 + e
+		- y = b0 + b1x1_ + b2x2_ + e
+		- how are these coefficients related
+		- define how the scaling
+		- RMSE for both, RMSE for both ways KNN
+
 
 ## Curse of Dimensionality
 
@@ -119,6 +290,71 @@ set.seed(42)
 knn_data_trn = sim_knn_data()
 knn_data_tst = sim_knn_data()
 ```
+
+```{r}
+# define helper function for getting knn.reg predictions
+# note: this function is highly specific to this situation and dataset
+make_knn_pred = function(k = 1, X_trn, X_pred, y_trn, y_pred) {
+  pred = FNN::knn.reg(train = scale(X_trn), test = scale(X_pred), y = y_pred, k = k)$pred
+  act  = y_pred
+  rmse(predicted = pred, actual = act)
+}
+```
+
+```{r}
+# TODO: DRY
+cod_train_rmse = c(
+  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_trn["x1"],  y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_trn[, 2:3], y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_trn[, 2:4], y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_trn[, 2:5], y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_trn[, 2:6], y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]))
+```
+
+```{r}
+# TODO: DRY
+cod_test_rmse = c(
+  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_tst["x1"],  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_tst[, 2:3], y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_tst[, 2:4], y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_tst[, 2:5], y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_tst[, 2:6], y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]))
+```
+
+
+```{r}
+cod_results = data.frame(
+  dimension = c(1, 2, 3, 4, 5),
+  cod_train_rmse,
+  cod_test_rmse
+)
+
+colnames(cod_results) = c("$p$, Dimension", "Train RMSE", "Test RMSE")
+
+knitr::kable(cod_results)
+```
+
+
+
+- TODO: Local becomes less local.
+
+
+## Train Time versus Test Time
+
+- TODO: lm vs knn
+    - lm: "slow" train, "fast" test
+    - knn: "fast" train, "slow" test
+ 
+
+## Interpretability
+
+- TODO: lm (high) vs knn (low)
+    - somewhat generalizes to parametric vs non-parametric
+
+
+## Data Example
+
+- TODO: `Boston` with multiple variables (maybe, 3? all?), decide on a $k$ and if scaling is appropriate.
 
 
 ## `rmarkdown`
