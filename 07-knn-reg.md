@@ -216,26 +216,21 @@ knn_results = data.frame(
 colnames(knn_results) = c("k", "Train RMSE", "Test RMSE", "Fit?")
 
 # display results
-knitr::kable(knn_results)
+knitr::kable(knn_results, escape = FALSE, booktabs = TRUE)
 ```
 
 
-\begin{tabular}{r|r|r|l}
-\hline
+\begin{tabular}{rrrl}
+\toprule
 k & Train RMSE & Test RMSE & Fit?\\
-\hline
+\midrule
 1 & 2.22 & 7.50 & Over\\
-\hline
 5 & 4.30 & 5.89 & Over\\
-\hline
 10 & 4.60 & 5.72 & Over\\
-\hline
 25 & 4.66 & 5.71 & Best\\
-\hline
 50 & 4.99 & 6.03 & Under\\
-\hline
 250 & 8.90 & 9.47 & Under\\
-\hline
+\bottomrule
 \end{tabular}
 
 - TODO: What about ties? why isn't k = 1 give 0 training error? There are some non-unique $x_i$ values in the training data. How do we predict when this is the case?

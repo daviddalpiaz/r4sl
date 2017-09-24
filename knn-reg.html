@@ -527,7 +527,7 @@ knn_results =<span class="st"> </span><span class="kw">data.frame</span>(
 <span class="kw">colnames</span>(knn_results) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;k&quot;</span>, <span class="st">&quot;Train RMSE&quot;</span>, <span class="st">&quot;Test RMSE&quot;</span>, <span class="st">&quot;Fit?&quot;</span>)
 
 <span class="co"># display results</span>
-knitr::<span class="kw">kable</span>(knn_results)</code></pre></div>
+knitr::<span class="kw">kable</span>(knn_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <table>
 <thead>
 <tr class="header">

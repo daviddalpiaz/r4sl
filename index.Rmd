@@ -13,6 +13,11 @@ description: ""
 favicon: "favicon.ico"
 ---
 
+```{r, setup, include = FALSE}
+library(knitr)
+opts_knit$set(fig.align = "center")
+```
+
 
 # Introduction {-}
 
