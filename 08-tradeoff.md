@@ -387,14 +387,14 @@ mse = apply(predictions, 2, get_mse, truth = f(x = 0.90))
 We summarize these results in the following table.
 
 
-\begin{tabular}{lrrrr}
+\begin{tabular}{rrrr}
 \toprule
-Model & Degree & Mean Squared Error & Bias Squared & Variance\\
+Degree & Mean Squared Error & Bias Squared & Variance\\
 \midrule
-\$\textbackslash{}hat\{f\}\_0(x)\$ & 0 & 0.22643 & 0.22476 & 0.00167\\
-\$\textbackslash{}hat\{f\}\_1(x)\$ & 1 & 0.00829 & 0.00508 & 0.00322\\
-\$\textbackslash{}hat\{f\}\_2(x)\$ & 2 & 0.00387 & 0.00005 & 0.00381\\
-\$\textbackslash{}hat\{f\}\_9(x)\$ & 9 & 0.01019 & 0.00002 & 0.01017\\
+0 & 0.22643 & 0.22476 & 0.00167\\
+1 & 0.00829 & 0.00508 & 0.00322\\
+2 & 0.00387 & 0.00005 & 0.00381\\
+9 & 0.01019 & 0.00002 & 0.01017\\
 \bottomrule
 \end{tabular}
 

@@ -602,15 +602,14 @@ We summarize these results in the following table.
 
 ```{r, echo = FALSE}
 results = data.frame(
-  model = c("$\\hat{f}_0(x)$", "$\\hat{f}_1(x)$", "$\\hat{f}_2(x)$", "$\\hat{f}_9(x)$"),
   poly_degree = c(0, 1, 2, 9),
   round(mse, 5),
   round(bias ^ 2, 5),
   round(variance, 5)
 )
-colnames(results) = c("Model", "Degree", "Mean Squared Error", "Bias Squared", "Variance")
+colnames(results) = c("Degree", "Mean Squared Error", "Bias Squared", "Variance")
 rownames(results) = NULL
-knitr::kable(results, booktabs = TRUE, escape = TRUE)
+knitr::kable(results, booktabs = TRUE)
 ```
 
 A number of things to notice here:
