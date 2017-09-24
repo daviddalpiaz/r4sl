@@ -341,24 +341,20 @@ cod_results = data.frame(
 
 colnames(cod_results) = c("$p$, Dimension", "Train RMSE", "Test RMSE")
 
-knitr::kable(cod_results, escape = FALSE)
+knitr::kable(cod_results, escape = FALSE, booktabs = TRUE)
 ```
 
 
-\begin{tabular}{r|r|r}
-\hline
+\begin{tabular}{rrr}
+\toprule
 $p$, Dimension & Train RMSE & Test RMSE\\
-\hline
+\midrule
 1 & 1.413569 & 1.510538\\
-\hline
 2 & 5.407340 & 7.273415\\
-\hline
 3 & 8.726803 & 10.654934\\
-\hline
 4 & 10.310148 & 12.844738\\
-\hline
 5 & 12.101930 & 14.250704\\
-\hline
+\bottomrule
 \end{tabular}
 
 
