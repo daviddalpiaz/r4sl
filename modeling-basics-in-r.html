@@ -517,29 +517,31 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
-##        x1         x2          y
-##    &lt;fctr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1      A 0.83241792 -0.9053636
-##  2      A 0.04421576 -0.8943207
-##  3      A 0.61143615  0.1036569
-##  4      A 0.18183371 -0.9874642
-##  5      A 0.71460640  0.6231479
-##  6      A 0.22276632 -0.2091199
-##  7      A 0.21119703  1.0962895
-##  8      A 0.05814385 -0.6194520
-##  9      A 0.62566201  0.3942161
-## 10      A 0.89719532 -0.7757958
+##        x1         x2           y
+##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+##  1      A 0.63837462  1.43856182
+##  2      A 0.10688573  0.44472908
+##  3      A 0.55729545 -1.90334237
+##  4      A 0.01518943  0.03782271
+##  5      A 0.87111654  1.97152431
+##  6      A 0.41497017 -1.22779626
+##  7      A 0.30033595  1.81906311
+##  8      A 0.48923772 -0.53311054
+##  9      A 0.60931630 -1.15856458
+## 10      A 0.95369238 -0.33731811
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  -0.1717744   0.5075137   0.5477080  -0.1037538</code></pre>
+##   0.2656553  -0.1091097   0.1510766  -0.4246990</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
-<pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.3044277   1.1283750   0.6256429   0.1977670  -1.2301534  -0.1731308</code></pre>
+<pre><code>##  (Intercept)          x1B          x1C           x2       x1B:x2 
+## -0.004570633  0.433214911  0.408324032  0.120505563 -1.089090053 
+##       x1C:x2 
+## -0.520233001</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>

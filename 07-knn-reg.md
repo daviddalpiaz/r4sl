@@ -372,7 +372,42 @@ $p$, Dimension & Train RMSE & Test RMSE\\
 
 ## Data Example
 
-- TODO: `Boston` with multiple variables (maybe, 3? all?), decide on a $k$ and if scaling is appropriate.
+Returning to the `Boston` dataset, we now use all of the available predictors.
+
+
+```r
+X_trn_boston = trn_boston[, !names(trn_boston) %in% c("medv")]
+X_tst_boston = tst_boston[, !names(tst_boston) %in% c("medv")]
+y_trn_boston = trn_boston["medv"]
+y_tst_boston = tst_boston["medv"]
+```
+
+
+```r
+scaled_pred = knn.reg(train = scale(X_trn_boston), test = scale(X_tst_boston), 
+                      y = y_trn_boston, k = 25)$pred
+unscaled_pred = knn.reg(train = X_trn_boston, test = X_tst_boston, 
+                        y = y_trn_boston, k = 25)$pred
+
+# test rmse
+rmse(predicted = scaled_pred, actual = y_tst_boston) # with scaling
+```
+
+```
+## [1] 6.188467
+```
+
+```r
+rmse(predicted = unscaled_pred, actual = y_tst_boston) # without scaling
+```
+
+```
+## [1] 8.268603
+```
+
+Here we see that scaling makes little-to-no difference. The unscaled data performs slightly better, but probably not enough to truly make a difference.
+
+Can you improve this model? Can you find a better $k$? Can you find a better model by only using some of the predictors?
 
 
 ## `rmarkdown`
