@@ -602,7 +602,7 @@ We summarize these results in the following table.
 
 ```{r, echo = FALSE, asis = TRUE}
 results = data.frame(
-  model = c("`fit_0`", "`fit_1`", "`fit_2`", "`fit_9`"),
+  model = c("$\\hat{f}_0(x)$", "$\\hat{f}_1(x)$", "$\\hat{f}_2(x)$", "$\\hat{f}_9(x)$"),
   poly_degree = c(0, 1, 2, 9),
   round(mse, 5),
   round(bias ^ 2, 5),
