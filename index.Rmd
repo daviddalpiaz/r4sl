@@ -13,9 +13,8 @@ description: ""
 favicon: "favicon.ico"
 ---
 
-```{r, setup, include = FALSE}
-library(knitr)
-opts_knit$set(fig.align = "center")
+```{r global.options, include = FALSE}
+knitr::opts_chunk$set(fig.align = "center")
 ```
 
 
