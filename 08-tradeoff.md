@@ -591,3 +591,8 @@ $$
 the expected prediction error. (In practice we prefer RMSE to MSE for comparing models because of the units.)
 
 How good is this estimate? Well, if $\mathcal{D}$ is a random sample from $(X, Y)$, and $\texttt{tst}$ is randomly sampled from $i = 1, 2, \ldots, n$, then it is an unbiased estimate. However, it is variable. How variable? It turns out, pretty variable. It's unbiasedness justifies it as an estimate for now, but we'll fix the variability issue later.
+
+
+## `rmarkdown`
+
+The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 3.4.1.
