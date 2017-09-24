@@ -389,12 +389,12 @@ We summarize these results in the following table.
 
 \begin{tabular}{lrrrr}
 \toprule
-Model & Polynomial Degree & Mean Squared Error & Bias Squared & Variance\\
+Model & Degree & Mean Squared Error & Bias Squared & Variance\\
 \midrule
-`fit\_0` & 0 & 0.22643 & 0.22476 & 0.00167\\
-`fit\_1` & 1 & 0.00829 & 0.00508 & 0.00322\\
-`fit\_2` & 2 & 0.00387 & 0.00005 & 0.00381\\
-`fit\_9` & 9 & 0.01019 & 0.00002 & 0.01017\\
+\$\textbackslash{}hat\{f\}\_0(x)\$ & 0 & 0.22643 & 0.22476 & 0.00167\\
+\$\textbackslash{}hat\{f\}\_1(x)\$ & 1 & 0.00829 & 0.00508 & 0.00322\\
+\$\textbackslash{}hat\{f\}\_2(x)\$ & 2 & 0.00387 & 0.00005 & 0.00381\\
+\$\textbackslash{}hat\{f\}\_9(x)\$ & 9 & 0.01019 & 0.00002 & 0.01017\\
 \bottomrule
 \end{tabular}
 
