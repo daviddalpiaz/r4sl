@@ -341,13 +341,13 @@ cod_results = data.frame(
 
 colnames(cod_results) = c("$p$, Dimension", "Train RMSE", "Test RMSE")
 
-knitr::kable(cod_results)
+knitr::kable(cod_results, escape = FALSE)
 ```
 
 
 \begin{tabular}{r|r|r}
 \hline
-\$p\$, Dimension & Train RMSE & Test RMSE\\
+$p$, Dimension & Train RMSE & Test RMSE\\
 \hline
 1 & 1.413569 & 1.510538\\
 \hline

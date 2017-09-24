@@ -331,7 +331,7 @@ cod_results = data.frame(
 
 colnames(cod_results) = c("$p$, Dimension", "Train RMSE", "Test RMSE")
 
-knitr::kable(cod_results)
+knitr::kable(cod_results, escape = FALSE)
 ```
 
 

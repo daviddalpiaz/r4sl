@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.1 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-22">
+<meta name="date" content="2017-09-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -104,13 +104,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>0.1</b> About This Book</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i><b>0.2</b> Organization</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.3</b> Who?</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.4</b> Caveat Emptor</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>0.5</b> Conventions</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
-<li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.7</b> License</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
@@ -518,27 +518,27 @@ cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
 ##        x1         x2          y
 ##    &lt;fctr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1      A 0.11225329 -1.8867518
-##  2      A 0.16737926 -1.1598361
-##  3      A 0.67127496 -1.1948505
-##  4      A 0.67099728  0.1635414
-##  5      A 0.45680785  0.5334474
-##  6      A 0.63346099  1.1082412
-##  7      A 0.18389921 -0.2190827
-##  8      A 0.36929306  1.0402649
-##  9      A 0.08486231 -0.0180929
-## 10      A 0.28735507  2.2899981
+##  1      A 0.39156417 -1.9087241
+##  2      A 0.95426363  1.3963319
+##  3      A 0.47666423 -0.6289961
+##  4      A 0.26759187 -0.4007283
+##  5      A 0.16777428 -2.0489447
+##  6      A 0.05561599  1.2826676
+##  7      A 0.49041464 -0.2670781
+##  8      A 0.88220322  1.3158477
+##  9      A 0.82025002 -1.5216983
+## 10      A 0.79005356 -0.6726188
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  0.05484600  0.21004890 -0.49006686  0.02980525</code></pre>
+##  -0.9547052  -0.2412889   0.3408689   1.1504260</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.3880094   0.8818390  -0.0198604   1.2472492  -1.8341760  -1.2642212</code></pre>
+##  -0.9222467  -1.7803641   0.5859652   1.0891417   3.3076101  -0.5882120</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
