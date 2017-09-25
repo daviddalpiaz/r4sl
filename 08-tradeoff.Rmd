@@ -306,7 +306,7 @@ get_sim_data = function(f, sample_size = 100) {
 
 To completely specify the data generating process, we have made more model assumptions than simply $\mathbb{E}[Y \mid X = x] = x^2$ and $\mathbb{V}[Y \mid X = x] = \sigma ^ 2$. In particular,
 
-- The $x_i$ in $\mathcal{D}$ are sampled from a uniform distribution over $[0, 2]$.
+- The $x_i$ in $\mathcal{D}$ are sampled from a uniform distribution over $[0, 1]$.
 - The $x_i$ and $\epsilon$ are independent.
 - The $y_i$ in $\mathcal{D}$ are sampled from the conditional normal distribution.
 
@@ -772,4 +772,4 @@ How good is this estimate? Well, if $\mathcal{D}$ is a random sample from $(X, Y
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`.
+The `rmarkdown` file for this chapter can be found [**here**](08-tradeoff.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`.
