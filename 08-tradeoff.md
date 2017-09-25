@@ -156,7 +156,7 @@ As model complexity increases, bias decreases, while variance increases. By unde
 
 ## Simulation
 
-We will illustrate these decompositions, most importantly the bias-variance tradeoff, through simulation. Suppose we would like a train a model to learn the true regression function function $f(x) = x^2$.
+We will illustrate these decompositions, most importantly the bias-variance tradeoff, through simulation. Suppose we would like to train a model to learn the true regression function function $f(x) = x^2$.
 
 
 ```r

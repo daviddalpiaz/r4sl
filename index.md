@@ -1,7 +1,7 @@
 --- 
 title: "`R` for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2017-09-24"
+date: "2017-09-25"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
