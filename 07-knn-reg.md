@@ -385,16 +385,16 @@ y_tst_boston = tst_boston["medv"]
 
 ```r
 scaled_pred = knn.reg(train = scale(X_trn_boston), test = scale(X_tst_boston), 
-                      y = y_trn_boston, k = 25)$pred
+                      y = y_trn_boston, k = 10)$pred
 unscaled_pred = knn.reg(train = X_trn_boston, test = X_tst_boston, 
-                        y = y_trn_boston, k = 25)$pred
+                        y = y_trn_boston, k = 10)$pred
 
 # test rmse
 rmse(predicted = scaled_pred, actual = y_tst_boston) # with scaling
 ```
 
 ```
-## [1] 6.188467
+## [1] 5.709402
 ```
 
 ```r
@@ -402,10 +402,10 @@ rmse(predicted = unscaled_pred, actual = y_tst_boston) # without scaling
 ```
 
 ```
-## [1] 8.268603
+## [1] 7.540342
 ```
 
-Here we see that scaling makes little-to-no difference. The unscaled data performs slightly better, but probably not enough to truly make a difference.
+Here we see that scaling makes a pretty big difference.
 
 Can you improve this model? Can you find a better $k$? Can you find a better model by only using some of the predictors?
 

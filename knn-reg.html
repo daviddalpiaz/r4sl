@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-26">
+<meta name="date" content="2017-09-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -724,16 +724,16 @@ X_tst_boston =<span class="st"> </span>tst_boston[, !<span class="kw">names</spa
 y_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;medv&quot;</span>]
 y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn_boston), <span class="dt">test =</span> <span class="kw">scale</span>(X_tst_boston), 
-                      <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">25</span>)$pred
+                      <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)$pred
 unscaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> X_tst_boston, 
-                        <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">25</span>)$pred
+                        <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)$pred
 
 <span class="co"># test rmse</span>
 <span class="kw">rmse</span>(<span class="dt">predicted =</span> scaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># with scaling</span></code></pre></div>
-<pre><code>## [1] 6.188467</code></pre>
+<pre><code>## [1] 5.709402</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmse</span>(<span class="dt">predicted =</span> unscaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># without scaling</span></code></pre></div>
-<pre><code>## [1] 8.268603</code></pre>
-<p>Here we see that scaling makes little-to-no difference. The unscaled data performs slightly better, but probably not enough to truly make a difference.</p>
+<pre><code>## [1] 7.540342</code></pre>
+<p>Here we see that scaling makes a pretty big difference.</p>
 <p>Can you improve this model? Can you find a better <span class="math inline">\(k\)</span>? Can you find a better model by only using some of the predictors?</p>
 </div>
 <div id="rmarkdown-1" class="section level2">
