@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-27">
+<meta name="date" content="2017-09-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,7 +147,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#regression-notation"><i class="fa fa-check"></i><b>5.1</b> Regression Notation</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
@@ -390,8 +392,61 @@ Y = f(\bf{x}) + \epsilon
 \]</span></p>
 <p><span class="math display">\[
 \text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Test Data}) = \sqrt{\frac{1}{n_{\text{Te}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
+\]</span> - TODO: RSS vs <span class="math inline">\(R^2\)</span> vs RMSE</p>
+<div id="regression-notation" class="section level2">
+<h2><span class="header-section-number">5.1</span> Regression Notation</h2>
+<ul>
+<li><span class="math inline">\(\mathbf{X}\)</span> = <span class="math inline">\(n \times p\)</span> data matrix</li>
+<li><span class="math inline">\(\mathbf{x}_j\)</span> = column of data matrix. vector of length <span class="math inline">\(n\)</span>. <span class="math inline">\(n\)</span> observations of predictors <span class="math inline">\(j\)</span>.</li>
+<li><span class="math inline">\(X\)</span> = random variable. vector of length <span class="math inline">\(p\)</span>, which could be 1 (not bold)</li>
+<li><span class="math inline">\(x_i\)</span> = predictor values for observation <span class="math inline">\(i\)</span>. vector of length <span class="math inline">\(p\)</span>. realization of random variable <span class="math inline">\(X\)</span>. (not bold)</li>
+<li><span class="math inline">\(Y\)</span> = random variable. scalar. (not bold)</li>
+<li><p><span class="math inline">\(y_i\)</span> = response for observation <span class="math inline">\(i\)</span>. scalar. realization of random variable <span class="math inline">\(Y\)</span>. (not bold)</p></li>
+<li><span class="math inline">\(i\)</span> is for observations, of which there are <span class="math inline">\(n\)</span></li>
+<li><p><span class="math inline">\(j\)</span> is for predictors (features), of which there are <span class="math inline">\(p\)</span></p></li>
+<li><span class="math inline">\(\mathcal{D}_{\texttt{trn}}\)</span> is training data</li>
+<li><span class="math inline">\(n_{\texttt{trn}}\)</span> is size of training data</li>
+<li><span class="math inline">\(\mathcal{D}_{\texttt{tst}}\)</span> is training data</li>
+<li><p><span class="math inline">\(n_{\texttt{tst}}\)</span> is size of training data</p></li>
+</ul>
+<p><span class="math display">\[
+(X, Y) \in \mathbb{R}^p \times \mathbb{R}
+\]</span></p>
+<p><span class="math display">\[
+\mathcal{D} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}
+\]</span></p>
+<p><span class="math display">\[
+x_i^T = [x_{i1}, x_{i2}, \ldots x_{ip}]
+\]</span></p>
+<p><span class="math display">\[
+x^T = [x_{1}, x_{2}, \ldots x_{p}]
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{x}_j = \begin{bmatrix} x_{1j} \\ x_{2j} \\ \vdots\\ x_{nj} \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p]
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{X} = \begin{bmatrix} x_1^T \\ x_2^T \\ \vdots\\ x_n^T \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{X} = [\mathbf{1}, \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p]
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots\\ y_n \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\mathbb{E}[(Y - f(X))^2]
+\]</span></p>
+<p><span class="math display">\[
+Y = f(X) + \epsilon
+\]</span></p>
+<p><span class="math display">\[
+f(x) = \mathbb{E}(Y \mid X = x)
 \]</span></p>
 
+</div>
 </div>
             </section>
 

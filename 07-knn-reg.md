@@ -297,7 +297,7 @@ knn_data_tst = sim_knn_data()
 # define helper function for getting knn.reg predictions
 # note: this function is highly specific to this situation and dataset
 make_knn_pred = function(k = 1, X_trn, X_pred, y_trn, y_pred) {
-  pred = FNN::knn.reg(train = scale(X_trn), test = scale(X_pred), y = y_pred, k = k)$pred
+  pred = FNN::knn.reg(train = scale(X_trn), test = scale(X_pred), y = y_trn, k = k)$pred
   act  = y_pred
   rmse(predicted = pred, actual = act)
 }
@@ -307,22 +307,32 @@ make_knn_pred = function(k = 1, X_trn, X_pred, y_trn, y_pred) {
 ```r
 # TODO: DRY
 cod_train_rmse = c(
-  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_trn["x1"],  y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_trn[, 2:3], y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_trn[, 2:4], y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_trn[, 2:5], y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_trn[, 2:6], y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]))
+  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_trn["x1"],  
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_trn[, 2:3], 
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_trn[, 2:4], 
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_trn[, 2:5], 
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_trn[, 2:6], 
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]))
 ```
 
 
 ```r
 # TODO: DRY
 cod_test_rmse = c(
-  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_tst["x1"],  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_tst[, 2:3], y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_tst[, 2:4], y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_tst[, 2:5], y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_tst[, 2:6], y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]))
+  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_tst["x1"],  
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_tst[, 2:3], 
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_tst[, 2:4], 
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_tst[, 2:5], 
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_tst[, 2:6], 
+                 y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]))
 ```
 
 
@@ -344,11 +354,11 @@ knitr::kable(cod_results, escape = FALSE, booktabs = TRUE)
 \toprule
 $p$, Dimension & Train RMSE & Test RMSE\\
 \midrule
-1 & 1.413569 & 1.510538\\
-2 & 5.407340 & 7.273415\\
-3 & 8.726803 & 10.654934\\
-4 & 10.310148 & 12.844738\\
-5 & 12.101930 & 14.250704\\
+1 & 1.413569 & 1.565495\\
+2 & 5.407340 & 7.212414\\
+3 & 8.726803 & 10.629993\\
+4 & 10.310148 & 12.933572\\
+5 & 12.101930 & 14.256241\\
 \bottomrule
 \end{tabular}
 

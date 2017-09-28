@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-27">
+<meta name="date" content="2017-09-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,7 +147,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#regression-notation"><i class="fa fa-check"></i><b>5.1</b> Regression Notation</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
@@ -630,24 +632,34 @@ knn_data_tst =<span class="st"> </span><span class="kw">sim_knn_data</span>()</c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define helper function for getting knn.reg predictions</span>
 <span class="co"># note: this function is highly specific to this situation and dataset</span>
 make_knn_pred =<span class="st"> </span>function(<span class="dt">k =</span> <span class="dv">1</span>, X_trn, X_pred, y_trn, y_pred) {
-  pred =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn), <span class="dt">test =</span> <span class="kw">scale</span>(X_pred), <span class="dt">y =</span> y_pred, <span class="dt">k =</span> k)$pred
+  pred =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn), <span class="dt">test =</span> <span class="kw">scale</span>(X_pred), <span class="dt">y =</span> y_trn, <span class="dt">k =</span> k)$pred
   act  =<span class="st"> </span>y_pred
   <span class="kw">rmse</span>(<span class="dt">predicted =</span> pred, <span class="dt">actual =</span> act)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># TODO: DRY</span>
 cod_train_rmse =<span class="st"> </span><span class="kw">c</span>(
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]))</code></pre></div>
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># TODO: DRY</span>
 cod_test_rmse =<span class="st"> </span><span class="kw">c</span>(
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_tst[<span class="st">&quot;x1&quot;</span>],  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">3</span>], <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">4</span>], <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">6</span>], <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]))</code></pre></div>
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_tst[<span class="st">&quot;x1&quot;</span>],  
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">3</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">4</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">5</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">6</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cod_results =<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="dt">dimension =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),
   cod_train_rmse,
@@ -669,27 +681,27 @@ knitr::<span class="kw">kable</span>(cod_results, <span class="dt">escape =</spa
 <tr class="odd">
 <td align="right">1</td>
 <td align="right">1.413569</td>
-<td align="right">1.510538</td>
+<td align="right">1.565495</td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
 <td align="right">5.407340</td>
-<td align="right">7.273415</td>
+<td align="right">7.212414</td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
 <td align="right">8.726803</td>
-<td align="right">10.654934</td>
+<td align="right">10.629993</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
 <td align="right">10.310148</td>
-<td align="right">12.844738</td>
+<td align="right">12.933572</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
 <td align="right">12.101930</td>
-<td align="right">14.250704</td>
+<td align="right">14.256241</td>
 </tr>
 </tbody>
 </table>
