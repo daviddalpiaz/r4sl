@@ -6,10 +6,10 @@
 
 ![](images/classification.png)
 
-That is, the classifier $\hat{C}$ returns the predicted category $\hat{y}$.
+That is, the classifier $\hat{C}(x)$ returns the predicted category $\hat{y}(X)$.
 
 $$
-\hat{y}_i = \hat{C}(\bf x_i)
+\hat{y}(x) = \hat{C}(x)
 $$
 
 To build our first classifier, we will use the `Default` dataset from the `ISLR` package.
@@ -80,7 +80,7 @@ library(caret)
 A density plot can often suggest a simple split based on a numeric predictor. Essentially this plot graphs a density estimate
 
 $$
-f_{X_i}(x_i \mid y = k)
+\hat{f}_{X_i}(x_i \mid Y = k)
 $$
 
 for each numeric predictor $x_i$ and each category $k$ of the response $y$.
@@ -161,7 +161,7 @@ Similar to `pairs` is a plot of type `ellipse`, which requires the `ellipse` pac
 A very simple classifier is a rule based on a boundary $b$ for a particular input variable $x$.
 
 $$
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
       1 & x > b \\
       0 & x \leq b 
@@ -171,10 +171,10 @@ $$
 Based on the first plot, we believe we can use `balance` to create a reasonable classifier. In particular,
 
 $$
-\hat{C}(\text{balance}) = 
+\hat{C}(\texttt{balance}) = 
 \begin{cases} 
-      \text{Yes} & \text{balance} > 1400 \\
-      \text{No} & \text{balance} \leq 1400 
+      \text{Yes} & \texttt{balance} > 1400 \\
+      \text{No} & \texttt{balance} \leq 1400 
    \end{cases}
 $$
 
@@ -276,54 +276,54 @@ train_con_mat = confusionMatrix(train_tab, positive = "Yes")
 ## 
 ```
 
-The most common, and most important metric is the **classification accuracy**. 
+The most common, and most important metric is the **classification error**. 
 
 $$
-\text{Acc}(\hat{C}, \text{Data}) = \frac{1}{n}\sum_{i = 1}^{n}I(y_i = \hat{C}(\bf x_i))
+\text{err}(\hat{C}, \text{Data}) = \frac{1}{n}\sum_{i = 1}^{n}I(y_i \neq \hat{C}(x_i))
 $$
 
 Here, $I$ is an indicator function, so we are essentially calculating the proportion of predicted classes that match the true class.
 
 $$
-I(y_i = \hat{C}(x)) = 
+I(y_i \neq \hat{C}(x)) = 
 \begin{cases} 
-  1 & y_i = \hat{C}(x) \\
-  0 & y_i \neq \hat{C}(x) \\
+  1 & y_i \neq \hat{C}(x) \\
+  0 & y_i = \hat{C}(x) \\
 \end{cases}
 $$
 
-It is also common to discuss the **misclassification rate**, or classification error, which is simply one minus the accuracy.
+It is also common to discuss the **accuracy**, which is simply one minus the error.
 
-Like regression, we often split the data, and then consider Train Accuracy and Test Accuracy. Test Accuracy will be used as a measure of how well a classifier will work on unseen future data.
-
-$$
-\text{Acc}_{\text{Train}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{Tr}}\sum_{i \in \text{Train}}^{}I(y_i = \hat{C}(\bf x_i))
-$$
+Like regression, we often split the data, and then consider Train (Classification) Error and Test (Classification) Error will be used as a measure of how well a classifier will work on unseen future data.
 
 $$
-\text{Acc}_{\text{Test}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{Te}}\sum_{i \in \text{Test}}^{}I(y_i = \hat{C}(\bf x_i))
+\text{err}_{\texttt{trn}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{\texttt{trn}}}\sum_{i \in \texttt{trn}}^{}I(y_i = \hat{C}(x_i))
 $$
 
-These accuracy values are given by calling `confusionMatrix()`, or, if stored, can be accessed directly.
+$$
+\text{err}_{\texttt{tst}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{\texttt{tst}}}\sum_{i \in \texttt{tst}}^{}I(y_i = \hat{C}(x_i))
+$$
+
+These accuracy values are given by calling `confusionMatrix()`, or, if stored, can be accessed directly. Here, we use this to obtain error rates.
 
 
 ```r
-train_con_mat$overall["Accuracy"]
+1 - train_con_mat$overall["Accuracy"]
 ```
 
 ```
 ## Accuracy 
-##   0.8916
+##   0.1084
 ```
 
 
 ```r
-test_con_mat$overall["Accuracy"]
+1 - test_con_mat$overall["Accuracy"]
 ```
 
 ```
 ## Accuracy 
-##   0.9006
+##   0.0994
 ```
 
 Sometimes guarding against making certain errors, FP or FN, are more important than simply finding the best accuracy. Thus, sometimes we will consider **sensitivity** and **specificity**.
@@ -386,10 +386,10 @@ test_con_mat$byClass["Prevalence"]
 Here, we see an extremely low prevalence, which suggests an even simpler classifier than our current based on `balance`.
 
 $$
-\hat{C}(\text{balance}) = 
+\hat{C}(\texttt{balance}) = 
 \begin{cases} 
-      \text{No} & \text{balance} > 1400 \\
-      \text{No} & \text{balance} \leq 1400 
+      \text{No} & \texttt{balance} > 1400 \\
+      \text{No} & \texttt{balance} \leq 1400 
    \end{cases}
 $$
 
@@ -412,27 +412,27 @@ The `confusionMatrix()` function won't even accept this table as input, because 
 
 
 ```r
-4835 / (4835 + 165) # test accuracy
+165 / (4835 + 165) # test error
 ```
 
 ```
-## [1] 0.967
-```
-
-```r
-1 - 0.0336 # 1 - (train prevelence)
-```
-
-```
-## [1] 0.9664
+## [1] 0.033
 ```
 
 ```r
-1 - 0.033 # 1 - (test prevelence)
+0.0336 # train prevelence
 ```
 
 ```
-## [1] 0.967
+## [1] 0.0336
 ```
 
-This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test accuracy better than 0.967, which is obtained by simply manipulating the prevalence. Next chapter, we'll introduce much better classifiers which should have no problem accomplishing this task.
+```r
+0.033 # test prevelence
+```
+
+```
+## [1] 0.033
+```
+
+This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test error better than 0.033, which is obtained by simply manipulating the prevalence. Next chapter, we'll introduce much better classifiers which should have no problem accomplishing this task.

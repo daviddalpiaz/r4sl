@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-28">
+<meta name="date" content="2017-09-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -353,9 +353,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="images/classification.png" alt="" />
 
 </div>
-<p>That is, the classifier <span class="math inline">\(\hat{C}\)</span> returns the predicted category <span class="math inline">\(\hat{y}\)</span>.</p>
+<p>That is, the classifier <span class="math inline">\(\hat{C}(x)\)</span> returns the predicted category <span class="math inline">\(\hat{y}(X)\)</span>.</p>
 <p><span class="math display">\[
-\hat{y}_i = \hat{C}(\bf x_i)
+\hat{y}(x) = \hat{C}(x)
 \]</span></p>
 <p>To build our first classifier, we will use the <code>Default</code> dataset from the <code>ISLR</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
@@ -391,7 +391,7 @@ test_default =<span class="st"> </span>Default[-train_index, ]</code></pre></div
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre></div>
 <p>A density plot can often suggest a simple split based on a numeric predictor. Essentially this plot graphs a density estimate</p>
 <p><span class="math display">\[
-f_{X_i}(x_i \mid y = k)
+\hat{f}_{X_i}(x_i \mid Y = k)
 \]</span></p>
 <p>for each numeric predictor <span class="math inline">\(x_i\)</span> and each category <span class="math inline">\(k\)</span> of the response <span class="math inline">\(y\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">featurePlot</span>(<span class="dt">x =</span> train_default[, <span class="kw">c</span>(<span class="st">&quot;balance&quot;</span>, <span class="st">&quot;income&quot;</span>)], 
@@ -445,7 +445,7 @@ f_{X_i}(x_i \mid y = k)
 <h2><span class="header-section-number">9.2</span> A Simple Classifier</h2>
 <p>A very simple classifier is a rule based on a boundary <span class="math inline">\(b\)</span> for a particular input variable <span class="math inline">\(x\)</span>.</p>
 <p><span class="math display">\[
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
       1 &amp; x &gt; b \\
       0 &amp; x \leq b 
@@ -453,10 +453,10 @@ f_{X_i}(x_i \mid y = k)
 \]</span></p>
 <p>Based on the first plot, we believe we can use <code>balance</code> to create a reasonable classifier. In particular,</p>
 <p><span class="math display">\[
-\hat{C}(\text{balance}) = 
+\hat{C}(\texttt{balance}) = 
 \begin{cases} 
-      \text{Yes} &amp; \text{balance} &gt; 1400 \\
-      \text{No} &amp; \text{balance} \leq 1400 
+      \text{Yes} &amp; \texttt{balance} &gt; 1400 \\
+      \text{No} &amp; \texttt{balance} \leq 1400 
    \end{cases}
 \]</span></p>
 <p>So we predict an individual is a defaulter if their <code>balance</code> is above 1400, and not a defaulter if the balance is 1400 or less.</p>
@@ -520,33 +520,33 @@ test_pred =<span class="st"> </span><span class="kw">simple_class</span>(<span c
 ##                                          
 ##        &#39;Positive&#39; Class : Yes            
 ## </code></pre>
-<p>The most common, and most important metric is the <strong>classification accuracy</strong>.</p>
+<p>The most common, and most important metric is the <strong>classification error</strong>.</p>
 <p><span class="math display">\[
-\text{Acc}(\hat{C}, \text{Data}) = \frac{1}{n}\sum_{i = 1}^{n}I(y_i = \hat{C}(\bf x_i))
+\text{err}(\hat{C}, \text{Data}) = \frac{1}{n}\sum_{i = 1}^{n}I(y_i \neq \hat{C}(x_i))
 \]</span></p>
 <p>Here, <span class="math inline">\(I\)</span> is an indicator function, so we are essentially calculating the proportion of predicted classes that match the true class.</p>
 <p><span class="math display">\[
-I(y_i = \hat{C}(x)) = 
+I(y_i \neq \hat{C}(x)) = 
 \begin{cases} 
-  1 &amp; y_i = \hat{C}(x) \\
-  0 &amp; y_i \neq \hat{C}(x) \\
+  1 &amp; y_i \neq \hat{C}(x) \\
+  0 &amp; y_i = \hat{C}(x) \\
 \end{cases}
 \]</span></p>
-<p>It is also common to discuss the <strong>misclassification rate</strong>, or classification error, which is simply one minus the accuracy.</p>
-<p>Like regression, we often split the data, and then consider Train Accuracy and Test Accuracy. Test Accuracy will be used as a measure of how well a classifier will work on unseen future data.</p>
+<p>It is also common to discuss the <strong>accuracy</strong>, which is simply one minus the error.</p>
+<p>Like regression, we often split the data, and then consider Train (Classification) Error and Test (Classification) Error will be used as a measure of how well a classifier will work on unseen future data.</p>
 <p><span class="math display">\[
-\text{Acc}_{\text{Train}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{Tr}}\sum_{i \in \text{Train}}^{}I(y_i = \hat{C}(\bf x_i))
+\text{err}_{\texttt{trn}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{\texttt{trn}}}\sum_{i \in \texttt{trn}}^{}I(y_i = \hat{C}(x_i))
 \]</span></p>
 <p><span class="math display">\[
-\text{Acc}_{\text{Test}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{Te}}\sum_{i \in \text{Test}}^{}I(y_i = \hat{C}(\bf x_i))
+\text{err}_{\texttt{tst}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{\texttt{tst}}}\sum_{i \in \texttt{tst}}^{}I(y_i = \hat{C}(x_i))
 \]</span></p>
-<p>These accuracy values are given by calling <code>confusionMatrix()</code>, or, if stored, can be accessed directly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_con_mat$overall[<span class="st">&quot;Accuracy&quot;</span>]</code></pre></div>
+<p>These accuracy values are given by calling <code>confusionMatrix()</code>, or, if stored, can be accessed directly. Here, we use this to obtain error rates.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span>train_con_mat$overall[<span class="st">&quot;Accuracy&quot;</span>]</code></pre></div>
 <pre><code>## Accuracy 
-##   0.8916</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_con_mat$overall[<span class="st">&quot;Accuracy&quot;</span>]</code></pre></div>
+##   0.1084</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span>test_con_mat$overall[<span class="st">&quot;Accuracy&quot;</span>]</code></pre></div>
 <pre><code>## Accuracy 
-##   0.9006</code></pre>
+##   0.0994</code></pre>
 <p>Sometimes guarding against making certain errors, FP or FN, are more important than simply finding the best accuracy. Thus, sometimes we will consider <strong>sensitivity</strong> and <strong>specificity</strong>.</p>
 <p><span class="math display">\[
 \text{Sens} = \text{True Positive Rate} = \frac{\text{TP}}{\text{P}} = \frac{\text{TP}}{\text{TP + FN}}
@@ -573,10 +573,10 @@ I(y_i = \hat{C}(x)) =
 ##      0.033</code></pre>
 <p>Here, we see an extremely low prevalence, which suggests an even simpler classifier than our current based on <code>balance</code>.</p>
 <p><span class="math display">\[
-\hat{C}(\text{balance}) = 
+\hat{C}(\texttt{balance}) = 
 \begin{cases} 
-      \text{No} &amp; \text{balance} &gt; 1400 \\
-      \text{No} &amp; \text{balance} \leq 1400 
+      \text{No} &amp; \texttt{balance} &gt; 1400 \\
+      \text{No} &amp; \texttt{balance} \leq 1400 
    \end{cases}
 \]</span></p>
 <p>This classifier simply classifies all observations as negative cases.</p>
@@ -587,13 +587,13 @@ I(y_i = \hat{C}(x)) =
 ## predicted   No  Yes
 ##        No 4835  165</code></pre>
 <p>The <code>confusionMatrix()</code> function won’t even accept this table as input, because it isn’t a full matrix, only one row, so we calculate some metrics “by hand”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4835</span> /<span class="st"> </span>(<span class="dv">4835</span> +<span class="st"> </span><span class="dv">165</span>) <span class="co"># test accuracy</span></code></pre></div>
-<pre><code>## [1] 0.967</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span><span class="fl">0.0336</span> <span class="co"># 1 - (train prevelence)</span></code></pre></div>
-<pre><code>## [1] 0.9664</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span><span class="fl">0.033</span> <span class="co"># 1 - (test prevelence)</span></code></pre></div>
-<pre><code>## [1] 0.967</code></pre>
-<p>This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test accuracy better than 0.967, which is obtained by simply manipulating the prevalence. Next chapter, we’ll introduce much better classifiers which should have no problem accomplishing this task.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">165</span> /<span class="st"> </span>(<span class="dv">4835</span> +<span class="st"> </span><span class="dv">165</span>) <span class="co"># test error</span></code></pre></div>
+<pre><code>## [1] 0.033</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="fl">0.0336</span> <span class="co"># train prevelence</span></code></pre></div>
+<pre><code>## [1] 0.0336</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="fl">0.033</span> <span class="co"># test prevelence</span></code></pre></div>
+<pre><code>## [1] 0.033</code></pre>
+<p>This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test error better than 0.033, which is obtained by simply manipulating the prevalence. Next chapter, we’ll introduce much better classifiers which should have no problem accomplishing this task.</p>
 
 </div>
 </div>

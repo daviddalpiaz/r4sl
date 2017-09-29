@@ -58,16 +58,16 @@ default_test_lm$default = as.numeric(default_test_lm$default) - 1
 Why would we think this should work? Recall that,
 
 $$
-\hat{E}[Y \mid X = x] = X\hat{\beta}.
+\hat{\mathbb{E}}[Y \mid X = x] = X\hat{\beta}.
 $$
 
 Since $Y$ is limited to values of $0$ and $1$, we have
 
 $$
-E[Y \mid X = x] = P[Y = 1 \mid X = x].
+\mathbb{E}[Y \mid X = x] = P[Y = 1 \mid X = x].
 $$
 
-It would then seem reasonable that $X\hat{\beta}$ is a reasonable estimate of $P[Y = 1 \mid X = x]$. We test this on the `Default` data.
+It would then seem reasonable that $X\hat{\beta}$ is a reasonable estimate of $P(Y = 1 \mid X = x)$. We test this on the `Default` data.
 
 
 ```r
@@ -116,48 +116,50 @@ any(predict(model_lm) < 0)
 Why are we using a predicted probability of 0.5 as the cutoff for classification? Recall, the Bayes Classifier, which minimizes the classification error:
 
 $$
-C^B({\bf x}) = \underset{k}{\mathrm{argmax}} \ P[Y = k \mid {\bf X = x}]
+C^B(x) = \underset{k}{\mathrm{argmax}} \ P[Y = k \mid  X = x]
 $$
 
 So, in the binary classification problem, we will use predicted probabilities
 
 $$
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}]
+\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}]
 $$
 
 and 
 
 $$
-\hat{P}[Y = 0 \mid {\bf X = x}]
+\hat{P}[Y = 0 \mid { X = x}]
 $$
 
-and then classify to the larger of the two. We actually only need to consider a single probability, usually for $\hat{P}[Y = 1 \mid {\bf X = x}]$. Since we use it so often, we give it the shorthand notation, $\hat{p}({\bf x})$. Then the classifier is written,
+and then classify to the larger of the two. We actually only need to consider a single probability, usually for $\hat{P}[Y = 1 \mid { X = x}]$. Since we use it so often, we give it the shorthand notation, $\hat{p}({ x})$. Then the classifier is written,
 
 $$
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
-      1 & \hat{p}({\bf x}) > 0.5 \\
-      0 & \hat{p}({\bf x}) \leq 0.5 
+      1 & \hat{p}(x) > 0.5 \\
+      0 & \hat{p}(x) \leq 0.5 
 \end{cases}
 $$
+
+This classifier is essentially estimating the Bayes Classifier, thus, is seeking to minimize classification errors.
 
 ## Logistic Regression with `glm()`
 
 To better estimate the probability
 
 $$
-p({\bf x}) = P[Y = 1 \mid {\bf X = x}]
+p(x) = P[Y = 1 \mid {X = x}]
 $$
 we turn to logistic regression. The model is written
 
 $$
-\log\left(\frac{p({\bf x})}{1 - p({\bf x})}\right) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p.
+\log\left(\frac{p(x)}{1 - p(x)}\right) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p.
 $$
 
 Rearranging, we see the probabilities can be written as
 
 $$
-p({\bf x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)}} = \sigma(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)
+p(x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)}} = \sigma(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)
 $$
 
 Notice, we use the sigmoid function as shorthand notation, which appears often in deep learning literature. It takes any real input, and outputs a number between 0 and 1. How useful!
@@ -223,7 +225,7 @@ for each observation.
 Importantly, these are **not** predicted probabilities. To obtain the predicted probabilities
 
 $$
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}]
+\hat{p}(x) = \hat{P}[Y = 1 \mid X = x]
 $$
 
 we need to use `type = "response"`
@@ -251,35 +253,36 @@ model_glm_pred = ifelse(predict(model_glm, type = "link") > 0, "Yes", "No")
 The line that is run is performing
 
 $$
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
-      1 & \hat{f}({\bf x}) > 0 \\
-      0 & \hat{f}({\bf x}) \leq 0 
+      1 & \hat{f}(x) > 0 \\
+      0 & \hat{f}(x) \leq 0 
 \end{cases}
 $$
 
 where 
 
 $$
-\hat{f}({\bf x}) =\hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots  + \hat{\beta}_p x_p.
+\hat{f}(x) =\hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots  + \hat{\beta}_p x_p.
 $$
 
 The commented line, which would give the same results, is performing
 
 
 $$
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
-      1 & \hat{p}({\bf x}) > 0.5 \\
-      0 & \hat{p}({\bf x}) \leq 0.5 
+      1 & \hat{p}(x) > 0.5 \\
+      0 & \hat{p}(x) \leq 0.5 
 \end{cases}
 $$
 
 where 
 
 $$
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}].
+\hat{p}(x) = \hat{P}[Y = 1 \mid X = x].
 $$
+
 Once we have classifications, we can calculate metrics such as accuracy.
 
 
@@ -353,14 +356,14 @@ This plot contains a wealth of information.
 - The orange `|` characters are the data, $(x_i, y_i)$.
 - The blue "curve" is the predicted probabilities given by the fitted logistic regression. That is,
 $$
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}]
+\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}]
 $$
 - The solid vertical black line represents the **[decision boundary](https://en.wikipedia.org/wiki/Decision_boundary)**, the `balance` that obtains a predicted probability of 0.5. In this case `balance` = 1947.252994.
 
 The decision boundary is found by solving for points that satisfy
 
 $$
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}] = 0.5
+\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}] = 0.5
 $$
 
 This is equivalent to point that satisfy
@@ -431,11 +434,9 @@ diff(test_error)
 
 We call `model_2` the **additive** logistic model, which we will use quite often.
 
-
 ## ROC Curves
 
 Let's return to our simple model with only balance as a predictor.
-
 
 
 ```r
@@ -452,12 +453,11 @@ get_pred = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
 }
 ```
 
-
 $$
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
-      1 & \hat{f}({\bf x}) > c \\
-      0 & \hat{f}({\bf x}) \leq c 
+      1 & \hat{f}(x) > c \\
+      0 & \hat{f}(x) \leq c 
 \end{cases}
 $$
 
@@ -542,7 +542,7 @@ A good model will have a high AUC, that is as often as possible a high sensitivi
 What if the response contains more than two categories? For that we need multinomial logistic regression. 
 
 $$
-P[Y = k \mid {\bf X = x}] = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \beta_{pk} x_p}}{\sum_{j = 1}^{K} e^{\beta_{0j} + \beta_{1j} x_1 + \cdots +  + \beta_{pj} x_p}}
+P[Y = k \mid { X = x}] = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \beta_{pk} x_p}}{\sum_{j = 1}^{K} e^{\beta_{0j} + \beta_{1j} x_1 + \cdots +  + \beta_{pj} x_p}}
 $$
 
 We will omit the details, as ISL has as well. If you are interested, the [Wikipedia page](https://en.wikipedia.org/wiki/Multinomial_logistic_regression) provides a rather thorough coverage. Also note that the above is an example of the [softmax function](https://en.wikipedia.org/wiki/Softmax_function).

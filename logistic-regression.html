@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-28">
+<meta name="date" content="2017-09-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -381,13 +381,13 @@ default_test_lm =<span class="st"> </span>default_test</code></pre></div>
 default_test_lm$default =<span class="st"> </span><span class="kw">as.numeric</span>(default_test_lm$default) -<span class="st"> </span><span class="dv">1</span></code></pre></div>
 <p>Why would we think this should work? Recall that,</p>
 <p><span class="math display">\[
-\hat{E}[Y \mid X = x] = X\hat{\beta}.
+\hat{\mathbb{E}}[Y \mid X = x] = X\hat{\beta}.
 \]</span></p>
 <p>Since <span class="math inline">\(Y\)</span> is limited to values of <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, we have</p>
 <p><span class="math display">\[
-E[Y \mid X = x] = P[Y = 1 \mid X = x].
+\mathbb{E}[Y \mid X = x] = P[Y = 1 \mid X = x].
 \]</span></p>
-<p>It would then seem reasonable that <span class="math inline">\(X\hat{\beta}\)</span> is a reasonable estimate of <span class="math inline">\(P[Y = 1 \mid X = x]\)</span>. We test this on the <code>Default</code> data.</p>
+<p>It would then seem reasonable that <span class="math inline">\(X\hat{\beta}\)</span> is a reasonable estimate of <span class="math inline">\(P(Y = 1 \mid X = x)\)</span>. We test this on the <code>Default</code> data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_lm =<span class="st"> </span><span class="kw">lm</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train_lm)</code></pre></div>
 <p>Everything seems to be working, until we plot the results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(default ~<span class="st"> </span>balance, <span class="dt">data =</span> default_train_lm, 
@@ -409,37 +409,38 @@ E[Y \mid X = x] = P[Y = 1 \mid X = x].
 <h2><span class="header-section-number">10.2</span> Bayes Classifier</h2>
 <p>Why are we using a predicted probability of 0.5 as the cutoff for classification? Recall, the Bayes Classifier, which minimizes the classification error:</p>
 <p><span class="math display">\[
-C^B({\bf x}) = \underset{k}{\mathrm{argmax}} \ P[Y = k \mid {\bf X = x}]
+C^B(x) = \underset{k}{\mathrm{argmax}} \ P[Y = k \mid  X = x]
 \]</span></p>
 <p>So, in the binary classification problem, we will use predicted probabilities</p>
 <p><span class="math display">\[
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}]
+\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}]
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-\hat{P}[Y = 0 \mid {\bf X = x}]
+\hat{P}[Y = 0 \mid { X = x}]
 \]</span></p>
-<p>and then classify to the larger of the two. We actually only need to consider a single probability, usually for <span class="math inline">\(\hat{P}[Y = 1 \mid {\bf X = x}]\)</span>. Since we use it so often, we give it the shorthand notation, <span class="math inline">\(\hat{p}({\bf x})\)</span>. Then the classifier is written,</p>
+<p>and then classify to the larger of the two. We actually only need to consider a single probability, usually for <span class="math inline">\(\hat{P}[Y = 1 \mid { X = x}]\)</span>. Since we use it so often, we give it the shorthand notation, <span class="math inline">\(\hat{p}({ x})\)</span>. Then the classifier is written,</p>
 <p><span class="math display">\[
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
-      1 &amp; \hat{p}({\bf x}) &gt; 0.5 \\
-      0 &amp; \hat{p}({\bf x}) \leq 0.5 
+      1 &amp; \hat{p}(x) &gt; 0.5 \\
+      0 &amp; \hat{p}(x) \leq 0.5 
 \end{cases}
 \]</span></p>
+<p>This classifier is essentially estimating the Bayes Classifier, thus, is seeking to minimize classification errors.</p>
 </div>
 <div id="logistic-regression-with-glm" class="section level2">
 <h2><span class="header-section-number">10.3</span> Logistic Regression with <code>glm()</code></h2>
 <p>To better estimate the probability</p>
 <p><span class="math display">\[
-p({\bf x}) = P[Y = 1 \mid {\bf X = x}]
+p(x) = P[Y = 1 \mid {X = x}]
 \]</span> we turn to logistic regression. The model is written</p>
 <p><span class="math display">\[
-\log\left(\frac{p({\bf x})}{1 - p({\bf x})}\right) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p.
+\log\left(\frac{p(x)}{1 - p(x)}\right) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p.
 \]</span></p>
 <p>Rearranging, we see the probabilities can be written as</p>
 <p><span class="math display">\[
-p({\bf x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)}} = \sigma(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)
+p(x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)}} = \sigma(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)
 \]</span></p>
 <p>Notice, we use the sigmoid function as shorthand notation, which appears often in deep learning literature. It takes any real input, and outputs a number between 0 and 1. How useful!</p>
 <p><span class="math display">\[
@@ -467,7 +468,7 @@ p({\bf x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \
 \]</span> for each observation.</p>
 <p>Importantly, these are <strong>not</strong> predicted probabilities. To obtain the predicted probabilities</p>
 <p><span class="math display">\[
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}]
+\hat{p}(x) = \hat{P}[Y = 1 \mid X = x]
 \]</span></p>
 <p>we need to use <code>type = &quot;response&quot;</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>))</code></pre></div>
@@ -480,28 +481,29 @@ p({\bf x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \
 <span class="co"># model_glm_pred = ifelse(predict(model_glm, type = &quot;response&quot;) &gt; 0.5, &quot;Yes&quot;, &quot;No&quot;)</span></code></pre></div>
 <p>The line that is run is performing</p>
 <p><span class="math display">\[
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
-      1 &amp; \hat{f}({\bf x}) &gt; 0 \\
-      0 &amp; \hat{f}({\bf x}) \leq 0 
+      1 &amp; \hat{f}(x) &gt; 0 \\
+      0 &amp; \hat{f}(x) \leq 0 
 \end{cases}
 \]</span></p>
 <p>where</p>
 <p><span class="math display">\[
-\hat{f}({\bf x}) =\hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots  + \hat{\beta}_p x_p.
+\hat{f}(x) =\hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots  + \hat{\beta}_p x_p.
 \]</span></p>
 <p>The commented line, which would give the same results, is performing</p>
 <p><span class="math display">\[
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
-      1 &amp; \hat{p}({\bf x}) &gt; 0.5 \\
-      0 &amp; \hat{p}({\bf x}) \leq 0.5 
+      1 &amp; \hat{p}(x) &gt; 0.5 \\
+      0 &amp; \hat{p}(x) \leq 0.5 
 \end{cases}
 \]</span></p>
 <p>where</p>
 <p><span class="math display">\[
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}].
-\]</span> Once we have classifications, we can calculate metrics such as accuracy.</p>
+\hat{p}(x) = \hat{P}[Y = 1 \mid X = x].
+\]</span></p>
+<p>Once we have classifications, we can calculate metrics such as accuracy.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(model_glm_pred ==<span class="st"> </span>default_train$default) <span class="co"># train accuracy</span></code></pre></div>
 <pre><code>## [1] 0.9722</code></pre>
 <p>As we saw previously, the <code>table()</code> and <code>confusionMatrix()</code> functions can be used to quickly obtain many more metrics.</p>
@@ -533,18 +535,18 @@ train_con_mat =<span class="st"> </span><span class="kw">confusionMatrix</span>(
 <span class="kw">curve</span>(<span class="kw">predict</span>(model_glm, <span class="kw">data.frame</span>(<span class="dt">balance =</span> x), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>), 
       <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)
 <span class="kw">abline</span>(<span class="dt">v =</span> -<span class="kw">coef</span>(model_glm)[<span class="dv">1</span>] /<span class="st"> </span><span class="kw">coef</span>(model_glm)[<span class="dv">2</span>], <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="10-logistic_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="10-logistic_files/figure-html/unnamed-chunk-19-1.png" width="576" /></p>
 <p>This plot contains a wealth of information.</p>
 <ul>
 <li>The orange <code>|</code> characters are the data, <span class="math inline">\((x_i, y_i)\)</span>.</li>
 <li>The blue “curve” is the predicted probabilities given by the fitted logistic regression. That is, <span class="math display">\[
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}]
+\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}]
 \]</span></li>
 <li>The solid vertical black line represents the <strong><a href="https://en.wikipedia.org/wiki/Decision_boundary">decision boundary</a></strong>, the <code>balance</code> that obtains a predicted probability of 0.5. In this case <code>balance</code> = 1947.252994.</li>
 </ul>
 <p>The decision boundary is found by solving for points that satisfy</p>
 <p><span class="math display">\[
-\hat{p}({\bf x}) = \hat{P}[Y = 1 \mid {\bf X = x}] = 0.5
+\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}] = 0.5
 \]</span></p>
 <p>This is equivalent to point that satisfy</p>
 <p><span class="math display">\[
@@ -590,10 +592,10 @@ test_error =<span class="st"> </span><span class="dv">1</span> -<span class="st"
   <span class="kw">ifelse</span>(probs &gt;<span class="st"> </span>cut, pos, neg)
 }</code></pre></div>
 <p><span class="math display">\[
-\hat{C}(\bf x) = 
+\hat{C}(x) = 
 \begin{cases} 
-      1 &amp; \hat{f}({\bf x}) &gt; c \\
-      0 &amp; \hat{f}({\bf x}) \leq c 
+      1 &amp; \hat{f}(x) &gt; c \\
+      0 &amp; \hat{f}(x) \leq c 
 \end{cases}
 \]</span></p>
 <p>Let’s use this to obtain predictions using a low, medium, and high cutoff. (0.1, 0.5, and 0.9)</p>
@@ -645,7 +647,7 @@ test_roc =<span class="st"> </span><span class="kw">roc</span>(default_test$defa
 <h2><span class="header-section-number">10.5</span> Multinomial Logistic Regression</h2>
 <p>What if the response contains more than two categories? For that we need multinomial logistic regression.</p>
 <p><span class="math display">\[
-P[Y = k \mid {\bf X = x}] = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \beta_{pk} x_p}}{\sum_{j = 1}^{K} e^{\beta_{0j} + \beta_{1j} x_1 + \cdots +  + \beta_{pj} x_p}}
+P[Y = k \mid { X = x}] = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \beta_{pk} x_p}}{\sum_{j = 1}^{K} e^{\beta_{0j} + \beta_{1j} x_1 + \cdots +  + \beta_{pj} x_p}}
 \]</span></p>
 <p>We will omit the details, as ISL has as well. If you are interested, the <a href="https://en.wikipedia.org/wiki/Multinomial_logistic_regression">Wikipedia page</a> provides a rather thorough coverage. Also note that the above is an example of the <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax function</a>.</p>
 <p>As an example of a dataset with a three category response, we use the <code>iris</code> dataset, which is so famous, it has its own <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia entry</a>. It is also a default dataset in <code>R</code>, so no need to load it.</p>
