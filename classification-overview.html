@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-09-29">
+<meta name="date" content="2017-09-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -535,10 +535,10 @@ I(y_i \neq \hat{C}(x)) =
 <p>It is also common to discuss the <strong>accuracy</strong>, which is simply one minus the error.</p>
 <p>Like regression, we often split the data, and then consider Train (Classification) Error and Test (Classification) Error will be used as a measure of how well a classifier will work on unseen future data.</p>
 <p><span class="math display">\[
-\text{err}_{\texttt{trn}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{\texttt{trn}}}\sum_{i \in \texttt{trn}}^{}I(y_i = \hat{C}(x_i))
+\text{err}_{\texttt{trn}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{\texttt{trn}}}\sum_{i \in \texttt{trn}}^{}I(y_i \neq \hat{C}(x_i))
 \]</span></p>
 <p><span class="math display">\[
-\text{err}_{\texttt{tst}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{\texttt{tst}}}\sum_{i \in \texttt{tst}}^{}I(y_i = \hat{C}(x_i))
+\text{err}_{\texttt{tst}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{\texttt{tst}}}\sum_{i \in \texttt{tst}}^{}I(y_i \neq \hat{C}(x_i))
 \]</span></p>
 <p>These accuracy values are given by calling <code>confusionMatrix()</code>, or, if stored, can be accessed directly. Here, we use this to obtain error rates.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span>train_con_mat$overall[<span class="st">&quot;Accuracy&quot;</span>]</code></pre></div>

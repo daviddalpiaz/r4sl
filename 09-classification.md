@@ -297,11 +297,11 @@ It is also common to discuss the **accuracy**, which is simply one minus the err
 Like regression, we often split the data, and then consider Train (Classification) Error and Test (Classification) Error will be used as a measure of how well a classifier will work on unseen future data.
 
 $$
-\text{err}_{\texttt{trn}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{\texttt{trn}}}\sum_{i \in \texttt{trn}}^{}I(y_i = \hat{C}(x_i))
+\text{err}_{\texttt{trn}}(\hat{C}, \text{Train Data}) = \frac{1}{n_{\texttt{trn}}}\sum_{i \in \texttt{trn}}^{}I(y_i \neq \hat{C}(x_i))
 $$
 
 $$
-\text{err}_{\texttt{tst}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{\texttt{tst}}}\sum_{i \in \texttt{tst}}^{}I(y_i = \hat{C}(x_i))
+\text{err}_{\texttt{tst}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{\texttt{tst}}}\sum_{i \in \texttt{tst}}^{}I(y_i \neq \hat{C}(x_i))
 $$
 
 These accuracy values are given by calling `confusionMatrix()`, or, if stored, can be accessed directly. Here, we use this to obtain error rates.
