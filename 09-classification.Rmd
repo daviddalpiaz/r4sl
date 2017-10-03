@@ -31,9 +31,9 @@ As we did with regression, we test-train split our data. In this case, using 50%
 
 ```{r}
 set.seed(42)
-train_index = sample(nrow(Default), 5000)
-train_default = Default[train_index, ]
-test_default = Default[-train_index, ]
+default_idx   = sample(nrow(Default), 5000)
+default_trn = Default[default_idx, ]
+default_tst = Default[-default_idx, ]
 ```
 
 
@@ -54,8 +54,8 @@ $$
 for each numeric predictor $x_i$ and each category $k$ of the response $y$.
 
 ```{r, fig.height = 5, fig.width = 10}
-featurePlot(x = train_default[, c("balance", "income")], 
-            y = train_default$default,
+featurePlot(x = default_trn[, c("balance", "income")], 
+            y = default_trn$default,
             plot = "density", 
             scales = list(x = list(relation = "free"), 
                           y = list(relation = "free")), 
@@ -79,8 +79,8 @@ Some notes about the arguments to this function:
 It seems that the income variable by itself is not particularly useful. However, there seems to be a big difference in default status at a `balance` of about 1400. We will use this information shortly.
 
 ```{r, fig.height = 5, fig.width = 10, message = FALSE, warning = FALSE}
-featurePlot(x = train_default[, c("balance", "income")], 
-            y = train_default$student,
+featurePlot(x = default_trn[, c("balance", "income")], 
+            y = default_trn$student,
             plot = "density", 
             scales = list(x = list(relation = "free"), 
                           y = list(relation = "free")), 
@@ -93,8 +93,8 @@ featurePlot(x = train_default[, c("balance", "income")],
 Above, we create a similar plot, except with `student` as the response. We see that students often carry a slightly larger balance, and have far lower income. This will be useful to know when making more complicated classifiers.
 
 ```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
-featurePlot(x = train_default[, c("student", "balance", "income")], 
-            y = train_default$default, 
+featurePlot(x = default_trn[, c("student", "balance", "income")], 
+            y = default_trn$default, 
             plot = "pairs",
             auto.key = list(columns = 2))
 ```
@@ -103,8 +103,8 @@ We can use `plot = "pairs"` to consider multiple variables at the same time. Thi
 
 ```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
 library(ellipse)
-featurePlot(x = train_default[, c("balance", "income")], 
-            y = train_default$default, 
+featurePlot(x = default_trn[, c("balance", "income")], 
+            y = default_trn$default, 
             plot = "ellipse",
             auto.key = list(columns = 2))
 ```
@@ -145,11 +145,11 @@ simple_class = function(x, boundary, above = 1, below = 0) {
 We write a simple `R` function that compares a variable to a boundary, then use it to make predictions on the train and test sets with our chosen variable and boundary.
 
 ```{r}
-train_pred = simple_class(x = train_default$balance, 
-                          boundary = 1400, above = "Yes", below = "No")
-test_pred = simple_class(x = test_default$balance, 
-                         boundary = 1400, above = "Yes", below = "No")
-head(train_pred, n = 10)
+default_trn_pred = simple_class(x = default_trn$balance, 
+                                boundary = 1400, above = "Yes", below = "No")
+default_tst_pred = simple_class(x = default_tst$balance, 
+                                boundary = 1400, above = "Yes", below = "No")
+head(default_tst_pred, n = 10)
 ```
 
 
@@ -160,11 +160,11 @@ In the classification setting, there are a large number of metrics to assess how
 One of the most obvious things to do is arrange predictions and true values in a cross table.
 
 ```{r}
-(train_tab = table(predicted = train_pred, actual = train_default$default))
+(trn_tab = table(predicted = default_trn_pred, actual = default_trn$default))
 ```
 
 ```{r}
-(test_tab = table(predicted = test_pred, actual = test_default$default))
+(tst_tab = table(predicted = default_tst_pred, actual = default_tst$default))
 ```
 
 Often we give specific names to individual cells of these tables, and in the predictive setting, we would call this table a [**confusion matrix**](https://en.wikipedia.org/wiki/Confusion_matrix). Be aware, that the placement of Actual and Predicted values affects the names of the cells, and often the matrix may be presented transposed.
@@ -176,11 +176,11 @@ In statistics, we label the errors Type I and Type II, but these are hard to rem
 The `confusionMatrix()` function from the `caret` package can be used to obtain a wealth of additional information, which we see output below for the test data. Note that we specify which category is considered "positive."
 
 ```{r}
-train_con_mat = confusionMatrix(train_tab, positive = "Yes")
-(test_con_mat = confusionMatrix(test_tab, positive = "Yes"))
+trn_con_mat  = confusionMatrix(trn_tab, positive = "Yes")
+(tst_con_mat = confusionMatrix(tst_tab, positive = "Yes"))
 ```
 
-The most common, and most important metric is the **classification error**. 
+The most common, and most important metric is the **classification error rate**. 
 
 $$
 \text{err}(\hat{C}, \text{Data}) = \frac{1}{n}\sum_{i = 1}^{n}I(y_i \neq \hat{C}(x_i))
@@ -208,14 +208,14 @@ $$
 \text{err}_{\texttt{tst}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{\texttt{tst}}}\sum_{i \in \texttt{tst}}^{}I(y_i \neq \hat{C}(x_i))
 $$
 
-These accuracy values are given by calling `confusionMatrix()`, or, if stored, can be accessed directly. Here, we use this to obtain error rates.
+Accuracy values can be found by calling `confusionMatrix()`, or, if stored, can be accessed directly. Here, we use them to obtain error rates.
 
 ```{r}
-1 - train_con_mat$overall["Accuracy"]
+1 - trn_con_mat$overall["Accuracy"]
 ```
 
 ```{r}
-1 - test_con_mat$overall["Accuracy"]
+1 - tst_con_mat$overall["Accuracy"]
 ```
 
 Sometimes guarding against making certain errors, FP or FN, are more important than simply finding the best accuracy. Thus, sometimes we will consider **sensitivity** and **specificity**.
@@ -225,7 +225,7 @@ $$
 $$
 
 ```{r}
-test_con_mat$byClass["Sensitivity"]
+tst_con_mat$byClass["Sensitivity"]
 ```
 
 $$
@@ -233,7 +233,7 @@ $$
 $$
 
 ```{r}
-test_con_mat$byClass["Specificity"]
+tst_con_mat$byClass["Specificity"]
 ```
 
 Like accuracy, these can easily be found using `confusionMatrix()`.
@@ -245,8 +245,8 @@ $$
 $$
 
 ```{r}
-train_con_mat$byClass["Prevalence"]
-test_con_mat$byClass["Prevalence"]
+trn_con_mat$byClass["Prevalence"]
+tst_con_mat$byClass["Prevalence"]
 ```
 
 Here, we see an extremely low prevalence, which suggests an even simpler classifier than our current based on `balance`.
@@ -262,17 +262,37 @@ $$
 This classifier simply classifies all observations as negative cases.
 
 ```{r}
-pred_all_no = simple_class(test_default$balance, 
+pred_all_no = simple_class(default_tst$balance, 
                            boundary = 1400, above = "No", below = "No")
-table(predicted = pred_all_no, actual = test_default$default)
+table(predicted = pred_all_no, actual = default_tst$default)
 ```
 
-The `confusionMatrix()` function won't even accept this table as input, because it isn't a full matrix, only one row, so we calculate some metrics "by hand".
+The `confusionMatrix()` function won't even accept this table as input, because it isn't a full matrix, only one row, so we calculate error rates directly. To do so, we write a function.
 
 ```{r}
-165 / (4835 + 165) # test error
-0.0336 # train prevelence
-0.033 # test prevelence
+calc_class_err = function(actual, predicted) {
+  mean(actual != predicted)
+}
 ```
 
-This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test error better than 0.033, which is obtained by simply manipulating the prevalence. Next chapter, we'll introduce much better classifiers which should have no problem accomplishing this task.
+```{r}
+calc_class_err(actual = default_tst$default,
+               predicted = pred_all_no)
+```
+
+Here we see that the error rate is exactly the prevelance of the minority class.
+
+```{r}
+table(default_tst$default) / length(default_tst$default)
+```
+
+This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test error better than 0.033, which is obtained by simply manipulating the prevalences. Next chapter, we'll introduce much better classifiers which should have no problem accomplishing this task.
+
+
+## `rmarkdown`
+
+The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`. The following packages (and their dependencies) were loaded when knitting this file:
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```

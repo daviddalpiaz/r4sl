@@ -62,9 +62,9 @@ As we did with regression, we test-train split our data. In this case, using 50%
 
 ```r
 set.seed(42)
-train_index = sample(nrow(Default), 5000)
-train_default = Default[train_index, ]
-test_default = Default[-train_index, ]
+default_idx   = sample(nrow(Default), 5000)
+default_trn = Default[default_idx, ]
+default_tst = Default[-default_idx, ]
 ```
 
 
@@ -87,8 +87,8 @@ for each numeric predictor $x_i$ and each category $k$ of the response $y$.
 
 
 ```r
-featurePlot(x = train_default[, c("balance", "income")], 
-            y = train_default$default,
+featurePlot(x = default_trn[, c("balance", "income")], 
+            y = default_trn$default,
             plot = "density", 
             scales = list(x = list(relation = "free"), 
                           y = list(relation = "free")), 
@@ -115,8 +115,8 @@ It seems that the income variable by itself is not particularly useful. However,
 
 
 ```r
-featurePlot(x = train_default[, c("balance", "income")], 
-            y = train_default$student,
+featurePlot(x = default_trn[, c("balance", "income")], 
+            y = default_trn$student,
             plot = "density", 
             scales = list(x = list(relation = "free"), 
                           y = list(relation = "free")), 
@@ -132,8 +132,8 @@ Above, we create a similar plot, except with `student` as the response. We see t
 
 
 ```r
-featurePlot(x = train_default[, c("student", "balance", "income")], 
-            y = train_default$default, 
+featurePlot(x = default_trn[, c("student", "balance", "income")], 
+            y = default_trn$default, 
             plot = "pairs",
             auto.key = list(columns = 2))
 ```
@@ -145,8 +145,8 @@ We can use `plot = "pairs"` to consider multiple variables at the same time. Thi
 
 ```r
 library(ellipse)
-featurePlot(x = train_default[, c("balance", "income")], 
-            y = train_default$default, 
+featurePlot(x = default_trn[, c("balance", "income")], 
+            y = default_trn$default, 
             plot = "ellipse",
             auto.key = list(columns = 2))
 ```
@@ -191,15 +191,15 @@ We write a simple `R` function that compares a variable to a boundary, then use 
 
 
 ```r
-train_pred = simple_class(x = train_default$balance, 
-                          boundary = 1400, above = "Yes", below = "No")
-test_pred = simple_class(x = test_default$balance, 
-                         boundary = 1400, above = "Yes", below = "No")
-head(train_pred, n = 10)
+default_trn_pred = simple_class(x = default_trn$balance, 
+                                boundary = 1400, above = "Yes", below = "No")
+default_tst_pred = simple_class(x = default_tst$balance, 
+                                boundary = 1400, above = "Yes", below = "No")
+head(default_tst_pred, n = 10)
 ```
 
 ```
-##  [1] "No"  "Yes" "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"
+##  [1] "No" "No" "No" "No" "No" "No" "No" "No" "No" "No"
 ```
 
 
@@ -211,7 +211,7 @@ One of the most obvious things to do is arrange predictions and true values in a
 
 
 ```r
-(train_tab = table(predicted = train_pred, actual = train_default$default))
+(trn_tab = table(predicted = default_trn_pred, actual = default_trn$default))
 ```
 
 ```
@@ -223,7 +223,7 @@ One of the most obvious things to do is arrange predictions and true values in a
 
 
 ```r
-(test_tab = table(predicted = test_pred, actual = test_default$default))
+(tst_tab = table(predicted = default_tst_pred, actual = default_tst$default))
 ```
 
 ```
@@ -243,8 +243,8 @@ The `confusionMatrix()` function from the `caret` package can be used to obtain 
 
 
 ```r
-train_con_mat = confusionMatrix(train_tab, positive = "Yes")
-(test_con_mat = confusionMatrix(test_tab, positive = "Yes"))
+trn_con_mat  = confusionMatrix(trn_tab, positive = "Yes")
+(tst_con_mat = confusionMatrix(tst_tab, positive = "Yes"))
 ```
 
 ```
@@ -276,7 +276,7 @@ train_con_mat = confusionMatrix(train_tab, positive = "Yes")
 ## 
 ```
 
-The most common, and most important metric is the **classification error**. 
+The most common, and most important metric is the **classification error rate**. 
 
 $$
 \text{err}(\hat{C}, \text{Data}) = \frac{1}{n}\sum_{i = 1}^{n}I(y_i \neq \hat{C}(x_i))
@@ -304,11 +304,11 @@ $$
 \text{err}_{\texttt{tst}}(\hat{C}, \text{Test Data}) = \frac{1}{n_{\texttt{tst}}}\sum_{i \in \texttt{tst}}^{}I(y_i \neq \hat{C}(x_i))
 $$
 
-These accuracy values are given by calling `confusionMatrix()`, or, if stored, can be accessed directly. Here, we use this to obtain error rates.
+Accuracy values can be found by calling `confusionMatrix()`, or, if stored, can be accessed directly. Here, we use them to obtain error rates.
 
 
 ```r
-1 - train_con_mat$overall["Accuracy"]
+1 - trn_con_mat$overall["Accuracy"]
 ```
 
 ```
@@ -318,7 +318,7 @@ These accuracy values are given by calling `confusionMatrix()`, or, if stored, c
 
 
 ```r
-1 - test_con_mat$overall["Accuracy"]
+1 - tst_con_mat$overall["Accuracy"]
 ```
 
 ```
@@ -334,7 +334,7 @@ $$
 
 
 ```r
-test_con_mat$byClass["Sensitivity"]
+tst_con_mat$byClass["Sensitivity"]
 ```
 
 ```
@@ -348,7 +348,7 @@ $$
 
 
 ```r
-test_con_mat$byClass["Specificity"]
+tst_con_mat$byClass["Specificity"]
 ```
 
 ```
@@ -366,7 +366,7 @@ $$
 
 
 ```r
-train_con_mat$byClass["Prevalence"]
+trn_con_mat$byClass["Prevalence"]
 ```
 
 ```
@@ -375,7 +375,7 @@ train_con_mat$byClass["Prevalence"]
 ```
 
 ```r
-test_con_mat$byClass["Prevalence"]
+tst_con_mat$byClass["Prevalence"]
 ```
 
 ```
@@ -397,9 +397,9 @@ This classifier simply classifies all observations as negative cases.
 
 
 ```r
-pred_all_no = simple_class(test_default$balance, 
+pred_all_no = simple_class(default_tst$balance, 
                            boundary = 1400, above = "No", below = "No")
-table(predicted = pred_all_no, actual = test_default$default)
+table(predicted = pred_all_no, actual = default_tst$default)
 ```
 
 ```
@@ -408,31 +408,46 @@ table(predicted = pred_all_no, actual = test_default$default)
 ##        No 4835  165
 ```
 
-The `confusionMatrix()` function won't even accept this table as input, because it isn't a full matrix, only one row, so we calculate some metrics "by hand".
+The `confusionMatrix()` function won't even accept this table as input, because it isn't a full matrix, only one row, so we calculate error rates directly. To do so, we write a function.
 
 
 ```r
-165 / (4835 + 165) # test error
+calc_class_err = function(actual, predicted) {
+  mean(actual != predicted)
+}
+```
+
+
+```r
+calc_class_err(actual = default_tst$default,
+               predicted = pred_all_no)
 ```
 
 ```
 ## [1] 0.033
 ```
 
-```r
-0.0336 # train prevelence
-```
+Here we see that the error rate is exactly the prevelance of the minority class.
 
-```
-## [1] 0.0336
-```
 
 ```r
-0.033 # test prevelence
+table(default_tst$default) / length(default_tst$default)
 ```
 
 ```
-## [1] 0.033
+## 
+##    No   Yes 
+## 0.967 0.033
 ```
 
-This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test error better than 0.033, which is obtained by simply manipulating the prevalence. Next chapter, we'll introduce much better classifiers which should have no problem accomplishing this task.
+This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test error better than 0.033, which is obtained by simply manipulating the prevalences. Next chapter, we'll introduce much better classifiers which should have no problem accomplishing this task.
+
+
+## `rmarkdown`
+
+The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:
+
+
+```
+## [1] "ellipse" "caret"   "ggplot2" "lattice" "tibble"  "ISLR"
+```
