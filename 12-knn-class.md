@@ -1,115 +1,147 @@
 # k-Nearest Neighbors {#knn-class}
 
-In this chapter we introduce our first **non-parametric** method, $k$-nearest neighbors, which can be used for both classification and regression.
 
-Each method we have seen so far has been parametric. For example, logistic regression had the form
+In this chapter we introduce our first **non-parametric** classification method, $k$-nearest neighbors. So far, all of the methods for classificaiton that we have seen have been parametric. For example, logistic regression had the form
 
 $$
-\log\left(\frac{p({\bf x})}{1 - p({\bf x})}\right) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p.
+\log\left(\frac{p(x)}{1 - p(x)}\right) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p.
 $$
 
-In this case, the $\beta_i$ are the parameters of the model, which we learned (estimated) by training (fitting) the model.
+In this case, the $\beta_j$ are the parameters of the model, which we learned (estimated) by training (fitting) the model. Those estimates were then used to obtain estimates of the probability $p(x) = P(Y = 1 \mid X = x)$,
 
-$k$-nearest neighbors has no such parameters. Instead, it has a **tuning parameter**, $k$. This is a parameter which determines *how* the model is trained, instead of a parameter that is *learned* through training. Note that tuning parameters are not used exclusively used with non-parametric methods. Later we will see examples of tuning parameters for parametric methods.
+$$
+\hat{p}(x) = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots  + \hat{\beta}_p x_p}}{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots  + \hat{\beta}_p x_p}}
+$$
 
-## Classification
+As we saw in regression, $k$-nearest neighbors has no such model parameters. Instead, it has a **tuning parameter**, $k$. This is a parameter which determines *how* the model is trained, instead of a parameter that is *learned* through training. Note that tuning parameters are not used exclusively with non-parametric methods. Later we will see examples of tuning parameters for parametric methods.
+
+Often when discussing $k$-nearest neighbors for classification, it is framed as a black-box method that directly returns classifications. We will instead frame it as a non-parametric model for the probabilites $p_g(x) = P(Y = g \mid X = x)$. That is a $k$-nearest neighbors model using $k$ neighbors estimates this probability as
+
+$$
+\hat{p}_{kg}(x) = \hat{P}_k(Y = g \mid X = x) = \frac{1}{k} \sum_{i \in \mathcal{N}_k(x, \mathcal{D})} I(y_i = g)
+$$
+
+Essentially, the probability of each class $g$ is the proportion of the $k$ neighbors of $x$ with that class, $g$.
+
+Then, to create a classifier, as always, we simply classify to the class with the highest estimated probability.
+
+$$
+\hat{C}(x) =  \underset{g}{\mathrm{argmax}} \ \ \hat{p}_{kg}(x)
+$$
+
+This is the same as saying that we classify to the class with the most observations in the $k$ nearest neighbors. If more than one class is tied for the highest estimated probablity, simply assign a class at random to one of the classes tied for highest.
+
+In the binary case this becomes
+
+$$
+\hat{C}(x) = 
+\begin{cases} 
+      1 & \hat{p}_{k0}(x) > 0.5 \\
+      0 & \hat{p}_{k1}(x) < 0.5
+\end{cases}
+$$
+
+Again, if the probability for class `0` and `1` are equal, simply assign at random.
+
+
+## Binary Data Example
 
 
 ```r
 library(ISLR)
 library(class)
-library(MASS)
 ```
 
-We first load some necessary libraries. We'll begin discussing classification by returning to the `Default` data from the `ISLR` package. To illustrate regression, we'll also return to the `Boston` data from the `MASS` package. To perform $k$-nearest neighbors, we will use the `knn()` function from the `class` package.
+We first load some necessary libraries. We'll begin discussing $k$-nearest neighbors for classification by returning to the `Default` data from the `ISLR` package. To perform $k$-nearest neighbors for classification, we will use the `knn()` function from the `class` package.
 
-### Default Data
-
-Unlike many of our previous methods, `knn()` requires that all predictors be numeric, so we coerce `student` to be a `0` and `1` variable instead of a factor. (We can leave the response as a factor.)
+Unlike many of our previous methods, such as logistic regression, `knn()` requires that all predictors be numeric, so we coerce `student` to be a `0` and `1` dummy variable instead of a factor. (We can, and should, leave the response as a factor.) Numeric predictors are required because of the distance calculations taking place.
 
 
 ```r
 set.seed(42)
 Default$student = as.numeric(Default$student) - 1
-default_index = sample(nrow(Default), 5000)
-default_train = Default[default_index, ]
-default_test = Default[-default_index, ]
+default_idx = sample(nrow(Default), 5000)
+default_trn = Default[default_idx, ]
+default_tst = Default[-default_idx, ]
 ```
 
-Also unlike previous methods, `knn()` does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable. Note that the $y$ data should be a factor vector, **not** a data frame containing a factor vector.
+Like we saw with `knn.reg` form the `FNN` package for regression, `knn()` from `class` does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable. Note that the `y` data should be a factor vector, **not** a data frame containing a factor vector. 
+
+Note that the `FNN` package also contains a `knn()` function for classification. We choose `knn()` from `class` as it seems to be much more popular. However, you should be aware of which packages you have loaded and thus which functions you are using. They are very similar, but have some differences.
 
 
 ```r
 # training data
-X_default_train = default_train[, -1]
-y_default_train = default_train$default
+X_default_trn = default_trn[, -1]
+y_default_trn = default_trn$default
 
 # testing data
-X_default_test = default_test[, -1]
-y_default_test = default_test$default
+X_default_tst = default_tst[, -1]
+y_default_tst = default_tst$default
 ```
 
-There is very little "training" with $k$-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that $k$-nearest neighbors is fast at training time. However, at test time, $k$-nearest neighbors is very slow. For each test case, the method must find the $k$-nearest neighbors, which is not computationally cheap. (Note that `knn()` uses Euclidean distance.)
+Again, there is very little "training" with $k$-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that $k$-nearest neighbors is fast at training time. However, at test time, $k$-nearest neighbors is very slow. For each test observation, the method must find the $k$-nearest neighbors, which is not computationally cheap. Note that by deafult, `knn()` uses Euclidean distance to determine neighbors.
 
 
 ```r
-head(knn(train = X_default_train, 
-         test = X_default_test, 
-         cl = y_default_train, 
-         k = 3),
-         n = 25)
+head(knn(train = X_default_trn, 
+         test  = X_default_tst, 
+         cl    = y_default_trn, 
+         k     = 3))
 ```
 
 ```
-##  [1] No No No No No No No No No No No No No No No No No No No No No No No
-## [24] No No
+## [1] No No No No No No
 ## Levels: No Yes
 ```
 
-Because of the lack of any need for training, the `knn()` function essentially replaces the `predict()` function, and immediately returns classifications. Here, `knn()` used four arguments:
+Because of the lack of any need for training, the `knn()` function immediately returns classifications. With logistic regression, we needed to use `glm()` to fit the model, then `predict()` to obtain probabilities we would use to make a classifier. Here, the `knn()` function directly returns classifications. That is `knn()` is essentially $\hat{C}_k(x)$.
+
+Here, `knn()` takes four arguments:
 
 - `train`, the predictors for the train set.
-- `test`, the predictors for the test set. `knn()` will output results for these cases.
+- `test`, the predictors for the test set. `knn()` will output results (classifications) for these cases.
 - `cl`, the true class labels for the train set.
 - `k`, the number of neighbors to consider.
 
 
-
 ```r
-accuracy = function(actual, predicted) {
-  mean(actual == predicted)
+calc_class_err = function(actual, predicted) {
+  mean(actual != predicted)
 }
 ```
 
-We'll use our usual `accuracy()` function to asses how well `knn()` works with this data.
+We'll use our usual `calc_class_err()` function to asses how well `knn()` works with this data. We use the test data to evaluate.
 
 
 ```r
-accuracy(actual = y_default_test,
-         predicted = knn(train = X_default_train, 
-                         test = X_default_test, 
-                         cl = y_default_train, k = 5))
+calc_class_err(actual    = y_default_tst,
+               predicted = knn(train = X_default_trn,
+                               test  = X_default_tst,
+                               cl    = y_default_trn,
+                               k     = 5))
 ```
 
 ```
-## [1] 0.9684
+## [1] 0.0316
 ```
 
-Often with `knn()` we need to consider the scale of the predictors variables. If one variable is contains much larger numbers because of the units or range of the variable, it will dominate other variables in the distance measurements. But this doesn't necessarily mean that it should be such an important variable. It is common practice to scale the predictors to have 0 mean and unit variance. Be sure to apply the scaling to both the train and test data.
+Often with `knn()` we need to consider the scale of the predictors variables. If one variable is contains much larger numbers because of the units or range of the variable, it will dominate other variables in the distance measurements. But this doesn't necessarily mean that it should be such an important variable. It is common practice to scale the predictors to have a mean of zero and unit variance. Be sure to apply the scaling to both the train and test data.
 
 
 ```r
-accuracy(actual = y_default_test,
-         predicted = knn(train = scale(X_default_train), 
-                         test = scale(X_default_test), 
-                         cl = y_default_train, k = 5))
+calc_class_err(actual    = y_default_tst,
+               predicted = knn(train = scale(X_default_trn), 
+                               test  = scale(X_default_tst), 
+                               cl    = y_default_trn, 
+                               k     = 5))
 ```
 
 ```
-## [1] 0.9722
+## [1] 0.0278
 ```
 
-Here we see the scaling improves the classification accuracy. This may not always be the case, and often, it is normal to attempt classification with and without scaling.
+Here we see the scaling slightly improves the classification accuracy. This may not always be the case, and often, it is normal to attempt classification with and without scaling.
 
 How do we choose $k$? Try different values and see which works best.
 
@@ -117,104 +149,106 @@ How do we choose $k$? Try different values and see which works best.
 ```r
 set.seed(42)
 k_to_try = 1:100
-acc_k = rep(x = 0, times = length(k_to_try))
+err_k = rep(x = 0, times = length(k_to_try))
 
-for(i in seq_along(k_to_try)) {
-  pred = knn(train = scale(X_default_train), 
-             test = scale(X_default_test), 
-             cl = y_default_train, 
-             k = k_to_try[i])
-  acc_k[i] = accuracy(y_default_test, pred)
+for (i in seq_along(k_to_try)) {
+  pred = knn(train = scale(X_default_trn), 
+             test  = scale(X_default_tst), 
+             cl    = y_default_trn, 
+             k     = k_to_try[i])
+  err_k[i] = calc_class_err(y_default_tst, pred)
 }
 ```
 
-The `seq_along()` function can be very useful for looping over a vector that stores non-consecutive numbers. It often removes the need for an additional counter variable. We actually didn't need it in the above `knn()` example, but it is still a good habit. Here we see an example where we would have otherwise needed another variable.
+The `seq_along()` function can be very useful for looping over a vector that stores non-consecutive numbers. It often removes the need for an additional counter variable. We actually didn't need it in the above `knn()` example, but it is still a good habit. For example maybe we didn't want to try every value of $k$, but only odd integers, which woudl prevent ties. Or perhaps we'd only like to check multiples of 5 to further cut down on computation time.
 
-
-```r
-ex_seq = seq(from = 1, to = 100, by = 5)
-seq_along(ex_seq)
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
-```
-
-```r
-ex_storage = rep(x = 0, times = length(ex_seq))
-for(i in seq_along(ex_seq)) {
-  ex_storage[i] = mean(rnorm(n = 10, mean = ex_seq[i], sd = 1))
-}
-
-ex_storage
-```
-
-```
-##  [1]  0.948629  5.792671 11.090760 15.915397 21.422372 26.106009 30.857772
-##  [8] 35.593119 40.958334 46.338667 50.672116 55.733392 60.387860 65.747387
-## [15] 71.037306 76.066974 80.956349 85.173316 91.077993 95.882329
-```
+Also, note that we set a seed before running this loops. This is because we are considering even values of $k$, thus, there are ties which are randomly broken.
 
 Naturally, we plot the $k$-nearest neighbor results.
 
 
 ```r
-# plot accuracy vs choice of k
-plot(acc_k, type = "b", col = "dodgerblue", cex = 1, pch = 20, 
-     xlab = "k, number of neighbors", ylab = "classification accuracy",
-     main = "Accuracy vs Neighbors")
-# add lines indicating k with best accuracy
-abline(v = which(acc_k == max(acc_k)), col = "darkorange", lwd = 1.5)
-# add line for max accuracy seen
-abline(h = max(acc_k), col = "grey", lty = 2)
-# add line for prevalence in test set
-abline(h = mean(y_default_test == "No"), col = "grey", lty = 2)
+# plot error vs choice of k
+plot(err_k, type = "b", col = "dodgerblue", cex = 1, pch = 20, 
+     xlab = "k, number of neighbors", ylab = "classification error",
+     main = "(Test) Error Rate vs Neighbors")
+# add line for min error seen
+abline(h = min(err_k), col = "darkorange", lty = 3)
+# add line for minority prevalence in test set
+abline(h = mean(y_default_tst == "Yes"), col = "grey", lty = 2)
 ```
 
-![](12-knn-class_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
+![](12-knn-class_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
+
+The dotted orange line represents the smallest observed test classification error rate.
 
 
 ```r
-max(acc_k)
+min(err_k)
 ```
 
 ```
-## [1] 0.9746
+## [1] 0.0254
 ```
+
+We see that five different values of $k$ are tied for the lowest error rate. 
 
 
 ```r
-max(which(acc_k == max(acc_k)))
+which(err_k == min(err_k))
+```
+
+```
+## [1] 11 17 20 21 22
+```
+
+Given a choice of these five values of $k$, we select the largest, as it is the least variable, and has the least chance of overfitting.
+
+
+```r
+max(which(err_k == min(err_k)))
 ```
 
 ```
 ## [1] 22
 ```
 
-We see that four different values of $k$ are tied for the highest accuracy. Given a choice of these four values of $k$, we select the largest, as it is the least variable, and has the least chance of overfitting.
-
-Also notice that, as $k$ increases, eventually the accuracy approaches the test prevalence.
+Recall that defaulters are the minority class. That is, the majority of observations are non-defaulters.
 
 
 ```r
-mean(y_default_test == "No")
+table(y_default_tst)
 ```
 
 ```
-## [1] 0.967
+## y_default_tst
+##   No  Yes 
+## 4835  165
 ```
 
-### Iris Data
+Notice that, as $k$ increases, eventually the error approaches the test prevalence of the minority class.
 
-Like LDA and QDA, KNN can be used for both binary and multi-class problems. As an example, we return to the iris data.
+
+```r
+mean(y_default_tst == "Yes")
+```
+
+```
+## [1] 0.033
+```
+
+
+## Categorical Data
+
+Like LDA and QDA, KNN can be used for both binary and multi-class problems. As an example of a multi-class problems, we return to the `iris` data.
 
 
 ```r
 set.seed(430)
 iris_obs = nrow(iris)
-iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
-iris_train = iris[iris_index, ]
-iris_test = iris[-iris_index, ]
+iris_idx = sample(iris_obs, size = trunc(0.50 * iris_obs))
+iris_trn = iris[iris_idx, ]
+iris_tst = iris[-iris_idx, ]
 ```
 
 All the predictors here are numeric, so we proceed to splitting the data into predictors and classes.
@@ -222,28 +256,28 @@ All the predictors here are numeric, so we proceed to splitting the data into pr
 
 ```r
 # training data
-X_iris_train = iris_train[, -5]
-y_iris_train = iris_train$Species
+X_iris_trn = iris_trn[, -5]
+y_iris_trn = iris_trn$Species
 
 # testing data
-X_iris_test = iris_test[, -5]
-y_iris_test = iris_test$Species
+X_iris_tst = iris_tst[, -5]
+y_iris_tst = iris_tst$Species
 ```
 
 Like previous methods, we can obtain predicted probabilities given test predictors. To do so, we add an argument, `prob = TRUE`
 
 
 ```r
-iris_pred = knn(train = scale(X_iris_train), 
-                test = scale(X_iris_test),
-                cl = y_iris_train,
-                k = 10,
-                prob = TRUE)
+iris_pred = knn(train = scale(X_iris_trn), 
+                test  = scale(X_iris_tst),
+                cl    = y_iris_trn,
+                k     = 10,
+                prob  = TRUE)
 ```
 
 
 ```r
-iris_pred
+head(iris_pred, n = 50)
 ```
 
 ```
@@ -255,31 +289,15 @@ iris_pred
 ## [31] versicolor versicolor versicolor versicolor versicolor versicolor
 ## [37] versicolor versicolor versicolor versicolor versicolor versicolor
 ## [43] versicolor versicolor versicolor versicolor versicolor versicolor
-## [49] virginica  versicolor virginica  virginica  virginica  virginica 
-## [55] virginica  virginica  virginica  versicolor versicolor virginica 
-## [61] virginica  virginica  virginica  versicolor virginica  virginica 
-## [67] virginica  virginica  virginica  versicolor virginica  virginica 
-## [73] virginica  virginica  versicolor
-## attr(,"prob")
-##  [1] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-##  [8] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-## [15] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-## [22] 1.0000000 0.9000000 1.0000000 0.8000000 1.0000000 0.9000000 0.9000000
-## [29] 0.9000000 0.8000000 1.0000000 0.9000000 1.0000000 0.8000000 0.5000000
-## [36] 0.8000000 0.9000000 0.8000000 1.0000000 1.0000000 0.7272727 0.9000000
-## [43] 0.8000000 0.9000000 1.0000000 1.0000000 0.9000000 0.9000000 0.9000000
-## [50] 0.7000000 0.8000000 0.7272727 0.8000000 0.8000000 0.8000000 0.9000000
-## [57] 0.6000000 0.6000000 0.5000000 0.9000000 0.6000000 1.0000000 0.6000000
-## [64] 0.5000000 0.7000000 0.9000000 1.0000000 0.9000000 0.6000000 0.7000000
-## [71] 0.8000000 0.9000000 0.8000000 0.9000000 0.5000000
+## [49] virginica  versicolor
 ## Levels: setosa versicolor virginica
 ```
 
-Unfortunately, this only returns the predicted probability of the most common class. In the binary case, this would be sufficient, however, for multi-class problems, we cannot recover each of the probabilities of interest.
+Unfortunately, this only returns the predicted probability of the most common class. In the binary case, this would be sufficient to recover all probabilities, however, for multi-class problems, we cannot recover each of the probabilities of interest. This will simply be a minor annoyance for now, which we will fix when we introduce the `caret` package for model training.
 
 
 ```r
-attributes(iris_pred)$prob
+head(attributes(iris_pred)$prob, n = 50)
 ```
 
 ```
@@ -290,99 +308,19 @@ attributes(iris_pred)$prob
 ## [29] 0.9000000 0.8000000 1.0000000 0.9000000 1.0000000 0.8000000 0.5000000
 ## [36] 0.8000000 0.9000000 0.8000000 1.0000000 1.0000000 0.7272727 0.9000000
 ## [43] 0.8000000 0.9000000 1.0000000 1.0000000 0.9000000 0.9000000 0.9000000
-## [50] 0.7000000 0.8000000 0.7272727 0.8000000 0.8000000 0.8000000 0.9000000
-## [57] 0.6000000 0.6000000 0.5000000 0.9000000 0.6000000 1.0000000 0.6000000
-## [64] 0.5000000 0.7000000 0.9000000 1.0000000 0.9000000 0.6000000 0.7000000
-## [71] 0.8000000 0.9000000 0.8000000 0.9000000 0.5000000
+## [50] 0.7000000
 ```
 
-
-## Regression
-
-We quickly illustrate KNN for regression using the `Boston` data. We'll only use `lstat` as a predictor, and `medv` as the response. We won't test-train split for this example since we won't be checking RMSE, but instead plotting fitted models. To make plotting easier, we won't scale the data.
-
-
-```r
-X_boston = Boston["lstat"]
-y_boston = Boston$medv
-```
-
-We create a "test" set, that is a grid of `lstat` values at which we will predict `medv`.
-
-
-```r
-lstat_grid = data.frame(lstat = seq(range(X_boston$lstat)[1], range(X_boston$lstat)[2], by = 0.01))
-```
-
-Unfortunately, `knn()` from `class` only handles classification. To perform regression, we will need `knn.reg()` from the `FNN` package. Notice that, we do **not** load this package, but instead use `FNN::knn.reg` to access the function. This is useful since `FNN` also contains a function `knn()` and would then mask `knn()` from `class`.
-
-
-```r
-pred_001 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 1)
-pred_005 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 5)
-pred_010 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 10)
-pred_050 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 50)
-pred_100 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 100)
-pred_506 = FNN::knn.reg(train = X_boston, test = lstat_grid, y = y_boston, k = 506)
-```
-
-We make predictions for various values of `k`. Note that `506` is the total number of observations in this dataset.
-
-
-```r
-par(mfrow = c(3, 2))
-
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 1")
-lines(lstat_grid$lstat, pred_001$pred, col = "darkorange", lwd = 0.25)
-
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 5")
-lines(lstat_grid$lstat, pred_005$pred, col = "darkorange", lwd = 0.75)
-
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 10")
-lines(lstat_grid$lstat, pred_010$pred, col = "darkorange", lwd = 1)
-
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 25")
-lines(lstat_grid$lstat, pred_050$pred, col = "darkorange", lwd = 1.5)
-
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 50")
-lines(lstat_grid$lstat, pred_100$pred, col = "darkorange", lwd = 2)
-
-plot(medv ~ lstat, data = Boston, cex = .8, col = "dodgerblue", main = "k = 506")
-lines(lstat_grid$lstat, pred_506$pred, col = "darkorange", lwd = 2)
-```
-
-![](12-knn-class_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
-
-We see that `k = 1` is clearly overfitting, as `k = 1` is a very complex, highly variable model. Conversely, `k = 506` is clearly underfitting the data, as `k = 506` is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.
 
 ## External Links
 
 - [YouTube: $k$-Nearest Neighbor Classification Algorithm](https://www.youtube.com/watch?v=4ObVzTuFivY) - Video from user "mathematicalmonk" which gives a brief but thorough introduction to the method.
 
-## RMarkdown
+## `rmarkdown`
 
-The RMarkdown file for this chapter can be found [**here**](10-knn.Rmd). The file was created using `R` version 3.4.1 and the following packages:
-
-- Base Packages, Attached
+The `rmarkdown` file for this chapter can be found [**here**](12-knn-class.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
-## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
-```
-
-- Additional Packages, Attached
-
-
-```
-## [1] "MASS"  "class" "ISLR"
-```
-
-- Additional Packages, Not Attached
-
-
-```
-##  [1] "Rcpp"      "bookdown"  "FNN"       "digest"    "rprojroot"
-##  [6] "backports" "magrittr"  "evaluate"  "stringi"   "rmarkdown"
-## [11] "tools"     "stringr"   "yaml"      "compiler"  "htmltools"
-## [16] "knitr"     "methods"
+## [1] "class" "ISLR"
 ```
