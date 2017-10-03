@@ -1,5 +1,6 @@
 # Logistic Regression
 
+
 In this chapter, we continue our discussion of classification. We introduce our first model for classification, logistic regression. To begin, we return to the `Default` dataset from the previous chapter. 
 
 
@@ -31,9 +32,9 @@ We also repeat the test-train split from the previous chapter.
 
 ```r
 set.seed(42)
-default_index = sample(nrow(Default), 5000)
-default_train = Default[default_index, ]
-default_test = Default[-default_index, ]
+default_idx = sample(nrow(Default), 5000)
+default_trn = Default[default_idx, ]
+default_tst = Default[-default_idx, ]
 ```
 
 
@@ -43,16 +44,16 @@ Before moving on to logistic regression, why not plain, old, linear regression?
 
 
 ```r
-default_train_lm = default_train
-default_test_lm = default_test
+default_trn_lm = default_trn
+default_tst_lm = default_tst
 ```
 
 Since linear regression expects a numeric response variable, we coerce the response to be numeric. (Notice that we also shift the results, as we require `0` and `1`, not `1` and `2`.) Notice we have also copied the dataset so that we can return the original data with factors later.
 
 
 ```r
-default_train_lm$default = as.numeric(default_train_lm$default) - 1
-default_test_lm$default = as.numeric(default_test_lm$default) - 1
+default_trn_lm$default = as.numeric(default_trn_lm$default) - 1
+default_tst_lm$default = as.numeric(default_tst_lm$default) - 1
 ```
 
 Why would we think this should work? Recall that,
@@ -64,21 +65,21 @@ $$
 Since $Y$ is limited to values of $0$ and $1$, we have
 
 $$
-\mathbb{E}[Y \mid X = x] = P[Y = 1 \mid X = x].
+\mathbb{E}[Y \mid X = x] = P(Y = 1 \mid X = x).
 $$
 
-It would then seem reasonable that $X\hat{\beta}$ is a reasonable estimate of $P(Y = 1 \mid X = x)$. We test this on the `Default` data.
+It would then seem reasonable that $\mathbf{X}\hat{\beta}$ is a reasonable estimate of $P(Y = 1 \mid X = x)$. We test this on the `Default` data.
 
 
 ```r
-model_lm = lm(default ~ balance, data = default_train_lm)
+model_lm = lm(default ~ balance, data = default_trn_lm)
 ```
 
 Everything seems to be working, until we plot the results.
 
 
 ```r
-plot(default ~ balance, data = default_train_lm, 
+plot(default ~ balance, data = default_trn_lm, 
      col = "darkorange", pch = "|", ylim = c(-0.2, 1),
      main = "Using Linear Regression for Classification")
 abline(h = 0, lty = 3)
@@ -89,7 +90,7 @@ abline(model_lm, lwd = 3, col = "dodgerblue")
 
 ![](10-logistic_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
-Two issues arise. First, all of the predicted probabilities are below 0.5 That means, we would classify every observation as a `"No"`. This is certainly possible, but not what we would expect.
+Two issues arise. First, all of the predicted probabilities are below 0.5. That means, we would classify every observation as a `"No"`. This is certainly possible, but not what we would expect.
 
 
 ```r
@@ -111,27 +112,28 @@ any(predict(model_lm) < 0)
 ## [1] TRUE
 ```
 
+
 ## Bayes Classifier
 
 Why are we using a predicted probability of 0.5 as the cutoff for classification? Recall, the Bayes Classifier, which minimizes the classification error:
 
 $$
-C^B(x) = \underset{k}{\mathrm{argmax}} \ P[Y = k \mid  X = x]
+C^B(x) = \underset{g}{\mathrm{argmax}} \ P(Y = g \mid  X = x)
 $$
 
 So, in the binary classification problem, we will use predicted probabilities
 
 $$
-\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}]
+\hat{p}(x) = \hat{P}(Y = 1 \mid { X = x})
 $$
 
 and 
 
 $$
-\hat{P}[Y = 0 \mid { X = x}]
+\hat{P}(Y = 0 \mid { X = x})
 $$
 
-and then classify to the larger of the two. We actually only need to consider a single probability, usually for $\hat{P}[Y = 1 \mid { X = x}]$. Since we use it so often, we give it the shorthand notation, $\hat{p}({ x})$. Then the classifier is written,
+and then classify to the larger of the two. We actually only need to consider a single probability, usually $\hat{P}(Y = 1 \mid { X = x})$. Since we use it so often, we give it the shorthand notation, $\hat{p}(x)$. Then the classifier is written,
 
 $$
 \hat{C}(x) = 
@@ -143,12 +145,13 @@ $$
 
 This classifier is essentially estimating the Bayes Classifier, thus, is seeking to minimize classification errors.
 
+
 ## Logistic Regression with `glm()`
 
 To better estimate the probability
 
 $$
-p(x) = P[Y = 1 \mid {X = x}]
+p(x) = P(Y = 1 \mid {X = x})
 $$
 we turn to logistic regression. The model is written
 
@@ -162,10 +165,10 @@ $$
 p(x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)}} = \sigma(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p)
 $$
 
-Notice, we use the sigmoid function as shorthand notation, which appears often in deep learning literature. It takes any real input, and outputs a number between 0 and 1. How useful!
+Notice, we use the sigmoid function as shorthand notation, which appears often in deep learning literature. It takes any real input, and outputs a number between 0 and 1. How useful! (This is actualy a particular sigmoid function called the logistic function, but since it is by far the most popular sigmoid function, often sigmoid function is used to refer to the logistic function)
 
 $$
-\sigma(x) = \frac{1}{1 + e^{-x}}
+\sigma(x) = \frac{e^x}{1 + e^x} = \frac{1}{1 + e^{-x}}
 $$
 
 The model is fit by numerically maximizing the likelihood, which we will let `R` take care of.
@@ -174,7 +177,7 @@ We start with a single predictor example, again using `balance` as our single pr
 
 
 ```r
-model_glm = glm(default ~ balance, data = default_train, family = "binomial")
+model_glm = glm(default ~ balance, data = default_trn, family = "binomial")
 ```
 
 Fitting this model looks very similar to fitting a simple linear regression. Instead of `lm()` we use `glm()`. The only other difference is the use of `family = "binomial"` which indicates that we have a two-class categorical response. Using `glm()` with `family = "gaussian"` would perform the usual linear regression.
@@ -225,7 +228,7 @@ for each observation.
 Importantly, these are **not** predicted probabilities. To obtain the predicted probabilities
 
 $$
-\hat{p}(x) = \hat{P}[Y = 1 \mid X = x]
+\hat{p}(x) = \hat{P}(Y = 1 \mid X = x)
 $$
 
 we need to use `type = "response"`
@@ -268,7 +271,6 @@ $$
 
 The commented line, which would give the same results, is performing
 
-
 $$
 \hat{C}(x) = 
 \begin{cases} 
@@ -280,25 +282,32 @@ $$
 where 
 
 $$
-\hat{p}(x) = \hat{P}[Y = 1 \mid X = x].
+\hat{p}(x) = \hat{P}(Y = 1 \mid X = x).
 $$
 
-Once we have classifications, we can calculate metrics such as accuracy.
+Once we have classifications, we can calculate metrics such as the trainging classification error rate.
 
 
 ```r
-mean(model_glm_pred == default_train$default) # train accuracy
+calc_class_err = function(actual, predicted) {
+  mean(actual != predicted)
+}
+```
+
+
+```r
+calc_class_err(actual = default_trn$default, predicted = model_glm_pred)
 ```
 
 ```
-## [1] 0.9722
+## [1] 0.0278
 ```
 
 As we saw previously, the `table()` and `confusionMatrix()` functions can be used to quickly obtain many more metrics.
 
 
 ```r
-train_tab = table(predicted = model_glm_pred, actual = default_train$default)
+train_tab = table(predicted = model_glm_pred, actual = default_trn$default)
 library(caret)
 train_con_mat = confusionMatrix(train_tab, positive = "Yes")
 c(train_con_mat$overall["Accuracy"], 
@@ -311,34 +320,34 @@ c(train_con_mat$overall["Accuracy"],
 ##   0.9722000   0.2738095   0.9964818
 ```
 
-As we did with regression, we could also write a custom function for accuracy.
+We could also write a custom function for the error for use with trained logist regression models.
 
 
 ```r
-get_accuracy = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
+get_logistic_error = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
   probs = predict(mod, newdata = data, type = "response")
   preds = ifelse(probs > cut, pos, neg)
-  mean(data[, res] == preds)
+  calc_class_err(actual = data[, res], predicted = preds)
 }
 ```
 
-This function will be useful later when calculating train and test accuracies for several models at the same time.
+This function will be useful later when calculating train and test errors for several models at the same time.
 
 
 ```r
-get_accuracy(model_glm, data = default_train, 
-             res = "default", pos = "Yes", neg = "No", cut = 0.5)
+get_logistic_error(model_glm, data = default_trn, 
+                   res = "default", pos = "Yes", neg = "No", cut = 0.5)
 ```
 
 ```
-## [1] 0.9722
+## [1] 0.0278
 ```
 
 To see how much better logistic regression is for this task, we create the same plot we used for linear regression.
 
 
 ```r
-plot(default ~ balance, data = default_train_lm, 
+plot(default ~ balance, data = default_trn_lm, 
      col = "darkorange", pch = "|", ylim = c(-0.2, 1),
      main = "Using Logistic Regression for Classification")
 abline(h = 0, lty = 3)
@@ -349,21 +358,21 @@ curve(predict(model_glm, data.frame(balance = x), type = "response"),
 abline(v = -coef(model_glm)[1] / coef(model_glm)[2], lwd = 2)
 ```
 
-![](10-logistic_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
+![](10-logistic_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
 This plot contains a wealth of information.
 
 - The orange `|` characters are the data, $(x_i, y_i)$.
 - The blue "curve" is the predicted probabilities given by the fitted logistic regression. That is,
 $$
-\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}]
+\hat{p}(x) = \hat{P}(Y = 1 \mid { X = x})
 $$
 - The solid vertical black line represents the **[decision boundary](https://en.wikipedia.org/wiki/Decision_boundary)**, the `balance` that obtains a predicted probability of 0.5. In this case `balance` = 1947.252994.
 
 The decision boundary is found by solving for points that satisfy
 
 $$
-\hat{p}(x) = \hat{P}[Y = 1 \mid { X = x}] = 0.5
+\hat{p}(x) = \hat{P}(Y = 1 \mid { X = x}) = 0.5
 $$
 
 This is equivalent to point that satisfy
@@ -381,7 +390,7 @@ The following is not run, but an alternative way to add the logistic curve to th
 
 
 ```r
-grid = seq(0, max(default_train$balance), by = 0.01)
+grid = seq(0, max(default_trn$balance), by = 0.01)
 
 sigmoid = function(x) {
   1 / (1 + exp(-x))
@@ -391,14 +400,14 @@ lines(grid, sigmoid(coef(model_glm)[1] + coef(model_glm)[2] * grid), lwd = 3)
 ```
 
 
-Using the usual formula syntax, it is easy to add complexity to logistic regressions.
+Using the usual formula syntax, it is easy to add or remove complexity from logistic regressions.
 
 
 ```r
-model_1 = glm(default ~ 1, data = default_train, family = "binomial")
-model_2 = glm(default ~ ., data = default_train, family = "binomial")
+model_1 = glm(default ~ 1, data = default_trn, family = "binomial")
+model_2 = glm(default ~ ., data = default_trn, family = "binomial")
 model_3 = glm(default ~ . ^ 2 + I(balance ^ 2),
-              data = default_train, family = "binomial")
+              data = default_trn, family = "binomial")
 ```
 
 Note that, using polynomial transformations of predictors will allow a linear model to have non-linear decision boundaries.
@@ -406,33 +415,33 @@ Note that, using polynomial transformations of predictors will allow a linear mo
 
 ```r
 model_list = list(model_1, model_2, model_3)
-
-train_error = 1 - sapply(model_list, get_accuracy, data = default_train, 
-                         res = "default", pos = "Yes", neg = "No", cut = 0.5)
-test_error = 1 - sapply(model_list, get_accuracy, data = default_test, 
-                       res = "default", pos = "Yes", neg = "No", cut = 0.5)
+train_errors = 1 - sapply(model_list, get_logistic_error, data = default_trn, 
+                          res = "default", pos = "Yes", neg = "No", cut = 0.5)
+test_errors = 1 - sapply(model_list, get_logistic_error, data = default_tst, 
+                        res = "default", pos = "Yes", neg = "No", cut = 0.5)
 ```
 
 Here we see the misclassification error rates for each model. The train decreases, and the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.
 
 
 ```r
-diff(train_error)
+diff(train_errors)
 ```
 
 ```
-## [1] -0.0058 -0.0002
+## [1] 0.0058 0.0002
 ```
 
 ```r
-diff(test_error)
+diff(test_errors)
 ```
 
 ```
-## [1] -0.0068  0.0004
+## [1]  0.0068 -0.0004
 ```
 
 We call `model_2` the **additive** logistic model, which we will use quite often.
+
 
 ## ROC Curves
 
@@ -440,14 +449,14 @@ Let's return to our simple model with only balance as a predictor.
 
 
 ```r
-model_glm = glm(default ~ balance, data = default_train, family = "binomial")
+model_glm = glm(default ~ balance, data = default_trn, family = "binomial")
 ```
 
 We write a function which allows use to make predictions based on different probability cutoffs.
 
 
 ```r
-get_pred = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
+get_logistic_pred = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
   probs = predict(mod, newdata = data, type = "response")
   ifelse(probs > cut, pos, neg)
 }
@@ -456,8 +465,8 @@ get_pred = function(mod, data, res = "y", pos = 1, neg = 0, cut = 0.5) {
 $$
 \hat{C}(x) = 
 \begin{cases} 
-      1 & \hat{f}(x) > c \\
-      0 & \hat{f}(x) \leq c 
+      1 & \hat{p}(x) > c \\
+      0 & \hat{p}(x) \leq c 
 \end{cases}
 $$
 
@@ -465,18 +474,21 @@ Let's use this to obtain predictions using a low, medium, and high cutoff. (0.1,
 
 
 ```r
-test_pred_10 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.1)
-test_pred_50 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.5)
-test_pred_90 = get_pred(model_glm, data = default_test, res = "default", pos = "Yes", neg = "No", cut = 0.9)
+test_pred_10 = get_logistic_pred(model_glm, data = default_tst, res = "default", 
+                                 pos = "Yes", neg = "No", cut = 0.1)
+test_pred_50 = get_logistic_pred(model_glm, data = default_tst, res = "default", 
+                                 pos = "Yes", neg = "No", cut = 0.5)
+test_pred_90 = get_logistic_pred(model_glm, data = default_tst, res = "default", 
+                                 pos = "Yes", neg = "No", cut = 0.9)
 ```
 
 Now we evaluate accuracy, sensitivity, and specificity for these classifiers.
 
 
 ```r
-test_tab_10 = table(predicted = test_pred_10, actual = default_test$default)
-test_tab_50 = table(predicted = test_pred_50, actual = default_test$default)
-test_tab_90 = table(predicted = test_pred_90, actual = default_test$default)
+test_tab_10 = table(predicted = test_pred_10, actual = default_tst$default)
+test_tab_50 = table(predicted = test_pred_50, actual = default_tst$default)
+test_tab_90 = table(predicted = test_pred_90, actual = default_tst$default)
 
 test_con_mat_10 = confusionMatrix(test_tab_10, positive = "Yes")
 test_con_mat_50 = confusionMatrix(test_tab_50, positive = "Yes")
@@ -521,11 +533,11 @@ Instead of manually checking cutoffs, we can create an ROC curve (receiver opera
 
 ```r
 library(pROC)
-test_prob = predict(model_glm, newdata = default_test, type = "response")
-test_roc = roc(default_test$default ~ test_prob, plot = TRUE, print.auc = TRUE)
+test_prob = predict(model_glm, newdata = default_tst, type = "response")
+test_roc = roc(default_tst$default ~ test_prob, plot = TRUE, print.auc = TRUE)
 ```
 
-![](10-logistic_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
+![](10-logistic_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
 
 ```r
 as.numeric(test_roc$auc)
@@ -537,12 +549,13 @@ as.numeric(test_roc$auc)
 
 A good model will have a high AUC, that is as often as possible a high sensitivity and specificity.
 
+
 ## Multinomial Logistic Regression
 
 What if the response contains more than two categories? For that we need multinomial logistic regression. 
 
 $$
-P[Y = k \mid { X = x}] = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \beta_{pk} x_p}}{\sum_{j = 1}^{K} e^{\beta_{0j} + \beta_{1j} x_1 + \cdots +  + \beta_{pj} x_p}}
+P(Y = c \mid { X = x}) = \frac{e^{\beta_{0c} + \beta_{1c} x_1 + \cdots +  + \beta_{pc} x_p}}{\sum_{g = 1}^{G} e^{\beta_{0g} + \beta_{1g} x_1 + \cdots + \beta_{pg} x_p}}
 $$
 
 We will omit the details, as ISL has as well. If you are interested, the [Wikipedia page](https://en.wikipedia.org/wiki/Multinomial_logistic_regression) provides a rather thorough coverage. Also note that the above is an example of the [softmax function](https://en.wikipedia.org/wiki/Softmax_function).
@@ -555,9 +568,9 @@ Before proceeding, we test-train split this data.
 ```r
 set.seed(430)
 iris_obs = nrow(iris)
-iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
-iris_train = iris[iris_index, ]
-iris_test = iris[-iris_index, ]
+iris_idx = sample(iris_obs, size = trunc(0.50 * iris_obs))
+iris_trn = iris[iris_idx, ]
+iris_test = iris[-iris_idx, ]
 ```
 
 To perform multinomial logistic regression, we use the `multinom` function from the `nnet` package. Training using `multinom()` is done using similar syntax to `lm()` and `glm()`. We add the `trace = FALSE` argument to suppress information about updates to the optimization routine as the model is trained.
@@ -565,7 +578,7 @@ To perform multinomial logistic regression, we use the `multinom` function from 
 
 ```r
 library(nnet)
-model_multi = multinom(Species ~ ., data = iris_train, trace = FALSE)
+model_multi = multinom(Species ~ ., data = iris_trn, trace = FALSE)
 summary(model_multi)$coefficients
 ```
 
@@ -581,7 +594,7 @@ A difference between `glm()` and `multinom()` is how the `predict()` function op
 
 
 ```r
-head(predict(model_multi, newdata = iris_train))
+head(predict(model_multi, newdata = iris_trn))
 ```
 
 ```
@@ -590,19 +603,29 @@ head(predict(model_multi, newdata = iris_train))
 ```
 
 ```r
-head(predict(model_multi, newdata = iris, type = "prob"))
+head(predict(model_multi, newdata = iris_trn, type = "prob"))
 ```
 
 ```
-##   setosa   versicolor    virginica
-## 1      1 1.386333e-16 1.137629e-39
-## 2      1 1.888634e-12 3.059666e-35
-## 3      1 3.868198e-14 2.226923e-37
-## 4      1 2.315067e-11 1.687874e-33
-## 5      1 5.490420e-17 4.794326e-40
-## 6      1 2.196721e-17 1.482366e-38
+##           setosa   versicolor    virginica
+## 23  1.000000e+00 2.607782e-19 3.891079e-44
+## 106 4.461651e-38 2.328295e-09 1.000000e+00
+## 37  1.000000e+00 1.108222e-18 1.620112e-42
+## 40  1.000000e+00 5.389221e-15 1.525649e-37
+## 145 1.146554e-28 9.816687e-07 9.999990e-01
+## 36  1.000000e+00 6.216549e-16 7.345269e-40
 ```
 
 Notice that by default, classifications are returned. When obtaining probabilities, we are given the predicted probability for **each** class.
 
 Interestingly, you've just fit a neural network, and you didn't even know it! (Hence the `nnet` package.) Later we will discuss the connections between logistic regression, multinomial logistic regression, and simple neural networks.
+
+
+## `rmarkdown`
+
+The `rmarkdown` file for this chapter can be found [**here**](10-logistic.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:
+
+
+```
+## [1] "nnet"    "pROC"    "caret"   "ggplot2" "lattice" "tibble"  "ISLR"
+```
