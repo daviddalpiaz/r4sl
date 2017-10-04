@@ -415,10 +415,10 @@ Note that, using polynomial transformations of predictors will allow a linear mo
 
 ```r
 model_list = list(model_1, model_2, model_3)
-train_errors = 1 - sapply(model_list, get_logistic_error, data = default_trn, 
-                          res = "default", pos = "Yes", neg = "No", cut = 0.5)
-test_errors = 1 - sapply(model_list, get_logistic_error, data = default_tst, 
-                        res = "default", pos = "Yes", neg = "No", cut = 0.5)
+train_errors = sapply(model_list, get_logistic_error, data = default_trn, 
+                      res = "default", pos = "Yes", neg = "No", cut = 0.5)
+test_errors =  sapply(model_list, get_logistic_error, data = default_tst, 
+                      res = "default", pos = "Yes", neg = "No", cut = 0.5)
 ```
 
 Here we see the misclassification error rates for each model. The train decreases, and the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.
@@ -429,7 +429,7 @@ diff(train_errors)
 ```
 
 ```
-## [1] 0.0058 0.0002
+## [1] -0.0058 -0.0002
 ```
 
 ```r
@@ -437,7 +437,7 @@ diff(test_errors)
 ```
 
 ```
-## [1]  0.0068 -0.0004
+## [1] -0.0068  0.0004
 ```
 
 We call `model_2` the **additive** logistic model, which we will use quite often.

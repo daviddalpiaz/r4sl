@@ -572,15 +572,15 @@ model_3 =<span class="st"> </span><span class="kw">glm</span>(default ~<span cla
               <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre></div>
 <p>Note that, using polynomial transformations of predictors will allow a linear model to have non-linear decision boundaries.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_list =<span class="st"> </span><span class="kw">list</span>(model_1, model_2, model_3)
-train_errors =<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_trn, 
-                          <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
-test_errors =<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_tst, 
-                        <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</code></pre></div>
+train_errors =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_trn, 
+                      <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
+test_errors =<span class="st">  </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_tst, 
+                      <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</code></pre></div>
 <p>Here we see the misclassification error rates for each model. The train decreases, and the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(train_errors)</code></pre></div>
-<pre><code>## [1] 0.0058 0.0002</code></pre>
+<pre><code>## [1] -0.0058 -0.0002</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(test_errors)</code></pre></div>
-<pre><code>## [1]  0.0068 -0.0004</code></pre>
+<pre><code>## [1] -0.0068  0.0004</code></pre>
 <p>We call <code>model_2</code> the <strong>additive</strong> logistic model, which we will use quite often.</p>
 </div>
 <div id="roc-curves" class="section level2">
