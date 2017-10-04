@@ -186,7 +186,7 @@ calc_class_err(predicted = iris_qda_tst_pred, actual = iris_tst$Species)
 ```
 
 ```{r}
-table(predicted = iris_qda_test_pred, actual = iris_tst$Species)
+table(predicted = iris_qda_tst_pred, actual = iris_tst$Species)
 ```
 
 Here we find that QDA is not performing as well as LDA. It is misclassifying versicolors. Since QDA is a more complex model than LDA (many more parameters) we would say that QDA is overfitting here.
