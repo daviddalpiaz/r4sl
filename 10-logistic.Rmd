@@ -55,7 +55,7 @@ model_lm = lm(default ~ balance, data = default_trn_lm)
 
 Everything seems to be working, until we plot the results.
 
-```{r, fig.height=3, fig.width=6}
+```{r, fig.height=5, fig.width=7}
 plot(default ~ balance, data = default_trn_lm, 
      col = "darkorange", pch = "|", ylim = c(-0.2, 1),
      main = "Using Linear Regression for Classification")
@@ -264,7 +264,7 @@ get_logistic_error(model_glm, data = default_trn,
 
 To see how much better logistic regression is for this task, we create the same plot we used for linear regression.
 
-```{r, fig.height=3, fig.width=6}
+```{r, fig.height=5, fig.width=7}
 plot(default ~ balance, data = default_trn_lm, 
      col = "darkorange", pch = "|", ylim = c(-0.2, 1),
      main = "Using Logistic Regression for Classification")
