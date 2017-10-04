@@ -29,6 +29,7 @@ Imports:
   sparcl,
   mlbench,
   klaR,
-  rpart.plot
+  rpart.plot,
+  plotrix
 Remotes: 
   rstudio/bookdown
