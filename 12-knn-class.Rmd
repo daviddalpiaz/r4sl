@@ -26,7 +26,7 @@ Essentially, the probability of each class $g$ is the proportion of the $k$ neig
 Then, to create a classifier, as always, we simply classify to the class with the highest estimated probability.
 
 $$
-\hat{C}(x) =  \underset{g}{\mathrm{argmax}} \ \ \hat{p}_{kg}(x)
+\hat{C}_k(x) =  \underset{g}{\mathrm{argmax}} \ \ \hat{p}_{kg}(x)
 $$
 
 This is the same as saying that we classify to the class with the most observations in the $k$ nearest neighbors. If more than one class is tied for the highest estimated probablity, simply assign a class at random to one of the classes tied for highest.
@@ -34,7 +34,7 @@ This is the same as saying that we classify to the class with the most observati
 In the binary case this becomes
 
 $$
-\hat{C}(x) = 
+\hat{C}_k(x) = 
 \begin{cases} 
       1 & \hat{p}_{k0}(x) > 0.5 \\
       0 & \hat{p}_{k1}(x) < 0.5
@@ -42,6 +42,35 @@ $$
 $$
 
 Again, if the probability for class `0` and `1` are equal, simply assign at random.
+
+```{r, echo = FALSE}
+set.seed(42)
+knn_ex = tibble::tibble(
+  x1 = 1:10,
+  x2 = sample(1:10, size = 10, replace = TRUE),
+  class = sample(c("darkorange", "dodgerblue"), size = 10, replace = TRUE))
+plot(x2 ~ x1, col = class, data = knn_ex,
+     ylim = c(0, 10), xlim = c(0, 10), pch = 20, cex = 1.5)
+points(8, 6, col = "darkgrey", pch = "x")
+plotrix::draw.circle(8, 6, 2.6, nv = 1000, lty = 1, lwd = 2, border = "darkgrey")
+legend("bottomleft", c("O", "B"), pch = c(20, 20), col = c("darkorange", "dodgerblue"))
+```
+
+In the above example, when predicting at $x = (x_1, x_2) = (8, 6)$,
+
+$$
+\hat{p}_{5B}(x_1 = 8, x_2 = 6) = \hat{P}_5(Y = \text{Blue} \mid X_1 = 8, X_2 = 6) = \frac{3}{5}
+$$
+
+$$
+\hat{p}_{5O}(x_1 = 8, x_2 = 6) = \hat{P}_5(Y = \text{Orange} \mid X_1 = 8, X_2 = 6) = \frac{2}{5}
+$$
+
+Thus
+
+$$
+\hat{C}_5(x_1 = 8, x_2 = 6) = \text{Blue}
+$$
 
 
 ## Binary Data Example
