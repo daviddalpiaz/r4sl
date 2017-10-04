@@ -26,7 +26,7 @@ Essentially, the probability of each class $g$ is the proportion of the $k$ neig
 Then, to create a classifier, as always, we simply classify to the class with the highest estimated probability.
 
 $$
-\hat{C}(x) =  \underset{g}{\mathrm{argmax}} \ \ \hat{p}_{kg}(x)
+\hat{C}_k(x) =  \underset{g}{\mathrm{argmax}} \ \ \hat{p}_{kg}(x)
 $$
 
 This is the same as saying that we classify to the class with the most observations in the $k$ nearest neighbors. If more than one class is tied for the highest estimated probablity, simply assign a class at random to one of the classes tied for highest.
@@ -34,7 +34,7 @@ This is the same as saying that we classify to the class with the most observati
 In the binary case this becomes
 
 $$
-\hat{C}(x) = 
+\hat{C}_k(x) = 
 \begin{cases} 
       1 & \hat{p}_{k0}(x) > 0.5 \\
       0 & \hat{p}_{k1}(x) < 0.5
@@ -42,6 +42,24 @@ $$
 $$
 
 Again, if the probability for class `0` and `1` are equal, simply assign at random.
+
+![](12-knn-class_files/figure-latex/unnamed-chunk-1-1.pdf)<!-- --> 
+
+In the above example, when predicting at $x = (x_1, x_2) = (8, 6)$,
+
+$$
+\hat{p}_{5B}(x_1 = 8, x_2 = 6) = \hat{P}_5(Y = \text{Blue} \mid X_1 = 8, X_2 = 6) = \frac{3}{5}
+$$
+
+$$
+\hat{p}_{5O}(x_1 = 8, x_2 = 6) = \hat{P}_5(Y = \text{Orange} \mid X_1 = 8, X_2 = 6) = \frac{2}{5}
+$$
+
+Thus
+
+$$
+\hat{C}_5(x_1 = 8, x_2 = 6) = \text{Blue}
+$$
 
 
 ## Binary Data Example
@@ -178,7 +196,7 @@ abline(h = min(err_k), col = "darkorange", lty = 3)
 abline(h = mean(y_default_tst == "Yes"), col = "grey", lty = 2)
 ```
 
-![](12-knn-class_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
+![](12-knn-class_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 The dotted orange line represents the smallest observed test classification error rate.
 
