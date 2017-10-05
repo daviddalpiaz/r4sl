@@ -202,7 +202,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
@@ -574,7 +574,7 @@ model_3 =<span class="st"> </span><span class="kw">glm</span>(default ~<span cla
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_list =<span class="st"> </span><span class="kw">list</span>(model_1, model_2, model_3)
 train_errors =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_trn, 
                       <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
-test_errors =<span class="st">  </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_tst, 
+test_errors  =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_tst, 
                       <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</code></pre></div>
 <p>Here we see the misclassification error rates for each model. The train decreases, and the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(train_errors)</code></pre></div>
@@ -651,7 +651,7 @@ test_roc =<span class="st"> </span><span class="kw">roc</span>(default_tst$defau
 <h2><span class="header-section-number">10.5</span> Multinomial Logistic Regression</h2>
 <p>What if the response contains more than two categories? For that we need multinomial logistic regression.</p>
 <p><span class="math display">\[
-P(Y = c \mid { X = x}) = \frac{e^{\beta_{0c} + \beta_{1c} x_1 + \cdots +  + \beta_{pc} x_p}}{\sum_{g = 1}^{G} e^{\beta_{0g} + \beta_{1g} x_1 + \cdots + \beta_{pg} x_p}}
+P(Y = k \mid { X = x}) = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \beta_{pk} x_p}}{\sum_{g = 1}^{G} e^{\beta_{0g} + \beta_{1g} x_1 + \cdots + \beta_{pg} x_p}}
 \]</span></p>
 <p>We will omit the details, as ISL has as well. If you are interested, the <a href="https://en.wikipedia.org/wiki/Multinomial_logistic_regression">Wikipedia page</a> provides a rather thorough coverage. Also note that the above is an example of the <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax function</a>.</p>
 <p>As an example of a dataset with a three category response, we use the <code>iris</code> dataset, which is so famous, it has its own <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia entry</a>. It is also a default dataset in <code>R</code>, so no need to load it.</p>

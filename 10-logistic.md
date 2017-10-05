@@ -417,7 +417,7 @@ Note that, using polynomial transformations of predictors will allow a linear mo
 model_list = list(model_1, model_2, model_3)
 train_errors = sapply(model_list, get_logistic_error, data = default_trn, 
                       res = "default", pos = "Yes", neg = "No", cut = 0.5)
-test_errors =  sapply(model_list, get_logistic_error, data = default_tst, 
+test_errors  = sapply(model_list, get_logistic_error, data = default_tst, 
                       res = "default", pos = "Yes", neg = "No", cut = 0.5)
 ```
 
@@ -555,7 +555,7 @@ A good model will have a high AUC, that is as often as possible a high sensitivi
 What if the response contains more than two categories? For that we need multinomial logistic regression. 
 
 $$
-P(Y = c \mid { X = x}) = \frac{e^{\beta_{0c} + \beta_{1c} x_1 + \cdots +  + \beta_{pc} x_p}}{\sum_{g = 1}^{G} e^{\beta_{0g} + \beta_{1g} x_1 + \cdots + \beta_{pg} x_p}}
+P(Y = k \mid { X = x}) = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \beta_{pk} x_p}}{\sum_{g = 1}^{G} e^{\beta_{0g} + \beta_{1g} x_1 + \cdots + \beta_{pg} x_p}}
 $$
 
 We will omit the details, as ISL has as well. If you are interested, the [Wikipedia page](https://en.wikipedia.org/wiki/Multinomial_logistic_regression) provides a rather thorough coverage. Also note that the above is an example of the [softmax function](https://en.wikipedia.org/wiki/Softmax_function).

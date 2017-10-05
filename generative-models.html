@@ -202,7 +202,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
@@ -351,10 +351,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Generative methods model the joint probability, <span class="math inline">\(p(x, y)\)</span>, often by assuming some distribution for the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span>, <span class="math inline">\(f(x \mid y)\)</span>. Bayes theorem is then applied to classify according to <span class="math inline">\(p(y \mid x)\)</span>. Discriminative methods directly model this conditional, <span class="math inline">\(p(y \mid x)\)</span>. A detailed discussion and analysis can be found in <a href="https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf">Ng and Jordan, 2002</a>.</p>
 <p>Each of the methods in this chapter will use Bayes theorem to build a classifier.</p>
 <p><span class="math display">\[
-p_k(x) = P[Y = k \mid {\mathbf X} = {\mathbf x}] = \frac{\pi_k \cdot f_k({\mathbf x})}{\sum_{i = 1 }^{K} \pi_k \cdot f_k({\mathbf x})}
+p_k(x) = P(Y = k \mid X = x) = \frac{\pi_k \cdot f_k(x)}{\sum_{g = 1}^{G} \pi_g \cdot f_g(x)}
 \]</span></p>
-<p>We call <span class="math inline">\(p_k(x)\)</span> the <strong>posterior</strong> probability, which we will estimate then use to create classifications. The <span class="math inline">\(\pi_k\)</span> are called the <strong>prior</strong> probabilities for each class <span class="math inline">\(k\)</span>. That is, <span class="math inline">\(P[y = k]\)</span>, unconditioned on <span class="math inline">\(X\)</span>. The <span class="math inline">\(f_k({\mathbf x})\)</span> are called the <strong>likelihoods</strong>, which are indexed by <span class="math inline">\(k\)</span> to denote that they are conditional on the classes. The denominator is often referred to as a <strong>normalizing constant</strong>.</p>
-<p>The methods will differ by placing different modeling assumptions on the likelihoods, <span class="math inline">\(f_k({\mathbf x})\)</span>. For each method, the priors could be learned from data or pre-specified.</p>
+<p>We call <span class="math inline">\(p_k(x)\)</span> the <strong>posterior</strong> probability, which we will estimate then use to create classifications. The <span class="math inline">\(\pi_g\)</span> are called the <strong>prior</strong> probabilities for each possible class <span class="math inline">\(g\)</span>. That is, <span class="math inline">\(\pi_g = P(Y = g)\)</span>, unconditioned on <span class="math inline">\(X\)</span>. The <span class="math inline">\(f_g(x)\)</span> are called the <strong>likelihoods</strong>, which are indexed by <span class="math inline">\(g\)</span> to denote that they are conditional on the classes. The denominator is often referred to as a <strong>normalizing constant</strong>.</p>
+<p>The methods will differ by placing different modeling assumptions on the likelihoods, <span class="math inline">\(f_g(x)\)</span>. For each method, the priors could be learned from data or pre-specified.</p>
 <p>For each method, classifications are made to the class with the highest estimated posterior probability, which is equivalent to the class with the largest</p>
 <p><span class="math display">\[
 \log(\hat{\pi}_k \cdot \hat{f}_k({\mathbf x})).
@@ -363,34 +363,34 @@ p_k(x) = P[Y = k \mid {\mathbf X} = {\mathbf x}] = \frac{\pi_k \cdot f_k({\mathb
 <p>To illustrate these new methods, we return to the iris data, which you may remember has three classes. After a test-train split, we create a number of plots to refresh our memory.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
 iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)
-iris_index =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
+iris_idx =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>iris_obs))
 <span class="co"># iris_index = sample(iris_obs, size = trunc(0.10 * iris_obs))</span>
-iris_train =<span class="st"> </span>iris[iris_index, ]
-iris_test =<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_train[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
-                               <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
-            <span class="dt">y =</span> iris_train$Species,
-            <span class="dt">plot =</span> <span class="st">&quot;density&quot;</span>, 
-            <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>), 
-                          <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>)), 
-            <span class="dt">adjust =</span> <span class="fl">1.5</span>, 
-            <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, 
-            <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), 
-            <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>))</code></pre></div>
+iris_trn =<span class="st"> </span>iris[iris_idx, ]
+iris_tst =<span class="st"> </span>iris[-iris_idx, ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_trn[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
+                                    <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
+                   <span class="dt">y =</span> iris_trn$Species,
+                   <span class="dt">plot =</span> <span class="st">&quot;density&quot;</span>, 
+                   <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>), 
+                                 <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>)), 
+                   <span class="dt">adjust =</span> <span class="fl">1.5</span>, 
+                   <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, 
+                   <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), 
+                   <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>))</code></pre></div>
 <p><img src="11-generative_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_train[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
-                               <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
-            <span class="dt">y =</span> iris_train$Species,
-            <span class="dt">plot =</span> <span class="st">&quot;ellipse&quot;</span>,
-            <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_trn[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
+                                    <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
+                   <span class="dt">y =</span> iris_trn$Species,
+                   <span class="dt">plot =</span> <span class="st">&quot;ellipse&quot;</span>,
+                   <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>))</code></pre></div>
 <p><img src="11-generative_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_train[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
-                               <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
-            <span class="dt">y =</span> iris_train$Species,
-                  <span class="dt">plot =</span> <span class="st">&quot;box&quot;</span>,
-                  <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation=</span><span class="st">&quot;free&quot;</span>),
-                                <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">rot =</span> <span class="dv">90</span>)),
-                  <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">caret::<span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_trn[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, 
+                                    <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], 
+                   <span class="dt">y =</span> iris_trn$Species,
+                   <span class="dt">plot =</span> <span class="st">&quot;box&quot;</span>,
+                   <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>),
+                                 <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">rot =</span> <span class="dv">90</span>)),
+                   <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))</code></pre></div>
 <p><img src="11-generative_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Especially based on the pairs plot, we see that it should not be too difficult to find a good classifier.</p>
 <p>Notice that we use <code>caret::featurePlot</code> to access the <code>featurePlot()</code> function without loading the entire <code>caret</code> package.</p>
@@ -398,7 +398,7 @@ iris_test =<span class="st"> </span>iris[-iris_index, ]</code></pre></div>
 <h2><span class="header-section-number">11.1</span> Linear Discriminant Analysis</h2>
 <p>LDA assumes that the predictors are multivariate normal conditioned on the classes.</p>
 <p><span class="math display">\[
-{\mathbf X} \mid Y = k \sim N(\mu_k, \Sigma)
+X \mid Y = k \sim N(\mu_k, \Sigma)
 \]</span></p>
 <p><span class="math display">\[
 f_k({\mathbf x}) = \frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}{2}(\mathbf x - \mu_k)^{\prime}\Sigma^{-1}(\mathbf x - \mu_k)\right]
@@ -406,10 +406,10 @@ f_k({\mathbf x}) = \frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}{2}(\m
 <p>Notice that <span class="math inline">\(\Sigma\)</span> does <strong>not</strong> depend on <span class="math inline">\(k\)</span>, that is, we are assuming the same <span class="math inline">\(\Sigma\)</span> for each class. We then use information from all the classes to estimate <span class="math inline">\(\Sigma\)</span>.</p>
 <p>To fit an LDA model, we use the <code>lda()</code> function from the <code>MASS</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
-iris_lda =<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+iris_lda =<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_trn)
 iris_lda</code></pre></div>
 <pre><code>## Call:
-## lda(Species ~ ., data = iris_train)
+## lda(Species ~ ., data = iris_trn)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
@@ -432,15 +432,15 @@ iris_lda</code></pre></div>
 ##    LD1    LD2 
 ## 0.9908 0.0092</code></pre>
 <p>Here we see the estimated <span class="math inline">\(\hat{\pi}_k\)</span> and <span class="math inline">\(\hat{\mu}_k\)</span> for each class.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.list</span>(<span class="kw">predict</span>(iris_lda, iris_train))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.list</span>(<span class="kw">predict</span>(iris_lda, iris_trn))</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(<span class="kw">predict</span>(iris_lda, iris_train))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(<span class="kw">predict</span>(iris_lda, iris_trn))</code></pre></div>
 <pre><code>## [1] &quot;class&quot;     &quot;posterior&quot; &quot;x&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_lda, iris_train)$class, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_lda, iris_trn)$class, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>##  [1] setosa     virginica  setosa     setosa     virginica  setosa    
 ##  [7] virginica  setosa     versicolor setosa    
 ## Levels: setosa versicolor virginica</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_lda, iris_train)$posterior, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_lda, iris_trn)$posterior, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>##           setosa   versicolor    virginica
 ## 23  1.000000e+00 1.517145e-21 1.717663e-41
 ## 106 2.894733e-43 1.643603e-06 9.999984e-01
@@ -453,28 +453,28 @@ iris_lda</code></pre></div>
 ## 94  1.599359e-11 9.999999e-01 1.035129e-07
 ## 27  1.000000e+00 8.154612e-15 4.862249e-32</code></pre>
 <p>As we should come to expect, the <code>predict()</code> function operates in a new way when called on an <code>lda</code> object. By default, it returns an entire list. Within that list <code>class</code> stores the classifications and <code>posterior</code> contains the estimated probability for each class.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_train)$class
-iris_lda_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_test)$class</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_trn_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_trn)$class
+iris_lda_tst_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_tst)$class</code></pre></div>
 <p>We store the predictions made on the train and test sets.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
-  <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calc_class_err =<span class="st"> </span>function(actual, predicted) {
+  <span class="kw">mean</span>(actual !=<span class="st"> </span>predicted)
 }</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
-<pre><code>## [1] 0.96</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
-<pre><code>## [1] 0.9866667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">predicted =</span> iris_lda_trn_pred, <span class="dt">actual =</span> iris_trn$Species)</code></pre></div>
+<pre><code>## [1] 0.04</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">predicted =</span> iris_lda_tst_pred, <span class="dt">actual =</span> iris_tst$Species)</code></pre></div>
+<pre><code>## [1] 0.01333333</code></pre>
 <p>As expected, LDA performs well on both the train and test data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_lda_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_lda_tst_pred, <span class="dt">actual =</span> iris_tst$Species)</code></pre></div>
 <pre><code>##             actual
 ## predicted    setosa versicolor virginica
 ##   setosa         22          0         0
 ##   versicolor      0         26         1
 ##   virginica       0          0        26</code></pre>
 <p>Looking at the test set, we see that we are perfectly predicting both setosa and versicolor. The only error is labeling a virginica as a versicolor.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat =<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train, <span class="dt">prior =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) /<span class="st"> </span><span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat =<span class="st"> </span><span class="kw">lda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_trn, <span class="dt">prior =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) /<span class="st"> </span><span class="dv">3</span>)
 iris_lda_flat</code></pre></div>
 <pre><code>## Call:
-## lda(Species ~ ., data = iris_train, prior = c(1, 1, 1)/3)
+## lda(Species ~ ., data = iris_trn, prior = c(1, 1, 1)/3)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
@@ -497,28 +497,28 @@ iris_lda_flat</code></pre></div>
 ##    LD1    LD2 
 ## 0.9901 0.0099</code></pre>
 <p>Instead of learning (estimating) the proportion of the three species from the data, we could instead specify them ourselves. Here we choose a uniform distributions over the possible species. We would call this a “flat” prior.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_train)$class
-iris_lda_flat_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_test)$class</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_flat_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
-<pre><code>## [1] 0.96</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_lda_flat_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_lda_flat_trn_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_trn)$class
+iris_lda_flat_tst_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_tst)$class</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">predicted =</span> iris_lda_flat_trn_pred, <span class="dt">actual =</span> iris_trn$Species)</code></pre></div>
+<pre><code>## [1] 0.04</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">predicted =</span> iris_lda_flat_tst_pred, <span class="dt">actual =</span> iris_tst$Species)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
 <p>This actually gives a better test accuracy!</p>
 </div>
 <div id="quadratic-discriminant-analysis" class="section level2">
 <h2><span class="header-section-number">11.2</span> Quadratic Discriminant Analysis</h2>
 <p>QDA also assumes that the predictors are multivariate normal conditioned on the classes.</p>
 <p><span class="math display">\[
-{\mathbf X} \mid Y = k \sim N(\mu_k, \Sigma_k)
+X \mid Y = k \sim N(\mu_k, \Sigma_k)
 \]</span></p>
 <p><span class="math display">\[
 f_k({\mathbf x}) = \frac{1}{(2\pi)^{p/2}|\Sigma_k|^{1/2}}\exp\left[-\frac{1}{2}(\mathbf x - \mu_k)^{\prime}\Sigma_{k}^{-1}(\mathbf x - \mu_k)\right]
 \]</span></p>
 <p>Notice that now <span class="math inline">\(\Sigma_k\)</span> <strong>does</strong> depend on <span class="math inline">\(k\)</span>, that is, we are allowing a different <span class="math inline">\(\Sigma_k\)</span> for each class. We only use information from class <span class="math inline">\(k\)</span> to estimate <span class="math inline">\(\Sigma_k\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda =<span class="st"> </span><span class="kw">qda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda =<span class="st"> </span><span class="kw">qda</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_trn)
 iris_qda</code></pre></div>
 <pre><code>## Call:
-## qda(Species ~ ., data = iris_train)
+## qda(Species ~ ., data = iris_trn)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
@@ -531,14 +531,14 @@ iris_qda</code></pre></div>
 ## virginica      6.669565    3.065217     5.717391   2.0956522</code></pre>
 <p>Here the output is similar to LDA, again giving the estimated <span class="math inline">\(\hat{\pi}_k\)</span> and <span class="math inline">\(\hat{\mu}_k\)</span> for each class. Like <code>lda()</code>, the <code>qda()</code> function is found in the <code>MASS</code> package.</p>
 <p>Consider trying to fit QDA again, but this time with a smaller training set. (Use the commented line above to obtain a smaller test set.) This will cause an error because there are not enough observations within each class to estimate the large number of parameters in the <span class="math inline">\(\Sigma_k\)</span> matrices. This is less of a problem with LDA, since all observations, no matter the class, are being use to estimate the shared <span class="math inline">\(\Sigma\)</span> matrix.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_train)$class
-iris_qda_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_test)$class</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_qda_trn_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_trn)$class
+iris_qda_tst_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_tst)$class</code></pre></div>
 <p>The <code>predict()</code> function operates the same as the <code>predict()</code> function for LDA.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_qda_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
-<pre><code>## [1] 0.9866667</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_qda_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
-<pre><code>## [1] 0.96</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_qda_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">predicted =</span> iris_qda_trn_pred, <span class="dt">actual =</span> iris_trn$Species)</code></pre></div>
+<pre><code>## [1] 0.01333333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">predicted =</span> iris_qda_tst_pred, <span class="dt">actual =</span> iris_tst$Species)</code></pre></div>
+<pre><code>## [1] 0.04</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_qda_tst_pred, <span class="dt">actual =</span> iris_tst$Species)</code></pre></div>
 <pre><code>##             actual
 ## predicted    setosa versicolor virginica
 ##   setosa         22          0         0
@@ -556,7 +556,7 @@ iris_qda_test_pred =<span class="st"> </span><span class="kw">predict</span>(iri
 <p>Naive Bayes assumes that the predictors <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> are independent. This is the “naive” part of naive Bayes. The Bayes part is nothing new. Since <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> are assumed independent, each <span class="math inline">\(\Sigma_k\)</span> is diagonal, that is, we assume no correlation between predictors. Independence implies zero correlation.</p>
 <p>This will allow us to write the (joint) likelihood as a product of univariate distributions. In this case, the product of univariate normal distributions instead of a (joint) multivariate distribution.</p>
 <p><span class="math display">\[
-f_k({\mathbf x}) = \prod_{j = 1}^{j = p} f_{kj}(x_j)
+f_k(x) = \prod_{j = 1}^{j = p} f_{kj}(x_j)
 \]</span></p>
 <p>Here, <span class="math inline">\(f_{kj}(x_j)\)</span> is the density for the <span class="math inline">\(j\)</span>-th predictor conditioned on the <span class="math inline">\(k\)</span>-th class. Notice that there is a <span class="math inline">\(\sigma_{kj}\)</span> for each predictor for each class.</p>
 <p><span class="math display">\[
@@ -564,7 +564,7 @@ f_{kj}(x_j) = \frac{1}{\sigma_{kj}\sqrt{2\pi}}\exp\left[-\frac{1}{2}\left(\frac{
 \]</span></p>
 <p>When <span class="math inline">\(p = 1\)</span>, this version of naive Bayes is equivalent to QDA.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)
-iris_nb =<span class="st"> </span><span class="kw">naiveBayes</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_train)
+iris_nb =<span class="st"> </span><span class="kw">naiveBayes</span>(Species ~<span class="st"> </span>., <span class="dt">data =</span> iris_trn)
 iris_nb</code></pre></div>
 <pre><code>## 
 ## Naive Bayes Classifier for Discrete Predictors
@@ -604,13 +604,13 @@ iris_nb</code></pre></div>
 <p>Many packages implement naive Bayes. Here we choose to use <code>naiveBayes()</code> from the package <code>e1071</code>. (The name of this package has an interesting history. Based on the name you wouldn’t know it, but the package contains many functions related to machine learning.)</p>
 <p>The <code>Conditional probabilities:</code> portion of the output gives the mean and standard deviation of the normal distribution for each predictor in each class. Notice how these mean estimates match those for LDA and QDA above.</p>
 <p>Note that <code>naiveBayes()</code> will work without a factor response, but functions much better with one. (Especially when making predictions.) If you are using a <code>0</code> and <code>1</code> response, you might consider coercing to a factor first.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_train))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_trn))</code></pre></div>
 <pre><code>## [1] setosa    virginica setosa    setosa    virginica setosa   
 ## Levels: setosa versicolor virginica</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_train, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</code></pre></div>
 <pre><code>## [1] setosa    virginica setosa    setosa    virginica setosa   
 ## Levels: setosa versicolor virginica</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_train, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_trn, <span class="dt">type =</span> <span class="st">&quot;raw&quot;</span>))</code></pre></div>
 <pre><code>##             setosa   versicolor    virginica
 ## [1,]  1.000000e+00 3.134201e-16 2.948226e-27
 ## [2,] 4.400050e-257 5.188308e-08 9.999999e-01
@@ -619,13 +619,13 @@ iris_nb</code></pre></div>
 ## [5,] 1.897732e-218 6.189883e-08 9.999999e-01
 ## [6,]  1.000000e+00 8.184097e-15 6.816322e-26</code></pre>
 <p>Oh look, <code>predict()</code> has another new mode of operation. If only there were a way to unify the <code>predict()</code> function across all of these methods…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_nb_train_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_train)
-iris_nb_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_test)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_nb_train_pred, <span class="dt">actual =</span> iris_train$Species)</code></pre></div>
-<pre><code>## [1] 0.9466667</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> iris_nb_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
-<pre><code>## [1] 0.9466667</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_nb_test_pred, <span class="dt">actual =</span> iris_test$Species)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_nb_trn_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_trn)
+iris_nb_tst_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_tst)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">predicted =</span> iris_nb_trn_pred, <span class="dt">actual =</span> iris_trn$Species)</code></pre></div>
+<pre><code>## [1] 0.05333333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">predicted =</span> iris_nb_tst_pred, <span class="dt">actual =</span> iris_tst$Species)</code></pre></div>
+<pre><code>## [1] 0.05333333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_nb_tst_pred, <span class="dt">actual =</span> iris_tst$Species)</code></pre></div>
 <pre><code>##             actual
 ## predicted    setosa versicolor virginica
 ##   setosa         22          0         0
@@ -636,30 +636,30 @@ iris_nb_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris
 <thead>
 <tr class="header">
 <th align="left">Method</th>
-<th align="right">Train Accuracy</th>
-<th align="right">Test Accuracy</th>
+<th align="right">Train Error</th>
+<th align="right">Test Error</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">LDA</td>
-<td align="right">0.9600000</td>
-<td align="right">0.9866667</td>
+<td align="right">0.0400000</td>
+<td align="right">0.0133333</td>
 </tr>
 <tr class="even">
 <td align="left">LDA, Flat Prior</td>
-<td align="right">0.9600000</td>
-<td align="right">1.0000000</td>
+<td align="right">0.0400000</td>
+<td align="right">0.0000000</td>
 </tr>
 <tr class="odd">
 <td align="left">QDA</td>
-<td align="right">0.9866667</td>
-<td align="right">0.9600000</td>
+<td align="right">0.0133333</td>
+<td align="right">0.0400000</td>
 </tr>
 <tr class="even">
 <td align="left">Naive Bayes</td>
-<td align="right">0.9466667</td>
-<td align="right">0.9466667</td>
+<td align="right">0.0533333</td>
+<td align="right">0.0533333</td>
 </tr>
 </tbody>
 </table>
@@ -670,17 +670,17 @@ iris_nb_test_pred =<span class="st"> </span><span class="kw">predict</span>(iris
 <div id="discrete-inputs" class="section level2">
 <h2><span class="header-section-number">11.4</span> Discrete Inputs</h2>
 <p>So far, we have assumed that all predictors are numeric. What happens with categorical predictors?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_train_mod =<span class="st"> </span>iris_train
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_trn_mod =<span class="st"> </span>iris_trn
 
-iris_train_mod$Sepal.Width =<span class="st"> </span><span class="kw">ifelse</span>(iris_train$Sepal.Width &gt;<span class="st"> </span><span class="dv">3</span>, 
-                                    <span class="kw">ifelse</span>(iris_train$Sepal.Width &gt;<span class="st"> </span><span class="dv">4</span>, 
-                                           <span class="st">&quot;Large&quot;</span>, <span class="st">&quot;Medium&quot;</span>),
-                                    <span class="st">&quot;Small&quot;</span>)
+iris_trn_mod$Sepal.Width =<span class="st"> </span><span class="kw">ifelse</span>(iris_trn$Sepal.Width &gt;<span class="st"> </span><span class="dv">3</span>, 
+                                  <span class="kw">ifelse</span>(iris_trn$Sepal.Width &gt;<span class="st"> </span><span class="dv">4</span>, 
+                                         <span class="st">&quot;Large&quot;</span>, <span class="st">&quot;Medium&quot;</span>),
+                                  <span class="st">&quot;Small&quot;</span>)
 
-<span class="kw">unique</span>(iris_train_mod$Sepal.Width)</code></pre></div>
+<span class="kw">unique</span>(iris_trn_mod$Sepal.Width)</code></pre></div>
 <pre><code>## [1] &quot;Medium&quot; &quot;Small&quot;  &quot;Large&quot;</code></pre>
 <p>Here we make a new dataset where <code>Sepal.Width</code> is categorical, with levels <code>Small</code>, <code>Medium</code>, and <code>Large</code>. We then try to train classifiers using only the sepal variables.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">naiveBayes</span>(Species ~<span class="st"> </span>Sepal.Length +<span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris_train_mod)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">naiveBayes</span>(Species ~<span class="st"> </span>Sepal.Length +<span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris_trn_mod)</code></pre></div>
 <pre><code>## 
 ## Naive Bayes Classifier for Discrete Predictors
 ## 
@@ -705,9 +705,9 @@ iris_train_mod$Sepal.Width =<span class="st"> </span><span class="kw">ifelse</sp
 ##   versicolor 0.00000000 0.25000000 0.75000000
 ##   virginica  0.00000000 0.43478261 0.56521739</code></pre>
 <p>Naive Bayes makes a somewhat obvious and intelligent choice to model the categorical variable as a multinomial. It then estimates the probability parameters of a multinomial distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lda</span>(Species ~<span class="st"> </span>Sepal.Length +<span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris_train_mod)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lda</span>(Species ~<span class="st"> </span>Sepal.Length +<span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris_trn_mod)</code></pre></div>
 <pre><code>## Call:
-## lda(Species ~ Sepal.Length + Sepal.Width, data = iris_train_mod)
+## lda(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
@@ -731,36 +731,9 @@ iris_train_mod$Sepal.Width =<span class="st"> </span><span class="kw">ifelse</sp
 <p>LDA however creates dummy variables, here with <code>Large</code> is the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.</p>
 </div>
 <div id="rmarkdown-5" class="section level2">
-<h2><span class="header-section-number">11.5</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="09-generative.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.1 and the following packages:</p>
-<ul>
-<li>Base Packages, Attached</li>
-</ul>
-<pre><code>## [1] &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;base&quot;</code></pre>
-<ul>
-<li>Additional Packages, Attached</li>
-</ul>
+<h2><span class="header-section-number">11.5</span> <code>rmarkdown</code></h2>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="11-generative.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;e1071&quot; &quot;MASS&quot;</code></pre>
-<ul>
-<li>Additional Packages, Not Attached</li>
-</ul>
-<pre><code>##  [1] &quot;reshape2&quot;     &quot;kernlab&quot;      &quot;purrr&quot;        &quot;splines&quot;     
-##  [5] &quot;lattice&quot;      &quot;colorspace&quot;   &quot;stats4&quot;       &quot;htmltools&quot;   
-##  [9] &quot;yaml&quot;         &quot;survival&quot;     &quot;prodlim&quot;      &quot;rlang&quot;       
-## [13] &quot;ModelMetrics&quot; &quot;withr&quot;        &quot;glue&quot;         &quot;bindrcpp&quot;    
-## [17] &quot;foreach&quot;      &quot;plyr&quot;         &quot;bindr&quot;        &quot;dimRed&quot;      
-## [21] &quot;lava&quot;         &quot;robustbase&quot;   &quot;stringr&quot;      &quot;timeDate&quot;    
-## [25] &quot;munsell&quot;      &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;   
-## [29] &quot;evaluate&quot;     &quot;knitr&quot;        &quot;caret&quot;        &quot;class&quot;       
-## [33] &quot;highr&quot;        &quot;DEoptimR&quot;     &quot;methods&quot;      &quot;Rcpp&quot;        
-## [37] &quot;scales&quot;       &quot;backports&quot;    &quot;ipred&quot;        &quot;CVST&quot;        
-## [41] &quot;ellipse&quot;      &quot;ggplot2&quot;      &quot;digest&quot;       &quot;stringi&quot;     
-## [45] &quot;bookdown&quot;     &quot;dplyr&quot;        &quot;RcppRoll&quot;     &quot;ddalpha&quot;     
-## [49] &quot;grid&quot;         &quot;rprojroot&quot;    &quot;tools&quot;        &quot;magrittr&quot;    
-## [53] &quot;lazyeval&quot;     &quot;tibble&quot;       &quot;DRR&quot;          &quot;pkgconfig&quot;   
-## [57] &quot;Matrix&quot;       &quot;lubridate&quot;    &quot;gower&quot;        &quot;assertthat&quot;  
-## [61] &quot;rmarkdown&quot;    &quot;iterators&quot;    &quot;R6&quot;           &quot;rpart&quot;       
-## [65] &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
 
 </div>
 </div>

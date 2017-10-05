@@ -7,12 +7,12 @@ Generative methods model the joint probability, $p(x, y)$, often by assuming som
 Each of the methods in this chapter will use Bayes theorem to build a classifier.
 
 $$
-p_k(x) = P[Y = k \mid {\mathbf X} = {\mathbf x}] = \frac{\pi_k \cdot f_k({\mathbf x})}{\sum_{i = 1 }^{K} \pi_k \cdot f_k({\mathbf x})}
+p_k(x) = P(Y = k \mid X = x) = \frac{\pi_k \cdot f_k(x)}{\sum_{g = 1}^{G} \pi_g \cdot f_g(x)}
 $$
 
-We call $p_k(x)$ the **posterior** probability, which we will estimate then use to create classifications. The $\pi_k$ are called the **prior** probabilities for each class $k$. That is, $P[y = k]$, unconditioned on $X$. The $f_k({\mathbf x})$ are called the **likelihoods**, which are indexed by $k$ to denote that they are conditional on the classes. The denominator is often referred to as a **normalizing constant**.
+We call $p_k(x)$ the **posterior** probability, which we will estimate then use to create classifications. The $\pi_g$ are called the **prior** probabilities for each possible class $g$. That is, $\pi_g = P(Y = g)$, unconditioned on $X$. The $f_g(x)$ are called the **likelihoods**, which are indexed by $g$ to denote that they are conditional on the classes. The denominator is often referred to as a **normalizing constant**.
 
-The methods will differ by placing different modeling assumptions on the likelihoods, $f_k({\mathbf x})$. For each method, the priors could be learned from data or pre-specified.
+The methods will differ by placing different modeling assumptions on the likelihoods, $f_g(x)$. For each method, the priors could be learned from data or pre-specified.
 
 For each method, classifications are made to the class with the highest estimated posterior probability, which is equivalent to the class with the largest
 
@@ -28,36 +28,36 @@ To illustrate these new methods, we return to the iris data, which you may remem
 ```r
 set.seed(430)
 iris_obs = nrow(iris)
-iris_index = sample(iris_obs, size = trunc(0.50 * iris_obs))
+iris_idx = sample(iris_obs, size = trunc(0.50 * iris_obs))
 # iris_index = sample(iris_obs, size = trunc(0.10 * iris_obs))
-iris_train = iris[iris_index, ]
-iris_test = iris[-iris_index, ]
+iris_trn = iris[iris_idx, ]
+iris_tst = iris[-iris_idx, ]
 ```
 
 
 
 ```r
-caret::featurePlot(x = iris_train[, c("Sepal.Length", "Sepal.Width", 
-                               "Petal.Length", "Petal.Width")], 
-            y = iris_train$Species,
-            plot = "density", 
-            scales = list(x = list(relation = "free"), 
-                          y = list(relation = "free")), 
-            adjust = 1.5, 
-            pch = "|", 
-            layout = c(2, 2), 
-            auto.key = list(columns = 3))
+caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
+                                    "Petal.Length", "Petal.Width")], 
+                   y = iris_trn$Species,
+                   plot = "density", 
+                   scales = list(x = list(relation = "free"), 
+                                 y = list(relation = "free")), 
+                   adjust = 1.5, 
+                   pch = "|", 
+                   layout = c(2, 2), 
+                   auto.key = list(columns = 3))
 ```
 
 ![](11-generative_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 ```r
-caret::featurePlot(x = iris_train[, c("Sepal.Length", "Sepal.Width", 
-                               "Petal.Length", "Petal.Width")], 
-            y = iris_train$Species,
-            plot = "ellipse",
-            auto.key = list(columns = 3))
+caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
+                                    "Petal.Length", "Petal.Width")], 
+                   y = iris_trn$Species,
+                   plot = "ellipse",
+                   auto.key = list(columns = 3))
 ```
 
 ![](11-generative_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
@@ -65,13 +65,13 @@ caret::featurePlot(x = iris_train[, c("Sepal.Length", "Sepal.Width",
 
 
 ```r
-caret::featurePlot(x = iris_train[, c("Sepal.Length", "Sepal.Width", 
-                               "Petal.Length", "Petal.Width")], 
-            y = iris_train$Species,
-                  plot = "box",
-                  scales = list(y = list(relation="free"),
-                                x = list(rot = 90)),
-                  layout = c(4, 1))
+caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
+                                    "Petal.Length", "Petal.Width")], 
+                   y = iris_trn$Species,
+                   plot = "box",
+                   scales = list(y = list(relation = "free"),
+                                 x = list(rot = 90)),
+                   layout = c(4, 1))
 ```
 
 ![](11-generative_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
@@ -80,12 +80,13 @@ Especially based on the pairs plot, we see that it should not be too difficult t
 
 Notice that we use `caret::featurePlot` to access the `featurePlot()` function without loading the entire `caret` package.
 
+
 ## Linear Discriminant Analysis
 
 LDA assumes that the predictors are multivariate normal conditioned on the classes.
 
 $$
-{\mathbf X} \mid Y = k \sim N(\mu_k, \Sigma)
+X \mid Y = k \sim N(\mu_k, \Sigma)
 $$
 
 $$
@@ -99,13 +100,13 @@ To fit an LDA model, we use the `lda()` function from the `MASS` package.
 
 ```r
 library(MASS)
-iris_lda = lda(Species ~ ., data = iris_train)
+iris_lda = lda(Species ~ ., data = iris_trn)
 iris_lda
 ```
 
 ```
 ## Call:
-## lda(Species ~ ., data = iris_train)
+## lda(Species ~ ., data = iris_trn)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
@@ -133,7 +134,7 @@ Here we see the estimated $\hat{\pi}_k$ and $\hat{\mu}_k$ for each class.
 
 
 ```r
-is.list(predict(iris_lda, iris_train))
+is.list(predict(iris_lda, iris_trn))
 ```
 
 ```
@@ -141,7 +142,7 @@ is.list(predict(iris_lda, iris_train))
 ```
 
 ```r
-names(predict(iris_lda, iris_train))
+names(predict(iris_lda, iris_trn))
 ```
 
 ```
@@ -149,7 +150,7 @@ names(predict(iris_lda, iris_train))
 ```
 
 ```r
-head(predict(iris_lda, iris_train)$class, n = 10)
+head(predict(iris_lda, iris_trn)$class, n = 10)
 ```
 
 ```
@@ -159,7 +160,7 @@ head(predict(iris_lda, iris_train)$class, n = 10)
 ```
 
 ```r
-head(predict(iris_lda, iris_train)$posterior, n = 10)
+head(predict(iris_lda, iris_trn)$posterior, n = 10)
 ```
 
 ```
@@ -180,41 +181,41 @@ As we should come to expect, the `predict()` function operates in a new way when
 
 
 ```r
-iris_lda_train_pred = predict(iris_lda, iris_train)$class
-iris_lda_test_pred = predict(iris_lda, iris_test)$class
+iris_lda_trn_pred = predict(iris_lda, iris_trn)$class
+iris_lda_tst_pred = predict(iris_lda, iris_tst)$class
 ```
 
 We store the predictions made on the train and test sets.
 
 
 ```r
-accuracy = function(actual, predicted) {
-  mean(actual == predicted)
+calc_class_err = function(actual, predicted) {
+  mean(actual != predicted)
 }
 ```
 
 
 ```r
-accuracy(predicted = iris_lda_train_pred, actual = iris_train$Species)
+calc_class_err(predicted = iris_lda_trn_pred, actual = iris_trn$Species)
 ```
 
 ```
-## [1] 0.96
+## [1] 0.04
 ```
 
 ```r
-accuracy(predicted = iris_lda_test_pred, actual = iris_test$Species)
+calc_class_err(predicted = iris_lda_tst_pred, actual = iris_tst$Species)
 ```
 
 ```
-## [1] 0.9866667
+## [1] 0.01333333
 ```
 
 As expected, LDA performs well on both the train and test data.
 
 
 ```r
-table(predicted = iris_lda_test_pred, actual = iris_test$Species)
+table(predicted = iris_lda_tst_pred, actual = iris_tst$Species)
 ```
 
 ```
@@ -229,13 +230,13 @@ Looking at the test set, we see that we are perfectly predicting both setosa and
 
 
 ```r
-iris_lda_flat = lda(Species ~ ., data = iris_train, prior = c(1, 1, 1) / 3)
+iris_lda_flat = lda(Species ~ ., data = iris_trn, prior = c(1, 1, 1) / 3)
 iris_lda_flat
 ```
 
 ```
 ## Call:
-## lda(Species ~ ., data = iris_train, prior = c(1, 1, 1)/3)
+## lda(Species ~ ., data = iris_trn, prior = c(1, 1, 1)/3)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
@@ -263,25 +264,25 @@ Instead of learning (estimating) the proportion of the three species from the da
 
 
 ```r
-iris_lda_flat_train_pred = predict(iris_lda_flat, iris_train)$class
-iris_lda_flat_test_pred = predict(iris_lda_flat, iris_test)$class
+iris_lda_flat_trn_pred = predict(iris_lda_flat, iris_trn)$class
+iris_lda_flat_tst_pred = predict(iris_lda_flat, iris_tst)$class
 ```
 
 
 ```r
-accuracy(predicted = iris_lda_flat_train_pred, actual = iris_train$Species)
+calc_class_err(predicted = iris_lda_flat_trn_pred, actual = iris_trn$Species)
 ```
 
 ```
-## [1] 0.96
+## [1] 0.04
 ```
 
 ```r
-accuracy(predicted = iris_lda_flat_test_pred, actual = iris_test$Species)
+calc_class_err(predicted = iris_lda_flat_tst_pred, actual = iris_tst$Species)
 ```
 
 ```
-## [1] 1
+## [1] 0
 ```
 
 This actually gives a better test accuracy!
@@ -292,7 +293,7 @@ This actually gives a better test accuracy!
 QDA also assumes that the predictors are multivariate normal conditioned on the classes.
 
 $$
-{\mathbf X} \mid Y = k \sim N(\mu_k, \Sigma_k)
+X \mid Y = k \sim N(\mu_k, \Sigma_k)
 $$
 
 $$
@@ -303,13 +304,13 @@ Notice that now $\Sigma_k$ **does** depend on $k$, that is, we are allowing a di
 
 
 ```r
-iris_qda = qda(Species ~ ., data = iris_train)
+iris_qda = qda(Species ~ ., data = iris_trn)
 iris_qda
 ```
 
 ```
 ## Call:
-## qda(Species ~ ., data = iris_train)
+## qda(Species ~ ., data = iris_trn)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
@@ -328,32 +329,32 @@ Consider trying to fit QDA again, but this time with a smaller training set. (Us
 
 
 ```r
-iris_qda_train_pred = predict(iris_qda, iris_train)$class
-iris_qda_test_pred = predict(iris_qda, iris_test)$class
+iris_qda_trn_pred = predict(iris_qda, iris_trn)$class
+iris_qda_tst_pred = predict(iris_qda, iris_tst)$class
 ```
 
 The `predict()` function operates the same as the `predict()` function for LDA.
 
 
 ```r
-accuracy(predicted = iris_qda_train_pred, actual = iris_train$Species)
+calc_class_err(predicted = iris_qda_trn_pred, actual = iris_trn$Species)
 ```
 
 ```
-## [1] 0.9866667
+## [1] 0.01333333
 ```
-
-```r
-accuracy(predicted = iris_qda_test_pred, actual = iris_test$Species)
-```
-
-```
-## [1] 0.96
-```
-
 
 ```r
-table(predicted = iris_qda_test_pred, actual = iris_test$Species)
+calc_class_err(predicted = iris_qda_tst_pred, actual = iris_tst$Species)
+```
+
+```
+## [1] 0.04
+```
+
+
+```r
+table(predicted = iris_qda_tst_pred, actual = iris_tst$Species)
 ```
 
 ```
@@ -382,7 +383,7 @@ Naive Bayes assumes that the predictors $X_1, X_2, \ldots, X_p$ are independent.
 This will allow us to write the (joint) likelihood as a product of univariate distributions. In this case, the product of univariate normal distributions instead of a (joint) multivariate distribution.
 
 $$
-f_k({\mathbf x}) = \prod_{j = 1}^{j = p} f_{kj}(x_j)
+f_k(x) = \prod_{j = 1}^{j = p} f_{kj}(x_j)
 $$
 
 Here, $f_{kj}(x_j)$ is the density for the $j$-th predictor conditioned on the $k$-th class. Notice that there is a $\sigma_{kj}$ for each predictor for each class.
@@ -396,7 +397,7 @@ When $p = 1$, this version of naive Bayes is equivalent to QDA.
 
 ```r
 library(e1071)
-iris_nb = naiveBayes(Species ~ ., data = iris_train)
+iris_nb = naiveBayes(Species ~ ., data = iris_trn)
 iris_nb
 ```
 
@@ -446,7 +447,7 @@ Note that `naiveBayes()` will work without a factor response, but functions much
 
 
 ```r
-head(predict(iris_nb, iris_train))
+head(predict(iris_nb, iris_trn))
 ```
 
 ```
@@ -455,7 +456,7 @@ head(predict(iris_nb, iris_train))
 ```
 
 ```r
-head(predict(iris_nb, iris_train, type = "class"))
+head(predict(iris_nb, iris_trn, type = "class"))
 ```
 
 ```
@@ -464,7 +465,7 @@ head(predict(iris_nb, iris_train, type = "class"))
 ```
 
 ```r
-head(predict(iris_nb, iris_train, type = "raw"))
+head(predict(iris_nb, iris_trn, type = "raw"))
 ```
 
 ```
@@ -481,30 +482,30 @@ Oh look, `predict()` has another new mode of operation. If only there were a way
 
 
 ```r
-iris_nb_train_pred = predict(iris_nb, iris_train)
-iris_nb_test_pred = predict(iris_nb, iris_test)
+iris_nb_trn_pred = predict(iris_nb, iris_trn)
+iris_nb_tst_pred = predict(iris_nb, iris_tst)
 ```
 
 
 ```r
-accuracy(predicted = iris_nb_train_pred, actual = iris_train$Species)
+calc_class_err(predicted = iris_nb_trn_pred, actual = iris_trn$Species)
 ```
 
 ```
-## [1] 0.9466667
+## [1] 0.05333333
 ```
-
-```r
-accuracy(predicted = iris_nb_test_pred, actual = iris_test$Species)
-```
-
-```
-## [1] 0.9466667
-```
-
 
 ```r
-table(predicted = iris_nb_test_pred, actual = iris_test$Species)
+calc_class_err(predicted = iris_nb_tst_pred, actual = iris_tst$Species)
+```
+
+```
+## [1] 0.05333333
+```
+
+
+```r
+table(predicted = iris_nb_tst_pred, actual = iris_tst$Species)
 ```
 
 ```
@@ -522,15 +523,15 @@ Like LDA, naive Bayes is having trouble with virginica.
 
 \begin{tabular}{l|r|r}
 \hline
-Method & Train Accuracy & Test Accuracy\\
+Method & Train Error & Test Error\\
 \hline
-LDA & 0.9600000 & 0.9866667\\
+LDA & 0.0400000 & 0.0133333\\
 \hline
-LDA, Flat Prior & 0.9600000 & 1.0000000\\
+LDA, Flat Prior & 0.0400000 & 0.0000000\\
 \hline
-QDA & 0.9866667 & 0.9600000\\
+QDA & 0.0133333 & 0.0400000\\
 \hline
-Naive Bayes & 0.9466667 & 0.9466667\\
+Naive Bayes & 0.0533333 & 0.0533333\\
 \hline
 \end{tabular}
 
@@ -547,14 +548,14 @@ So far, we have assumed that all predictors are numeric. What happens with categ
 
 
 ```r
-iris_train_mod = iris_train
+iris_trn_mod = iris_trn
 
-iris_train_mod$Sepal.Width = ifelse(iris_train$Sepal.Width > 3, 
-                                    ifelse(iris_train$Sepal.Width > 4, 
-                                           "Large", "Medium"),
-                                    "Small")
+iris_trn_mod$Sepal.Width = ifelse(iris_trn$Sepal.Width > 3, 
+                                  ifelse(iris_trn$Sepal.Width > 4, 
+                                         "Large", "Medium"),
+                                  "Small")
 
-unique(iris_train_mod$Sepal.Width)
+unique(iris_trn_mod$Sepal.Width)
 ```
 
 ```
@@ -565,7 +566,7 @@ Here we make a new dataset where `Sepal.Width` is categorical, with levels `Smal
 
 
 ```r
-naiveBayes(Species ~ Sepal.Length + Sepal.Width, data = iris_train_mod)
+naiveBayes(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)
 ```
 
 ```
@@ -598,12 +599,12 @@ Naive Bayes makes a somewhat obvious and intelligent choice to model the categor
 
 
 ```r
-lda(Species ~ Sepal.Length + Sepal.Width, data = iris_train_mod)
+lda(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)
 ```
 
 ```
 ## Call:
-## lda(Species ~ Sepal.Length + Sepal.Width, data = iris_train_mod)
+## lda(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
@@ -629,45 +630,11 @@ lda(Species ~ Sepal.Length + Sepal.Width, data = iris_train_mod)
 LDA however creates dummy variables, here with `Large` is the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.
 
 
-## RMarkdown
+## `rmarkdown`
 
-The RMarkdown file for this chapter can be found [**here**](09-generative.Rmd). The file was created using `R` version 3.4.1 and the following packages:
-
-- Base Packages, Attached
-
-
-```
-## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
-```
-
-- Additional Packages, Attached
+The `rmarkdown` file for this chapter can be found [**here**](11-generative.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
 ## [1] "e1071" "MASS"
 ```
-
-- Additional Packages, Not Attached
-
-
-```
-##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
-##  [5] "lattice"      "colorspace"   "stats4"       "htmltools"   
-##  [9] "yaml"         "survival"     "prodlim"      "rlang"       
-## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
-## [17] "foreach"      "plyr"         "bindr"        "dimRed"      
-## [21] "lava"         "robustbase"   "stringr"      "timeDate"    
-## [25] "munsell"      "gtable"       "recipes"      "codetools"   
-## [29] "evaluate"     "knitr"        "caret"        "class"       
-## [33] "DEoptimR"     "methods"      "Rcpp"         "scales"      
-## [37] "backports"    "ipred"        "CVST"         "ellipse"     
-## [41] "ggplot2"      "digest"       "stringi"      "bookdown"    
-## [45] "dplyr"        "RcppRoll"     "ddalpha"      "grid"        
-## [49] "rprojroot"    "tools"        "magrittr"     "lazyeval"    
-## [53] "tibble"       "DRR"          "pkgconfig"    "Matrix"      
-## [57] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
-## [61] "iterators"    "R6"           "rpart"        "nnet"        
-## [65] "nlme"         "compiler"
-```
-
-
