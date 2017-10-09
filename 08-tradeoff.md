@@ -348,7 +348,7 @@ get_mse = function(truth, estimate) {
 Similarly, for the bias of our predictions we use,
 
 $$
-\widehat{\text{bias}} \left(\hat{f}(0.90) \right)  = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k(x0.90) \right) - f(0.90)
+\widehat{\text{bias}} \left(\hat{f}(0.90) \right)  = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k(0.90) \right) - f(0.90)
 $$
 
 And again, we write an accompanying `R` function.

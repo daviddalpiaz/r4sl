@@ -1,7 +1,7 @@
 --- 
 title: "`R` for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2017-10-04"
+date: "2017-10-09"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -106,6 +106,7 @@ Your name could be here! Suggest an edit! Correct a typo! Pull requests encourag
 - Chenxing Wu, Fall 2017
 - [Wenting Xu](https://www.linkedin.com/in/wenting-xu-16b548117/), Fall 2017
 - [Yuanning Wei](https://www.linkedin.com/in/yuanning-wei-79b9a4138/), Fall 2017
+- Ross Drucker, Fall 2017
 
 ## License {-}
 
