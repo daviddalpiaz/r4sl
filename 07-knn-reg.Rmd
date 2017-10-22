@@ -354,6 +354,7 @@ knitr::kable(cod_results, escape = FALSE, booktabs = TRUE)
 - TODO: lm vs knn
     - lm: "slow" train, "fast" test
     - knn: "fast" train, "slow" test
+    - illustrate with system timings
  
 
 ## Interpretability
