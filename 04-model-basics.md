@@ -50,7 +50,7 @@ plot(Sales ~ TV, data = Advertising, col = "dodgerblue", pch = 20, cex = 1.5,
      main = "Sales vs Television Advertising")
 ```
 
-<img src="04-model-basics_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](04-model-basics_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 The `pairs()` function is a useful way to quickly visualize a number of scatter plots.
 
@@ -59,7 +59,7 @@ The `pairs()` function is a useful way to quickly visualize a number of scatter 
 pairs(Advertising)
 ```
 
-<img src="04-model-basics_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](04-model-basics_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 Often, we will be most interested in only the relationship between each predictor and the response. For this, we can use the `featurePlot()` function from the `caret` package. (We will use the `caret` package more and more frequently as we introduce new topics.)
 
@@ -69,7 +69,7 @@ library(caret)
 featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$Sales)
 ```
 
-<img src="04-model-basics_files/figure-html/unnamed-chunk-5-1.png" width="960" />
+![](04-model-basics_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 We see that there is a clear increase in `Sales` as `Radio` or `TV` are increased. The relationship between `Sales` and `Newspaper` is less clear. How all of the predictors work together is also unclear, as there is some obvious correlation between `Radio` and `TV`. To investigate further, we will need to model the data.
 
@@ -331,18 +331,18 @@ cat_pred
 
 ```
 ## # A tibble: 30 x 3
-##        x1          x2          y
-##    <fctr>       <dbl>      <dbl>
-##  1      A 0.556492741 -0.8591917
-##  2      A 0.183534861  0.8532454
-##  3      A 0.819056470  0.4207225
-##  4      A 0.354075618  0.6201128
-##  5      A 0.797360227  0.9414265
-##  6      A 0.008943139  1.8179768
-##  7      A 0.981523106 -1.4305252
-##  8      A 0.260993932  0.7537086
-##  9      A 0.393971700 -0.5252941
-## 10      A 0.254776267  0.7968377
+##        x1         x2           y
+##    <fctr>      <dbl>       <dbl>
+##  1      A 0.76302733 -0.27135081
+##  2      A 0.84550904 -1.21624776
+##  3      A 0.33332196  1.18431099
+##  4      A 0.08087800 -0.42799519
+##  5      A 0.16001935  0.45763790
+##  6      A 0.32228667  0.30423564
+##  7      A 0.75016763 -0.08104345
+##  8      A 0.84529362  0.12119443
+##  9      A 0.05333462  0.18318891
+## 10      A 0.75384046  0.69237896
 ## # ... with 20 more rows
 ```
 
@@ -358,7 +358,7 @@ coef(cat_pred_mod_add)
 
 ```
 ## (Intercept)         x1B         x1C          x2 
-##   0.4794595  -0.8995134  -0.5622277  -0.3048490
+## -0.11185729 -0.04898067 -0.60729047  0.42074526
 ```
 
 
@@ -369,7 +369,7 @@ coef(cat_pred_mod_int)
 
 ```
 ## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##    1.241580   -2.307184   -1.544847   -1.957777    3.036419    2.122923
+##   0.3913770  -2.6926329  -1.0602147  -0.6046567   4.2767946   0.9286400
 ```
 
 

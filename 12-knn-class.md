@@ -43,7 +43,7 @@ $$
 
 Again, if the probability for class `0` and `1` are equal, simply assign at random.
 
-<img src="12-knn-class_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+![](12-knn-class_files/figure-latex/unnamed-chunk-1-1.pdf)<!-- --> 
 
 In the above example, when predicting at $x = (x_1, x_2) = (8, 6)$,
 
@@ -196,7 +196,7 @@ abline(h = min(err_k), col = "darkorange", lty = 3)
 abline(h = mean(y_default_tst == "Yes"), col = "grey", lty = 2)
 ```
 
-<img src="12-knn-class_files/figure-html/unnamed-chunk-10-1.png" width="768" />
+![](12-knn-class_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 The dotted orange line represents the smallest observed test classification error rate.
 

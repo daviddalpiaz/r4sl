@@ -254,7 +254,7 @@ The above verifies some of the "math" of PCA. We see how the loadings obtain the
 biplot(USArrests_pca, scale = 0, cex = 0.5)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-9-1.png" width="768" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 A `biplot` can be used to visualize both the principal component scores and the principal component loadings. (Note the two scales for each axis.)
 
@@ -307,7 +307,7 @@ plot(
 )
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-12-1.pdf)<!-- --> 
 
 We can then plot the proportion of variance explained for each PC. As expected, we see the PVE decrease.
 
@@ -330,7 +330,7 @@ plot(
 )
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 Often we are interested in the cumulative proportion. A common use of PCA outside of visualization is dimension reduction for modeling. If $p$ is large, PCA is performed, and the principal components that account for a large proportion of variation, say 95%, are used for further analysis. In certain situations that can reduce the dimensionality of data significantly. This can be done almost automatically using `caret`:
 
@@ -494,7 +494,7 @@ plot(
 )
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
 Plotting the first and second variables simply results in a blob.
 
@@ -510,7 +510,7 @@ plot(
 )
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
 
 Even when using their true clusters for coloring, this plot isn't very helpful.
 
@@ -527,7 +527,7 @@ plot(
 )
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
 If we instead plot the first two principal components, we see, even without coloring, one blob that is clearly separate from the rest.
 
@@ -545,7 +545,7 @@ plot(
 points(clust_data_pca$x[, 1], clust_data_pca$x[, 2], col = kmeans_clusters, pch = 20, cex = 1.5)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> 
 
 Now adding the true colors (boxes) and the $k$-means results (circles), we obtain a nice visualization.
 
@@ -562,7 +562,7 @@ plot(
 )
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
 
 The above visualization works well because the first two PCs explain a large proportion of the variance.
 
@@ -584,7 +584,7 @@ ColorDendrogram(clust_data_hc, y = clust_data_cut,
                 branchlength = 1.5)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
 
 Here we apply hierarchical clustering to the **scaled** data. The `dist()` function is used to calculate pairwise distances between the (scaled in this case) observations. We use complete linkage. We then use the `cutree()` function to cluster the data into `3` clusters. The `ColorDendrogram()` function is then used to plot the dendrogram. Note that the `branchlength` argument is somewhat arbitrary (the length of the colored bar) and will need to be modified for each dendrogram.
 
@@ -613,7 +613,7 @@ ColorDendrogram(clust_data_hc, y = clust_data_cut,
                 branchlength = 0.5)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 ```r
 table(true_clusters, clust_data_cut)
@@ -636,7 +636,7 @@ ColorDendrogram(clust_data_hc, y = clust_data_cut,
                 branchlength = 1)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-28-2.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-28-2.pdf)<!-- --> 
 
 ```r
 table(true_clusters, clust_data_cut)
@@ -692,13 +692,13 @@ lab_to_col = function (labels){
 plot(iris_pca$x[,1], iris_pca$x[,2], col = lab_to_col(iris$Species), pch = 20)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
 
 ```r
 plot(iris_pca$x[,3], iris_pca$x[,4], col = lab_to_col(iris$Species), pch = 20)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-29-2.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-29-2.pdf)<!-- --> 
 
 ```r
 iris_pve = get_PVE(iris_pca)
@@ -712,7 +712,7 @@ plot(
 )
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-29-3.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-29-3.pdf)<!-- --> 
 
 ```r
 iris_kmeans = kmeans(iris[,-5], centers = 3, nstart = 10)
@@ -736,7 +736,7 @@ ColorDendrogram(iris_hc, y = iris_cut,
                 branchlength = 1.5)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-29-4.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-29-4.pdf)<!-- --> 
 
 ```r
 table(iris_cut, iris[,5])
@@ -771,7 +771,7 @@ ColorDendrogram(iris_hc, y = iris_cut,
                 branchlength = 0.3)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-29-5.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-29-5.pdf)<!-- --> 
 
 ```r
 iris_hc = hclust(dist(scale(iris[,-5])), method = "average")
@@ -782,7 +782,7 @@ ColorDendrogram(iris_hc, y = iris_cut,
                 branchlength = 1)
 ```
 
-<img src="13-unsupervised_files/figure-html/unnamed-chunk-29-6.png" width="672" />
+![](13-unsupervised_files/figure-latex/unnamed-chunk-29-6.pdf)<!-- --> 
 
 ## External Links
 

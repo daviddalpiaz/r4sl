@@ -132,7 +132,7 @@ Recall that when fitting models, we've seen that train RMSE decreases as model c
 
 Now we can understand why this is happening. The expected test RMSE is essentially the expected prediction error, which we now known decomposes into (squared) bias, variance, and the irreducible Bayes error. The following plots show three examples of this.
 
-<img src="08-tradeoff_files/figure-html/unnamed-chunk-2-1.png" width="1152" />
+![](08-tradeoff_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 The three plots show three examples of the bias-variance tradeoff. In the left panel, the variance influences the expected prediction error more than the bias. In the right panel, the opposite is true. The middle panel is somewhat neutral. In all cases, the difference between the Bayes error (the horizontal dashed grey line) and the expected prediction error (the solid black curve) is exactly the mean squared error, which is the sum of the squared bias (blue curve) and variance (orange curve). The vertical line indicates the complexity that minimizes the prediction error.
 
@@ -151,7 +151,7 @@ $$
 
 As model complexity increases, bias decreases, while variance increases. By understanding the tradeoff between bias and variance, we can manipulate model complexity to find a model that well predict well on unseen observations.
 
-<img src="08-tradeoff_files/figure-html/unnamed-chunk-3-1.png" width="960" />
+![](08-tradeoff_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 
 ## Simulation
@@ -251,11 +251,11 @@ Note that technically we're being lazy and using orthogonal polynomials, but the
 
 Plotting these four trained models, we see that the zero predictor model does very poorly. The first degree model is reasonable, but we can see that the second degree model fits much better. The ninth degree model seem rather wild.
 
-<img src="08-tradeoff_files/figure-html/unnamed-chunk-10-1.png" width="864" />
+![](08-tradeoff_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 The following three plots were created using three additional simulated datasets. The zero predictor and ninth degree polynomial were fit to each.
 
-<img src="08-tradeoff_files/figure-html/unnamed-chunk-11-1.png" width="1152" />
+![](08-tradeoff_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 This plot should make clear the difference between the bias and variance of these two models. The zero predictor model is clearly wrong, that is, biased, but nearly the same for each of the datasets, since it has very low variance.
 
@@ -263,7 +263,7 @@ While the ninth degree model doesn't appear to be correct for any of these three
 
 We could have also fit $k$-nearest neighbors models to these three datasets.
 
-<img src="08-tradeoff_files/figure-html/unnamed-chunk-12-1.png" width="1152" />
+![](08-tradeoff_files/figure-latex/unnamed-chunk-12-1.pdf)<!-- --> 
 
 Here we see that when $k = 100$ we have a biased model with very low variance. (It's actually the same as the 0 predictor linear model.) When $k = 5$, we again have a highly variable model.
 
@@ -311,7 +311,7 @@ Our approach, which would be considered a `base` `R` approach, was chosen to mak
 
 Also of note, while it may seem like the output stored in `predictions` would meet the definition of [tidy data](http://vita.had.co.nz/papers/tidy-data.html) given by [Hadley Wickham](http://hadley.nz/) since each row represents a simulation, it actually falls slightly short. For our data to be tidy, a row should store the simulation number, the model, and the resulting prediction. We've actually already aggregated one level above this. Our observational unit is a simulation (with four predictions), but for tidy data, it should be a single prediction. This may be revised by the author later when there are [more examples of how to do this from the `R` community](https://twitter.com/hspter/status/748260288143589377).
 
-<img src="08-tradeoff_files/figure-html/unnamed-chunk-16-1.png" width="864" />
+![](08-tradeoff_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
 
 The above plot shows the predictions for each of the 250 simulations of each of the four models of different polynomial degrees. The truth, $f(x = 0.90) = (0.9)^2 = 0.81$, is given by the solid black horizontal line.
 
@@ -387,12 +387,16 @@ mse = apply(predictions, 2, get_mse, truth = f(x = 0.90))
 We summarize these results in the following table.
 
 
- Degree   Mean Squared Error   Bias Squared   Variance
--------  -------------------  -------------  ---------
-      0              0.22643        0.22476    0.00167
-      1              0.00829        0.00508    0.00322
-      2              0.00387        0.00005    0.00381
-      9              0.01019        0.00002    0.01017
+\begin{tabular}{rrrr}
+\toprule
+Degree & Mean Squared Error & Bias Squared & Variance\\
+\midrule
+0 & 0.22643 & 0.22476 & 0.00167\\
+1 & 0.00829 & 0.00508 & 0.00322\\
+2 & 0.00387 & 0.00005 & 0.00381\\
+9 & 0.01019 & 0.00002 & 0.01017\\
+\bottomrule
+\end{tabular}
 
 A number of things to notice here:
 

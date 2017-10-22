@@ -364,14 +364,14 @@ default_knn
 plot(default_knn)
 ```
 
-<img src="21-caret_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](21-caret_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 
 ```r
 ggplot(default_knn) + theme_bw()
 ```
 
-<img src="21-caret_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+![](21-caret_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
 
 
 ```r

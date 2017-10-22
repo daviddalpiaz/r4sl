@@ -140,7 +140,7 @@ points(best_bic, fit_all_sum$bic[best_bic],
        col = "red", cex = 2, pch = 20)
 ```
 
-<img src="22-subset_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](22-subset_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 ### Stepwise Methods
 
@@ -261,7 +261,7 @@ test_err
 plot(test_err, type='b', ylab = "Test Set RMSE", xlab = "Number of Predictors")
 ```
 
-<img src="22-subset_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](22-subset_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 
 ```r
@@ -357,7 +357,7 @@ cv_error
 plot(cv_error, type='b', ylab = "Corss-Validated RMSE", xlab = "Number of Predictors")
 ```
 
-<img src="22-subset_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+![](22-subset_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
 
 ```r

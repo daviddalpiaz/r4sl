@@ -69,7 +69,7 @@ Since he have loaded `caret`, we also have access to the `lattice` package which
 histogram(Hitters$Salary, xlab = "Salary, $1000s", main = "Baseball Salaries, 1986 - 1987")
 ```
 
-<img src="25-elnet_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](25-elnet_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 ## Elastic Net for Regression
 

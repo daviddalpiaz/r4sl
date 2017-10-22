@@ -49,7 +49,7 @@ caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width",
                    auto.key = list(columns = 3))
 ```
 
-<img src="11-generative_files/figure-html/unnamed-chunk-2-1.png" width="768" />
+![](11-generative_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 ```r
@@ -60,7 +60,7 @@ caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width",
                    auto.key = list(columns = 3))
 ```
 
-<img src="11-generative_files/figure-html/unnamed-chunk-3-1.png" width="768" />
+![](11-generative_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 
 
@@ -74,7 +74,7 @@ caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width",
                    layout = c(4, 1))
 ```
 
-<img src="11-generative_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](11-generative_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 Especially based on the pairs plot, we see that it should not be too difficult to find a good classifier.
 
@@ -521,12 +521,19 @@ Like LDA, naive Bayes is having trouble with virginica.
 
 
 
-Method             Train Error   Test Error
-----------------  ------------  -----------
-LDA                  0.0400000    0.0133333
-LDA, Flat Prior      0.0400000    0.0000000
-QDA                  0.0133333    0.0400000
-Naive Bayes          0.0533333    0.0533333
+\begin{tabular}{l|r|r}
+\hline
+Method & Train Error & Test Error\\
+\hline
+LDA & 0.0400000 & 0.0133333\\
+\hline
+LDA, Flat Prior & 0.0400000 & 0.0000000\\
+\hline
+QDA & 0.0133333 & 0.0400000\\
+\hline
+Naive Bayes & 0.0533333 & 0.0533333\\
+\hline
+\end{tabular}
 
 Summarizing the results, we see that Naive Bayes is the worst of LDA, QDA, and NB for this data. So why should we care about naive Bayes?
 

@@ -44,7 +44,7 @@ library(caret)
 featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$Sales)
 ```
 
-<img src="06-linear_files/figure-html/unnamed-chunk-3-1.png" width="960" />
+![](06-linear_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 
 ## Assesing Model Accuracy
@@ -388,7 +388,7 @@ plot(model_complexity, train_rmse, type = "b",
 lines(model_complexity, test_rmse, type = "b", col = "darkorange")
 ```
 
-<img src="06-linear_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+![](06-linear_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
 We also summarize the results as a table. `fit_1` is the least flexible, and `fit_5` is the most flexible. We see the Train RMSE decrease as flexibility increases. We see that the Test RMSE is smallest for `fit_3`, thus is the model we believe will perform the best on future data not used to train the model. Note this may not be the best model, but it is the best model of the models we have seen in this example.
 

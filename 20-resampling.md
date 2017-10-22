@@ -27,7 +27,7 @@ Here, we will use the `Auto` data from `ISLR` and attempt to predict `mpg` (a nu
 ## # ... with 382 more rows, and 2 more variables: origin <dbl>, name <fctr>
 ```
 
-<img src="20-resampling_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](20-resampling_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 
 ## Test-Train Split
@@ -62,7 +62,7 @@ for(i in 1:100) {
 }
 ```
 
-<img src="20-resampling_files/figure-html/unnamed-chunk-5-1.png" width="960" />
+![](20-resampling_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 Notice two things, first that the "Reasonable" model has on average the smallest error. Second, notice large variability in the RMSE. We see this in the "Reasonable" model, but it is very clear in the "Ridiculous" model. Here it is very clear that if we use an "unlucky" split, our test error will be much larger than the likely reality.
 
@@ -143,7 +143,7 @@ plot(loocv_rmse_poly, type = "b", col = "dodgerblue",
      ylab = "LOOCV-RMSE", xlab = "Polynomial Degree")
 ```
 
-<img src="20-resampling_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](20-resampling_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 If you run the above code locally, you will notice that is painfully slow. We are fitting each of the 10 models 392 times, that is, each model $n$ times, once with each data point left out. (Note: in this case, for a linear model, there is actually a shortcut formula which would allow us to obtain LOOCV-RMSE from a single fit to the data. See details in ISL as well as a link below.)
 
@@ -172,7 +172,7 @@ plot(cv_10_rmse_poly, type = "b", col = "dodgerblue",
      ylab = "10 Fold CV-RMSE", xlab = "Polynomial Degree")
 ```
 
-<img src="20-resampling_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](20-resampling_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 Here we chose 10-fold cross-validation. Notice it is **much** faster. In practice, we usually stick to 5 or 10-fold CV.
 
@@ -200,7 +200,7 @@ for(i in 1:100) {
 
 Repeating the test-train split analysis from above, this time with 10-fold CV, see that that the resulting RMSE are much less variable. That means, will cross-validation still has some inherent randomness, it has a much smaller effect on the results.
 
-<img src="20-resampling_files/figure-html/unnamed-chunk-13-1.png" width="960" />
+![](20-resampling_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 
 ### Manual Cross-Validation
@@ -316,7 +316,7 @@ correlations = apply(train[, -1], 2, cor, y = train$y)
 hist(correlations)
 ```
 
-<img src="20-resampling_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](20-resampling_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 ```r
 # select the 25 largest (absolute) correlation
