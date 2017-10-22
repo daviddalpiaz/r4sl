@@ -4,6 +4,9 @@
 .Ruserdata
 .DS_Store
 *.html 
-*.pdf 
+*.pdf
+*.rds
 devel/*.html 
 devel/*.pdf 
+_book
+_bookdown_files

@@ -7,14 +7,15 @@ URL: https://github.com/daviddalpiaz/r4sl
 Imports: 
   bookdown, 
   rmarkdown,
+  knitr,
   tidyverse,
+  ISLR,
+  plotrix,
+  ellipse, 
   caret,
   e1071,
   class,
   FNN,
-  knitr, 
-  ISLR,
-  ellipse, 
   nnet, 
   pROC,
   randomForest,
@@ -23,13 +24,12 @@ Imports:
   gam,
   tree,
   rpart, 
+  rpart.plot,
   gbm, 
   extraTrees, 
   kernlab, 
   sparcl,
   mlbench,
-  klaR,
-  rpart.plot,
-  plotrix
+  klaR
 Remotes: 
   rstudio/bookdown
