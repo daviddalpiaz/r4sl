@@ -69,7 +69,7 @@ Since he have loaded `caret`, we also have access to the `lattice` package which
 histogram(Hitters$Salary, xlab = "Salary, $1000s", main = "Baseball Salaries, 1986 - 1987")
 ```
 
-![](25-elnet_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+<img src="25-elnet_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 ## Elastic Net for Regression
 
@@ -335,7 +335,7 @@ accuracy(actual = default_tst$default,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The file was created using `R` version 3.4.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The file was created using `R` version 3.4.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -357,7 +357,7 @@ The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The f
 
 ```
 ##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
-##  [5] "colorspace"   "htmltools"    "stats4"       "yaml"        
+##  [5] "colorspace"   "stats4"       "htmltools"    "yaml"        
 ##  [9] "survival"     "prodlim"      "rlang"        "e1071"       
 ## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
 ## [17] "plyr"         "bindr"        "dimRed"       "lava"        
@@ -370,6 +370,6 @@ The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The f
 ## [45] "tools"        "magrittr"     "lazyeval"     "tibble"      
 ## [49] "DRR"          "pkgconfig"    "MASS"         "lubridate"   
 ## [53] "gower"        "assertthat"   "rmarkdown"    "iterators"   
-## [57] "R6"           "rpart"        "nnet"         "nlme"        
-## [61] "compiler"
+## [57] "R6"           "rpart"        "sfsmisc"      "nnet"        
+## [61] "nlme"         "compiler"
 ```

@@ -50,7 +50,7 @@ plot(Sales ~ TV, data = Advertising, col = "dodgerblue", pch = 20, cex = 1.5,
      main = "Sales vs Television Advertising")
 ```
 
-![](04-model-basics_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
+<img src="04-model-basics_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 The `pairs()` function is a useful way to quickly visualize a number of scatter plots.
 
@@ -59,7 +59,7 @@ The `pairs()` function is a useful way to quickly visualize a number of scatter 
 pairs(Advertising)
 ```
 
-![](04-model-basics_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
+<img src="04-model-basics_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 Often, we will be most interested in only the relationship between each predictor and the response. For this, we can use the `featurePlot()` function from the `caret` package. (We will use the `caret` package more and more frequently as we introduce new topics.)
 
@@ -69,7 +69,7 @@ library(caret)
 featurePlot(x = Advertising[ , c("TV", "Radio", "Newspaper")], y = Advertising$Sales)
 ```
 
-![](04-model-basics_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+<img src="04-model-basics_files/figure-html/unnamed-chunk-5-1.png" width="960" />
 
 We see that there is a clear increase in `Sales` as `Radio` or `TV` are increased. The relationship between `Sales` and `Newspaper` is less clear. How all of the predictors work together is also unclear, as there is some obvious correlation between `Radio` and `TV`. To investigate further, we will need to model the data.
 
@@ -331,18 +331,18 @@ cat_pred
 
 ```
 ## # A tibble: 30 x 3
-##        x1         x2          y
-##    <fctr>      <dbl>      <dbl>
-##  1      A 0.13355552 -0.8367659
-##  2      A 0.19622757  0.4504337
-##  3      A 0.85244214 -0.6015372
-##  4      A 0.09325977 -0.8252373
-##  5      A 0.40016087 -1.2596296
-##  6      A 0.60420738  0.7812850
-##  7      A 0.67804357  0.3010480
-##  8      A 0.07672658  0.5558331
-##  9      A 0.99704915 -0.8597782
-## 10      A 0.93893173 -0.4887113
+##        x1          x2          y
+##    <fctr>       <dbl>      <dbl>
+##  1      A 0.556492741 -0.8591917
+##  2      A 0.183534861  0.8532454
+##  3      A 0.819056470  0.4207225
+##  4      A 0.354075618  0.6201128
+##  5      A 0.797360227  0.9414265
+##  6      A 0.008943139  1.8179768
+##  7      A 0.981523106 -1.4305252
+##  8      A 0.260993932  0.7537086
+##  9      A 0.393971700 -0.5252941
+## 10      A 0.254776267  0.7968377
 ## # ... with 20 more rows
 ```
 
@@ -358,7 +358,7 @@ coef(cat_pred_mod_add)
 
 ```
 ## (Intercept)         x1B         x1C          x2 
-##  -0.1718776   0.5562571   0.4813465  -0.2141155
+##   0.4794595  -0.8995134  -0.5622277  -0.3048490
 ```
 
 
@@ -369,7 +369,7 @@ coef(cat_pred_mod_int)
 
 ```
 ## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.1397235   0.3919548   0.5688858  -0.2788040   0.3319531  -0.1391217
+##    1.241580   -2.307184   -1.544847   -1.957777    3.036419    2.122923
 ```
 
 
@@ -461,7 +461,7 @@ sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded in this file:
+The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded in this file:
 
 
 ```

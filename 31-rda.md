@@ -140,7 +140,7 @@
 
 <!-- ## RMarkdown -->
 
-<!-- The RMarkdown file for this chapter can be found [**here**](17-rda.Rmd). The file was created using `R` version 3.4.1 and the following packages: -->
+<!-- The RMarkdown file for this chapter can be found [**here**](17-rda.Rmd). The file was created using `R` version 3.4.2 and the following packages: -->
 
 <!-- - Base Packages, Attached -->
 

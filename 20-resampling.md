@@ -27,7 +27,7 @@ Here, we will use the `Auto` data from `ISLR` and attempt to predict `mpg` (a nu
 ## # ... with 382 more rows, and 2 more variables: origin <dbl>, name <fctr>
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
+<img src="20-resampling_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
 ## Test-Train Split
@@ -62,7 +62,7 @@ for(i in 1:100) {
 }
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+<img src="20-resampling_files/figure-html/unnamed-chunk-5-1.png" width="960" />
 
 Notice two things, first that the "Reasonable" model has on average the smallest error. Second, notice large variability in the RMSE. We see this in the "Reasonable" model, but it is very clear in the "Ridiculous" model. Here it is very clear that if we use an "unlucky" split, our test error will be much larger than the likely reality.
 
@@ -143,7 +143,7 @@ plot(loocv_rmse_poly, type = "b", col = "dodgerblue",
      ylab = "LOOCV-RMSE", xlab = "Polynomial Degree")
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
+<img src="20-resampling_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 If you run the above code locally, you will notice that is painfully slow. We are fitting each of the 10 models 392 times, that is, each model $n$ times, once with each data point left out. (Note: in this case, for a linear model, there is actually a shortcut formula which would allow us to obtain LOOCV-RMSE from a single fit to the data. See details in ISL as well as a link below.)
 
@@ -172,7 +172,7 @@ plot(cv_10_rmse_poly, type = "b", col = "dodgerblue",
      ylab = "10 Fold CV-RMSE", xlab = "Polynomial Degree")
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
+<img src="20-resampling_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 Here we chose 10-fold cross-validation. Notice it is **much** faster. In practice, we usually stick to 5 or 10-fold CV.
 
@@ -200,7 +200,7 @@ for(i in 1:100) {
 
 Repeating the test-train split analysis from above, this time with 10-fold CV, see that that the resulting RMSE are much less variable. That means, will cross-validation still has some inherent randomness, it has a much smaller effect on the results.
 
-![](20-resampling_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
+<img src="20-resampling_files/figure-html/unnamed-chunk-13-1.png" width="960" />
 
 
 ### Manual Cross-Validation
@@ -316,7 +316,7 @@ correlations = apply(train[, -1], 2, cor, y = train$y)
 hist(correlations)
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+<img src="20-resampling_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 ```r
 # select the 25 largest (absolute) correlation
@@ -434,7 +434,7 @@ For fun, write-up a simulation study which compares the strategy in the bias-var
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](11-resampling.Rmd). The file was created using `R` version 3.4.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](11-resampling.Rmd). The file was created using `R` version 3.4.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -458,8 +458,8 @@ The RMarkdown file for this chapter can be found [**here**](11-resampling.Rmd). 
 ##  [5] "lattice"      "colorspace"   "stats4"       "htmltools"   
 ##  [9] "yaml"         "survival"     "prodlim"      "rlang"       
 ## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
-## [17] "foreach"      "plyr"         "bindr"        "dimRed"      
-## [21] "lava"         "robustbase"   "stringr"      "timeDate"    
+## [17] "foreach"      "plyr"         "bindr"        "lava"        
+## [21] "dimRed"       "robustbase"   "stringr"      "timeDate"    
 ## [25] "munsell"      "gtable"       "recipes"      "codetools"   
 ## [29] "evaluate"     "knitr"        "caret"        "class"       
 ## [33] "DEoptimR"     "methods"      "Rcpp"         "scales"      
@@ -469,6 +469,6 @@ The RMarkdown file for this chapter can be found [**here**](11-resampling.Rmd). 
 ## [49] "tools"        "magrittr"     "lazyeval"     "tibble"      
 ## [53] "DRR"          "pkgconfig"    "MASS"         "Matrix"      
 ## [57] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
-## [61] "iterators"    "R6"           "rpart"        "nnet"        
-## [65] "nlme"         "compiler"
+## [61] "iterators"    "R6"           "rpart"        "sfsmisc"     
+## [65] "nnet"         "nlme"         "compiler"
 ```

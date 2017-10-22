@@ -72,4 +72,4 @@ $$
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](12-classification-overview.Rmd). The file was created using `R` version 3.4.1.
+The RMarkdown file for this chapter can be found [**here**](12-classification-overview.Rmd). The file was created using `R` version 3.4.2.

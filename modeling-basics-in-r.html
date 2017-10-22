@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-10">
+<meta name="date" content="2017-10-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -521,27 +521,27 @@ cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
 ##        x1          x2          y
 ##    &lt;fctr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-##  1      A 0.913088110  0.8616391
-##  2      A 0.183640812 -1.1280179
-##  3      A 0.047636664  1.0635511
-##  4      A 0.977015266 -0.7534088
-##  5      A 0.628985454 -0.2926677
-##  6      A 0.932582821  0.9451496
-##  7      A 0.797647052 -1.5100240
-##  8      A 0.008650498 -1.2616500
-##  9      A 0.068920727  0.7259886
-## 10      A 0.155020664 -1.7311162
+##  1      A 0.556492741 -0.8591917
+##  2      A 0.183534861  0.8532454
+##  3      A 0.819056470  0.4207225
+##  4      A 0.354075618  0.6201128
+##  5      A 0.797360227  0.9414265
+##  6      A 0.008943139  1.8179768
+##  7      A 0.981523106 -1.4305252
+##  8      A 0.260993932  0.7537086
+##  9      A 0.393971700 -0.5252941
+## 10      A 0.254776267  0.7968377
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-## -0.28802111  0.11995402  0.42374751 -0.04250737</code></pre>
+##   0.4794595  -0.8995134  -0.5622277  -0.3048490</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.4954835   0.2549977   1.3883166   0.3976669  -0.2909847  -2.1155637</code></pre>
+##    1.241580   -2.307184   -1.544847   -1.957777    3.036419    2.122923</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
@@ -584,7 +584,7 @@ cat_pred</code></pre></div>
 </div>
 <div id="rmarkdown" class="section level2">
 <h2><span class="header-section-number">4.7</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="04-model-basics.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.1. The following packages (and their dependencies) were loaded in this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="04-model-basics.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2. The following packages (and their dependencies) were loaded in this file:</p>
 <pre><code>## [1] &quot;tibble&quot;  &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot; &quot;readr&quot;</code></pre>
 
 </div>

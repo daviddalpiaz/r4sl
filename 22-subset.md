@@ -140,7 +140,7 @@ points(best_bic, fit_all_sum$bic[best_bic],
        col = "red", cex = 2, pch = 20)
 ```
 
-![](22-subset_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+<img src="22-subset_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 ### Stepwise Methods
 
@@ -261,7 +261,7 @@ test_err
 plot(test_err, type='b', ylab = "Test Set RMSE", xlab = "Number of Predictors")
 ```
 
-![](22-subset_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
+<img src="22-subset_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 ```r
@@ -357,7 +357,7 @@ cv_error
 plot(cv_error, type='b', ylab = "Corss-Validated RMSE", xlab = "Number of Predictors")
 ```
 
-![](22-subset_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
+<img src="22-subset_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 
 ```r
@@ -382,7 +382,7 @@ coef(fit_all, which.min(cv_error))
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.4.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.4.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -402,7 +402,7 @@ The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The 
 
 
 ```
-##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
+##  [1] "purrr"        "reshape2"     "kernlab"      "splines"     
 ##  [5] "lattice"      "colorspace"   "stats4"       "htmltools"   
 ##  [9] "yaml"         "survival"     "prodlim"      "rlang"       
 ## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
@@ -417,8 +417,8 @@ The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The 
 ## [49] "tools"        "magrittr"     "lazyeval"     "tibble"      
 ## [53] "DRR"          "pkgconfig"    "MASS"         "Matrix"      
 ## [57] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
-## [61] "iterators"    "R6"           "rpart"        "nnet"        
-## [65] "nlme"         "compiler"
+## [61] "iterators"    "R6"           "rpart"        "sfsmisc"     
+## [65] "nnet"         "nlme"         "compiler"
 ```
 
 

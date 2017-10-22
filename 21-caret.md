@@ -364,14 +364,14 @@ default_knn
 plot(default_knn)
 ```
 
-![](21-caret_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+<img src="21-caret_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 
 ```r
 ggplot(default_knn) + theme_bw()
 ```
 
-![](21-caret_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
+<img src="21-caret_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 
 ```r
@@ -430,7 +430,7 @@ Notes to add later:
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). The file was created using `R` version 3.4.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). The file was created using `R` version 3.4.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -451,7 +451,7 @@ The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). T
 
 
 ```
-##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
+##  [1] "purrr"        "reshape2"     "kernlab"      "splines"     
 ##  [5] "colorspace"   "stats4"       "htmltools"    "yaml"        
 ##  [9] "survival"     "prodlim"      "rlang"        "e1071"       
 ## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
@@ -466,7 +466,8 @@ The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). T
 ## [49] "lazyeval"     "tibble"       "DRR"          "pkgconfig"   
 ## [53] "MASS"         "Matrix"       "lubridate"    "gower"       
 ## [57] "assertthat"   "rmarkdown"    "iterators"    "R6"          
-## [61] "rpart"        "nnet"         "nlme"         "compiler"
+## [61] "rpart"        "sfsmisc"      "nnet"         "nlme"        
+## [65] "compiler"
 ```
 
 

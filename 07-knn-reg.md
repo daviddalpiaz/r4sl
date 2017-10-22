@@ -138,7 +138,7 @@ pred_250 = knn.reg(train = X_trn_boston, test = lstat_grid, y = y_trn_boston, k 
 
 We make predictions for a large number of possible values of `lstat`, for different values of `k`. Note that `250` is the total number of observations in this training dataset.
 
-![](07-knn-reg_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+<img src="07-knn-reg_files/figure-html/unnamed-chunk-7-1.png" width="576" />
 
 - TODO: Orange "curves" are $\hat{f}_k(x)$ where $x$ are the values we defined in `lstat_grid`. So really a bunch of predictions with interpolated lines, but you can't really tell...
 
@@ -220,18 +220,15 @@ knitr::kable(knn_results, escape = FALSE, booktabs = TRUE)
 ```
 
 
-\begin{tabular}{rrrl}
-\toprule
-k & Train RMSE & Test RMSE & Fit?\\
-\midrule
-1 & 2.22 & 7.50 & Over\\
-5 & 4.30 & 5.89 & Over\\
-10 & 4.60 & 5.72 & Over\\
-25 & 4.66 & 5.71 & Best\\
-50 & 4.99 & 6.03 & Under\\
-250 & 8.90 & 9.47 & Under\\
-\bottomrule
-\end{tabular}
+
+   k   Train RMSE   Test RMSE  Fit?  
+----  -----------  ----------  ------
+   1         2.22        7.50  Over  
+   5         4.30        5.89  Over  
+  10         4.60        5.72  Over  
+  25         4.66        5.71  Best  
+  50         4.99        6.03  Under 
+ 250         8.90        9.47  Under 
 
 - TODO: What about ties? why isn't k = 1 give 0 training error? There are some non-unique $x_i$ values in the training data. How do we predict when this is the case?
 
@@ -271,7 +268,7 @@ set.seed(42)
 knn_data = sim_knn_data()
 ```
 
-![](07-knn-reg_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
+<img src="07-knn-reg_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 - TODO: How should we scale the test data?
 
@@ -350,17 +347,14 @@ knitr::kable(cod_results, escape = FALSE, booktabs = TRUE)
 ```
 
 
-\begin{tabular}{rrr}
-\toprule
-$p$, Dimension & Train RMSE & Test RMSE\\
-\midrule
-1 & 1.413569 & 1.565495\\
-2 & 5.407340 & 7.212414\\
-3 & 8.726803 & 10.629993\\
-4 & 10.310148 & 12.933572\\
-5 & 12.101930 & 14.256241\\
-\bottomrule
-\end{tabular}
+
+ $p$, Dimension   Train RMSE   Test RMSE
+---------------  -----------  ----------
+              1     1.413569    1.565495
+              2     5.407340    7.212414
+              3     8.726803   10.629993
+              4    10.310148   12.933572
+              5    12.101930   14.256241
 
 
 
@@ -372,6 +366,7 @@ $p$, Dimension & Train RMSE & Test RMSE\\
 - TODO: lm vs knn
     - lm: "slow" train, "fast" test
     - knn: "fast" train, "slow" test
+    - illustrate with system timings
  
 
 ## Interpretability
@@ -422,7 +417,7 @@ Can you improve this model? Can you find a better $k$? Can you find a better mod
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

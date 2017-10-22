@@ -50,7 +50,7 @@ plot(boston_prune_tst_pred, boston_tst$medv,
 abline(0, 1, col = "red", lwd = 2)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ```r
 (tree_tst_rmse = rmse(boston_prune_tst_pred, boston_tst$medv))
@@ -75,7 +75,7 @@ plot(boston_lm_tst_pred, boston_tst$medv,
 abline(0, 1, col = "red", lwd = 2)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 ```r
 (lm_tst_rmse = rmse(boston_lm_tst_pred, boston_tst$medv))
@@ -117,7 +117,7 @@ plot(boston_bag_tst_pred,boston_tst$medv,
 abline(0, 1, col = "red", lwd = 2)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ```r
 (bag_tst_rmse = rmse(boston_bag_tst_pred, boston_tst$medv))
@@ -134,7 +134,7 @@ Here we see two interesting results. First, the predicted versus actual plot no 
 plot(boston_bag)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
 ### Random Forest
@@ -171,7 +171,7 @@ plot(boston_forest_tst_pred, boston_tst$medv,
 abline(0, 1, col = "red", lwd = 2)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 ```r
 (forest_tst_rmse = rmse(boston_forest_tst_pred, boston_tst$medv))
@@ -221,7 +221,7 @@ booston_boost
 summary(booston_boost)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-10-1.png" width="768" />
 
 ```
 ##             var    rel.inf
@@ -246,7 +246,7 @@ plot(booston_boost, i = "rm")
 plot(booston_boost, i = "lstat")
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-10-2.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-10-2.png" width="768" />
 
 ```r
 boston_boost_tst_pred = predict(booston_boost, newdata = boston_tst, n.trees = 5000)
@@ -266,7 +266,7 @@ plot(boston_boost_tst_pred, boston_tst$medv,
 abline(0, 1, col = "red", lwd = 2)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 ### Results
 
@@ -681,7 +681,7 @@ By default, calling `plot` here will produce a nice graphic of the results.
 plot(seat_gbm_tune)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 ```r
 accuracy(predict(seat_gbm_tune, seat_tst), seat_tst$Sales)
@@ -723,7 +723,7 @@ plot(sim_trn$X1, sim_trn$X2, col = sim_trn$class,
      xlab = "X1", ylab = "X2")
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 
 ```r
@@ -745,7 +745,7 @@ library(rpart.plot)
 prp(sim_tree_cv$finalModel)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 
 ```r
@@ -794,7 +794,7 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_pred,
      xlab = "X1", ylab = "X2", pch = 20, main = "Boosted Trees")
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-36-1.pdf)<!-- --> 
+<img src="27-ensemble_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 
 ## External Links
@@ -810,7 +810,7 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_pred,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). The file was created using `R` version 3.4.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). The file was created using `R` version 3.4.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -847,8 +847,8 @@ The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). Th
 ## [41] "gtable"       "magrittr"     "scales"       "stringi"     
 ## [45] "reshape2"     "bindrcpp"     "timeDate"     "robustbase"  
 ## [49] "lava"         "iterators"    "tools"        "glue"        
-## [53] "DEoptimR"     "purrr"        "yaml"         "colorspace"  
-## [57] "knitr"        "bindr"
+## [53] "DEoptimR"     "purrr"        "sfsmisc"      "yaml"        
+## [57] "colorspace"   "knitr"        "bindr"
 ```
 
 

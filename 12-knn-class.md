@@ -43,7 +43,7 @@ $$
 
 Again, if the probability for class `0` and `1` are equal, simply assign at random.
 
-![](12-knn-class_files/figure-latex/unnamed-chunk-1-1.pdf)<!-- --> 
+<img src="12-knn-class_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
 In the above example, when predicting at $x = (x_1, x_2) = (8, 6)$,
 
@@ -196,7 +196,7 @@ abline(h = min(err_k), col = "darkorange", lty = 3)
 abline(h = mean(y_default_tst == "Yes"), col = "grey", lty = 2)
 ```
 
-![](12-knn-class_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
+<img src="12-knn-class_files/figure-html/unnamed-chunk-10-1.png" width="768" />
 
 The dotted orange line represents the smallest observed test classification error rate.
 
@@ -336,7 +336,7 @@ head(attributes(iris_pred)$prob, n = 50)
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](12-knn-class.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](12-knn-class.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

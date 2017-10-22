@@ -1,16 +1,19 @@
 --- 
 title: "`R` for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2017-10-10"
+date: "2017-10-22"
+github-repo: daviddalpiaz/r4sl
+url: 'http\://daviddalpiaz.github.io/r4sl/'
+knit: "bookdown::render_book"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
-link-citations: yes
-github-repo: daviddalpiaz/r4sl
-url: 'http\://daviddalpiaz.github.io/r4sl/'
-description: ""
 favicon: "favicon.ico"
+link-citations: yes
+urlcolor: cyan
+download: [["r4sl.pdf", "PDF"]]
+description: ""
 ---
 
 
@@ -18,19 +21,28 @@ favicon: "favicon.ico"
 
 # Introduction {-}
 
-Welcome to `R` for Statistical Learning!
+Welcome to `R` for Statistical Learning! While this is the current title, a more appropriate title would be 
+"Machine Learning from the Perspective of a Statistician using `R`.," but doesn't seem as catchy.
 
 
 ## About This Book {-}
 
-This book will serve as a supplement to [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/) for [STAT 430 - Basics of Statistical Learning](https://go.illinois.edu/stat430) at the [University of Illinois at Urbana-Champaign](http://illinois.edu/).
+This book currently serves as a supplement to [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/) for [STAT 432 - Basics of Statistical Learning](https://go.illinois.edu/stat430) at the [University of Illinois at Urbana-Champaign](http://illinois.edu/).
 
-Currently the focus of this text is to expand on ISL's introduction to using `R` for statistical learning. Eventually the text may become more self-contained.
+The initial focus of this text was to expand on ISL's introduction to using `R` for statistical learning, mostly through adding to and modifying existing code. This text is currently becoming much more self-contained. Why? A very good question considering that the author consider ISL one of the best undergraduate textbooks available, and was one of the driving forces for the creation of STAT 432. However once the course was created, exact control over content became extremely useful. The main focus of this text is to match the needs of students in that course. Some of those needs include:
+
+- Additional `R` code examples and explanation
+- Simulation studies
+- Mathematical rigor that matches the background of the readers
+- A book structure that matches the overall structure of the course
+
+In other words, this text seeks to replicate the best parts of [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/), [The Elements of 
+Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), and [Applied Predictive Modeling](http://appliedpredictivemodeling.com/) that are most needed by a particular set of students.
 
 
 ## Organization {-}
 
-The text is organized into seven parts.
+The text is organized into roughly seven parts.
 
 1. Prerequisites
 2. (Supervised Learning) Regression
@@ -40,11 +52,11 @@ The text is organized into seven parts.
 6. (Statistical Learning) in The Modern Era
 7. Appendix
 
-Part 1 details the assumed prerequisite knowledge required to read the text. It recaps some of the more important bits of information.
+Part 1 details the assumed prerequisite knowledge required to read the text. It recaps some of the more important bits of information. It is currently rather sparse.
 
-Parts 2, 3, and 4 discuss the theory of statistical learning. Several methods are introduced throughout to highlight different theoretical concepts.
+Parts 2, 3, and 4 discuss the **theory** of statistical learning. Several methods are introduced throughout to highlight different theoretical concepts.
 
-Parts 5 and 6 highlight the use of statistical learning in practice. Part 5 focuses on practical usage of the techniques seen in Parts 2, 3, and 4. Part 6 introduces techniques that are most commonly used in practice today.
+Parts 5 and 6 highlight the use of statistical learning in **practice**. Part 5 focuses on practical usage of the techniques seen in Parts 2, 3, and 4. Part 6 introduces techniques that are most commonly used in practice today.
 
 
 ## Who? {-}
@@ -54,22 +66,22 @@ This book is targeted at advanced undergraduate or first year MS students in Sta
 
 ## Caveat Emptor {-}
 
-**This "book" is under active development.** Much of the text was hastily written during the Spring 2017 run of the course. While together with [ISL](http://www-bcf.usc.edu/~gareth/ISL/) the coverage is essentially complete, significant updates will occur during Fall 2017.
+**This "book" is under active development.** Much of the text was hastily written during the Spring 2017 run of the course. While together with [ISL](http://www-bcf.usc.edu/~gareth/ISL/) the coverage is essentially complete, significant updates are occurring during Fall 2017.
 
-When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a [**pdf version** is continuously maintained](http://daviddalpiaz.github.io/r4sl/r4sl.pdf).
+When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a [**pdf version** is continuously maintained](http://daviddalpiaz.github.io/r4sl/r4sl.pdf). While development is taking place, formatting in the pdf version may not be as well planned as the html version since the html version does not need to worry about pagination.
 
-Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (`dalpiaz2 AT illinois DOT edu`) Or, if you know RMarkdown and are familiar with GitHub, [make a pull request and fix an issue yourself!](https://github.com/daviddalpiaz/r4sl) This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We'll also link to your GitHub account, or personal website upon request.
+Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (`dalpiaz2 AT illinois DOT edu`) Or, if you know `rmarkdown` and are familiar with GitHub, [make a pull request and fix an issue yourself!](https://github.com/daviddalpiaz/r4sl) This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We'll also link to your GitHub account, or personal website upon request.
 
-You will often see "TODO" scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.
+While development is taking place, you may see "TODO" scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.
 
 
 ## Conventions {-}
 
 This text uses MathJax to render mathematical notation for the web. Occasionally, but rarely, a JavaScript error will prevent MathJax from rendering correctly. In this case, you will see the "code" instead of the expected mathematical equations. From experience, this is almost always fixed by simply refreshing the page. You'll also notice that if you right-click any equation you can obtain the MathML Code (for copying into Microsoft Word) or the TeX command used to generate the equation.
 
-\[
+$$
 a^2 + b^2 = c^2
-\]
+$$
 
 `R` code will be typeset using a `monospace` font which is syntax highlighted.
 
@@ -107,6 +119,7 @@ Your name could be here! Suggest an edit! Correct a typo! Pull requests encourag
 - [Wenting Xu](https://www.linkedin.com/in/wenting-xu-16b548117/), Fall 2017
 - [Yuanning Wei](https://www.linkedin.com/in/yuanning-wei-79b9a4138/), Fall 2017
 - [Ross Drucker](https://www.linkedin.com/in/ross-drucker/), Fall 2017
+
 
 ## License {-}
 

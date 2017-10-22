@@ -88,7 +88,7 @@ abline(h = 0.5, lty = 2)
 abline(model_lm, lwd = 3, col = "dodgerblue")
 ```
 
-![](10-logistic_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+<img src="10-logistic_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 Two issues arise. First, all of the predicted probabilities are below 0.5. That means, we would classify every observation as a `"No"`. This is certainly possible, but not what we would expect.
 
@@ -358,7 +358,7 @@ curve(predict(model_glm, data.frame(balance = x), type = "response"),
 abline(v = -coef(model_glm)[1] / coef(model_glm)[2], lwd = 2)
 ```
 
-![](10-logistic_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
+<img src="10-logistic_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 This plot contains a wealth of information.
 
@@ -537,7 +537,7 @@ test_prob = predict(model_glm, newdata = default_tst, type = "response")
 test_roc = roc(default_tst$default ~ test_prob, plot = TRUE, print.auc = TRUE)
 ```
 
-![](10-logistic_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
+<img src="10-logistic_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 ```r
 as.numeric(test_roc$auc)
@@ -623,7 +623,7 @@ Interestingly, you've just fit a neural network, and you didn't even know it! (H
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](10-logistic.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](10-logistic.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

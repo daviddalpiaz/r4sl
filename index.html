@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-10">
+<meta name="date" content="2017-10-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -348,19 +348,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title"><code>R</code> for Statistical Learning</h1>
 <h4 class="author"><em><a href="https://daviddalpiaz.com/">David Dalpiaz</a></em></h4>
-<h4 class="date"><em>2017-10-10</em></h4>
+<h4 class="date"><em>2017-10-22</em></h4>
 </div>
 <div id="introduction" class="section level1 unnumbered">
 <h1>Introduction</h1>
-<p>Welcome to <code>R</code> for Statistical Learning!</p>
+<p>Welcome to <code>R</code> for Statistical Learning! While this is the current title, a more appropriate title would be “Machine Learning from the Perspective of a Statistician using <code>R</code>.,” but doesn’t seem as catchy.</p>
 <div id="about-this-book" class="section level2 unnumbered">
 <h2>About This Book</h2>
-<p>This book will serve as a supplement to <a href="http://www-bcf.usc.edu/~gareth/ISL/">An Introduction to Statistical Learning</a> for <a href="https://go.illinois.edu/stat430">STAT 430 - Basics of Statistical Learning</a> at the <a href="http://illinois.edu/">University of Illinois at Urbana-Champaign</a>.</p>
-<p>Currently the focus of this text is to expand on ISL’s introduction to using <code>R</code> for statistical learning. Eventually the text may become more self-contained.</p>
+<p>This book currently serves as a supplement to <a href="http://www-bcf.usc.edu/~gareth/ISL/">An Introduction to Statistical Learning</a> for <a href="https://go.illinois.edu/stat430">STAT 432 - Basics of Statistical Learning</a> at the <a href="http://illinois.edu/">University of Illinois at Urbana-Champaign</a>.</p>
+<p>The initial focus of this text was to expand on ISL’s introduction to using <code>R</code> for statistical learning, mostly through adding to and modifying existing code. This text is currently becoming much more self-contained. Why? A very good question considering that the author consider ISL one of the best undergraduate textbooks available, and was one of the driving forces for the creation of STAT 432. However once the course was created, exact control over content became extremely useful. The main focus of this text is to match the needs of students in that course. Some of those needs include:</p>
+<ul>
+<li>Additional <code>R</code> code examples and explanation</li>
+<li>Simulation studies</li>
+<li>Mathematical rigor that matches the background of the readers</li>
+<li>A book structure that matches the overall structure of the course</li>
+</ul>
+<p>In other words, this text seeks to replicate the best parts of <a href="http://www-bcf.usc.edu/~gareth/ISL/">An Introduction to Statistical Learning</a>, <a href="https://web.stanford.edu/~hastie/ElemStatLearn/">The Elements of Statistical Learning</a>, and <a href="http://appliedpredictivemodeling.com/">Applied Predictive Modeling</a> that are most needed by a particular set of students.</p>
 </div>
 <div id="organization" class="section level2 unnumbered">
 <h2>Organization</h2>
-<p>The text is organized into seven parts.</p>
+<p>The text is organized into roughly seven parts.</p>
 <ol style="list-style-type: decimal">
 <li>Prerequisites</li>
 <li>(Supervised Learning) Regression</li>
@@ -370,9 +377,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>(Statistical Learning) in The Modern Era</li>
 <li>Appendix</li>
 </ol>
-<p>Part 1 details the assumed prerequisite knowledge required to read the text. It recaps some of the more important bits of information.</p>
-<p>Parts 2, 3, and 4 discuss the theory of statistical learning. Several methods are introduced throughout to highlight different theoretical concepts.</p>
-<p>Parts 5 and 6 highlight the use of statistical learning in practice. Part 5 focuses on practical usage of the techniques seen in Parts 2, 3, and 4. Part 6 introduces techniques that are most commonly used in practice today.</p>
+<p>Part 1 details the assumed prerequisite knowledge required to read the text. It recaps some of the more important bits of information. It is currently rather sparse.</p>
+<p>Parts 2, 3, and 4 discuss the <strong>theory</strong> of statistical learning. Several methods are introduced throughout to highlight different theoretical concepts.</p>
+<p>Parts 5 and 6 highlight the use of statistical learning in <strong>practice</strong>. Part 5 focuses on practical usage of the techniques seen in Parts 2, 3, and 4. Part 6 introduces techniques that are most commonly used in practice today.</p>
 </div>
 <div id="who" class="section level2 unnumbered">
 <h2>Who?</h2>
@@ -380,10 +387,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="caveat-emptor" class="section level2 unnumbered">
 <h2>Caveat Emptor</h2>
-<p><strong>This “book” is under active development.</strong> Much of the text was hastily written during the Spring 2017 run of the course. While together with <a href="http://www-bcf.usc.edu/~gareth/ISL/">ISL</a> the coverage is essentially complete, significant updates will occur during Fall 2017.</p>
-<p>When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a <a href="http://daviddalpiaz.github.io/r4sl/r4sl.pdf"><strong>pdf version</strong> is continuously maintained</a>.</p>
-<p>Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (<code>dalpiaz2 AT illinois DOT edu</code>) Or, if you know RMarkdown and are familiar with GitHub, <a href="https://github.com/daviddalpiaz/r4sl">make a pull request and fix an issue yourself!</a> This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We’ll also link to your GitHub account, or personal website upon request.</p>
-<p>You will often see “TODO” scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.</p>
+<p><strong>This “book” is under active development.</strong> Much of the text was hastily written during the Spring 2017 run of the course. While together with <a href="http://www-bcf.usc.edu/~gareth/ISL/">ISL</a> the coverage is essentially complete, significant updates are occurring during Fall 2017.</p>
+<p>When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a <a href="http://daviddalpiaz.github.io/r4sl/r4sl.pdf"><strong>pdf version</strong> is continuously maintained</a>. While development is taking place, formatting in the pdf version may not be as well planned as the html version since the html version does not need to worry about pagination.</p>
+<p>Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (<code>dalpiaz2 AT illinois DOT edu</code>) Or, if you know <code>rmarkdown</code> and are familiar with GitHub, <a href="https://github.com/daviddalpiaz/r4sl">make a pull request and fix an issue yourself!</a> This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We’ll also link to your GitHub account, or personal website upon request.</p>
+<p>While development is taking place, you may see “TODO” scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.</p>
 </div>
 <div id="conventions" class="section level2 unnumbered">
 <h2>Conventions</h2>

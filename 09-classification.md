@@ -98,7 +98,7 @@ featurePlot(x = default_trn[, c("balance", "income")],
             auto.key = list(columns = 2))
 ```
 
-![](09-classification_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+<img src="09-classification_files/figure-html/unnamed-chunk-5-1.png" width="960" />
 
 Some notes about the arguments to this function:
 
@@ -126,7 +126,7 @@ featurePlot(x = default_trn[, c("balance", "income")],
             auto.key = list(columns = 2))
 ```
 
-![](09-classification_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+<img src="09-classification_files/figure-html/unnamed-chunk-6-1.png" width="960" />
 
 Above, we create a similar plot, except with `student` as the response. We see that students often carry a slightly larger balance, and have far lower income. This will be useful to know when making more complicated classifiers.
 
@@ -138,7 +138,7 @@ featurePlot(x = default_trn[, c("student", "balance", "income")],
             auto.key = list(columns = 2))
 ```
 
-![](09-classification_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+<img src="09-classification_files/figure-html/unnamed-chunk-7-1.png" width="576" />
 
 We can use `plot = "pairs"` to consider multiple variables at the same time. This plot reinforces using `balance` to create a classifier, and again shows that `income` seems not that useful.
 
@@ -151,7 +151,7 @@ featurePlot(x = default_trn[, c("balance", "income")],
             auto.key = list(columns = 2))
 ```
 
-![](09-classification_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
+<img src="09-classification_files/figure-html/unnamed-chunk-8-1.png" width="576" />
 
 Similar to `pairs` is a plot of type `ellipse`, which requires the `ellipse` package. Here we only use numeric predictors, as essentially we are assuming multivariate normality. The ellipses mark points of equal density. This will be useful later when discussing LDA and QDA.
 
@@ -445,7 +445,7 @@ This classifier does better than the previous. But the point is, in reality, to 
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 3.4.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

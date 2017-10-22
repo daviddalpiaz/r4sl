@@ -90,7 +90,7 @@ text(seat_tree, pretty = 0)
 title(main = "Unpruned Classification Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-5-1.png" width="2304" />
 
 Above we plot the tree. Below we output the details of the splits.
 
@@ -228,7 +228,7 @@ text(seat_tree, pretty = 0)
 title(main = "Unpruned Classification Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-11-1.png" width="2304" />
 
 When using the `predict()` function on a tree, the default `type` is `vector` which gives predicted probabilities for both classes. We will use `type = class` to directly obtain classes. We first fit the tree using the training data (above), then obtain predictions on both the train and test set, then view the confusion matrix for both.
 
@@ -345,7 +345,7 @@ plot(seat_tree_cv$size, seat_tree_cv$dev / nrow(seat_trn), type = "b",
      xlab = "Tree Size", ylab = "CV Misclassification Rate")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 It appears that a tree of size 9 has the fewest misclassifications of the considered trees, via cross-validation.
 
@@ -375,7 +375,7 @@ text(seat_tree_prune, pretty = 0)
 title(main = "Pruned Classification Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-22-1.png" width="1152" />
 
 We again obtain predictions using this smaller tree, and evaluate on the test and train sets.
 
@@ -467,7 +467,7 @@ text(boston_tree, pretty = 0)
 title(main = "Unpruned Regression Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-27-1.png" width="1152" />
 
 As with classification trees, we can use cross-validation to select a good pruning of the tree.
 
@@ -479,7 +479,7 @@ plot(boston_tree_cv$size, sqrt(boston_tree_cv$dev / nrow(boston_trn)), type = "b
      xlab = "Tree Size", ylab = "CV-RMSE")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 While the tree of size 9 does have the lowest RMSE, we'll prune to a size of 7 as it seems to perform just as well. (Otherwise we would not be pruning.) The pruned tree is, as expected, smaller and easier to interpret.
 
@@ -509,7 +509,7 @@ text(boston_tree_prune, pretty = 0)
 title(main = "Pruned Regression Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-30-1.png" width="1152" />
 
 Let's compare this regression tree to an additive linear model and use RMSE as our metric.
 
@@ -560,7 +560,7 @@ plot(boston_prune_tst_pred, boston_tst$medv, xlab = "Predicted", ylab = "Actual"
 abline(0, 1)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-34-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 Here, using an additive linear regression the actual vs predicted looks much more like what we are used to.
 
@@ -572,7 +572,7 @@ plot(boston_lm_pred, boston_tst$medv, xlab = "Predicted", ylab = "Actual")
 abline(0, 1)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-35-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 ```r
 rmse(boston_lm_pred, boston_tst$medv)
@@ -621,7 +621,7 @@ seat_rpart = rpart(Sales ~ ., data = seat_trn, method = "class")
 plotcp(seat_rpart)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-37-1.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 ```r
 # find best value of cp
@@ -642,19 +642,19 @@ library(rpart.plot)
 prp(seat_rpart_prune)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-37-2.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-37-2.png" width="672" />
 
 ```r
 prp(seat_rpart_prune, type = 4)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-37-3.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-37-3.png" width="672" />
 
 ```r
 rpart.plot(seat_rpart_prune)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-37-4.pdf)<!-- --> 
+<img src="26-tree_files/figure-html/unnamed-chunk-37-4.png" width="672" />
 
 ## External Links
 
@@ -664,7 +664,7 @@ rpart.plot(seat_rpart_prune)
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](19-tree.Rmd). The file was created using `R` version 3.4.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](19-tree.Rmd). The file was created using `R` version 3.4.2 and the following packages:
 
 - Base Packages, Attached
 
