@@ -11,9 +11,7 @@ bibliography: [book.bib]
 biblio-style: apalike
 favicon: "favicon.ico"
 link-citations: yes
-colorlinks: yes
-monofont: "Source Code Pro"
-monofontoptions: "Scale=0.7"
+urlcolor: cyan
 download: [["r4sl.pdf", "PDF"]]
 description: ""
 ---
