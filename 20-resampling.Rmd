@@ -121,7 +121,7 @@ We are actually given two values. The first is exactly the LOOCV-RMSE. The secon
 loocv_rmse_poly = rep(0, times = 10)
 for (i in seq_along(loocv_rmse_poly)) {
   glm_fit = glm(mpg ~ poly(horsepower, i), data = Auto)
-  loocv_rmse_poly[i] = sqrt(cv.glm(Auto, glm_fit)$delta[1])
+  loocv_rmse_poly[i] = sqrt(boot::cv.glm(Auto, glm_fit)$delta[1])
 }
 loocv_rmse_poly
 ```
@@ -141,7 +141,7 @@ set.seed(17)
 cv_10_rmse_poly = rep(0, times = 10)
 for (i in seq_along(cv_10_rmse_poly)) {
   glm_fit = glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv_10_rmse_poly[i] = sqrt(cv.glm(Auto, glm_fit, K = 10)$delta[1])
+  cv_10_rmse_poly[i] = sqrt(boot::cv.glm(Auto, glm_fit, K = 10)$delta[1])
 }
 cv_10_rmse_poly
 ```
