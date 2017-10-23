@@ -244,13 +244,13 @@ $$
 \sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2.
 $$
 
-The **standard deviation of a random variable $X$ is given by
+The **standard deviation** of a random variable $X$ is given by
 
 $$
 \sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}.
 $$
 
-The **covariance** or random variables $X$ and $Y$ is given by
+The **covariance** of random variables $X$ and $Y$ is given by
 
 $$
 \text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y].
