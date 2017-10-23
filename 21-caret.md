@@ -7,7 +7,7 @@ Now that we have seen a number of classification (and regression) methods, and i
 - Select a method
 - Test-train split the available data
 - Decide on a set of candidate models via tuning parameters
-- Select the best model (tuning parameters) using a cross-validated metric
+- Select the "best model" (chose the values of the tuning parameters) using a cross-validated metric with the training data
 - Use chosen model to make predictions
 - Calculate relevant metrics on the test data
 
@@ -28,15 +28,15 @@ Thankfully, the `R` community has essentially provided a silver bullet for these
     - `trainControl()` will setup cross-validation
     - `train()` is the workhorse of `caret`. It takes the following information then trains the requested model:
         - `form`, a formula, such as `y ~ .`
-        - `data`
-        - `method`, from a long list of possibilities
-        - `preProcess` which allows for specification of things such as centering and scaling
+        - `data`, the data used for training
+        - `method`, a statistical learning method from [a long list of availible models](https://topepo.github.io/caret/available-models.html)
+        - `preProcess` which allows for specification of data pre-processing such as centering and scaling
         - `tuneGrid` which specifies the tuning parameters to train over
-        - `trControl` which specifies the resampling scheme, that is, how cross-validation should be performed
+        - `trControl` which specifies the resampling scheme, that is, how cross-validation should be performed to find the best values of the tuning parameters
 - Use chosen model to make predictions
-    - `predict()` used on objects of type `train` will be magical!
+    - `predict()` used on objects of type `train` will be truly magical!
 
-To illustrate `caret`, we return to our familiar `Default` data.
+To illustrate `caret`, we will use the `Default` data from the `ISLR` package.
 
 
 ```r
@@ -57,6 +57,8 @@ default_idx = createDataPartition(Default$default, p = 0.75, list = FALSE)
 default_trn = Default[default_idx, ]
 default_tst = Default[-default_idx, ]
 ```
+
+- TODO: Why are we specifying the response? (`createDataPartition` tries to create similiar distributions in the train and test sets.)
 
 
 ```r
@@ -134,7 +136,7 @@ default_glm$finalModel
 
 
 ```r
-accuracy = function(actual, predicted) {
+calc_acc = function(actual, predicted) {
   mean(actual == predicted)
 }
 ```
@@ -153,7 +155,7 @@ head(predict(default_glm, newdata = default_trn))
 
 ```r
 # train acc
-accuracy(actual = default_trn$default,
+calc_acc(actual = default_trn$default,
          predicted = predict(default_glm, newdata = default_trn))
 ```
 
@@ -164,7 +166,7 @@ accuracy(actual = default_trn$default,
 
 ```r
 # test acc
-accuracy(actual = default_tst$default,
+calc_acc(actual = default_tst$default,
          predicted = predict(default_glm, newdata = default_tst))
 ```
 
@@ -187,6 +189,8 @@ head(predict(default_glm, newdata = default_trn, type = "prob"))
 ## 8 0.9987645 0.001235527
 ## 9 0.9829081 0.017091877
 ```
+
+- TODO: WOW
 
 
 ```r
@@ -415,12 +419,12 @@ default_knn$finalModel
 ## 7251  250
 ```
 
+
 Notes to add later:
 
-- Fewer ties with CV than simple test-train approach
 - Default grid vs specified grid. `tuneLength`
 - Create table summarizing results for `knn()` and `glm()`. Test, train, and CV accuracy. Maybe also show SD for CV.
-
+- Use `auto` data for regression. Discuss how factor variables can be used.
 
 ## External Links
 
@@ -428,48 +432,6 @@ Notes to add later:
 - [`caret` Model List](http://topepo.github.io/caret/available-models.html) - List of available models in `caret`.
 
 
-## RMarkdown
+## `rmarkdown`
 
-The RMarkdown file for this chapter can be found [**here**](13-caret.Rmd.Rmd). The file was created using `R` version 3.4.2 and the following packages:
-
-- Base Packages, Attached
-
-
-```
-## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-## [7] "base"
-```
-
-- Additional Packages, Attached
-
-
-```
-## [1] "caret"   "ggplot2" "lattice"
-```
-
-- Additional Packages, Not Attached
-
-
-```
-##  [1] "purrr"        "reshape2"     "kernlab"      "splines"     
-##  [5] "colorspace"   "stats4"       "htmltools"    "yaml"        
-##  [9] "survival"     "prodlim"      "rlang"        "e1071"       
-## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
-## [17] "foreach"      "plyr"         "bindr"        "dimRed"      
-## [21] "lava"         "robustbase"   "stringr"      "timeDate"    
-## [25] "munsell"      "gtable"       "recipes"      "codetools"   
-## [29] "evaluate"     "labeling"     "knitr"        "class"       
-## [33] "DEoptimR"     "Rcpp"         "scales"       "backports"   
-## [37] "ipred"        "CVST"         "digest"       "stringi"     
-## [41] "bookdown"     "dplyr"        "RcppRoll"     "ddalpha"     
-## [45] "grid"         "rprojroot"    "tools"        "magrittr"    
-## [49] "lazyeval"     "tibble"       "DRR"          "pkgconfig"   
-## [53] "MASS"         "Matrix"       "lubridate"    "gower"       
-## [57] "assertthat"   "rmarkdown"    "iterators"    "R6"          
-## [61] "rpart"        "sfsmisc"      "nnet"         "nlme"        
-## [65] "compiler"
-```
-
-
-
-
+The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The file was created using `R` version 3.4.2.

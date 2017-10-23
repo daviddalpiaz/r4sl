@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-22">
+<meta name="date" content="2017-10-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -246,19 +246,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
-<li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#test-train-split-1"><i class="fa fa-check"></i><b>20.1</b> Test-Train Split</a></li>
+<li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="20.2.1" data-path="resampling.html"><a href="resampling.html#method-specific"><i class="fa fa-check"></i><b>20.2.1</b> Method Specific</a></li>
-<li class="chapter" data-level="20.2.2" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>20.2.2</b> Manual Cross-Validation</a></li>
-<li class="chapter" data-level="20.2.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.2.3</b> Test Data</a></li>
+<li class="chapter" data-level="20.2.1" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>20.2.1</b> Manual Cross-Validation</a></li>
+<li class="chapter" data-level="20.2.2" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.2.2</b> Test Data</a></li>
 </ul></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.3</b> Bootstrap</a></li>
 <li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.4</b> External Links</a></li>
-<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
 <li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.1</b> External Links</a></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.2</b> RMarkdown</a></li>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.2</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
 <li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
@@ -353,7 +352,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Select a method</li>
 <li>Test-train split the available data</li>
 <li>Decide on a set of candidate models via tuning parameters</li>
-<li>Select the best model (tuning parameters) using a cross-validated metric</li>
+<li>Select the “best model” (chose the values of the tuning parameters) using a cross-validated metric with the training data</li>
 <li>Use chosen model to make predictions</li>
 <li>Calculate relevant metrics on the test data</li>
 </ul>
@@ -380,19 +379,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>train()</code> is the workhorse of <code>caret</code>. It takes the following information then trains the requested model:
 <ul>
 <li><code>form</code>, a formula, such as <code>y ~ .</code></li>
-<li><code>data</code></li>
-<li><code>method</code>, from a long list of possibilities</li>
-<li><code>preProcess</code> which allows for specification of things such as centering and scaling</li>
+<li><code>data</code>, the data used for training</li>
+<li><code>method</code>, a statistical learning method from <a href="https://topepo.github.io/caret/available-models.html">a long list of availible models</a></li>
+<li><code>preProcess</code> which allows for specification of data pre-processing such as centering and scaling</li>
 <li><code>tuneGrid</code> which specifies the tuning parameters to train over</li>
-<li><code>trControl</code> which specifies the resampling scheme, that is, how cross-validation should be performed</li>
+<li><code>trControl</code> which specifies the resampling scheme, that is, how cross-validation should be performed to find the best values of the tuning parameters</li>
 </ul></li>
 </ul></li>
 <li>Use chosen model to make predictions
 <ul>
-<li><code>predict()</code> used on objects of type <code>train</code> will be magical!</li>
+<li><code>predict()</code> used on objects of type <code>train</code> will be truly magical!</li>
 </ul></li>
 </ul>
-<p>To illustrate <code>caret</code>, we return to our familiar <code>Default</code> data.</p>
+<p>To illustrate <code>caret</code>, we will use the <code>Default</code> data from the <code>ISLR</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Default, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre></div>
 <p>We first test-train split the data using <code>createDataPartition</code>. Here we are using 75% of the data for training.</p>
@@ -400,6 +399,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 default_idx =<span class="st"> </span><span class="kw">createDataPartition</span>(Default$default, <span class="dt">p =</span> <span class="fl">0.75</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)
 default_trn =<span class="st"> </span>Default[default_idx, ]
 default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
+<ul>
+<li>TODO: Why are we specifying the response? (<code>createDataPartition</code> tries to create similiar distributions in the train and test sets.)</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_glm =<span class="st"> </span><span class="kw">train</span>(
   <span class="dt">form =</span> default ~<span class="st"> </span>.,
   <span class="dt">data =</span> default_trn,
@@ -442,7 +444,7 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## Degrees of Freedom: 7500 Total (i.e. Null);  7497 Residual
 ## Null Deviance:       2192 
 ## Residual Deviance: 1204  AIC: 1212</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span>function(actual, predicted) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calc_acc =<span class="st"> </span>function(actual, predicted) {
   <span class="kw">mean</span>(actual ==<span class="st"> </span>predicted)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make predictions</span>
@@ -450,11 +452,11 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 <pre><code>## [1] No No No No No No
 ## Levels: No Yes</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train acc</span>
-<span class="kw">accuracy</span>(<span class="dt">actual =</span> default_trn$default,
+<span class="kw">calc_acc</span>(<span class="dt">actual =</span> default_trn$default,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(default_glm, <span class="dt">newdata =</span> default_trn))</code></pre></div>
 <pre><code>## [1] 0.9730703</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test acc</span>
-<span class="kw">accuracy</span>(<span class="dt">actual =</span> default_tst$default,
+<span class="kw">calc_acc</span>(<span class="dt">actual =</span> default_tst$default,
          <span class="dt">predicted =</span> <span class="kw">predict</span>(default_glm, <span class="dt">newdata =</span> default_tst))</code></pre></div>
 <pre><code>## [1] 0.9739896</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get probs</span>
@@ -466,6 +468,9 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## 6 0.9977233 0.002276746
 ## 8 0.9987645 0.001235527
 ## 9 0.9829081 0.017091877</code></pre>
+<ul>
+<li>TODO: WOW</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_knn =<span class="st"> </span><span class="kw">train</span>(
   default ~<span class="st"> </span>.,
   <span class="dt">data =</span> default_trn,
@@ -638,9 +643,9 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## 7251  250</code></pre>
 <p>Notes to add later:</p>
 <ul>
-<li>Fewer ties with CV than simple test-train approach</li>
 <li>Default grid vs specified grid. <code>tuneLength</code></li>
 <li>Create table summarizing results for <code>knn()</code> and <code>glm()</code>. Test, train, and CV accuracy. Maybe also show SD for CV.</li>
+<li>Use <code>auto</code> data for regression. Discuss how factor variables can be used.</li>
 </ul>
 <div id="external-links-4" class="section level2">
 <h2><span class="header-section-number">21.1</span> External Links</h2>
@@ -650,37 +655,8 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 </ul>
 </div>
 <div id="rmarkdown-10" class="section level2">
-<h2><span class="header-section-number">21.2</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="13-caret.Rmd.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2 and the following packages:</p>
-<ul>
-<li>Base Packages, Attached</li>
-</ul>
-<pre><code>## [1] &quot;methods&quot;   &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
-## [7] &quot;base&quot;</code></pre>
-<ul>
-<li>Additional Packages, Attached</li>
-</ul>
-<pre><code>## [1] &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot;</code></pre>
-<ul>
-<li>Additional Packages, Not Attached</li>
-</ul>
-<pre><code>##  [1] &quot;purrr&quot;        &quot;reshape2&quot;     &quot;kernlab&quot;      &quot;splines&quot;     
-##  [5] &quot;colorspace&quot;   &quot;stats4&quot;       &quot;htmltools&quot;    &quot;yaml&quot;        
-##  [9] &quot;survival&quot;     &quot;prodlim&quot;      &quot;rlang&quot;        &quot;e1071&quot;       
-## [13] &quot;ModelMetrics&quot; &quot;withr&quot;        &quot;glue&quot;         &quot;bindrcpp&quot;    
-## [17] &quot;foreach&quot;      &quot;plyr&quot;         &quot;bindr&quot;        &quot;dimRed&quot;      
-## [21] &quot;lava&quot;         &quot;robustbase&quot;   &quot;stringr&quot;      &quot;timeDate&quot;    
-## [25] &quot;munsell&quot;      &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;   
-## [29] &quot;evaluate&quot;     &quot;labeling&quot;     &quot;knitr&quot;        &quot;class&quot;       
-## [33] &quot;DEoptimR&quot;     &quot;Rcpp&quot;         &quot;scales&quot;       &quot;backports&quot;   
-## [37] &quot;ipred&quot;        &quot;CVST&quot;         &quot;digest&quot;       &quot;stringi&quot;     
-## [41] &quot;bookdown&quot;     &quot;dplyr&quot;        &quot;RcppRoll&quot;     &quot;ddalpha&quot;     
-## [45] &quot;grid&quot;         &quot;rprojroot&quot;    &quot;tools&quot;        &quot;magrittr&quot;    
-## [49] &quot;lazyeval&quot;     &quot;tibble&quot;       &quot;DRR&quot;          &quot;pkgconfig&quot;   
-## [53] &quot;MASS&quot;         &quot;Matrix&quot;       &quot;lubridate&quot;    &quot;gower&quot;       
-## [57] &quot;assertthat&quot;   &quot;rmarkdown&quot;    &quot;iterators&quot;    &quot;R6&quot;          
-## [61] &quot;rpart&quot;        &quot;sfsmisc&quot;      &quot;nnet&quot;         &quot;nlme&quot;        
-## [65] &quot;compiler&quot;</code></pre>
+<h2><span class="header-section-number">21.2</span> <code>rmarkdown</code></h2>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="21-caret.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2.</p>
 
 </div>
 </div>
