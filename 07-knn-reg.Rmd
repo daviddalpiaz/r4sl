@@ -242,6 +242,66 @@ knitr::kable(knn_results, escape = FALSE, booktabs = TRUE)
         - could work if ...
     - knn "automatically" approximates
     
+```{r, echo = FALSE}
+line_reg_fun = function(x) {
+  x
+}
+
+quad_reg_fun = function(x) {
+  x ^ 2
+}
+
+sine_reg_fun = function(x) {
+  sin(x)
+}
+
+get_sim_data = function(f, sample_size = 100, sd = 1) {
+  x = runif(n = sample_size, min = -5, max = 5)
+  y = rnorm(n = sample_size, mean = f(x), sd = sd)
+  data.frame(x, y)
+}
+
+set.seed(42)
+line_data = get_sim_data(f = line_reg_fun)
+quad_data = get_sim_data(f = quad_reg_fun, sd = 2)
+sine_data = get_sim_data(f = sine_reg_fun, sd = 0.5)
+
+x_grid = data.frame(x = seq(-5, 5, by = 0.01))
+
+par(mfrow = c(1, 3))
+plot(y ~ x, data = line_data, pch = 1, col = "darkgrey")
+knn_pred = FNN::knn.reg(train = line_data$x, test = x_grid, y = line_data$y, k = 10)$pred
+fit = lm(y ~ x, data = line_data)
+lines(x_grid$x, line_reg_fun(x_grid$x), lwd = 2)
+lines(x_grid$x, knn_pred, col = "darkorange", lwd = 2)
+abline(fit, col = "dodgerblue", lwd = 2, lty = 3)
+
+plot(y ~ x, data = quad_data, pch = 1, col = "darkgrey")
+knn_pred = FNN::knn.reg(train = quad_data$x, test = x_grid, y = quad_data$y, k = 10)$pred
+fit = lm(y ~ x, data = quad_data)
+lines(x_grid$x, quad_reg_fun(x_grid$x), lwd = 2)
+lines(x_grid$x, knn_pred, col = "darkorange", lwd = 2)
+abline(fit, col = "dodgerblue", lwd = 2, lty = 3)
+
+plot(y ~ x, data = sine_data, pch = 1, col = "darkgrey")
+knn_pred = FNN::knn.reg(train = sine_data$x, test = x_grid, y = sine_data$y, k = 10)$pred
+fit = lm(y ~ x, data = sine_data)
+lines(x_grid$x, sine_reg_fun(x_grid$x), lwd = 2)
+lines(x_grid$x, knn_pred, col = "darkorange", lwd = 2)
+abline(fit, col = "dodgerblue", lwd = 2, lty = 3)
+
+
+
+# k was reasonably well chosen
+# this is a reasonable amount of data
+# this is a rather low dimensional problem
+
+# could fix with: y ~ poly(x, degree = 2)
+# could fix with: y ~ sin(x)
+# both would have better edge behavior
+```
+
+    
 
 ## Scaling Data
 
