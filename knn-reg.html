@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-23">
+<meta name="date" content="2017-10-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -599,6 +599,7 @@ knitr::<span class="kw">kable</span>(knn_results, <span class="dt">escape =</spa
 <li>knn “automatically” approximates</li>
 </ul></li>
 </ul>
+<p><img src="07-knn-reg_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="scaling-data" class="section level2">
 <h2><span class="header-section-number">7.8</span> Scaling Data</h2>
@@ -616,7 +617,7 @@ knitr::<span class="kw">kable</span>(knn_results, <span class="dt">escape =</spa
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 knn_data =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre></div>
-<p><img src="07-knn-reg_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="07-knn-reg_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <ul>
 <li><p>TODO: How should we scale the test data?</p></li>
 <li><p>TODO: Show that linear regression is invariant to scaling. KNN is not. - y = b0 + b1x1 + b2x2 + e - y = b0 + b1x1_ + b2x2_ + e - how are these coefficients related - define how the scaling - RMSE for both, RMSE for both ways KNN</p></li>

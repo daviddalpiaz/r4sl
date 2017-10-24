@@ -1,7 +1,7 @@
 --- 
 title: "`R` for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2017-10-23"
+date: "2017-10-24"
 github-repo: daviddalpiaz/r4sl
 url: 'http\://daviddalpiaz.github.io/r4sl/'
 knit: "bookdown::render_book"
@@ -19,10 +19,10 @@ description: ""
 
 
 
+
 # Introduction {-}
 
-Welcome to `R` for Statistical Learning! While this is the current title, a more appropriate title would be 
-"Machine Learning from the Perspective of a Statistician using `R`.," but doesn't seem as catchy.
+Welcome to `R` for Statistical Learning! While this is the current title, a more appropriate title would be "Machine Learning from the Perspective of a Statistician using `R`" but that doesn't seem as catchy.
 
 
 ## About This Book {-}
@@ -106,7 +106,7 @@ We use the value $p$ to mean the number of **p**redictors.
 
 ## Acknowledgements {-}
 
-Your name could be here! Suggest an edit! Correct a typo! Pull requests encouraged! If you submit a correction and would like to be listed below, please provide your name as you would like it to appear, as well as a link to a GitHub, LinkedIn, or personal website.
+The following is a (likely incomplete) list of helpful contributers.
 
 - [James Balamuta](http://www.thecoatlessprofessor.com/), Summer 2016 - ??? 
 - Korawat Tanwisuth, Spring 2017
@@ -119,6 +119,14 @@ Your name could be here! Suggest an edit! Correct a typo! Pull requests encourag
 - [Wenting Xu](https://www.linkedin.com/in/wenting-xu-16b548117/), Fall 2017
 - [Yuanning Wei](https://www.linkedin.com/in/yuanning-wei-79b9a4138/), Fall 2017
 - [Ross Drucker](https://www.linkedin.com/in/ross-drucker/), Fall 2017
+
+Your name could be here! If you submit a correction and would like to be listed below, please provide your name as you would like it to appear, as well as a link to a GitHub, LinkedIn, or personal website. Pull requests encouraged!
+
+Looking for ways to contribute? 
+
+- You'll notice that a lot of the plotting code is not displayed in the text, but is availible in the source. Currently that code was written to accomplish a task, but without much thought about the best way to accomplish the task. Try refactoring some of this code.
+- Fix typos. Since the book is actively being developed, typos are getting added all the time.
+- Suggest edits. Good feedback can be just as helpful as actually contributing code changes.
 
 
 ## License {-}

@@ -247,6 +247,9 @@ k & Train RMSE & Test RMSE & Fit?\\
         - could work if ...
     - knn "automatically" approximates
     
+![](07-knn-reg_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
+
+    
 
 ## Scaling Data
 
@@ -271,7 +274,7 @@ set.seed(42)
 knn_data = sim_knn_data()
 ```
 
-![](07-knn-reg_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
+![](07-knn-reg_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
 
 - TODO: How should we scale the test data?
 
