@@ -549,7 +549,7 @@ get_best_result =<span class="st"> </span>function(caret_fit) {
 sim_trn =<span class="st"> </span><span class="kw">gen_some_data</span>(<span class="dt">n_obs =</span> <span class="dv">500</span>)
 sim_tst =<span class="st"> </span><span class="kw">gen_some_data</span>(<span class="dt">n_obs =</span> <span class="dv">5000</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_knn =<span class="st"> </span><span class="kw">train</span>(
-  y ~<span class="st"> </span><span class="kw">poly</span>(x1, <span class="dv">2</span>) +<span class="st"> </span><span class="kw">poly</span>(x2, <span class="dv">2</span>) +<span class="st"> </span>.,
+  y ~<span class="st"> </span>.,
   <span class="dt">data =</span> sim_trn,
   <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,
   <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),

@@ -430,7 +430,7 @@ for (i in seq_along(folds)) {
   add_log_mod = glm(y ~ ., data = trn_fold_screen, family = "binomial")
   add_log_prob = predict(add_log_mod, newdata = val_fold_screen, type = "response")
   add_log_pred = ifelse(add_log_prob > 0.5, yes = 1, no = 0)
-  fold_err[i] = mean(add_log_pred == val_fold_screen$y)
+  fold_err[i] = mean(add_log_pred != val_fold_screen$y)
   
 }
 
@@ -439,7 +439,7 @@ fold_err
 ```
 
 ```
-##  [1] 0.5 0.5 0.4 0.5 0.4 0.5 0.3 0.4 0.8 0.8
+##  [1] 0.5 0.5 0.6 0.5 0.6 0.5 0.7 0.6 0.2 0.2
 ```
 
 ```r
@@ -449,7 +449,7 @@ mean(fold_err)
 ```
 
 ```
-## [1] 0.51
+## [1] 0.49
 ```
 
 - TODO: note that, even cross-validated correctly, this isn't a brilliant variable selection procedure. (it completely ignores interactions and correlations among the predictors. however, if it works, it works.) next chapters...

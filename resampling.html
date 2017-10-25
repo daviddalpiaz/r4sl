@@ -672,17 +672,17 @@ for (i in <span class="kw">seq_along</span>(folds)) {
   add_log_mod =<span class="st"> </span><span class="kw">glm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> trn_fold_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
   add_log_prob =<span class="st"> </span><span class="kw">predict</span>(add_log_mod, <span class="dt">newdata =</span> val_fold_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
   add_log_pred =<span class="st"> </span><span class="kw">ifelse</span>(add_log_prob &gt;<span class="st"> </span><span class="fl">0.5</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)
-  fold_err[i] =<span class="st"> </span><span class="kw">mean</span>(add_log_pred ==<span class="st"> </span>val_fold_screen$y)
+  fold_err[i] =<span class="st"> </span><span class="kw">mean</span>(add_log_pred !=<span class="st"> </span>val_fold_screen$y)
   
 }
 
 <span class="co"># report all 10 validation fold errors</span>
 fold_err</code></pre></div>
-<pre><code>##  [1] 0.5 0.5 0.4 0.5 0.4 0.5 0.3 0.4 0.8 0.8</code></pre>
+<pre><code>##  [1] 0.5 0.5 0.6 0.5 0.6 0.5 0.7 0.6 0.2 0.2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># properly cross-validated error</span>
 <span class="co"># this roughly matches what we expect in the test set</span>
 <span class="kw">mean</span>(fold_err)</code></pre></div>
-<pre><code>## [1] 0.51</code></pre>
+<pre><code>## [1] 0.49</code></pre>
 <ul>
 <li>TODO: note that, even cross-validated correctly, this isn’t a brilliant variable selection procedure. (it completely ignores interactions and correlations among the predictors. however, if it works, it works.) next chapters…</li>
 </ul>

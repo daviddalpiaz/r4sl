@@ -337,7 +337,7 @@ sim_tst = gen_some_data(n_obs = 5000)
 
 ```r
 sim_knn = train(
-  y ~ poly(x1, 2) + poly(x2, 2) + .,
+  y ~ .,
   data = sim_trn,
   method = "knn",
   trControl = trainControl(method = "cv", number = 5),
