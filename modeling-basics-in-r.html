@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-24">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -247,17 +247,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
-<li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="20.2.1" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>20.2.1</b> Manual Cross-Validation</a></li>
-<li class="chapter" data-level="20.2.2" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.2.2</b> Test Data</a></li>
-</ul></li>
-<li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.3</b> Bootstrap</a></li>
-<li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.4</b> External Links</a></li>
-<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.5</b> <code>rmarkdown</code></a></li>
+<li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
+<li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
+<li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.4</b> Bootstrap</a></li>
+<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#which-k"><i class="fa fa-check"></i><b>20.5</b> Which <span class="math inline">\(K\)</span>?</a></li>
+<li class="chapter" data-level="20.6" data-path="resampling.html"><a href="resampling.html#summary"><i class="fa fa-check"></i><b>20.6</b> Summary</a></li>
+<li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
+<li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.1</b> External Links</a></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.2</b> <code>rmarkdown</code></a></li>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification-example"><i class="fa fa-check"></i><b>21.1</b> Classification Example</a></li>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression-example"><i class="fa fa-check"></i><b>21.2</b> Regression Example</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#new-methods"><i class="fa fa-check"></i><b>21.2.1</b> New Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
+<li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
 <li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
@@ -518,29 +522,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
-##        x1         x2           y
-##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-##  1      A 0.47457980 -0.03571573
-##  2      A 0.24391074 -0.52438695
-##  3      A 0.59530531  1.17898056
-##  4      A 0.74375507  1.11345222
-##  5      A 0.29611148 -0.04904435
-##  6      A 0.21175819 -0.56245895
-##  7      A 0.36933434  1.86270495
-##  8      A 0.75437683 -1.37031785
-##  9      A 0.86464456  1.04616981
-## 10      A 0.04227038 -0.14593849
+##        x1          x2          y
+##    &lt;fctr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+##  1      A 0.003995984  2.5045487
+##  2      A 0.225921859  0.7718610
+##  3      A 0.856765247 -0.1130832
+##  4      A 0.205259215  0.2258409
+##  5      A 0.719344016 -0.5364267
+##  6      A 0.069586382  0.5864949
+##  7      A 0.953584997 -0.4153358
+##  8      A 0.465967371 -0.5747208
+##  9      A 0.089699820 -0.7474788
+## 10      A 0.940356569 -2.5613461
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##   0.2020751  -0.8499108  -0.5927529   0.1071995</code></pre>
+##   0.7095688  -0.1509452   0.5978076  -1.7559576</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-## -0.19559504 -0.88344908  0.92905719  0.97244348 -0.09570211 -3.94079448</code></pre>
+##   0.9336488  -0.9359592   0.3359967  -2.2505631   1.7350217   0.5486905</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>

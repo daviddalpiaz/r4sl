@@ -588,9 +588,9 @@ $$
 \mathbb{E}_{X, Y, \mathcal{D}} \left[  (Y - \hat{f}(X))^2 \right]
 $$
 
-the expected prediction error. (In practice we prefer RMSE to MSE for comparing models because of the units.)
+the expected prediction error. (In practice we prefer RMSE to MSE for comparing models and reporting because of the units.)
 
-How good is this estimate? Well, if $\mathcal{D}$ is a random sample from $(X, Y)$, and $\texttt{tst}$ is randomly sampled from $i = 1, 2, \ldots, n$, then it is an unbiased estimate. However, it is variable. How variable? It turns out, pretty variable. It's unbiasedness justifies it as an estimate for now, but we'll fix the variability issue later.
+How good is this estimate? Well, if $\mathcal{D}$ is a random sample from $(X, Y)$, and $\texttt{tst}$ are randomly sampled observations randomly sampled from $i = 1, 2, \ldots, n$, then it is a reasonable estimate. However, it is rather variable due to the randomness of selecting the observations for the test set. How variable? It turns out, pretty variable. While it's a justified estimate, eventually we'll introduce cross-validation as a procedure better suited to performing this estimation to select a model.
 
 
 ## `rmarkdown`

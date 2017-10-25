@@ -1,5 +1,9 @@
 # The `caret` Package
 
+```{r caret_opts, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
 **Instructor's Note: This chapter is currently missing the usual narrative text. Hopefully it will be added later.**
 
 Now that we have seen a number of classification (and regression) methods, and introduced cross-validation, we see the general outline of a predictive analysis:
@@ -7,7 +11,7 @@ Now that we have seen a number of classification (and regression) methods, and i
 - Select a method
 - Test-train split the available data
 - Decide on a set of candidate models via tuning parameters
-- Select the "best model" (chose the values of the tuning parameters) using a cross-validated metric with the training data
+- Select the "best model" (chose the values of the tuning parameters) using a resampled metric with the training data
 - Use chosen model to make predictions
 - Calculate relevant metrics on the test data
 
@@ -15,8 +19,8 @@ At face value it would seem like it should be easy to repeat this process for a 
 
 - The `predict()` function seems to have a different behavior for each new method we see.
 - Many methods have different cross-validation functions, or worse yet, no built-in process for cross-validation.
-- Not all methods expect the same data format. Some methods do not use formula syntax.
-- Different methods have different handling of categorical predictors.
+- Not all methods expect the same data format. Some methods do not use formula syntax. 
+- Different methods have different handling of categorical predictors. Some methods cannot handle factor variables.
 
 Thankfully, the `R` community has essentially provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package. Returning to the above list, we will see that a number of these tasks are directly addressed in the `caret` package.
 
@@ -24,7 +28,7 @@ Thankfully, the `R` community has essentially provided a silver bullet for these
     - `createDataPartition()` will take the place of our manual data splitting. It will also do some extra work to ensure that the train and test samples are somewhat similar.
 - Decide on a set of candidate models via tuning parameters
     - `expand.grid()` is not a function in `caret`, but we will get in the habit of using it to specify a grid of tuning parameters.
-- Select the best model (tuning parameters) using a cross-validated metric
+- Select the best model (tuning parameters) using a resampled metric
     - `trainControl()` will setup cross-validation
     - `train()` is the workhorse of `caret`. It takes the following information then trains the requested model:
         - `form`, a formula, such as `y ~ .`
@@ -35,6 +39,8 @@ Thankfully, the `R` community has essentially provided a silver bullet for these
         - `trControl` which specifies the resampling scheme, that is, how cross-validation should be performed to find the best values of the tuning parameters
 - Use chosen model to make predictions
     - `predict()` used on objects of type `train` will be truly magical!
+
+## Classification Example
 
 To illustrate `caret`, we will use the `Default` data from the `ISLR` package.
 
@@ -133,12 +139,12 @@ default_knn = train(
   method = "knn",
   trControl = trainControl(method = "cv", number = 5),
   preProcess = c("center", "scale"),
-  tuneGrid = expand.grid(k = seq(1, 100, by = 1))
+  tuneGrid = expand.grid(k = seq(1, 101, by = 2))
 )
 ```
 
 ```{r}
-default_knn
+# default_knn
 ```
 
 ```{r}
@@ -154,6 +160,7 @@ default_knn$bestTune
 ```
 
 ```{r}
+# only works for single parameter
 get_best_result = function(caret_fit) {
   best_result = caret_fit$results[as.numeric(rownames(caret_fit$bestTune)), ]
   rownames(best_result) = NULL
@@ -170,11 +177,133 @@ default_knn$finalModel
 ```
 
 
+
+## Regression Example
+
+```{r}
+gen_some_data = function(n_obs = 50) {
+  x1 = seq(0, 10, length.out = n_obs)
+  x2 = runif(n = n_obs, min = 0, max = 2)
+  x3 = sample(c("A", "B", "C"), size = n_obs, replace = TRUE)
+  x4 = round(runif(n = n_obs, min = 0, max = 5), 1)
+  x5 = round(runif(n = n_obs, min = 0, max = 5), 0)
+  y = round(x1 ^ 2 + x2 ^ 2 + 2 * (x3 == "B") + rnorm(n = n_obs), 3)
+  data.frame(y, x1, x2, x3, x4, x5)
+}
+```
+
+```{r}
+set.seed(42)
+sim_trn = gen_some_data(n_obs = 500)
+sim_tst = gen_some_data(n_obs = 5000)
+```
+
+```{r}
+sim_knn = train(
+  y ~ poly(x1, 2) + poly(x2, 2) + .,
+  data = sim_trn,
+  method = "knn",
+  trControl = trainControl(method = "cv", number = 5),
+  # preProcess = c("center", "scale"),
+  tuneGrid = expand.grid(k = seq(1, 31, by = 2))
+)
+```
+
+- TODO: Why no scaling?
+
+```{r}
+plot(sim_knn)
+```
+
+
+
+```{r, echo = FALSE}
+plot(    seq(1, 31, by = 2), sim_knn$results$RMSE, col = "dodgerblue", type = "b", ylim = c(3, 6.5), pch = 20, lwd = 2)
+segments(seq(1, 31, by = 2), sim_knn$results$RMSE, 
+         seq(1, 31, by = 2), sim_knn$results$RMSE - sim_knn$results$RMSESD, col = "darkgrey")
+segments(seq(1, 31, by = 2), sim_knn$results$RMSE, 
+         seq(1, 31, by = 2), sim_knn$results$RMSE + sim_knn$results$RMSESD, col = "darkgrey")
+```
+
+- TODO: 1se rule
+- TODO: is this any good?
+
+### New Methods
+
+```{r}
+gbm_grid = expand.grid(interaction.depth = c(1, 2, 3),
+                       n.trees = (1:30) * 100,
+                       shrinkage = c(0.1, 0.3),
+                       n.minobsinnode = 20)
+head(gbm_grid)
+```
+
+```{r}
+set.seed(42)
+sim_gbm_mod = train(
+  y ~ .,
+  data = sim_trn,
+  method = "gbm",
+  trControl = trainControl(method = "cv", number = 5),
+  tuneGrid = gbm_grid, 
+  verbose = FALSE
+)
+
+plot(sim_gbm_mod)
+```
+
+```{r}
+sim_gbm_mod$bestTune
+```
+
+```{r}
+min(sim_gbm_mod$results$RMSE)
+```
+
+```{r}
+calc_rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+```
+
+```{r}
+calc_rmse(actual = sim_tst$y,
+          predicted = predict(sim_gbm_mod, sim_tst))
+```
+
+
+
+- TODO: issues with this tuning?
+- TODO: did we tune enough?
+- TODO: is this any good?
+- TODO: how are factors being used?
+
+
+
+```{r}
+sim_lm_mod = train(
+  y ~ x1 + I(x1^2) + x2 + I(x2^2) + x3,
+  data = sim_trn,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5)
+)
+```
+
+
+
+```{r}
+sim_lm_mod$results$RMSE
+```
+
+```{r}
+calc_rmse(actual = sim_tst$y,
+          predicted = predict(sim_lm_mod, sim_tst))
+```
+
 Notes to add later:
 
 - Default grid vs specified grid. `tuneLength`
 - Create table summarizing results for `knn()` and `glm()`. Test, train, and CV accuracy. Maybe also show SD for CV.
-- Use `auto` data for regression. Discuss how factor variables can be used.
 
 ## External Links
 

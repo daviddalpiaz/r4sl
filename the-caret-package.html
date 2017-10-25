@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-24">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -247,17 +247,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
-<li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="20.2.1" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>20.2.1</b> Manual Cross-Validation</a></li>
-<li class="chapter" data-level="20.2.2" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.2.2</b> Test Data</a></li>
-</ul></li>
-<li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.3</b> Bootstrap</a></li>
-<li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.4</b> External Links</a></li>
-<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.5</b> <code>rmarkdown</code></a></li>
+<li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
+<li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
+<li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.4</b> Bootstrap</a></li>
+<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#which-k"><i class="fa fa-check"></i><b>20.5</b> Which <span class="math inline">\(K\)</span>?</a></li>
+<li class="chapter" data-level="20.6" data-path="resampling.html"><a href="resampling.html#summary"><i class="fa fa-check"></i><b>20.6</b> Summary</a></li>
+<li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
+<li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.1</b> External Links</a></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.2</b> <code>rmarkdown</code></a></li>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification-example"><i class="fa fa-check"></i><b>21.1</b> Classification Example</a></li>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression-example"><i class="fa fa-check"></i><b>21.2</b> Regression Example</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#new-methods"><i class="fa fa-check"></i><b>21.2.1</b> New Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
+<li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
 <li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
@@ -352,7 +356,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Select a method</li>
 <li>Test-train split the available data</li>
 <li>Decide on a set of candidate models via tuning parameters</li>
-<li>Select the “best model” (chose the values of the tuning parameters) using a cross-validated metric with the training data</li>
+<li>Select the “best model” (chose the values of the tuning parameters) using a resampled metric with the training data</li>
 <li>Use chosen model to make predictions</li>
 <li>Calculate relevant metrics on the test data</li>
 </ul>
@@ -361,7 +365,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>The <code>predict()</code> function seems to have a different behavior for each new method we see.</li>
 <li>Many methods have different cross-validation functions, or worse yet, no built-in process for cross-validation.</li>
 <li>Not all methods expect the same data format. Some methods do not use formula syntax.</li>
-<li>Different methods have different handling of categorical predictors.</li>
+<li>Different methods have different handling of categorical predictors. Some methods cannot handle factor variables.</li>
 </ul>
 <p>Thankfully, the <code>R</code> community has essentially provided a silver bullet for these issues, the <a href="http://topepo.github.io/caret/"><code>caret</code></a> package. Returning to the above list, we will see that a number of these tasks are directly addressed in the <code>caret</code> package.</p>
 <ul>
@@ -373,7 +377,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li><code>expand.grid()</code> is not a function in <code>caret</code>, but we will get in the habit of using it to specify a grid of tuning parameters.</li>
 </ul></li>
-<li>Select the best model (tuning parameters) using a cross-validated metric
+<li>Select the best model (tuning parameters) using a resampled metric
 <ul>
 <li><code>trainControl()</code> will setup cross-validation</li>
 <li><code>train()</code> is the workhorse of <code>caret</code>. It takes the following information then trains the requested model:
@@ -391,6 +395,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>predict()</code> used on objects of type <code>train</code> will be truly magical!</li>
 </ul></li>
 </ul>
+<div id="classification-example" class="section level2">
+<h2><span class="header-section-number">21.1</span> Classification Example</h2>
 <p>To illustrate <code>caret</code>, we will use the <code>Default</code> data from the <code>ISLR</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Default, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre></div>
@@ -502,132 +508,18 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
   <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,
   <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),
   <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),
-  <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">1</span>))
+  <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">101</span>, <span class="dt">by =</span> <span class="dv">2</span>))
 )</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_knn</code></pre></div>
-<pre><code>## k-Nearest Neighbors 
-## 
-## 7501 samples
-##    3 predictor
-##    2 classes: &#39;No&#39;, &#39;Yes&#39; 
-## 
-## Pre-processing: centered (3), scaled (3) 
-## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 6001, 6000, 6001, 6001, 6001 
-## Resampling results across tuning parameters:
-## 
-##   k    Accuracy   Kappa      
-##     1  0.9556062  0.298089557
-##     2  0.9534727  0.278858080
-##     3  0.9676048  0.375302287
-##     4  0.9684043  0.392531223
-##     5  0.9701374  0.404022317
-##     6  0.9710706  0.423064304
-##     7  0.9706704  0.390664155
-##     8  0.9712037  0.399173401
-##     9  0.9720034  0.409106426
-##    10  0.9712037  0.386139169
-##    11  0.9717367  0.391087258
-##    12  0.9718700  0.382391562
-##    13  0.9720034  0.383930148
-##    14  0.9718700  0.385920266
-##    15  0.9718701  0.379873523
-##    16  0.9713369  0.377628107
-##    17  0.9720036  0.380320495
-##    18  0.9716036  0.373394281
-##    19  0.9716036  0.365929261
-##    20  0.9718700  0.368421254
-##    21  0.9720035  0.364668426
-##    22  0.9716036  0.362097470
-##    23  0.9714701  0.356376683
-##    24  0.9714701  0.355664780
-##    25  0.9717365  0.350899581
-##    26  0.9714701  0.345911449
-##    27  0.9718700  0.353134003
-##    28  0.9714703  0.345081109
-##    29  0.9713370  0.343455277
-##    30  0.9712036  0.339093085
-##    31  0.9712037  0.339182082
-##    32  0.9714703  0.342168206
-##    33  0.9717369  0.352226337
-##    34  0.9713370  0.341045339
-##    35  0.9713370  0.334327819
-##    36  0.9714703  0.339159698
-##    37  0.9717369  0.338120724
-##    38  0.9718701  0.338963642
-##    39  0.9713369  0.326523756
-##    40  0.9716036  0.328850300
-##    41  0.9716035  0.325286501
-##    42  0.9714701  0.319449330
-##    43  0.9713370  0.311058773
-##    44  0.9713369  0.314958826
-##    45  0.9710704  0.304969687
-##    46  0.9712037  0.310515120
-##    47  0.9712036  0.305970685
-##    48  0.9714702  0.307416051
-##    49  0.9713370  0.303143005
-##    50  0.9712036  0.297926950
-##    51  0.9710704  0.287872960
-##    52  0.9709372  0.282257433
-##    53  0.9710705  0.283589156
-##    54  0.9709371  0.282226306
-##    55  0.9706705  0.266533647
-##    56  0.9708038  0.271977860
-##    57  0.9706706  0.261835380
-##    58  0.9701372  0.249188016
-##    59  0.9702706  0.250148772
-##    60  0.9702706  0.250114697
-##    61  0.9701372  0.239629655
-##    62  0.9702708  0.240658770
-##    63  0.9698707  0.222966445
-##    64  0.9701372  0.234377021
-##    65  0.9698705  0.217685465
-##    66  0.9698706  0.213155702
-##    67  0.9694707  0.199923192
-##    68  0.9692041  0.187559137
-##    69  0.9690708  0.181218961
-##    70  0.9692041  0.182387968
-##    71  0.9690708  0.176074591
-##    72  0.9690709  0.170120508
-##    73  0.9688042  0.163573197
-##    74  0.9684042  0.150065236
-##    75  0.9688042  0.152290768
-##    76  0.9686708  0.151535913
-##    77  0.9688042  0.151657123
-##    78  0.9684043  0.138012553
-##    79  0.9686709  0.139859409
-##    80  0.9685375  0.127092858
-##    81  0.9685375  0.121296450
-##    82  0.9677376  0.085964305
-##    83  0.9680043  0.093510882
-##    84  0.9677376  0.085481828
-##    85  0.9676043  0.072888526
-##    86  0.9676044  0.077956439
-##    87  0.9672044  0.050919251
-##    88  0.9672044  0.043952211
-##    89  0.9668044  0.028789826
-##    90  0.9670711  0.029972813
-##    91  0.9673377  0.044609786
-##    92  0.9669378  0.022381190
-##    93  0.9669377  0.022513257
-##    94  0.9668044  0.014921466
-##    95  0.9666711  0.007329843
-##    96  0.9666711  0.007329843
-##    97  0.9666711  0.007329843
-##    98  0.9666711  0.007329843
-##    99  0.9666711  0.007329843
-##   100  0.9666711  0.007329843
-## 
-## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was k = 17.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># default_knn</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(default_knn)</code></pre></div>
-<p><img src="21-caret_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="21-caret_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(default_knn) +<span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="21-caret_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="21-caret_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_knn$bestTune</code></pre></div>
-<pre><code>##     k
-## 17 17</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_best_result =<span class="st"> </span>function(caret_fit) {
+<pre><code>##    k
+## 9 17</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># only works for single parameter</span>
+get_best_result =<span class="st"> </span>function(caret_fit) {
   best_result =<span class="st"> </span>caret_fit$results[<span class="kw">as.numeric</span>(<span class="kw">rownames</span>(caret_fit$bestTune)), ]
   <span class="kw">rownames</span>(best_result) =<span class="st"> </span><span class="ot">NULL</span>
   best_result
@@ -641,21 +533,117 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## 
 ##   No  Yes 
 ## 7251  250</code></pre>
+</div>
+<div id="regression-example" class="section level2">
+<h2><span class="header-section-number">21.2</span> Regression Example</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gen_some_data =<span class="st"> </span>function(<span class="dt">n_obs =</span> <span class="dv">50</span>) {
+  x1 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dt">length.out =</span> n_obs)
+  x2 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>)
+  x3 =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">size =</span> n_obs, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  x4 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>), <span class="dv">1</span>)
+  x5 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>), <span class="dv">0</span>)
+  y =<span class="st"> </span><span class="kw">round</span>(x1 ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span>x2 ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="dv">2</span> *<span class="st"> </span>(x3 ==<span class="st"> &quot;B&quot;</span>) +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_obs), <span class="dv">3</span>)
+  <span class="kw">data.frame</span>(y, x1, x2, x3, x4, x5)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+sim_trn =<span class="st"> </span><span class="kw">gen_some_data</span>(<span class="dt">n_obs =</span> <span class="dv">500</span>)
+sim_tst =<span class="st"> </span><span class="kw">gen_some_data</span>(<span class="dt">n_obs =</span> <span class="dv">5000</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_knn =<span class="st"> </span><span class="kw">train</span>(
+  y ~<span class="st"> </span><span class="kw">poly</span>(x1, <span class="dv">2</span>) +<span class="st"> </span><span class="kw">poly</span>(x2, <span class="dv">2</span>) +<span class="st"> </span>.,
+  <span class="dt">data =</span> sim_trn,
+  <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,
+  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),
+  <span class="co"># preProcess = c(&quot;center&quot;, &quot;scale&quot;),</span>
+  <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dt">by =</span> <span class="dv">2</span>))
+)</code></pre></div>
+<ul>
+<li>TODO: Why no scaling?</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(sim_knn)</code></pre></div>
+<p><img src="21-caret_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="21-caret_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ul>
+<li>TODO: 1se rule</li>
+<li>TODO: is this any good?</li>
+</ul>
+<div id="new-methods" class="section level3">
+<h3><span class="header-section-number">21.2.1</span> New Methods</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gbm_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),
+                       <span class="dt">n.trees =</span> (<span class="dv">1</span>:<span class="dv">30</span>) *<span class="st"> </span><span class="dv">100</span>,
+                       <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.3</span>),
+                       <span class="dt">n.minobsinnode =</span> <span class="dv">20</span>)
+<span class="kw">head</span>(gbm_grid)</code></pre></div>
+<pre><code>##   interaction.depth n.trees shrinkage n.minobsinnode
+## 1                 1     100       0.1             20
+## 2                 2     100       0.1             20
+## 3                 3     100       0.1             20
+## 4                 1     200       0.1             20
+## 5                 2     200       0.1             20
+## 6                 3     200       0.1             20</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+sim_gbm_mod =<span class="st"> </span><span class="kw">train</span>(
+  y ~<span class="st"> </span>.,
+  <span class="dt">data =</span> sim_trn,
+  <span class="dt">method =</span> <span class="st">&quot;gbm&quot;</span>,
+  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),
+  <span class="dt">tuneGrid =</span> gbm_grid, 
+  <span class="dt">verbose =</span> <span class="ot">FALSE</span>
+)</code></pre></div>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## 
+## Attaching package: &#39;survival&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:caret&#39;:
+## 
+##     cluster</code></pre>
+<pre><code>## Loading required package: splines</code></pre>
+<pre><code>## Loading required package: parallel</code></pre>
+<pre><code>## Loaded gbm 2.1.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(sim_gbm_mod)</code></pre></div>
+<p><img src="21-caret_files/figure-html/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_gbm_mod$bestTune</code></pre></div>
+<pre><code>##    n.trees interaction.depth shrinkage n.minobsinnode
+## 30    3000                 1       0.1             20</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(sim_gbm_mod$results$RMSE)</code></pre></div>
+<pre><code>## [1] 1.912962</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calc_rmse =<span class="st"> </span>function(actual, predicted) {
+  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual -<span class="st"> </span>predicted) ^<span class="st"> </span><span class="dv">2</span>))
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> sim_tst$y,
+          <span class="dt">predicted =</span> <span class="kw">predict</span>(sim_gbm_mod, sim_tst))</code></pre></div>
+<pre><code>## [1] 1.513519</code></pre>
+<ul>
+<li>TODO: issues with this tuning?</li>
+<li>TODO: did we tune enough?</li>
+<li>TODO: is this any good?</li>
+<li>TODO: how are factors being used?</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_lm_mod =<span class="st"> </span><span class="kw">train</span>(
+  y ~<span class="st"> </span>x1 +<span class="st"> </span><span class="kw">I</span>(x1^<span class="dv">2</span>) +<span class="st"> </span>x2 +<span class="st"> </span><span class="kw">I</span>(x2^<span class="dv">2</span>) +<span class="st"> </span>x3,
+  <span class="dt">data =</span> sim_trn,
+  <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,
+  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)
+)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_lm_mod$results$RMSE</code></pre></div>
+<pre><code>## [1] 0.9806239</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> sim_tst$y,
+          <span class="dt">predicted =</span> <span class="kw">predict</span>(sim_lm_mod, sim_tst))</code></pre></div>
+<pre><code>## [1] 1.014825</code></pre>
 <p>Notes to add later:</p>
 <ul>
 <li>Default grid vs specified grid. <code>tuneLength</code></li>
 <li>Create table summarizing results for <code>knn()</code> and <code>glm()</code>. Test, train, and CV accuracy. Maybe also show SD for CV.</li>
-<li>Use <code>auto</code> data for regression. Discuss how factor variables can be used.</li>
 </ul>
+</div>
+</div>
 <div id="external-links-4" class="section level2">
-<h2><span class="header-section-number">21.1</span> External Links</h2>
+<h2><span class="header-section-number">21.3</span> External Links</h2>
 <ul>
 <li><a href="http://topepo.github.io/caret/index.html">The <code>caret</code> Package</a> - Reference documentation for the <code>caret</code> package in <code>bookdown</code> format.</li>
 <li><a href="http://topepo.github.io/caret/available-models.html"><code>caret</code> Model List</a> - List of available models in <code>caret</code>.</li>
 </ul>
 </div>
 <div id="rmarkdown-10" class="section level2">
-<h2><span class="header-section-number">21.2</span> <code>rmarkdown</code></h2>
+<h2><span class="header-section-number">21.4</span> <code>rmarkdown</code></h2>
 <p>The <code>rmarkdown</code> file for this chapter can be found <a href="21-caret.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2.</p>
 
 </div>

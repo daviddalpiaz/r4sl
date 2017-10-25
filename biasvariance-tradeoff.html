@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-24">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -247,17 +247,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
-<li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="20.2.1" data-path="resampling.html"><a href="resampling.html#manual-cross-validation"><i class="fa fa-check"></i><b>20.2.1</b> Manual Cross-Validation</a></li>
-<li class="chapter" data-level="20.2.2" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.2.2</b> Test Data</a></li>
-</ul></li>
-<li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.3</b> Bootstrap</a></li>
-<li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.4</b> External Links</a></li>
-<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.5</b> <code>rmarkdown</code></a></li>
+<li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
+<li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
+<li class="chapter" data-level="20.4" data-path="resampling.html"><a href="resampling.html#bootstrap"><i class="fa fa-check"></i><b>20.4</b> Bootstrap</a></li>
+<li class="chapter" data-level="20.5" data-path="resampling.html"><a href="resampling.html#which-k"><i class="fa fa-check"></i><b>20.5</b> Which <span class="math inline">\(K\)</span>?</a></li>
+<li class="chapter" data-level="20.6" data-path="resampling.html"><a href="resampling.html#summary"><i class="fa fa-check"></i><b>20.6</b> Summary</a></li>
+<li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
+<li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.1</b> External Links</a></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.2</b> <code>rmarkdown</code></a></li>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification-example"><i class="fa fa-check"></i><b>21.1</b> Classification Example</a></li>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression-example"><i class="fa fa-check"></i><b>21.2</b> Regression Example</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#new-methods"><i class="fa fa-check"></i><b>21.2.1</b> New Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
+<li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
 <li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
@@ -733,8 +737,8 @@ for (i in <span class="kw">seq_along</span>(X)) {
 <p><span class="math display">\[
 \mathbb{E}_{X, Y, \mathcal{D}} \left[  (Y - \hat{f}(X))^2 \right]
 \]</span></p>
-<p>the expected prediction error. (In practice we prefer RMSE to MSE for comparing models because of the units.)</p>
-<p>How good is this estimate? Well, if <span class="math inline">\(\mathcal{D}\)</span> is a random sample from <span class="math inline">\((X, Y)\)</span>, and <span class="math inline">\(\texttt{tst}\)</span> is randomly sampled from <span class="math inline">\(i = 1, 2, \ldots, n\)</span>, then it is an unbiased estimate. However, it is variable. How variable? It turns out, pretty variable. It’s unbiasedness justifies it as an estimate for now, but we’ll fix the variability issue later.</p>
+<p>the expected prediction error. (In practice we prefer RMSE to MSE for comparing models and reporting because of the units.)</p>
+<p>How good is this estimate? Well, if <span class="math inline">\(\mathcal{D}\)</span> is a random sample from <span class="math inline">\((X, Y)\)</span>, and <span class="math inline">\(\texttt{tst}\)</span> are randomly sampled observations randomly sampled from <span class="math inline">\(i = 1, 2, \ldots, n\)</span>, then it is a reasonable estimate. However, it is rather variable due to the randomness of selecting the observations for the test set. How variable? It turns out, pretty variable. While it’s a justified estimate, eventually we’ll introduce cross-validation as a procedure better suited to performing this estimation to select a model.</p>
 </div>
 <div id="rmarkdown-2" class="section level2">
 <h2><span class="header-section-number">8.5</span> <code>rmarkdown</code></h2>

@@ -1,5 +1,7 @@
 # The `caret` Package
 
+
+
 **Instructor's Note: This chapter is currently missing the usual narrative text. Hopefully it will be added later.**
 
 Now that we have seen a number of classification (and regression) methods, and introduced cross-validation, we see the general outline of a predictive analysis:
@@ -7,7 +9,7 @@ Now that we have seen a number of classification (and regression) methods, and i
 - Select a method
 - Test-train split the available data
 - Decide on a set of candidate models via tuning parameters
-- Select the "best model" (chose the values of the tuning parameters) using a cross-validated metric with the training data
+- Select the "best model" (chose the values of the tuning parameters) using a resampled metric with the training data
 - Use chosen model to make predictions
 - Calculate relevant metrics on the test data
 
@@ -15,8 +17,8 @@ At face value it would seem like it should be easy to repeat this process for a 
 
 - The `predict()` function seems to have a different behavior for each new method we see.
 - Many methods have different cross-validation functions, or worse yet, no built-in process for cross-validation.
-- Not all methods expect the same data format. Some methods do not use formula syntax.
-- Different methods have different handling of categorical predictors.
+- Not all methods expect the same data format. Some methods do not use formula syntax. 
+- Different methods have different handling of categorical predictors. Some methods cannot handle factor variables.
 
 Thankfully, the `R` community has essentially provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package. Returning to the above list, we will see that a number of these tasks are directly addressed in the `caret` package.
 
@@ -24,7 +26,7 @@ Thankfully, the `R` community has essentially provided a silver bullet for these
     - `createDataPartition()` will take the place of our manual data splitting. It will also do some extra work to ensure that the train and test samples are somewhat similar.
 - Decide on a set of candidate models via tuning parameters
     - `expand.grid()` is not a function in `caret`, but we will get in the habit of using it to specify a grid of tuning parameters.
-- Select the best model (tuning parameters) using a cross-validated metric
+- Select the best model (tuning parameters) using a resampled metric
     - `trainControl()` will setup cross-validation
     - `train()` is the workhorse of `caret`. It takes the following information then trains the requested model:
         - `form`, a formula, such as `y ~ .`
@@ -35,6 +37,8 @@ Thankfully, the `R` community has essentially provided a silver bullet for these
         - `trControl` which specifies the resampling scheme, that is, how cross-validation should be performed to find the best values of the tuning parameters
 - Use chosen model to make predictions
     - `predict()` used on objects of type `train` will be truly magical!
+
+## Classification Example
 
 To illustrate `caret`, we will use the `Default` data from the `ISLR` package.
 
@@ -236,131 +240,13 @@ default_knn = train(
   method = "knn",
   trControl = trainControl(method = "cv", number = 5),
   preProcess = c("center", "scale"),
-  tuneGrid = expand.grid(k = seq(1, 100, by = 1))
+  tuneGrid = expand.grid(k = seq(1, 101, by = 2))
 )
 ```
 
 
 ```r
-default_knn
-```
-
-```
-## k-Nearest Neighbors 
-## 
-## 7501 samples
-##    3 predictor
-##    2 classes: 'No', 'Yes' 
-## 
-## Pre-processing: centered (3), scaled (3) 
-## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 6001, 6000, 6001, 6001, 6001 
-## Resampling results across tuning parameters:
-## 
-##   k    Accuracy   Kappa      
-##     1  0.9556062  0.298089557
-##     2  0.9534727  0.278858080
-##     3  0.9676048  0.375302287
-##     4  0.9684043  0.392531223
-##     5  0.9701374  0.404022317
-##     6  0.9710706  0.423064304
-##     7  0.9706704  0.390664155
-##     8  0.9712037  0.399173401
-##     9  0.9720034  0.409106426
-##    10  0.9712037  0.386139169
-##    11  0.9717367  0.391087258
-##    12  0.9718700  0.382391562
-##    13  0.9720034  0.383930148
-##    14  0.9718700  0.385920266
-##    15  0.9718701  0.379873523
-##    16  0.9713369  0.377628107
-##    17  0.9720036  0.380320495
-##    18  0.9716036  0.373394281
-##    19  0.9716036  0.365929261
-##    20  0.9718700  0.368421254
-##    21  0.9720035  0.364668426
-##    22  0.9716036  0.362097470
-##    23  0.9714701  0.356376683
-##    24  0.9714701  0.355664780
-##    25  0.9717365  0.350899581
-##    26  0.9714701  0.345911449
-##    27  0.9718700  0.353134003
-##    28  0.9714703  0.345081109
-##    29  0.9713370  0.343455277
-##    30  0.9712036  0.339093085
-##    31  0.9712037  0.339182082
-##    32  0.9714703  0.342168206
-##    33  0.9717369  0.352226337
-##    34  0.9713370  0.341045339
-##    35  0.9713370  0.334327819
-##    36  0.9714703  0.339159698
-##    37  0.9717369  0.338120724
-##    38  0.9718701  0.338963642
-##    39  0.9713369  0.326523756
-##    40  0.9716036  0.328850300
-##    41  0.9716035  0.325286501
-##    42  0.9714701  0.319449330
-##    43  0.9713370  0.311058773
-##    44  0.9713369  0.314958826
-##    45  0.9710704  0.304969687
-##    46  0.9712037  0.310515120
-##    47  0.9712036  0.305970685
-##    48  0.9714702  0.307416051
-##    49  0.9713370  0.303143005
-##    50  0.9712036  0.297926950
-##    51  0.9710704  0.287872960
-##    52  0.9709372  0.282257433
-##    53  0.9710705  0.283589156
-##    54  0.9709371  0.282226306
-##    55  0.9706705  0.266533647
-##    56  0.9708038  0.271977860
-##    57  0.9706706  0.261835380
-##    58  0.9701372  0.249188016
-##    59  0.9702706  0.250148772
-##    60  0.9702706  0.250114697
-##    61  0.9701372  0.239629655
-##    62  0.9702708  0.240658770
-##    63  0.9698707  0.222966445
-##    64  0.9701372  0.234377021
-##    65  0.9698705  0.217685465
-##    66  0.9698706  0.213155702
-##    67  0.9694707  0.199923192
-##    68  0.9692041  0.187559137
-##    69  0.9690708  0.181218961
-##    70  0.9692041  0.182387968
-##    71  0.9690708  0.176074591
-##    72  0.9690709  0.170120508
-##    73  0.9688042  0.163573197
-##    74  0.9684042  0.150065236
-##    75  0.9688042  0.152290768
-##    76  0.9686708  0.151535913
-##    77  0.9688042  0.151657123
-##    78  0.9684043  0.138012553
-##    79  0.9686709  0.139859409
-##    80  0.9685375  0.127092858
-##    81  0.9685375  0.121296450
-##    82  0.9677376  0.085964305
-##    83  0.9680043  0.093510882
-##    84  0.9677376  0.085481828
-##    85  0.9676043  0.072888526
-##    86  0.9676044  0.077956439
-##    87  0.9672044  0.050919251
-##    88  0.9672044  0.043952211
-##    89  0.9668044  0.028789826
-##    90  0.9670711  0.029972813
-##    91  0.9673377  0.044609786
-##    92  0.9669378  0.022381190
-##    93  0.9669377  0.022513257
-##    94  0.9668044  0.014921466
-##    95  0.9666711  0.007329843
-##    96  0.9666711  0.007329843
-##    97  0.9666711  0.007329843
-##    98  0.9666711  0.007329843
-##    99  0.9666711  0.007329843
-##   100  0.9666711  0.007329843
-## 
-## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was k = 17.
+# default_knn
 ```
 
 
@@ -368,14 +254,18 @@ default_knn
 plot(default_knn)
 ```
 
-![](21-caret_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{21-caret_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 
 ```r
 ggplot(default_knn) + theme_bw()
 ```
 
-![](21-caret_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{21-caret_files/figure-latex/unnamed-chunk-19-1} \end{center}
 
 
 ```r
@@ -383,12 +273,13 @@ default_knn$bestTune
 ```
 
 ```
-##     k
-## 17 17
+##    k
+## 9 17
 ```
 
 
 ```r
+# only works for single parameter
 get_best_result = function(caret_fit) {
   best_result = caret_fit$results[as.numeric(rownames(caret_fit$bestTune)), ]
   rownames(best_result) = NULL
@@ -420,11 +311,209 @@ default_knn$finalModel
 ```
 
 
+
+## Regression Example
+
+
+```r
+gen_some_data = function(n_obs = 50) {
+  x1 = seq(0, 10, length.out = n_obs)
+  x2 = runif(n = n_obs, min = 0, max = 2)
+  x3 = sample(c("A", "B", "C"), size = n_obs, replace = TRUE)
+  x4 = round(runif(n = n_obs, min = 0, max = 5), 1)
+  x5 = round(runif(n = n_obs, min = 0, max = 5), 0)
+  y = round(x1 ^ 2 + x2 ^ 2 + 2 * (x3 == "B") + rnorm(n = n_obs), 3)
+  data.frame(y, x1, x2, x3, x4, x5)
+}
+```
+
+
+```r
+set.seed(42)
+sim_trn = gen_some_data(n_obs = 500)
+sim_tst = gen_some_data(n_obs = 5000)
+```
+
+
+```r
+sim_knn = train(
+  y ~ poly(x1, 2) + poly(x2, 2) + .,
+  data = sim_trn,
+  method = "knn",
+  trControl = trainControl(method = "cv", number = 5),
+  # preProcess = c("center", "scale"),
+  tuneGrid = expand.grid(k = seq(1, 31, by = 2))
+)
+```
+
+- TODO: Why no scaling?
+
+
+```r
+plot(sim_knn)
+```
+
+
+
+\begin{center}\includegraphics{21-caret_files/figure-latex/unnamed-chunk-27-1} \end{center}
+
+
+
+
+\begin{center}\includegraphics{21-caret_files/figure-latex/unnamed-chunk-28-1} \end{center}
+
+- TODO: 1se rule
+- TODO: is this any good?
+
+### New Methods
+
+
+```r
+gbm_grid = expand.grid(interaction.depth = c(1, 2, 3),
+                       n.trees = (1:30) * 100,
+                       shrinkage = c(0.1, 0.3),
+                       n.minobsinnode = 20)
+head(gbm_grid)
+```
+
+```
+##   interaction.depth n.trees shrinkage n.minobsinnode
+## 1                 1     100       0.1             20
+## 2                 2     100       0.1             20
+## 3                 3     100       0.1             20
+## 4                 1     200       0.1             20
+## 5                 2     200       0.1             20
+## 6                 3     200       0.1             20
+```
+
+
+```r
+set.seed(42)
+sim_gbm_mod = train(
+  y ~ .,
+  data = sim_trn,
+  method = "gbm",
+  trControl = trainControl(method = "cv", number = 5),
+  tuneGrid = gbm_grid, 
+  verbose = FALSE
+)
+```
+
+```
+## Loading required package: survival
+```
+
+```
+## 
+## Attaching package: 'survival'
+```
+
+```
+## The following object is masked from 'package:caret':
+## 
+##     cluster
+```
+
+```
+## Loading required package: splines
+```
+
+```
+## Loading required package: parallel
+```
+
+```
+## Loaded gbm 2.1.3
+```
+
+```r
+plot(sim_gbm_mod)
+```
+
+
+
+\begin{center}\includegraphics{21-caret_files/figure-latex/unnamed-chunk-30-1} \end{center}
+
+
+```r
+sim_gbm_mod$bestTune
+```
+
+```
+##    n.trees interaction.depth shrinkage n.minobsinnode
+## 30    3000                 1       0.1             20
+```
+
+
+```r
+min(sim_gbm_mod$results$RMSE)
+```
+
+```
+## [1] 1.912962
+```
+
+
+```r
+calc_rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+```
+
+
+```r
+calc_rmse(actual = sim_tst$y,
+          predicted = predict(sim_gbm_mod, sim_tst))
+```
+
+```
+## [1] 1.513519
+```
+
+
+
+- TODO: issues with this tuning?
+- TODO: did we tune enough?
+- TODO: is this any good?
+- TODO: how are factors being used?
+
+
+
+
+```r
+sim_lm_mod = train(
+  y ~ x1 + I(x1^2) + x2 + I(x2^2) + x3,
+  data = sim_trn,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5)
+)
+```
+
+
+
+
+```r
+sim_lm_mod$results$RMSE
+```
+
+```
+## [1] 0.9806239
+```
+
+
+```r
+calc_rmse(actual = sim_tst$y,
+          predicted = predict(sim_lm_mod, sim_tst))
+```
+
+```
+## [1] 1.014825
+```
+
 Notes to add later:
 
 - Default grid vs specified grid. `tuneLength`
 - Create table summarizing results for `knn()` and `glm()`. Test, train, and CV accuracy. Maybe also show SD for CV.
-- Use `auto` data for regression. Discuss how factor variables can be used.
 
 ## External Links
 

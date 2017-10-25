@@ -1,29 +1,40 @@
 # Resampling
 
-- **NOTE**: This chapter is currently be re-written and will likely change considerably in the near future. It is currently lacking in a number of ways.
-- TODO: add narrative
+
+
+- **NOTE**: This chapter is currently be re-written and will likely change considerably in the near future. It is currently lacking in a number of ways mostly narrative.
+
+In this chapter we introduce **resampling** methods, in particular **cross-validation**. We will highlight the need for cross-validation by comparing it to our previous approach, which was to simply set aside some "test" data that we used for evaluating a model fit using "training" data. We will now refer to these held-out samples as the **validation** data and this approach as the **validation set approach**. Along the way we'll redefine the notion of a "test" dataset.
+
+To illustrate the use of resampling techniques, we'll consider a regression setup with a single predictor $x$, and a regression function $f(x) = x^3$. Adding an additional noise parameter, we define the entire data generating process as
+
+$$
+Y \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
+$$
+
+We write an `R` function that generates datasets according to this process.
 
 
 ```r
-get_sim_data = function(sample_size = 100) {
+gen_sim_data = function(sample_size) {
   x = runif(n = sample_size, min = -1, max = 1)
   y = rnorm(n = sample_size, mean = x ^ 3, sd = 0.25)
   data.frame(x, y)
 }
 ```
 
-$$
-Y \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
-$$
+We first simulate a single dataset, which we also split into a *train* and *validation* set. Here, the validation set is 20% of the data.
 
 
 ```r
 set.seed(42)
-sim_data = get_sim_data(sample_size = 200)
-sim_idx = sample(1:nrow(sim_data), 100)
-sim_trn = sim_data[sim_idx, ]
-sim_tst = sim_data[-sim_idx, ]
+sim_data = gen_sim_data(sample_size = 200)
+sim_idx  = sample(1:nrow(sim_data), 160)
+sim_trn  = sim_data[sim_idx, ]
+sim_val  = sim_data[-sim_idx, ]
 ```
+
+We plot this training data, as well as the true regression function.
 
 
 ```r
@@ -31,7 +42,9 @@ plot(y ~ x, data = sim_trn, col = "dodgerblue", pch = 20)
 curve(x ^ 3, add = TRUE, col = "grey", lwd = 2)
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{20-resampling_files/figure-latex/unnamed-chunk-3-1} \end{center}
 
 
 ```r
@@ -40,8 +53,33 @@ calc_rmse = function(actual, predicted) {
 }
 ```
 
+Recall that we needed this validation set because the training error was far too optimistic for highly flexible models. This would lead us to always use the most flexible model.
+
+
+```r
+fit = lm(y ~ poly(x, 10), data = sim_trn)
+
+calc_rmse(actual = sim_trn$y, predicted = predict(fit, sim_trn))
+```
+
+```
+## [1] 0.2262618
+```
+
+```r
+calc_rmse(actual = sim_val$y, predicted = predict(fit, sim_val))
+```
+
+```
+## [1] 0.2846442
+```
+
 
 ## Validation-Set Approach
+
+- TODO: consider fitting polynomial models of degree k = 1:10 to data from this data generating process
+- TODO: here, we can consider k, the polynomial degree, as a tuning parameter
+- TODO: perform simulation study to evaluate how well validation set approach works
 
 
 ```r
@@ -50,17 +88,19 @@ num_degrees = 10
 val_rmse = matrix(0, ncol = num_degrees, nrow = num_sims)
 ```
 
+- TODO: each simulation we will...
+
 
 ```r
 set.seed(42)
 for (i in 1:num_sims) {
   # simulate data
-  sim_data = get_sim_data(sample_size = 200)
+  sim_data = gen_sim_data(sample_size = 200)
   # set aside validation set
   sim_idx = sample(1:nrow(sim_data), 160)
   sim_trn = sim_data[sim_idx, ]
   sim_val = sim_data[-sim_idx, ]
-  # fit models and store RMSE
+  # fit models and store RMSEs
   for (j in 1:num_degrees) {
     #fit model
     fit = glm(y ~ poly(x, degree = j), data = sim_trn)
@@ -70,139 +110,85 @@ for (i in 1:num_sims) {
 }
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+
+\begin{center}\includegraphics{20-resampling_files/figure-latex/unnamed-chunk-8-1} \end{center}
+
+- TODO: issues are hard to "see" but have to do with variability
 
 
 ## Cross-Validation
 
 Instead of using a single test-train split, we instead look to use $K$-fold cross-validation.
 
-- TODO: Can be used with any metric
-
 $$
-\text{CV}_{K}\text{-RMSE} = \sum_{k = 1}^{K} \frac{n_k}{n} \text{RMSE}_k
+\text{RMSE-CV}_{K} = \sum_{k = 1}^{K} \frac{n_k}{n} \text{RMSE}_k
 $$
 
 $$
-\text{RMSE}_k = \sqrt{\frac{1}{n_k} \sum_{i \in C_k} \left( y_i - \hat{f}(x_i) \right)^2 }
+\text{RMSE}_k = \sqrt{\frac{1}{n_k} \sum_{i \in C_k} \left( y_i - \hat{f}^{-k}(x_i) \right)^2 }
 $$
 
 - $n_k$ is the number of observations in fold $k$ 
 - $C_k$ are the observations in fold $k$
+- $\hat{f}^{-k}()$ is the trained model using the training data without fold $k$
 
 If $n_k$ is the same in each fold, then
 
 $$
-\text{CV}_{K}\text{-RMSE} = \frac{1}{K}\sum_{k = 1}^{K} \text{RMSE}_k
+\text{RMSE-CV}_{K} = \frac{1}{K}\sum_{k = 1}^{K} \text{RMSE}_k
 $$
 
-There are many ways to perform cross-validation `R`, depending on the method of interest. Some methods, for example `glm()` through `boot::cv.glm()` and `knn()` through `knn.cv()` have cross-validation capabilities built-in. We'll use `glm()` for illustration. First we need to convince ourselves that `glm()` can be used to perform the same tasks as `lm()`.
+- TODO: create and add graphic that shows the splitting process
+- TODO: Can be used with any metric, MSE, RMSE, class-err, class-acc
+
+There are many ways to perform cross-validation in `R`, depending on the statistical learning method of interest. Some methods, for example `glm()` through `boot::cv.glm()` and `knn()` through `knn.cv()` have cross-validation capabilities built-in. We'll use `glm()` for illustration. First we need to convince ourselves that `glm()` can be used to perform the same tasks as `lm()`.
 
 
 ```r
-data(Auto, package = "ISLR")
-```
-
-
-```r
-glm_fit = glm(mpg ~ horsepower, data = Auto)
+glm_fit = glm(y ~ poly(x, 3), data = sim_trn)
 coef(glm_fit)
 ```
 
 ```
-## (Intercept)  horsepower 
-##  39.9358610  -0.1578447
+##  (Intercept)  poly(x, 3)1  poly(x, 3)2  poly(x, 3)3 
+## -0.005513063  4.153963639 -0.207436179  2.078844572
 ```
 
 ```r
-lm_fit = lm(mpg ~ horsepower, data = Auto)
+lm_fit  = lm(y ~ poly(x, 3), data = sim_trn)
 coef(lm_fit)
 ```
 
 ```
-## (Intercept)  horsepower 
-##  39.9358610  -0.1578447
+##  (Intercept)  poly(x, 3)1  poly(x, 3)2  poly(x, 3)3 
+## -0.005513063  4.153963639 -0.207436179  2.078844572
 ```
 
 By default, `cv.glm()` will report leave-one-out cross-validation (LOOCV).
 
 
 ```r
-glm_fit = glm(mpg ~ horsepower, data = Auto)
-loocv_rmse = sqrt(boot::cv.glm(Auto, glm_fit)$delta)
-sqrt(loocv_rmse)
+sqrt(boot::cv.glm(sim_trn, glm_fit)$delta)
 ```
 
 ```
-## [1] 2.218682 2.218674
+## [1] 0.2372763 0.2372582
 ```
 
-```r
-sqrt(loocv_rmse[1])
-```
+We are actually given two values. The first is exactly the LOOCV-MSE. The second is a minor correction that we will not worry about. We take a square root to obtain LOOCV-RMSE.
 
-```
-## [1] 2.218682
-```
-
-We are actually given two values. The first is exactly the LOOCV-RMSE. The second is a minor correction that we will not worry about. We take a square root to obtain LOOCV-RMSE.
+In practice, we often prefer 5 or 10-fold cross-validation for a number of reason, but often most importantly, for computational efficiency.
 
 
 ```r
-loocv_rmse_poly = rep(0, times = 10)
-for (i in seq_along(loocv_rmse_poly)) {
-  glm_fit = glm(mpg ~ poly(horsepower, i), data = Auto)
-  loocv_rmse_poly[i] = sqrt(boot::cv.glm(Auto, glm_fit)$delta[1])
-}
-loocv_rmse_poly
+sqrt(boot::cv.glm(sim_trn, glm_fit, K = 5)$delta)
 ```
 
 ```
-##  [1] 4.922552 4.387279 4.397156 4.407316 4.362707 4.356449 4.339706
-##  [8] 4.354440 4.366764 4.414854
+## [1] 0.2392979 0.2384206
 ```
 
-
-```r
-plot(loocv_rmse_poly, type = "b", col = "dodgerblue", 
-     main = "LOOCV-RMSE vs Polynomial Degree", 
-     ylab = "LOOCV-RMSE", xlab = "Polynomial Degree")
-```
-
-![](20-resampling_files/figure-latex/unnamed-chunk-12-1.pdf)<!-- --> 
-
-If you run the above code locally, you will notice that is painfully slow. We are fitting each of the 10 models 392 times, that is, each model $n$ times, once with each data point left out. (Note: in this case, for a linear model, there is actually a shortcut formula which would allow us to obtain LOOCV-RMSE from a single fit to the data. See details in ISL as well as a link below.)
-
-We could instead use $k$-fold cross-validation.
-
-
-```r
-set.seed(17)
-cv_10_rmse_poly = rep(0, times = 10)
-for (i in seq_along(cv_10_rmse_poly)) {
-  glm_fit = glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv_10_rmse_poly[i] = sqrt(boot::cv.glm(Auto, glm_fit, K = 10)$delta[1])
-}
-cv_10_rmse_poly
-```
-
-```
-##  [1] 4.919878 4.380552 4.393929 4.397498 4.345010 4.361311 4.346963
-##  [8] 4.439821 4.353321 4.416102
-```
-
-
-```r
-plot(cv_10_rmse_poly, type = "b", col = "dodgerblue",
-     main = "10 Fold CV-RMSE vs Polynomial Degree", 
-     ylab = "10 Fold CV-RMSE", xlab = "Polynomial Degree")
-```
-
-![](20-resampling_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
-
-Here we chose 10-fold cross-validation. Notice it is **much** faster. In practice, we usually stick to 5 or 10-fold CV.
-
-Returning to our simulated data:
+We repeat the above simulation study, this time performing 5-fold cross-validation. With a total sample size of $n = 200$ each validation set has 40 observations, as did the single validation set in the previous simulations.
 
 
 ```r
@@ -214,7 +200,7 @@ cv_rmse = matrix(0, ncol = num_degrees, nrow = num_sims)
 set.seed(42)
 for (i in 1:num_sims) {
   # simulate data, use all data for training
-  sim_trn = get_sim_data(sample_size = 200)
+  sim_trn = gen_sim_data(sample_size = 200)
   # fit models and store RMSE
   for (j in 1:num_degrees) {
     #fit model
@@ -225,8 +211,8 @@ for (i in 1:num_sims) {
 }
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
 
+\begin{center}\includegraphics{20-resampling_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 
 \begin{tabular}{r|r|r|r|r}
@@ -255,81 +241,17 @@ Polynomial Degree & Mean, Val & SD, Val & Mean, CV & SD, CV\\
 \hline
 \end{tabular}
 
-- TODO: cv overestimating (worse for reporting)
-- TODO: cv less variable (better for selecting)
+
+\begin{center}\includegraphics{20-resampling_files/figure-latex/unnamed-chunk-16-1} \end{center}
+
+- TODO: differences: less variance, better selections
 
 
+## Test Data
 
-```r
-par(mfrow = c(1, 2))
-matplot(t(val_rmse)[, 1:10], pch = 20, type = "b", ylim = c(0.17, 0.35), xlab = "Polynomial Degree", ylab = "RMSE", main = "Single Validation Set")
-matplot(t(cv_rmse)[, 1:10],  pch = 20, type = "b", ylim = c(0.17, 0.35), xlab = "Polynomial Degree", ylab = "RMSE", main = "5-Fold Cross-Validation")
-```
+The following example, inspired by The Elements of Statistical Learning, will illustrate the need for a dedicated test set which is **never** used in model training. We do this, if for no other reason, because it gives us a quick sanity check that we have cross-validated correctly. To be specific we will always test-train split the data, then perform cross-validation **within the training data**. 
 
-![](20-resampling_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
-
-
-### Manual Cross-Validation
-
-For methods that do not have a built-in ability to perform cross-validation, or for methods that have limited cross-validation capability, we will need to write our own code for cross-validation. (Spoiler: This is not true, but let's pretend it is, so we can see how to perform cross-validation from scratch.)
-
-This essentially amounts to randomly splitting the data, then looping over the splits. The `createFolds()` function from the `caret()` package will make this much easier.
-
-
-```r
-caret::createFolds(sim_data$y, k = 10)
-```
-
-```
-## $Fold01
-##  [1]   5   6  28  37  44  45  61  64  71  90 110 128 133 138 146 154 160
-## [18] 169 174 184
-## 
-## $Fold02
-##  [1]   1  68  72  75  87  95 100 101 109 113 114 117 124 132 135 182 188
-## [18] 192 195 196
-## 
-## $Fold03
-##  [1]   2   4  11  18  23  24  26  34  47  58  62  69  98 115 140 163 165
-## [18] 170 173 190
-## 
-## $Fold04
-##  [1]   3  14  21  38  57  66  79  80  84  94 107 122 127 130 147 148 153
-## [18] 166 189 194
-## 
-## $Fold05
-##  [1]  40  41  59  63  65  73  82  83  96 103 108 119 120 149 150 158 167
-## [18] 171 187 199
-## 
-## $Fold06
-##  [1]  16  39  43  51  56  67  74  76  78 105 118 126 131 136 157 159 178
-## [18] 185 186 197
-## 
-## $Fold07
-##  [1]  17  25  48  49  52  86  88  89  91  92  93 112 121 152 155 162 164
-## [18] 168 175 181
-## 
-## $Fold08
-##  [1]   7  19  20  27  30  35  55  70  99 111 129 137 141 143 145 161 177
-## [18] 179 183 200
-## 
-## $Fold09
-##  [1]   9  10  12  13  29  31  33  36  46  77  85  97 102 116 134 151 172
-## [18] 176 180 193
-## 
-## $Fold10
-##  [1]   8  15  22  32  42  50  53  54  60  81 104 106 123 125 139 142 144
-## [18] 156 191 198
-```
-
-Can you use this to verify the 10-fold CV results from above?
-
-
-### Test Data
-
-The following example illustrates the need for a dedicated test set which is **never** used in model training. If for no other reason, it gives us a quick sanity check that we have cross-validated correctly.
-
-To be specific we will test-train split the data, then perform cross-validation **within the training data**.
+Essentially, this example will also show how to **not** cross-validate properly. It will also show can example of cross-validated in a classification setting.
 
 
 ```r
@@ -338,93 +260,148 @@ calc_err = function(actual, predicted) {
 }
 ```
 
+Consider a binary response $Y$ with equal probability to take values $0$ and $1$.
+
+$$
+Y \sim \text{bern}(p = 0.5)
+$$
+
+Also consider $p = 10,000$ independent predictor variables, $X_j$, each with a standard normal distribution.
+
+$$
+X_j \sim N(\mu = 0, \sigma^2 = 1)
+$$
+
+We simulate $n = 100$ observations from this data generating process. Notice that the way we've defined this process, none of the $X_j$ are related to $Y$.
+
 
 ```r
-# simulate data
-# y is 0/1
-# X are independent N(0,1) variables
-# X has no relationship with the response
-# p >>> n
-
-set.seed(430)
-n = 400
-p = 5000
-X = replicate(p, rnorm(n))
+set.seed(42)
+n = 200
+p = 10000
+x = replicate(p, rnorm(n))
 y = c(rbinom(n = n, size = 1, prob = 0.5))
+full_data = data.frame(y, x)
 ```
 
+Before attempting to perform cross-validation, we test-train split the data, using half of the available data for each. (In practice, with this little data, it would be hard to justify a separate test dataset, but here we do so to illustrate another point.)
+
 
 ```r
-# first n/2 observations are used for training
-# last n/2 observations used for testing
-# both are 50% 0s and 50% 1s
-# cv will be done inside train data
-
-full_data = data.frame(y, X)
-trn_idx = sample(1:nrow(full_data), trunc(nrow(full_data) * 0.5))
+trn_idx  = sample(1:nrow(full_data), trunc(nrow(full_data) * 0.5))
 trn_data = full_data[trn_idx,   ]
 tst_data = full_data[-trn_idx, ]
 ```
 
-First, we use the screen-then-validate approach.
+Now we would like to train a logistic regression model to predict $Y$ using the available predictor data. However, here we have $p > n$, which prevents us from fitting logistic regression. To overcome this issue, we will first attempt to find a subset of relevant predictors. To do so, we'll simply find the predictors that are most correlated with the response.
 
 
 ```r
 # find correlation between y and each predictor variable
 correlations = apply(trn_data[, -1], 2, cor, y = trn_data$y)
-hist(correlations)
 ```
 
-![](20-resampling_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
+
+\begin{center}\includegraphics{20-resampling_files/figure-latex/unnamed-chunk-21-1} \end{center}
+
+While many of these correlations are small, many very close to zero, some are as large as 0.40. Since our training data has 50 observations, we'll select the 25 predictors with the largest (absolute) correlations.
+
 
 ```r
-# select the 25 largest (absolute) correlation
-# these should be "useful" for prediction
 selected = order(abs(correlations), decreasing = TRUE)[1:25]
 correlations[selected]
 ```
 
 ```
-##      X2717        X32      X2665      X2371      X4611      X3573 
-##  0.2716135  0.2547580 -0.2536404  0.2530664 -0.2466395  0.2428334 
-##      X1701      X4116      X1653      X1024      X3334      X3094 
-##  0.2329670 -0.2297586 -0.2195325 -0.2174270  0.2162564 -0.2124802 
-##      X2327      X3491      X2299      X4900      X2078       X941 
-## -0.2110879  0.2108721 -0.2099112 -0.2073970  0.2069720  0.2055869 
-##       X320      X2680      X4204      X3820      X1619      X3438 
-##  0.2051092 -0.2048960 -0.2043215 -0.2001827 -0.1996106 -0.1985622 
-##       X115 
-## -0.1969733
+##      X2596      X4214      X9335      X8569      X3299      X2533 
+##  0.3543596  0.3523432 -0.3479568 -0.3457459 -0.3454538  0.3432992 
+##      X2638      X4737      X2542      X8624      X6201      X4186 
+## -0.3393733 -0.3314835  0.3228942 -0.3193488  0.3187754 -0.3181454 
+##      X7600      X8557      X3273      X5639      X4482      X7593 
+##  0.3175957  0.3159638 -0.3117192  0.3113686  0.3109364  0.3094102 
+##      X7374      X7283      X9888       X518      X9970      X7654 
+##  0.3090942 -0.3086637  0.3069136 -0.3066874 -0.3061039 -0.3042648 
+##      X9329 
+## -0.3038140
 ```
 
+We subset the training and test sets to contain only the response as well as these 25 predictors.
+
+
 ```r
-# subset the test and training data based on the selected predictors
 trn_screen = trn_data[c(1, selected)]
 tst_screen = tst_data[c(1, selected)]
-
-# fit an additive logistic regression
-# use 10-fold cross-validation to obtain an estimate of test accuracy
-# horribly optimistic
-glm_fit = glm(y ~ ., data = trn_screen, family = "binomial")
-boot::cv.glm(trn_screen, glm_fit, K = 10)$delta[1]
 ```
 
-```
-## [1] 0.284542
-```
+Then we finally fit an additive logistic regression using this subset of predictors. We perform 10-fold cross-validation to obtain an estimate of the classification error.
+
 
 ```r
-# get test accuracy, which we expect to be 0.50
-# no better than guessing
-glm_pred = (predict(glm_fit, newdata = tst_screen, type = "response") > 0.5) * 1
-calc_err(predicted = glm_pred, actual = tst_screen$y)
+add_log_mod = glm(y ~ ., data = trn_screen, family = "binomial")
+boot::cv.glm(trn_screen, add_log_mod, K = 10)$delta[1]
 ```
 
 ```
-## [1] 0.545
+## [1] 0.3166792
 ```
 
-Now, we will correctly screen-while-validating.
+The 10-fold cross-validation is suggesting a classification error estimate of almost 30%.
+
+
+```r
+add_log_pred = (predict(add_log_mod, newdata = tst_screen, type = "response") > 0.5) * 1
+calc_err(predicted = add_log_pred, actual = tst_screen$y)
+```
+
+```
+## [1] 0.5
+```
+
+However, if we obtain an estimate of the error using the set, we see an error rate of 50%. No better than guessing! But since $Y$ has no relationship with the predictors, this is actually what we would expect. This incorrect method we'll call screen-then-validate.
+
+Now, we will correctly screen-while-validating. Essentially, instead of simply cross-validating the logistic regression, we also need to cross validate the screening process. That is, we won't simply use the same variables for each fold, we get the "best" predictors for each fold.
+
+For methods that do not have a built-in ability to perform cross-validation, or for methods that have limited cross-validation capability, we will need to write our own code for cross-validation. (Spoiler: This is not completely true, but let's pretend it is, so we can see how to perform cross-validation from scratch.)
+
+This essentially amounts to randomly splitting the data, then looping over the splits. The `createFolds()` function from the `caret()` package will make this much easier.
+
+
+```r
+caret::createFolds(trn_data$y, k = 10)
+```
+
+```
+## $Fold01
+##  [1]  2  6 10 28 66 69 70 89 94 98
+## 
+## $Fold02
+##  [1] 27 30 32 33 34 56 74 80 85 96
+## 
+## $Fold03
+##  [1]  8 23 29 31 39 53 57 60 61 72
+## 
+## $Fold04
+##  [1]  9 15 16 21 41 44 54 63 71 99
+## 
+## $Fold05
+##  [1]  5 12 17 51 62 68 81 82 92 97
+## 
+## $Fold06
+##  [1]  7 13 19 40 43 55 75 77 87 90
+## 
+## $Fold07
+##  [1]  18  42  45  47  48  73  83  88  91 100
+## 
+## $Fold08
+##  [1]  4 11 35 37 46 52 64 76 79 84
+## 
+## $Fold09
+##  [1]  1 14 20 22 26 36 50 59 67 78
+## 
+## $Fold10
+##  [1]  3 24 25 38 49 58 65 86 93 95
+```
+
 
 
 ```r
@@ -440,19 +417,19 @@ fold_err = rep(0, length(folds))
 for (i in seq_along(folds)) {
 
   # split for fold i  
-  trn_fold = trn_data[-folds[[i]],]
-  val_fold = trn_data[folds[[i]],]
+  trn_fold = trn_data[-folds[[i]], ]
+  val_fold = trn_data[folds[[i]], ]
 
   # screening for fold i  
   correlations = apply(trn_fold[, -1], 2, cor, y = trn_fold[,1])
   selected = order(abs(correlations), decreasing = TRUE)[1:25]
-  trn_fold_screen = trn_fold[ ,c(1,selected)]
-  val_fold_screen = val_fold[ ,c(1,selected)]
+  trn_fold_screen = trn_fold[ , c(1, selected)]
+  val_fold_screen = val_fold[ , c(1, selected)]
 
   # accuracy for fold i  
-  glm_fit = glm(y ~ ., data = trn_fold_screen, family = "binomial")
-  glm_pred = (predict(glm_fit, newdata = val_fold_screen, type = "response") > 0.5) * 1
-  fold_err[i] = mean(glm_pred == val_fold_screen$y)
+  add_log_mod = glm(y ~ ., data = trn_fold_screen, family = "binomial")
+  add_log_pred = (predict(add_log_mod, newdata = val_fold_screen, type = "response") > 0.5) * 1
+  fold_err[i] = mean(add_log_pred == val_fold_screen$y)
   
 }
 
@@ -461,7 +438,7 @@ fold_err
 ```
 
 ```
-##  [1] 0.40 0.35 0.45 0.50 0.45 0.30 0.60 0.55 0.60 0.75
+##  [1] 0.5 0.5 0.4 0.5 0.4 0.5 0.3 0.4 0.8 0.8
 ```
 
 ```r
@@ -471,8 +448,10 @@ mean(fold_err)
 ```
 
 ```
-## [1] 0.495
+## [1] 0.51
 ```
+
+- TODO: note that, even cross-validated correctly, this isn't a brilliant variable selection procedure. (it completely ignores interactions and correlations among the predictors. however, if it works, it works.) next chapters...
 
 
 ## Bootstrap
@@ -480,6 +459,19 @@ mean(fold_err)
 ISL discusses the bootstrap, which is another resampling method. However, it is less relevant to the statistical learning tasks we will encounter. It could be used to replace cross-validation, but encounters significantly more computation.
 
 It could be more useful if we were to attempt to calculate the bias and variance of a prediction (estimate) without access to the data generating process. Return to the bias-variance tradeoff chapter and think about how the bootstrap could be used to obtain estimates of bias and variance with a single dataset, instead of repeated simulated datasets.
+
+
+
+## Which $K$?
+
+- TODO: LOO vs 5 vs 10
+- TODO: bias and variance
+
+
+
+## Summary
+
+- TODO: using cross validation for: tuning, error estimation
 
 
 ## External Links
@@ -493,9 +485,4 @@ It could be more useful if we were to attempt to calculate the bias and variance
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](20-resampling.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
-
-
-```
-## NULL
-```
+The `rmarkdown` file for this chapter can be found [**here**](20-resampling.Rmd). The file was created using `R` version 3.4.2.
