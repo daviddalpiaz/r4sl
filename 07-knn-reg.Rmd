@@ -242,7 +242,7 @@ knitr::kable(knn_results, escape = FALSE, booktabs = TRUE)
         - could work if ...
     - knn "automatically" approximates
     
-```{r, echo = FALSE}
+```{r echo = FALSE, fig.height = 5, fig.width = 10}
 line_reg_fun = function(x) {
   x
 }
