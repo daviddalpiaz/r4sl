@@ -653,7 +653,7 @@ folds =<span class="st"> </span>caret::<span class="kw">createFolds</span>(trn_d
 <span class="co"># for each fold</span>
 <span class="co"># - pre-screen variables on the 9 training folds</span>
 <span class="co"># - fit model to these variables</span>
-<span class="co"># - get accuracy on validation fold</span>
+<span class="co"># - get error on validation fold</span>
 fold_err =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(folds))
 
 for (i in <span class="kw">seq_along</span>(folds)) {
@@ -668,14 +668,15 @@ for (i in <span class="kw">seq_along</span>(folds)) {
   trn_fold_screen =<span class="st"> </span>trn_fold[ , <span class="kw">c</span>(<span class="dv">1</span>, selected)]
   val_fold_screen =<span class="st"> </span>val_fold[ , <span class="kw">c</span>(<span class="dv">1</span>, selected)]
 
-  <span class="co"># accuracy for fold i  </span>
+  <span class="co"># error for fold i  </span>
   add_log_mod =<span class="st"> </span><span class="kw">glm</span>(y ~<span class="st"> </span>., <span class="dt">data =</span> trn_fold_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
-  add_log_pred =<span class="st"> </span>(<span class="kw">predict</span>(add_log_mod, <span class="dt">newdata =</span> val_fold_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) &gt;<span class="st"> </span><span class="fl">0.5</span>) *<span class="st"> </span><span class="dv">1</span>
+  add_log_prob =<span class="st"> </span><span class="kw">predict</span>(add_log_mod, <span class="dt">newdata =</span> val_fold_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
+  add_log_pred =<span class="st"> </span><span class="kw">ifelse</span>(add_log_prob &gt;<span class="st"> </span><span class="fl">0.5</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)
   fold_err[i] =<span class="st"> </span><span class="kw">mean</span>(add_log_pred ==<span class="st"> </span>val_fold_screen$y)
   
 }
 
-<span class="co"># report all 10 validation fold accuracies</span>
+<span class="co"># report all 10 validation fold errors</span>
 fold_err</code></pre></div>
 <pre><code>##  [1] 0.5 0.5 0.4 0.5 0.4 0.5 0.3 0.4 0.8 0.8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># properly cross-validated error</span>

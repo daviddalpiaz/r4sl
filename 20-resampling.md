@@ -411,7 +411,7 @@ folds = caret::createFolds(trn_data$y, k = 10)
 # for each fold
 # - pre-screen variables on the 9 training folds
 # - fit model to these variables
-# - get accuracy on validation fold
+# - get error on validation fold
 fold_err = rep(0, length(folds))
 
 for (i in seq_along(folds)) {
@@ -426,14 +426,15 @@ for (i in seq_along(folds)) {
   trn_fold_screen = trn_fold[ , c(1, selected)]
   val_fold_screen = val_fold[ , c(1, selected)]
 
-  # accuracy for fold i  
+  # error for fold i  
   add_log_mod = glm(y ~ ., data = trn_fold_screen, family = "binomial")
-  add_log_pred = (predict(add_log_mod, newdata = val_fold_screen, type = "response") > 0.5) * 1
+  add_log_prob = predict(add_log_mod, newdata = val_fold_screen, type = "response")
+  add_log_pred = ifelse(add_log_prob > 0.5, yes = 1, no = 0)
   fold_err[i] = mean(add_log_pred == val_fold_screen$y)
   
 }
 
-# report all 10 validation fold accuracies
+# report all 10 validation fold errors
 fold_err
 ```
 
