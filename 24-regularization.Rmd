@@ -1,8 +1,12 @@
 # Regularization
 
-**TODO:** Introduce regularization as a concept.
+**Chapter Status:** Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later. Also, more comments on using `glmnet` with `caret` will be discussed.
 
-We will use the `Hitters` dataset from the `ISLR` package to explore two shrinkage methods: **ridge** and **lasso**. These are otherwise known as **penalized regression** methods.
+```{r caret_opts, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+We will use the `Hitters` dataset from the `ISLR` package to explore two shrinkage methods: **ridge regression** and **lasso**. These are otherwise known as **penalized regression** methods.
 
 ```{r}
 data(Hitters, package = "ISLR")
@@ -23,26 +27,20 @@ The predictors variables are offensive and defensive statistics for a number of 
 names(Hitters)
 ```
 
-We use the `glmnet()` and `cv.glmnet()` functions in the `glmnet` package to fit penalized regressions.
-
-```{r}
-# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
-# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
-library(methods)
-```
+We use the `glmnet()` and `cv.glmnet()` functions from the `glmnet` package to fit penalized regressions.
 
 ```{r, message = FALSE, warning = FALSE}
 library(glmnet)
 ```
 
-The `glmnet` function does not allow the use of model formulas, so we setup the data for ease of use with `glmnet`.
+Unfortunately, the `glmnet` function does not allow the use of model formulas, so we setup the data for ease of use with `glmnet`. Eventually we will use `train()` from `caret` which does allow for fitting penalized regression with the formula syntax, but to explore some of the details, we first work with the functions from `glmnet` directly.
 
 ```{r}
 X = model.matrix(Salary ~ ., Hitters)[, -1]
 y = Hitters$Salary
 ```
 
-First, we fit a regular linear regression, and note the size of the predictors' coefficients, and predictors' coefficients squared. (The two penalties we will use.)
+First, we fit an ordinary linear regression, and note the size of the predictors' coefficients, and predictors' coefficients squared. (The two penalties we will use.)
 
 ```{r}
 fit = lm(Salary ~ ., Hitters)
@@ -60,15 +58,15 @@ $$
 \sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
 $$
 
-Notice that the intercept is **not** penalized. Also, note that that ridge regression is **not** scale invariant like the usual unpenalized regression. Thankfully, `glmnet()` takes care of this internally. It automatically standardizes input for fitting, then reports fitted coefficient using the original scale.
+Notice that the intercept is **not** penalized. Also, note that that ridge regression is **not** scale invariant like the usual unpenalized regression. Thankfully, `glmnet()` takes care of this internally. It automatically standardizes predictors for fitting, then reports fitted coefficient using the original scale.
 
 The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
 
-```{r ridge}
+```{r ridge, fig.height = 4, fig.width = 8}
+par(mfrow = c(1, 2))
 fit_ridge = glmnet(X, y, alpha = 0)
 plot(fit_ridge)
 plot(fit_ridge, xvar = "lambda", label = TRUE)
-dim(coef(fit_ridge))
 ```
 
 We use cross-validation to select a good $\lambda$ value. The `cv.glmnet()`function uses 10 folds by default. The plot illustrates the MSE for the $\lambda$s considered. Two lines are drawn. The first is the $\lambda$ that gives the smallest MSE. The second is the $\lambda$ that gives an MSE within one standard error of the smallest.
@@ -81,17 +79,58 @@ plot(fit_ridge_cv)
 The `cv.glmnet()` function returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)
 
 ```{r}
+# fitted coefficients, using 1-SE rule lambda, default behavior
 coef(fit_ridge_cv)
+```
+
+```{r}
+# fitted coefficients, using minimum lambda
 coef(fit_ridge_cv, s = "lambda.min")
-sum(coef(fit_ridge_cv, s = "lambda.min")[-1] ^ 2) # penalty term for lambda minimum
+```
+
+```{r}
+# penalty term using minimum lambda
+sum(coef(fit_ridge_cv, s = "lambda.min")[-1] ^ 2)
+```
+
+```{r}
+# fitted coefficients, using 1-SE rule lambda
 coef(fit_ridge_cv, s = "lambda.1se")
-sum(coef(fit_ridge_cv, s = "lambda.1se")[-1] ^ 2) # penalty term for lambda one SE
-#predict(fit_ridge_cv, X, s = "lambda.min")
-#predict(fit_ridge_cv, X)
-mean((y - predict(fit_ridge_cv, X)) ^ 2) # "train error"
-sqrt(fit_ridge_cv$cvm) # CV-RMSEs
-sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min]) # CV-RMSE minimum
-sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) # CV-RMSE one SE
+```
+
+```{r}
+# penalty term using 1-SE rule lambda
+sum(coef(fit_ridge_cv, s = "lambda.1se")[-1] ^ 2)
+```
+
+```{r, eval = FALSE}
+# predict using minimum lambda
+predict(fit_ridge_cv, X, s = "lambda.min")
+```
+
+```{r, eval = FALSE}
+# predict using 1-SE rule lambda, default behavior
+predict(fit_ridge_cv, X)
+```
+
+```{r}
+# calcualte "train error"
+mean((y - predict(fit_ridge_cv, X)) ^ 2)
+```
+
+```{r}
+# CV-RMSEs
+sqrt(fit_ridge_cv$cvm)
+```
+
+```{r}
+# CV-RMSE using minimum lambda
+sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min])
+```
+
+```{r}
+# CV-RMSE using 1-SE rule lambda
+sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) 
 ```
 
 
@@ -107,11 +146,11 @@ Like ridge, lasso is not scale invariant.
 
 The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice some of the coefficients are forced to be zero.
 
-```{r lasso}
+```{r lasso, fig.height = 4, fig.width = 8}
+par(mfrow = c(1, 2))
 fit_lasso = glmnet(X, y, alpha = 1)
 plot(fit_lasso)
 plot(fit_lasso, xvar = "lambda", label = TRUE)
-dim(coef(fit_lasso))
 ```
 
 Again, to actually pick a $\lambda$, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)
@@ -124,18 +163,60 @@ plot(fit_lasso_cv)
 `cv.glmnet()` returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.
 
 ```{r}
+# fitted coefficients, using 1-SE rule lambda, default behavior
 coef(fit_lasso_cv)
-coef(fit_lasso_cv, s = "lambda.min")
-sum(abs(coef(fit_lasso_cv, s = "lambda.min")[-1])) # penalty term for lambda minimum
-coef(fit_lasso_cv, s = "lambda.1se")
-sum(abs(coef(fit_lasso_cv, s = "lambda.1se")[-1])) # penalty term for lambda one SE
-#predict(fit_lasso_cv, X, s = "lambda.min")
-#predict(fit_lasso_cv, X)
-mean((y - predict(fit_lasso_cv, X)) ^ 2) # "train error"
-sqrt(fit_lasso_cv$cvm)
-sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min]) # CV-RMSE minimum
-sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]) # CV-RMSE one SE
 ```
+
+```{r}
+# fitted coefficients, using minimum lambda
+coef(fit_lasso_cv, s = "lambda.min")
+```
+
+```{r}
+# penalty term using minimum lambda
+sum(coef(fit_lasso_cv, s = "lambda.min")[-1] ^ 2)
+```
+
+```{r}
+# fitted coefficients, using 1-SE rule lambda
+coef(fit_lasso_cv, s = "lambda.1se")
+```
+
+```{r}
+# penalty term using 1-SE rule lambda
+sum(coef(fit_lasso_cv, s = "lambda.1se")[-1] ^ 2)
+```
+
+```{r, eval = FALSE}
+# predict using minimum lambda
+predict(fit_lasso_cv, X, s = "lambda.min")
+```
+
+```{r, eval = FALSE}
+# predict using 1-SE rule lambda, default behavior
+predict(fit_lasso_cv, X)
+```
+
+```{r}
+# calcualte "train error"
+mean((y - predict(fit_lasso_cv, X)) ^ 2)
+```
+
+```{r}
+# CV-RMSEs
+sqrt(fit_lasso_cv$cvm)
+```
+
+```{r}
+# CV-RMSE using minimum lambda
+sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min])
+```
+
+```{r}
+# CV-RMSE using 1-SE rule lambda
+sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]) 
+```
+
 
 ## `broom`
 
@@ -143,13 +224,15 @@ Sometimes, the output from `glmnet()` can be overwhelming. The `broom` package c
 
 ```{r, message = FALSE, warning = FALSE}
 library(broom)
-#fit_lasso_cv
+# the output from the commented line would be immense
+# fit_lasso_cv
 tidy(fit_lasso_cv)
-glance(fit_lasso_cv) # the two lambda values of interest
+# the two lambda values of interest
+glance(fit_lasso_cv) 
 ```
 
 
-## Simulation Study, p > n
+## Simulated Data, $p > n$
 
 Aside from simply shrinking coefficients (ridge) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the $p > n$ case.
 
@@ -202,11 +285,9 @@ which(as.vector(as.matrix(fit_1se$beta)) != 0)
 
 We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.
 
-```{r}
+```{r, fig.height = 4, fig.width = 8}
+par(mfrow = c(1, 2))
 plot(glmnet(X, y, family = "binomial"))
-```
-
-```{r}
 plot(glmnet(X, y, family = "binomial"), xvar = "lambda")
 ```
 
@@ -240,30 +321,18 @@ fit_lasso = train(
 fit_lasso$results
 ```
 
+The interaction between the `glmnet` and `caret` packages is sometimes frustrating, but for obtaining results for particular values of $\lambda$, we see it can be easily used. More on this next chapter.
+
 
 ## External Links
 
 - [`glmnet` Web Vingette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html) - Details from the package developers.
 
 
-## RMarkdown
+## `rmarkdown`
 
-The RMarkdown file for this chapter can be found [**here**](15-shrink.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
-
-- Base Packages, Attached
-
-```{r, echo = FALSE}
-sessionInfo()$basePkgs
-```
-
-- Additional Packages, Attached
+The `rmarkdown` file for this chapter can be found [**here**](24-regularization.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`. The following packages (and their dependencies) were loaded when knitting this file:
 
 ```{r, echo = FALSE}
 names(sessionInfo()$otherPkgs)
-```
-
-- Additional Packages, Not Attached
-
-```{r, echo = FALSE}
-names(sessionInfo()$loadedOnly)
 ```

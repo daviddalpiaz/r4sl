@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-26">
+<meta name="date" content="2017-10-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -281,9 +281,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
-<li class="chapter" data-level="24.4" data-path="regularization.html"><a href="regularization.html#simulation-study-p-n"><i class="fa fa-check"></i><b>24.4</b> Simulation Study, p &gt; n</a></li>
+<li class="chapter" data-level="24.4" data-path="regularization.html"><a href="regularization.html#simulated-data-p-n"><i class="fa fa-check"></i><b>24.4</b> Simulated Data, <span class="math inline">\(p &gt; n\)</span></a></li>
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
-<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>25.1</b> Hitters Data</a></li>
@@ -352,8 +352,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="regularization" class="section level1">
 <h1><span class="header-section-number">Chapter 24</span> Regularization</h1>
-<p><strong>TODO:</strong> Introduce regularization as a concept.</p>
-<p>We will use the <code>Hitters</code> dataset from the <code>ISLR</code> package to explore two shrinkage methods: <strong>ridge</strong> and <strong>lasso</strong>. These are otherwise known as <strong>penalized regression</strong> methods.</p>
+<p><strong>Chapter Status:</strong> Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later. Also, more comments on using <code>glmnet</code> with <code>caret</code> will be discussed.</p>
+<p>We will use the <code>Hitters</code> dataset from the <code>ISLR</code> package to explore two shrinkage methods: <strong>ridge regression</strong> and <strong>lasso</strong>. These are otherwise known as <strong>penalized regression</strong> methods.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</code></pre></div>
 <p>This dataset has some missing data in the response <code>Salaray</code>. We use the <code>na.omit()</code> function the clean the dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</code></pre></div>
@@ -369,15 +369,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  [6] &quot;Walks&quot;     &quot;Years&quot;     &quot;CAtBat&quot;    &quot;CHits&quot;     &quot;CHmRun&quot;   
 ## [11] &quot;CRuns&quot;     &quot;CRBI&quot;      &quot;CWalks&quot;    &quot;League&quot;    &quot;Division&quot; 
 ## [16] &quot;PutOuts&quot;   &quot;Assists&quot;   &quot;Errors&quot;    &quot;Salary&quot;    &quot;NewLeague&quot;</code></pre>
-<p>We use the <code>glmnet()</code> and <code>cv.glmnet()</code> functions in the <code>glmnet</code> package to fit penalized regressions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3</span>
-<span class="co"># see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console</span>
-<span class="kw">library</span>(methods)</code></pre></div>
+<p>We use the <code>glmnet()</code> and <code>cv.glmnet()</code> functions from the <code>glmnet</code> package to fit penalized regressions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(glmnet)</code></pre></div>
-<p>The <code>glmnet</code> function does not allow the use of model formulas, so we setup the data for ease of use with <code>glmnet</code>.</p>
+<p>Unfortunately, the <code>glmnet</code> function does not allow the use of model formulas, so we setup the data for ease of use with <code>glmnet</code>. Eventually we will use <code>train()</code> from <code>caret</code> which does allow for fitting penalized regression with the formula syntax, but to explore some of the details, we first work with the functions from <code>glmnet</code> directly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X =<span class="st"> </span><span class="kw">model.matrix</span>(Salary ~<span class="st"> </span>., Hitters)[, -<span class="dv">1</span>]
 y =<span class="st"> </span>Hitters$Salary</code></pre></div>
-<p>First, we fit a regular linear regression, and note the size of the predictors’ coefficients, and predictors’ coefficients squared. (The two penalties we will use.)</p>
+<p>First, we fit an ordinary linear regression, and note the size of the predictors’ coefficients, and predictors’ coefficients squared. (The two penalties we will use.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit =<span class="st"> </span><span class="kw">lm</span>(Salary ~<span class="st"> </span>., Hitters)
 <span class="kw">coef</span>(fit)</code></pre></div>
 <pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs 
@@ -398,44 +395,44 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 <p><span class="math display">\[
 \sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
 \]</span></p>
-<p>Notice that the intercept is <strong>not</strong> penalized. Also, note that that ridge regression is <strong>not</strong> scale invariant like the usual unpenalized regression. Thankfully, <code>glmnet()</code> takes care of this internally. It automatically standardizes input for fitting, then reports fitted coefficient using the original scale.</p>
+<p>Notice that the intercept is <strong>not</strong> penalized. Also, note that that ridge regression is <strong>not</strong> scale invariant like the usual unpenalized regression. Thankfully, <code>glmnet()</code> takes care of this internally. It automatically standardizes predictors for fitting, then reports fitted coefficient using the original scale.</p>
 <p>The two plots illustrate how much the coefficients are penalized for different values of <span class="math inline">\(\lambda\)</span>. Notice none of the coefficients are forced to be zero.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_ridge =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)
-<span class="kw">plot</span>(fit_ridge)</code></pre></div>
-<p><img src="24-regularization_files/figure-html/ridge-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit_ridge, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="24-regularization_files/figure-html/ridge-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(<span class="kw">coef</span>(fit_ridge))</code></pre></div>
-<pre><code>## [1]  20 100</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+fit_ridge =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)
+<span class="kw">plot</span>(fit_ridge)
+<span class="kw">plot</span>(fit_ridge, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/ridge-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>We use cross-validation to select a good <span class="math inline">\(\lambda\)</span> value. The <code>cv.glmnet()</code>function uses 10 folds by default. The plot illustrates the MSE for the <span class="math inline">\(\lambda\)</span>s considered. Two lines are drawn. The first is the <span class="math inline">\(\lambda\)</span> that gives the smallest MSE. The second is the <span class="math inline">\(\lambda\)</span> that gives an MSE within one standard error of the smallest.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_ridge_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)
 <span class="kw">plot</span>(fit_ridge_cv)</code></pre></div>
-<p><img src="24-regularization_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The <code>cv.glmnet()</code> function returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using 1-SE rule lambda, default behavior</span>
+<span class="kw">coef</span>(fit_ridge_cv)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept) 226.844379273
-## AtBat         0.086613903
-## Hits          0.352962516
-## HmRun         1.144213853
-## Runs          0.569353374
-## RBI           0.570074068
-## Walks         0.735072620
-## Years         2.397356093
-## CAtBat        0.007295083
-## CHits         0.027995153
-## CHmRun        0.208112350
-## CRuns         0.056146220
-## CRBI          0.058060281
-## CWalks        0.056586702
-## LeagueN       2.850306112
-## DivisionW   -20.329125702
-## PutOuts       0.049296951
-## Assists       0.007063169
-## Errors       -0.128066381
-## NewLeagueN    2.654025563</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
+## (Intercept) 199.418112992
+## AtBat         0.093426871
+## Hits          0.389767264
+## HmRun         1.212875008
+## Runs          0.623229049
+## RBI           0.618547530
+## Walks         0.810467709
+## Years         2.544170913
+## CAtBat        0.007897059
+## CHits         0.030554662
+## CHmRun        0.226545984
+## CRuns         0.061265846
+## CRBI          0.063384832
+## CWalks        0.060720300
+## LeagueN       3.743295054
+## DivisionW   -23.545192371
+## PutOuts       0.056202373
+## Assists       0.007879196
+## Errors       -0.164203268
+## NewLeagueN    3.313773178</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using minimum lambda</span>
+<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
 ## (Intercept)  7.645824e+01
@@ -458,57 +455,66 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 ## Assists      1.629044e-01
 ## Errors      -3.644002e+00
 ## NewLeagueN  -1.702598e+01</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># penalty term for lambda minimum</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># penalty term using minimum lambda</span>
+<span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## [1] 18126.85</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using 1-SE rule lambda</span>
+<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept) 226.844379273
-## AtBat         0.086613903
-## Hits          0.352962516
-## HmRun         1.144213853
-## Runs          0.569353374
-## RBI           0.570074068
-## Walks         0.735072620
-## Years         2.397356093
-## CAtBat        0.007295083
-## CHits         0.027995153
-## CHmRun        0.208112350
-## CRuns         0.056146220
-## CRBI          0.058060281
-## CWalks        0.056586702
-## LeagueN       2.850306112
-## DivisionW   -20.329125702
-## PutOuts       0.049296951
-## Assists       0.007063169
-## Errors       -0.128066381
-## NewLeagueN    2.654025563</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># penalty term for lambda one SE</span></code></pre></div>
-<pre><code>## [1] 436.8923</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#predict(fit_ridge_cv, X, s = &quot;lambda.min&quot;)</span>
-<span class="co">#predict(fit_ridge_cv, X)</span>
-<span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># &quot;train error&quot;</span></code></pre></div>
-<pre><code>## [1] 134397.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm) <span class="co"># CV-RMSEs</span></code></pre></div>
-<pre><code>##  [1] 451.6562 450.1080 449.7368 449.0926 448.8056 448.4920 448.1495
-##  [8] 447.7756 447.3676 446.9227 446.4377 445.9095 445.3346 444.7093
-## [15] 444.0299 443.2921 442.4921 441.6255 440.6877 439.6744 438.5810
-## [22] 437.4029 436.1357 434.7751 433.3171 431.7581 430.0947 428.3244
-## [29] 426.4453 424.4563 422.3572 420.1493 417.8347 415.4174 412.9024
-## [36] 410.2966 407.6086 404.8480 402.0266 399.1573 396.2544 393.3333
-## [43] 390.4101 387.5013 384.6237 381.7938 379.0272 376.3388 373.7422
-## [50] 371.2489 368.8682 366.6092 364.4771 362.4756 360.6075 358.8725
-## [57] 357.2687 355.7933 354.4419 353.2094 352.0898 351.0768 350.1637
-## [64] 349.3430 348.6082 347.9566 347.3776 346.8668 346.4161 346.0222
-## [71] 345.6862 345.3921 345.1408 344.9268 344.7452 344.5899 344.4620
-## [78] 344.3528 344.2607 344.1818 344.1129 344.0488 343.9920 343.9341
-## [85] 343.8741 343.8098 343.7446 343.6687 343.5826 343.4924 343.3866
-## [92] 343.2667 343.1545 343.0090 342.8799 342.7136 342.5685 342.3877
-## [99] 342.2333</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre></div>
-<pre><code>## [1] 342.2333</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.1se]) <span class="co"># CV-RMSE one SE</span></code></pre></div>
-<pre><code>## [1] 373.7422</code></pre>
+## (Intercept) 199.418112992
+## AtBat         0.093426871
+## Hits          0.389767264
+## HmRun         1.212875008
+## Runs          0.623229049
+## RBI           0.618547530
+## Walks         0.810467709
+## Years         2.544170913
+## CAtBat        0.007897059
+## CHits         0.030554662
+## CHmRun        0.226545984
+## CRuns         0.061265846
+## CRBI          0.063384832
+## CWalks        0.060720300
+## LeagueN       3.743295054
+## DivisionW   -23.545192371
+## PutOuts       0.056202373
+## Assists       0.007879196
+## Errors       -0.164203268
+## NewLeagueN    3.313773178</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># penalty term using 1-SE rule lambda</span>
+<span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 588.9958</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict using minimum lambda</span>
+<span class="kw">predict</span>(fit_ridge_cv, X, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict using 1-SE rule lambda, default behavior</span>
+<span class="kw">predict</span>(fit_ridge_cv, X)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calcualte &quot;train error&quot;</span>
+<span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 130404.9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSEs</span>
+<span class="kw">sqrt</span>(fit_ridge_cv$cvm)</code></pre></div>
+<pre><code>##  [1] 451.9981 450.3557 449.7291 449.3468 449.0540 448.7342 448.3849
+##  [8] 448.0035 447.5874 447.1336 446.6390 446.1003 445.5141 444.8765
+## [15] 444.1837 443.4316 442.6160 441.7325 440.7766 439.7438 438.6294
+## [22] 437.4289 436.1378 434.7517 433.2666 431.6789 429.9853 428.1833
+## [29] 426.2709 424.2472 422.1123 419.8675 417.5153 415.0596 412.5061
+## [36] 409.8620 407.1363 404.3390 401.4823 398.5798 395.6464 392.6980
+## [43] 389.7513 386.8234 383.9315 381.0925 378.3226 375.6369 373.0489
+## [50] 370.5707 368.2118 365.9799 363.8812 361.9192 360.0952 358.4088
+## [57] 356.8577 355.4382 354.1455 352.9736 351.9160 350.9657 350.1155
+## [64] 349.3591 348.6886 348.0970 347.5781 347.1247 346.7313 346.3914
+## [71] 346.1043 345.8588 345.6495 345.4774 345.3371 345.2186 345.1246
+## [78] 345.0480 344.9875 344.9372 344.8958 344.8600 344.8238 344.7920
+## [85] 344.7582 344.7181 344.6739 344.6251 344.5679 344.5021 344.4268
+## [92] 344.3430 344.2514 344.1511 344.0434 343.9275 343.8064 343.6811
+## [99] 343.5527</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSE using minimum lambda</span>
+<span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.min])</code></pre></div>
+<pre><code>## [1] 343.5527</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSE using 1-SE rule lambda</span>
+<span class="kw">sqrt</span>(fit_ridge_cv$cvm[fit_ridge_cv$lambda ==<span class="st"> </span>fit_ridge_cv$lambda.1se]) </code></pre></div>
+<pre><code>## [1] 368.2118</code></pre>
 </div>
 <div id="lasso" class="section level2">
 <h2><span class="header-section-number">24.2</span> Lasso</h2>
@@ -518,42 +524,42 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 \]</span></p>
 <p>Like ridge, lasso is not scale invariant.</p>
 <p>The two plots illustrate how much the coefficients are penalized for different values of <span class="math inline">\(\lambda\)</span>. Notice some of the coefficients are forced to be zero.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_lasso =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)
-<span class="kw">plot</span>(fit_lasso)</code></pre></div>
-<p><img src="24-regularization_files/figure-html/lasso-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit_lasso, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="24-regularization_files/figure-html/lasso-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(<span class="kw">coef</span>(fit_lasso))</code></pre></div>
-<pre><code>## [1] 20 80</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+fit_lasso =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)
+<span class="kw">plot</span>(fit_lasso)
+<span class="kw">plot</span>(fit_lasso, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/lasso-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Again, to actually pick a <span class="math inline">\(\lambda\)</span>, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_lasso_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(fit_lasso_cv)</code></pre></div>
-<p><img src="24-regularization_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><code>cv.glmnet()</code> returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using 1-SE rule lambda, default behavior</span>
+<span class="kw">coef</span>(fit_lasso_cv)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                        1
-## (Intercept) 193.74263858
+## (Intercept) 167.91202818
 ## AtBat         .         
-## Hits          1.21471320
+## Hits          1.29269756
 ## HmRun         .         
 ## Runs          .         
 ## RBI           .         
-## Walks         1.28957902
+## Walks         1.39817511
 ## Years         .         
 ## CAtBat        .         
 ## CHits         .         
 ## CHmRun        .         
-## CRuns         0.12923755
-## CRBI          0.31515925
+## CRuns         0.14167760
+## CRBI          0.32192558
 ## CWalks        .         
 ## LeagueN       .         
 ## DivisionW     .         
-## PutOuts       0.02533305
+## PutOuts       0.04675463
 ## Assists       .         
 ## Errors        .         
 ## NewLeagueN    .</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using minimum lambda</span>
+<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                        1
 ## (Intercept)  123.7520756
@@ -576,142 +582,155 @@ y =<span class="st"> </span>Hitters$Salary</code></pre></div>
 ## Assists        0.1732025
 ## Errors        -2.0585083
 ## NewLeagueN     .</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>])) <span class="co"># penalty term for lambda minimum</span></code></pre></div>
-<pre><code>## [1] 177.4942</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># penalty term using minimum lambda</span>
+<span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 15414.79</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using 1-SE rule lambda</span>
+<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                        1
-## (Intercept) 193.74263858
+## (Intercept) 167.91202818
 ## AtBat         .         
-## Hits          1.21471320
+## Hits          1.29269756
 ## HmRun         .         
 ## Runs          .         
 ## RBI           .         
-## Walks         1.28957902
+## Walks         1.39817511
 ## Years         .         
 ## CAtBat        .         
 ## CHits         .         
 ## CHmRun        .         
-## CRuns         0.12923755
-## CRBI          0.31515925
+## CRuns         0.14167760
+## CRBI          0.32192558
 ## CWalks        .         
 ## LeagueN       .         
 ## DivisionW     .         
-## PutOuts       0.02533305
+## PutOuts       0.04675463
 ## Assists       .         
 ## Errors        .         
 ## NewLeagueN    .</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>])) <span class="co"># penalty term for lambda one SE</span></code></pre></div>
-<pre><code>## [1] 2.974022</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#predict(fit_lasso_cv, X, s = &quot;lambda.min&quot;)</span>
-<span class="co">#predict(fit_lasso_cv, X)</span>
-<span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) ^<span class="st"> </span><span class="dv">2</span>) <span class="co"># &quot;train error&quot;</span></code></pre></div>
-<pre><code>## [1] 127112.4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm)</code></pre></div>
-<pre><code>##  [1] 451.0431 443.3229 434.0544 425.8512 418.5621 410.6027 402.5680
-##  [8] 394.9917 388.4774 382.9837 378.2337 373.7307 369.5550 366.0733
-## [15] 362.8842 359.8170 357.1576 354.8380 352.7278 350.9632 349.5031
-## [22] 348.3003 347.3049 346.4986 345.8892 345.4541 345.1646 344.9512
-## [29] 344.8102 344.7207 344.6537 344.6247 344.6304 344.6184 344.6309
-## [36] 344.7160 345.0816 345.5804 345.9128 345.7656 345.3627 345.0394
-## [43] 344.7257 344.2995 343.8275 343.1734 342.6623 342.2533 341.9819
-## [50] 341.9631 342.0346 342.1885 342.3734 342.5896 342.8849 343.0885
-## [57] 343.3264 343.6484 343.9295 344.1942 344.4527 344.7210 344.9961
-## [64] 345.2644 345.4822 345.7177 345.9438 346.1596 346.2996 346.4580
-## [71] 346.5540 346.7014 346.7903 346.9317 347.0186</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre></div>
-<pre><code>## [1] 341.9631</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.1se]) <span class="co"># CV-RMSE one SE</span></code></pre></div>
-<pre><code>## [1] 373.7307</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># penalty term using 1-SE rule lambda</span>
+<span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[-<span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 3.751855</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict using minimum lambda</span>
+<span class="kw">predict</span>(fit_lasso_cv, X, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict using 1-SE rule lambda, default behavior</span>
+<span class="kw">predict</span>(fit_lasso_cv, X)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calcualte &quot;train error&quot;</span>
+<span class="kw">mean</span>((y -<span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 123931.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSEs</span>
+<span class="kw">sqrt</span>(fit_lasso_cv$cvm)</code></pre></div>
+<pre><code>##  [1] 449.3277 440.7071 431.0678 422.5092 414.8664 406.8112 398.5303
+##  [8] 391.2518 385.2668 380.4241 376.4451 373.2058 370.5349 368.3130
+## [15] 366.0072 363.3523 360.7399 358.3513 356.3519 354.6989 353.3470
+## [22] 352.2426 351.3524 350.6268 350.0446 349.5824 349.3181 349.1585
+## [29] 349.0538 349.0200 349.0328 349.0258 349.0423 349.0801 349.1637
+## [36] 349.4301 349.8975 350.3329 350.3666 349.6884 348.8844 347.9256
+## [43] 347.0583 346.2675 345.4806 344.8304 344.3305 343.9875 343.8030
+## [50] 343.7842 343.8112 343.8724 343.9452 344.0594 344.2100 344.3086
+## [57] 344.4111 344.5311 344.5932 344.5202 344.5537 344.6630 344.7940
+## [64] 344.9468 345.0796 345.2049 345.3540 345.4562 345.5904 345.6817
+## [71] 345.7835 345.8659 345.9577 346.0287 346.1081 346.1692 346.2559</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSE using minimum lambda</span>
+<span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.min])</code></pre></div>
+<pre><code>## [1] 343.7842</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSE using 1-SE rule lambda</span>
+<span class="kw">sqrt</span>(fit_lasso_cv$cvm[fit_lasso_cv$lambda ==<span class="st"> </span>fit_lasso_cv$lambda.1se]) </code></pre></div>
+<pre><code>## [1] 370.5349</code></pre>
 </div>
 <div id="broom" class="section level2">
 <h2><span class="header-section-number">24.3</span> <code>broom</code></h2>
 <p>Sometimes, the output from <code>glmnet()</code> can be overwhelming. The <code>broom</code> package can help with that.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="co">#fit_lasso_cv</span>
+<span class="co"># the output from the commented line would be immense</span>
+<span class="co"># fit_lasso_cv</span>
 <span class="kw">tidy</span>(fit_lasso_cv)</code></pre></div>
 <pre><code>##         lambda estimate std.error conf.high  conf.low nzero
-## 1  255.2820965 203439.9  28169.73  231609.6 175270.12     0
-## 2  232.6035386 196535.2  29270.80  225806.0 167264.43     1
-## 3  211.9396813 188403.2  29138.43  217541.6 159264.75     2
-## 4  193.1115442 181349.2  28747.90  210097.1 152601.31     2
-## 5  175.9560468 175194.3  28466.90  203661.2 146727.35     3
-## 6  160.3245966 168594.6  28111.46  196706.1 140483.15     4
-## 7  146.0818013 162061.0  27591.63  189652.6 134469.36     4
-## 8  133.1042967 156018.4  27091.24  183109.6 128927.16     4
-## 9  121.2796778 150914.7  26649.85  177564.5 124264.86     4
-## 10 110.5055255 146676.5  26303.89  172980.4 120372.61     4
-## 11 100.6885192 143060.7  26016.25  169077.0 117044.45     5
-## 12  91.7436287 139674.6  25869.91  165544.5 113804.70     5
-## 13  83.5933775 136570.9  25753.64  162324.5 110817.22     5
-## 14  76.1671723 134009.6  25676.03  159685.7 108333.59     5
-## 15  69.4006906 131684.9  25660.67  157345.6 106024.28     6
-## 16  63.2353245 129468.2  25671.60  155139.8 103796.64     6
-## 17  57.6176726 127561.5  25703.69  153265.2 101857.85     6
-## 18  52.4990774 125910.0  25699.05  151609.0 100210.94     6
-## 19  47.8352040 124416.9  25611.71  150028.6  98805.19     6
-## 20  43.5856563 123175.1  25537.02  148712.2  97638.13     6
-## 21  39.7136268 122152.4  25488.26  147640.7  96664.18     6
-## 22  36.1855776 121313.1  25461.51  146774.6  95851.56     6
-## 23  32.9709506 120620.7  25449.10  146069.8  95171.56     6
-## 24  30.0419022 120061.3  25455.15  145516.4  94606.12     6
-## 25  27.3730624 119639.4  25468.56  145107.9  94170.80     6
-## 26  24.9413150 119338.5  25484.37  144822.9  93854.16     6
-## 27  22.7255973 119138.6  25498.46  144637.1  93640.16     6
-## 28  20.7067179 118991.3  25515.07  144506.4  93476.23     6
-## 29  18.8671902 118894.1  25530.74  144424.8  93363.32     6
-## 30  17.1910810 118832.4  25547.10  144379.5  93285.29     7
-## 31  15.6638727 118786.2  25570.69  144356.9  93215.51     7
-## 32  14.2723374 118766.2  25596.03  144362.2  93170.16     7
-## 33  13.0044223 118770.1  25621.42  144391.6  93148.70     9
-## 34  11.8491453 118761.8  25647.49  144409.3  93114.36     9
-## 35  10.7964999 118770.4  25667.97  144438.4  93102.47     9
-## 36   9.8373686 118829.1  25666.52  144495.6  93162.60     9
-## 37   8.9634439 119081.3  25651.02  144732.4  93430.31     9
-## 38   8.1671562 119425.8  25659.92  145085.8  93765.92    11
-## 39   7.4416086 119655.7  25683.62  145339.3  93972.06    11
-## 40   6.7805166 119553.8  25661.83  145215.7  93892.01    12
-## 41   6.1781542 119275.4  25487.38  144762.8  93788.00    12
-## 42   5.6293040 119052.2  25318.25  144370.5  93733.97    13
-## 43   5.1292121 118835.8  25145.06  143980.9  93690.77    13
-## 44   4.6735471 118542.1  24955.73  143497.8  93586.39    13
-## 45   4.2583620 118217.4  24703.37  142920.7  93514.00    13
-## 46   3.8800609 117768.0  24310.00  142078.0  93457.95    13
-## 47   3.5353670 117417.4  23969.38  141386.8  93448.07    13
-## 48   3.2212947 117137.3  23666.04  140803.4  93471.29    13
-## 49   2.9351238 116951.6  23410.75  140362.3  93540.84    13
-## 50   2.6743755 116938.8  23188.15  140126.9  93750.64    13
-## 51   2.4367913 116987.7  22992.51  139980.2  93995.19    13
-## 52   2.2203135 117093.0  22810.90  139903.9  94282.07    14
-## 53   2.0230670 117219.6  22625.26  139844.8  94594.30    15
-## 54   1.8433433 117367.7  22466.40  139834.1  94901.25    15
-## 55   1.6795857 117570.0  22322.38  139892.4  95247.65    17
-## 56   1.5303760 117709.7  22152.69  139862.4  95557.04    17
-## 57   1.3944216 117873.0  21988.18  139861.2  95884.81    17
-## 58   1.2705450 118094.3  21875.67  139969.9  96218.58    17
-## 59   1.1576733 118287.5  21777.43  140064.9  96510.04    17
-## 60   1.0548288 118469.7  21694.89  140164.6  96774.78    17
-## 61   0.9611207 118647.7  21613.81  140261.5  97033.86    17
-## 62   0.8757374 118832.6  21539.14  140371.7  97293.42    17
-## 63   0.7979393 119022.3  21472.54  140494.9  97549.79    17
-## 64   0.7270526 119207.5  21412.72  140620.3  97794.81    17
-## 65   0.6624632 119358.0  21357.66  140715.6  98000.31    18
-## 66   0.6036118 119520.7  21306.53  140827.3  98214.20    18
-## 67   0.5499886 119677.1  21260.75  140937.9  98416.40    18
-## 68   0.5011291 119826.5  21218.35  141044.8  98608.13    17
-## 69   0.4566102 119923.4  21184.87  141108.3  98738.53    18
-## 70   0.4160462 120033.1  21129.22  141162.3  98903.90    18
-## 71   0.3790858 120099.6  21109.75  141209.4  98989.90    18
-## 72   0.3454089 120201.8  21074.49  141276.3  99127.34    18
-## 73   0.3147237 120263.5  21058.86  141322.3  99204.62    18
-## 74   0.2867645 120361.6  21040.79  141402.4  99320.81    18
-## 75   0.2612891 120421.9  21037.77  141459.7  99384.15    18</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glance</span>(fit_lasso_cv) <span class="co"># the two lambda values of interest</span></code></pre></div>
+## 1  255.2820965 201895.4  23447.84  225343.3 178447.57     0
+## 2  232.6035386 194222.7  23848.72  218071.4 170374.01     1
+## 3  211.9396813 185819.4  23001.17  208820.6 162818.26     2
+## 4  193.1115442 178514.0  21970.56  200484.6 156543.48     2
+## 5  175.9560468 172114.1  21016.87  193131.0 151097.27     3
+## 6  160.3245966 165495.4  20134.06  185629.4 145361.31     4
+## 7  146.0818013 158826.4  19255.66  178082.1 139570.77     4
+## 8  133.1042967 153078.0  18517.59  171595.6 134560.41     4
+## 9  121.2796778 148430.5  17928.81  166359.3 130501.66     4
+## 10 110.5055255 144722.5  17476.58  162199.1 127245.93     4
+## 11 100.6885192 141710.9  17168.89  158879.8 124542.02     5
+## 12  91.7436287 139282.5  16995.29  156277.8 122287.26     5
+## 13  83.5933775 137296.1  16945.59  154241.7 120350.49     5
+## 14  76.1671723 135654.4  16903.38  152557.8 118751.07     5
+## 15  69.4006906 133961.3  16824.29  150785.6 117137.02     6
+## 16  63.2353245 132024.9  16731.75  148756.7 115293.17     6
+## 17  57.6176726 130133.3  16697.07  146830.4 113436.22     6
+## 18  52.4990774 128415.7  16728.80  145144.5 111686.89     6
+## 19  47.8352040 126986.7  16813.74  143800.4 110172.94     6
+## 20  43.5856563 125811.3  16936.81  142748.1 108874.50     6
+## 21  39.7136268 124854.1  17083.81  141937.9 107770.31     6
+## 22  36.1855776 124074.8  17245.97  141320.8 106828.87     6
+## 23  32.9709506 123448.5  17415.19  140863.7 106033.29     6
+## 24  30.0419022 122939.1  17587.93  140527.1 105351.21     6
+## 25  27.3730624 122531.2  17758.83  140290.0 104772.38     6
+## 26  24.9413150 122207.9  17925.82  140133.7 104282.06     6
+## 27  22.7255973 122023.2  18079.70  140102.9 103943.46     6
+## 28  20.7067179 121911.6  18225.41  140137.1 103686.24     6
+## 29  18.8671902 121838.6  18362.81  140201.4 103475.75     6
+## 30  17.1910810 121815.0  18488.63  140303.6 103326.33     7
+## 31  15.6638727 121823.9  18598.40  140422.3 103225.49     7
+## 32  14.2723374 121819.0  18687.17  140506.2 103131.85     7
+## 33  13.0044223 121830.5  18771.54  140602.1 103059.01     9
+## 34  11.8491453 121856.9  18868.50  140725.4 102988.39     9
+## 35  10.7964999 121915.3  18973.56  140888.8 102941.72     9
+## 36   9.8373686 122101.4  19110.15  141211.5 102991.26     9
+## 37   8.9634439 122428.2  19202.81  141631.0 103225.43     9
+## 38   8.1671562 122733.2  19217.10  141950.3 103516.07    11
+## 39   7.4416086 122756.7  19132.79  141889.5 103623.95    11
+## 40   6.7805166 122282.0  19143.82  141425.8 103138.19    12
+## 41   6.1781542 121720.3  19205.68  140926.0 102514.63    12
+## 42   5.6293040 121052.2  19305.91  140358.2 101746.34    13
+## 43   5.1292121 120449.5  19405.45  139854.9 101044.01    13
+## 44   4.6735471 119901.2  19446.67  139347.9 100454.53    13
+## 45   4.2583620 119356.9  19434.26  138791.1  99922.61    13
+## 46   3.8800609 118908.0  19420.79  138328.8  99487.21    13
+## 47   3.5353670 118563.5  19420.73  137984.2  99142.76    13
+## 48   3.2212947 118327.4  19426.67  137754.1  98900.72    13
+## 49   2.9351238 118200.5  19437.52  137638.0  98762.95    13
+## 50   2.6743755 118187.6  19468.64  137656.2  98718.95    13
+## 51   2.4367913 118206.2  19494.35  137700.5  98711.81    13
+## 52   2.2203135 118248.2  19494.64  137742.9  98753.60    14
+## 53   2.0230670 118298.3  19493.90  137792.2  98804.39    15
+## 54   1.8433433 118376.9  19492.73  137869.6  98884.17    15
+## 55   1.6795857 118480.5  19498.27  137978.8  98982.24    17
+## 56   1.5303760 118548.4  19523.07  138071.5  99025.35    17
+## 57   1.3944216 118619.0  19559.13  138178.1  99059.89    17
+## 58   1.2705450 118701.7  19593.56  138295.2  99108.12    17
+## 59   1.1576733 118744.5  19622.98  138367.5  99121.51    17
+## 60   1.0548288 118694.2  19630.23  138324.4  99063.94    17
+## 61   0.9611207 118717.2  19630.36  138347.6  99086.87    17
+## 62   0.8757374 118792.6  19632.29  138424.9  99160.30    17
+## 63   0.7979393 118882.9  19632.18  138515.1  99250.70    17
+## 64   0.7270526 118988.3  19630.85  138619.1  99357.43    17
+## 65   0.6624632 119079.9  19632.65  138712.6  99447.25    18
+## 66   0.6036118 119166.4  19634.48  138800.9  99531.95    18
+## 67   0.5499886 119269.4  19632.25  138901.6  99637.12    18
+## 68   0.5011291 119340.0  19632.91  138972.9  99707.07    17
+## 69   0.4566102 119432.8  19628.10  139060.9  99804.65    18
+## 70   0.4160462 119495.8  19629.24  139125.1  99866.59    18
+## 71   0.3790858 119566.3  19621.60  139187.9  99944.66    18
+## 72   0.3454089 119623.2  19617.91  139241.1 100005.31    18
+## 73   0.3147237 119686.7  19610.95  139297.7 100075.77    18
+## 74   0.2867645 119735.9  19610.29  139346.2 100125.60    18
+## 75   0.2612891 119790.8  19606.58  139397.4 100184.24    18
+## 76   0.2380769 119833.1  19607.71  139440.8 100225.38    18
+## 77   0.2169268 119893.1  19609.48  139502.6 100283.64    18</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the two lambda values of interest</span>
+<span class="kw">glance</span>(fit_lasso_cv) </code></pre></div>
 <pre><code>##   lambda.min lambda.1se
-## 1   2.674375   91.74363</code></pre>
+## 1   2.674375   83.59338</code></pre>
 </div>
-<div id="simulation-study-p-n" class="section level2">
-<h2><span class="header-section-number">24.4</span> Simulation Study, p &gt; n</h2>
+<div id="simulated-data-p-n" class="section level2">
+<h2><span class="header-section-number">24.4</span> Simulated Data, <span class="math inline">\(p &gt; n\)</span></h2>
 <p>Aside from simply shrinking coefficients (ridge) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the <span class="math inline">\(p &gt; n\)</span> case.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
 n =<span class="st"> </span><span class="dv">1000</span>
@@ -732,7 +751,7 @@ y =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">r
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(glmnet)
 fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(fit_cv)</code></pre></div>
-<p><img src="24-regularization_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">coef</span>(fit_cv), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>## 10 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                      1
@@ -764,10 +783,10 @@ fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span c
 <span class="kw">which</span>(<span class="kw">as.vector</span>(<span class="kw">as.matrix</span>(fit_1se$beta)) !=<span class="st"> </span><span class="dv">0</span>)</code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
 <p>We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>))</code></pre></div>
-<p><img src="24-regularization_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</code></pre></div>
-<p><img src="24-regularization_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>))
+<span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</code></pre></div>
+<p><img src="24-regularization_files/figure-html/unnamed-chunk-38-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>We can extract the two relevant <span class="math inline">\(\lambda\)</span> values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_cv$lambda.min</code></pre></div>
 <pre><code>## [1] 0.03087158</code></pre>
@@ -794,6 +813,7 @@ fit_lasso$results</code></pre></div>
 <pre><code>##   alpha     lambda  Accuracy     Kappa AccuracySD    KappaSD
 ## 1     1 0.03087158 0.7679304 0.5358028 0.03430230 0.06844656
 ## 2     1 0.05149690 0.7689003 0.5377583 0.02806941 0.05596114</code></pre>
+<p>The interaction between the <code>glmnet</code> and <code>caret</code> packages is sometimes frustrating, but for obtaining results for particular values of <span class="math inline">\(\lambda\)</span>, we see it can be easily used. More on this next chapter.</p>
 </div>
 <div id="external-links-6" class="section level2">
 <h2><span class="header-section-number">24.5</span> External Links</h2>
@@ -802,37 +822,9 @@ fit_lasso$results</code></pre></div>
 </ul>
 </div>
 <div id="rmarkdown-12" class="section level2">
-<h2><span class="header-section-number">24.6</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="15-shrink.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2 and the following packages:</p>
-<ul>
-<li>Base Packages, Attached</li>
-</ul>
-<pre><code>## [1] &quot;methods&quot;   &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
-## [7] &quot;base&quot;</code></pre>
-<ul>
-<li>Additional Packages, Attached</li>
-</ul>
+<h2><span class="header-section-number">24.6</span> <code>rmarkdown</code></h2>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="24-regularization.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot; &quot;broom&quot;   &quot;glmnet&quot;  &quot;foreach&quot; &quot;Matrix&quot;</code></pre>
-<ul>
-<li>Additional Packages, Not Attached</li>
-</ul>
-<pre><code>##  [1] &quot;Rcpp&quot;         &quot;lubridate&quot;    &quot;tidyr&quot;        &quot;class&quot;       
-##  [5] &quot;assertthat&quot;   &quot;rprojroot&quot;    &quot;digest&quot;       &quot;ipred&quot;       
-##  [9] &quot;psych&quot;        &quot;R6&quot;           &quot;plyr&quot;         &quot;backports&quot;   
-## [13] &quot;stats4&quot;       &quot;evaluate&quot;     &quot;e1071&quot;        &quot;rlang&quot;       
-## [17] &quot;lazyeval&quot;     &quot;kernlab&quot;      &quot;rpart&quot;        &quot;rmarkdown&quot;   
-## [21] &quot;splines&quot;      &quot;CVST&quot;         &quot;ddalpha&quot;      &quot;gower&quot;       
-## [25] &quot;stringr&quot;      &quot;foreign&quot;      &quot;munsell&quot;      &quot;compiler&quot;    
-## [29] &quot;pkgconfig&quot;    &quot;mnormt&quot;       &quot;dimRed&quot;       &quot;htmltools&quot;   
-## [33] &quot;nnet&quot;         &quot;tibble&quot;       &quot;prodlim&quot;      &quot;DRR&quot;         
-## [37] &quot;bookdown&quot;     &quot;codetools&quot;    &quot;RcppRoll&quot;     &quot;dplyr&quot;       
-## [41] &quot;withr&quot;        &quot;MASS&quot;         &quot;recipes&quot;      &quot;ModelMetrics&quot;
-## [45] &quot;grid&quot;         &quot;nlme&quot;         &quot;gtable&quot;       &quot;magrittr&quot;    
-## [49] &quot;scales&quot;       &quot;stringi&quot;      &quot;reshape2&quot;     &quot;bindrcpp&quot;    
-## [53] &quot;timeDate&quot;     &quot;robustbase&quot;   &quot;lava&quot;         &quot;iterators&quot;   
-## [57] &quot;tools&quot;        &quot;glue&quot;         &quot;DEoptimR&quot;     &quot;purrr&quot;       
-## [61] &quot;sfsmisc&quot;      &quot;parallel&quot;     &quot;survival&quot;     &quot;yaml&quot;        
-## [65] &quot;colorspace&quot;   &quot;knitr&quot;        &quot;bindr&quot;</code></pre>
 
 </div>
 </div>

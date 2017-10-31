@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-10-26">
+<meta name="date" content="2017-10-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -281,9 +281,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
-<li class="chapter" data-level="24.4" data-path="regularization.html"><a href="regularization.html#simulation-study-p-n"><i class="fa fa-check"></i><b>24.4</b> Simulation Study, p &gt; n</a></li>
+<li class="chapter" data-level="24.4" data-path="regularization.html"><a href="regularization.html#simulated-data-p-n"><i class="fa fa-check"></i><b>24.4</b> Simulated Data, <span class="math inline">\(p &gt; n\)</span></a></li>
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
-<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#hitters-data"><i class="fa fa-check"></i><b>25.1</b> Hitters Data</a></li>
@@ -524,29 +524,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
-##        x1         x2          y
-##    &lt;fctr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1      A 0.67645696 -0.4319804
-##  2      A 0.08157189 -0.6201461
-##  3      A 0.69239381 -0.7823786
-##  4      A 0.58621092 -0.3547475
-##  5      A 0.82423526  1.0071951
-##  6      A 0.89424726  1.3568096
-##  7      A 0.35027769 -1.3866902
-##  8      A 0.17990303 -0.2054924
-##  9      A 0.38875219  0.3709253
-## 10      A 0.08550207  0.3743215
+##        x1         x2            y
+##    &lt;fctr&gt;      &lt;dbl&gt;        &lt;dbl&gt;
+##  1      A 0.22412850 -0.473149413
+##  2      A 0.83954765 -0.001145951
+##  3      A 0.08731061 -1.798190544
+##  4      A 0.91850312  0.662234545
+##  5      A 0.74232274  0.546582828
+##  6      A 0.79097217 -0.609244863
+##  7      A 0.59057602  1.490286528
+##  8      A 0.94364177 -0.542840657
+##  9      A 0.92170293 -0.621085504
+## 10      A 0.28817714 -0.429606416
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  -0.3485363   0.2377125  -0.4309129   0.5910598</code></pre>
+##  -0.4874379   0.6727238   0.2527128   0.4881483</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-## -0.60741916  0.87070405 -0.07517775  1.13498267 -1.14227153 -0.70521412</code></pre>
+## -0.90852844  2.02639567  0.02375034  1.15160866 -2.23379607  0.27187800</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
