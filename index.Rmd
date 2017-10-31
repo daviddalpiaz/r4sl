@@ -16,9 +16,12 @@ download: [["r4sl.pdf", "PDF"]]
 description: ""
 ---
 
-
 ```{r global.options, include = FALSE}
 knitr::opts_chunk$set(fig.align = "center")
+```
+
+```{r}
+knitr::include_graphics("wordmark.png")
 ```
 
 
