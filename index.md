@@ -19,6 +19,14 @@ description: ""
 
 
 
+```r
+knitr::include_graphics("wordmark.png")
+```
+
+
+
+\begin{center}\includegraphics{wordmark} \end{center}
+
 
 # Introduction {-}
 
