@@ -12,7 +12,7 @@ biblio-style: apalike
 favicon: "favicon.ico"
 link-citations: yes
 urlcolor: cyan
-download: [["r4sl.pdf", "PDF"]]
+download: ["r4sl.pdf"]
 description: ""
 ---
 
