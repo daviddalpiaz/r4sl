@@ -20,12 +20,11 @@ description: ""
 knitr::opts_chunk$set(fig.align = "center")
 ```
 
-```{r}
+# Introduction {-}
+
+```{r, echo = FALSE}
 knitr::include_graphics("wordmark.png")
 ```
-
-
-# Introduction {-}
 
 Welcome to `R` for Statistical Learning! While this is the current title, a more appropriate title would be "Machine Learning from the Perspective of a Statistician using `R`" but that doesn't seem as catchy.
 
