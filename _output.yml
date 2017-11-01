@@ -3,11 +3,12 @@ bookdown::gitbook:
   split_by: chapter
   config:
     toc:
-      collapse: section
+      collapse: chapter
       before: |
         <li><a href="./">R for Statistical Learning</a></li>
       after: |
         <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
+    download: ["r4sl.pdf"]
     edit:
       link: https://github.com/daviddalpiaz/r4sl/edit/master/%s
 bookdown::pdf_book:
