@@ -1,5 +1,9 @@
 # Bias–Variance Tradeoff
 
+```{r bvt, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
 Consider the general regression setup where we are given a random pair $(X, Y) \in \mathbb{R}^p \times \mathbb{R}$. We would like to "predict" $Y$ with some function of $X$, say, $f(X)$.
 
 To clarify what we mean by "predict," we specify that we would like $f(X)$ to be "close" to $Y$. To further clarify what we mean by "close," we define the **squared error loss** of estimating $Y$ using $f(X)$.
@@ -142,6 +146,7 @@ plot(x, g(x), ylim = c(0, 3), type = "l", lwd = 2,
      ylab = "Error", xlab = expression(Low %<-% Complexity %->% High),
      main = "Error versus Model Complexity", col = "darkorange", 
      axes = FALSE)
+grid()
 axis(1, labels = FALSE)
 axis(2, labels = FALSE)
 box()
@@ -168,6 +173,7 @@ plot(x, b, type = "l", ylim = c(0, 10), col = "dodgerblue", lwd = 2, lty = 3,
      main = "More Dominant Variance")
 axis(1, labels = FALSE)
 axis(2, labels = FALSE)
+grid()
 box()
 lines(x, v, col = "darkorange", lwd = 2, lty = 4)
 lines(x, epe, col = "black", lwd = 2)
@@ -184,6 +190,7 @@ plot(x, b, type = "l", ylim = c(0, 10), col = "dodgerblue", lwd = 2, lty = 3,
      main = "Decomposition of Prediction Error")
 axis(1, labels = FALSE)
 axis(2, labels = FALSE)
+grid()
 box()
 lines(x, v, col = "darkorange", lwd = 2, lty = 4)
 lines(x, epe, col = "black", lwd = 2)
@@ -200,6 +207,7 @@ plot(x, b, type = "l", ylim = c(0, 10), col = "dodgerblue", lwd = 2, lty = 3,
      main = "More Dominant Bias")
 axis(1, labels = FALSE)
 axis(2, labels = FALSE)
+grid()
 box()
 lines(x, v, col = "darkorange", lwd = 2, lty = 4)
 lines(x, epe, col = "black", lwd = 2)
@@ -240,6 +248,7 @@ plot(x, g(x), ylim = c(0, 3), type = "l", lwd = 2,
      ylab = "Error", xlab = "",
      main = "Error versus Model Complexity", col = "darkorange", 
      axes = FALSE)
+grid()
 axis(1, labels = FALSE)
 axis(2, labels = FALSE)
 box()
@@ -353,6 +362,7 @@ Plotting these four trained models, we see that the zero predictor model does ve
 set.seed(42)
 plot(y ~ x, data = sim_data, col = "grey", pch = 20,
      main = "Four Polynomial Models fit to a Simulated Dataset")
+grid()
 grid = seq(from = 0, to = 2, by = 0.01)
 lines(grid, f(grid), col = "black", lwd = 3)
 lines(grid, predict(fit_0, newdata = data.frame(x = grid)), col = "dodgerblue",  lwd = 2, lty = 2)
@@ -386,18 +396,21 @@ fit_9_2 = lm(y ~ poly(x, degree = 9), data = sim_data_2)
 fit_9_3 = lm(y ~ poly(x, degree = 9), data = sim_data_3)
 
 plot(y ~ x, data = sim_data_1, col = "grey", pch = 20, main = "Simulated Dataset 1")
+grid()
 grid = seq(from = 0, to = 2, by = 0.01)
 lines(grid, predict(fit_0_1, newdata = data.frame(x = grid)), col = "dodgerblue", lwd = 2, lty = 2)
 lines(grid, predict(fit_9_1, newdata = data.frame(x = grid)), col = "darkorange", lwd = 2, lty = 5)
 legend("topleft", c("y ~ 1", "y ~ poly(x, 9)"), col = c("dodgerblue", "darkorange"), lty = c(2, 5), lwd = 2)
 
 plot(y ~ x, data = sim_data_2, col = "grey", pch = 20, main = "Simulated Dataset 2")
+grid()
 grid = seq(from = 0, to = 2, by = 0.01)
 lines(grid, predict(fit_0_2, newdata = data.frame(x = grid)), col = "dodgerblue", lwd = 2, lty = 2)
 lines(grid, predict(fit_9_2, newdata = data.frame(x = grid)), col = "darkorange", lwd = 2, lty = 5)
 legend("topleft", c("y ~ 1", "y ~ poly(x, 9)"), col = c("dodgerblue", "darkorange"), lty = c(2, 5), lwd = 2)
 
 plot(y ~ x, data = sim_data_3, col = "grey", pch = 20, main = "Simulated Dataset 3")
+grid()
 grid = seq(from = 0, to = 2, by = 0.01)
 lines(grid, predict(fit_0_3, newdata = data.frame(x = grid)), col = "dodgerblue", lwd = 2, lty = 2)
 lines(grid, predict(fit_9_3, newdata = data.frame(x = grid)), col = "darkorange", lwd = 2, lty = 5)
@@ -431,20 +444,22 @@ fit_9_2 = FNN::knn.reg(train = sim_data_2["x"], test = data.frame(x = grid), y =
 fit_9_3 = FNN::knn.reg(train = sim_data_3["x"], test = data.frame(x = grid), y = sim_data_3["y"], k = 100)$pred
 
 plot(y ~ x, data = sim_data_1, col = "grey", pch = 20, main = "Simulated Dataset 1")
+grid()
 lines(grid, fit_0_1, col = "dodgerblue", lwd = 1, lty = 1)
 lines(grid, fit_9_1, col = "darkorange", lwd = 2, lty = 2)
 legend("topleft", c("k = 5", "k = 100"), col = c("dodgerblue", "darkorange"), lty = c(1, 2), lwd = 2)
 
 plot(y ~ x, data = sim_data_2, col = "grey", pch = 20, main = "Simulated Dataset 2")
+grid()
 lines(grid, fit_0_2, col = "dodgerblue", lwd = 1, lty = 1)
 lines(grid, fit_9_2, col = "darkorange", lwd = 2, lty = 2)
 legend("topleft", c("k = 5", "k = 100"), col = c("dodgerblue", "darkorange"), lty = c(1, 2), lwd = 2)
 
 plot(y ~ x, data = sim_data_3, col = "grey", pch = 20, main = "Simulated Dataset 3")
+grid()
 lines(grid, fit_0_3, col = "dodgerblue", lwd = 1, lty = 1)
 lines(grid, fit_9_3, col = "darkorange", lwd = 2, lty = 2)
 legend("topleft", c("k = 5", "k = 100"), col = c("dodgerblue", "darkorange"), lty = c(1, 2), lwd = 2)
-
 ```
 
 Here we see that when $k = 100$ we have a biased model with very low variance. (It's actually the same as the 0 predictor linear model.) When $k = 5$, we again have a highly variable model.
@@ -462,7 +477,7 @@ predictions = matrix(0, nrow = n_sims, ncol = n_models)
 ```
 
 ```{r}
-for(sim in 1:n_sims) {
+for (sim in 1:n_sims) {
 
   # simulate new, random, training data
   # this is the only random portion of the bias, var, and mse calculations
@@ -527,6 +542,7 @@ predictions = as.data.frame(predictions)
 tall_predictions = tidyr::gather(predictions, factor_key = TRUE)
 boxplot(value ~ key, data = tall_predictions, border = "darkgrey", xlab = "Polynomial Degree", ylab = "Predictions",
         main = "Simulated Predictions for Polynomial Models")
+grid()
 stripchart(value ~ key, data = tall_predictions, add = TRUE, vertical = TRUE, method = "jitter", jitter = 0.15, pch = 1, col = c("dodgerblue", "firebrick", "springgreen", "darkorange"))
 abline(h = f(x = 0.90), lwd = 2)
 ```
@@ -609,7 +625,7 @@ results = data.frame(
 )
 colnames(results) = c("Degree", "Mean Squared Error", "Bias Squared", "Variance")
 rownames(results) = NULL
-knitr::kable(results, booktabs = TRUE, escape = TRUE)
+knitr::kable(results, booktabs = TRUE, escape = TRUE, align = "center")
 ```
 
 A number of things to notice here:
