@@ -625,7 +625,7 @@ results = data.frame(
 )
 colnames(results) = c("Degree", "Mean Squared Error", "Bias Squared", "Variance")
 rownames(results) = NULL
-knitr::kable(results, booktabs = TRUE, escape = TRUE, align = "center")
+knitr::kable(results, booktabs = TRUE, escape = TRUE, align = "c")
 ```
 
 A number of things to notice here:
