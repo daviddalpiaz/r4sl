@@ -4,8 +4,6 @@
 
 We again use the `Hitters` dataset from the `ISLR` package to explore another shrinkage method, **elastic net**, which combines the *ridge* and *lasso* methods from the previous chapter.
 
-## Hitters Data
-
 
 ```r
 data(Hitters, package = "ISLR")
@@ -51,13 +49,6 @@ Because this dataset isn't particularly large, we will forego a test-train split
 
 
 ```r
-# this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3
-# see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console
-library(methods)
-```
-
-
-```r
 library(caret)
 library(glmnet)
 ```
@@ -66,12 +57,16 @@ Since he have loaded `caret`, we also have access to the `lattice` package which
 
 
 ```r
-histogram(Hitters$Salary, xlab = "Salary, $1000s", main = "Baseball Salaries, 1986 - 1987")
+histogram(Hitters$Salary, xlab = "Salary, $1000s", 
+          main = "Baseball Salaries, 1986 - 1987")
 ```
 
-![](25-elnet_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
-## Elastic Net for Regression
+
+\begin{center}\includegraphics{25-elnet_files/figure-latex/unnamed-chunk-5-1} \end{center}
+
+
+## Regression
 
 Like ridge and lasso, we again attempt to minimize the residual sum of squares plus some penalty term.
 
@@ -98,7 +93,7 @@ Often it is more useful to simply think of $\alpha$ as controlling the mixing be
 
 
 ```r
-set.seed(430)
+set.seed(42)
 cv_5 = trainControl(method = "cv", number = 5)
 ```
 
@@ -130,27 +125,27 @@ hit_elnet
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 210, 211, 210, 211, 210 
+## Summary of sample sizes: 209, 211, 211, 212, 209 
 ## Resampling results across tuning parameters:
 ## 
 ##   alpha  lambda   RMSE   Rsquared  MAE  
-##   0.10    0.5106  340.7  0.4463    242.4
-##   0.10    5.1056  340.5  0.4441    241.2
-##   0.10   51.0564  344.7  0.4329    237.3
-##   0.55    0.5106  340.3  0.4468    242.1
-##   0.55    5.1056  341.2  0.4426    239.3
-##   0.55   51.0564  346.0  0.4345    238.6
-##   1.00    0.5106  339.9  0.4475    241.7
-##   1.00    5.1056  342.2  0.4400    237.9
-##   1.00   51.0564  355.4  0.4162    246.3
+##   0.10    0.5106  327.7  0.4869    231.6
+##   0.10    5.1056  327.4  0.4894    230.7
+##   0.10   51.0564  334.3  0.4734    229.4
+##   0.55    0.5106  327.6  0.4873    231.5
+##   0.55    5.1056  328.1  0.4895    229.1
+##   0.55   51.0564  338.7  0.4749    233.2
+##   1.00    0.5106  327.6  0.4877    231.3
+##   1.00    5.1056  331.3  0.4818    229.3
+##   1.00   51.0564  348.8  0.4663    242.2
 ## 
 ## RMSE was used to select the optimal model using  the smallest value.
-## The final values used for the model were alpha = 1 and lambda = 0.5106.
+## The final values used for the model were alpha = 0.1 and lambda = 5.106.
 ```
 
-Notice a few things with these results. First, we have tried three $\alpha$ values, `0.1`, `0.55`, and `1`. It is not entirely clear why `caret` doesn't use `0`. It likely uses `0.1` to fit a model close to ridge, but with some potential for sparsity.
+Notice a few things with these results. First, we have tried three $\alpha$ values, `0.10`, `0.55`, and `1`. It is not entirely clear why `caret` doesn't use `0`. It likely uses `0.10` to fit a model close to ridge, but with some potential for sparsity.
 
-Here, the best result uses $\alpha = 0.55$, so this result is somewhere between ridge and lasso.
+Here, the best result uses $\alpha = 0.10$, so this result is somewhere between ridge and lasso, but closer to ridge.
 
 
 ```r
@@ -171,7 +166,8 @@ To deal with this, we write a quick helper function to extract the row with the 
 
 ```r
 get_best_result = function(caret_fit) {
-  best_result = caret_fit$results[as.numeric(rownames(caret_fit$bestTune)), ]
+  best = which(rownames(caret_fit$results) == rownames(caret_fit$bestTune))
+  best_result = caret_fit$results[best, ]
   rownames(best_result) = NULL
   best_result
 }
@@ -180,14 +176,13 @@ get_best_result = function(caret_fit) {
 We then call this function on the trained object.
 
 
-
 ```r
 get_best_result(hit_elnet_int)
 ```
 
 ```
 ##   alpha lambda  RMSE Rsquared   MAE RMSESD RsquaredSD MAESD
-## 1     1  4.135 295.5   0.5808 196.8     50     0.1525 11.49
+## 1     1  4.135 313.5     0.56 206.1  70.83     0.1254 24.37
 ```
 
 We see that the best result uses $\alpha = 1$, which makes since. With $\alpha = 1$, many of the added interaction coefficients are likely set to zero. (Unfortunately, obtaining this information after using `caret` with `glmnet` isn't easy. The two don't actually play very nice together. We'll use `cv.glmnet()` with the expanded feature space to explore this.)
@@ -198,7 +193,7 @@ We also perform a quick analysis using `cv.glmnet()` instead. Due in part to ran
 
 
 ```r
-set.seed(430)
+set.seed(42)
 X = model.matrix(Salary ~ . ^ 2, Hitters)[, -1]
 y = Hitters$Salary
 
@@ -207,17 +202,31 @@ sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min]) # CV-RMSE
 ```
 
 ```
-## [1] 304.1
+## [1] 305
 ```
 
-The commented line is not run, since it produces a lot of output, but if run, it will show that the fast majority of the coefficients are zero! (Also, you'll notice that `cv.glmnet()` does not respect the usual predictor hierarchy. Not a problem for prediction, but a massive interpretation issue!)
+The commented line is not run, since it produces a lot of output, but if run, it will show that the fast majority of the coefficients are zero! Also, you'll notice that `cv.glmnet()` does not respect the usual predictor hierarchy. Not a problem for prediction, but a massive interpretation issue!
 
 
 ```r
 #coef(fit_lasso_cv)
+sum(coef(fit_lasso_cv) != 0)
 ```
 
-## Elastic Net for Classification
+```
+## [1] 5
+```
+
+```r
+sum(coef(fit_lasso_cv) == 0)
+```
+
+```
+## [1] 186
+```
+
+
+## Classification
 
 Above, we have performed a regression task. But like lasso and ridge, elastic net can also be used for classification by using the deviance instead of the residual sum of squares. This essentially happens automatically in `caret` if the response variable is a factor.
 
@@ -230,7 +239,7 @@ data(Default, package = "ISLR")
 
 
 ```r
-set.seed(430)
+set.seed(42)
 default_idx = createDataPartition(Default$default, p = 0.75, list = FALSE)
 default_trn = Default[default_idx, ]
 default_tst = Default[-default_idx, ]
@@ -257,29 +266,27 @@ def_elnet
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 6001, 6001, 6000, 6001, 6001 
+## Summary of sample sizes: 6001, 6001, 6001, 6000, 6001 
 ## Resampling results across tuning parameters:
 ## 
-##   alpha  lambda     Accuracy  Kappa  
-##   0.10   0.0001242  0.9733    0.40751
-##   0.10   0.0012424  0.9727    0.36354
-##   0.10   0.0124239  0.9676    0.07718
-##   0.55   0.0001242  0.9732    0.40600
-##   0.55   0.0012424  0.9724    0.36841
-##   0.55   0.0124239  0.9684    0.12506
-##   1.00   0.0001242  0.9732    0.40600
-##   1.00   0.0012424  0.9727    0.38095
-##   1.00   0.0124239  0.9689    0.15170
+##   alpha  lambda     Accuracy  Kappa 
+##   0.10   0.0001242  0.9731    0.4125
+##   0.10   0.0012422  0.9731    0.3878
+##   0.10   0.0124220  0.9679    0.0796
+##   0.55   0.0001242  0.9731    0.4125
+##   0.55   0.0012422  0.9731    0.3909
+##   0.55   0.0124220  0.9684    0.1144
+##   1.00   0.0001242  0.9731    0.4125
+##   1.00   0.0012422  0.9732    0.4104
+##   1.00   0.0124220  0.9693    0.1661
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final values used for the model were alpha = 0.1 and lambda
-##  = 0.0001242.
+## The final values used for the model were alpha = 1 and lambda = 0.001242.
 ```
 
 Since the best model used $\alpha = 1$, this is a lasso model.
 
 We also try an expanded feature space, and a larger tuning grid.
-
 
 
 ```r
@@ -294,21 +301,20 @@ def_elnet_int = train(
 Since the result here will return 100 models, we again use are helper function to simply extract the best result.
 
 
-
 ```r
 get_best_result(def_elnet_int)
 ```
 
 ```
 ##   alpha   lambda Accuracy  Kappa AccuracySD KappaSD
-## 1     1 0.001888   0.9728 0.3906   0.002509 0.07252
+## 1   0.1 0.001888   0.9732 0.3887   0.001843 0.07165
 ```
 
-Here we see $\alpha = 0.3$, which is a mix between ridge and lasso.
+Here we see $\alpha = 0.1$, which is a mix, but close to ridge.
 
 
 ```r
-accuracy = function(actual, predicted) {
+calc_acc = function(actual, predicted) {
   mean(actual == predicted)
 }
 ```
@@ -318,12 +324,12 @@ Evaluating the test accuracy of this model, we obtain one of the highest accurac
 
 ```r
 # test acc
-accuracy(actual = default_tst$default,
+calc_acc(actual = default_tst$default,
          predicted = predict(def_elnet_int, newdata = default_tst))
 ```
 
 ```
-## [1] 0.9744
+## [1] 0.9728
 ```
 
 
@@ -333,43 +339,11 @@ accuracy(actual = default_tst$default,
 - [`glmnet` with `caret`](https://github.com/topepo/caret/issues/116) - Some details on Elastic Net tuning in the `caret` package.
 
 
-## RMarkdown
+## `rmarkdown`
 
-The RMarkdown file for this chapter can be found [**here**](16-elnet.Rmd). The file was created using `R` version 3.4.2 and the following packages:
-
-- Base Packages, Attached
-
-
-```
-## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-## [7] "base"
-```
-
-- Additional Packages, Attached
+The `rmarkdown` file for this chapter can be found [**here**](25-elnet.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
 ## [1] "glmnet"  "foreach" "Matrix"  "caret"   "ggplot2" "lattice"
-```
-
-- Additional Packages, Not Attached
-
-
-```
-##  [1] "reshape2"     "kernlab"      "purrr"        "splines"     
-##  [5] "colorspace"   "stats4"       "htmltools"    "yaml"        
-##  [9] "survival"     "prodlim"      "rlang"        "e1071"       
-## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
-## [17] "plyr"         "bindr"        "dimRed"       "lava"        
-## [21] "robustbase"   "stringr"      "timeDate"     "munsell"     
-## [25] "gtable"       "recipes"      "codetools"    "evaluate"    
-## [29] "knitr"        "class"        "DEoptimR"     "Rcpp"        
-## [33] "scales"       "backports"    "ipred"        "CVST"        
-## [37] "digest"       "stringi"      "bookdown"     "dplyr"       
-## [41] "RcppRoll"     "ddalpha"      "grid"         "rprojroot"   
-## [45] "tools"        "magrittr"     "lazyeval"     "tibble"      
-## [49] "DRR"          "pkgconfig"    "MASS"         "lubridate"   
-## [53] "gower"        "assertthat"   "rmarkdown"    "iterators"   
-## [57] "R6"           "rpart"        "sfsmisc"      "nnet"        
-## [61] "nlme"         "compiler"
 ```

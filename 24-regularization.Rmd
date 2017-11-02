@@ -2,7 +2,7 @@
 
 **Chapter Status:** Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later. Also, more comments on using `glmnet` with `caret` will be discussed.
 
-```{r caret_opts, include = FALSE}
+```{r reg_opts, include = FALSE}
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
 
