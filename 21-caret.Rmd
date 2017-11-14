@@ -477,4 +477,9 @@ This question of *which* variables should be included is where we will turn our 
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`.
+The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`. The following packages (and their dependencies) were loaded when knitting this file:
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+

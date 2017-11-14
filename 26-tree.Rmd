@@ -1,5 +1,11 @@
 # Trees
 
+**Chapter Status:** This chapter was originally written using the `tree` packages. Currently being re-written to exclusively use the `rpart` package which seems more widely suggested and provides better plotting features.
+
+```{r tree_opts, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
 ```{r, message = FALSE, warning = FALSE}
 library(tree)
 ```
@@ -68,7 +74,7 @@ Note that, the tree is not using all of the available variables.
 
 ```{r}
 summary(seat_tree)$used
-names(Carseats)[which(!(names(Carseats) %in%summary(seat_tree)$used))]
+names(Carseats)[which(!(names(Carseats) %in% summary(seat_tree)$used))]
 ```
 
 Also notice that, this new tree is slightly different than the tree fit to all of the data.
@@ -313,27 +319,10 @@ rpart.plot(seat_rpart_prune)
 - [`rpart.plot` Package](http://www.milbo.org/doc/prp.pdf) - Detailed manual on plotting with `rpart` using the `rpart.plot` package.
 
 
-## RMarkdown
+## `rmarkdown`
 
-The RMarkdown file for this chapter can be found [**here**](19-tree.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)` and the following packages:
-
-- Base Packages, Attached
-
-```{r, echo = FALSE}
-sessionInfo()$basePkgs
-```
-
-- Additional Packages, Attached
+The `rmarkdown` file for this chapter can be found [**here**](26-tree.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`. The following packages (and their dependencies) were loaded when knitting this file:
 
 ```{r, echo = FALSE}
 names(sessionInfo()$otherPkgs)
 ```
-
-- Additional Packages, Not Attached
-
-```{r, echo = FALSE}
-names(sessionInfo()$loadedOnly)
-```
-
-
-
