@@ -39,7 +39,8 @@ We plot this training data, as well as the true regression function.
 
 ```r
 plot(y ~ x, data = sim_trn, col = "dodgerblue", pch = 20)
-curve(x ^ 3, add = TRUE, col = "grey", lwd = 2)
+grid()
+curve(x ^ 3, add = TRUE, col = "black", lwd = 2)
 ```
 
 

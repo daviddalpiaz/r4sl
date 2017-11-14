@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-02">
+<meta name="date" content="2017-11-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -296,7 +296,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
-<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
 <li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
@@ -321,7 +321,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="27.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>27.4</b> Tree versus Ensemble Boundaries</a></li>
 <li class="chapter" data-level="27.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-9"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
-<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-15"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-15"><i class="fa fa-check"></i><b>27.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="artificial-neural-networks.html"><a href="artificial-neural-networks.html"><i class="fa fa-check"></i><b>28</b> Artificial Neural Networks</a></li>
 <li class="part"><span><b>VII Appendix</b></span></li>
@@ -523,29 +523,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
-##        x1          x2          y
-##    &lt;fctr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-##  1      A 0.528802282  0.3300900
-##  2      A 0.159867064 -0.4510905
-##  3      A 0.111243468  0.1318355
-##  4      A 0.616414959 -1.6456583
-##  5      A 0.191905315  1.3317435
-##  6      A 0.003924092 -1.2171826
-##  7      A 0.536036229 -0.1956863
-##  8      A 0.663777194 -0.4165936
-##  9      A 0.791557838 -0.9819392
-## 10      A 0.710116228  1.1619605
+##        x1         x2           y
+##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+##  1      A 0.96452771  1.04460262
+##  2      A 0.02901216 -0.92585517
+##  3      A 0.01549893  0.13172735
+##  4      A 0.73890112 -0.32841086
+##  5      A 0.67827785  1.41604744
+##  6      A 0.39086240 -1.62906018
+##  7      A 0.07670577 -1.16220750
+##  8      A 0.48623529 -0.09930012
+##  9      A 0.59482242  0.34285333
+## 10      A 0.29059833 -0.71905358
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-## -0.15427692  0.25147575  0.14641485 -0.09498966</code></pre>
+##  -0.3837446  -0.4106122   0.1871724   0.4475009</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-## -0.11407862 -0.04623605  0.35632530 -0.18817837  0.63611212 -0.38760119</code></pre>
+##  -0.9747830   0.8604753   1.0467607   1.8331449  -2.4990701  -1.9063352</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
@@ -647,9 +647,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

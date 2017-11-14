@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-02">
+<meta name="date" content="2017-11-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -296,7 +296,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
-<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
 <li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
@@ -321,7 +321,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="27.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>27.4</b> Tree versus Ensemble Boundaries</a></li>
 <li class="chapter" data-level="27.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-9"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
-<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-15"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-15"><i class="fa fa-check"></i><b>27.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="artificial-neural-networks.html"><a href="artificial-neural-networks.html"><i class="fa fa-check"></i><b>28</b> Artificial Neural Networks</a></li>
 <li class="part"><span><b>VII Appendix</b></span></li>
@@ -373,7 +373,8 @@ sim_trn  =<span class="st"> </span>sim_data[sim_idx, ]
 sim_val  =<span class="st"> </span>sim_data[-sim_idx, ]</code></pre></div>
 <p>We plot this training data, as well as the true regression function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-<span class="kw">curve</span>(x ^<span class="st"> </span><span class="dv">3</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
+<span class="kw">grid</span>()
+<span class="kw">curve</span>(x ^<span class="st"> </span><span class="dv">3</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
 <p><img src="20-resampling_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calc_rmse =<span class="st"> </span>function(actual, predicted) {
   <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual -<span class="st"> </span>predicted) ^<span class="st"> </span><span class="dv">2</span>))
@@ -773,9 +774,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

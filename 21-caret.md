@@ -805,4 +805,11 @@ This question of *which* variables should be included is where we will turn our 
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The file was created using `R` version 3.4.2.
+The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
+
+
+```
+## [1] "MASS"     "nnet"     "plyr"     "gbm"      "survival" "caret"   
+## [7] "ggplot2"  "lattice"
+```
+

@@ -1,5 +1,9 @@
 # Trees
 
+**Chapter Status:** This chapter was originally written using the `tree` packages. Currently being re-written to exclusively use the `rpart` package which seems more widely suggested and provides better plotting features.
+
+
+
 
 ```r
 library(tree)
@@ -90,7 +94,9 @@ text(seat_tree, pretty = 0)
 title(main = "Unpruned Classification Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Above we plot the tree. Below we output the details of the splits.
 
@@ -212,7 +218,7 @@ summary(seat_tree)$used
 ```
 
 ```r
-names(Carseats)[which(!(names(Carseats) %in%summary(seat_tree)$used))]
+names(Carseats)[which(!(names(Carseats) %in% summary(seat_tree)$used))]
 ```
 
 ```
@@ -228,7 +234,9 @@ text(seat_tree, pretty = 0)
 title(main = "Unpruned Classification Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-11-1} \end{center}
 
 When using the `predict()` function on a tree, the default `type` is `vector` which gives predicted probabilities for both classes. We will use `type = class` to directly obtain classes. We first fit the tree using the training data (above), then obtain predictions on both the train and test set, then view the confusion matrix for both.
 
@@ -345,7 +353,9 @@ plot(seat_tree_cv$size, seat_tree_cv$dev / nrow(seat_trn), type = "b",
      xlab = "Tree Size", ylab = "CV Misclassification Rate")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-20-1} \end{center}
 
 It appears that a tree of size 9 has the fewest misclassifications of the considered trees, via cross-validation.
 
@@ -375,7 +385,9 @@ text(seat_tree_prune, pretty = 0)
 title(main = "Pruned Classification Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 We again obtain predictions using this smaller tree, and evaluate on the test and train sets.
 
@@ -467,7 +479,9 @@ text(boston_tree, pretty = 0)
 title(main = "Unpruned Regression Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-27-1} \end{center}
 
 As with classification trees, we can use cross-validation to select a good pruning of the tree.
 
@@ -479,7 +493,9 @@ plot(boston_tree_cv$size, sqrt(boston_tree_cv$dev / nrow(boston_trn)), type = "b
      xlab = "Tree Size", ylab = "CV-RMSE")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-28-1} \end{center}
 
 While the tree of size 9 does have the lowest RMSE, we'll prune to a size of 7 as it seems to perform just as well. (Otherwise we would not be pruning.) The pruned tree is, as expected, smaller and easier to interpret.
 
@@ -509,7 +525,9 @@ text(boston_tree_prune, pretty = 0)
 title(main = "Pruned Regression Tree")
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-30-1} \end{center}
 
 Let's compare this regression tree to an additive linear model and use RMSE as our metric.
 
@@ -560,7 +578,9 @@ plot(boston_prune_tst_pred, boston_tst$medv, xlab = "Predicted", ylab = "Actual"
 abline(0, 1)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-34-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-34-1} \end{center}
 
 Here, using an additive linear regression the actual vs predicted looks much more like what we are used to.
 
@@ -572,7 +592,9 @@ plot(boston_lm_pred, boston_tst$medv, xlab = "Predicted", ylab = "Actual")
 abline(0, 1)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-35-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 ```r
 rmse(boston_lm_pred, boston_tst$medv)
@@ -621,7 +643,9 @@ seat_rpart = rpart(Sales ~ ., data = seat_trn, method = "class")
 plotcp(seat_rpart)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-37-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-37-1} \end{center}
 
 ```r
 # find best value of cp
@@ -642,19 +666,25 @@ library(rpart.plot)
 prp(seat_rpart_prune)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-37-2.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-37-2} \end{center}
 
 ```r
 prp(seat_rpart_prune, type = 4)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-37-3.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-37-3} \end{center}
 
 ```r
 rpart.plot(seat_rpart_prune)
 ```
 
-![](26-tree_files/figure-latex/unnamed-chunk-37-4.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{26-tree_files/figure-latex/unnamed-chunk-37-4} \end{center}
 
 ## External Links
 
@@ -662,33 +692,11 @@ rpart.plot(seat_rpart_prune)
 - [`rpart.plot` Package](http://www.milbo.org/doc/prp.pdf) - Detailed manual on plotting with `rpart` using the `rpart.plot` package.
 
 
-## RMarkdown
+## `rmarkdown`
 
-The RMarkdown file for this chapter can be found [**here**](19-tree.Rmd). The file was created using `R` version 3.4.2 and the following packages:
-
-- Base Packages, Attached
-
-
-```
-## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
-```
-
-- Additional Packages, Attached
+The `rmarkdown` file for this chapter can be found [**here**](26-tree.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
 ## [1] "rpart.plot" "rpart"      "MASS"       "ISLR"       "tree"
 ```
-
-- Additional Packages, Not Attached
-
-
-```
-##  [1] "Rcpp"      "bookdown"  "digest"    "rprojroot" "backports"
-##  [6] "magrittr"  "evaluate"  "stringi"   "rmarkdown" "tools"    
-## [11] "stringr"   "yaml"      "compiler"  "htmltools" "knitr"    
-## [16] "methods"
-```
-
-
-

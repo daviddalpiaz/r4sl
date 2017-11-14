@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-02">
+<meta name="date" content="2017-11-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -296,7 +296,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
-<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> RMarkdown</a></li>
+<li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
 <li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
@@ -321,7 +321,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="27.4" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-versus-ensemble-boundaries"><i class="fa fa-check"></i><b>27.4</b> Tree versus Ensemble Boundaries</a></li>
 <li class="chapter" data-level="27.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#external-links-9"><i class="fa fa-check"></i><b>27.5</b> External Links</a></li>
-<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-15"><i class="fa fa-check"></i><b>27.6</b> RMarkdown</a></li>
+<li class="chapter" data-level="27.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#rmarkdown-15"><i class="fa fa-check"></i><b>27.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="artificial-neural-networks.html"><a href="artificial-neural-networks.html"><i class="fa fa-check"></i><b>28</b> Artificial Neural Networks</a></li>
 <li class="part"><span><b>VII Appendix</b></span></li>
@@ -351,6 +351,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="trees" class="section level1">
 <h1><span class="header-section-number">Chapter 26</span> Trees</h1>
+<p><strong>Chapter Status:</strong> This chapter was originally written using the <code>tree</code> packages. Currently being re-written to exclusively use the <code>rpart</code> package which seems more widely suggested and provides better plotting features.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tree)</code></pre></div>
 <p>In this document, we will use the package <code>tree</code> for both classification and regression trees. Note that there are many packages to do this in <code>R</code>. <a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf"><code>rpart</code></a> may be the most common, however, we will use <code>tree</code> for simplicity.</p>
 <div id="classification-trees" class="section level2">
@@ -404,7 +405,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree)
 <span class="kw">text</span>(seat_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
 <span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Classification Tree&quot;</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-5-1.png" width="2304" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-5-1.png" width="2304" style="display: block; margin: auto;" /></p>
 <p>Above we plot the tree. Below we output the details of the splits.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_tree</code></pre></div>
 <pre><code>## node), split, n, deviance, yval, (yprob)
@@ -486,13 +487,13 @@ seat_tst =<span class="st"> </span>Carseats[-seat_idx,]</code></pre></div>
 <pre><code>## [1] ShelveLoc   Price       Population  Advertising Income      Age        
 ## [7] CompPrice  
 ## 11 Levels: &lt;leaf&gt; CompPrice Income Advertising Population ... US</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Carseats)[<span class="kw">which</span>(!(<span class="kw">names</span>(Carseats) %in%<span class="kw">summary</span>(seat_tree)$used))]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Carseats)[<span class="kw">which</span>(!(<span class="kw">names</span>(Carseats) %in%<span class="st"> </span><span class="kw">summary</span>(seat_tree)$used))]</code></pre></div>
 <pre><code>## [1] &quot;Sales&quot;     &quot;Education&quot; &quot;Urban&quot;     &quot;US&quot;</code></pre>
 <p>Also notice that, this new tree is slightly different than the tree fit to all of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree)
 <span class="kw">text</span>(seat_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
 <span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Classification Tree&quot;</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-11-1.png" width="2304" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-11-1.png" width="2304" style="display: block; margin: auto;" /></p>
 <p>When using the <code>predict()</code> function on a tree, the default <code>type</code> is <code>vector</code> which gives predicted probabilities for both classes. We will use <code>type = class</code> to directly obtain classes. We first fit the tree using the training data (above), then obtain predictions on both the train and test set, then view the confusion matrix for both.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_trn_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
 seat_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
@@ -539,7 +540,7 @@ seat_tree_cv$dev /<span class="st"> </span><span class="kw">length</span>(seat_i
 <span class="co"># better plot</span>
 <span class="kw">plot</span>(seat_tree_cv$size, seat_tree_cv$dev /<span class="st"> </span><span class="kw">nrow</span>(seat_trn), <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>,
      <span class="dt">xlab =</span> <span class="st">&quot;Tree Size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;CV Misclassification Rate&quot;</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>It appears that a tree of size 9 has the fewest misclassifications of the considered trees, via cross-validation.</p>
 <p>We use <code>prune.misclass()</code> to obtain that tree from our original tree, and plot this smaller tree.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_tree_prune =<span class="st"> </span><span class="kw">prune.misclass</span>(seat_tree, <span class="dt">best =</span> <span class="dv">9</span>)
@@ -555,7 +556,7 @@ seat_tree_cv$dev /<span class="st"> </span><span class="kw">length</span>(seat_i
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree_prune)
 <span class="kw">text</span>(seat_tree_prune, <span class="dt">pretty =</span> <span class="dv">0</span>)
 <span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Pruned Classification Tree&quot;</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-22-1.png" width="1152" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-22-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>We again obtain predictions using this smaller tree, and evaluate on the test and train sets.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train</span>
 seat_prune_trn_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree_prune, seat_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
@@ -601,13 +602,13 @@ boston_tst =<span class="st"> </span>Boston[-boston_idx,]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_tree)
 <span class="kw">text</span>(boston_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
 <span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Regression Tree&quot;</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-27-1.png" width="1152" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-27-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>As with classification trees, we can use cross-validation to select a good pruning of the tree.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">18</span>)
 boston_tree_cv =<span class="st"> </span><span class="kw">cv.tree</span>(boston_tree)
 <span class="kw">plot</span>(boston_tree_cv$size, <span class="kw">sqrt</span>(boston_tree_cv$dev /<span class="st"> </span><span class="kw">nrow</span>(boston_trn)), <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>,
      <span class="dt">xlab =</span> <span class="st">&quot;Tree Size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;CV-RMSE&quot;</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>While the tree of size 9 does have the lowest RMSE, we’ll prune to a size of 7 as it seems to perform just as well. (Otherwise we would not be pruning.) The pruned tree is, as expected, smaller and easier to interpret.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boston_tree_prune =<span class="st"> </span><span class="kw">prune.tree</span>(boston_tree, <span class="dt">best =</span> <span class="dv">7</span>)
 <span class="kw">summary</span>(boston_tree_prune)</code></pre></div>
@@ -624,7 +625,7 @@ boston_tree_cv =<span class="st"> </span><span class="kw">cv.tree</span>(boston_
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_tree_prune)
 <span class="kw">text</span>(boston_tree_prune, <span class="dt">pretty =</span> <span class="dv">0</span>)
 <span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Pruned Regression Tree&quot;</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-30-1.png" width="1152" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-30-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>Let’s compare this regression tree to an additive linear model and use RMSE as our metric.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span>function(actual, predicted) {
   <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual -<span class="st"> </span>predicted) ^<span class="st"> </span><span class="dv">2</span>))
@@ -642,13 +643,13 @@ boston_prune_tst_pred =<span class="st"> </span><span class="kw">predict</span>(
 <pre><code>## [1] 5.331457</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_prune_tst_pred, boston_tst$medv, <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>)
 <span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Here, using an additive linear regression the actual vs predicted looks much more like what we are used to.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bostom_lm =<span class="st"> </span><span class="kw">lm</span>(medv ~<span class="st"> </span>., <span class="dt">data =</span> boston_trn)
 boston_lm_pred =<span class="st"> </span><span class="kw">predict</span>(bostom_lm, <span class="dt">newdata =</span> boston_tst)
 <span class="kw">plot</span>(boston_lm_pred, boston_tst$medv, <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>)
 <span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmse</span>(boston_lm_pred, boston_tst$medv)</code></pre></div>
 <pre><code>## [1] 5.125877</code></pre>
 <p>We also see a lower test RMSE. The most obvious linear regression beats the tree! Again, we’ll improve on this tree soon. Also note the summary of the additive linear regression below. Which is easier to interpret, that output, or the small tree above?</p>
@@ -677,7 +678,7 @@ seat_rpart =<span class="st"> </span><span class="kw">rpart</span>(Sales ~<span 
 <span class="co"># rpart tries different cost-complexities by default</span>
 <span class="co"># also stores cv results</span>
 <span class="kw">plotcp</span>(seat_rpart)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find best value of cp</span>
 min_cp =<span class="st"> </span>seat_rpart$cptable[<span class="kw">which.min</span>(seat_rpart$cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>]
 min_cp</code></pre></div>
@@ -688,11 +689,11 @@ seat_rpart_prune =<span class="st"> </span><span class="kw">prune</span>(seat_rp
 <span class="co"># nicer plots</span>
 <span class="kw">library</span>(rpart.plot)
 <span class="kw">prp</span>(seat_rpart_prune)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-37-2.png" width="672" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-37-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(seat_rpart_prune, <span class="dt">type =</span> <span class="dv">4</span>)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-37-3.png" width="672" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-37-3.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rpart.plot</span>(seat_rpart_prune)</code></pre></div>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-37-4.png" width="672" /></p>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-37-4.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="external-links-8" class="section level2">
 <h2><span class="header-section-number">26.4</span> External Links</h2>
@@ -702,23 +703,9 @@ seat_rpart_prune =<span class="st"> </span><span class="kw">prune</span>(seat_rp
 </ul>
 </div>
 <div id="rmarkdown-14" class="section level2">
-<h2><span class="header-section-number">26.5</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="19-tree.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2 and the following packages:</p>
-<ul>
-<li>Base Packages, Attached</li>
-</ul>
-<pre><code>## [1] &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;base&quot;</code></pre>
-<ul>
-<li>Additional Packages, Attached</li>
-</ul>
+<h2><span class="header-section-number">26.5</span> <code>rmarkdown</code></h2>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="26-tree.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;rpart.plot&quot; &quot;rpart&quot;      &quot;MASS&quot;       &quot;ISLR&quot;       &quot;tree&quot;</code></pre>
-<ul>
-<li>Additional Packages, Not Attached</li>
-</ul>
-<pre><code>##  [1] &quot;Rcpp&quot;      &quot;bookdown&quot;  &quot;digest&quot;    &quot;rprojroot&quot; &quot;backports&quot;
-##  [6] &quot;magrittr&quot;  &quot;evaluate&quot;  &quot;stringi&quot;   &quot;rmarkdown&quot; &quot;tools&quot;    
-## [11] &quot;stringr&quot;   &quot;yaml&quot;      &quot;compiler&quot;  &quot;htmltools&quot; &quot;knitr&quot;    
-## [16] &quot;methods&quot;</code></pre>
 
 </div>
 </div>
@@ -773,9 +760,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

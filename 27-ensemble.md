@@ -1,6 +1,10 @@
 # Ensemble Methods
 
-We'll now consider ensembles of trees. 
+**Chapter Status:** Currently chapter is rather lacking in narrative and gives no introduction to the theory of the methods. The `R` code is in a reasonable place, but is generally a little heavy on the output, and could use some better summary of results. Using `Boston` for regression seems OK, but would like a better dataset for classification.
+
+
+
+In this chapter, we'll consider ensembles of trees.
 
 ## Regression
 
@@ -8,7 +12,7 @@ We first consider the regression case, using the `Boston` data from the `MASS` p
 
 
 ```r
-rmse = function(actual, predicted) {
+calc_rmse = function(actual, predicted) {
   sqrt(mean((actual - predicted) ^ 2))
 }
 ```
@@ -17,15 +21,16 @@ We also load all of the packages that we will need.
 
 
 ```r
-library(tree)
-library(MASS)
-library(ISLR)
+library(rpart)
+library(rpart.plot)
 library(randomForest)
 library(gbm)
 library(caret)
+library(MASS)
+library(ISLR)
 ```
 
-We first test-train split the data and fit the same pruned tree as before. (Note: When pruning the tree, the best tree is actually the unpruned tree. View the results of `cv.tree` to see this. However, we select the tree of size 7 as the best of the pruned trees.)
+We first test-train split the data and fit a single tree using `rpart`.
 
 
 ```r
@@ -39,25 +44,31 @@ boston_tst = Boston[-boston_idx,]
 
 
 ```r
-boston_tree = tree(medv ~ ., data = boston_trn)
-set.seed(18)
-boston_tree_cv = cv.tree(boston_tree)
-boston_tree_prune = prune.tree(boston_tree, best = 7)
-boston_prune_tst_pred = predict(boston_tree_prune, newdata = boston_tst)
-plot(boston_prune_tst_pred, boston_tst$medv, 
-     xlab = "Predicted", ylab = "Actual", 
-     main = "Predicted vs Actual: Tree, Test Data")
-abline(0, 1, col = "red", lwd = 2)
+boston_tree = rpart(medv ~ ., data = boston_trn)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 ```r
-(tree_tst_rmse = rmse(boston_prune_tst_pred, boston_tst$medv))
+boston_tree_tst_pred = predict(boston_tree, newdata = boston_tst)
+plot(boston_tree_tst_pred, boston_tst$medv, 
+     xlab = "Predicted", ylab = "Actual", 
+     main = "Predicted vs Actual: Single Tree, Test Data",
+     col = "dodgerblue", pch = 20)
+grid()
+abline(0, 1, col = "darkorange", lwd = 2)
+```
+
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-5-1} \end{center}
+
+
+```r
+(tree_tst_rmse = calc_rmse(boston_tree_tst_pred, boston_tst$medv))
 ```
 
 ```
-## [1] 5.331457
+## [1] 5.458088
 ```
 
 ### Linear Model
@@ -66,19 +77,27 @@ Last time, we also fit an additive linear model, which we found to work better t
 
 
 ```r
-bostom_lm = lm(medv ~ ., data = boston_trn)
-boston_lm_tst_pred = predict(bostom_lm, newdata = boston_tst)
-plot(boston_lm_tst_pred, boston_tst$medv,
-     xlab = "Predicted", ylab = "Actual",
-     main = "Predicted vs Actual: Linear Model, Test Data"
-)
-abline(0, 1, col = "red", lwd = 2)
+boston_lm = lm(medv ~ ., data = boston_trn)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 ```r
-(lm_tst_rmse = rmse(boston_lm_tst_pred, boston_tst$medv))
+boston_lm_tst_pred = predict(boston_lm, newdata = boston_tst)
+plot(boston_lm_tst_pred, boston_tst$medv,
+     xlab = "Predicted", ylab = "Actual",
+     main = "Predicted vs Actual: Linear Model, Test Data",
+     col = "dodgerblue", pch = 20)
+grid()
+abline(0, 1, col = "darkorange", lwd = 2)
+```
+
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-8-1} \end{center}
+
+
+```r
+(lm_tst_rmse = calc_rmse(boston_lm_tst_pred, boston_tst$medv))
 ```
 
 ```
@@ -104,37 +123,45 @@ boston_bag
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 13
 ## 
-##           Mean of squared residuals: 14.20299
-##                     % Var explained: 80.92
+##           Mean of squared residuals: 13.78573
+##                     % Var explained: 81.48
 ```
+
 
 ```r
 boston_bag_tst_pred = predict(boston_bag, newdata = boston_tst)
 plot(boston_bag_tst_pred,boston_tst$medv,
      xlab = "Predicted", ylab = "Actual",
-     main = "Predicted vs Actual: Bagged Model, Test Data"
-)
-abline(0, 1, col = "red", lwd = 2)
+     main = "Predicted vs Actual: Bagged Model, Test Data",
+     col = "dodgerblue", pch = 20)
+grid()
+abline(0, 1, col = "darkorange", lwd = 2)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-11-1} \end{center}
+
 
 ```r
-(bag_tst_rmse = rmse(boston_bag_tst_pred, boston_tst$medv))
+(bag_tst_rmse = calc_rmse(boston_bag_tst_pred, boston_tst$medv))
 ```
 
 ```
-## [1] 3.814368
+## [1] 3.844243
 ```
 
 Here we see two interesting results. First, the predicted versus actual plot no longer has a small number of predicted values. Second, our test error has dropped dramatically. Also note that the "Mean of squared residuals" which is output by `randomForest` is the **Out of Bag** estimate of the error.
 
 
 ```r
-plot(boston_bag)
+plot(boston_bag, col = "dodgerblue", lwd = 2, main = "Bagged Trees: Error vs Number of Trees")
+grid()
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 
 ### Random Forest
@@ -156,45 +183,78 @@ boston_forest
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 4
 ## 
-##           Mean of squared residuals: 12.80737
-##                     % Var explained: 82.79
+##           Mean of squared residuals: 12.54771
+##                     % Var explained: 83.14
+```
+
+
+```r
+importance(boston_forest, type = 1)
+```
+
+```
+##           %IncMSE
+## crim    11.159069
+## zn       4.736893
+## indus    9.167686
+## chas     2.826810
+## nox     11.040039
+## rm      30.787637
+## age      8.448608
+## dis      9.733887
+## rad      4.725829
+## tax      8.622564
+## ptratio 11.718528
+## black    7.061299
+## lstat   23.357019
 ```
 
 ```r
-#importance(boston_forest)
-#varImpPlot(boston_forest)
+varImpPlot(boston_forest, type = 1)
+```
+
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-15-1} \end{center}
+
+
+```r
 boston_forest_tst_pred = predict(boston_forest, newdata = boston_tst)
 plot(boston_forest_tst_pred, boston_tst$medv,
      xlab = "Predicted", ylab = "Actual",
-     main = "Predicted vs Actual: Random Forest, Test Data"
-)
-abline(0, 1, col = "red", lwd = 2)
+     main = "Predicted vs Actual: Random Forest, Test Data",
+     col = "dodgerblue", pch = 20)
+grid()
+abline(0, 1, col = "darkorange", lwd = 2)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-16-1} \end{center}
+
 
 ```r
-(forest_tst_rmse = rmse(boston_forest_tst_pred, boston_tst$medv))
+(forest_tst_rmse = calc_rmse(boston_forest_tst_pred, boston_tst$medv))
 ```
 
 ```
-## [1] 3.73447
+## [1] 3.710097
 ```
 
 ```r
 boston_forest_trn_pred = predict(boston_forest, newdata = boston_trn)
-forest_trn_rmse = rmse(boston_forest_trn_pred, boston_trn$medv)
-forest_oob_rmse = rmse(boston_forest$predicted, boston_trn$medv)
+forest_trn_rmse = calc_rmse(boston_forest_trn_pred, boston_trn$medv)
+forest_oob_rmse = calc_rmse(boston_forest$predicted, boston_trn$medv)
 ```
 
-Here we note three RMSEs. The training RMSE (which is optimistic), the OOB RMSE (which is a good estimate of the test error) and the test RMSE. Also note that variables importance was calculated, however, the results are not shown here. (The code to view the results is commented out.)
+Here we note three RMSEs. The training RMSE (which is optimistic), the OOB RMSE (which is a reasonable estimate of the test error) and the test RMSE. Also note that variables importance was calculated.
 
 
 ```
 ##       Data    Error
-## 1 Training 1.563253
-## 2      OOB 3.578738
-## 3     Test 3.734470
+## 1 Training 1.573562
+## 2      OOB 3.542275
+## 3     Test 3.710097
 ```
 
 
@@ -217,56 +277,72 @@ booston_boost
 ## There were 13 predictors of which 13 had non-zero influence.
 ```
 
-```r
-summary(booston_boost)
-```
-
-![](27-ensemble_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
-
-```
-##             var    rel.inf
-## rm           rm 33.1305117
-## lstat     lstat 32.0413077
-## dis         dis 10.1450348
-## crim       crim  6.4535978
-## black     black  4.7076459
-## nox         nox  4.1647148
-## age         age  3.4933055
-## ptratio ptratio  2.1056374
-## tax         tax  1.3320146
-## indus     indus  0.9248479
-## rad         rad  0.7800278
-## chas       chas  0.5731764
-## zn           zn  0.1481777
-```
 
 ```r
-par(mfrow = c(1, 2))
-plot(booston_boost, i = "rm")
-plot(booston_boost, i = "lstat")
+tibble::as_tibble(summary(booston_boost))
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-10-2.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-20-1} \end{center}
+
+```
+## # A tibble: 13 x 2
+##        var    rel.inf
+##  *  <fctr>      <dbl>
+##  1   lstat 34.9422206
+##  2      rm 30.6091445
+##  3     dis  9.8531723
+##  4    crim  6.4339021
+##  5   black  4.4331063
+##  6     nox  4.3018284
+##  7     age  3.3374254
+##  8 ptratio  2.3087262
+##  9     tax  1.1824679
+## 10     rad  0.9045362
+## 11   indus  0.8828171
+## 12    chas  0.6793425
+## 13      zn  0.1313104
+```
+
+
+```r
+par(mfrow = c(1, 3))
+plot(booston_boost, i = "rm", col = "dodgerblue", lwd = 2)
+grid()
+plot(booston_boost, i = "lstat", col = "dodgerblue", lwd = 2)
+grid()
+plot(booston_boost, i = "dis", col = "dodgerblue", lwd = 2)
+grid()
+```
+
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-21-1} \end{center}
+
 
 ```r
 boston_boost_tst_pred = predict(booston_boost, newdata = boston_tst, n.trees = 5000)
-(boost_tst_rmse = rmse(boston_boost_tst_pred, boston_tst$medv))
+(boost_tst_rmse = calc_rmse(boston_boost_tst_pred, boston_tst$medv))
 ```
 
 ```
-## [1] 3.437024
+## [1] 3.381453
 ```
 
 
 ```r
 plot(boston_boost_tst_pred, boston_tst$medv,
      xlab = "Predicted", ylab = "Actual", 
-     main = "Predicted vs Actual: Boosted Model, Test Data"
-)
-abline(0, 1, col = "red", lwd = 2)
+     main = "Predicted vs Actual: Boosted Model, Test Data",
+     col = "dodgerblue", pch = 20)
+grid()
+abline(0, 1, col = "darkorange", lwd = 2)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-23-1} \end{center}
 
 ### Results
 
@@ -281,11 +357,11 @@ abline(0, 1, col = "red", lwd = 2)
 
 ```
 ##           Model TestError
-## 1   Single Tree  5.331457
+## 1   Single Tree  5.458088
 ## 2  Linear Model  5.125877
-## 3       Bagging  3.814368
-## 4 Random Forest  3.734470
-## 5      Boosting  3.437024
+## 3       Bagging  3.844243
+## 4 Random Forest  3.710097
+## 5      Boosting  3.381453
 ```
 
 While a single tree does not beat linear regression, each of the ensemble methods perform much better!
@@ -299,45 +375,57 @@ We now use prediction accuracy as our metric:
 
 
 ```r
-accuracy = function(actual, predicted) {
+calc_acc = function(actual, predicted) {
   mean(actual == predicted)
 }
 ```
 
 
-
 ```r
 data(Carseats)
 Carseats$Sales = as.factor(ifelse(Carseats$Sales <= 8, "Low", "High"))
+```
+
+
+```r
 set.seed(2)
 seat_idx = sample(1:nrow(Carseats), 200)
 seat_trn = Carseats[seat_idx,]
 seat_tst = Carseats[-seat_idx,]
 ```
 
+
 ### Tree Model
 
 
 ```r
-seat_tree = tree(Sales ~ ., data = seat_trn)
-set.seed(3)
-seat_tree_cv = cv.tree(seat_tree, FUN = prune.misclass)
+seat_tree = rpart(Sales ~ ., data = seat_trn)
+```
 
-seat_tree_prune = prune.misclass(seat_tree, best = 9)
-seat_prune_tst_pred = predict(seat_tree_prune, seat_tst, type = "class")
 
-table(predicted = seat_prune_tst_pred, actual = seat_tst$Sales)
+```r
+rpart.plot(seat_tree)
+```
+
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-29-1} \end{center}
+
+
+```r
+seat_tree_tst_pred = predict(seat_tree, seat_tst, type = "class")
+table(predicted = seat_tree_tst_pred, actual = seat_tst$Sales)
 ```
 
 ```
 ##          actual
 ## predicted High Low
-##      High   60  22
-##      Low    24  94
+##      High   64  26
+##      Low    20  90
 ```
 
 ```r
-(tree_tst_acc = accuracy(predicted = seat_prune_tst_pred, actual = seat_tst$Sales))
+(tree_tst_acc = calc_acc(predicted = seat_tree_tst_pred, actual = seat_tst$Sales))
 ```
 
 ```
@@ -348,9 +436,12 @@ table(predicted = seat_prune_tst_pred, actual = seat_tst$Sales)
 ### Logistic Regression
 
 
-
 ```r
 seat_glm = glm(Sales ~ ., data = seat_trn, family = "binomial")
+```
+
+
+```r
 seat_glm_tst_pred = ifelse(predict(seat_glm, seat_tst, "response") > 0.5, 
                            "Low", "High")
 table(predicted = seat_glm_tst_pred, actual = seat_tst$Sales)
@@ -364,12 +455,13 @@ table(predicted = seat_glm_tst_pred, actual = seat_tst$Sales)
 ```
 
 ```r
-(glm_tst_acc = accuracy(predicted = seat_glm_tst_pred, actual = seat_tst$Sales))
+(glm_tst_acc = calc_acc(predicted = seat_glm_tst_pred, actual = seat_tst$Sales))
 ```
 
 ```
 ## [1] 0.91
 ```
+
 
 ### Bagging
 
@@ -388,12 +480,13 @@ seat_bag
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 10
 ## 
-##         OOB estimate of  error rate: 21.5%
+##         OOB estimate of  error rate: 20%
 ## Confusion matrix:
 ##      High Low class.error
-## High   51  29   0.3625000
-## Low    14 106   0.1166667
+## High   53  27   0.3375000
+## Low    13 107   0.1083333
 ```
+
 
 ```r
 seat_bag_tst_pred = predict(seat_bag, newdata = seat_tst)
@@ -403,17 +496,18 @@ table(predicted = seat_bag_tst_pred, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   68  21
-##      Low    16  95
+##      High   66  21
+##      Low    18  95
 ```
 
 ```r
-(bag_tst_acc = accuracy(predicted = seat_bag_tst_pred, actual = seat_tst$Sales))
+(bag_tst_acc = calc_acc(predicted = seat_bag_tst_pred, actual = seat_tst$Sales))
 ```
 
 ```
-## [1] 0.815
+## [1] 0.805
 ```
+
 
 ### Random Forest
 
@@ -433,12 +527,13 @@ seat_forest
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 3
 ## 
-##         OOB estimate of  error rate: 22%
+##         OOB estimate of  error rate: 22.5%
 ## Confusion matrix:
 ##      High Low class.error
 ## High   49  31   0.3875000
-## Low    13 107   0.1083333
+## Low    14 106   0.1166667
 ```
+
 
 ```r
 seat_forest_tst_perd = predict(seat_forest, newdata = seat_tst)
@@ -448,17 +543,18 @@ table(predicted = seat_forest_tst_perd, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   63  16
-##      Low    21 100
+##      High   62  19
+##      Low    22  97
 ```
 
 ```r
-(forest_tst_acc = accuracy(predicted = seat_forest_tst_perd, actual = seat_tst$Sales))
+(forest_tst_acc = calc_acc(predicted = seat_forest_tst_perd, actual = seat_tst$Sales))
 ```
 
 ```
-## [1] 0.815
+## [1] 0.795
 ```
+
 
 ### Boosting
 
@@ -468,7 +564,10 @@ To perform boosting, we modify the response to be `0` and `1` to work with `gbm`
 ```r
 seat_trn_mod = seat_trn
 seat_trn_mod$Sales = as.numeric(ifelse(seat_trn_mod$Sales == "Low", "0", "1"))
+```
 
+
+```r
 seat_boost = gbm(Sales ~ ., data = seat_trn_mod, distribution = "bernoulli", 
                  n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
 seat_boost
@@ -482,6 +581,7 @@ seat_boost
 ## There were 10 predictors of which 10 had non-zero influence.
 ```
 
+
 ```r
 seat_boost_tst_pred = ifelse(predict(seat_boost, seat_tst, n.trees = 5000, "response") > 0.5, 
                              "High", "Low")
@@ -491,12 +591,12 @@ table(predicted = seat_boost_tst_pred, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   70  17
-##      Low    14  99
+##      High   71  18
+##      Low    13  98
 ```
 
 ```r
-(boost_tst_acc = accuracy(predicted = seat_boost_tst_pred, actual = seat_tst$Sales))
+(boost_tst_acc = calc_acc(predicted = seat_boost_tst_pred, actual = seat_tst$Sales))
 ```
 
 ```
@@ -519,14 +619,12 @@ table(predicted = seat_boost_tst_pred, actual = seat_tst$Sales)
 ##                 Model TestAccuracy
 ## 1         Single Tree        0.770
 ## 2 Logistic Regression        0.910
-## 3             Bagging        0.815
-## 4       Random Forest        0.815
+## 3             Bagging        0.805
+## 4       Random Forest        0.795
 ## 5            Boosting        0.845
 ```
 
 Here we see each of the ensemble methods performing better than a single tree, however, they still fall behind logistic regression. Sometimes a simple linear model will beat more complicated models! This is why you should always try a logistic regression for classification.
-
-
 
 
 ## Tuning
@@ -552,8 +650,6 @@ Also note that with these tree-based ensemble methods there are two resampling s
 Using Out of Bag samples is advantageous with these methods as compared to Cross-Validation since it removes the need to refit the model and is thus much more computationally efficient. Unfortunately OOB methods cannot be used with `gbm` models. See the [`caret` documentation](http://topepo.github.io/caret/training.html) for details.
 
 
-
-
 ### Random Forest and Bagging
 
 Here we setup training control for both OOB and cross-validation methods. Note we specify `verbose = FALSE` which suppresses output related to progress. You may wish to set this to `TRUE` when first tuning a model since it will give you an idea of how long the tuning process will take. (Which can sometimes be a long time.)
@@ -564,7 +660,7 @@ oob = trainControl(method = "oob")
 cv_5 = trainControl(method = "cv", number = 5)
 ```
 
-To tune a Random Forest in `caret` we will use `method = "rf"` which uses the `randomForest` function in the background. Here we elect to use the OOB training control that we created. We could also use Cross-Validation, however it will likely select a similar model, but requiring more time.
+To tune a Random Forest in `caret` we will use `method = "rf"` which uses the `randomForest` function in the background. Here we elect to use the OOB training control that we created. We could also use cross-validation, however it will likely select a similar model, but require much more time.
 
 We setup a grid of `mtry` values which include all possible values since there are $10$ predictors in the dataset. An `mtry` of $10$ is actually bagging.
 
@@ -579,6 +675,10 @@ dim(seat_trn)
 
 ```r
 rf_grid =  expand.grid(mtry = 1:10)
+```
+
+
+```r
 set.seed(825)
 seat_rf_tune = train(Sales ~ ., data = seat_trn,
                      method = "rf",
@@ -614,8 +714,9 @@ seat_rf_tune
 ## The final value used for the model was mtry = 7.
 ```
 
+
 ```r
-accuracy(predict(seat_rf_tune, seat_tst), seat_tst$Sales)
+calc_acc(predict(seat_rf_tune, seat_tst), seat_tst$Sales)
 ```
 
 ```
@@ -634,7 +735,7 @@ seat_rf_tune$bestTune
 ## 7    7
 ```
 
-Based on these results, we would select the random forest model with an `mtry` of 7. Note that based on the OOB estimates, the bagging model is expected to perform worse than this select model, however, based on our results above, that is not what we find to be true in our test set.
+Based on these results, we would select the random forest model with an `mtry` of 7. Note that based on the OOB estimates, the bagging model is expected to perform worse than this selected model, however, based on our results above, that is not what we find to be true in our test set.
 
 Also note that `method = "ranger"` would also fit a random forest model. [Ranger](http://arxiv.org/pdf/1508.04409.pdf) is a newer `R` package for random forests that has been shown to be much faster, especially when there are a larger number of predictors.
 
@@ -673,18 +774,20 @@ seat_gbm_tune = train(Sales ~ ., data = seat_trn,
 
 The additional `verbose = FALSE` in the `train` call suppresses additional output from each `gbm` call.
 
-By default, calling `plot` here will produce a nice graphic of the results.
+By default, calling `plot` here will produce a nice graphic summarizing the results. 
 
 
 ```r
-#seat_gbm_tune
 plot(seat_gbm_tune)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-48-1} \end{center}
+
 
 ```r
-accuracy(predict(seat_gbm_tune, seat_tst), seat_tst$Sales)
+calc_acc(predict(seat_gbm_tune, seat_tst), seat_tst$Sales)
 ```
 
 ```
@@ -704,7 +807,6 @@ seat_gbm_tune$bestTune
 ```
 
 
-
 ## Tree versus Ensemble Boundaries
 
 
@@ -719,11 +821,15 @@ sim_tst = data.frame(sim_tst$x, class = as.factor(sim_tst$classes))
 
 
 ```r
-plot(sim_trn$X1, sim_trn$X2, col = sim_trn$class,
-     xlab = "X1", ylab = "X2")
+sim_trn_col = ifelse(sim_trn$class == 1, "darkorange", "dodgerblue")
+plot(sim_trn$X1, sim_trn$X2, col = sim_trn_col,
+     xlab = "X1", ylab = "X2", main = "Simulated Training Data", pch = 20)
+grid()
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-52-1} \end{center}
 
 
 ```r
@@ -742,10 +848,12 @@ sim_tree_cv = train(class ~ .,
 
 ```r
 library(rpart.plot)
-prp(sim_tree_cv$finalModel)
+rpart.plot(sim_tree_cv$finalModel)
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-55-1} \end{center}
 
 
 ```r
@@ -774,27 +882,36 @@ sim_gbm_cv = train(class ~ .,
 
 ```r
 plot_grid = expand.grid(
-  X1 = seq(min(sim_tst$X1), max(sim_tst$X1), by = 0.01),
-  X2 = seq(min(sim_tst$X2), max(sim_tst$X2), by = 0.01)
+  X1 = seq(min(sim_tst$X1) - 1, max(sim_tst$X1) + 1, by = 0.01),
+  X2 = seq(min(sim_tst$X2) - 1, max(sim_tst$X2) + 1, by = 0.01)
 )
 
 tree_pred = predict(sim_tree_cv, plot_grid)
 rf_pred   = predict(sim_rf_oob, plot_grid)
 gbm_pred  = predict(sim_gbm_cv, plot_grid)
+
+tree_col = ifelse(tree_pred == 1, "darkorange", "dodgerblue")
+rf_col   = ifelse(rf_pred == 1, "darkorange", "dodgerblue")
+gbm_col  = ifelse(gbm_pred == 1, "darkorange", "dodgerblue")
 ```
 
 
 ```r
 par(mfrow = c(1, 3))
-plot(plot_grid$X1, plot_grid$X2, col = tree_pred,
-     xlab = "X1", ylab = "X2", pch = 20, main = "Single Tree")
-plot(plot_grid$X1, plot_grid$X2, col = rf_pred,
-     xlab = "X1", ylab = "X2", pch = 20, main = "Random Forest")
-plot(plot_grid$X1, plot_grid$X2, col = gbm_pred,
-     xlab = "X1", ylab = "X2", pch = 20, main = "Boosted Trees")
+plot(plot_grid$X1, plot_grid$X2, col = tree_col,
+     xlab = "X1", ylab = "X2", pch = 20, main = "Single Tree",
+     xlim = c(-1, 1), ylim = c(-1, 1))
+plot(plot_grid$X1, plot_grid$X2, col = rf_col,
+     xlab = "X1", ylab = "X2", pch = 20, main = "Random Forest",
+     xlim = c(-1, 1), ylim = c(-1, 1))
+plot(plot_grid$X1, plot_grid$X2, col = gbm_col,
+     xlab = "X1", ylab = "X2", pch = 20, main = "Boosted Trees",
+     xlim = c(-1, 1), ylim = c(-1, 1))
 ```
 
-![](27-ensemble_files/figure-latex/unnamed-chunk-36-1.pdf)<!-- --> 
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-59-1} \end{center}
 
 
 ## External Links
@@ -808,51 +925,13 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_pred,
 - [XGBoost `R` Tutorial](http://xgboost.readthedocs.io/en/latest/R-package/xgboostPresentation.html)
 
 
-## RMarkdown
+## `rmarkdown`
 
-The RMarkdown file for this chapter can be found [**here**](20-ensemble.Rmd). The file was created using `R` version 3.4.2 and the following packages:
-
-- Base Packages, Attached
+The `rmarkdown` file for this chapter can be found [**here**](27-ensemble.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
-## [1] "methods"   "parallel"  "splines"   "stats"     "graphics"  "grDevices"
-## [7] "utils"     "datasets"  "base"
-```
-
-- Additional Packages, Attached
-
-
-```
-##  [1] "rpart.plot"   "rpart"        "mlbench"      "plyr"        
+##  [1] "mlbench"      "plyr"         "ISLR"         "MASS"        
 ##  [5] "caret"        "ggplot2"      "gbm"          "lattice"     
-##  [9] "survival"     "randomForest" "ISLR"         "MASS"        
-## [13] "tree"
+##  [9] "survival"     "randomForest" "rpart.plot"   "rpart"
 ```
-
-- Additional Packages, Not Attached
-
-
-```
-##  [1] "Rcpp"         "lubridate"    "class"        "assertthat"  
-##  [5] "rprojroot"    "digest"       "ipred"        "foreach"     
-##  [9] "R6"           "backports"    "stats4"       "evaluate"    
-## [13] "e1071"        "rlang"        "lazyeval"     "kernlab"     
-## [17] "Matrix"       "rmarkdown"    "CVST"         "ddalpha"     
-## [21] "gower"        "stringr"      "munsell"      "compiler"    
-## [25] "pkgconfig"    "dimRed"       "htmltools"    "nnet"        
-## [29] "tibble"       "prodlim"      "DRR"          "bookdown"    
-## [33] "codetools"    "RcppRoll"     "dplyr"        "withr"       
-## [37] "recipes"      "ModelMetrics" "grid"         "nlme"        
-## [41] "gtable"       "magrittr"     "scales"       "stringi"     
-## [45] "reshape2"     "bindrcpp"     "timeDate"     "robustbase"  
-## [49] "lava"         "iterators"    "tools"        "glue"        
-## [53] "DEoptimR"     "purrr"        "sfsmisc"      "yaml"        
-## [57] "colorspace"   "knitr"        "bindr"
-```
-
-
-
-
-
-
