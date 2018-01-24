@@ -61,77 +61,77 @@ $$
 
 
 
-## Regression Notation
+<!-- ## Regression Notation -->
 
 
-- $\mathbf{X}$ = $n \times p$ data matrix
-- $\mathbf{x}_j$ = column of data matrix. vector of length $n$. $n$ observations of predictors $j$.
-- $X$ = random variable. vector of length $p$, which could be 1 (not bold)
-- $x_i$ = predictor values for observation $i$. vector of length $p$. realization of random variable $X$. (not bold)
-- $Y$ = random variable. scalar. (not bold)
-- $y_i$ = response for observation $i$. scalar. realization of random variable $Y$. (not bold)
+<!-- - $\mathbf{X}$ = $n \times p$ data matrix -->
+<!-- - $\mathbf{x}_j$ = column of data matrix. vector of length $n$. $n$ observations of predictors $j$. -->
+<!-- - $X$ = random variable. vector of length $p$, which could be 1 (not bold) -->
+<!-- - $x_i$ = predictor values for observation $i$. vector of length $p$. realization of random variable $X$. (not bold) -->
+<!-- - $Y$ = random variable. scalar. (not bold) -->
+<!-- - $y_i$ = response for observation $i$. scalar. realization of random variable $Y$. (not bold) -->
 
-- $i$ is for observations, of which there are $n$
-- $j$ is for predictors (features), of which there are $p$
-
-
-- $\mathcal{D}_{\texttt{trn}}$ is training data
-- $n_{\texttt{trn}}$ is size of training data
-- $\mathcal{D}_{\texttt{tst}}$ is training data
-- $n_{\texttt{tst}}$ is size of training data
-
-$$
-(X, Y) \in \mathbb{R}^p \times \mathbb{R}
-$$
+<!-- - $i$ is for observations, of which there are $n$ -->
+<!-- - $j$ is for predictors (features), of which there are $p$ -->
 
 
+<!-- - $\mathcal{D}_{\texttt{trn}}$ is training data -->
+<!-- - $n_{\texttt{trn}}$ is size of training data -->
+<!-- - $\mathcal{D}_{\texttt{tst}}$ is training data -->
+<!-- - $n_{\texttt{tst}}$ is size of training data -->
 
-$$
-\mathcal{D} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}
-$$
-
-$$
-x_i^T = [x_{i1}, x_{i2}, \ldots x_{ip}]
-$$
-
-
-$$
-x^T = [x_{1}, x_{2}, \ldots x_{p}]
-$$
-
-$$
-\mathbf{x}_j = \begin{bmatrix} x_{1j} \\ x_{2j} \\ \vdots\\ x_{nj} \end{bmatrix}
-$$
-
-$$
-\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p]
-$$
-
-$$
-\mathbf{X} = \begin{bmatrix} x_1^T \\ x_2^T \\ \vdots\\ x_n^T \end{bmatrix}
-$$
+<!-- $$ -->
+<!-- (X, Y) \in \mathbb{R}^p \times \mathbb{R} -->
+<!-- $$ -->
 
 
-$$
-\mathbf{X} = [\mathbf{1}, \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p]
-$$
+
+<!-- $$ -->
+<!-- \mathcal{D} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R} -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- x_i^T = [x_{i1}, x_{i2}, \ldots x_{ip}] -->
+<!-- $$ -->
 
 
-$$
-\mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots\\ y_n \end{bmatrix}
-$$
+<!-- $$ -->
+<!-- x^T = [x_{1}, x_{2}, \ldots x_{p}] -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- \mathbf{x}_j = \begin{bmatrix} x_{1j} \\ x_{2j} \\ \vdots\\ x_{nj} \end{bmatrix} -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- \mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p] -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- \mathbf{X} = \begin{bmatrix} x_1^T \\ x_2^T \\ \vdots\\ x_n^T \end{bmatrix} -->
+<!-- $$ -->
 
 
-$$
-\mathbb{E}[(Y - f(X))^2]
-$$
+<!-- $$ -->
+<!-- \mathbf{X} = [\mathbf{1}, \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_p] -->
+<!-- $$ -->
 
-$$
-Y = f(X) + \epsilon
-$$
 
-$$
-f(x) = \mathbb{E}(Y \mid X = x)
-$$
+<!-- $$ -->
+<!-- \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots\\ y_n \end{bmatrix} -->
+<!-- $$ -->
+
+
+<!-- $$ -->
+<!-- \mathbb{E}[(Y - f(X))^2] -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- Y = f(X) + \epsilon -->
+<!-- $$ -->
+
+<!-- $$ -->
+<!-- f(x) = \mathbb{E}(Y \mid X = x) -->
+<!-- $$ -->
 
 

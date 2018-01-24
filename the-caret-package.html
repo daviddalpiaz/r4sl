@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.16 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-14">
+<meta name="date" content="2018-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,9 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#regression-notation"><i class="fa fa-check"></i><b>5.1</b> Regression Notation</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
 <li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
@@ -563,7 +561,7 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ##   7  0.9654711  0.08890944
 ##   9  0.9660044  0.03400684
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was k = 9.</code></pre>
 <p>Here we are again using 5-fold cross-validation and no pre-processing. Notice that we now have multiple results, for <code>k = 5</code>, <code>k = 7</code>, and <code>k = 9</code>.</p>
 <p>Let’s modifying this training by introducing pre-processing, and specifying our own tuning parameters, instead of the default values above.</p>
@@ -606,8 +604,8 @@ default_tst =<span class="st"> </span>Default[-default_idx, ]</code></pre></div>
 ## 1 17 0.9720036 0.3803205 0.002404977 0.05972573</code></pre>
 <p>While we did fit a large number of models, the “best” model is stored in <code>finalModel</code>. After this model was determined to be the best via cross-validation, it is then fit to the entire training dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">default_knn_mod$finalModel</code></pre></div>
-<pre><code>## 17-nearest neighbor classification model
-## Training set class distribution:
+<pre><code>## 17-nearest neighbor model
+## Training set outcome distribution:
 ## 
 ##   No  Yes 
 ## 7251  250</code></pre>
@@ -897,8 +895,7 @@ sim_gbm_mod =<span class="st"> </span><span class="kw">train</span>(
 <div id="rmarkdown-10" class="section level2">
 <h2><span class="header-section-number">21.4</span> <code>rmarkdown</code></h2>
 <p>The <code>rmarkdown</code> file for this chapter can be found <a href="21-caret.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
-<pre><code>## [1] &quot;MASS&quot;     &quot;nnet&quot;     &quot;plyr&quot;     &quot;gbm&quot;      &quot;survival&quot; &quot;caret&quot;   
-## [7] &quot;ggplot2&quot;  &quot;lattice&quot;</code></pre>
+<pre><code>## [1] &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot;</code></pre>
 
 </div>
 </div>

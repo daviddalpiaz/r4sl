@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.16 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-14">
+<meta name="date" content="2018-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,9 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#regression-notation"><i class="fa fa-check"></i><b>5.1</b> Regression Notation</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
 <li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
@@ -370,8 +368,8 @@ Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</code
 ##  9   401    92    17    49    66    65    13   5206  1332    253   784
 ## 10   574   159    21   107    75    59    10   4631  1300     90   702
 ## # ... with 253 more rows, and 9 more variables: CRBI &lt;int&gt;, CWalks &lt;int&gt;,
-## #   League &lt;fctr&gt;, Division &lt;fctr&gt;, PutOuts &lt;int&gt;, Assists &lt;int&gt;,
-## #   Errors &lt;int&gt;, Salary &lt;dbl&gt;, NewLeague &lt;fctr&gt;</code></pre>
+## #   League &lt;fct&gt;, Division &lt;fct&gt;, PutOuts &lt;int&gt;, Assists &lt;int&gt;,
+## #   Errors &lt;int&gt;, Salary &lt;dbl&gt;, NewLeague &lt;fct&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Hitters)</code></pre></div>
 <pre><code>## [1] 263  20</code></pre>
 <p>Because this dataset isn’t particularly large, we will forego a test-train split, and simply use all of the data as training data.</p>
@@ -429,7 +427,7 @@ cv_5 =<span class="st"> </span><span class="kw">trainControl</span>(<span class=
 ##   1.00    5.1056  331.3  0.4818    229.3
 ##   1.00   51.0564  348.8  0.4663    242.2
 ## 
-## RMSE was used to select the optimal model using  the smallest value.
+## RMSE was used to select the optimal model using the smallest value.
 ## The final values used for the model were alpha = 0.1 and lambda = 5.106.</code></pre>
 <p>Notice a few things with these results. First, we have tried three <span class="math inline">\(\alpha\)</span> values, <code>0.10</code>, <code>0.55</code>, and <code>1</code>. It is not entirely clear why <code>caret</code> doesn’t use <code>0</code>. It likely uses <code>0.10</code> to fit a model close to ridge, but with some potential for sparsity.</p>
 <p>Here, the best result uses <span class="math inline">\(\alpha = 0.10\)</span>, so this result is somewhere between ridge and lasso, but closer to ridge.</p>
@@ -507,7 +505,7 @@ def_elnet</code></pre></div>
 ##   1.00   0.0012422  0.9732    0.4104
 ##   1.00   0.0124220  0.9693    0.1661
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final values used for the model were alpha = 1 and lambda = 0.001242.</code></pre>
 <p>Since the best model used <span class="math inline">\(\alpha = 1\)</span>, this is a lasso model.</p>
 <p>We also try an expanded feature space, and a larger tuning grid.</p>

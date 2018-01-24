@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.16 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-14">
+<meta name="date" content="2018-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,9 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#regression-notation"><i class="fa fa-check"></i><b>5.1</b> Regression Notation</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
 <li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
@@ -590,23 +588,25 @@ cv_error</code></pre></div>
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;purrr&quot;        &quot;reshape2&quot;     &quot;kernlab&quot;      &quot;splines&quot;     
-##  [5] &quot;lattice&quot;      &quot;colorspace&quot;   &quot;stats4&quot;       &quot;htmltools&quot;   
-##  [9] &quot;yaml&quot;         &quot;survival&quot;     &quot;prodlim&quot;      &quot;rlang&quot;       
-## [13] &quot;ModelMetrics&quot; &quot;withr&quot;        &quot;glue&quot;         &quot;bindrcpp&quot;    
-## [17] &quot;foreach&quot;      &quot;plyr&quot;         &quot;bindr&quot;        &quot;dimRed&quot;      
-## [21] &quot;lava&quot;         &quot;robustbase&quot;   &quot;stringr&quot;      &quot;timeDate&quot;    
-## [25] &quot;munsell&quot;      &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;   
-## [29] &quot;evaluate&quot;     &quot;knitr&quot;        &quot;caret&quot;        &quot;class&quot;       
-## [33] &quot;DEoptimR&quot;     &quot;methods&quot;      &quot;Rcpp&quot;         &quot;scales&quot;      
-## [37] &quot;backports&quot;    &quot;ipred&quot;        &quot;CVST&quot;         &quot;ggplot2&quot;     
-## [41] &quot;digest&quot;       &quot;stringi&quot;      &quot;bookdown&quot;     &quot;dplyr&quot;       
-## [45] &quot;RcppRoll&quot;     &quot;ddalpha&quot;      &quot;grid&quot;         &quot;rprojroot&quot;   
-## [49] &quot;tools&quot;        &quot;magrittr&quot;     &quot;lazyeval&quot;     &quot;tibble&quot;      
-## [53] &quot;DRR&quot;          &quot;pkgconfig&quot;    &quot;MASS&quot;         &quot;Matrix&quot;      
-## [57] &quot;lubridate&quot;    &quot;gower&quot;        &quot;assertthat&quot;   &quot;rmarkdown&quot;   
-## [61] &quot;iterators&quot;    &quot;R6&quot;           &quot;rpart&quot;        &quot;sfsmisc&quot;     
-## [65] &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
+<pre><code>##  [1] &quot;Rcpp&quot;         &quot;lubridate&quot;    &quot;lattice&quot;      &quot;tidyr&quot;       
+##  [5] &quot;class&quot;        &quot;assertthat&quot;   &quot;rprojroot&quot;    &quot;digest&quot;      
+##  [9] &quot;ipred&quot;        &quot;psych&quot;        &quot;foreach&quot;      &quot;R6&quot;          
+## [13] &quot;plyr&quot;         &quot;backports&quot;    &quot;stats4&quot;       &quot;evaluate&quot;    
+## [17] &quot;ggplot2&quot;      &quot;pillar&quot;       &quot;rlang&quot;        &quot;lazyeval&quot;    
+## [21] &quot;caret&quot;        &quot;kernlab&quot;      &quot;rpart&quot;        &quot;Matrix&quot;      
+## [25] &quot;rmarkdown&quot;    &quot;splines&quot;      &quot;CVST&quot;         &quot;ddalpha&quot;     
+## [29] &quot;gower&quot;        &quot;stringr&quot;      &quot;foreign&quot;      &quot;munsell&quot;     
+## [33] &quot;broom&quot;        &quot;compiler&quot;     &quot;xfun&quot;         &quot;pkgconfig&quot;   
+## [37] &quot;mnormt&quot;       &quot;dimRed&quot;       &quot;htmltools&quot;    &quot;nnet&quot;        
+## [41] &quot;tidyselect&quot;   &quot;tibble&quot;       &quot;prodlim&quot;      &quot;DRR&quot;         
+## [45] &quot;bookdown&quot;     &quot;codetools&quot;    &quot;RcppRoll&quot;     &quot;withr&quot;       
+## [49] &quot;dplyr&quot;        &quot;MASS&quot;         &quot;recipes&quot;      &quot;ModelMetrics&quot;
+## [53] &quot;grid&quot;         &quot;nlme&quot;         &quot;gtable&quot;       &quot;magrittr&quot;    
+## [57] &quot;scales&quot;       &quot;stringi&quot;      &quot;reshape2&quot;     &quot;bindrcpp&quot;    
+## [61] &quot;timeDate&quot;     &quot;robustbase&quot;   &quot;lava&quot;         &quot;iterators&quot;   
+## [65] &quot;tools&quot;        &quot;glue&quot;         &quot;DEoptimR&quot;     &quot;purrr&quot;       
+## [69] &quot;sfsmisc&quot;      &quot;parallel&quot;     &quot;survival&quot;     &quot;yaml&quot;        
+## [73] &quot;colorspace&quot;   &quot;knitr&quot;        &quot;bindr&quot;        &quot;methods&quot;</code></pre>
 
 </div>
 </div>

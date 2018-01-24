@@ -32,8 +32,8 @@ tibble::as_tibble(Hitters)
 ##  9   401    92    17    49    66    65    13   5206  1332    253   784
 ## 10   574   159    21   107    75    59    10   4631  1300     90   702
 ## # ... with 253 more rows, and 9 more variables: CRBI <int>, CWalks <int>,
-## #   League <fctr>, Division <fctr>, PutOuts <int>, Assists <int>,
-## #   Errors <int>, Salary <dbl>, NewLeague <fctr>
+## #   League <fct>, Division <fct>, PutOuts <int>, Assists <int>,
+## #   Errors <int>, Salary <dbl>, NewLeague <fct>
 ```
 
 
@@ -139,7 +139,7 @@ hit_elnet
 ##   1.00    5.1056  331.3  0.4818    229.3
 ##   1.00   51.0564  348.8  0.4663    242.2
 ## 
-## RMSE was used to select the optimal model using  the smallest value.
+## RMSE was used to select the optimal model using the smallest value.
 ## The final values used for the model were alpha = 0.1 and lambda = 5.106.
 ```
 
@@ -280,7 +280,7 @@ def_elnet
 ##   1.00   0.0012422  0.9732    0.4104
 ##   1.00   0.0124220  0.9693    0.1661
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final values used for the model were alpha = 1 and lambda = 0.001242.
 ```
 

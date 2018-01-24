@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.16 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-14">
+<meta name="date" content="2018-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,9 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#regression-notation"><i class="fa fa-check"></i><b>5.1</b> Regression Notation</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
 <li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
@@ -359,18 +357,18 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 <p>After loading data into <code>R</code>, our first step should <strong>always</strong> be to inspect the data. We will start by simply printing some observations in order to understand the basic structure of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Advertising</code></pre></div>
 <pre><code>## # A tibble: 200 x 4
-##       TV Radio Newspaper Sales
-##    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
-##  1 230.1  37.8      69.2  22.1
-##  2  44.5  39.3      45.1  10.4
-##  3  17.2  45.9      69.3   9.3
-##  4 151.5  41.3      58.5  18.5
-##  5 180.8  10.8      58.4  12.9
-##  6   8.7  48.9      75.0   7.2
-##  7  57.5  32.8      23.5  11.8
-##  8 120.2  19.6      11.6  13.2
-##  9   8.6   2.1       1.0   4.8
-## 10 199.8   2.6      21.2  10.6
+##        TV Radio Newspaper Sales
+##     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+##  1 230    37.8      69.2  22.1 
+##  2  44.5  39.3      45.1  10.4 
+##  3  17.2  45.9      69.3   9.30
+##  4 152    41.3      58.5  18.5 
+##  5 181    10.8      58.4  12.9 
+##  6   8.70 48.9      75.0   7.20
+##  7  57.5  32.8      23.5  11.8 
+##  8 120    19.6      11.6  13.2 
+##  9   8.60  2.10      1.00  4.80
+## 10 200     2.60     21.2  10.6 
 ## # ... with 190 more rows</code></pre>
 <p>Because the data was read using <code>read_csv()</code>, <code>Advertising</code> is a tibble. We see that there are a total of 200 observations and 4 variables, each of which is numeric. (Specifically double-precision vectors, but more importantly they are numbers.) For the purpose of this analysis, <code>Sales</code> will be the <strong>response variable</strong>. That is, we seek to understand the relationship between <code>Sales</code>, and the <strong>predictor variables</strong>: <code>TV</code>, <code>Radio</code>, and <code>Newspaper</code>.</p>
 <div id="visualization-for-regression" class="section level2">
@@ -523,29 +521,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
-##        x1         x2           y
-##    &lt;fctr&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-##  1      A 0.96452771  1.04460262
-##  2      A 0.02901216 -0.92585517
-##  3      A 0.01549893  0.13172735
-##  4      A 0.73890112 -0.32841086
-##  5      A 0.67827785  1.41604744
-##  6      A 0.39086240 -1.62906018
-##  7      A 0.07670577 -1.16220750
-##  8      A 0.48623529 -0.09930012
-##  9      A 0.59482242  0.34285333
-## 10      A 0.29059833 -0.71905358
+##    x1        x2      y
+##    &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 A     0.761  -0.615
+##  2 A     0.726   0.502
+##  3 A     0.246   0.779
+##  4 A     0.305   0.263
+##  5 A     0.852   1.65 
+##  6 A     0.0969 -1.27 
+##  7 A     0.442   0.291
+##  8 A     0.207   1.92 
+##  9 A     0.779  -1.31 
+## 10 A     0.483   0.312
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##  -0.3837446  -0.4106122   0.1871724   0.4475009</code></pre>
+##  0.23884269  0.05391185 -0.57493370  0.02497048</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.9747830   0.8604753   1.0467607   1.8331449  -2.4990701  -1.9063352</code></pre>
+##   0.3455450  -0.4789166  -0.3968081  -0.1928372   1.0026789  -0.2588307</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>

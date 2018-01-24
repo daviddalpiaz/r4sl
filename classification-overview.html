@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.16 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-14">
+<meta name="date" content="2018-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,9 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#regression-notation"><i class="fa fa-check"></i><b>5.1</b> Regression Notation</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
 <li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
@@ -365,18 +363,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(tibble)
 <span class="kw">as_tibble</span>(Default)</code></pre></div>
 <pre><code>## # A tibble: 10,000 x 4
-##    default student   balance    income
-##     &lt;fctr&gt;  &lt;fctr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-##  1      No      No  729.5265 44361.625
-##  2      No     Yes  817.1804 12106.135
-##  3      No      No 1073.5492 31767.139
-##  4      No      No  529.2506 35704.494
-##  5      No      No  785.6559 38463.496
-##  6      No     Yes  919.5885  7491.559
-##  7      No      No  825.5133 24905.227
-##  8      No     Yes  808.6675 17600.451
-##  9      No      No 1161.0579 37468.529
-## 10      No      No    0.0000 29275.268
+##    default student balance income
+##    &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+##  1 No      No          730  44362
+##  2 No      Yes         817  12106
+##  3 No      No         1074  31767
+##  4 No      No          529  35704
+##  5 No      No          786  38463
+##  6 No      Yes         920   7492
+##  7 No      No          826  24905
+##  8 No      Yes         809  17600
+##  9 No      No         1161  37469
+## 10 No      No            0  29275
 ## # ... with 9,990 more rows</code></pre>
 <p>Our goal is to properly classify individuals as defaulters based on student status, credit card balance, and income. Be aware that the response <code>default</code> is a factor, as is the predictor <code>student</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.factor</span>(Default$default)</code></pre></div>

@@ -23,18 +23,18 @@ as_tibble(Default)
 
 ```
 ## # A tibble: 10,000 x 4
-##    default student   balance    income
-##     <fctr>  <fctr>     <dbl>     <dbl>
-##  1      No      No  729.5265 44361.625
-##  2      No     Yes  817.1804 12106.135
-##  3      No      No 1073.5492 31767.139
-##  4      No      No  529.2506 35704.494
-##  5      No      No  785.6559 38463.496
-##  6      No     Yes  919.5885  7491.559
-##  7      No      No  825.5133 24905.227
-##  8      No     Yes  808.6675 17600.451
-##  9      No      No 1161.0579 37468.529
-## 10      No      No    0.0000 29275.268
+##    default student balance income
+##    <fct>   <fct>     <dbl>  <dbl>
+##  1 No      No          730  44362
+##  2 No      Yes         817  12106
+##  3 No      No         1074  31767
+##  4 No      No          529  35704
+##  5 No      No          786  38463
+##  6 No      Yes         920   7492
+##  7 No      No          826  24905
+##  8 No      Yes         809  17600
+##  9 No      No         1161  37469
+## 10 No      No            0  29275
 ## # ... with 9,990 more rows
 ```
 

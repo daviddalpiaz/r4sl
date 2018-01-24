@@ -311,7 +311,7 @@ default_knn_mod
 ##   7  0.9654711  0.08890944
 ##   9  0.9660044  0.03400684
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was k = 9.
 ```
 
@@ -413,8 +413,8 @@ default_knn_mod$finalModel
 ```
 
 ```
-## 17-nearest neighbor classification model
-## Training set class distribution:
+## 17-nearest neighbor model
+## Training set outcome distribution:
 ## 
 ##   No  Yes 
 ## 7251  250
@@ -809,7 +809,6 @@ The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The
 
 
 ```
-## [1] "MASS"     "nnet"     "plyr"     "gbm"      "survival" "caret"   
-## [7] "ggplot2"  "lattice"
+## [1] "caret"   "ggplot2" "lattice"
 ```
 

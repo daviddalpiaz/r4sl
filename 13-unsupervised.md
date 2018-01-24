@@ -798,8 +798,7 @@ The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd)
 
 
 ```
-## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-## [7] "base"
+## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
 ```
 
 - Additional Packages, Attached
@@ -813,22 +812,25 @@ The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd)
 
 
 ```
-##  [1] "purrr"        "reshape2"     "kernlab"      "splines"     
-##  [5] "colorspace"   "stats4"       "htmltools"    "yaml"        
-##  [9] "survival"     "prodlim"      "rlang"        "e1071"       
-## [13] "ModelMetrics" "withr"        "glue"         "bindrcpp"    
-## [17] "foreach"      "plyr"         "bindr"        "dimRed"      
-## [21] "lava"         "robustbase"   "stringr"      "timeDate"    
-## [25] "munsell"      "gtable"       "recipes"      "codetools"   
-## [29] "evaluate"     "knitr"        "class"        "DEoptimR"    
-## [33] "Rcpp"         "scales"       "backports"    "ipred"       
-## [37] "CVST"         "digest"       "stringi"      "bookdown"    
-## [41] "dplyr"        "RcppRoll"     "ddalpha"      "grid"        
-## [45] "rprojroot"    "tools"        "magrittr"     "lazyeval"    
-## [49] "tibble"       "DRR"          "pkgconfig"    "Matrix"      
-## [53] "lubridate"    "gower"        "assertthat"   "rmarkdown"   
-## [57] "iterators"    "R6"           "rpart"        "sfsmisc"     
-## [61] "nnet"         "nlme"         "compiler"
+##  [1] "Rcpp"         "lubridate"    "tidyr"        "class"       
+##  [5] "assertthat"   "rprojroot"    "digest"       "ipred"       
+##  [9] "psych"        "foreach"      "R6"           "plyr"        
+## [13] "backports"    "stats4"       "e1071"        "evaluate"    
+## [17] "pillar"       "rlang"        "lazyeval"     "kernlab"     
+## [21] "rpart"        "Matrix"       "rmarkdown"    "splines"     
+## [25] "CVST"         "ddalpha"      "gower"        "stringr"     
+## [29] "foreign"      "munsell"      "broom"        "compiler"    
+## [33] "xfun"         "pkgconfig"    "mnormt"       "dimRed"      
+## [37] "htmltools"    "nnet"         "tidyselect"   "tibble"      
+## [41] "prodlim"      "DRR"          "bookdown"     "codetools"   
+## [45] "RcppRoll"     "withr"        "dplyr"        "recipes"     
+## [49] "ModelMetrics" "grid"         "nlme"         "gtable"      
+## [53] "magrittr"     "scales"       "stringi"      "reshape2"    
+## [57] "bindrcpp"     "timeDate"     "robustbase"   "lava"        
+## [61] "iterators"    "tools"        "glue"         "DEoptimR"    
+## [65] "purrr"        "sfsmisc"      "parallel"     "survival"    
+## [69] "yaml"         "colorspace"   "knitr"        "bindr"       
+## [73] "methods"
 ```
 
 

@@ -288,21 +288,21 @@ tibble::as_tibble(summary(booston_boost))
 
 ```
 ## # A tibble: 13 x 2
-##        var    rel.inf
-##  *  <fctr>      <dbl>
-##  1   lstat 34.9422206
-##  2      rm 30.6091445
-##  3     dis  9.8531723
-##  4    crim  6.4339021
-##  5   black  4.4331063
-##  6     nox  4.3018284
-##  7     age  3.3374254
-##  8 ptratio  2.3087262
-##  9     tax  1.1824679
-## 10     rad  0.9045362
-## 11   indus  0.8828171
-## 12    chas  0.6793425
-## 13      zn  0.1313104
+##    var     rel.inf
+##  * <fct>     <dbl>
+##  1 lstat    34.9  
+##  2 rm       30.6  
+##  3 dis       9.85 
+##  4 crim      6.43 
+##  5 black     4.43 
+##  6 nox       4.30 
+##  7 age       3.34 
+##  8 ptratio   2.31 
+##  9 tax       1.18 
+## 10 rad       0.905
+## 11 indus     0.883
+## 12 chas      0.679
+## 13 zn        0.131
 ```
 
 
@@ -710,7 +710,7 @@ seat_rf_tune
 ##    9    0.785     0.5376344
 ##   10    0.775     0.5202559
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was mtry = 7.
 ```
 
@@ -931,7 +931,7 @@ The `rmarkdown` file for this chapter can be found [**here**](27-ensemble.Rmd). 
 
 
 ```
-##  [1] "mlbench"      "plyr"         "ISLR"         "MASS"        
-##  [5] "caret"        "ggplot2"      "gbm"          "lattice"     
-##  [9] "survival"     "randomForest" "rpart.plot"   "rpart"
+##  [1] "mlbench"      "ISLR"         "MASS"         "caret"       
+##  [5] "ggplot2"      "gbm"          "lattice"      "survival"    
+##  [9] "randomForest" "rpart.plot"   "rpart"
 ```

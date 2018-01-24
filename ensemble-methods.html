@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.16 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2017-11-14">
+<meta name="date" content="2018-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,9 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#rmarkdown"><i class="fa fa-check"></i><b>4.7</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#regression-notation"><i class="fa fa-check"></i><b>5.1</b> Regression Notation</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
 <li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
@@ -496,21 +494,21 @@ booston_boost</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tibble::<span class="kw">as_tibble</span>(<span class="kw">summary</span>(booston_boost))</code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre><code>## # A tibble: 13 x 2
-##        var    rel.inf
-##  *  &lt;fctr&gt;      &lt;dbl&gt;
-##  1   lstat 34.9422206
-##  2      rm 30.6091445
-##  3     dis  9.8531723
-##  4    crim  6.4339021
-##  5   black  4.4331063
-##  6     nox  4.3018284
-##  7     age  3.3374254
-##  8 ptratio  2.3087262
-##  9     tax  1.1824679
-## 10     rad  0.9045362
-## 11   indus  0.8828171
-## 12    chas  0.6793425
-## 13      zn  0.1313104</code></pre>
+##    var     rel.inf
+##  * &lt;fct&gt;     &lt;dbl&gt;
+##  1 lstat    34.9  
+##  2 rm       30.6  
+##  3 dis       9.85 
+##  4 crim      6.43 
+##  5 black     4.43 
+##  6 nox       4.30 
+##  7 age       3.34 
+##  8 ptratio   2.31 
+##  9 tax       1.18 
+## 10 rad       0.905
+## 11 indus     0.883
+## 12 chas      0.679
+## 13 zn        0.131</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
 <span class="kw">plot</span>(booston_boost, <span class="dt">i =</span> <span class="st">&quot;rm&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
 <span class="kw">grid</span>()
@@ -735,7 +733,7 @@ seat_rf_tune</code></pre></div>
 ##    9    0.785     0.5376344
 ##   10    0.775     0.5202559
 ## 
-## Accuracy was used to select the optimal model using  the largest value.
+## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was mtry = 7.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_acc</span>(<span class="kw">predict</span>(seat_rf_tune, seat_tst), seat_tst$Sales)</code></pre></div>
 <pre><code>## [1] 0.795</code></pre>
@@ -856,9 +854,9 @@ gbm_col  =<span class="st"> </span><span class="kw">ifelse</span>(gbm_pred ==<sp
 <div id="rmarkdown-15" class="section level2">
 <h2><span class="header-section-number">27.6</span> <code>rmarkdown</code></h2>
 <p>The <code>rmarkdown</code> file for this chapter can be found <a href="27-ensemble.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
-<pre><code>##  [1] &quot;mlbench&quot;      &quot;plyr&quot;         &quot;ISLR&quot;         &quot;MASS&quot;        
-##  [5] &quot;caret&quot;        &quot;ggplot2&quot;      &quot;gbm&quot;          &quot;lattice&quot;     
-##  [9] &quot;survival&quot;     &quot;randomForest&quot; &quot;rpart.plot&quot;   &quot;rpart&quot;</code></pre>
+<pre><code>##  [1] &quot;mlbench&quot;      &quot;ISLR&quot;         &quot;MASS&quot;         &quot;caret&quot;       
+##  [5] &quot;ggplot2&quot;      &quot;gbm&quot;          &quot;lattice&quot;      &quot;survival&quot;    
+##  [9] &quot;randomForest&quot; &quot;rpart.plot&quot;   &quot;rpart&quot;</code></pre>
 
 </div>
 </div>
