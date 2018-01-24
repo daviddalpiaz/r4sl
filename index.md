@@ -24,7 +24,6 @@ description: ""
 
 Welcome to `R` for Statistical Learning! While this is the current title, a more appropriate title would be "Machine Learning from the Perspective of a Statistician using `R`" but that doesn't seem as catchy.
 
-
 ## About This Book {-}
 
 This book currently serves as a supplement to [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/) for [STAT 432 - Basics of Statistical Learning](https://go.illinois.edu/stat430) at the [University of Illinois at Urbana-Champaign](http://illinois.edu/).
@@ -38,7 +37,6 @@ The initial focus of this text was to expand on ISL's introduction to using `R` 
 
 In other words, this text seeks to replicate the best parts of [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/), [The Elements of 
 Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), and [Applied Predictive Modeling](http://appliedpredictivemodeling.com/) that are most needed by a particular set of students.
-
 
 ## Organization {-}
 
@@ -58,11 +56,9 @@ Parts 2, 3, and 4 discuss the **theory** of statistical learning. Several method
 
 Parts 5 and 6 highlight the use of statistical learning in **practice**. Part 5 focuses on practical usage of the techniques seen in Parts 2, 3, and 4. Part 6 introduces techniques that are most commonly used in practice today.
 
-
 ## Who? {-}
 
 This book is targeted at advanced undergraduate or first year MS students in Statistics who have no prior statistical learning experience. While both will be discussed in great detail, previous experience with both statistical modeling and `R` are assumed.
-
 
 ## Caveat Emptor {-}
 
@@ -73,7 +69,6 @@ When possible, it would be best to always access the text online to be sure you 
 Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (`dalpiaz2 AT illinois DOT edu`) Or, if you know `rmarkdown` and are familiar with GitHub, [make a pull request and fix an issue yourself!](https://github.com/daviddalpiaz/r4sl) This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We'll also link to your GitHub account, or personal website upon request.
 
 While development is taking place, you may see "TODO" scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.
-
 
 ## Conventions {-}
 
@@ -103,7 +98,6 @@ Often the symbol $\triangleq$ will be used to mean "is defined to be."
 
 We use the value $p$ to mean the number of **p**redictors.
 
-
 ## Acknowledgements {-}
 
 The following is a (likely incomplete) list of helpful contributers.
@@ -127,7 +121,6 @@ Looking for ways to contribute?
 - You'll notice that a lot of the plotting code is not displayed in the text, but is availible in the source. Currently that code was written to accomplish a task, but without much thought about the best way to accomplish the task. Try refactoring some of this code.
 - Fix typos. Since the book is actively being developed, typos are getting added all the time.
 - Suggest edits. Good feedback can be just as helpful as actually contributing code changes.
-
 
 ## License {-}
 
