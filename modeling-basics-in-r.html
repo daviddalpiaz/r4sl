@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.5.16 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2018-01-24">
+<meta name="date" content="2018-01-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -521,29 +521,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre></div>
 <pre><code>## # A tibble: 30 x 3
-##    x1       x2      y
-##    &lt;fct&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1 A     0.402 -0.796
-##  2 A     0.971 -0.211
-##  3 A     0.632 -1.04 
-##  4 A     0.845  1.78 
-##  5 A     0.803  0.643
-##  6 A     0.968  1.38 
-##  7 A     0.884 -1.12 
-##  8 A     0.305  1.62 
-##  9 A     0.358 -1.64 
-## 10 A     0.112  1.34 
+##    x1       x2       y
+##    &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1 A     0.191 -0.355 
+##  2 A     0.531  1.16  
+##  3 A     0.698 -1.01  
+##  4 A     0.899  1.87  
+##  5 A     0.780 -0.0654
+##  6 A     0.923  0.388 
+##  7 A     0.334 -1.01  
+##  8 A     0.214  1.36  
+##  9 A     0.222  0.312 
+## 10 A     0.989  0.537 
 ## # ... with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##   0.4753490  -0.2891136  -0.7877505  -0.4444951</code></pre>
+## -0.01237082 -0.45990788 -0.45090766  0.57378636</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x1 *<span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  0.18784998  0.32288427 -0.54183754  0.01330846 -1.50528891 -0.37079013</code></pre>
+## -0.02286489 -0.44076406 -0.43519960  0.59193647 -0.03486062 -0.02620419</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
@@ -618,10 +618,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

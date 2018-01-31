@@ -2,9 +2,20 @@
 
 # Overview {#regression-overview}
 
-**TODO:** Take main concepts from the next chapter and talk about them in general here. The next chapter will illustrate them by example.
+**Chapter Status:** This chapter is currently undergoing massive rewrites. Some code is mostly for the use of current students. Plotting code is often not best practice for plotting, but is instead useful for understanding.
 
-**Note:** This is a placeholder chapter that is new. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 - **Supervised Learning**
     - **Regression** (Numeric Response)
@@ -53,6 +64,194 @@ $$
 \text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Test Data}) = \sqrt{\frac{1}{n_{\text{Te}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
 $$
 - TODO: RSS vs $R^2$ vs RMSE
+
+
+
+
+
+
+
+**Code for Plotting from Class**
+
+
+```r
+## load packages
+library(rpart)
+library(FNN)
+```
+
+
+```r
+# simulate data
+
+## signal
+f = function(x) {
+  x ^ 3
+}
+
+## define data generating processs
+get_sim_data = function(f, sample_size = 50) {
+  x = runif(n = sample_size, min = -1, max = 1)
+  y = rnorm(n = sample_size, mean = f(x), sd = 0.15)
+  data.frame(x, y)
+}
+
+## simualte training data
+set.seed(42)
+sim_trn_data = get_sim_data(f = f)
+
+## simulate testing data
+set.seed(3)
+sim_tst_data = get_sim_data(f = f)
+
+## create grid for plotting
+x_grid = data.frame(x = seq(-1.5, 1.5, 0.001))
+```
+
+
+```r
+# fit models
+
+## tree models
+tree_fit_l = rpart(y ~ x, data = sim_trn_data, control = rpart.control(cp = 0.500, minsplit = 2))
+tree_fit_m = rpart(y ~ x, data = sim_trn_data, control = rpart.control(cp = 0.015, minsplit = 2))
+tree_fit_h = rpart(y ~ x, data = sim_trn_data, control = rpart.control(cp = 0.000, minsplit = 2))
+
+## knn models
+knn_fit_l = knn.reg(train = sim_trn_data["x"], test = x_grid, y = sim_trn_data$y, k = 40)
+knn_fit_m = knn.reg(train = sim_trn_data["x"], test = x_grid, y = sim_trn_data$y, k = 5)
+knn_fit_h = knn.reg(train = sim_trn_data["x"], test = x_grid, y = sim_trn_data$y, k = 1)
+
+## polynomial models
+poly_fit_l = lm(y ~ poly(x,  1), data = sim_trn_data)
+poly_fit_m = lm(y ~ poly(x,  3), data = sim_trn_data)
+poly_fit_h = lm(y ~ poly(x, 22), data = sim_trn_data)
+```
+
+
+```r
+# get predictions
+
+## tree models
+tree_fit_l_pred = predict(tree_fit_l, newdata = x_grid)
+tree_fit_m_pred = predict(tree_fit_m, newdata = x_grid)
+tree_fit_h_pred = predict(tree_fit_h, newdata = x_grid)
+
+## knn models
+knn_fit_l_pred = knn_fit_l$pred
+knn_fit_m_pred = knn_fit_m$pred
+knn_fit_h_pred = knn_fit_h$pred
+
+## polynomial models
+poly_fit_l_pred = predict(poly_fit_l, newdata = x_grid)
+poly_fit_m_pred = predict(poly_fit_m, newdata = x_grid)
+poly_fit_h_pred = predict(poly_fit_h, newdata = x_grid)
+```
+
+
+```r
+# plot fitted trees
+
+par(mfrow = c(1, 3))
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+     main = "Tree Model, cp = 0.5", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_l_pred, col = "darkgrey",  lwd = 2)
+
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
+     main = "Tree Model, cp = 0.015", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_m_pred, col = "darkgrey",  lwd = 2)
+
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+     main = "Tree Model, cp = 0.0", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_h_pred, col = "darkgrey",  lwd = 2)
+```
+
+![](05-regression_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+
+
+```r
+# plot fitted KNN
+
+par(mfrow = c(1, 3))
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+     main = "KNN, k = 40", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_l_pred, col = "darkgrey",  lwd = 2)
+
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
+     main = "KNN, k = 5", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_m_pred, col = "darkgrey",  lwd = 2)
+
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+     main = "KNN, k = 1", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_h_pred, col = "darkgrey",  lwd = 2)
+```
+
+![](05-regression_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+
+
+```r
+# plot fitted polynomials
+par(mfrow = c(1, 3))
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+     main = "Polynomial Model, degree = 1", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_l_pred, col = "darkgrey",  lwd = 2)
+
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
+     main = "Polynomial Model, degree = 3", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_m_pred, col = "darkgrey",  lwd = 2)
+
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+     main = "Polynomial Model, degree = 22", cex = 1.5)
+grid()
+lines(x_grid$x, tree_fit_h_pred, col = "darkgrey",  lwd = 2)
+```
+
+![](05-regression_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
