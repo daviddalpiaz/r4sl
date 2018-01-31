@@ -424,14 +424,20 @@ x_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fit models</span>
 
 ## tree models
-tree_fit_l =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.500</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
-tree_fit_m =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.015</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
-tree_fit_h =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.000</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
+tree_fit_l =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
+                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.500</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
+tree_fit_m =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
+                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.015</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
+tree_fit_h =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
+                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.000</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
 
 ## knn models
-knn_fit_l =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">test =</span> x_grid, <span class="dt">y =</span> sim_trn_data$y, <span class="dt">k =</span> <span class="dv">40</span>)
-knn_fit_m =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">test =</span> x_grid, <span class="dt">y =</span> sim_trn_data$y, <span class="dt">k =</span> <span class="dv">5</span>)
-knn_fit_h =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">test =</span> x_grid, <span class="dt">y =</span> sim_trn_data$y, <span class="dt">k =</span> <span class="dv">1</span>)
+knn_fit_l =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data$y, 
+                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">40</span>)
+knn_fit_m =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data$y, 
+                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">5</span>)
+knn_fit_h =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data$y, 
+                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">1</span>)
 
 ## polynomial models
 poly_fit_l =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">1</span>), <span class="dt">data =</span> sim_trn_data)
@@ -470,7 +476,7 @@ poly_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(poly_f
      <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.0&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
 <span class="kw">lines</span>(x_grid$x, tree_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="05-regression_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="05-regression_files/figure-html/unnamed-chunk-5-1.png" width="480" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted KNN</span>
 
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
@@ -488,7 +494,7 @@ poly_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(poly_f
      <span class="dt">main =</span> <span class="st">&quot;KNN, k = 1&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
 <span class="kw">lines</span>(x_grid$x, tree_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="05-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="05-regression_files/figure-html/unnamed-chunk-6-1.png" width="480" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted polynomials</span>
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
 <span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
@@ -505,7 +511,7 @@ poly_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(poly_f
      <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 22&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
 <span class="kw">lines</span>(x_grid$x, tree_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="05-regression_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="05-regression_files/figure-html/unnamed-chunk-7-1.png" width="480" /></p>
 <!-- ## Regression Notation -->
 <!-- - $\mathbf{X}$ = $n \times p$ data matrix -->
 <!-- - $\mathbf{x}_j$ = column of data matrix. vector of length $n$. $n$ observations of predictors $j$. -->

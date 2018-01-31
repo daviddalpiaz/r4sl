@@ -113,14 +113,20 @@ x_grid = data.frame(x = seq(-1.5, 1.5, 0.001))
 # fit models
 
 ## tree models
-tree_fit_l = rpart(y ~ x, data = sim_trn_data, control = rpart.control(cp = 0.500, minsplit = 2))
-tree_fit_m = rpart(y ~ x, data = sim_trn_data, control = rpart.control(cp = 0.015, minsplit = 2))
-tree_fit_h = rpart(y ~ x, data = sim_trn_data, control = rpart.control(cp = 0.000, minsplit = 2))
+tree_fit_l = rpart(y ~ x, data = sim_trn_data, 
+                   control = rpart.control(cp = 0.500, minsplit = 2))
+tree_fit_m = rpart(y ~ x, data = sim_trn_data, 
+                   control = rpart.control(cp = 0.015, minsplit = 2))
+tree_fit_h = rpart(y ~ x, data = sim_trn_data, 
+                   control = rpart.control(cp = 0.000, minsplit = 2))
 
 ## knn models
-knn_fit_l = knn.reg(train = sim_trn_data["x"], test = x_grid, y = sim_trn_data$y, k = 40)
-knn_fit_m = knn.reg(train = sim_trn_data["x"], test = x_grid, y = sim_trn_data$y, k = 5)
-knn_fit_h = knn.reg(train = sim_trn_data["x"], test = x_grid, y = sim_trn_data$y, k = 1)
+knn_fit_l = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y, 
+                    test = x_grid, k = 40)
+knn_fit_m = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y, 
+                    test = x_grid, k = 5)
+knn_fit_h = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y, 
+                    test = x_grid, k = 1)
 
 ## polynomial models
 poly_fit_l = lm(y ~ poly(x,  1), data = sim_trn_data)
