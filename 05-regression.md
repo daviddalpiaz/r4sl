@@ -185,17 +185,17 @@ par(mfrow = c(1, 3))
 plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
      main = "KNN, k = 40", cex = 1.5)
 grid()
-lines(x_grid$x, tree_fit_l_pred, col = "darkgrey",  lwd = 2)
+lines(x_grid$x, knn_fit_l_pred, col = "darkgrey",  lwd = 2)
 
 plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
      main = "KNN, k = 5", cex = 1.5)
 grid()
-lines(x_grid$x, tree_fit_m_pred, col = "darkgrey",  lwd = 2)
+lines(x_grid$x, knn_fit_m_pred, col = "darkgrey",  lwd = 2)
 
 plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
      main = "KNN, k = 1", cex = 1.5)
 grid()
-lines(x_grid$x, tree_fit_h_pred, col = "darkgrey",  lwd = 2)
+lines(x_grid$x, knn_fit_h_pred, col = "darkgrey",  lwd = 2)
 ```
 
 ![](05-regression_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
@@ -207,17 +207,17 @@ par(mfrow = c(1, 3))
 plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
      main = "Polynomial Model, degree = 1", cex = 1.5)
 grid()
-lines(x_grid$x, tree_fit_l_pred, col = "darkgrey",  lwd = 2)
+lines(x_grid$x, poly_fit_l_pred, col = "darkgrey",  lwd = 2)
 
 plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
      main = "Polynomial Model, degree = 3", cex = 1.5)
 grid()
-lines(x_grid$x, tree_fit_m_pred, col = "darkgrey",  lwd = 2)
+lines(x_grid$x, poly_fit_m_pred, col = "darkgrey",  lwd = 2)
 
 plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
      main = "Polynomial Model, degree = 22", cex = 1.5)
 grid()
-lines(x_grid$x, tree_fit_h_pred, col = "darkgrey",  lwd = 2)
+lines(x_grid$x, poly_fit_h_pred, col = "darkgrey",  lwd = 2)
 ```
 
 ![](05-regression_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
