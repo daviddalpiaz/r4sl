@@ -632,7 +632,7 @@ LDA however creates dummy variables, here with `Large` is the reference level, t
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](11-generative.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](11-generative.Rmd). The file was created using `R` version 3.4.4. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

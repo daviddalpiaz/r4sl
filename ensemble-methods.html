@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
   <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7.4 and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2018-02-02">
+<meta name="date" content="2018-03-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -325,7 +325,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a></li>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
+<li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
+<li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
+<li class="chapter" data-level="31.4" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-random-search-search"><i class="fa fa-check"></i><b>31.4</b> RDA with Random Search Search</a></li>
+<li class="chapter" data-level="31.5" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#comparison-to-elastic-net"><i class="fa fa-check"></i><b>31.5</b> Comparison to Elastic Net</a></li>
+<li class="chapter" data-level="31.6" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#results-2"><i class="fa fa-check"></i><b>31.6</b> Results</a></li>
+<li class="chapter" data-level="31.7" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#external-links-10"><i class="fa fa-check"></i><b>31.7</b> External Links</a></li>
+<li class="chapter" data-level="31.8" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rmarkdown-16"><i class="fa fa-check"></i><b>31.8</b> RMarkdown</a></li>
+</ul></li>
 <li class="chapter" data-level="32" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>32</b> Support Vector Machines</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
@@ -412,8 +421,8 @@ boston_bag</code></pre></div>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 13
 ## 
-##           Mean of squared residuals: 13.78573
-##                     % Var explained: 81.48</code></pre>
+##           Mean of squared residuals: 13.74459
+##                     % Var explained: 81.53</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boston_bag_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_bag, <span class="dt">newdata =</span> boston_tst)
 <span class="kw">plot</span>(boston_bag_tst_pred,boston_tst$medv,
      <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>,
@@ -423,7 +432,7 @@ boston_bag</code></pre></div>
 <span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">bag_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_bag_tst_pred, boston_tst$medv))</code></pre></div>
-<pre><code>## [1] 3.844243</code></pre>
+<pre><code>## [1] 3.843966</code></pre>
 <p>Here we see two interesting results. First, the predicted versus actual plot no longer has a small number of predicted values. Second, our test error has dropped dramatically. Also note that the “Mean of squared residuals” which is output by <code>randomForest</code> is the <strong>Out of Bag</strong> estimate of the error.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_bag, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">main =</span> <span class="st">&quot;Bagged Trees: Error vs Number of Trees&quot;</span>)
 <span class="kw">grid</span>()</code></pre></div>
@@ -442,23 +451,23 @@ boston_forest</code></pre></div>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 4
 ## 
-##           Mean of squared residuals: 12.54771
-##                     % Var explained: 83.14</code></pre>
+##           Mean of squared residuals: 12.78942
+##                     % Var explained: 82.82</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">importance</span>(boston_forest, <span class="dt">type =</span> <span class="dv">1</span>)</code></pre></div>
 <pre><code>##           %IncMSE
-## crim    11.159069
-## zn       4.736893
-## indus    9.167686
-## chas     2.826810
-## nox     11.040039
-## rm      30.787637
-## age      8.448608
-## dis      9.733887
-## rad      4.725829
-## tax      8.622564
-## ptratio 11.718528
-## black    7.061299
-## lstat   23.357019</code></pre>
+## crim    11.702184
+## zn       4.251232
+## indus    9.789632
+## chas     2.599685
+## nox     14.404374
+## rm      30.629328
+## age     10.192164
+## dis     10.617532
+## rad      4.947145
+## tax      8.663865
+## ptratio 11.686099
+## black    7.345671
+## lstat   23.094159</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">varImpPlot</span>(boston_forest, <span class="dt">type =</span> <span class="dv">1</span>)</code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boston_forest_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_forest, <span class="dt">newdata =</span> boston_tst)
@@ -470,15 +479,15 @@ boston_forest</code></pre></div>
 <span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">forest_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_forest_tst_pred, boston_tst$medv))</code></pre></div>
-<pre><code>## [1] 3.710097</code></pre>
+<pre><code>## [1] 3.701805</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boston_forest_trn_pred =<span class="st"> </span><span class="kw">predict</span>(boston_forest, <span class="dt">newdata =</span> boston_trn)
 forest_trn_rmse =<span class="st"> </span><span class="kw">calc_rmse</span>(boston_forest_trn_pred, boston_trn$medv)
 forest_oob_rmse =<span class="st"> </span><span class="kw">calc_rmse</span>(boston_forest$predicted, boston_trn$medv)</code></pre></div>
 <p>Here we note three RMSEs. The training RMSE (which is optimistic), the OOB RMSE (which is a reasonable estimate of the test error) and the test RMSE. Also note that variables importance was calculated.</p>
 <pre><code>##       Data    Error
-## 1 Training 1.573562
-## 2      OOB 3.542275
-## 3     Test 3.710097</code></pre>
+## 1 Training 1.558111
+## 2      OOB 3.576229
+## 3     Test 3.701805</code></pre>
 </div>
 <div id="boosting" class="section level3">
 <h3><span class="header-section-number">27.1.5</span> Boosting</h3>
@@ -496,19 +505,19 @@ booston_boost</code></pre></div>
 <pre><code>## # A tibble: 13 x 2
 ##    var     rel.inf
 ##  * &lt;fct&gt;     &lt;dbl&gt;
-##  1 lstat    34.9  
-##  2 rm       30.6  
-##  3 dis       9.85 
-##  4 crim      6.43 
-##  5 black     4.43 
-##  6 nox       4.30 
-##  7 age       3.34 
-##  8 ptratio   2.31 
-##  9 tax       1.18 
-## 10 rad       0.905
-## 11 indus     0.883
-## 12 chas      0.679
-## 13 zn        0.131</code></pre>
+##  1 lstat    34.4  
+##  2 rm       31.6  
+##  3 dis       9.78 
+##  4 crim      6.15 
+##  5 black     4.50 
+##  6 nox       4.35 
+##  7 age       3.50 
+##  8 ptratio   1.87 
+##  9 tax       1.16 
+## 10 indus     0.959
+## 11 rad       0.885
+## 12 chas      0.687
+## 13 zn        0.145</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
 <span class="kw">plot</span>(booston_boost, <span class="dt">i =</span> <span class="st">&quot;rm&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
 <span class="kw">grid</span>()
@@ -519,7 +528,7 @@ booston_boost</code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-21-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boston_boost_tst_pred =<span class="st"> </span><span class="kw">predict</span>(booston_boost, <span class="dt">newdata =</span> boston_tst, <span class="dt">n.trees =</span> <span class="dv">5000</span>)
 (<span class="dt">boost_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_boost_tst_pred, boston_tst$medv))</code></pre></div>
-<pre><code>## [1] 3.381453</code></pre>
+<pre><code>## [1] 3.43382</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_boost_tst_pred, boston_tst$medv,
      <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>, 
      <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Boosted Model, Test Data&quot;</span>,
@@ -538,9 +547,9 @@ booston_boost</code></pre></div>
 <pre><code>##           Model TestError
 ## 1   Single Tree  5.458088
 ## 2  Linear Model  5.125877
-## 3       Bagging  3.844243
-## 4 Random Forest  3.710097
-## 5      Boosting  3.381453</code></pre>
+## 3       Bagging  3.843966
+## 4 Random Forest  3.701805
+## 5      Boosting  3.433820</code></pre>
 <p>While a single tree does not beat linear regression, each of the ensemble methods perform much better!</p>
 </div>
 </div>
@@ -596,19 +605,19 @@ seat_bag</code></pre></div>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 10
 ## 
-##         OOB estimate of  error rate: 20%
+##         OOB estimate of  error rate: 21%
 ## Confusion matrix:
 ##      High Low class.error
-## High   53  27   0.3375000
+## High   51  29   0.3625000
 ## Low    13 107   0.1083333</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_bag_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_bag, <span class="dt">newdata =</span> seat_tst)
 <span class="kw">table</span>(<span class="dt">predicted =</span> seat_bag_tst_pred, <span class="dt">actual =</span> seat_tst$Sales)</code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   66  21
-##      Low    18  95</code></pre>
+##      High   66  19
+##      Low    18  97</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">bag_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_bag_tst_pred, <span class="dt">actual =</span> seat_tst$Sales))</code></pre></div>
-<pre><code>## [1] 0.805</code></pre>
+<pre><code>## [1] 0.815</code></pre>
 </div>
 <div id="random-forest-1" class="section level3">
 <h3><span class="header-section-number">27.2.4</span> Random Forest</h3>
@@ -622,19 +631,19 @@ seat_forest</code></pre></div>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 3
 ## 
-##         OOB estimate of  error rate: 22.5%
+##         OOB estimate of  error rate: 22%
 ## Confusion matrix:
 ##      High Low class.error
-## High   49  31   0.3875000
+## High   50  30   0.3750000
 ## Low    14 106   0.1166667</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_forest_tst_perd =<span class="st"> </span><span class="kw">predict</span>(seat_forest, <span class="dt">newdata =</span> seat_tst)
 <span class="kw">table</span>(<span class="dt">predicted =</span> seat_forest_tst_perd, <span class="dt">actual =</span> seat_tst$Sales)</code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   62  19
-##      Low    22  97</code></pre>
+##      High   64  18
+##      Low    20  98</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">forest_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_forest_tst_perd, <span class="dt">actual =</span> seat_tst$Sales))</code></pre></div>
-<pre><code>## [1] 0.795</code></pre>
+<pre><code>## [1] 0.81</code></pre>
 </div>
 <div id="boosting-1" class="section level3">
 <h3><span class="header-section-number">27.2.5</span> Boosting</h3>
@@ -654,10 +663,10 @@ seat_boost</code></pre></div>
 <span class="kw">table</span>(<span class="dt">predicted =</span> seat_boost_tst_pred, <span class="dt">actual =</span> seat_tst$Sales)</code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   71  18
-##      Low    13  98</code></pre>
+##      High   70  16
+##      Low    14 100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">boost_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_boost_tst_pred, <span class="dt">actual =</span> seat_tst$Sales))</code></pre></div>
-<pre><code>## [1] 0.845</code></pre>
+<pre><code>## [1] 0.85</code></pre>
 </div>
 <div id="results-1" class="section level3">
 <h3><span class="header-section-number">27.2.6</span> Results</h3>
@@ -669,9 +678,9 @@ seat_boost</code></pre></div>
 <pre><code>##                 Model TestAccuracy
 ## 1         Single Tree        0.770
 ## 2 Logistic Regression        0.910
-## 3             Bagging        0.805
-## 4       Random Forest        0.795
-## 5            Boosting        0.845</code></pre>
+## 3             Bagging        0.815
+## 4       Random Forest        0.810
+## 5            Boosting        0.850</code></pre>
 <p>Here we see each of the ensemble methods performing better than a single tree, however, they still fall behind logistic regression. Sometimes a simple linear model will beat more complicated models! This is why you should always try a logistic regression for classification.</p>
 </div>
 </div>
@@ -722,26 +731,26 @@ seat_rf_tune</code></pre></div>
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy  Kappa    
-##    1    0.730     0.3807339
-##    2    0.775     0.5033113
-##    3    0.795     0.5591398
-##    4    0.790     0.5474138
-##    5    0.795     0.5610278
-##    6    0.790     0.5512821
-##    7    0.805     0.5806452
-##    8    0.795     0.5628998
+##    1    0.740     0.4090909
+##    2    0.790     0.5434783
+##    3    0.770     0.5043103
+##    4    0.785     0.5376344
+##    5    0.790     0.5493562
+##    6    0.785     0.5415778
+##    7    0.790     0.5493562
+##    8    0.805     0.5824411
 ##    9    0.785     0.5376344
-##   10    0.775     0.5202559
+##   10    0.805     0.5824411
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final value used for the model was mtry = 7.</code></pre>
+## The final value used for the model was mtry = 8.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_acc</span>(<span class="kw">predict</span>(seat_rf_tune, seat_tst), seat_tst$Sales)</code></pre></div>
 <pre><code>## [1] 0.795</code></pre>
 <p>The results returned are based on the OOB samples. (Coincidentally, the test accuracy is the same as the best accuracy found using OOB samples.) Note that when using OOB, for some reason the default plot is not what you would expect and is not at all useful. (Which is why it is omitted here.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_rf_tune$bestTune</code></pre></div>
 <pre><code>##   mtry
-## 7    7</code></pre>
-<p>Based on these results, we would select the random forest model with an <code>mtry</code> of 7. Note that based on the OOB estimates, the bagging model is expected to perform worse than this selected model, however, based on our results above, that is not what we find to be true in our test set.</p>
+## 8    8</code></pre>
+<p>Based on these results, we would select the random forest model with an <code>mtry</code> of 8. Note that based on the OOB estimates, the bagging model is expected to perform worse than this selected model, however, based on our results above, that is not what we find to be true in our test set.</p>
 <p>Also note that <code>method = &quot;ranger&quot;</code> would also fit a random forest model. <a href="http://arxiv.org/pdf/1508.04409.pdf">Ranger</a> is a newer <code>R</code> package for random forests that has been shown to be much faster, especially when there are a larger number of predictors.</p>
 </div>
 <div id="boosting-2" class="section level3">
@@ -770,11 +779,11 @@ seat_rf_tune</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_gbm_tune)</code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_acc</span>(<span class="kw">predict</span>(seat_gbm_tune, seat_tst), seat_tst$Sales)</code></pre></div>
-<pre><code>## [1] 0.845</code></pre>
+<pre><code>## [1] 0.85</code></pre>
 <p>We see our tuned model does no better on the test set than the arbitrary boosted model we had fit above, with the slightly different parameters seen below. We could perhaps try a larger tuning grid, but at this point it seems unlikely that we could find a much better model. There seems to be no way to get a tree method to out-perform logistic regression in this dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat_gbm_tune$bestTune</code></pre></div>
 <pre><code>##    n.trees interaction.depth shrinkage n.minobsinnode
-## 61     500                 1       0.1             10</code></pre>
+## 34    2000                 1      0.01             10</code></pre>
 </div>
 </div>
 <div id="tree-versus-ensemble-boundaries" class="section level2">
@@ -853,7 +862,7 @@ gbm_col  =<span class="st"> </span><span class="kw">ifelse</span>(gbm_pred ==<sp
 </div>
 <div id="rmarkdown-15" class="section level2">
 <h2><span class="header-section-number">27.6</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="27-ensemble.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="27-ensemble.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.4. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>##  [1] &quot;mlbench&quot;      &quot;ISLR&quot;         &quot;MASS&quot;         &quot;caret&quot;       
 ##  [5] &quot;ggplot2&quot;      &quot;gbm&quot;          &quot;lattice&quot;      &quot;survival&quot;    
 ##  [9] &quot;randomForest&quot; &quot;rpart.plot&quot;   &quot;rpart&quot;</code></pre>

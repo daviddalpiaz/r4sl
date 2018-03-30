@@ -382,13 +382,14 @@ coef(fit_all, which.min(cv_error))
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.4.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.4.4 and the following packages:
 
 - Base Packages, Attached
 
 
 ```
-## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
+## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+## [7] "base"
 ```
 
 - Additional Packages, Attached
@@ -420,7 +421,7 @@ The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The 
 ## [61] "timeDate"     "robustbase"   "lava"         "iterators"   
 ## [65] "tools"        "glue"         "DEoptimR"     "purrr"       
 ## [69] "sfsmisc"      "parallel"     "survival"     "yaml"        
-## [73] "colorspace"   "knitr"        "bindr"        "methods"
+## [73] "colorspace"   "knitr"        "bindr"
 ```
 
 

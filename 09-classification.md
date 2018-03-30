@@ -25,16 +25,16 @@ as_tibble(Default)
 ## # A tibble: 10,000 x 4
 ##    default student balance income
 ##    <fct>   <fct>     <dbl>  <dbl>
-##  1 No      No          730  44362
-##  2 No      Yes         817  12106
-##  3 No      No         1074  31767
-##  4 No      No          529  35704
-##  5 No      No          786  38463
-##  6 No      Yes         920   7492
-##  7 No      No          826  24905
-##  8 No      Yes         809  17600
-##  9 No      No         1161  37469
-## 10 No      No            0  29275
+##  1 No      No         730. 44362.
+##  2 No      Yes        817. 12106.
+##  3 No      No        1074. 31767.
+##  4 No      No         529. 35704.
+##  5 No      No         786. 38463.
+##  6 No      Yes        920.  7492.
+##  7 No      No         826. 24905.
+##  8 No      Yes        809. 17600.
+##  9 No      No        1161. 37469.
+## 10 No      No           0. 29275.
 ## # ... with 9,990 more rows
 ```
 
@@ -445,7 +445,7 @@ This classifier does better than the previous. But the point is, in reality, to 
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 3.4.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 3.4.4. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

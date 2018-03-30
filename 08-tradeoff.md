@@ -603,4 +603,4 @@ How good is this estimate? Well, if $\mathcal{D}$ is a random sample from $(X, Y
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](08-tradeoff.Rmd). The file was created using `R` version 3.4.2.
+The `rmarkdown` file for this chapter can be found [**here**](08-tradeoff.Rmd). The file was created using `R` version 3.4.4.

@@ -792,13 +792,14 @@ ColorDendrogram(iris_hc, y = iris_cut,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.4.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.4.4 and the following packages:
 
 - Base Packages, Attached
 
 
 ```
-## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "base"
+## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+## [7] "base"
 ```
 
 - Additional Packages, Attached
@@ -829,8 +830,7 @@ The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd)
 ## [57] "bindrcpp"     "timeDate"     "robustbase"   "lava"        
 ## [61] "iterators"    "tools"        "glue"         "DEoptimR"    
 ## [65] "purrr"        "sfsmisc"      "parallel"     "survival"    
-## [69] "yaml"         "colorspace"   "knitr"        "bindr"       
-## [73] "methods"
+## [69] "yaml"         "colorspace"   "knitr"        "bindr"
 ```
 
 
