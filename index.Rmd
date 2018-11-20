@@ -122,7 +122,7 @@ Your name could be here! If you submit a correction and would like to be listed 
 
 Looking for ways to contribute? 
 
-- You'll notice that a lot of the plotting code is not displayed in the text, but is availible in the source. Currently that code was written to accomplish a task, but without much thought about the best way to accomplish the task. Try refactoring some of this code.
+- You'll notice that a lot of the plotting code is not displayed in the text, but is available in the source. Currently that code was written to accomplish a task, but without much thought about the best way to accomplish the task. Try refactoring some of this code.
 - Fix typos. Since the book is actively being developed, typos are getting added all the time.
 - Suggest edits. Good feedback can be just as helpful as actually contributing code changes.
 
