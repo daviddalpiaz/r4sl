@@ -100,7 +100,7 @@ We use the value $p$ to mean the number of **p**redictors.
 
 ## Acknowledgements {-}
 
-The following is a (likely incomplete) list of helpful contributers.
+The following is a (likely incomplete) list of helpful contributors.
 
 - [James Balamuta](http://www.thecoatlessprofessor.com/), Summer 2016 - ??? 
 - Korawat Tanwisuth, Spring 2017
@@ -114,6 +114,7 @@ The following is a (likely incomplete) list of helpful contributers.
 - [Yuanning Wei](https://www.linkedin.com/in/yuanning-wei-79b9a4138/), Fall 2017
 - [Ross Drucker](https://www.linkedin.com/in/ross-drucker/), Fall 2017
 - [Craig Bonsignore](https://github.com/cbonsig), Fall 2018
+- [Ashish Kumar](https://github.com/ak-org), Fall 2018
 
 Your name could be here! If you submit a correction and would like to be listed below, please provide your name as you would like it to appear, as well as a link to a GitHub, LinkedIn, or personal website. Pull requests encouraged!
 
