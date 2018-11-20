@@ -127,7 +127,7 @@ This function can actually be improved for the inputs that we are using. We woul
 
 ```{r}
 get_rmse = function(model, data, response) {
-  rmse(actual = data[, response] * 1, 
+  rmse(actual = subset(data, select = response, drop = TRUE),
        predicted = predict(model, data))
 }
 ```
