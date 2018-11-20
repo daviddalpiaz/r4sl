@@ -430,7 +430,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="model-complexity" class="section level2">
 <h2><span class="header-section-number">6.2</span> Model Complexity</h2>
-<p>Aside from how well a model predicts, we will also be very interested in the complexity (flexibility) of a model. For now, we will only considered nested linear models for simplicity. Then in that case, the more predictors that a model has, the more complex the model. For the sake of assigning a numerical value to the complexity of a linear model, we will use the number of predictors, <span class="math inline">\(p\)</span>.</p>
+<p>Aside from how well a model predicts, we will also be very interested in the complexity (flexibility) of a model. For now, we will only consider nested linear models for simplicity. Then in that case, the more predictors that a model has, the more complex the model. For the sake of assigning a numerical value to the complexity of a linear model, we will use the number of predictors, <span class="math inline">\(p\)</span>.</p>
 <p>We write a simple <code>R</code> function to extract this information from a model.</p>
 <pre class="sourceCode r"><code class="sourceCode r">get_complexity =<span class="st"> </span><span class="cf">function</span>(model) {
   <span class="kw">length</span>(<span class="kw">coef</span>(model)) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
