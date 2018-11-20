@@ -245,13 +245,13 @@ alpha & lambda & Accuracy & Kappa & AccuracySD & KappaSD\\
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The file was created using `R` version 3.4.4 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The file was created using `R` version 3.5.1 and the following packages:
 
 - Base Packages, Attached
 
 
 ```
-## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
 ## [7] "base"
 ```
 
@@ -267,25 +267,23 @@ The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The fil
 
 
 ```
-##  [1] "ddalpha"      "tidyr"        "sfsmisc"      "splines"     
-##  [5] "prodlim"      "shiny"        "assertthat"   "highr"       
-##  [9] "stats4"       "DRR"          "yaml"         "robustbase"  
-## [13] "ipred"        "pillar"       "backports"    "glue"        
-## [17] "digest"       "colorspace"   "recipes"      "httpuv"      
-## [21] "htmltools"    "plyr"         "psych"        "timeDate"    
-## [25] "pkgconfig"    "CVST"         "broom"        "questionr"   
-## [29] "bookdown"     "xtable"       "purrr"        "scales"      
-## [33] "gower"        "lava"         "tibble"       "combinat"    
-## [37] "withr"        "nnet"         "lazyeval"     "mnormt"      
-## [41] "mime"         "survival"     "magrittr"     "evaluate"    
-## [45] "nlme"         "dimRed"       "foreign"      "class"       
-## [49] "tools"        "stringr"      "kernlab"      "munsell"     
-## [53] "bindrcpp"     "e1071"        "compiler"     "RcppRoll"    
-## [57] "rlang"        "grid"         "rstudioapi"   "iterators"   
-## [61] "miniUI"       "labeling"     "rmarkdown"    "gtable"      
-## [65] "ModelMetrics" "codetools"    "reshape2"     "R6"          
-## [69] "lubridate"    "knitr"        "dplyr"        "bindr"       
-## [73] "rprojroot"    "stringi"      "parallel"     "Rcpp"        
-## [77] "rpart"        "DEoptimR"     "tidyselect"   "xfun"
+##  [1] "Rcpp"         "lubridate"    "class"        "assertthat"  
+##  [5] "rprojroot"    "digest"       "ipred"        "mime"        
+##  [9] "R6"           "plyr"         "backports"    "stats4"      
+## [13] "e1071"        "evaluate"     "highr"        "pillar"      
+## [17] "rlang"        "lazyeval"     "rstudioapi"   "data.table"  
+## [21] "miniUI"       "rpart"        "combinat"     "rmarkdown"   
+## [25] "labeling"     "splines"      "gower"        "stringr"     
+## [29] "questionr"    "munsell"      "shiny"        "compiler"    
+## [33] "httpuv"       "xfun"         "pkgconfig"    "htmltools"   
+## [37] "nnet"         "tidyselect"   "tibble"       "prodlim"     
+## [41] "bookdown"     "codetools"    "later"        "crayon"      
+## [45] "dplyr"        "withr"        "recipes"      "ModelMetrics"
+## [49] "grid"         "xtable"       "nlme"         "gtable"      
+## [53] "magrittr"     "scales"       "stringi"      "reshape2"    
+## [57] "promises"     "bindrcpp"     "timeDate"     "generics"    
+## [61] "lava"         "iterators"    "tools"        "glue"        
+## [65] "purrr"        "survival"     "yaml"         "colorspace"  
+## [69] "knitr"        "bindr"
 ```
 

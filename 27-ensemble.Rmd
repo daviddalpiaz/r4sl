@@ -173,11 +173,8 @@ tibble::as_tibble(summary(booston_boost))
 ```{r, fig.height = 5, fig.width = 12, message = FALSE, warning = FALSE}
 par(mfrow = c(1, 3))
 plot(booston_boost, i = "rm", col = "dodgerblue", lwd = 2)
-grid()
 plot(booston_boost, i = "lstat", col = "dodgerblue", lwd = 2)
-grid()
 plot(booston_boost, i = "dis", col = "dodgerblue", lwd = 2)
-grid()
 ```
 
 ```{r}

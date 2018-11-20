@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
-  <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.7.4 and GitBook 2.6.7">
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2018-03-30">
+<meta name="date" content="2018-11-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="knn-reg.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,41 +51,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -362,29 +391,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>NOTE:</strong> This chapter has previously existed. Eventually the concepts will be first introduced in the preceding chapter.</p>
 <p>When using linear models in the past, we often emphasized distributional results, which were useful for creating and performing hypothesis tests. Frequently, when developing a linear regression model, part of our goal was to <strong>explain</strong> a relationship.</p>
 <p>Now, we will ignore much of what we have learned and instead simply use regression as a tool to <strong>predict</strong>. Instead of a model which explains relationships, we seek a model which minimizes errors.</p>
-<div class="figure">
-<img src="images/regression.png" alt="" />
-
-</div>
+<p><img src="images/regression.png" /></p>
 <p>First, note that a linear model is one of many methods used in regression.</p>
 <p>To discuss linear models in the context of prediction, we return to the <code>Advertising</code> data from the previous chapter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Advertising</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">Advertising</code></pre>
 <pre><code>## # A tibble: 200 x 4
-##        TV Radio Newspaper Sales
-##     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
-##  1 230.   37.8      69.2  22.1 
-##  2  44.5  39.3      45.1  10.4 
-##  3  17.2  45.9      69.3   9.30
-##  4 152.   41.3      58.5  18.5 
-##  5 181.   10.8      58.4  12.9 
-##  6   8.70 48.9      75.0   7.20
-##  7  57.5  32.8      23.5  11.8 
-##  8 120.   19.6      11.6  13.2 
-##  9   8.60  2.10      1.00  4.80
-## 10 200.    2.60     21.2  10.6 
+##       TV Radio Newspaper Sales
+##    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+##  1 230.   37.8      69.2  22.1
+##  2  44.5  39.3      45.1  10.4
+##  3  17.2  45.9      69.3   9.3
+##  4 152.   41.3      58.5  18.5
+##  5 181.   10.8      58.4  12.9
+##  6   8.7  48.9      75     7.2
+##  7  57.5  32.8      23.5  11.8
+##  8 120.   19.6      11.6  13.2
+##  9   8.6   2.1       1     4.8
+## 10 200.    2.6      21.2  10.6
 ## # ... with 190 more rows</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
-<span class="kw">featurePlot</span>(<span class="dt">x =</span> Advertising[ , <span class="kw">c</span>(<span class="st">&quot;TV&quot;</span>, <span class="st">&quot;Radio&quot;</span>, <span class="st">&quot;Newspaper&quot;</span>)], <span class="dt">y =</span> Advertising$Sales)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+<span class="kw">featurePlot</span>(<span class="dt">x =</span> Advertising[ , <span class="kw">c</span>(<span class="st">&quot;TV&quot;</span>, <span class="st">&quot;Radio&quot;</span>, <span class="st">&quot;Newspaper&quot;</span>)], <span class="dt">y =</span> Advertising<span class="op">$</span>Sales)</code></pre>
 <p><img src="06-linear_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
 <div id="assesing-model-accuracy" class="section level2">
 <h2><span class="header-section-number">6.1</span> Assesing Model Accuracy</h2>
@@ -395,20 +421,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>While for the sake of comparing models, the choice between RMSE and MSE is arbitrary, we have a preference for RMSE, as it has the same units as the response variable. Also, notice that in the prediction context MSE refers to an average, whereas in an ANOVA context, the denominator for MSE may not be <span class="math inline">\(n\)</span>.</p>
 <p>For a linear model , the estimate of <span class="math inline">\(f\)</span>, <span class="math inline">\(\hat{f}\)</span>, is given by the fitted regression line.</p>
 <p><span class="math display">\[
-\hat{y}(\bf{x}_i) = \hat{f}(\bf{x}_i)
+\hat{y}({\bf{x}_i}) = \hat{f}({\bf{x}_i})
 \]</span></p>
 <p>We can write an <code>R</code> function that will be useful for performing this calculation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span>function(actual, predicted) {
-  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual -<span class="st"> </span>predicted) ^<span class="st"> </span><span class="dv">2</span>))
-}</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
+  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))
+}</code></pre>
 </div>
 <div id="model-complexity" class="section level2">
 <h2><span class="header-section-number">6.2</span> Model Complexity</h2>
 <p>Aside from how well a model predicts, we will also be very interested in the complexity (flexibility) of a model. For now, we will only considered nested linear models for simplicity. Then in that case, the more predictors that a model has, the more complex the model. For the sake of assigning a numerical value to the complexity of a linear model, we will use the number of predictors, <span class="math inline">\(p\)</span>.</p>
 <p>We write a simple <code>R</code> function to extract this information from a model.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_complexity =<span class="st"> </span>function(model) {
-  <span class="kw">length</span>(<span class="kw">coef</span>(model)) -<span class="st"> </span><span class="dv">1</span>
-}</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">get_complexity =<span class="st"> </span><span class="cf">function</span>(model) {
+  <span class="kw">length</span>(<span class="kw">coef</span>(model)) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+}</code></pre>
 </div>
 <div id="test-train-split" class="section level2">
 <h2><span class="header-section-number">6.3</span> Test-Train Split</h2>
@@ -417,12 +443,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Frequently we will take a dataset of interest and split it in two. One part of the datasets will be used to fit (train) a model, which we will call the <strong>training</strong> data. The remainder of the original data will be used to assess how well the model is predicting, which we will call the <strong>test</strong> data. Test data should <em>never</em> be used to train a model.</p>
 <p>Note that sometimes the terms <em>evaluation set</em> and <em>test set</em> are used interchangeably. We will give somewhat specific definitions to these later. For now we will simply use a single test set for a training set.</p>
 <p>Here we use the <code>sample()</code> function to obtain a random sample of the rows of the original data. We then use those row numbers (and remaining row numbers) to split the data accordingly. Notice we used the <code>set.seed()</code> function to allow use to reproduce the same random split each time we perform this analysis.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">9</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">9</span>)
 num_obs =<span class="st"> </span><span class="kw">nrow</span>(Advertising)
 
-train_index =<span class="st"> </span><span class="kw">sample</span>(num_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> *<span class="st"> </span>num_obs))
+train_index =<span class="st"> </span><span class="kw">sample</span>(num_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> <span class="op">*</span><span class="st"> </span>num_obs))
 train_data =<span class="st"> </span>Advertising[train_index, ]
-test_data =<span class="st"> </span>Advertising[-train_index, ]</code></pre></div>
+test_data =<span class="st"> </span>Advertising[<span class="op">-</span>train_index, ]</code></pre>
 <p>We will look at two measures that assess how well a model is predicting, the <strong>train RMSE</strong> and the <strong>test RMSE</strong>.</p>
 <p><span class="math display">\[
 \text{RMSE}_{\text{Train}} = \text{RMSE}(\hat{f}, \text{Train Data}) = \sqrt{\frac{1}{n_{\text{Tr}}}\displaystyle\sum_{i \in \text{Train}}^{}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
@@ -433,140 +459,140 @@ test_data =<span class="st"> </span>Advertising[-train_index, ]</code></pre></di
 \]</span></p>
 <p>Here <span class="math inline">\(n_{Te}\)</span> is the number of observations in the test set. Test RMSE uses the model fit to the training data, but evaluated on the unused test data. This is a measure of how well the fitted model will predict <strong>in general</strong>, not simply how well it fits data used to train the model, as is the case with train RMSE. What happens to test RMSE as the size of the model increases? That is what we will investigate.</p>
 <p>We will start with the simplest possible linear model, that is, a model with no predictors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_0 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> train_data)
-<span class="kw">get_complexity</span>(fit_0)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fit_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_<span class="dv">0</span>)</code></pre>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train RMSE</span>
-<span class="kw">sqrt</span>(<span class="kw">mean</span>((train_data$Sales -<span class="st"> </span><span class="kw">predict</span>(fit_0, train_data)) ^<span class="st"> </span><span class="dv">2</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train RMSE</span>
+<span class="kw">sqrt</span>(<span class="kw">mean</span>((train_data<span class="op">$</span>Sales <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">0</span>, train_data)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</code></pre>
 <pre><code>## [1] 4.788513</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test RMSE</span>
-<span class="kw">sqrt</span>(<span class="kw">mean</span>((test_data$Sales -<span class="st"> </span><span class="kw">predict</span>(fit_0, test_data)) ^<span class="st"> </span><span class="dv">2</span>)) </code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test RMSE</span>
+<span class="kw">sqrt</span>(<span class="kw">mean</span>((test_data<span class="op">$</span>Sales <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">0</span>, test_data)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)) </code></pre>
 <pre><code>## [1] 5.643574</code></pre>
 <p>The previous two operations obtain the train and test RMSE. Since these are operations we are about to use repeatedly, we should use the function that we happen to have already written.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train RMSE</span>
-<span class="kw">rmse</span>(<span class="dt">actual =</span> train_data$Sales, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit_0, train_data))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train RMSE</span>
+<span class="kw">rmse</span>(<span class="dt">actual =</span> train_data<span class="op">$</span>Sales, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit_<span class="dv">0</span>, train_data))</code></pre>
 <pre><code>## [1] 4.788513</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test RMSE</span>
-<span class="kw">rmse</span>(<span class="dt">actual =</span> test_data$Sales, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit_0, test_data))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test RMSE</span>
+<span class="kw">rmse</span>(<span class="dt">actual =</span> test_data<span class="op">$</span>Sales, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit_<span class="dv">0</span>, test_data))</code></pre>
 <pre><code>## [1] 5.643574</code></pre>
 <p>This function can actually be improved for the inputs that we are using. We would like to obtain train and test RMSE for a fitted model, given a train or test dataset, and the appropriate response variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_rmse =<span class="st"> </span>function(model, data, response) {
-  <span class="kw">rmse</span>(<span class="dt">actual =</span> data[, response], 
+<pre class="sourceCode r"><code class="sourceCode r">get_rmse =<span class="st"> </span><span class="cf">function</span>(model, data, response) {
+  <span class="kw">rmse</span>(<span class="dt">actual =</span> <span class="kw">subset</span>(data, <span class="dt">select =</span> response, <span class="dt">drop =</span> <span class="ot">TRUE</span>),
        <span class="dt">predicted =</span> <span class="kw">predict</span>(model, data))
-}</code></pre></div>
+}</code></pre>
 <p>By using this function, our code becomes easier to read, and it is more obvious what task we are accomplishing.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_0, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">0</span>, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre>
 <pre><code>## [1] 4.788513</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_0, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">0</span>, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre>
 <pre><code>## [1] 5.643574</code></pre>
 </div>
 <div id="adding-flexibility-to-linear-models" class="section level2">
 <h2><span class="header-section-number">6.4</span> Adding Flexibility to Linear Models</h2>
 <p>Each successive model we fit will be more and more flexible using both interactions and polynomial terms. We will see the training error decrease each time the model is made more flexible. We expect the test error to decrease a number of times, then eventually start going up, as a result of overfitting.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_1 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> train_data)
-<span class="kw">get_complexity</span>(fit_1)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_<span class="dv">1</span>)</code></pre>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_1, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">1</span>, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre>
 <pre><code>## [1] 1.637699</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_1, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">1</span>, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre>
 <pre><code>## [1] 1.737574</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_2 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV, <span class="dt">data =</span> train_data)
-<span class="kw">get_complexity</span>(fit_2)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper <span class="op">*</span><span class="st"> </span>TV, <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_2, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">2</span>, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre>
 <pre><code>## [1] 0.7797226</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_2, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">2</span>, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre>
 <pre><code>## [1] 1.110372</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_3 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +<span class="st"> </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
-<span class="kw">get_complexity</span>(fit_3)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fit_<span class="dv">3</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper <span class="op">*</span><span class="st"> </span>TV <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(TV <span class="op">^</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_<span class="dv">3</span>)</code></pre>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_3, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">3</span>, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre>
 <pre><code>## [1] 0.4960149</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_3, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">3</span>, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre>
 <pre><code>## [1] 0.7320758</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_4 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +<span class="st"> </span>
-<span class="st">           </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="kw">I</span>(Radio ^<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="kw">I</span>(Newspaper ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
-<span class="kw">get_complexity</span>(fit_4)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fit_<span class="dv">4</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper <span class="op">*</span><span class="st"> </span>TV <span class="op">+</span><span class="st"> </span>
+<span class="st">           </span><span class="kw">I</span>(TV <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Radio <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Newspaper <span class="op">^</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_<span class="dv">4</span>)</code></pre>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_4, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">4</span>, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre>
 <pre><code>## [1] 0.488771</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_4, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">4</span>, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre>
 <pre><code>## [1] 0.7466312</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_5 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +
-<span class="st">           </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>) *<span class="st"> </span><span class="kw">I</span>(Radio ^<span class="st"> </span><span class="dv">2</span>) *<span class="st"> </span><span class="kw">I</span>(Newspaper ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
-<span class="kw">get_complexity</span>(fit_5)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fit_<span class="dv">5</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper <span class="op">*</span><span class="st"> </span>TV <span class="op">+</span>
+<span class="st">           </span><span class="kw">I</span>(TV <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Radio <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Newspaper <span class="op">^</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+<span class="kw">get_complexity</span>(fit_<span class="dv">5</span>)</code></pre>
 <pre><code>## [1] 14</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_5, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">5</span>, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># train RMSE</span></code></pre>
 <pre><code>## [1] 0.4705201</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_5, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_rmse</span>(<span class="dt">model =</span> fit_<span class="dv">5</span>, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>) <span class="co"># test RMSE</span></code></pre>
 <pre><code>## [1] 0.8425384</code></pre>
 </div>
 <div id="choosing-a-model" class="section level2">
 <h2><span class="header-section-number">6.5</span> Choosing a Model</h2>
 <p>To better understand the relationship between train RMSE, test RMSE, and model complexity, we summarize our results, as the above is somewhat cluttered.</p>
 <p>First, we recap the models that we have fit.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_1 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>., <span class="dt">data =</span> train_data)
-fit_2 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV, <span class="dt">data =</span> train_data)
-fit_3 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +<span class="st"> </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
-fit_4 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +<span class="st"> </span>
-<span class="st">           </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="kw">I</span>(Radio ^<span class="st"> </span><span class="dv">2</span>) +<span class="st"> </span><span class="kw">I</span>(Newspaper ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
-fit_5 =<span class="st"> </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>Radio *<span class="st"> </span>Newspaper *<span class="st"> </span>TV +
-<span class="st">           </span><span class="kw">I</span>(TV ^<span class="st"> </span><span class="dv">2</span>) *<span class="st"> </span><span class="kw">I</span>(Radio ^<span class="st"> </span><span class="dv">2</span>) *<span class="st"> </span><span class="kw">I</span>(Newspaper ^<span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_data)
+fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper <span class="op">*</span><span class="st"> </span>TV, <span class="dt">data =</span> train_data)
+fit_<span class="dv">3</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper <span class="op">*</span><span class="st"> </span>TV <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(TV <span class="op">^</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+fit_<span class="dv">4</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper <span class="op">*</span><span class="st"> </span>TV <span class="op">+</span><span class="st"> </span>
+<span class="st">           </span><span class="kw">I</span>(TV <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Radio <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Newspaper <span class="op">^</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)
+fit_<span class="dv">5</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper <span class="op">*</span><span class="st"> </span>TV <span class="op">+</span>
+<span class="st">           </span><span class="kw">I</span>(TV <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Radio <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Newspaper <span class="op">^</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> train_data)</code></pre>
 <p>Next, we create a list of the models fit.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_list =<span class="st"> </span><span class="kw">list</span>(fit_1, fit_2, fit_3, fit_4, fit_5)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">model_list =<span class="st"> </span><span class="kw">list</span>(fit_<span class="dv">1</span>, fit_<span class="dv">2</span>, fit_<span class="dv">3</span>, fit_<span class="dv">4</span>, fit_<span class="dv">5</span>)</code></pre>
 <p>We then obtain train RMSE, test RMSE, and model complexity for each.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_rmse =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_rmse, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">train_rmse =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_rmse, <span class="dt">data =</span> train_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>)
 test_rmse =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_rmse, <span class="dt">data =</span> test_data, <span class="dt">response =</span> <span class="st">&quot;Sales&quot;</span>)
-model_complexity =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_complexity)</code></pre></div>
+model_complexity =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_complexity)</code></pre>
 <p>We then plot the results. The train RMSE can be seen in blue, while the test RMSE is given in orange.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(model_complexity, train_rmse, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, 
-     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">c</span>(train_rmse, test_rmse)) -<span class="st"> </span><span class="fl">0.02</span>, 
-              <span class="kw">max</span>(<span class="kw">c</span>(train_rmse, test_rmse)) +<span class="st"> </span><span class="fl">0.02</span>), 
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(model_complexity, train_rmse, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, 
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">c</span>(train_rmse, test_rmse)) <span class="op">-</span><span class="st"> </span><span class="fl">0.02</span>, 
+              <span class="kw">max</span>(<span class="kw">c</span>(train_rmse, test_rmse)) <span class="op">+</span><span class="st"> </span><span class="fl">0.02</span>), 
      <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, 
      <span class="dt">xlab =</span> <span class="st">&quot;Model Size&quot;</span>,
      <span class="dt">ylab =</span> <span class="st">&quot;RMSE&quot;</span>)
-<span class="kw">lines</span>(model_complexity, test_rmse, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</code></pre></div>
+<span class="kw">lines</span>(model_complexity, test_rmse, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</code></pre>
 <p><img src="06-linear_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>We also summarize the results as a table. <code>fit_1</code> is the least flexible, and <code>fit_5</code> is the most flexible. We see the Train RMSE decrease as flexibility increases. We see that the Test RMSE is smallest for <code>fit_3</code>, thus is the model we believe will perform the best on future data not used to train the model. Note this may not be the best model, but it is the best model of the models we have seen in this example.</p>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model</th>
-<th align="left">Train RMSE</th>
-<th align="left">Test RMSE</th>
-<th align="left">Predictors</th>
+<th>Model</th>
+<th>Train RMSE</th>
+<th>Test RMSE</th>
+<th>Predictors</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>fit_1</code></td>
-<td align="left">1.6376991</td>
-<td align="left">1.7375736</td>
-<td align="left">3</td>
+<td><code>fit_1</code></td>
+<td>1.6376991</td>
+<td>1.7375736</td>
+<td>3</td>
 </tr>
 <tr class="even">
-<td align="left"><code>fit_2</code></td>
-<td align="left">0.7797226</td>
-<td align="left">1.1103716</td>
-<td align="left">7</td>
+<td><code>fit_2</code></td>
+<td>0.7797226</td>
+<td>1.1103716</td>
+<td>7</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>fit_3</code></td>
-<td align="left">0.4960149</td>
-<td align="left">0.7320758</td>
-<td align="left">8</td>
+<td><code>fit_3</code></td>
+<td>0.4960149</td>
+<td>0.7320758</td>
+<td>8</td>
 </tr>
 <tr class="even">
-<td align="left"><code>fit_4</code></td>
-<td align="left">0.488771</td>
-<td align="left">0.7466312</td>
-<td align="left">10</td>
+<td><code>fit_4</code></td>
+<td>0.488771</td>
+<td>0.7466312</td>
+<td>10</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>fit_5</code></td>
-<td align="left">0.4705201</td>
-<td align="left">0.8425384</td>
-<td align="left">14</td>
+<td><code>fit_5</code></td>
+<td>0.4705201</td>
+<td>0.8425384</td>
+<td>14</td>
 </tr>
 </tbody>
 </table>
@@ -612,7 +638,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -624,6 +650,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/daviddalpiaz/r4sl/edit/master/06-linear.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["r4sl.pdf"],
 "toc": {
@@ -638,8 +668,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

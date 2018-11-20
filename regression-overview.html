@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
-  <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.7.4 and GitBook 2.6.7">
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2018-03-30">
+<meta name="date" content="2018-11-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="linear-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,41 +51,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -376,10 +405,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Classification (Categorical Response) The next section.</li>
 </ul></li>
 </ul>
-<div class="figure">
-<img src="images/regression.png" alt="" />
-
-</div>
+<p><img src="images/regression.png" /></p>
 <p><strong>Regression</strong> is a form of <strong>supervised learning</strong>. Supervised learning deals with problems where there are both an input and an output. Regression problems are the subset of supervised learning problems with a <strong>numeric</strong> output.</p>
 <p>Often one of the biggest differences between <em>statistical learning</em>, <em>machine learning</em>, <em>artificial intelligence</em> are the names used to describe variables and methods.</p>
 <ul>
@@ -401,21 +427,22 @@ Y = f(\bf{x}) + \epsilon
 \]</span></p>
 <p><span class="math display">\[
 \text{RMSE}_{\text{Test}} = \text{RMSE}(\hat{f}, \text{Test Data}) = \sqrt{\frac{1}{n_{\text{Te}}}\displaystyle\sum_{i \in \text{Test}}^{}\left(y_i - \hat{f}(\bf{x}_i)\right)^2}
-\]</span> - TODO: RSS vs <span class="math inline">\(R^2\)</span> vs RMSE</p>
+\]</span>
+- TODO: RSS vs <span class="math inline">\(R^2\)</span> vs RMSE</p>
 <p><strong>Code for Plotting from Class</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## load packages
+<pre class="sourceCode r"><code class="sourceCode r">## load packages
 <span class="kw">library</span>(rpart)
-<span class="kw">library</span>(FNN)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate data</span>
+<span class="kw">library</span>(FNN)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate data</span>
 
 ## signal
-f =<span class="st"> </span>function(x) {
-  x ^<span class="st"> </span><span class="dv">3</span>
+f =<span class="st"> </span><span class="cf">function</span>(x) {
+  x <span class="op">^</span><span class="st"> </span><span class="dv">3</span>
 }
 
 ## define data generating processs
-get_sim_data =<span class="st"> </span>function(f, <span class="dt">sample_size =</span> <span class="dv">50</span>) {
-  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> -<span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">1</span>)
+get_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">50</span>) {
+  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>)
   y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> <span class="fl">0.15</span>)
   <span class="kw">data.frame</span>(x, y)
 }
@@ -429,30 +456,30 @@ sim_trn_data =<span class="st"> </span><span class="kw">get_sim_data</span>(<spa
 sim_tst_data =<span class="st"> </span><span class="kw">get_sim_data</span>(<span class="dt">f =</span> f)
 
 ## create grid for plotting
-x_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(-<span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">0.001</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fit models</span>
+x_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">0.001</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fit models</span>
 
 ## tree models
-tree_fit_l =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
+tree_fit_l =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
                    <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.500</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
-tree_fit_m =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
+tree_fit_m =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
                    <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.015</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
-tree_fit_h =<span class="st"> </span><span class="kw">rpart</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
+tree_fit_h =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
                    <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.000</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
 
 ## knn models
-knn_fit_l =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data$y, 
+knn_fit_l =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, 
                     <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">40</span>)
-knn_fit_m =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data$y, 
+knn_fit_m =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, 
                     <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">5</span>)
-knn_fit_h =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data$y, 
+knn_fit_h =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, 
                     <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">1</span>)
 
 ## polynomial models
-poly_fit_l =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">1</span>), <span class="dt">data =</span> sim_trn_data)
-poly_fit_m =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">3</span>), <span class="dt">data =</span> sim_trn_data)
-poly_fit_h =<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">22</span>), <span class="dt">data =</span> sim_trn_data)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get predictions</span>
+poly_fit_l =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">1</span>), <span class="dt">data =</span> sim_trn_data)
+poly_fit_m =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">3</span>), <span class="dt">data =</span> sim_trn_data)
+poly_fit_h =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">22</span>), <span class="dt">data =</span> sim_trn_data)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get predictions</span>
 
 ## tree models
 tree_fit_l_pred =<span class="st"> </span><span class="kw">predict</span>(tree_fit_l, <span class="dt">newdata =</span> x_grid)
@@ -460,66 +487,66 @@ tree_fit_m_pred =<span class="st"> </span><span class="kw">predict</span>(tree_f
 tree_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(tree_fit_h, <span class="dt">newdata =</span> x_grid)
 
 ## knn models
-knn_fit_l_pred =<span class="st"> </span>knn_fit_l$pred
-knn_fit_m_pred =<span class="st"> </span>knn_fit_m$pred
-knn_fit_h_pred =<span class="st"> </span>knn_fit_h$pred
+knn_fit_l_pred =<span class="st"> </span>knn_fit_l<span class="op">$</span>pred
+knn_fit_m_pred =<span class="st"> </span>knn_fit_m<span class="op">$</span>pred
+knn_fit_h_pred =<span class="st"> </span>knn_fit_h<span class="op">$</span>pred
 
 ## polynomial models
 poly_fit_l_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_l, <span class="dt">newdata =</span> x_grid)
 poly_fit_m_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_m, <span class="dt">newdata =</span> x_grid)
-poly_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_h, <span class="dt">newdata =</span> x_grid)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted trees</span>
+poly_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_h, <span class="dt">newdata =</span> x_grid)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted trees</span>
 
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
      <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.5&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, tree_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
 
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
      <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.015&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, tree_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
 
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
      <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.0&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, tree_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
 <p><img src="05-regression_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted KNN</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted KNN</span>
 
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
      <span class="dt">main =</span> <span class="st">&quot;KNN, k = 40&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, knn_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
 
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
      <span class="dt">main =</span> <span class="st">&quot;KNN, k = 5&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, knn_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
 
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
      <span class="dt">main =</span> <span class="st">&quot;KNN, k = 1&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, knn_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
 <p><img src="05-regression_files/figure-html/unnamed-chunk-6-1.png" width="960" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted polynomials</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted polynomials</span>
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
      <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 1&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, poly_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
 
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
      <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 3&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, poly_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
 
-<span class="kw">plot</span>(y ~<span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
+<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
      <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 22&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
 <span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid$x, poly_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre></div>
+<span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
 <p><img src="05-regression_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
 <!-- ## Regression Notation -->
 <!-- - $\mathbf{X}$ = $n \times p$ data matrix -->
@@ -598,7 +625,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -610,6 +637,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/daviddalpiaz/r4sl/edit/master/05-regression.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["r4sl.pdf"],
 "toc": {
@@ -624,8 +655,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

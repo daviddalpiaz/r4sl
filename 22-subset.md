@@ -382,13 +382,13 @@ coef(fit_all, which.min(cv_error))
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.4.4 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.5.1 and the following packages:
 
 - Base Packages, Attached
 
 
 ```
-## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
 ## [7] "base"
 ```
 
@@ -403,25 +403,22 @@ The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The 
 
 
 ```
-##  [1] "Rcpp"         "lubridate"    "lattice"      "tidyr"       
-##  [5] "class"        "assertthat"   "rprojroot"    "digest"      
-##  [9] "ipred"        "psych"        "foreach"      "R6"          
-## [13] "plyr"         "backports"    "stats4"       "evaluate"    
-## [17] "ggplot2"      "pillar"       "rlang"        "lazyeval"    
-## [21] "caret"        "kernlab"      "rpart"        "Matrix"      
-## [25] "rmarkdown"    "splines"      "CVST"         "ddalpha"     
-## [29] "gower"        "stringr"      "foreign"      "munsell"     
-## [33] "broom"        "compiler"     "xfun"         "pkgconfig"   
-## [37] "mnormt"       "dimRed"       "htmltools"    "nnet"        
-## [41] "tidyselect"   "tibble"       "prodlim"      "DRR"         
-## [45] "bookdown"     "codetools"    "RcppRoll"     "withr"       
-## [49] "dplyr"        "MASS"         "recipes"      "ModelMetrics"
-## [53] "grid"         "nlme"         "gtable"       "magrittr"    
-## [57] "scales"       "stringi"      "reshape2"     "bindrcpp"    
-## [61] "timeDate"     "robustbase"   "lava"         "iterators"   
-## [65] "tools"        "glue"         "DEoptimR"     "purrr"       
-## [69] "sfsmisc"      "parallel"     "survival"     "yaml"        
-## [73] "colorspace"   "knitr"        "bindr"
+##  [1] "tidyselect"   "xfun"         "purrr"        "reshape2"    
+##  [5] "splines"      "lattice"      "colorspace"   "generics"    
+##  [9] "stats4"       "htmltools"    "yaml"         "prodlim"     
+## [13] "survival"     "rlang"        "ModelMetrics" "pillar"      
+## [17] "withr"        "glue"         "bindrcpp"     "foreach"     
+## [21] "bindr"        "plyr"         "lava"         "stringr"     
+## [25] "timeDate"     "munsell"      "gtable"       "recipes"     
+## [29] "codetools"    "evaluate"     "knitr"        "caret"       
+## [33] "class"        "Rcpp"         "scales"       "backports"   
+## [37] "ipred"        "ggplot2"      "digest"       "stringi"     
+## [41] "bookdown"     "dplyr"        "grid"         "rprojroot"   
+## [45] "tools"        "magrittr"     "lazyeval"     "tibble"      
+## [49] "crayon"       "pkgconfig"    "MASS"         "Matrix"      
+## [53] "data.table"   "lubridate"    "gower"        "assertthat"  
+## [57] "rmarkdown"    "iterators"    "R6"           "rpart"       
+## [61] "nnet"         "nlme"         "compiler"
 ```
 
 

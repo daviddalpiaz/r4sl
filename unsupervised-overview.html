@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
-  <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.7.4 and GitBook 2.6.7">
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2018-03-30">
+<meta name="date" content="2018-11-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="principal-component-analysis-1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,41 +51,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -378,43 +407,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">13.2</span> Examples</h2>
 <div id="us-arrests" class="section level3">
 <h3><span class="header-section-number">13.2.1</span> US Arrests</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
 <span class="kw">data</span>(USArrests)
-<span class="kw">apply</span>(USArrests, <span class="dv">2</span>, mean)</code></pre></div>
+<span class="kw">apply</span>(USArrests, <span class="dv">2</span>, mean)</code></pre>
 <pre><code>##   Murder  Assault UrbanPop     Rape 
 ##    7.788  170.760   65.540   21.232</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(USArrests, <span class="dv">2</span>, sd)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(USArrests, <span class="dv">2</span>, sd)</code></pre>
 <pre><code>##    Murder   Assault  UrbanPop      Rape 
 ##  4.355510 83.337661 14.474763  9.366385</code></pre>
 <p>“Before” performing PCA, we will scale the data. (This will actually happen inside the <code>prcomp()</code> function.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca =<span class="st"> </span><span class="kw">prcomp</span>(USArrests, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca =<span class="st"> </span><span class="kw">prcomp</span>(USArrests, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre>
 <p>A large amount of information is stored in the output of <code>prcomp()</code>, some of which can neatly be displayed with <code>summary()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(USArrests_pca)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(USArrests_pca)</code></pre>
 <pre><code>## [1] &quot;sdev&quot;     &quot;rotation&quot; &quot;center&quot;   &quot;scale&quot;    &quot;x&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(USArrests_pca)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(USArrests_pca)</code></pre>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.5749 0.9949 0.59713 0.41645
 ## Proportion of Variance 0.6201 0.2474 0.08914 0.04336
 ## Cumulative Proportion  0.6201 0.8675 0.95664 1.00000</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$center</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>center</code></pre>
 <pre><code>##   Murder  Assault UrbanPop     Rape 
 ##    7.788  170.760   65.540   21.232</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$scale</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>scale</code></pre>
 <pre><code>##    Murder   Assault  UrbanPop      Rape 
 ##  4.355510 83.337661 14.474763  9.366385</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$rotation</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>rotation</code></pre>
 <pre><code>##                 PC1        PC2        PC3         PC4
 ## Murder   -0.5358995  0.4181809 -0.3412327  0.64922780
 ## Assault  -0.5831836  0.1879856 -0.2681484 -0.74340748
 ## UrbanPop -0.2781909 -0.8728062 -0.3780158  0.13387773
 ## Rape     -0.5434321 -0.1673186  0.8177779  0.08902432</code></pre>
 <p>We see that <code>$center</code> and <code>$scale</code> give the mean and standard deviations for the original variables. <code>$rotation</code> gives the loading vectors that are used to rotate the original data to obtain the principal components.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(USArrests_pca$x)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(USArrests_pca<span class="op">$</span>x)</code></pre>
 <pre><code>## [1] 50  4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(USArrests)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(USArrests)</code></pre>
 <pre><code>## [1] 50  4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(USArrests_pca$x)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(USArrests_pca<span class="op">$</span>x)</code></pre>
 <pre><code>##                   PC1        PC2         PC3          PC4
 ## Alabama    -0.9756604  1.1220012 -0.43980366  0.154696581
 ## Alaska     -1.9305379  1.0624269  2.01950027 -0.434175454
@@ -423,19 +452,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## California -2.4986128 -1.5274267  0.59254100 -0.338559240
 ## Colorado   -1.4993407 -0.9776297  1.08400162  0.001450164</code></pre>
 <p>The dimension of the principal components is the same as the original data. The principal components are stored in <code>$x</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">1</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>]</code></pre>
 <pre><code>##            [,1]
 ## [1,] -0.9756604</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">2</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">2</span>]</code></pre>
 <pre><code>##          [,1]
 ## [1,] 1.122001</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">3</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">3</span>]</code></pre>
 <pre><code>##            [,1]
 ## [1,] -0.4398037</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">4</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">4</span>]</code></pre>
 <pre><code>##           [,1]
 ## [1,] 0.1546966</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests)) %*%<span class="st"> </span>USArrests_pca$rotation[,<span class="dv">1</span>])</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests)) <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[,<span class="dv">1</span>])</code></pre>
 <pre><code>##                  [,1]
 ## Alabama    -0.9756604
 ## Alaska     -1.9305379
@@ -443,77 +472,77 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Arkansas    0.1399989
 ## California -2.4986128
 ## Colorado   -1.4993407</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(USArrests_pca$x[, <span class="dv">1</span>])</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>])</code></pre>
 <pre><code>##    Alabama     Alaska    Arizona   Arkansas California   Colorado 
 ## -0.9756604 -1.9305379 -1.7454429  0.1399989 -2.4986128 -1.4993407</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(USArrests_pca$rotation[, <span class="dv">1</span>] ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$rotation[, <span class="dv">1</span>] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">2</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">2</span>]</code></pre>
 <pre><code>##               [,1]
 ## [1,] -1.387779e-16</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$rotation[, <span class="dv">1</span>] %*%<span class="st"> </span>USArrests_pca$rotation[, <span class="dv">3</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">3</span>]</code></pre>
 <pre><code>##               [,1]
 ## [1,] -5.551115e-17</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$x[, <span class="dv">1</span>] %*%<span class="st"> </span>USArrests_pca$x[, <span class="dv">2</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>x[, <span class="dv">2</span>]</code></pre>
 <pre><code>##               [,1]
 ## [1,] -2.062239e-14</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$x[, <span class="dv">1</span>] %*%<span class="st"> </span>USArrests_pca$x[, <span class="dv">3</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>x[, <span class="dv">3</span>]</code></pre>
 <pre><code>##              [,1]
 ## [1,] 5.384582e-15</code></pre>
 <p>The above verifies some of the “math” of PCA. We see how the loadings obtain the principal components from the original data. We check that the loading vectors are normalized. We also check for orthogonality of both the loading vectors and the principal components. (Note the above inner products aren’t exactly 0, but that is simply a numerical issue.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(USArrests_pca, <span class="dt">scale =</span> <span class="dv">0</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(USArrests_pca, <span class="dt">scale =</span> <span class="dv">0</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
 <p>A <code>biplot</code> can be used to visualize both the principal component scores and the principal component loadings. (Note the two scales for each axis.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$sdev</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>sdev</code></pre>
 <pre><code>## [1] 1.5748783 0.9948694 0.5971291 0.4164494</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests_pca$sdev ^<span class="st"> </span><span class="dv">2</span> /<span class="st"> </span><span class="kw">sum</span>(USArrests_pca$sdev ^<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(USArrests_pca<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
 <p>Frequently we will be interested in the proportion of variance explained by a principal component.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_PVE =<span class="st"> </span>function(pca_out) {
-  pca_out$sdev ^<span class="st"> </span><span class="dv">2</span> /<span class="st"> </span><span class="kw">sum</span>(pca_out$sdev ^<span class="st"> </span><span class="dv">2</span>)
-}</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">get_PVE =<span class="st"> </span><span class="cf">function</span>(pca_out) {
+  pca_out<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(pca_out<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
+}</code></pre>
 <p>So frequently, we would be smart to write a function to do so.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pve =<span class="st"> </span><span class="kw">get_PVE</span>(USArrests_pca)
+<pre class="sourceCode r"><code class="sourceCode r">pve =<span class="st"> </span><span class="kw">get_PVE</span>(USArrests_pca)
 
-pve</code></pre></div>
+pve</code></pre>
 <pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
   pve,
   <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
   <span class="dt">ylab =</span> <span class="st">&quot;Proportion of Variance Explained&quot;</span>,
   <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
   <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
-)</code></pre></div>
+)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>We can then plot the proportion of variance explained for each PC. As expected, we see the PVE decrease.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(pve)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(pve)</code></pre>
 <pre><code>## [1] 0.6200604 0.8675017 0.9566425 1.0000000</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
   <span class="kw">cumsum</span>(pve),
   <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
   <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
   <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
   <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
-)</code></pre></div>
+)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Often we are interested in the cumulative proportion. A common use of PCA outside of visualization is dimension reduction for modeling. If <span class="math inline">\(p\)</span> is large, PCA is performed, and the principal components that account for a large proportion of variation, say 95%, are used for further analysis. In certain situations that can reduce the dimensionality of data significantly. This can be done almost automatically using <code>caret</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
 <span class="kw">library</span>(mlbench)
 <span class="kw">data</span>(Sonar)
 <span class="kw">set.seed</span>(<span class="dv">18</span>)
-using_pca =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
+using_pca =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
                   <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>), 
                   <span class="dt">preProcess =</span> <span class="st">&quot;pca&quot;</span>,
                   <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)))
-regular_scaling =<span class="st"> </span><span class="kw">train</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
+regular_scaling =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
                         <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>), 
                         <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>), 
                         <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)))
-<span class="kw">max</span>(using_pca$results$Accuracy)</code></pre></div>
+<span class="kw">max</span>(using_pca<span class="op">$</span>results<span class="op">$</span>Accuracy)</code></pre>
 <pre><code>## [1] 0.8656997</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(regular_scaling$results$Accuracy)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(regular_scaling<span class="op">$</span>results<span class="op">$</span>Accuracy)</code></pre>
 <pre><code>## [1] 0.8609378</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">using_pca$preProcess</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">using_pca<span class="op">$</span>preProcess</code></pre>
 <pre><code>## Created from 208 samples and 60 variables
 ## 
 ## Pre-processing:
@@ -527,25 +556,25 @@ regular_scaling =<span class="st"> </span><span class="kw">train</span>(Class ~<
 </div>
 <div id="simulated-data" class="section level3">
 <h3><span class="header-section-number">13.2.2</span> Simulated Data</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
 <span class="kw">set.seed</span>(<span class="dv">42</span>)
 n =<span class="st"> </span><span class="dv">180</span>
 p =<span class="st"> </span><span class="dv">10</span>
 clust_data =<span class="st"> </span><span class="kw">rbind</span>(
-  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n /<span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),
-  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n /<span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),
-  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n /<span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p))
-)</code></pre></div>
+  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),
+  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),
+  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p))
+)</code></pre>
 <p>Above we simulate data for clustering. Note that, we did this in a way that will result in three clusters.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">true_clusters =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>, n /<span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">1</span>, n /<span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">2</span>, n /<span class="st"> </span><span class="dv">3</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">true_clusters =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">1</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">2</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>))</code></pre>
 <p>We label the true clusters 1, 2, and 3 in a way that will “match” output from <span class="math inline">\(k\)</span>-means. (Which is somewhat arbitrary.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmean_out =<span class="st"> </span><span class="kw">kmeans</span>(clust_data, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
-<span class="kw">names</span>(kmean_out)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">kmean_out =<span class="st"> </span><span class="kw">kmeans</span>(clust_data, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+<span class="kw">names</span>(kmean_out)</code></pre>
 <pre><code>## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
 ## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
 ## [9] &quot;ifault&quot;</code></pre>
 <p>Notice that we used <code>nstart = 10</code> which will give us a more stable solution by attempting 10 random starting positions for the means. Also notice we chose to use <code>centers = 3</code>. (The <span class="math inline">\(k\)</span> in <span class="math inline">\(k\)</span>-mean). How did we know to do this? We’ll find out on the homework. (It will involve looking at <code>tot.withinss</code>)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmean_out</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">kmean_out</code></pre>
 <pre><code>## K-means clustering with 3 clusters of sizes 61, 60, 59
 ## 
 ## Cluster means:
@@ -575,61 +604,61 @@ clust_data =<span class="st"> </span><span class="kw">rbind</span>(
 ## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
 ## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
 ## [9] &quot;ifault&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmeans_clusters =<span class="st"> </span>kmean_out$cluster
+<pre class="sourceCode r"><code class="sourceCode r">kmeans_clusters =<span class="st"> </span>kmean_out<span class="op">$</span>cluster
 
-<span class="kw">table</span>(true_clusters, kmeans_clusters)</code></pre></div>
+<span class="kw">table</span>(true_clusters, kmeans_clusters)</code></pre>
 <pre><code>##              kmeans_clusters
 ## true_clusters  1  2  3
 ##             1 58  0  2
 ##             2  0 60  0
 ##             3  3  0 57</code></pre>
 <p>We check how well the clustering is working.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(clust_data)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(clust_data)</code></pre>
 <pre><code>## [1] 180  10</code></pre>
 <p>This data is “high dimensional” so it is difficult to visualize. (Anything more than 2 is hard to visualize.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
   clust_data[, <span class="dv">1</span>],
   clust_data[, <span class="dv">2</span>],
   <span class="dt">pch =</span> <span class="dv">20</span>,
   <span class="dt">xlab =</span> <span class="st">&quot;First Variable&quot;</span>,
   <span class="dt">ylab =</span> <span class="st">&quot;Second Variable&quot;</span>
-)</code></pre></div>
+)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Plotting the first and second variables simply results in a blob.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
   clust_data[, <span class="dv">1</span>],
   clust_data[, <span class="dv">2</span>],
   <span class="dt">col =</span> true_clusters,
   <span class="dt">pch =</span> <span class="dv">20</span>,
   <span class="dt">xlab =</span> <span class="st">&quot;First Variable&quot;</span>,
   <span class="dt">ylab =</span> <span class="st">&quot;Second Variable&quot;</span>
-)</code></pre></div>
+)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Even when using their true clusters for coloring, this plot isn’t very helpful.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_pca =<span class="st"> </span><span class="kw">prcomp</span>(clust_data, <span class="dt">scale =</span> <span class="ot">TRUE</span>)
+<pre class="sourceCode r"><code class="sourceCode r">clust_data_pca =<span class="st"> </span><span class="kw">prcomp</span>(clust_data, <span class="dt">scale =</span> <span class="ot">TRUE</span>)
 
 <span class="kw">plot</span>(
-  clust_data_pca$x[, <span class="dv">1</span>],
-  clust_data_pca$x[, <span class="dv">2</span>],
+  clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>],
+  clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>],
   <span class="dt">pch =</span> <span class="dv">0</span>,
   <span class="dt">xlab =</span> <span class="st">&quot;First Principal Component&quot;</span>,
   <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span>
-)</code></pre></div>
+)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>If we instead plot the first two principal components, we see, even without coloring, one blob that is clearly separate from the rest.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
-  clust_data_pca$x[, <span class="dv">1</span>],
-  clust_data_pca$x[, <span class="dv">2</span>],
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>],
+  clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>],
   <span class="dt">col =</span> true_clusters,
   <span class="dt">pch =</span> <span class="dv">0</span>,
   <span class="dt">xlab =</span> <span class="st">&quot;First Principal Component&quot;</span>,
   <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span>,
   <span class="dt">cex =</span> <span class="dv">2</span>
 )
-<span class="kw">points</span>(clust_data_pca$x[, <span class="dv">1</span>], clust_data_pca$x[, <span class="dv">2</span>], <span class="dt">col =</span> kmeans_clusters, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</code></pre></div>
+<span class="kw">points</span>(clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>], clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>], <span class="dt">col =</span> kmeans_clusters, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Now adding the true colors (boxes) and the <span class="math inline">\(k\)</span>-means results (circles), we obtain a nice visualization.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_pve =<span class="st"> </span><span class="kw">get_PVE</span>(clust_data_pca)
+<pre class="sourceCode r"><code class="sourceCode r">clust_data_pve =<span class="st"> </span><span class="kw">get_PVE</span>(clust_data_pca)
 
 <span class="kw">plot</span>(
   <span class="kw">cumsum</span>(clust_data_pve),
@@ -637,48 +666,48 @@ clust_data =<span class="st"> </span><span class="kw">rbind</span>(
   <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
   <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
   <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
-)</code></pre></div>
+)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>The above visualization works well because the first two PCs explain a large proportion of the variance.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&#39;sparcl&#39;)</span>
-<span class="kw">library</span>(sparcl)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&#39;sparcl&#39;)</span>
+<span class="kw">library</span>(sparcl)</code></pre>
 <p>To create colored dendrograms we will use <code>ColorDendrogram()</code> in the <code>sparcl</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
 clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
 <span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
                 <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
                 <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Complete Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</code></pre></div>
+                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Here we apply hierarchical clustering to the <strong>scaled</strong> data. The <code>dist()</code> function is used to calculate pairwise distances between the (scaled in this case) observations. We use complete linkage. We then use the <code>cutree()</code> function to cluster the data into <code>3</code> clusters. The <code>ColorDendrogram()</code> function is then used to plot the dendrogram. Note that the <code>branchlength</code> argument is somewhat arbitrary (the length of the colored bar) and will need to be modified for each dendrogram.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre>
 <pre><code>##              clust_data_cut
 ## true_clusters  1  2  3
 ##             1  9 51  0
 ##             2  1  0 59
 ##             3 59  1  0</code></pre>
 <p>We see in this case hierarchical clustering doesn’t “work” as well as <span class="math inline">\(k\)</span>-means.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
 clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
 <span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
                 <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
                 <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Single Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="fl">0.5</span>)</code></pre></div>
+                <span class="dt">branchlength =</span> <span class="fl">0.5</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre>
 <pre><code>##              clust_data_cut
 ## true_clusters  1  2  3
 ##             1 59  1  0
 ##             2 59  0  1
 ##             3 60  0  0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
 clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
 <span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
                 <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
                 <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Average Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="dv">1</span>)</code></pre></div>
+                <span class="dt">branchlength =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre>
 <pre><code>##              clust_data_cut
 ## true_clusters  1  2  3
 ##             1  1 59  0
@@ -688,30 +717,30 @@ clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_da
 </div>
 <div id="iris-data" class="section level3">
 <h3><span class="header-section-number">13.2.3</span> Iris Data</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(iris)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(iris)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
 ##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
 ##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
 ##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
 ##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 ##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_pca =<span class="st"> </span><span class="kw">prcomp</span>(iris[,-<span class="dv">5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
-iris_pca$rotation</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">iris_pca =<span class="st"> </span><span class="kw">prcomp</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
+iris_pca<span class="op">$</span>rotation</code></pre>
 <pre><code>##                     PC1         PC2        PC3        PC4
 ## Sepal.Length  0.5210659 -0.37741762  0.7195664  0.2612863
 ## Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096
 ## Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492
 ## Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lab_to_col =<span class="st"> </span>function (labels){
+<pre class="sourceCode r"><code class="sourceCode r">lab_to_col =<span class="st"> </span><span class="cf">function</span> (labels){
   cols =<span class="st"> </span><span class="kw">rainbow</span> (<span class="kw">length</span>(<span class="kw">unique</span>(labels)))
   cols[<span class="kw">as.numeric</span> (<span class="kw">as.factor</span>(labels))]
 }
 
-<span class="kw">plot</span>(iris_pca$x[,<span class="dv">1</span>], iris_pca$x[,<span class="dv">2</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris$Species), <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<span class="kw">plot</span>(iris_pca<span class="op">$</span>x[,<span class="dv">1</span>], iris_pca<span class="op">$</span>x[,<span class="dv">2</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris<span class="op">$</span>Species), <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(iris_pca$x[,<span class="dv">3</span>], iris_pca$x[,<span class="dv">4</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris$Species), <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(iris_pca<span class="op">$</span>x[,<span class="dv">3</span>], iris_pca<span class="op">$</span>x[,<span class="dv">4</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris<span class="op">$</span>Species), <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_pve =<span class="st"> </span><span class="kw">get_PVE</span>(iris_pca)
+<pre class="sourceCode r"><code class="sourceCode r">iris_pve =<span class="st"> </span><span class="kw">get_PVE</span>(iris_pca)
 
 <span class="kw">plot</span>(
   <span class="kw">cumsum</span>(iris_pve),
@@ -719,47 +748,47 @@ iris_pca$rotation</code></pre></div>
   <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
   <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
   <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
-)</code></pre></div>
+)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-3.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_kmeans =<span class="st"> </span><span class="kw">kmeans</span>(iris[,-<span class="dv">5</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
-<span class="kw">table</span>(iris_kmeans$clust, iris[,<span class="dv">5</span>])</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">iris_kmeans =<span class="st"> </span><span class="kw">kmeans</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+<span class="kw">table</span>(iris_kmeans<span class="op">$</span>clust, iris[,<span class="dv">5</span>])</code></pre>
 <pre><code>##    
 ##     setosa versicolor virginica
 ##   1      0         48        14
 ##   2      0          2        36
 ##   3     50          0         0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,-<span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
 iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
 <span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
                 <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
                 <span class="dt">main =</span> <span class="st">&quot;Iris, Complete Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</code></pre></div>
+                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-4.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris_cut, iris[,<span class="dv">5</span>])</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris_cut, iris[,<span class="dv">5</span>])</code></pre>
 <pre><code>##         
 ## iris_cut setosa versicolor virginica
 ##        1     49          0         0
 ##        2      1         21         2
 ##        3      0         29        48</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris_cut, iris_kmeans$clust)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris_cut, iris_kmeans<span class="op">$</span>clust)</code></pre>
 <pre><code>##         
 ## iris_cut  1  2  3
 ##        1  0  0 49
 ##        2 23  0  1
 ##        3 39 38  0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,-<span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
 iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
 <span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
                 <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
                 <span class="dt">main =</span> <span class="st">&quot;Iris, Single Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="fl">0.3</span>)</code></pre></div>
+                <span class="dt">branchlength =</span> <span class="fl">0.3</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-5.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,-<span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
 iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
 <span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
                 <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
                 <span class="dt">main =</span> <span class="st">&quot;Iris, Average Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="dv">1</span>)</code></pre></div>
+                <span class="dt">branchlength =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-6.png" width="672" /></p>
 </div>
 </div>
@@ -773,11 +802,11 @@ iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <spa
 </div>
 <div id="rmarkdown-7" class="section level2">
 <h2><span class="header-section-number">13.4</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="22-unsupervised.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.4 and the following packages:</p>
+<p>The RMarkdown file for this chapter can be found <a href="22-unsupervised.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.1 and the following packages:</p>
 <ul>
 <li>Base Packages, Attached</li>
 </ul>
-<pre><code>## [1] &quot;methods&quot;   &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
+<pre><code>## [1] &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;methods&quot;  
 ## [7] &quot;base&quot;</code></pre>
 <ul>
 <li>Additional Packages, Attached</li>
@@ -786,24 +815,21 @@ iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <spa
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;Rcpp&quot;         &quot;lubridate&quot;    &quot;tidyr&quot;        &quot;class&quot;       
-##  [5] &quot;assertthat&quot;   &quot;rprojroot&quot;    &quot;digest&quot;       &quot;ipred&quot;       
-##  [9] &quot;psych&quot;        &quot;foreach&quot;      &quot;R6&quot;           &quot;plyr&quot;        
-## [13] &quot;backports&quot;    &quot;stats4&quot;       &quot;e1071&quot;        &quot;evaluate&quot;    
-## [17] &quot;pillar&quot;       &quot;rlang&quot;        &quot;lazyeval&quot;     &quot;kernlab&quot;     
-## [21] &quot;rpart&quot;        &quot;Matrix&quot;       &quot;rmarkdown&quot;    &quot;splines&quot;     
-## [25] &quot;CVST&quot;         &quot;ddalpha&quot;      &quot;gower&quot;        &quot;stringr&quot;     
-## [29] &quot;foreign&quot;      &quot;munsell&quot;      &quot;broom&quot;        &quot;compiler&quot;    
-## [33] &quot;xfun&quot;         &quot;pkgconfig&quot;    &quot;mnormt&quot;       &quot;dimRed&quot;      
-## [37] &quot;htmltools&quot;    &quot;nnet&quot;         &quot;tidyselect&quot;   &quot;tibble&quot;      
-## [41] &quot;prodlim&quot;      &quot;DRR&quot;          &quot;bookdown&quot;     &quot;codetools&quot;   
-## [45] &quot;RcppRoll&quot;     &quot;withr&quot;        &quot;dplyr&quot;        &quot;recipes&quot;     
-## [49] &quot;ModelMetrics&quot; &quot;grid&quot;         &quot;nlme&quot;         &quot;gtable&quot;      
-## [53] &quot;magrittr&quot;     &quot;scales&quot;       &quot;stringi&quot;      &quot;reshape2&quot;    
-## [57] &quot;bindrcpp&quot;     &quot;timeDate&quot;     &quot;robustbase&quot;   &quot;lava&quot;        
-## [61] &quot;iterators&quot;    &quot;tools&quot;        &quot;glue&quot;         &quot;DEoptimR&quot;    
-## [65] &quot;purrr&quot;        &quot;sfsmisc&quot;      &quot;parallel&quot;     &quot;survival&quot;    
-## [69] &quot;yaml&quot;         &quot;colorspace&quot;   &quot;knitr&quot;        &quot;bindr&quot;</code></pre>
+<pre><code>##  [1] &quot;tidyselect&quot;   &quot;xfun&quot;         &quot;purrr&quot;        &quot;reshape2&quot;    
+##  [5] &quot;splines&quot;      &quot;colorspace&quot;   &quot;generics&quot;     &quot;stats4&quot;      
+##  [9] &quot;htmltools&quot;    &quot;yaml&quot;         &quot;prodlim&quot;      &quot;survival&quot;    
+## [13] &quot;rlang&quot;        &quot;e1071&quot;        &quot;ModelMetrics&quot; &quot;pillar&quot;      
+## [17] &quot;glue&quot;         &quot;withr&quot;        &quot;bindrcpp&quot;     &quot;foreach&quot;     
+## [21] &quot;bindr&quot;        &quot;plyr&quot;         &quot;lava&quot;         &quot;stringr&quot;     
+## [25] &quot;timeDate&quot;     &quot;munsell&quot;      &quot;gtable&quot;       &quot;recipes&quot;     
+## [29] &quot;codetools&quot;    &quot;evaluate&quot;     &quot;knitr&quot;        &quot;class&quot;       
+## [33] &quot;Rcpp&quot;         &quot;scales&quot;       &quot;backports&quot;    &quot;ipred&quot;       
+## [37] &quot;digest&quot;       &quot;stringi&quot;      &quot;bookdown&quot;     &quot;dplyr&quot;       
+## [41] &quot;grid&quot;         &quot;rprojroot&quot;    &quot;tools&quot;        &quot;magrittr&quot;    
+## [45] &quot;lazyeval&quot;     &quot;tibble&quot;       &quot;crayon&quot;       &quot;pkgconfig&quot;   
+## [49] &quot;Matrix&quot;       &quot;data.table&quot;   &quot;lubridate&quot;    &quot;gower&quot;       
+## [53] &quot;assertthat&quot;   &quot;rmarkdown&quot;    &quot;iterators&quot;    &quot;R6&quot;          
+## [57] &quot;rpart&quot;        &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
 
 </div>
 </div>
@@ -833,7 +859,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -845,6 +871,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/daviddalpiaz/r4sl/edit/master/13-unsupervised.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["r4sl.pdf"],
 "toc": {
@@ -859,8 +889,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

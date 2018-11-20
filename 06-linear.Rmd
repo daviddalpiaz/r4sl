@@ -42,7 +42,7 @@ While for the sake of comparing models, the choice between RMSE and MSE is arbit
 For a linear model , the estimate of $f$, $\hat{f}$, is given by the fitted regression line.
 
 $$
-\hat{y}(\bf{x}_i) = \hat{f}(\bf{x}_i)
+\hat{y}({\bf{x}_i}) = \hat{f}({\bf{x}_i})
 $$
 
 We can write an `R` function that will be useful for performing this calculation.
@@ -127,7 +127,7 @@ This function can actually be improved for the inputs that we are using. We woul
 
 ```{r}
 get_rmse = function(model, data, response) {
-  rmse(actual = data[, response], 
+  rmse(actual = subset(data, select = response, drop = TRUE),
        predicted = predict(model, data))
 }
 ```

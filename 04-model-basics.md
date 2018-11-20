@@ -21,18 +21,18 @@ Advertising
 
 ```
 ## # A tibble: 200 x 4
-##        TV Radio Newspaper Sales
-##     <dbl> <dbl>     <dbl> <dbl>
-##  1 230.   37.8      69.2  22.1 
-##  2  44.5  39.3      45.1  10.4 
-##  3  17.2  45.9      69.3   9.30
-##  4 152.   41.3      58.5  18.5 
-##  5 181.   10.8      58.4  12.9 
-##  6   8.70 48.9      75.0   7.20
-##  7  57.5  32.8      23.5  11.8 
-##  8 120.   19.6      11.6  13.2 
-##  9   8.60  2.10      1.00  4.80
-## 10 200.    2.60     21.2  10.6 
+##       TV Radio Newspaper Sales
+##    <dbl> <dbl>     <dbl> <dbl>
+##  1 230.   37.8      69.2  22.1
+##  2  44.5  39.3      45.1  10.4
+##  3  17.2  45.9      69.3   9.3
+##  4 152.   41.3      58.5  18.5
+##  5 181.   10.8      58.4  12.9
+##  6   8.7  48.9      75     7.2
+##  7  57.5  32.8      23.5  11.8
+##  8 120.   19.6      11.6  13.2
+##  9   8.6   2.1       1     4.8
+## 10 200.    2.6      21.2  10.6
 ## # ... with 190 more rows
 ```
 
@@ -333,16 +333,16 @@ cat_pred
 ## # A tibble: 30 x 3
 ##    x1       x2       y
 ##    <fct> <dbl>   <dbl>
-##  1 A     0.743 -0.867 
-##  2 A     0.330 -0.595 
-##  3 A     0.205 -0.242 
-##  4 A     0.663  0.761 
-##  5 A     0.995 -1.55  
-##  6 A     0.888  0.102 
-##  7 A     0.755  2.23  
-##  8 A     0.121 -0.751 
-##  9 A     0.710 -0.0956
-## 10 A     0.821 -0.894 
+##  1 A     0.389  0.253 
+##  2 A     0.979  0.327 
+##  3 A     0.201  0.0797
+##  4 A     0.260  1.17  
+##  5 A     0.242 -0.105 
+##  6 A     0.807 -0.600 
+##  7 A     0.988  0.240 
+##  8 A     0.536 -0.0374
+##  9 A     0.541  0.723 
+## 10 A     0.265 -0.574 
 ## # ... with 20 more rows
 ```
 
@@ -358,7 +358,7 @@ coef(cat_pred_mod_add)
 
 ```
 ## (Intercept)         x1B         x1C          x2 
-## -0.13619945 -0.12248659  0.36470133 -0.08577449
+##  0.45797653 -0.03505246 -0.74422372 -0.59535739
 ```
 
 
@@ -369,7 +369,7 @@ coef(cat_pred_mod_int)
 
 ```
 ## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-## -0.29825727  0.43670965  0.03758107  0.17426767 -1.09305884  0.52756340
+##   0.1996981   0.6263062  -0.6867662  -0.0994682  -1.2599064  -0.1009748
 ```
 
 
@@ -461,7 +461,7 @@ sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 3.4.4. The following packages (and their dependencies) were loaded in this file:
+The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded in this file:
 
 
 ```

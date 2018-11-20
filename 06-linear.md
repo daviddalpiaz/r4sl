@@ -23,18 +23,18 @@ Advertising
 
 ```
 ## # A tibble: 200 x 4
-##        TV Radio Newspaper Sales
-##     <dbl> <dbl>     <dbl> <dbl>
-##  1 230.   37.8      69.2  22.1 
-##  2  44.5  39.3      45.1  10.4 
-##  3  17.2  45.9      69.3   9.30
-##  4 152.   41.3      58.5  18.5 
-##  5 181.   10.8      58.4  12.9 
-##  6   8.70 48.9      75.0   7.20
-##  7  57.5  32.8      23.5  11.8 
-##  8 120.   19.6      11.6  13.2 
-##  9   8.60  2.10      1.00  4.80
-## 10 200.    2.60     21.2  10.6 
+##       TV Radio Newspaper Sales
+##    <dbl> <dbl>     <dbl> <dbl>
+##  1 230.   37.8      69.2  22.1
+##  2  44.5  39.3      45.1  10.4
+##  3  17.2  45.9      69.3   9.3
+##  4 152.   41.3      58.5  18.5
+##  5 181.   10.8      58.4  12.9
+##  6   8.7  48.9      75     7.2
+##  7  57.5  32.8      23.5  11.8
+##  8 120.   19.6      11.6  13.2
+##  9   8.6   2.1       1     4.8
+## 10 200.    2.6      21.2  10.6
 ## # ... with 190 more rows
 ```
 
@@ -60,7 +60,7 @@ While for the sake of comparing models, the choice between RMSE and MSE is arbit
 For a linear model , the estimate of $f$, $\hat{f}$, is given by the fitted regression line.
 
 $$
-\hat{y}(\bf{x}_i) = \hat{f}(\bf{x}_i)
+\hat{y}({\bf{x}_i}) = \hat{f}({\bf{x}_i})
 $$
 
 We can write an `R` function that will be useful for performing this calculation.
@@ -179,7 +179,7 @@ This function can actually be improved for the inputs that we are using. We woul
 
 ```r
 get_rmse = function(model, data, response) {
-  rmse(actual = data[, response], 
+  rmse(actual = subset(data, select = response, drop = TRUE),
        predicted = predict(model, data))
 }
 ```

@@ -487,4 +487,4 @@ It could be more useful if we were to attempt to calculate the bias and variance
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](20-resampling.Rmd). The file was created using `R` version 3.4.4.
+The `rmarkdown` file for this chapter can be found [**here**](20-resampling.Rmd). The file was created using `R` version 3.5.1.

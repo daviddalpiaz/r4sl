@@ -792,13 +792,13 @@ ColorDendrogram(iris_hc, y = iris_cut,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.4.4 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.5.1 and the following packages:
 
 - Base Packages, Attached
 
 
 ```
-## [1] "methods"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+## [1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
 ## [7] "base"
 ```
 
@@ -813,24 +813,21 @@ The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd)
 
 
 ```
-##  [1] "Rcpp"         "lubridate"    "tidyr"        "class"       
-##  [5] "assertthat"   "rprojroot"    "digest"       "ipred"       
-##  [9] "psych"        "foreach"      "R6"           "plyr"        
-## [13] "backports"    "stats4"       "e1071"        "evaluate"    
-## [17] "pillar"       "rlang"        "lazyeval"     "kernlab"     
-## [21] "rpart"        "Matrix"       "rmarkdown"    "splines"     
-## [25] "CVST"         "ddalpha"      "gower"        "stringr"     
-## [29] "foreign"      "munsell"      "broom"        "compiler"    
-## [33] "xfun"         "pkgconfig"    "mnormt"       "dimRed"      
-## [37] "htmltools"    "nnet"         "tidyselect"   "tibble"      
-## [41] "prodlim"      "DRR"          "bookdown"     "codetools"   
-## [45] "RcppRoll"     "withr"        "dplyr"        "recipes"     
-## [49] "ModelMetrics" "grid"         "nlme"         "gtable"      
-## [53] "magrittr"     "scales"       "stringi"      "reshape2"    
-## [57] "bindrcpp"     "timeDate"     "robustbase"   "lava"        
-## [61] "iterators"    "tools"        "glue"         "DEoptimR"    
-## [65] "purrr"        "sfsmisc"      "parallel"     "survival"    
-## [69] "yaml"         "colorspace"   "knitr"        "bindr"
+##  [1] "tidyselect"   "xfun"         "purrr"        "reshape2"    
+##  [5] "splines"      "colorspace"   "generics"     "stats4"      
+##  [9] "htmltools"    "yaml"         "prodlim"      "survival"    
+## [13] "rlang"        "e1071"        "ModelMetrics" "pillar"      
+## [17] "glue"         "withr"        "bindrcpp"     "foreach"     
+## [21] "bindr"        "plyr"         "lava"         "stringr"     
+## [25] "timeDate"     "munsell"      "gtable"       "recipes"     
+## [29] "codetools"    "evaluate"     "knitr"        "class"       
+## [33] "Rcpp"         "scales"       "backports"    "ipred"       
+## [37] "digest"       "stringi"      "bookdown"     "dplyr"       
+## [41] "grid"         "rprojroot"    "tools"        "magrittr"    
+## [45] "lazyeval"     "tibble"       "crayon"       "pkgconfig"   
+## [49] "Matrix"       "data.table"   "lubridate"    "gower"       
+## [53] "assertthat"   "rmarkdown"    "iterators"    "R6"          
+## [57] "rpart"        "nnet"         "nlme"         "compiler"
 ```
 
 

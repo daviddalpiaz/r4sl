@@ -341,7 +341,7 @@ calc_acc(actual = default_tst$default,
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](25-elnet.Rmd). The file was created using `R` version 3.4.4. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](25-elnet.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

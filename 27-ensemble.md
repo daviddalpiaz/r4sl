@@ -309,16 +309,27 @@ tibble::as_tibble(summary(booston_boost))
 ```r
 par(mfrow = c(1, 3))
 plot(booston_boost, i = "rm", col = "dodgerblue", lwd = 2)
-grid()
-plot(booston_boost, i = "lstat", col = "dodgerblue", lwd = 2)
-grid()
-plot(booston_boost, i = "dis", col = "dodgerblue", lwd = 2)
-grid()
 ```
 
 
 
 \begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-21-1} \end{center}
+
+```r
+plot(booston_boost, i = "lstat", col = "dodgerblue", lwd = 2)
+```
+
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-21-2} \end{center}
+
+```r
+plot(booston_boost, i = "dis", col = "dodgerblue", lwd = 2)
+```
+
+
+
+\begin{center}\includegraphics{27-ensemble_files/figure-latex/unnamed-chunk-21-3} \end{center}
 
 
 ```r
@@ -927,11 +938,11 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_col,
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](27-ensemble.Rmd). The file was created using `R` version 3.4.4. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](27-ensemble.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
 ##  [1] "mlbench"      "ISLR"         "MASS"         "caret"       
-##  [5] "ggplot2"      "gbm"          "lattice"      "survival"    
-##  [9] "randomForest" "rpart.plot"   "rpart"
+##  [5] "ggplot2"      "lattice"      "gbm"          "randomForest"
+##  [9] "rpart.plot"   "rpart"
 ```

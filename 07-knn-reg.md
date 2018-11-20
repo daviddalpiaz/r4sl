@@ -327,6 +327,23 @@ cod_train_rmse = c(
                  y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]))
 ```
 
+```
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+```
+
 
 ```r
 # TODO: DRY
@@ -341,6 +358,23 @@ cod_test_rmse = c(
                  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
   make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_tst[, 2:6], 
                  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]))
+```
+
+```
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
 ```
 
 
@@ -362,11 +396,11 @@ knitr::kable(cod_results, escape = FALSE, booktabs = TRUE)
 \toprule
 $p$, Dimension & Train RMSE & Test RMSE\\
 \midrule
-1 & 1.413569 & 1.565495\\
-2 & 5.407340 & 7.212414\\
-3 & 8.726803 & 10.629993\\
-4 & 10.310148 & 12.933572\\
-5 & 12.101930 & 14.256241\\
+1 & NA & NA\\
+2 & NA & NA\\
+3 & NA & NA\\
+4 & NA & NA\\
+5 & NA & NA\\
 \bottomrule
 \end{tabular}
 
@@ -413,7 +447,12 @@ rmse(predicted = scaled_pred, actual = y_tst_boston) # with scaling
 ```
 
 ```
-## [1] 5.709402
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+```
+
+```
+## [1] NA
 ```
 
 ```r
@@ -421,7 +460,12 @@ rmse(predicted = unscaled_pred, actual = y_tst_boston) # without scaling
 ```
 
 ```
-## [1] 7.540342
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+```
+
+```
+## [1] NA
 ```
 
 Here we see that scaling makes a pretty big difference.
@@ -431,7 +475,7 @@ Can you improve this model? Can you find a better $k$? Can you find a better mod
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 3.4.4. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R for Statistical Learning</title>
-  <meta name="description" content="<code>R</code> for Statistical Learning">
-  <meta name="generator" content="bookdown 0.7.4 and GitBook 2.6.7">
+  <meta name="description" content="R for Statistical Learning">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="David Dalpiaz">
 
 
-<meta name="date" content="2018-03-30">
+<meta name="date" content="2018-11-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="biasvariance-tradeoff.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,41 +51,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -446,24 +475,24 @@ f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p
 </div>
 <div id="knn-in-r" class="section level2">
 <h2><span class="header-section-number">7.5</span> KNN in <code>R</code></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FNN)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FNN)
 <span class="kw">library</span>(MASS)
-<span class="kw">data</span>(Boston)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nrow</span>(Boston), <span class="dt">size =</span> <span class="dv">250</span>)
+<span class="kw">data</span>(Boston)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="dt">size =</span> <span class="dv">250</span>)
 trn_boston =<span class="st"> </span>Boston[boston_idx, ]
-tst_boston  =<span class="st"> </span>Boston[-boston_idx, ]</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;lstat&quot;</span>]
+tst_boston  =<span class="st"> </span>Boston[<span class="op">-</span>boston_idx, ]</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">X_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;lstat&quot;</span>]
 X_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;lstat&quot;</span>]
 y_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;medv&quot;</span>]
-y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</code></pre></div>
+y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</code></pre>
 <p>We create an additional “test” set <code>lstat_grid</code>, that is a grid of <code>lstat</code> values at which we will predict <code>medv</code> in order to create graphics.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_trn_boston_min =<span class="st"> </span><span class="kw">min</span>(X_trn_boston)
+<pre class="sourceCode r"><code class="sourceCode r">X_trn_boston_min =<span class="st"> </span><span class="kw">min</span>(X_trn_boston)
 X_trn_boston_max =<span class="st"> </span><span class="kw">max</span>(X_trn_boston)
 lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">seq</span>(X_trn_boston_min, X_trn_boston_max, 
-                                    <span class="dt">by =</span> <span class="fl">0.01</span>))</code></pre></div>
+                                    <span class="dt">by =</span> <span class="fl">0.01</span>))</code></pre>
 <p>To perform KNN for regression, we will need <code>knn.reg()</code> from the <code>FNN</code> package. Notice that, we do <strong>not</strong> load this package, but instead use <code>FNN::knn.reg</code> to access the function. Note that, in the future, we’ll need to be careful about loading the <code>FNN</code> package as it also contains a function called <code>knn</code>. This function also appears in the <code>class</code> package which we will likely use later.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knn.reg</span>(<span class="dt">train =</span> ?, <span class="dt">test =</span> ?, <span class="dt">y =</span> ?, <span class="dt">k =</span> ?)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knn.reg</span>(<span class="dt">train =</span> ?, <span class="dt">test =</span> ?, <span class="dt">y =</span> ?, <span class="dt">k =</span> ?)</code></pre>
 <p>INPUT</p>
 <ul>
 <li><code>train</code>: the predictors of the training data</li>
@@ -475,12 +504,12 @@ lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span cl
 <ul>
 <li>the output of <code>knn.reg()</code> is exactly <span class="math inline">\(\hat{f}_k(x)\)</span></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_001 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">1</span>)
-pred_005 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">5</span>)
-pred_010 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)
-pred_050 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">50</span>)
-pred_100 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">100</span>)
-pred_250 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">250</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">pred_<span class="dv">001</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">1</span>)
+pred_<span class="dv">005</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">5</span>)
+pred_<span class="dv">010</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)
+pred_<span class="dv">050</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">50</span>)
+pred_<span class="dv">100</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">100</span>)
+pred_<span class="dv">250</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">250</span>)</code></pre>
 <p>We make predictions for a large number of possible values of <code>lstat</code>, for different values of <code>k</code>. Note that <code>250</code> is the total number of observations in this training dataset.</p>
 <p><img src="07-knn-reg_files/figure-html/unnamed-chunk-7-1.png" width="576" /></p>
 <ul>
@@ -503,21 +532,21 @@ pred_250 =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="
 <ul>
 <li>TODO: Test MSE is an estimate of this. So finding best test RMSE will be our strategy. (Best test RMSE is same as best MSE, but with more understandable units.)</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span>function(actual, predicted) {
-  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual -<span class="st"> </span>predicted) ^<span class="st"> </span><span class="dv">2</span>))
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define helper function for getting knn.reg predictions</span>
+<pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
+  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define helper function for getting knn.reg predictions</span>
 <span class="co"># note: this function is highly specific to this situation and dataset</span>
-make_knn_pred =<span class="st"> </span>function(<span class="dt">k =</span> <span class="dv">1</span>, training, predicting) {
-  pred =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> training[<span class="st">&quot;lstat&quot;</span>], 
+make_knn_pred =<span class="st"> </span><span class="cf">function</span>(<span class="dt">k =</span> <span class="dv">1</span>, training, predicting) {
+  pred =<span class="st"> </span>FNN<span class="op">::</span><span class="kw">knn.reg</span>(<span class="dt">train =</span> training[<span class="st">&quot;lstat&quot;</span>], 
                       <span class="dt">test =</span> predicting[<span class="st">&quot;lstat&quot;</span>], 
-                      <span class="dt">y =</span> training$medv, <span class="dt">k =</span> k)$pred
-  act  =<span class="st"> </span>predicting$medv
+                      <span class="dt">y =</span> training<span class="op">$</span>medv, <span class="dt">k =</span> k)<span class="op">$</span>pred
+  act  =<span class="st"> </span>predicting<span class="op">$</span>medv
   <span class="kw">rmse</span>(<span class="dt">predicted =</span> pred, <span class="dt">actual =</span> act)
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define values of k to evaluate</span>
-k =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">250</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get requested train RMSEs</span>
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define values of k to evaluate</span>
+k =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">250</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get requested train RMSEs</span>
 knn_trn_rmse =<span class="st"> </span><span class="kw">sapply</span>(k, make_knn_pred, 
                       <span class="dt">training =</span> trn_boston, 
                       <span class="dt">predicting =</span> trn_boston)
@@ -530,8 +559,8 @@ knn_tst_rmse =<span class="st"> </span><span class="kw">sapply</span>(k, make_kn
 best_k =<span class="st"> </span>k[<span class="kw">which.min</span>(knn_tst_rmse)]
 
 <span class="co"># find overfitting, underfitting, and &quot;best&quot;&quot; k</span>
-fit_status =<span class="st"> </span><span class="kw">ifelse</span>(k &lt;<span class="st"> </span>best_k, <span class="st">&quot;Over&quot;</span>, <span class="kw">ifelse</span>(k ==<span class="st"> </span>best_k, <span class="st">&quot;Best&quot;</span>, <span class="st">&quot;Under&quot;</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># summarize results</span>
+fit_status =<span class="st"> </span><span class="kw">ifelse</span>(k <span class="op">&lt;</span><span class="st"> </span>best_k, <span class="st">&quot;Over&quot;</span>, <span class="kw">ifelse</span>(k <span class="op">==</span><span class="st"> </span>best_k, <span class="st">&quot;Best&quot;</span>, <span class="st">&quot;Under&quot;</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># summarize results</span>
 knn_results =<span class="st"> </span><span class="kw">data.frame</span>(
   k,
   <span class="kw">round</span>(knn_trn_rmse, <span class="dv">2</span>),
@@ -541,7 +570,7 @@ knn_results =<span class="st"> </span><span class="kw">data.frame</span>(
 <span class="kw">colnames</span>(knn_results) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;k&quot;</span>, <span class="st">&quot;Train RMSE&quot;</span>, <span class="st">&quot;Test RMSE&quot;</span>, <span class="st">&quot;Fit?&quot;</span>)
 
 <span class="co"># display results</span>
-knitr::<span class="kw">kable</span>(knn_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</code></pre></div>
+knitr<span class="op">::</span><span class="kw">kable</span>(knn_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -618,60 +647,93 @@ knitr::<span class="kw">kable</span>(knn_results, <span class="dt">escape =</spa
 <ul>
 <li>TODO: Sometimes “scale” differentiates between center and scale. <code>R</code> function <code>scale()</code> does both by default. Outputs variables with mean = 0, var = 1.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_knn_data =<span class="st"> </span>function(<span class="dt">n_obs =</span> <span class="dv">50</span>) {
+<pre class="sourceCode r"><code class="sourceCode r">sim_knn_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">n_obs =</span> <span class="dv">50</span>) {
   x1 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dt">length.out =</span> n_obs)
   x2 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>)
   x3 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
   x4 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>)
   x5 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>)
-  y =<span class="st"> </span>x1 ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_obs)
+  y =<span class="st"> </span>x1 <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_obs)
   <span class="kw">data.frame</span>(y, x1, x2, x3,x4, x5)
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-knn_data =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre></div>
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+knn_data =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre>
 <p><img src="07-knn-reg_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <ul>
 <li><p>TODO: How should we scale the test data?</p></li>
-<li><p>TODO: Show that linear regression is invariant to scaling. KNN is not. - y = b0 + b1x1 + b2x2 + e - y = b0 + b1x1_ + b2x2_ + e - how are these coefficients related - define how the scaling - RMSE for both, RMSE for both ways KNN</p></li>
+<li><p>TODO: Show that linear regression is invariant to scaling. KNN is not.
+- y = b0 + b1x1 + b2x2 + e
+- y = b0 + b1x1_ + b2x2_ + e
+- how are these coefficients related
+- define how the scaling
+- RMSE for both, RMSE for both ways KNN</p></li>
 </ul>
 </div>
 <div id="curse-of-dimensionality" class="section level2">
 <h2><span class="header-section-number">7.9</span> Curse of Dimensionality</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 knn_data_trn =<span class="st"> </span><span class="kw">sim_knn_data</span>()
-knn_data_tst =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define helper function for getting knn.reg predictions</span>
+knn_data_tst =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define helper function for getting knn.reg predictions</span>
 <span class="co"># note: this function is highly specific to this situation and dataset</span>
-make_knn_pred =<span class="st"> </span>function(<span class="dt">k =</span> <span class="dv">1</span>, X_trn, X_pred, y_trn, y_pred) {
-  pred =<span class="st"> </span>FNN::<span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn), <span class="dt">test =</span> <span class="kw">scale</span>(X_pred), <span class="dt">y =</span> y_trn, <span class="dt">k =</span> k)$pred
+make_knn_pred =<span class="st"> </span><span class="cf">function</span>(<span class="dt">k =</span> <span class="dv">1</span>, X_trn, X_pred, y_trn, y_pred) {
+  pred =<span class="st"> </span>FNN<span class="op">::</span><span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn), <span class="dt">test =</span> <span class="kw">scale</span>(X_pred), <span class="dt">y =</span> y_trn, <span class="dt">k =</span> k)<span class="op">$</span>pred
   act  =<span class="st"> </span>y_pred
   <span class="kw">rmse</span>(<span class="dt">predicted =</span> pred, <span class="dt">actual =</span> act)
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># TODO: DRY</span>
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">TODO</span><span class="co">: DRY</span>
 cod_train_rmse =<span class="st"> </span><span class="kw">c</span>(
   <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  
                  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], 
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], 
                  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], 
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], 
                  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], 
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], 
                  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># TODO: DRY</span>
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]))</code></pre>
+<pre><code>## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">TODO</span><span class="co">: DRY</span>
 cod_test_rmse =<span class="st"> </span><span class="kw">c</span>(
   <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_tst[<span class="st">&quot;x1&quot;</span>],  
                  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">3</span>], 
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], 
                  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">4</span>], 
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], 
                  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">5</span>], 
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], 
                  <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span>:<span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span>:<span class="dv">6</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cod_results =<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], 
+                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]))</code></pre>
+<pre><code>## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA
+
+## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">cod_results =<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="dt">dimension =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),
   cod_train_rmse,
   cod_test_rmse
@@ -679,7 +741,7 @@ cod_test_rmse =<span class="st"> </span><span class="kw">c</span>(
 
 <span class="kw">colnames</span>(cod_results) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$p$, Dimension&quot;</span>, <span class="st">&quot;Train RMSE&quot;</span>, <span class="st">&quot;Test RMSE&quot;</span>)
 
-knitr::<span class="kw">kable</span>(cod_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</code></pre></div>
+knitr<span class="op">::</span><span class="kw">kable</span>(cod_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -691,28 +753,28 @@ knitr::<span class="kw">kable</span>(cod_results, <span class="dt">escape =</spa
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">1.413569</td>
-<td align="right">1.565495</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
-<td align="right">5.407340</td>
-<td align="right">7.212414</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">8.726803</td>
-<td align="right">10.629993</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="right">10.310148</td>
-<td align="right">12.933572</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">12.101930</td>
-<td align="right">14.256241</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 </tr>
 </tbody>
 </table>
@@ -743,26 +805,30 @@ knitr::<span class="kw">kable</span>(cod_results, <span class="dt">escape =</spa
 <div id="data-example" class="section level2">
 <h2><span class="header-section-number">7.12</span> Data Example</h2>
 <p>Returning to the <code>Boston</code> dataset, we now use all of the available predictors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X_trn_boston =<span class="st"> </span>trn_boston[, !<span class="kw">names</span>(trn_boston) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;medv&quot;</span>)]
-X_tst_boston =<span class="st"> </span>tst_boston[, !<span class="kw">names</span>(tst_boston) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;medv&quot;</span>)]
+<pre class="sourceCode r"><code class="sourceCode r">X_trn_boston =<span class="st"> </span>trn_boston[, <span class="op">!</span><span class="kw">names</span>(trn_boston) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;medv&quot;</span>)]
+X_tst_boston =<span class="st"> </span>tst_boston[, <span class="op">!</span><span class="kw">names</span>(tst_boston) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;medv&quot;</span>)]
 y_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;medv&quot;</span>]
-y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn_boston), <span class="dt">test =</span> <span class="kw">scale</span>(X_tst_boston), 
-                      <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)$pred
+y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">scaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn_boston), <span class="dt">test =</span> <span class="kw">scale</span>(X_tst_boston), 
+                      <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)<span class="op">$</span>pred
 unscaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> X_tst_boston, 
-                        <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)$pred
+                        <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)<span class="op">$</span>pred
 
 <span class="co"># test rmse</span>
-<span class="kw">rmse</span>(<span class="dt">predicted =</span> scaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># with scaling</span></code></pre></div>
-<pre><code>## [1] 5.709402</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmse</span>(<span class="dt">predicted =</span> unscaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># without scaling</span></code></pre></div>
-<pre><code>## [1] 7.540342</code></pre>
+<span class="kw">rmse</span>(<span class="dt">predicted =</span> scaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># with scaling</span></code></pre>
+<pre><code>## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmse</span>(<span class="dt">predicted =</span> unscaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># without scaling</span></code></pre>
+<pre><code>## Warning in mean.default((actual - predicted)^2): argument is not numeric or
+## logical: returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
 <p>Here we see that scaling makes a pretty big difference.</p>
 <p>Can you improve this model? Can you find a better <span class="math inline">\(k\)</span>? Can you find a better model by only using some of the predictors?</p>
 </div>
 <div id="rmarkdown-1" class="section level2">
 <h2><span class="header-section-number">7.13</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="07-knn-reg.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.4.4. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="07-knn-reg.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;MASS&quot; &quot;FNN&quot;</code></pre>
 
 </div>
@@ -793,7 +859,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -805,6 +871,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/daviddalpiaz/r4sl/edit/master/07-knn-reg.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["r4sl.pdf"],
 "toc": {
@@ -819,8 +889,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

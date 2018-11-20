@@ -34,7 +34,7 @@ as_tibble(Default)
 ##  7 No      No         826. 24905.
 ##  8 No      Yes        809. 17600.
 ##  9 No      No        1161. 37469.
-## 10 No      No           0. 29275.
+## 10 No      No           0  29275.
 ## # ... with 9,990 more rows
 ```
 
@@ -445,7 +445,7 @@ This classifier does better than the previous. But the point is, in reality, to 
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 3.4.4. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
