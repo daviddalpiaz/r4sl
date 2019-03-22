@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-21" />
+<meta name="date" content="2019-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -368,7 +368,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="32" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>32</b> Support Vector Machines</a></li>
 <li class="divider"></li>
-<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 David Dalpiaz</a></li>
+<li><a href="https://github.com/daviddalpiaz/r4sl" target="blank">&copy; 2017 - 2019 David Dalpiaz</a></li>
 
 </ul>
 
@@ -561,29 +561,29 @@ cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
 )
 cat_pred</code></pre>
 <pre><code>## # A tibble: 30 x 3
-##    x1        x2      y
-##    &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 A     0.249   2.12 
-##  2 A     0.353  -1.07 
-##  3 A     0.425  -1.24 
-##  4 A     0.406  -1.09 
-##  5 A     0.874   0.160
-##  6 A     0.364  -1.92 
-##  7 A     0.0458 -1.73 
-##  8 A     0.587  -0.708
-##  9 A     0.316   1.18 
-## 10 A     0.296   0.991
+##    x1       x2      y
+##    &lt;fct&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 A     0.839  0.318
+##  2 A     0.301  1.27 
+##  3 A     0.341  0.728
+##  4 A     0.649 -0.156
+##  5 A     0.997  0.296
+##  6 A     0.396  0.738
+##  7 A     0.432  1.89 
+##  8 A     0.406 -0.955
+##  9 A     0.934 -1.09 
+## 10 A     0.463  1.84 
 ## # … with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
 <pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_add)</code></pre>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-## -0.90667962  0.21070766  0.01392128  1.47039457</code></pre>
+##   1.6136907  -0.8519225  -0.7092184  -1.9548160</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
 <span class="kw">coef</span>(cat_pred_mod_int)</code></pre>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.4108208  -0.4024480  -0.6767775   0.2043923   1.5034541   1.7134226</code></pre>
+##  1.59452873 -1.21914760 -0.09529022 -1.92154134  0.76514235 -0.98333898</code></pre>
 </div>
 <div id="polynomials" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>

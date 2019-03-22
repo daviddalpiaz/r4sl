@@ -1,7 +1,7 @@
 --- 
 title: "`R` for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2019-03-21"
+date: "2019-03-22"
 github-repo: daviddalpiaz/r4sl
 url: 'http\://daviddalpiaz.github.io/r4sl/'
 knit: "bookdown::render_book"
