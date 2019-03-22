@@ -289,7 +289,7 @@ tibble::as_tibble(summary(booston_boost))
 ```
 ## # A tibble: 13 x 2
 ##    var     rel.inf
-##  * <fct>     <dbl>
+##    <fct>     <dbl>
 ##  1 lstat    34.4  
 ##  2 rm       31.6  
 ##  3 dis       9.78 
@@ -938,7 +938,7 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_col,
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](27-ensemble.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](27-ensemble.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

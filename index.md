@@ -1,7 +1,7 @@
 --- 
 title: "`R` for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2018-11-20"
+date: "2019-03-21"
 github-repo: daviddalpiaz/r4sl
 url: 'http\://daviddalpiaz.github.io/r4sl/'
 knit: "bookdown::render_book"
@@ -70,13 +70,23 @@ Since this book is under active development you may encounter errors ranging fro
 
 While development is taking place, you may see "TODO" scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.
 
+Please see the [README] file on GitHub for notes on the development process.
+
 ## Conventions {-}
+
+### Mathematics
 
 This text uses MathJax to render mathematical notation for the web. Occasionally, but rarely, a JavaScript error will prevent MathJax from rendering correctly. In this case, you will see the "code" instead of the expected mathematical equations. From experience, this is almost always fixed by simply refreshing the page. You'll also notice that if you right-click any equation you can obtain the MathML Code (for copying into Microsoft Word) or the TeX command used to generate the equation.
 
 $$
 a^2 + b^2 = c^2
 $$
+
+Often the symbol $\triangleq$ will be used to mean "is defined to be."
+
+We use the value $p$ to mean the number of **p**redictors. We will use $n$ for sample size.
+
+### Code
 
 `R` code will be typeset using a `monospace` font which is syntax highlighted.
 
@@ -94,9 +104,7 @@ sqrt(a ^ 2 + b ^ 2)
 ## [1] 5
 ```
 
-Often the symbol $\triangleq$ will be used to mean "is defined to be."
-
-We use the value $p$ to mean the number of **p**redictors.
+For the most part, we will follow the `tidyverse` [style guide](https://style.tidyverse.org/), however with one massive and obvious exception. Instead of the usual assignment operator, `<-`, we will instead use the more visually appealing and easier to type `-`. Not many do this, but there are [dozens](https://github.com/coatless/errorist) [of](https://github.com/yihui/knitr) [us](https://github.com/csgillespie/efficientR).
 
 ## Acknowledgements {-}
 

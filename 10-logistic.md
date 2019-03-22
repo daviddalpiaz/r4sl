@@ -623,7 +623,7 @@ Interestingly, you've just fit a neural network, and you didn't even know it! (H
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](10-logistic.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](10-logistic.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

@@ -792,7 +792,7 @@ ColorDendrogram(iris_hc, y = iris_cut,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.5.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.5.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -814,20 +814,19 @@ The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd)
 
 ```
 ##  [1] "tidyselect"   "xfun"         "purrr"        "reshape2"    
-##  [5] "splines"      "colorspace"   "generics"     "stats4"      
-##  [9] "htmltools"    "yaml"         "prodlim"      "survival"    
+##  [5] "splines"      "colorspace"   "generics"     "htmltools"   
+##  [9] "stats4"       "yaml"         "survival"     "prodlim"     
 ## [13] "rlang"        "e1071"        "ModelMetrics" "pillar"      
-## [17] "glue"         "withr"        "bindrcpp"     "foreach"     
-## [21] "bindr"        "plyr"         "lava"         "stringr"     
-## [25] "timeDate"     "munsell"      "gtable"       "recipes"     
-## [29] "codetools"    "evaluate"     "knitr"        "class"       
-## [33] "Rcpp"         "scales"       "backports"    "ipred"       
-## [37] "digest"       "stringi"      "bookdown"     "dplyr"       
-## [41] "grid"         "rprojroot"    "tools"        "magrittr"    
-## [45] "lazyeval"     "tibble"       "crayon"       "pkgconfig"   
-## [49] "Matrix"       "data.table"   "lubridate"    "gower"       
-## [53] "assertthat"   "rmarkdown"    "iterators"    "R6"          
-## [57] "rpart"        "nnet"         "nlme"         "compiler"
+## [17] "glue"         "withr"        "foreach"      "plyr"        
+## [21] "lava"         "stringr"      "timeDate"     "munsell"     
+## [25] "gtable"       "recipes"      "codetools"    "evaluate"    
+## [29] "knitr"        "class"        "Rcpp"         "scales"      
+## [33] "ipred"        "digest"       "stringi"      "bookdown"    
+## [37] "dplyr"        "grid"         "tools"        "magrittr"    
+## [41] "lazyeval"     "tibble"       "crayon"       "pkgconfig"   
+## [45] "Matrix"       "data.table"   "lubridate"    "gower"       
+## [49] "assertthat"   "rmarkdown"    "iterators"    "R6"          
+## [53] "rpart"        "nnet"         "nlme"         "compiler"
 ```
 
 

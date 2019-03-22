@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>R for Statistical Learning</title>
-  <meta name="description" content="R for Statistical Learning">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 25 Elastic Net | R for Statistical Learning</title>
+  <meta name="description" content="Chapter 25 Elastic Net | R for Statistical Learning" />
+  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R for Statistical Learning" />
+  <meta property="og:title" content="Chapter 25 Elastic Net | R for Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://daviddalpiaz.github.io/r4sl/" />
   
@@ -17,21 +16,21 @@
   <meta name="github-repo" content="daviddalpiaz/r4sl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R for Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 25 Elastic Net | R for Statistical Learning" />
   
   
   
 
-<meta name="author" content="David Dalpiaz">
+<meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2018-11-20">
+<meta name="date" content="2019-03-21" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="regularization.html">
 <link rel="next" href="trees.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -137,7 +136,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
@@ -394,7 +396,7 @@ Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</code
 <pre class="sourceCode r"><code class="sourceCode r">tibble<span class="op">::</span><span class="kw">as_tibble</span>(Hitters)</code></pre>
 <pre><code>## # A tibble: 263 x 20
 ##    AtBat  Hits HmRun  Runs   RBI Walks Years CAtBat CHits CHmRun CRuns
-##  * &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;
 ##  1   315    81     7    24    38    39    14   3449   835     69   321
 ##  2   479   130    18    66    72    76     3   1624   457     63   224
 ##  3   496   141    20    65    78    37    11   5628  1575    225   828
@@ -405,7 +407,7 @@ Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</code
 ##  8   323    81     6    26    32     8     2    341    86      6    32
 ##  9   401    92    17    49    66    65    13   5206  1332    253   784
 ## 10   574   159    21   107    75    59    10   4631  1300     90   702
-## # ... with 253 more rows, and 9 more variables: CRBI &lt;int&gt;, CWalks &lt;int&gt;,
+## # … with 253 more rows, and 9 more variables: CRBI &lt;int&gt;, CWalks &lt;int&gt;,
 ## #   League &lt;fct&gt;, Division &lt;fct&gt;, PutOuts &lt;int&gt;, Assists &lt;int&gt;,
 ## #   Errors &lt;int&gt;, Salary &lt;dbl&gt;, NewLeague &lt;fct&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Hitters)</code></pre>
@@ -577,7 +579,7 @@ def_elnet</code></pre>
 </div>
 <div id="rmarkdown-13" class="section level2">
 <h2><span class="header-section-number">25.4</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="25-elnet.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="25-elnet.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;glmnet&quot;  &quot;foreach&quot; &quot;Matrix&quot;  &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot;</code></pre>
 
 </div>

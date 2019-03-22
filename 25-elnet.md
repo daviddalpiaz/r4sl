@@ -20,7 +20,7 @@ tibble::as_tibble(Hitters)
 ```
 ## # A tibble: 263 x 20
 ##    AtBat  Hits HmRun  Runs   RBI Walks Years CAtBat CHits CHmRun CRuns
-##  * <int> <int> <int> <int> <int> <int> <int>  <int> <int>  <int> <int>
+##    <int> <int> <int> <int> <int> <int> <int>  <int> <int>  <int> <int>
 ##  1   315    81     7    24    38    39    14   3449   835     69   321
 ##  2   479   130    18    66    72    76     3   1624   457     63   224
 ##  3   496   141    20    65    78    37    11   5628  1575    225   828
@@ -341,7 +341,7 @@ calc_acc(actual = default_tst$default,
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](25-elnet.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](25-elnet.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

@@ -331,18 +331,18 @@ cat_pred
 
 ```
 ## # A tibble: 30 x 3
-##    x1       x2       y
-##    <fct> <dbl>   <dbl>
-##  1 A     0.578 -1.00  
-##  2 A     0.403 -0.121 
-##  3 A     0.820 -1.42  
-##  4 A     0.897  0.0777
-##  5 A     0.264  0.174 
-##  6 A     0.251 -1.56  
-##  7 A     0.516  2.33  
-##  8 A     0.771  0.426 
-##  9 A     0.408 -1.96  
-## 10 A     0.162 -0.520 
+##    x1       x2      y
+##    <fct> <dbl>  <dbl>
+##  1 A     0.566  1.07 
+##  2 A     0.474 -0.425
+##  3 A     0.368 -0.221
+##  4 A     0.260  0.740
+##  5 A     0.244  0.877
+##  6 A     0.261  0.644
+##  7 A     0.588 -1.09 
+##  8 A     0.567  0.462
+##  9 A     0.154  0.733
+## 10 A     0.381  0.303
 ## # ... with 20 more rows
 ```
 
@@ -358,7 +358,7 @@ coef(cat_pred_mod_add)
 
 ```
 ## (Intercept)         x1B         x1C          x2 
-##  -0.6453313   0.5184987   0.4651687   0.5678150
+##   0.6859051  -0.3856005   0.1561719  -0.9737096
 ```
 
 
@@ -369,7 +369,7 @@ coef(cat_pred_mod_int)
 
 ```
 ## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  -0.6950337   0.9829010   0.2927061   0.6658303  -0.9893522   0.2460837
+##   1.0947954  -0.1830030  -1.2200503  -2.0321497  -0.4739374   2.8587050
 ```
 
 
@@ -461,7 +461,7 @@ sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded in this file:
+The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded in this file:
 
 
 ```

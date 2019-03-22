@@ -234,6 +234,7 @@ k & Train RMSE & Test RMSE & Fit?\\
 10 & 4.60 & 5.72 & Over\\
 25 & 4.66 & 5.71 & Best\\
 50 & 4.99 & 6.03 & Under\\
+\addlinespace
 250 & 8.90 & 9.47 & Under\\
 \bottomrule
 \end{tabular}
@@ -475,7 +476,7 @@ Can you improve this model? Can you find a better $k$? Can you find a better mod
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

@@ -336,7 +336,7 @@ head(attributes(iris_pred)$prob, n = 50)
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](12-knn-class.Rmd). The file was created using `R` version 3.5.1. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](12-knn-class.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

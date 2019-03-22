@@ -382,7 +382,7 @@ coef(fit_all, which.min(cv_error))
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.5.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.5.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -403,22 +403,21 @@ The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The 
 
 
 ```
-##  [1] "tidyselect"   "xfun"         "purrr"        "reshape2"    
+##  [1] "tidyselect"   "xfun"         "reshape2"     "purrr"       
 ##  [5] "splines"      "lattice"      "colorspace"   "generics"    
-##  [9] "stats4"       "htmltools"    "yaml"         "prodlim"     
-## [13] "survival"     "rlang"        "ModelMetrics" "pillar"      
-## [17] "withr"        "glue"         "bindrcpp"     "foreach"     
-## [21] "bindr"        "plyr"         "lava"         "stringr"     
-## [25] "timeDate"     "munsell"      "gtable"       "recipes"     
-## [29] "codetools"    "evaluate"     "knitr"        "caret"       
-## [33] "class"        "Rcpp"         "scales"       "backports"   
-## [37] "ipred"        "ggplot2"      "digest"       "stringi"     
-## [41] "bookdown"     "dplyr"        "grid"         "rprojroot"   
-## [45] "tools"        "magrittr"     "lazyeval"     "tibble"      
-## [49] "crayon"       "pkgconfig"    "MASS"         "Matrix"      
-## [53] "data.table"   "lubridate"    "gower"        "assertthat"  
-## [57] "rmarkdown"    "iterators"    "R6"           "rpart"       
-## [61] "nnet"         "nlme"         "compiler"
+##  [9] "htmltools"    "stats4"       "yaml"         "survival"    
+## [13] "prodlim"      "rlang"        "ModelMetrics" "pillar"      
+## [17] "glue"         "withr"        "foreach"      "plyr"        
+## [21] "lava"         "stringr"      "timeDate"     "munsell"     
+## [25] "gtable"       "recipes"      "codetools"    "evaluate"    
+## [29] "knitr"        "caret"        "class"        "Rcpp"        
+## [33] "scales"       "ipred"        "ggplot2"      "digest"      
+## [37] "stringi"      "bookdown"     "dplyr"        "grid"        
+## [41] "tools"        "magrittr"     "lazyeval"     "tibble"      
+## [45] "crayon"       "pkgconfig"    "MASS"         "Matrix"      
+## [49] "data.table"   "lubridate"    "gower"        "assertthat"  
+## [53] "rmarkdown"    "iterators"    "R6"           "rpart"       
+## [57] "nnet"         "nlme"         "compiler"
 ```
 
 

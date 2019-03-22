@@ -245,7 +245,7 @@ alpha & lambda & Accuracy & Kappa & AccuracySD & KappaSD\\
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The file was created using `R` version 3.5.1 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The file was created using `R` version 3.5.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -268,22 +268,21 @@ The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The fil
 
 ```
 ##  [1] "Rcpp"         "lubridate"    "class"        "assertthat"  
-##  [5] "rprojroot"    "digest"       "ipred"        "mime"        
-##  [9] "R6"           "plyr"         "backports"    "stats4"      
-## [13] "e1071"        "evaluate"     "highr"        "pillar"      
-## [17] "rlang"        "lazyeval"     "rstudioapi"   "data.table"  
-## [21] "miniUI"       "rpart"        "combinat"     "rmarkdown"   
-## [25] "labeling"     "splines"      "gower"        "stringr"     
-## [29] "questionr"    "munsell"      "shiny"        "compiler"    
-## [33] "httpuv"       "xfun"         "pkgconfig"    "htmltools"   
-## [37] "nnet"         "tidyselect"   "tibble"       "prodlim"     
-## [41] "bookdown"     "codetools"    "later"        "crayon"      
-## [45] "dplyr"        "withr"        "recipes"      "ModelMetrics"
-## [49] "grid"         "xtable"       "nlme"         "gtable"      
-## [53] "magrittr"     "scales"       "stringi"      "reshape2"    
-## [57] "promises"     "bindrcpp"     "timeDate"     "generics"    
-## [61] "lava"         "iterators"    "tools"        "glue"        
-## [65] "purrr"        "survival"     "yaml"         "colorspace"  
-## [69] "knitr"        "bindr"
+##  [5] "digest"       "ipred"        "mime"         "R6"          
+##  [9] "plyr"         "stats4"       "e1071"        "evaluate"    
+## [13] "highr"        "pillar"       "rlang"        "lazyeval"    
+## [17] "rstudioapi"   "data.table"   "miniUI"       "rpart"       
+## [21] "combinat"     "rmarkdown"    "labeling"     "splines"     
+## [25] "gower"        "stringr"      "questionr"    "munsell"     
+## [29] "shiny"        "compiler"     "httpuv"       "xfun"        
+## [33] "pkgconfig"    "htmltools"    "nnet"         "tidyselect"  
+## [37] "tibble"       "prodlim"      "bookdown"     "codetools"   
+## [41] "crayon"       "dplyr"        "withr"        "later"       
+## [45] "recipes"      "ModelMetrics" "grid"         "nlme"        
+## [49] "xtable"       "gtable"       "magrittr"     "scales"      
+## [53] "stringi"      "reshape2"     "promises"     "timeDate"    
+## [57] "generics"     "lava"         "iterators"    "tools"       
+## [61] "glue"         "purrr"        "survival"     "yaml"        
+## [65] "colorspace"   "knitr"
 ```
 

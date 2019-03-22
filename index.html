@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>R for Statistical Learning</title>
-  <meta name="description" content="R for Statistical Learning">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="R for Statistical Learning" />
+  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
 
   <meta property="og:title" content="R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -22,16 +21,16 @@
   
   
 
-<meta name="author" content="David Dalpiaz">
+<meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2018-11-20">
+<meta name="date" content="2019-03-21" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
 <link rel="next" href="prerequisites-overview.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -137,7 +136,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
@@ -388,7 +390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title"><code>R</code> for Statistical Learning</h1>
 <p class="author"><em><a href="https://daviddalpiaz.com/">David Dalpiaz</a></em></p>
-<p class="date"><em>2018-11-20</em></p>
+<p class="date"><em>2019-03-21</em></p>
 </div>
 <div id="introduction" class="section level1 unnumbered">
 <h1>Introduction</h1>
@@ -433,21 +435,29 @@ Statistical Learning</a>, and <a href="http://appliedpredictivemodeling.com/">Ap
 <p>When possible, it would be best to always access the text online to be sure you are using the most up-to-date version. Also, the html version provides additional features such as changing text size, font, and colors. If you are in need of a local copy, a <a href="http://daviddalpiaz.github.io/r4sl/r4sl.pdf"><strong>pdf version</strong> is continuously maintained</a>. While development is taking place, formatting in the pdf version may not be as well planned as the html version since the html version does not need to worry about pagination.</p>
 <p>Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Simply send an email and we will make the changes as soon as possible. (<code>dalpiaz2 AT illinois DOT edu</code>) Or, if you know <code>rmarkdown</code> and are familiar with GitHub, <a href="https://github.com/daviddalpiaz/r4sl">make a pull request and fix an issue yourself!</a> This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We’ll also link to your GitHub account, or personal website upon request.</p>
 <p>While development is taking place, you may see “TODO” scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.</p>
+<p>Please see the [README] file on GitHub for notes on the development process.</p>
 </div>
 <div id="conventions" class="section level2 unnumbered">
 <h2>Conventions</h2>
+<div id="mathematics" class="section level3">
+<h3><span class="header-section-number">0.0.1</span> Mathematics</h3>
 <p>This text uses MathJax to render mathematical notation for the web. Occasionally, but rarely, a JavaScript error will prevent MathJax from rendering correctly. In this case, you will see the “code” instead of the expected mathematical equations. From experience, this is almost always fixed by simply refreshing the page. You’ll also notice that if you right-click any equation you can obtain the MathML Code (for copying into Microsoft Word) or the TeX command used to generate the equation.</p>
 <p><span class="math display">\[
 a^2 + b^2 = c^2
 \]</span></p>
+<p>Often the symbol <span class="math inline">\(\triangleq\)</span> will be used to mean “is defined to be.”</p>
+<p>We use the value <span class="math inline">\(p\)</span> to mean the number of <strong>p</strong>redictors. We will use <span class="math inline">\(n\)</span> for sample size.</p>
+</div>
+<div id="code" class="section level3">
+<h3><span class="header-section-number">0.0.2</span> Code</h3>
 <p><code>R</code> code will be typeset using a <code>monospace</code> font which is syntax highlighted.</p>
 <pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="dv">3</span>
 b =<span class="st"> </span><span class="dv">4</span>
 <span class="kw">sqrt</span>(a <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>b <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
 <p><code>R</code> output lines, which would appear in the console will begin with <code>##</code>. They will generally not be syntax highlighted.</p>
 <pre><code>## [1] 5</code></pre>
-<p>Often the symbol <span class="math inline">\(\triangleq\)</span> will be used to mean “is defined to be.”</p>
-<p>We use the value <span class="math inline">\(p\)</span> to mean the number of <strong>p</strong>redictors.</p>
+<p>For the most part, we will follow the <code>tidyverse</code> <a href="https://style.tidyverse.org/">style guide</a>, however with one massive and obvious exception. Instead of the usual assignment operator, <code>&lt;-</code>, we will instead use the more visually appealing and easier to type <code>-</code>. Not many do this, but there are <a href="https://github.com/coatless/errorist">dozens</a> <a href="https://github.com/yihui/knitr">of</a> <a href="https://github.com/csgillespie/efficientR">us</a>.</p>
+</div>
 </div>
 <div id="acknowledgements" class="section level2 unnumbered">
 <h2>Acknowledgements</h2>
