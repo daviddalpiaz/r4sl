@@ -31,5 +31,3 @@ Imports:
   sparcl,
   mlbench,
   klaR
-Remotes: 
-  rstudio/bookdown
