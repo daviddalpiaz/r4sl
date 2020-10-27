@@ -1,5 +1,9 @@
 language: r
-sudo: false
+sudo: required
+apt_packages:
+  - r-cran-rjava
+before_install:
+  - sudo $(which R) CMD javareconf
 cache:
   packages: true
   directories:
