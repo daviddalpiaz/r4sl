@@ -1,5 +1,5 @@
 --- 
-title: "`R` for Statistical Learning"
+title: "R for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
 date: "`r Sys.Date()`"
 github-repo: daviddalpiaz/r4sl
