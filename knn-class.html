@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 k-Nearest Neighbors | R for Statistical Learning</title>
   <meta name="description" content="Chapter 12 k-Nearest Neighbors | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 k-Nearest Neighbors | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="generative-models.html">
-<link rel="next" href="unsupervised-overview.html">
+<link rel="prev" href="generative-models.html"/>
+<link rel="next" href="unsupervised-overview.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,7 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="knn-class" class="section level1">
+<div id="knn-class" class="section level1" number="12">
 <h1><span class="header-section-number">Chapter 12</span> k-Nearest Neighbors</h1>
 <p>In this chapter we introduce our first <strong>non-parametric</strong> classification method, <span class="math inline">\(k\)</span>-nearest neighbors. So far, all of the methods for classificaiton that we have seen have been parametric. For example, logistic regression had the form</p>
 <p><span class="math display">\[
@@ -429,31 +467,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \hat{C}_5(x_1 = 8, x_2 = 6) = \text{Blue}
 \]</span></p>
-<div id="binary-data-example" class="section level2">
+<div id="binary-data-example" class="section level2" number="12.1">
 <h2><span class="header-section-number">12.1</span> Binary Data Example</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
-<span class="kw">library</span>(class)</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="knn-class.html#cb330-1"></a><span class="kw">library</span>(ISLR)</span>
+<span id="cb330-2"><a href="knn-class.html#cb330-2"></a><span class="kw">library</span>(class)</span></code></pre></div>
 <p>We first load some necessary libraries. We’ll begin discussing <span class="math inline">\(k\)</span>-nearest neighbors for classification by returning to the <code>Default</code> data from the <code>ISLR</code> package. To perform <span class="math inline">\(k\)</span>-nearest neighbors for classification, we will use the <code>knn()</code> function from the <code>class</code> package.</p>
 <p>Unlike many of our previous methods, such as logistic regression, <code>knn()</code> requires that all predictors be numeric, so we coerce <code>student</code> to be a <code>0</code> and <code>1</code> dummy variable instead of a factor. (We can, and should, leave the response as a factor.) Numeric predictors are required because of the distance calculations taking place.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-Default<span class="op">$</span>student =<span class="st"> </span><span class="kw">as.numeric</span>(Default<span class="op">$</span>student) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
-default_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
-default_trn =<span class="st"> </span>Default[default_idx, ]
-default_tst =<span class="st"> </span>Default[<span class="op">-</span>default_idx, ]</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="knn-class.html#cb331-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb331-2"><a href="knn-class.html#cb331-2"></a>Default<span class="op">$</span>student =<span class="st"> </span><span class="kw">as.numeric</span>(Default<span class="op">$</span>student) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb331-3"><a href="knn-class.html#cb331-3"></a>default_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)</span>
+<span id="cb331-4"><a href="knn-class.html#cb331-4"></a>default_trn =<span class="st"> </span>Default[default_idx, ]</span>
+<span id="cb331-5"><a href="knn-class.html#cb331-5"></a>default_tst =<span class="st"> </span>Default[<span class="op">-</span>default_idx, ]</span></code></pre></div>
 <p>Like we saw with <code>knn.reg</code> form the <code>FNN</code> package for regression, <code>knn()</code> from <code>class</code> does not utilize the formula syntax, rather, requires the predictors be their own data frame or matrix, and the class labels be a separate factor variable. Note that the <code>y</code> data should be a factor vector, <strong>not</strong> a data frame containing a factor vector.</p>
 <p>Note that the <code>FNN</code> package also contains a <code>knn()</code> function for classification. We choose <code>knn()</code> from <code>class</code> as it seems to be much more popular. However, you should be aware of which packages you have loaded and thus which functions you are using. They are very similar, but have some differences.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># training data</span>
-X_default_trn =<span class="st"> </span>default_trn[, <span class="dv">-1</span>]
-y_default_trn =<span class="st"> </span>default_trn<span class="op">$</span>default
-
-<span class="co"># testing data</span>
-X_default_tst =<span class="st"> </span>default_tst[, <span class="dv">-1</span>]
-y_default_tst =<span class="st"> </span>default_tst<span class="op">$</span>default</code></pre>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="knn-class.html#cb332-1"></a><span class="co"># training data</span></span>
+<span id="cb332-2"><a href="knn-class.html#cb332-2"></a>X_default_trn =<span class="st"> </span>default_trn[, <span class="dv">-1</span>]</span>
+<span id="cb332-3"><a href="knn-class.html#cb332-3"></a>y_default_trn =<span class="st"> </span>default_trn<span class="op">$</span>default</span>
+<span id="cb332-4"><a href="knn-class.html#cb332-4"></a></span>
+<span id="cb332-5"><a href="knn-class.html#cb332-5"></a><span class="co"># testing data</span></span>
+<span id="cb332-6"><a href="knn-class.html#cb332-6"></a>X_default_tst =<span class="st"> </span>default_tst[, <span class="dv">-1</span>]</span>
+<span id="cb332-7"><a href="knn-class.html#cb332-7"></a>y_default_tst =<span class="st"> </span>default_tst<span class="op">$</span>default</span></code></pre></div>
 <p>Again, there is very little “training” with <span class="math inline">\(k\)</span>-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that <span class="math inline">\(k\)</span>-nearest neighbors is fast at training time. However, at test time, <span class="math inline">\(k\)</span>-nearest neighbors is very slow. For each test observation, the method must find the <span class="math inline">\(k\)</span>-nearest neighbors, which is not computationally cheap. Note that by deafult, <code>knn()</code> uses Euclidean distance to determine neighbors.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">knn</span>(<span class="dt">train =</span> X_default_trn, 
-         <span class="dt">test  =</span> X_default_tst, 
-         <span class="dt">cl    =</span> y_default_trn, 
-         <span class="dt">k     =</span> <span class="dv">3</span>))</code></pre>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="knn-class.html#cb333-1"></a><span class="kw">head</span>(<span class="kw">knn</span>(<span class="dt">train =</span> X_default_trn, </span>
+<span id="cb333-2"><a href="knn-class.html#cb333-2"></a>         <span class="dt">test  =</span> X_default_tst, </span>
+<span id="cb333-3"><a href="knn-class.html#cb333-3"></a>         <span class="dt">cl    =</span> y_default_trn, </span>
+<span id="cb333-4"><a href="knn-class.html#cb333-4"></a>         <span class="dt">k     =</span> <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## [1] No No No No No No
 ## Levels: No Yes</code></pre>
 <p>Because of the lack of any need for training, the <code>knn()</code> function immediately returns classifications. With logistic regression, we needed to use <code>glm()</code> to fit the model, then <code>predict()</code> to obtain probabilities we would use to make a classifier. Here, the <code>knn()</code> function directly returns classifications. That is <code>knn()</code> is essentially <span class="math inline">\(\hat{C}_k(x)\)</span>.</p>
@@ -464,119 +502,114 @@ y_default_tst =<span class="st"> </span>default_tst<span class="op">$</span>defa
 <li><code>cl</code>, the true class labels for the train set.</li>
 <li><code>k</code>, the number of neighbors to consider.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">calc_class_err =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)
-}</code></pre>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="knn-class.html#cb335-1"></a>calc_class_err =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb335-2"><a href="knn-class.html#cb335-2"></a>  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</span>
+<span id="cb335-3"><a href="knn-class.html#cb335-3"></a>}</span></code></pre></div>
 <p>We’ll use our usual <code>calc_class_err()</code> function to asses how well <code>knn()</code> works with this data. We use the test data to evaluate.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">actual    =</span> y_default_tst,
-               <span class="dt">predicted =</span> <span class="kw">knn</span>(<span class="dt">train =</span> X_default_trn,
-                               <span class="dt">test  =</span> X_default_tst,
-                               <span class="dt">cl    =</span> y_default_trn,
-                               <span class="dt">k     =</span> <span class="dv">5</span>))</code></pre>
-<pre><code>## [1] 0.0316</code></pre>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="knn-class.html#cb336-1"></a><span class="kw">calc_class_err</span>(<span class="dt">actual    =</span> y_default_tst,</span>
+<span id="cb336-2"><a href="knn-class.html#cb336-2"></a>               <span class="dt">predicted =</span> <span class="kw">knn</span>(<span class="dt">train =</span> X_default_trn,</span>
+<span id="cb336-3"><a href="knn-class.html#cb336-3"></a>                               <span class="dt">test  =</span> X_default_tst,</span>
+<span id="cb336-4"><a href="knn-class.html#cb336-4"></a>                               <span class="dt">cl    =</span> y_default_trn,</span>
+<span id="cb336-5"><a href="knn-class.html#cb336-5"></a>                               <span class="dt">k     =</span> <span class="dv">5</span>))</span></code></pre></div>
+<pre><code>## [1] 0.0312</code></pre>
 <p>Often with <code>knn()</code> we need to consider the scale of the predictors variables. If one variable is contains much larger numbers because of the units or range of the variable, it will dominate other variables in the distance measurements. But this doesn’t necessarily mean that it should be such an important variable. It is common practice to scale the predictors to have a mean of zero and unit variance. Be sure to apply the scaling to both the train and test data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">actual    =</span> y_default_tst,
-               <span class="dt">predicted =</span> <span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_default_trn), 
-                               <span class="dt">test  =</span> <span class="kw">scale</span>(X_default_tst), 
-                               <span class="dt">cl    =</span> y_default_trn, 
-                               <span class="dt">k     =</span> <span class="dv">5</span>))</code></pre>
-<pre><code>## [1] 0.0278</code></pre>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="knn-class.html#cb338-1"></a><span class="kw">calc_class_err</span>(<span class="dt">actual    =</span> y_default_tst,</span>
+<span id="cb338-2"><a href="knn-class.html#cb338-2"></a>               <span class="dt">predicted =</span> <span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_default_trn), </span>
+<span id="cb338-3"><a href="knn-class.html#cb338-3"></a>                               <span class="dt">test  =</span> <span class="kw">scale</span>(X_default_tst), </span>
+<span id="cb338-4"><a href="knn-class.html#cb338-4"></a>                               <span class="dt">cl    =</span> y_default_trn, </span>
+<span id="cb338-5"><a href="knn-class.html#cb338-5"></a>                               <span class="dt">k     =</span> <span class="dv">5</span>))</span></code></pre></div>
+<pre><code>## [1] 0.0284</code></pre>
 <p>Here we see the scaling slightly improves the classification accuracy. This may not always be the case, and often, it is normal to attempt classification with and without scaling.</p>
 <p>How do we choose <span class="math inline">\(k\)</span>? Try different values and see which works best.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-k_to_try =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span>
-err_k =<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">times =</span> <span class="kw">length</span>(k_to_try))
-
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(k_to_try)) {
-  pred =<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_default_trn), 
-             <span class="dt">test  =</span> <span class="kw">scale</span>(X_default_tst), 
-             <span class="dt">cl    =</span> y_default_trn, 
-             <span class="dt">k     =</span> k_to_try[i])
-  err_k[i] =<span class="st"> </span><span class="kw">calc_class_err</span>(y_default_tst, pred)
-}</code></pre>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="knn-class.html#cb340-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb340-2"><a href="knn-class.html#cb340-2"></a>k_to_try =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></span>
+<span id="cb340-3"><a href="knn-class.html#cb340-3"></a>err_k =<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">times =</span> <span class="kw">length</span>(k_to_try))</span>
+<span id="cb340-4"><a href="knn-class.html#cb340-4"></a></span>
+<span id="cb340-5"><a href="knn-class.html#cb340-5"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(k_to_try)) {</span>
+<span id="cb340-6"><a href="knn-class.html#cb340-6"></a>  pred =<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_default_trn), </span>
+<span id="cb340-7"><a href="knn-class.html#cb340-7"></a>             <span class="dt">test  =</span> <span class="kw">scale</span>(X_default_tst), </span>
+<span id="cb340-8"><a href="knn-class.html#cb340-8"></a>             <span class="dt">cl    =</span> y_default_trn, </span>
+<span id="cb340-9"><a href="knn-class.html#cb340-9"></a>             <span class="dt">k     =</span> k_to_try[i])</span>
+<span id="cb340-10"><a href="knn-class.html#cb340-10"></a>  err_k[i] =<span class="st"> </span><span class="kw">calc_class_err</span>(y_default_tst, pred)</span>
+<span id="cb340-11"><a href="knn-class.html#cb340-11"></a>}</span></code></pre></div>
 <p>The <code>seq_along()</code> function can be very useful for looping over a vector that stores non-consecutive numbers. It often removes the need for an additional counter variable. We actually didn’t need it in the above <code>knn()</code> example, but it is still a good habit. For example maybe we didn’t want to try every value of <span class="math inline">\(k\)</span>, but only odd integers, which woudl prevent ties. Or perhaps we’d only like to check multiples of 5 to further cut down on computation time.</p>
 <p>Also, note that we set a seed before running this loops. This is because we are considering even values of <span class="math inline">\(k\)</span>, thus, there are ties which are randomly broken.</p>
 <p>Naturally, we plot the <span class="math inline">\(k\)</span>-nearest neighbor results.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot error vs choice of k</span>
-<span class="kw">plot</span>(err_k, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">cex =</span> <span class="dv">1</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
-     <span class="dt">xlab =</span> <span class="st">&quot;k, number of neighbors&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;classification error&quot;</span>,
-     <span class="dt">main =</span> <span class="st">&quot;(Test) Error Rate vs Neighbors&quot;</span>)
-<span class="co"># add line for min error seen</span>
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">min</span>(err_k), <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lty =</span> <span class="dv">3</span>)
-<span class="co"># add line for minority prevalence in test set</span>
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">mean</span>(y_default_tst <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>), <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="knn-class.html#cb341-1"></a><span class="co"># plot error vs choice of k</span></span>
+<span id="cb341-2"><a href="knn-class.html#cb341-2"></a><span class="kw">plot</span>(err_k, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">cex =</span> <span class="dv">1</span>, <span class="dt">pch =</span> <span class="dv">20</span>, </span>
+<span id="cb341-3"><a href="knn-class.html#cb341-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;k, number of neighbors&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;classification error&quot;</span>,</span>
+<span id="cb341-4"><a href="knn-class.html#cb341-4"></a>     <span class="dt">main =</span> <span class="st">&quot;(Test) Error Rate vs Neighbors&quot;</span>)</span>
+<span id="cb341-5"><a href="knn-class.html#cb341-5"></a><span class="co"># add line for min error seen</span></span>
+<span id="cb341-6"><a href="knn-class.html#cb341-6"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">min</span>(err_k), <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb341-7"><a href="knn-class.html#cb341-7"></a><span class="co"># add line for minority prevalence in test set</span></span>
+<span id="cb341-8"><a href="knn-class.html#cb341-8"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">mean</span>(y_default_tst <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>), <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="12-knn-class_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
 <p>The dotted orange line represents the smallest observed test classification error rate.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(err_k)</code></pre>
-<pre><code>## [1] 0.0254</code></pre>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="knn-class.html#cb342-1"></a><span class="kw">min</span>(err_k)</span></code></pre></div>
+<pre><code>## [1] 0.025</code></pre>
 <p>We see that five different values of <span class="math inline">\(k\)</span> are tied for the lowest error rate.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(err_k <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(err_k))</code></pre>
-<pre><code>## [1] 11 17 20 21 22</code></pre>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="knn-class.html#cb344-1"></a><span class="kw">which</span>(err_k <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(err_k))</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
 <p>Given a choice of these five values of <span class="math inline">\(k\)</span>, we select the largest, as it is the least variable, and has the least chance of overfitting.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="kw">which</span>(err_k <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(err_k)))</code></pre>
-<pre><code>## [1] 22</code></pre>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="knn-class.html#cb346-1"></a><span class="kw">max</span>(<span class="kw">which</span>(err_k <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(err_k)))</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
 <p>Recall that defaulters are the minority class. That is, the majority of observations are non-defaulters.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(y_default_tst)</code></pre>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="knn-class.html#cb348-1"></a><span class="kw">table</span>(y_default_tst)</span></code></pre></div>
 <pre><code>## y_default_tst
 ##   No  Yes 
-## 4835  165</code></pre>
+## 4837  163</code></pre>
 <p>Notice that, as <span class="math inline">\(k\)</span> increases, eventually the error approaches the test prevalence of the minority class.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(y_default_tst <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</code></pre>
-<pre><code>## [1] 0.033</code></pre>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="knn-class.html#cb350-1"></a><span class="kw">mean</span>(y_default_tst <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0326</code></pre>
 </div>
-<div id="categorical-data" class="section level2">
+<div id="categorical-data" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Categorical Data</h2>
 <p>Like LDA and QDA, KNN can be used for both binary and multi-class problems. As an example of a multi-class problems, we return to the <code>iris</code> data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
-iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)
-iris_idx =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> <span class="op">*</span><span class="st"> </span>iris_obs))
-iris_trn =<span class="st"> </span>iris[iris_idx, ]
-iris_tst =<span class="st"> </span>iris[<span class="op">-</span>iris_idx, ]</code></pre>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="knn-class.html#cb352-1"></a><span class="kw">set.seed</span>(<span class="dv">430</span>)</span>
+<span id="cb352-2"><a href="knn-class.html#cb352-2"></a>iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)</span>
+<span id="cb352-3"><a href="knn-class.html#cb352-3"></a>iris_idx =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> <span class="op">*</span><span class="st"> </span>iris_obs))</span>
+<span id="cb352-4"><a href="knn-class.html#cb352-4"></a>iris_trn =<span class="st"> </span>iris[iris_idx, ]</span>
+<span id="cb352-5"><a href="knn-class.html#cb352-5"></a>iris_tst =<span class="st"> </span>iris[<span class="op">-</span>iris_idx, ]</span></code></pre></div>
 <p>All the predictors here are numeric, so we proceed to splitting the data into predictors and classes.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># training data</span>
-X_iris_trn =<span class="st"> </span>iris_trn[, <span class="dv">-5</span>]
-y_iris_trn =<span class="st"> </span>iris_trn<span class="op">$</span>Species
-
-<span class="co"># testing data</span>
-X_iris_tst =<span class="st"> </span>iris_tst[, <span class="dv">-5</span>]
-y_iris_tst =<span class="st"> </span>iris_tst<span class="op">$</span>Species</code></pre>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="knn-class.html#cb353-1"></a><span class="co"># training data</span></span>
+<span id="cb353-2"><a href="knn-class.html#cb353-2"></a>X_iris_trn =<span class="st"> </span>iris_trn[, <span class="dv">-5</span>]</span>
+<span id="cb353-3"><a href="knn-class.html#cb353-3"></a>y_iris_trn =<span class="st"> </span>iris_trn<span class="op">$</span>Species</span>
+<span id="cb353-4"><a href="knn-class.html#cb353-4"></a></span>
+<span id="cb353-5"><a href="knn-class.html#cb353-5"></a><span class="co"># testing data</span></span>
+<span id="cb353-6"><a href="knn-class.html#cb353-6"></a>X_iris_tst =<span class="st"> </span>iris_tst[, <span class="dv">-5</span>]</span>
+<span id="cb353-7"><a href="knn-class.html#cb353-7"></a>y_iris_tst =<span class="st"> </span>iris_tst<span class="op">$</span>Species</span></code></pre></div>
 <p>Like previous methods, we can obtain predicted probabilities given test predictors. To do so, we add an argument, <code>prob = TRUE</code></p>
-<pre class="sourceCode r"><code class="sourceCode r">iris_pred =<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_iris_trn), 
-                <span class="dt">test  =</span> <span class="kw">scale</span>(X_iris_tst),
-                <span class="dt">cl    =</span> y_iris_trn,
-                <span class="dt">k     =</span> <span class="dv">10</span>,
-                <span class="dt">prob  =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(iris_pred, <span class="dt">n =</span> <span class="dv">50</span>)</code></pre>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="knn-class.html#cb354-1"></a>iris_pred =<span class="st"> </span><span class="kw">knn</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_iris_trn), </span>
+<span id="cb354-2"><a href="knn-class.html#cb354-2"></a>                <span class="dt">test  =</span> <span class="kw">scale</span>(X_iris_tst),</span>
+<span id="cb354-3"><a href="knn-class.html#cb354-3"></a>                <span class="dt">cl    =</span> y_iris_trn,</span>
+<span id="cb354-4"><a href="knn-class.html#cb354-4"></a>                <span class="dt">k     =</span> <span class="dv">10</span>,</span>
+<span id="cb354-5"><a href="knn-class.html#cb354-5"></a>                <span class="dt">prob  =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="knn-class.html#cb355-1"></a><span class="kw">head</span>(iris_pred, <span class="dt">n =</span> <span class="dv">50</span>)</span></code></pre></div>
 <pre><code>##  [1] setosa     setosa     setosa     setosa     setosa     setosa    
 ##  [7] setosa     setosa     setosa     setosa     setosa     setosa    
 ## [13] setosa     setosa     setosa     setosa     setosa     setosa    
-## [19] setosa     setosa     setosa     setosa     versicolor versicolor
+## [19] setosa     setosa     setosa     versicolor versicolor versicolor
 ## [25] versicolor versicolor versicolor versicolor versicolor versicolor
 ## [31] versicolor versicolor versicolor versicolor versicolor versicolor
-## [37] versicolor versicolor versicolor versicolor versicolor versicolor
+## [37] versicolor versicolor virginica  versicolor versicolor versicolor
 ## [43] versicolor versicolor versicolor versicolor versicolor versicolor
-## [49] virginica  versicolor
+## [49] versicolor virginica 
 ## Levels: setosa versicolor virginica</code></pre>
 <p>Unfortunately, this only returns the predicted probability of the most common class. In the binary case, this would be sufficient to recover all probabilities, however, for multi-class problems, we cannot recover each of the probabilities of interest. This will simply be a minor annoyance for now, which we will fix when we introduce the <code>caret</code> package for model training.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">attributes</span>(iris_pred)<span class="op">$</span>prob, <span class="dt">n =</span> <span class="dv">50</span>)</code></pre>
-<pre><code>##  [1] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-##  [8] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-## [15] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-## [22] 1.0000000 0.9000000 1.0000000 0.8000000 1.0000000 0.9000000 0.9000000
-## [29] 0.9000000 0.8000000 1.0000000 0.9000000 1.0000000 0.8000000 0.5000000
-## [36] 0.8000000 0.9000000 0.8000000 1.0000000 1.0000000 0.7272727 0.9000000
-## [43] 0.8000000 0.9000000 1.0000000 1.0000000 0.9000000 0.9000000 0.9000000
-## [50] 0.7000000</code></pre>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="knn-class.html#cb357-1"></a><span class="kw">head</span>(<span class="kw">attributes</span>(iris_pred)<span class="op">$</span>prob, <span class="dt">n =</span> <span class="dv">50</span>)</span></code></pre></div>
+<pre><code>##  [1] 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
+## [20] 1.0 1.0 0.9 0.7 0.7 0.9 0.8 0.8 1.0 0.8 1.0 0.5 1.0 1.0 0.5 0.9 1.0 0.9 0.9
+## [39] 0.6 0.8 0.7 1.0 1.0 1.0 1.0 1.0 0.9 0.8 1.0 0.5</code></pre>
 </div>
-<div id="external-links" class="section level2">
+<div id="external-links" class="section level2" number="12.3">
 <h2><span class="header-section-number">12.3</span> External Links</h2>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=4ObVzTuFivY">YouTube: <span class="math inline">\(k\)</span>-Nearest Neighbor Classification Algorithm</a> - Video from user “mathematicalmonk” which gives a brief but thorough introduction to the method.</li>
 </ul>
 </div>
-<div id="rmarkdown-6" class="section level2">
+<div id="rmarkdown-6" class="section level2" number="12.4">
 <h2><span class="header-section-number">12.4</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="12-knn-class.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="12-knn-class.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;class&quot; &quot;ISLR&quot;</code></pre>
 
 </div>
@@ -595,11 +628,13 @@ y_iris_tst =<span class="st"> </span>iris_tst<span class="op">$</span>Species</c
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -607,12 +642,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -624,6 +658,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -642,8 +680,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

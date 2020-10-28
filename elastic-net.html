@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 25 Elastic Net | R for Statistical Learning</title>
   <meta name="description" content="Chapter 25 Elastic Net | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 25 Elastic Net | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="regularization.html">
-<link rel="next" href="trees.html">
+<link rel="prev" href="regularization.html"/>
+<link rel="next" href="trees.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,39 +425,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="elastic-net" class="section level1">
+<div id="elastic-net" class="section level1" number="25">
 <h1><span class="header-section-number">Chapter 25</span> Elastic Net</h1>
 <p>We again use the <code>Hitters</code> dataset from the <code>ISLR</code> package to explore another shrinkage method, <strong>elastic net</strong>, which combines the <em>ridge</em> and <em>lasso</em> methods from the previous chapter.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)
-Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</code></pre>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb715-1"><a href="elastic-net.html#cb715-1"></a><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</span>
+<span id="cb715-2"><a href="elastic-net.html#cb715-2"></a>Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</span></code></pre></div>
 <p>We again remove the missing data, which was all in the response variable, <code>Salary</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">tibble<span class="op">::</span><span class="kw">as_tibble</span>(Hitters)</code></pre>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="elastic-net.html#cb716-1"></a>tibble<span class="op">::</span><span class="kw">as_tibble</span>(Hitters)</span></code></pre></div>
 <pre><code>## # A tibble: 263 x 20
-##    AtBat  Hits HmRun  Runs   RBI Walks Years CAtBat CHits CHmRun CRuns
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;
-##  1   315    81     7    24    38    39    14   3449   835     69   321
-##  2   479   130    18    66    72    76     3   1624   457     63   224
-##  3   496   141    20    65    78    37    11   5628  1575    225   828
-##  4   321    87    10    39    42    30     2    396   101     12    48
-##  5   594   169     4    74    51    35    11   4408  1133     19   501
-##  6   185    37     1    23     8    21     2    214    42      1    30
-##  7   298    73     0    24    24     7     3    509   108      0    41
-##  8   323    81     6    26    32     8     2    341    86      6    32
-##  9   401    92    17    49    66    65    13   5206  1332    253   784
-## 10   574   159    21   107    75    59    10   4631  1300     90   702
-## # … with 253 more rows, and 9 more variables: CRBI &lt;int&gt;, CWalks &lt;int&gt;,
-## #   League &lt;fct&gt;, Division &lt;fct&gt;, PutOuts &lt;int&gt;, Assists &lt;int&gt;,
-## #   Errors &lt;int&gt;, Salary &lt;dbl&gt;, NewLeague &lt;fct&gt;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Hitters)</code></pre>
+##    AtBat  Hits HmRun  Runs   RBI Walks Years CAtBat CHits CHmRun CRuns  CRBI
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1   315    81     7    24    38    39    14   3449   835     69   321   414
+##  2   479   130    18    66    72    76     3   1624   457     63   224   266
+##  3   496   141    20    65    78    37    11   5628  1575    225   828   838
+##  4   321    87    10    39    42    30     2    396   101     12    48    46
+##  5   594   169     4    74    51    35    11   4408  1133     19   501   336
+##  6   185    37     1    23     8    21     2    214    42      1    30     9
+##  7   298    73     0    24    24     7     3    509   108      0    41    37
+##  8   323    81     6    26    32     8     2    341    86      6    32    34
+##  9   401    92    17    49    66    65    13   5206  1332    253   784   890
+## 10   574   159    21   107    75    59    10   4631  1300     90   702   504
+## # … with 253 more rows, and 8 more variables: CWalks &lt;int&gt;, League &lt;fct&gt;,
+## #   Division &lt;fct&gt;, PutOuts &lt;int&gt;, Assists &lt;int&gt;, Errors &lt;int&gt;, Salary &lt;dbl&gt;,
+## #   NewLeague &lt;fct&gt;</code></pre>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="elastic-net.html#cb718-1"></a><span class="kw">dim</span>(Hitters)</span></code></pre></div>
 <pre><code>## [1] 263  20</code></pre>
 <p>Because this dataset isn’t particularly large, we will forego a test-train split, and simply use all of the data as training data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
-<span class="kw">library</span>(glmnet)</code></pre>
+<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb720-1"><a href="elastic-net.html#cb720-1"></a><span class="kw">library</span>(caret)</span>
+<span id="cb720-2"><a href="elastic-net.html#cb720-2"></a><span class="kw">library</span>(glmnet)</span></code></pre></div>
 <p>Since he have loaded <code>caret</code>, we also have access to the <code>lattice</code> package which has a nice histogram function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(Hitters<span class="op">$</span>Salary, <span class="dt">xlab =</span> <span class="st">&quot;Salary, $1000s&quot;</span>, 
-          <span class="dt">main =</span> <span class="st">&quot;Baseball Salaries, 1986 - 1987&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="elastic-net.html#cb721-1"></a><span class="kw">histogram</span>(Hitters<span class="op">$</span>Salary, <span class="dt">xlab =</span> <span class="st">&quot;Salary, $1000s&quot;</span>, </span>
+<span id="cb721-2"><a href="elastic-net.html#cb721-2"></a>          <span class="dt">main =</span> <span class="st">&quot;Baseball Salaries, 1986 - 1987&quot;</span>)</span></code></pre></div>
 <p><img src="25-elnet_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div id="regression-1" class="section level2">
+<div id="regression-1" class="section level2" number="25.1">
 <h2><span class="header-section-number">25.1</span> Regression</h2>
 <p>Like ridge and lasso, we again attempt to minimize the residual sum of squares plus some penalty term.</p>
 <p><span class="math display">\[
@@ -436,17 +474,17 @@ Similarly, <span class="math inline">\(||\beta||_2\)</span> is called the <span 
 <p>These both quantify how “large” the coefficients are. Like lasso and ridge, the intercept is not penalized and <code>glment</code> takes care of standardization internally. Also reported coefficients are on the original scale.</p>
 <p>The new penalty is <span class="math inline">\(\frac{\lambda \cdot (1-\alpha)}{2}\)</span> times the ridge penalty plus <span class="math inline">\(\lambda \cdot \alpha\)</span> times the lasso lasso penalty. (Dividing the ridge penalty by 2 is a mathematical convenience for optimization.) Essentially, with the correct choice of <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\alpha\)</span> these two “penalty coefficients” can be any positive numbers.</p>
 <p>Often it is more useful to simply think of <span class="math inline">\(\alpha\)</span> as controlling the mixing between the two penalties and <span class="math inline">\(\lambda\)</span> controlling the amount of penalization. <span class="math inline">\(\alpha\)</span> takes values between 0 and 1. Using <span class="math inline">\(\alpha = 1\)</span> gives the lasso that we have seen before. Similarly, <span class="math inline">\(\alpha = 0\)</span> gives ridge. We used these two before with <code>glmnet()</code> to specify which to method we wanted. Now we also allow for <span class="math inline">\(\alpha\)</span> values in between.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</code></pre>
-<p>We first setup our cross-validation strategy, which will be 5 fold. We then use <code>train()</code> with <code>method = &quot;glmnet&quot;</code> which is actually fitting the elastic net.</p>
-<pre class="sourceCode r"><code class="sourceCode r">hit_elnet =<span class="st"> </span><span class="kw">train</span>(
-  Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters,
-  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
-  <span class="dt">trControl =</span> cv_<span class="dv">5</span>
-)</code></pre>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="elastic-net.html#cb722-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb722-2"><a href="elastic-net.html#cb722-2"></a>cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p>We first setup our cross-validation strategy, which will be 5 fold. We then use <code>train()</code> with <code>method = "glmnet"</code> which is actually fitting the elastic net.</p>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="elastic-net.html#cb723-1"></a>hit_elnet =<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb723-2"><a href="elastic-net.html#cb723-2"></a>  Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters,</span>
+<span id="cb723-3"><a href="elastic-net.html#cb723-3"></a>  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb723-4"><a href="elastic-net.html#cb723-4"></a>  <span class="dt">trControl =</span> cv_<span class="dv">5</span></span>
+<span id="cb723-5"><a href="elastic-net.html#cb723-5"></a>)</span></code></pre></div>
 <p>First, note that since we are using <code>caret()</code> directly, it is taking care of dummy variable creation. So unlike before when we used <code>glmnet()</code>, we do not need to manually create a model matrix.</p>
 <p>Also note that we have allowed <code>caret</code> to choose the tuning parameters for us.</p>
-<pre class="sourceCode r"><code class="sourceCode r">hit_elnet</code></pre>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="elastic-net.html#cb724-1"></a>hit_elnet</span></code></pre></div>
 <pre><code>## glmnet 
 ## 
 ## 263 samples
@@ -454,76 +492,76 @@ cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainCon
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 209, 211, 211, 212, 209 
+## Summary of sample sizes: 211, 210, 210, 211, 210 
 ## Resampling results across tuning parameters:
 ## 
 ##   alpha  lambda   RMSE   Rsquared  MAE  
-##   0.10    0.5106  327.7  0.4869    231.6
-##   0.10    5.1056  327.4  0.4894    230.7
-##   0.10   51.0564  334.3  0.4734    229.4
-##   0.55    0.5106  327.6  0.4873    231.5
-##   0.55    5.1056  328.1  0.4895    229.1
-##   0.55   51.0564  338.7  0.4749    233.2
-##   1.00    0.5106  327.6  0.4877    231.3
-##   1.00    5.1056  331.3  0.4818    229.3
-##   1.00   51.0564  348.8  0.4663    242.2
+##   0.10    0.5106  335.1  0.4549    235.2
+##   0.10    5.1056  332.4  0.4632    231.9
+##   0.10   51.0564  339.4  0.4486    231.1
+##   0.55    0.5106  334.9  0.4551    234.5
+##   0.55    5.1056  332.7  0.4650    230.4
+##   0.55   51.0564  343.5  0.4440    235.9
+##   1.00    0.5106  334.9  0.4546    234.1
+##   1.00    5.1056  336.0  0.4590    230.6
+##   1.00   51.0564  353.3  0.4231    244.1
 ## 
 ## RMSE was used to select the optimal model using the smallest value.
 ## The final values used for the model were alpha = 0.1 and lambda = 5.106.</code></pre>
 <p>Notice a few things with these results. First, we have tried three <span class="math inline">\(\alpha\)</span> values, <code>0.10</code>, <code>0.55</code>, and <code>1</code>. It is not entirely clear why <code>caret</code> doesn’t use <code>0</code>. It likely uses <code>0.10</code> to fit a model close to ridge, but with some potential for sparsity.</p>
 <p>Here, the best result uses <span class="math inline">\(\alpha = 0.10\)</span>, so this result is somewhere between ridge and lasso, but closer to ridge.</p>
-<pre class="sourceCode r"><code class="sourceCode r">hit_elnet_int =<span class="st"> </span><span class="kw">train</span>(
-  Salary <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Hitters,
-  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
-  <span class="dt">trControl =</span> cv_<span class="dv">5</span>,
-  <span class="dt">tuneLength =</span> <span class="dv">10</span>
-)</code></pre>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="elastic-net.html#cb726-1"></a>hit_elnet_int =<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb726-2"><a href="elastic-net.html#cb726-2"></a>  Salary <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Hitters,</span>
+<span id="cb726-3"><a href="elastic-net.html#cb726-3"></a>  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb726-4"><a href="elastic-net.html#cb726-4"></a>  <span class="dt">trControl =</span> cv_<span class="dv">5</span>,</span>
+<span id="cb726-5"><a href="elastic-net.html#cb726-5"></a>  <span class="dt">tuneLength =</span> <span class="dv">10</span></span>
+<span id="cb726-6"><a href="elastic-net.html#cb726-6"></a>)</span></code></pre></div>
 <p>Now we try a much larger model search. First, we’re expanding the feature space to include all interactions. Since we are using penalized regression, we don’t have to worry as much about overfitting. If many of the added variables are not useful, we will likely use a model close to lasso which makes many of them 0.</p>
 <p>We’re also using a larger tuning grid. By setting <code>tuneLength = 10</code>, we will search 10 <span class="math inline">\(\alpha\)</span> values and 10 <span class="math inline">\(\lambda\)</span> values for each. Because of this larger tuning grid, the results will be very large.</p>
 <p>To deal with this, we write a quick helper function to extract the row with the best tuning parameters.</p>
-<pre class="sourceCode r"><code class="sourceCode r">get_best_result =<span class="st"> </span><span class="cf">function</span>(caret_fit) {
-  best =<span class="st"> </span><span class="kw">which</span>(<span class="kw">rownames</span>(caret_fit<span class="op">$</span>results) <span class="op">==</span><span class="st"> </span><span class="kw">rownames</span>(caret_fit<span class="op">$</span>bestTune))
-  best_result =<span class="st"> </span>caret_fit<span class="op">$</span>results[best, ]
-  <span class="kw">rownames</span>(best_result) =<span class="st"> </span><span class="ot">NULL</span>
-  best_result
-}</code></pre>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="elastic-net.html#cb727-1"></a>get_best_result =<span class="st"> </span><span class="cf">function</span>(caret_fit) {</span>
+<span id="cb727-2"><a href="elastic-net.html#cb727-2"></a>  best =<span class="st"> </span><span class="kw">which</span>(<span class="kw">rownames</span>(caret_fit<span class="op">$</span>results) <span class="op">==</span><span class="st"> </span><span class="kw">rownames</span>(caret_fit<span class="op">$</span>bestTune))</span>
+<span id="cb727-3"><a href="elastic-net.html#cb727-3"></a>  best_result =<span class="st"> </span>caret_fit<span class="op">$</span>results[best, ]</span>
+<span id="cb727-4"><a href="elastic-net.html#cb727-4"></a>  <span class="kw">rownames</span>(best_result) =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb727-5"><a href="elastic-net.html#cb727-5"></a>  best_result</span>
+<span id="cb727-6"><a href="elastic-net.html#cb727-6"></a>}</span></code></pre></div>
 <p>We then call this function on the trained object.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_best_result</span>(hit_elnet_int)</code></pre>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="elastic-net.html#cb728-1"></a><span class="kw">get_best_result</span>(hit_elnet_int)</span></code></pre></div>
 <pre><code>##   alpha lambda  RMSE Rsquared   MAE RMSESD RsquaredSD MAESD
-## 1     1  4.135 313.5     0.56 206.1  70.83     0.1254 24.37</code></pre>
+## 1     1  9.552 308.6   0.5555 209.5  55.16    0.08669 21.13</code></pre>
 <p>We see that the best result uses <span class="math inline">\(\alpha = 1\)</span>, which makes since. With <span class="math inline">\(\alpha = 1\)</span>, many of the added interaction coefficients are likely set to zero. (Unfortunately, obtaining this information after using <code>caret</code> with <code>glmnet</code> isn’t easy. The two don’t actually play very nice together. We’ll use <code>cv.glmnet()</code> with the expanded feature space to explore this.)</p>
 <p>Also, this CV-RMSE is better than the lasso and ridge from the previous chapter that did not use the expanded feature space.</p>
 <p>We also perform a quick analysis using <code>cv.glmnet()</code> instead. Due in part to randomness in cross validation, and differences in how <code>cv.glmnet()</code> and <code>train()</code> search for <span class="math inline">\(\lambda\)</span>, the results are slightly different.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-X =<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, Hitters)[, <span class="dv">-1</span>]
-y =<span class="st"> </span>Hitters<span class="op">$</span>Salary
-
-fit_lasso_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)
-<span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda.min]) <span class="co"># CV-RMSE minimum</span></code></pre>
-<pre><code>## [1] 305</code></pre>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="elastic-net.html#cb730-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb730-2"><a href="elastic-net.html#cb730-2"></a>X =<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, Hitters)[, <span class="dv">-1</span>]</span>
+<span id="cb730-3"><a href="elastic-net.html#cb730-3"></a>y =<span class="st"> </span>Hitters<span class="op">$</span>Salary</span>
+<span id="cb730-4"><a href="elastic-net.html#cb730-4"></a></span>
+<span id="cb730-5"><a href="elastic-net.html#cb730-5"></a>fit_lasso_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb730-6"><a href="elastic-net.html#cb730-6"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda.min]) <span class="co"># CV-RMSE minimum</span></span></code></pre></div>
+<pre><code>## [1] 306.9</code></pre>
 <p>The commented line is not run, since it produces a lot of output, but if run, it will show that the fast majority of the coefficients are zero! Also, you’ll notice that <code>cv.glmnet()</code> does not respect the usual predictor hierarchy. Not a problem for prediction, but a massive interpretation issue!</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#coef(fit_lasso_cv)</span>
-<span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</code></pre>
-<pre><code>## [1] 186</code></pre>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="elastic-net.html#cb732-1"></a><span class="co">#coef(fit_lasso_cv)</span></span>
+<span id="cb732-2"><a href="elastic-net.html#cb732-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="elastic-net.html#cb734-1"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 183</code></pre>
 </div>
-<div id="classification-1" class="section level2">
+<div id="classification-1" class="section level2" number="25.2">
 <h2><span class="header-section-number">25.2</span> Classification</h2>
 <p>Above, we have performed a regression task. But like lasso and ridge, elastic net can also be used for classification by using the deviance instead of the residual sum of squares. This essentially happens automatically in <code>caret</code> if the response variable is a factor.</p>
 <p>We’ll test this using the familiar <code>Default</code> dataset, which we first test-train split.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Default, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-default_idx =<span class="st"> </span><span class="kw">createDataPartition</span>(Default<span class="op">$</span>default, <span class="dt">p =</span> <span class="fl">0.75</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)
-default_trn =<span class="st"> </span>Default[default_idx, ]
-default_tst =<span class="st"> </span>Default[<span class="op">-</span>default_idx, ]</code></pre>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="elastic-net.html#cb736-1"></a><span class="kw">data</span>(Default, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="elastic-net.html#cb737-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb737-2"><a href="elastic-net.html#cb737-2"></a>default_idx =<span class="st"> </span><span class="kw">createDataPartition</span>(Default<span class="op">$</span>default, <span class="dt">p =</span> <span class="fl">0.75</span>, <span class="dt">list =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb737-3"><a href="elastic-net.html#cb737-3"></a>default_trn =<span class="st"> </span>Default[default_idx, ]</span>
+<span id="cb737-4"><a href="elastic-net.html#cb737-4"></a>default_tst =<span class="st"> </span>Default[<span class="op">-</span>default_idx, ]</span></code></pre></div>
 <p>We then fit an elastic net with a default tuning grid.</p>
-<pre class="sourceCode r"><code class="sourceCode r">def_elnet =<span class="st"> </span><span class="kw">train</span>(
-  default <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> default_trn,
-  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
-  <span class="dt">trControl =</span> cv_<span class="dv">5</span>
-)
-def_elnet</code></pre>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="elastic-net.html#cb738-1"></a>def_elnet =<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb738-2"><a href="elastic-net.html#cb738-2"></a>  default <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> default_trn,</span>
+<span id="cb738-3"><a href="elastic-net.html#cb738-3"></a>  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb738-4"><a href="elastic-net.html#cb738-4"></a>  <span class="dt">trControl =</span> cv_<span class="dv">5</span></span>
+<span id="cb738-5"><a href="elastic-net.html#cb738-5"></a>)</span>
+<span id="cb738-6"><a href="elastic-net.html#cb738-6"></a>def_elnet</span></code></pre></div>
 <pre><code>## glmnet 
 ## 
 ## 7501 samples
@@ -535,52 +573,52 @@ def_elnet</code></pre>
 ## Summary of sample sizes: 6001, 6001, 6001, 6000, 6001 
 ## Resampling results across tuning parameters:
 ## 
-##   alpha  lambda     Accuracy  Kappa 
-##   0.10   0.0001242  0.9731    0.4125
-##   0.10   0.0012422  0.9731    0.3878
-##   0.10   0.0124220  0.9679    0.0796
-##   0.55   0.0001242  0.9731    0.4125
-##   0.55   0.0012422  0.9731    0.3909
-##   0.55   0.0124220  0.9684    0.1144
-##   1.00   0.0001242  0.9731    0.4125
-##   1.00   0.0012422  0.9732    0.4104
-##   1.00   0.0124220  0.9693    0.1661
+##   alpha  lambda     Accuracy  Kappa  
+##   0.10   0.0001253  0.9732    0.41637
+##   0.10   0.0012527  0.9727    0.37280
+##   0.10   0.0125270  0.9676    0.07238
+##   0.55   0.0001253  0.9735    0.42510
+##   0.55   0.0012527  0.9727    0.38012
+##   0.55   0.0125270  0.9679    0.09251
+##   1.00   0.0001253  0.9736    0.42638
+##   1.00   0.0012527  0.9725    0.38888
+##   1.00   0.0125270  0.9692    0.16987
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were alpha = 1 and lambda = 0.001242.</code></pre>
+## The final values used for the model were alpha = 1 and lambda = 0.0001253.</code></pre>
 <p>Since the best model used <span class="math inline">\(\alpha = 1\)</span>, this is a lasso model.</p>
 <p>We also try an expanded feature space, and a larger tuning grid.</p>
-<pre class="sourceCode r"><code class="sourceCode r">def_elnet_int =<span class="st"> </span><span class="kw">train</span>(
-  default <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> default_trn,
-  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
-  <span class="dt">trControl =</span> cv_<span class="dv">5</span>,
-  <span class="dt">tuneLength =</span> <span class="dv">10</span>
-)</code></pre>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="elastic-net.html#cb740-1"></a>def_elnet_int =<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb740-2"><a href="elastic-net.html#cb740-2"></a>  default <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> default_trn,</span>
+<span id="cb740-3"><a href="elastic-net.html#cb740-3"></a>  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb740-4"><a href="elastic-net.html#cb740-4"></a>  <span class="dt">trControl =</span> cv_<span class="dv">5</span>,</span>
+<span id="cb740-5"><a href="elastic-net.html#cb740-5"></a>  <span class="dt">tuneLength =</span> <span class="dv">10</span></span>
+<span id="cb740-6"><a href="elastic-net.html#cb740-6"></a>)</span></code></pre></div>
 <p>Since the result here will return 100 models, we again use are helper function to simply extract the best result.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_best_result</span>(def_elnet_int)</code></pre>
+<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="elastic-net.html#cb741-1"></a><span class="kw">get_best_result</span>(def_elnet_int)</span></code></pre></div>
 <pre><code>##   alpha   lambda Accuracy  Kappa AccuracySD KappaSD
-## 1   0.1 0.001888   0.9732 0.3887   0.001843 0.07165</code></pre>
+## 1     1 0.001904   0.9732 0.4039   0.002846 0.07694</code></pre>
 <p>Here we see <span class="math inline">\(\alpha = 0.1\)</span>, which is a mix, but close to ridge.</p>
-<pre class="sourceCode r"><code class="sourceCode r">calc_acc =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)
-}</code></pre>
+<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="elastic-net.html#cb743-1"></a>calc_acc =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb743-2"><a href="elastic-net.html#cb743-2"></a>  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)</span>
+<span id="cb743-3"><a href="elastic-net.html#cb743-3"></a>}</span></code></pre></div>
 <p>Evaluating the test accuracy of this model, we obtain one of the highest accuracies for this dataset of all methods we have tried.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test acc</span>
-<span class="kw">calc_acc</span>(<span class="dt">actual =</span> default_tst<span class="op">$</span>default,
-         <span class="dt">predicted =</span> <span class="kw">predict</span>(def_elnet_int, <span class="dt">newdata =</span> default_tst))</code></pre>
-<pre><code>## [1] 0.9728</code></pre>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="elastic-net.html#cb744-1"></a><span class="co"># test acc</span></span>
+<span id="cb744-2"><a href="elastic-net.html#cb744-2"></a><span class="kw">calc_acc</span>(<span class="dt">actual =</span> default_tst<span class="op">$</span>default,</span>
+<span id="cb744-3"><a href="elastic-net.html#cb744-3"></a>         <span class="dt">predicted =</span> <span class="kw">predict</span>(def_elnet_int, <span class="dt">newdata =</span> default_tst))</span></code></pre></div>
+<pre><code>## [1] 0.9736</code></pre>
 </div>
-<div id="external-links-7" class="section level2">
+<div id="external-links-7" class="section level2" number="25.3">
 <h2><span class="header-section-number">25.3</span> External Links</h2>
 <ul>
 <li><a href="https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html"><code>glmnet</code> Web Vingette</a> - Details from the package developers.</li>
 <li><a href="https://github.com/topepo/caret/issues/116"><code>glmnet</code> with <code>caret</code></a> - Some details on Elastic Net tuning in the <code>caret</code> package.</li>
 </ul>
 </div>
-<div id="rmarkdown-13" class="section level2">
+<div id="rmarkdown-13" class="section level2" number="25.4">
 <h2><span class="header-section-number">25.4</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="25-elnet.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
-<pre><code>## [1] &quot;glmnet&quot;  &quot;foreach&quot; &quot;Matrix&quot;  &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot;</code></pre>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="25-elnet.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<pre><code>## [1] &quot;glmnet&quot;  &quot;Matrix&quot;  &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot;</code></pre>
 
 </div>
 </div>
@@ -595,11 +633,13 @@ def_elnet</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -607,12 +647,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -624,6 +663,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -642,8 +685,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

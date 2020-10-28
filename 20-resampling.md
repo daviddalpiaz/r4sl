@@ -64,7 +64,7 @@ calc_rmse(actual = sim_trn$y, predicted = predict(fit, sim_trn))
 ```
 
 ```
-## [1] 0.2262618
+## [1] 0.2297774
 ```
 
 ```r
@@ -72,7 +72,7 @@ calc_rmse(actual = sim_val$y, predicted = predict(fit, sim_val))
 ```
 
 ```
-## [1] 0.2846442
+## [1] 0.2770462
 ```
 
 
@@ -151,8 +151,8 @@ coef(glm_fit)
 ```
 
 ```
-##  (Intercept)  poly(x, 3)1  poly(x, 3)2  poly(x, 3)3 
-## -0.005513063  4.153963639 -0.207436179  2.078844572
+## (Intercept) poly(x, 3)1 poly(x, 3)2 poly(x, 3)3 
+##  -0.0289307   4.5471322  -0.1527198   2.3895917
 ```
 
 ```r
@@ -161,8 +161,8 @@ coef(lm_fit)
 ```
 
 ```
-##  (Intercept)  poly(x, 3)1  poly(x, 3)2  poly(x, 3)3 
-## -0.005513063  4.153963639 -0.207436179  2.078844572
+## (Intercept) poly(x, 3)1 poly(x, 3)2 poly(x, 3)3 
+##  -0.0289307   4.5471322  -0.1527198   2.3895917
 ```
 
 By default, `cv.glm()` will report leave-one-out cross-validation (LOOCV).
@@ -173,7 +173,7 @@ sqrt(boot::cv.glm(sim_trn, glm_fit)$delta)
 ```
 
 ```
-## [1] 0.2372763 0.2372582
+## [1] 0.2598565 0.2598342
 ```
 
 We are actually given two values. The first is exactly the LOOCV-MSE. The second is a minor correction that we will not worry about. We take a square root to obtain LOOCV-RMSE.
@@ -186,7 +186,7 @@ sqrt(boot::cv.glm(sim_trn, glm_fit, K = 5)$delta)
 ```
 
 ```
-## [1] 0.2392979 0.2384206
+## [1] 0.2628287 0.2617056
 ```
 
 We repeat the above simulation study, this time performing 5-fold cross-validation. With a total sample size of $n = 200$ each validation set has 40 observations, as did the single validation set in the previous simulations.
@@ -220,25 +220,25 @@ for (i in 1:num_sims) {
 \hline
 Polynomial Degree & Mean, Val & SD, Val & Mean, CV & SD, CV\\
 \hline
-1 & 0.292 & 0.031 & 0.294 & 0.015\\
+1 & 0.290 & 0.031 & 0.293 & 0.015\\
 \hline
-2 & 0.293 & 0.031 & 0.295 & 0.015\\
+2 & 0.291 & 0.031 & 0.295 & 0.014\\
 \hline
-3 & 0.252 & 0.028 & 0.255 & 0.012\\
+3 & 0.247 & 0.027 & 0.251 & 0.010\\
 \hline
-4 & 0.253 & 0.028 & 0.255 & 0.013\\
+4 & 0.248 & 0.028 & 0.252 & 0.010\\
 \hline
-5 & 0.254 & 0.028 & 0.256 & 0.013\\
+5 & 0.248 & 0.027 & 0.253 & 0.010\\
 \hline
-6 & 0.254 & 0.028 & 0.257 & 0.013\\
+6 & 0.249 & 0.027 & 0.254 & 0.011\\
 \hline
-7 & 0.255 & 0.028 & 0.258 & 0.013\\
+7 & 0.251 & 0.027 & 0.255 & 0.012\\
 \hline
-8 & 0.256 & 0.029 & 0.258 & 0.013\\
+8 & 0.252 & 0.027 & 0.257 & 0.011\\
 \hline
-9 & 0.257 & 0.029 & 0.261 & 0.013\\
+9 & 0.253 & 0.028 & 0.258 & 0.012\\
 \hline
-10 & 0.259 & 0.030 & 0.262 & 0.014\\
+10 & 0.255 & 0.027 & 0.259 & 0.012\\
 \hline
 \end{tabular}
 
@@ -314,16 +314,14 @@ correlations[selected]
 ```
 
 ```
-##      X2596      X4214      X9335      X8569      X3299      X2533 
-##  0.3543596  0.3523432 -0.3479568 -0.3457459 -0.3454538  0.3432992 
-##      X2638      X4737      X2542      X8624      X6201      X4186 
-## -0.3393733 -0.3314835  0.3228942 -0.3193488  0.3187754 -0.3181454 
-##      X7600      X8557      X3273      X5639      X4482      X7593 
-##  0.3175957  0.3159638 -0.3117192  0.3113686  0.3109364  0.3094102 
-##      X7374      X7283      X9888       X518      X9970      X7654 
-##  0.3090942 -0.3086637  0.3069136 -0.3066874 -0.3061039 -0.3042648 
-##      X9329 
-## -0.3038140
+##      X4942       X867      X8617      X8044       X406      X4358      X7725 
+##  0.4005771  0.3847397  0.3809371  0.3692479 -0.3571329  0.3553777 -0.3459522 
+##      X1986      X3784        X77      X7010      X9354      X8450      X2355 
+## -0.3448612  0.3298109 -0.3252776 -0.3242813  0.3227353  0.3220087  0.3192606 
+##      X4381      X2486      X5947      X5767      X1227      X1464      X8223 
+##  0.3157441  0.3149892  0.3131235  0.3114936 -0.3105052 -0.3104528  0.3084551 
+##       X188      X4203      X2234      X1098 
+##  0.3065491  0.3039848 -0.3036512 -0.3036153
 ```
 
 We subset the training and test sets to contain only the response as well as these 25 predictors.
@@ -343,7 +341,7 @@ boot::cv.glm(trn_screen, add_log_mod, K = 10)$delta[1]
 ```
 
 ```
-## [1] 0.3166792
+## [1] 0.3742339
 ```
 
 The 10-fold cross-validation is suggesting a classification error estimate of almost 30%.
@@ -355,7 +353,7 @@ calc_err(predicted = add_log_pred, actual = tst_screen$y)
 ```
 
 ```
-## [1] 0.5
+## [1] 0.48
 ```
 
 However, if we obtain an estimate of the error using the set, we see an error rate of 50%. No better than guessing! But since $Y$ has no relationship with the predictors, this is actually what we would expect. This incorrect method we'll call screen-then-validate.
@@ -373,34 +371,34 @@ caret::createFolds(trn_data$y, k = 10)
 
 ```
 ## $Fold01
-##  [1]  2  6 10 28 66 69 70 89 94 98
+##  [1] 17 23 27 44 45 76 85 87 93 97
 ## 
 ## $Fold02
-##  [1] 27 30 32 33 34 56 74 80 85 96
+##  [1]  6 14 15 26 37 38 55 68 69 71
 ## 
 ## $Fold03
-##  [1]  8 23 29 31 39 53 57 60 61 72
+##  [1]  3  4  7 29 39 52 54 57 59 82
 ## 
 ## $Fold04
-##  [1]  9 15 16 21 41 44 54 63 71 99
+##  [1] 19 21 40 46 48 56 73 78 91 96
 ## 
 ## $Fold05
-##  [1]  5 12 17 51 62 68 81 82 92 97
+##  [1] 25 34 36 58 61 65 66 75 83 89
 ## 
 ## $Fold06
-##  [1]  7 13 19 40 43 55 75 77 87 90
+##  [1]  2  9 10 62 74 79 80 90 92 98
 ## 
 ## $Fold07
-##  [1]  18  42  45  47  48  73  83  88  91 100
+##  [1]  8 31 32 41 43 53 60 67 88 95
 ## 
 ## $Fold08
-##  [1]  4 11 35 37 46 52 64 76 79 84
+##  [1] 12 18 33 35 42 49 51 64 84 94
 ## 
 ## $Fold09
-##  [1]  1 14 20 22 26 36 50 59 67 78
+##  [1]  11  13  16  20  28  47  50  77  99 100
 ## 
 ## $Fold10
-##  [1]  3 24 25 38 49 58 65 86 93 95
+##  [1]  1  5 22 24 30 63 70 72 81 86
 ```
 
 
@@ -440,7 +438,7 @@ fold_err
 ```
 
 ```
-##  [1] 0.5 0.5 0.6 0.5 0.6 0.5 0.7 0.6 0.2 0.2
+##  [1] 0.4 0.9 0.6 0.4 0.6 0.3 0.7 0.5 0.6 0.6
 ```
 
 ```r
@@ -450,7 +448,7 @@ mean(fold_err)
 ```
 
 ```
-## [1] 0.49
+## [1] 0.56
 ```
 
 - TODO: note that, even cross-validated correctly, this isn't a brilliant variable selection procedure. (it completely ignores interactions and correlations among the predictors. however, if it works, it works.) next chapters...
@@ -487,4 +485,4 @@ It could be more useful if we were to attempt to calculate the bias and variance
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](20-resampling.Rmd). The file was created using `R` version 3.5.2.
+The `rmarkdown` file for this chapter can be found [**here**](20-resampling.Rmd). The file was created using `R` version 4.0.2.

@@ -68,7 +68,7 @@ abline(0, 1, col = "darkorange", lwd = 2)
 ```
 
 ```
-## [1] 5.458088
+## [1] 5.051138
 ```
 
 ### Linear Model
@@ -101,7 +101,7 @@ abline(0, 1, col = "darkorange", lwd = 2)
 ```
 
 ```
-## [1] 5.125877
+## [1] 5.016083
 ```
 
 ### Bagging
@@ -123,8 +123,8 @@ boston_bag
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 13
 ## 
-##           Mean of squared residuals: 13.74459
-##                     % Var explained: 81.53
+##           Mean of squared residuals: 13.79736
+##                     % Var explained: 82.42
 ```
 
 
@@ -148,7 +148,7 @@ abline(0, 1, col = "darkorange", lwd = 2)
 ```
 
 ```
-## [1] 3.843966
+## [1] 3.905538
 ```
 
 Here we see two interesting results. First, the predicted versus actual plot no longer has a small number of predicted values. Second, our test error has dropped dramatically. Also note that the "Mean of squared residuals" which is output by `randomForest` is the **Out of Bag** estimate of the error.
@@ -183,8 +183,8 @@ boston_forest
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 4
 ## 
-##           Mean of squared residuals: 12.78942
-##                     % Var explained: 82.82
+##           Mean of squared residuals: 12.629
+##                     % Var explained: 83.91
 ```
 
 
@@ -194,19 +194,19 @@ importance(boston_forest, type = 1)
 
 ```
 ##           %IncMSE
-## crim    11.702184
-## zn       4.251232
-## indus    9.789632
-## chas     2.599685
-## nox     14.404374
-## rm      30.629328
-## age     10.192164
-## dis     10.617532
-## rad      4.947145
-## tax      8.663865
-## ptratio 11.686099
-## black    7.345671
-## lstat   23.094159
+## crim    14.451052
+## zn       2.878652
+## indus   10.258393
+## chas     1.317298
+## nox     12.400294
+## rm      27.137361
+## age     10.473007
+## dis     12.568593
+## rad      5.120156
+## tax      6.960258
+## ptratio 10.684564
+## black    7.750034
+## lstat   28.943216
 ```
 
 ```r
@@ -238,7 +238,7 @@ abline(0, 1, col = "darkorange", lwd = 2)
 ```
 
 ```
-## [1] 3.701805
+## [1] 4.172905
 ```
 
 ```r
@@ -252,9 +252,9 @@ Here we note three RMSEs. The training RMSE (which is optimistic), the OOB RMSE 
 
 ```
 ##       Data    Error
-## 1 Training 1.558111
-## 2      OOB 3.576229
-## 3     Test 3.701805
+## 1 Training 1.583693
+## 2      OOB 3.553731
+## 3     Test 4.172905
 ```
 
 
@@ -289,20 +289,20 @@ tibble::as_tibble(summary(booston_boost))
 ```
 ## # A tibble: 13 x 2
 ##    var     rel.inf
-##    <fct>     <dbl>
-##  1 lstat    34.4  
-##  2 rm       31.6  
-##  3 dis       9.78 
-##  4 crim      6.15 
-##  5 black     4.50 
-##  6 nox       4.35 
-##  7 age       3.50 
-##  8 ptratio   1.87 
-##  9 tax       1.16 
-## 10 indus     0.959
-## 11 rad       0.885
-## 12 chas      0.687
-## 13 zn        0.145
+##    <chr>     <dbl>
+##  1 lstat   44.3   
+##  2 rm      26.8   
+##  3 dis      5.70  
+##  4 crim     5.00  
+##  5 nox      4.80  
+##  6 black    3.72  
+##  7 age      3.16  
+##  8 ptratio  2.66  
+##  9 tax      2.11  
+## 10 indus    0.869 
+## 11 rad      0.735 
+## 12 zn       0.165 
+## 13 chas     0.0440
 ```
 
 
@@ -338,7 +338,7 @@ boston_boost_tst_pred = predict(booston_boost, newdata = boston_tst, n.trees = 5
 ```
 
 ```
-## [1] 3.43382
+## [1] 3.656622
 ```
 
 
@@ -368,11 +368,11 @@ abline(0, 1, col = "darkorange", lwd = 2)
 
 ```
 ##           Model TestError
-## 1   Single Tree  5.458088
-## 2  Linear Model  5.125877
-## 3       Bagging  3.843966
-## 4 Random Forest  3.701805
-## 5      Boosting  3.433820
+## 1   Single Tree  5.051138
+## 2  Linear Model  5.016083
+## 3       Bagging  3.905538
+## 4 Random Forest  4.172905
+## 5      Boosting  3.656622
 ```
 
 While a single tree does not beat linear regression, each of the ensemble methods perform much better!
@@ -431,8 +431,8 @@ table(predicted = seat_tree_tst_pred, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   64  26
-##      Low    20  90
+##      High   58  20
+##      Low    25  97
 ```
 
 ```r
@@ -440,7 +440,7 @@ table(predicted = seat_tree_tst_pred, actual = seat_tst$Sales)
 ```
 
 ```
-## [1] 0.77
+## [1] 0.775
 ```
 
 
@@ -461,8 +461,8 @@ table(predicted = seat_glm_tst_pred, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   75   9
-##      Low     9 107
+##      High   72   6
+##      Low    11 111
 ```
 
 ```r
@@ -470,7 +470,7 @@ table(predicted = seat_glm_tst_pred, actual = seat_tst$Sales)
 ```
 
 ```
-## [1] 0.91
+## [1] 0.915
 ```
 
 
@@ -491,11 +491,11 @@ seat_bag
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 10
 ## 
-##         OOB estimate of  error rate: 21%
+##         OOB estimate of  error rate: 26%
 ## Confusion matrix:
 ##      High Low class.error
-## High   51  29   0.3625000
-## Low    13 107   0.1083333
+## High   51  30   0.3703704
+## Low    22  97   0.1848739
 ```
 
 
@@ -507,8 +507,8 @@ table(predicted = seat_bag_tst_pred, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   66  19
-##      Low    18  97
+##      High   62  14
+##      Low    21 103
 ```
 
 ```r
@@ -516,7 +516,7 @@ table(predicted = seat_bag_tst_pred, actual = seat_tst$Sales)
 ```
 
 ```
-## [1] 0.815
+## [1] 0.825
 ```
 
 
@@ -538,11 +538,11 @@ seat_forest
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 3
 ## 
-##         OOB estimate of  error rate: 22%
+##         OOB estimate of  error rate: 28.5%
 ## Confusion matrix:
 ##      High Low class.error
-## High   50  30   0.3750000
-## Low    14 106   0.1166667
+## High   44  37   0.4567901
+## Low    20  99   0.1680672
 ```
 
 
@@ -554,8 +554,8 @@ table(predicted = seat_forest_tst_perd, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   64  18
-##      Low    20  98
+##      High   58   8
+##      Low    25 109
 ```
 
 ```r
@@ -563,7 +563,7 @@ table(predicted = seat_forest_tst_perd, actual = seat_tst$Sales)
 ```
 
 ```
-## [1] 0.81
+## [1] 0.835
 ```
 
 
@@ -602,8 +602,8 @@ table(predicted = seat_boost_tst_pred, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   70  16
-##      Low    14 100
+##      High   68  10
+##      Low    15 107
 ```
 
 ```r
@@ -611,7 +611,7 @@ table(predicted = seat_boost_tst_pred, actual = seat_tst$Sales)
 ```
 
 ```
-## [1] 0.85
+## [1] 0.875
 ```
 
 
@@ -628,11 +628,11 @@ table(predicted = seat_boost_tst_pred, actual = seat_tst$Sales)
 
 ```
 ##                 Model TestAccuracy
-## 1         Single Tree        0.770
-## 2 Logistic Regression        0.910
-## 3             Bagging        0.815
-## 4       Random Forest        0.810
-## 5            Boosting        0.850
+## 1         Single Tree        0.775
+## 2 Logistic Regression        0.915
+## 3             Bagging        0.825
+## 4       Random Forest        0.835
+## 5            Boosting        0.875
 ```
 
 Here we see each of the ensemble methods performing better than a single tree, however, they still fall behind logistic regression. Sometimes a simple linear model will beat more complicated models! This is why you should always try a logistic regression for classification.
@@ -710,19 +710,19 @@ seat_rf_tune
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy  Kappa    
-##    1    0.740     0.4090909
-##    2    0.790     0.5434783
-##    3    0.770     0.5043103
-##    4    0.785     0.5376344
-##    5    0.790     0.5493562
-##    6    0.785     0.5415778
-##    7    0.790     0.5493562
-##    8    0.805     0.5824411
-##    9    0.785     0.5376344
-##   10    0.805     0.5824411
+##    1    0.695     0.3055556
+##    2    0.740     0.4337363
+##    3    0.720     0.4001071
+##    4    0.740     0.4406798
+##    5    0.740     0.4474551
+##    6    0.735     0.4333975
+##    7    0.735     0.4402197
+##    8    0.730     0.4308000
+##    9    0.710     0.3836999
+##   10    0.740     0.4474551
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final value used for the model was mtry = 8.
+## The final value used for the model was mtry = 2.
 ```
 
 
@@ -731,7 +731,7 @@ calc_acc(predict(seat_rf_tune, seat_tst), seat_tst$Sales)
 ```
 
 ```
-## [1] 0.795
+## [1] 0.82
 ```
 
 The results returned are based on the OOB samples. (Coincidentally, the test accuracy is the same as the best accuracy found using OOB samples.) Note that when using OOB, for some reason the default plot is not what you would expect and is not at all useful. (Which is why it is omitted here.)
@@ -743,10 +743,10 @@ seat_rf_tune$bestTune
 
 ```
 ##   mtry
-## 8    8
+## 2    2
 ```
 
-Based on these results, we would select the random forest model with an `mtry` of 8. Note that based on the OOB estimates, the bagging model is expected to perform worse than this selected model, however, based on our results above, that is not what we find to be true in our test set.
+Based on these results, we would select the random forest model with an `mtry` of 2. Note that based on the OOB estimates, the bagging model is expected to perform worse than this selected model, however, based on our results above, that is not what we find to be true in our test set.
 
 Also note that `method = "ranger"` would also fit a random forest model. [Ranger](http://arxiv.org/pdf/1508.04409.pdf) is a newer `R` package for random forests that has been shown to be much faster, especially when there are a larger number of predictors.
 
@@ -802,7 +802,7 @@ calc_acc(predict(seat_gbm_tune, seat_tst), seat_tst$Sales)
 ```
 
 ```
-## [1] 0.85
+## [1] 0.84
 ```
 
 We see our tuned model does no better on the test set than the arbitrary boosted model we had fit above, with the slightly different parameters seen below. We could perhaps try a larger tuning grid, but at this point it seems unlikely that we could find a much better model. There seems to be no way to get a tree method to out-perform logistic regression in this dataset.
@@ -814,7 +814,7 @@ seat_gbm_tune$bestTune
 
 ```
 ##    n.trees interaction.depth shrinkage n.minobsinnode
-## 34    2000                 1      0.01             10
+## 64    2000                 1       0.1             10
 ```
 
 
@@ -938,11 +938,10 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_col,
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](27-ensemble.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](27-ensemble.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
-##  [1] "mlbench"      "ISLR"         "MASS"         "caret"       
-##  [5] "ggplot2"      "lattice"      "gbm"          "randomForest"
-##  [9] "rpart.plot"   "rpart"
+##  [1] "mlbench"      "ISLR"         "MASS"         "caret"        "ggplot2"     
+##  [6] "lattice"      "gbm"          "randomForest" "rpart.plot"   "rpart"
 ```

@@ -110,24 +110,24 @@ iris_lda
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
-##  0.3733333  0.3200000  0.3066667 
+##  0.3866667  0.2933333  0.3200000 
 ## 
 ## Group means:
 ##            Sepal.Length Sepal.Width Petal.Length Petal.Width
-## setosa         4.978571    3.378571     1.432143   0.2607143
-## versicolor     5.995833    2.808333     4.254167   1.3333333
-## virginica      6.669565    3.065217     5.717391   2.0956522
+## setosa         4.958621    3.420690     1.458621    0.237931
+## versicolor     6.063636    2.845455     4.318182    1.354545
+## virginica      6.479167    2.937500     5.479167    2.045833
 ## 
 ## Coefficients of linear discriminants:
 ##                     LD1        LD2
-## Sepal.Length  0.7100013 -0.8446128
-## Sepal.Width   1.2435532  2.4773120
-## Petal.Length -2.3419418 -0.4065865
-## Petal.Width  -1.8502355  2.3234441
+## Sepal.Length  0.7394386 -0.6107043
+## Sepal.Width   1.8232273  1.6011748
+## Petal.Length -2.1304796 -1.2400672
+## Petal.Width  -2.8835695  3.8585321
 ## 
 ## Proportion of trace:
-##    LD1    LD2 
-## 0.9908 0.0092
+##   LD1   LD2 
+## 0.994 0.006
 ```
 
 Here we see the estimated $\hat{\pi}_k$ and $\hat{\mu}_k$ for each class.
@@ -154,8 +154,8 @@ head(predict(iris_lda, iris_trn)$class, n = 10)
 ```
 
 ```
-##  [1] setosa     virginica  setosa     setosa     virginica  setosa    
-##  [7] virginica  setosa     versicolor setosa    
+##  [1] setosa     versicolor versicolor setosa     virginica  versicolor
+##  [7] versicolor virginica  setosa     versicolor
 ## Levels: setosa versicolor virginica
 ```
 
@@ -165,16 +165,16 @@ head(predict(iris_lda, iris_trn)$posterior, n = 10)
 
 ```
 ##           setosa   versicolor    virginica
-## 23  1.000000e+00 1.517145e-21 1.717663e-41
-## 106 2.894733e-43 1.643603e-06 9.999984e-01
-## 37  1.000000e+00 2.169066e-20 1.287216e-40
-## 40  1.000000e+00 3.979954e-17 8.243133e-36
-## 145 1.303566e-37 4.335258e-06 9.999957e-01
-## 36  1.000000e+00 1.947567e-18 5.996917e-38
-## 119 2.220147e-51 9.587514e-09 1.000000e+00
-## 16  1.000000e+00 5.981936e-23 1.344538e-42
-## 94  1.599359e-11 9.999999e-01 1.035129e-07
-## 27  1.000000e+00 8.154612e-15 4.862249e-32
+## 1   1.000000e+00 9.098758e-23 1.863931e-43
+## 92  2.858466e-22 9.988462e-01 1.153843e-03
+## 77  9.196834e-24 9.988760e-01 1.124025e-03
+## 38  1.000000e+00 4.555854e-24 2.290761e-45
+## 108 4.462001e-43 3.898154e-04 9.996102e-01
+## 83  5.876068e-17 9.999948e-01 5.158096e-06
+## 64  5.167661e-24 9.959455e-01 4.054516e-03
+## 110 6.922158e-46 8.001878e-07 9.999992e-01
+## 30  1.000000e+00 2.473394e-17 4.662999e-36
+## 94  8.280923e-15 9.999995e-01 5.000679e-07
 ```
 
 As we should come to expect, the `predict()` function operates in a new way when called on an `lda` object. By default, it returns an entire list. Within that list `class` stores the classifications and `posterior` contains the estimated probability for each class.
@@ -200,7 +200,7 @@ calc_class_err(predicted = iris_lda_trn_pred, actual = iris_trn$Species)
 ```
 
 ```
-## [1] 0.04
+## [1] 0.02666667
 ```
 
 ```r
@@ -221,9 +221,9 @@ table(predicted = iris_lda_tst_pred, actual = iris_tst$Species)
 ```
 ##             actual
 ## predicted    setosa versicolor virginica
-##   setosa         22          0         0
-##   versicolor      0         26         1
-##   virginica       0          0        26
+##   setosa         21          0         0
+##   versicolor      0         27         0
+##   virginica       0          1        26
 ```
 
 Looking at the test set, we see that we are perfectly predicting both setosa and versicolor. The only error is labeling a virginica as a versicolor.
@@ -244,20 +244,20 @@ iris_lda_flat
 ## 
 ## Group means:
 ##            Sepal.Length Sepal.Width Petal.Length Petal.Width
-## setosa         4.978571    3.378571     1.432143   0.2607143
-## versicolor     5.995833    2.808333     4.254167   1.3333333
-## virginica      6.669565    3.065217     5.717391   2.0956522
+## setosa         4.958621    3.420690     1.458621    0.237931
+## versicolor     6.063636    2.845455     4.318182    1.354545
+## virginica      6.479167    2.937500     5.479167    2.045833
 ## 
 ## Coefficients of linear discriminants:
 ##                     LD1        LD2
-## Sepal.Length  0.7136357 -0.8415442
-## Sepal.Width   1.2328623  2.4826497
-## Petal.Length -2.3401674 -0.4166784
-## Petal.Width  -1.8602343  2.3154465
+## Sepal.Length  0.7403226 -0.6096323
+## Sepal.Width   1.8209056  1.6038146
+## Petal.Length -2.1286808 -1.2431524
+## Petal.Width  -2.8891565  3.8543505
 ## 
 ## Proportion of trace:
-##    LD1    LD2 
-## 0.9901 0.0099
+##   LD1   LD2 
+## 0.993 0.007
 ```
 
 Instead of learning (estimating) the proportion of the three species from the data, we could instead specify them ourselves. Here we choose a uniform distributions over the possible species. We would call this a "flat" prior.
@@ -274,7 +274,7 @@ calc_class_err(predicted = iris_lda_flat_trn_pred, actual = iris_trn$Species)
 ```
 
 ```
-## [1] 0.04
+## [1] 0.02666667
 ```
 
 ```r
@@ -282,7 +282,7 @@ calc_class_err(predicted = iris_lda_flat_tst_pred, actual = iris_tst$Species)
 ```
 
 ```
-## [1] 0
+## [1] 0.01333333
 ```
 
 This actually gives a better test accuracy!
@@ -314,13 +314,13 @@ iris_qda
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
-##  0.3733333  0.3200000  0.3066667 
+##  0.3866667  0.2933333  0.3200000 
 ## 
 ## Group means:
 ##            Sepal.Length Sepal.Width Petal.Length Petal.Width
-## setosa         4.978571    3.378571     1.432143   0.2607143
-## versicolor     5.995833    2.808333     4.254167   1.3333333
-## virginica      6.669565    3.065217     5.717391   2.0956522
+## setosa         4.958621    3.420690     1.458621    0.237931
+## versicolor     6.063636    2.845455     4.318182    1.354545
+## virginica      6.479167    2.937500     5.479167    2.045833
 ```
 
 Here the output is similar to LDA, again giving the estimated $\hat{\pi}_k$ and $\hat{\mu}_k$ for each class. Like `lda()`, the `qda()` function is found in the `MASS` package.
@@ -349,7 +349,7 @@ calc_class_err(predicted = iris_qda_tst_pred, actual = iris_tst$Species)
 ```
 
 ```
-## [1] 0.04
+## [1] 0.05333333
 ```
 
 
@@ -360,9 +360,9 @@ table(predicted = iris_qda_tst_pred, actual = iris_tst$Species)
 ```
 ##             actual
 ## predicted    setosa versicolor virginica
-##   setosa         22          0         0
-##   versicolor      0         23         0
-##   virginica       0          3        27
+##   setosa         21          0         0
+##   versicolor      0         25         1
+##   virginica       0          3        25
 ```
 
 Here we find that QDA is not performing as well as LDA. It is misclassifying versicolors. Since QDA is a more complex model than LDA (many more parameters) we would say that QDA is overfitting here.
@@ -411,32 +411,32 @@ iris_nb
 ## A-priori probabilities:
 ## Y
 ##     setosa versicolor  virginica 
-##  0.3733333  0.3200000  0.3066667 
+##  0.3866667  0.2933333  0.3200000 
 ## 
 ## Conditional probabilities:
 ##             Sepal.Length
 ## Y                [,1]      [,2]
-##   setosa     4.978571 0.3774742
-##   versicolor 5.995833 0.5812125
-##   virginica  6.669565 0.6392003
+##   setosa     4.958621 0.3212890
+##   versicolor 6.063636 0.5636154
+##   virginica  6.479167 0.5484993
 ## 
 ##             Sepal.Width
 ## Y                [,1]      [,2]
-##   setosa     3.378571 0.4349177
-##   versicolor 2.808333 0.3269313
-##   virginica  3.065217 0.3600615
+##   setosa     3.420690 0.4012296
+##   versicolor 2.845455 0.3262007
+##   virginica  2.937500 0.3267927
 ## 
 ##             Petal.Length
 ## Y                [,1]      [,2]
-##   setosa     1.432143 0.1743848
-##   versicolor 4.254167 0.5166608
-##   virginica  5.717391 0.5540366
+##   setosa     1.458621 0.1880677
+##   versicolor 4.318182 0.5543219
+##   virginica  5.479167 0.4995469
 ## 
 ##             Petal.Width
-## Y                 [,1]      [,2]
-##   setosa     0.2607143 0.1133310
-##   versicolor 1.3333333 0.2334368
-##   virginica  2.0956522 0.3022315
+## Y                [,1]       [,2]
+##   setosa     0.237931 0.09788402
+##   versicolor 1.354545 0.21979920
+##   virginica  2.045833 0.29039578
 ```
 
 Many packages implement naive Bayes. Here we choose to use `naiveBayes()` from the package `e1071`. (The name of this package has an interesting history. Based on the name you wouldn't know it, but the package contains many functions related to machine learning.)
@@ -451,7 +451,7 @@ head(predict(iris_nb, iris_trn))
 ```
 
 ```
-## [1] setosa    virginica setosa    setosa    virginica setosa   
+## [1] setosa     versicolor versicolor setosa     virginica  versicolor
 ## Levels: setosa versicolor virginica
 ```
 
@@ -460,7 +460,7 @@ head(predict(iris_nb, iris_trn, type = "class"))
 ```
 
 ```
-## [1] setosa    virginica setosa    setosa    virginica setosa   
+## [1] setosa     versicolor versicolor setosa     virginica  versicolor
 ## Levels: setosa versicolor virginica
 ```
 
@@ -470,12 +470,12 @@ head(predict(iris_nb, iris_trn, type = "raw"))
 
 ```
 ##             setosa   versicolor    virginica
-## [1,]  1.000000e+00 3.134201e-16 2.948226e-27
-## [2,] 4.400050e-257 5.188308e-08 9.999999e-01
-## [3,]  1.000000e+00 2.263278e-14 1.168760e-24
-## [4,]  1.000000e+00 4.855740e-14 2.167253e-24
-## [5,] 1.897732e-218 6.189883e-08 9.999999e-01
-## [6,]  1.000000e+00 8.184097e-15 6.816322e-26
+## [1,]  1.000000e+00 3.096444e-15 5.172277e-27
+## [2,]  1.079241e-93 9.833098e-01 1.669021e-02
+## [3,] 6.378471e-106 9.210439e-01 7.895614e-02
+## [4,]  1.000000e+00 1.691578e-16 2.882941e-28
+## [5,] 1.791407e-209 3.462703e-04 9.996537e-01
+## [6,]  4.538228e-59 9.999316e-01 6.835677e-05
 ```
 
 Oh look, `predict()` has another new mode of operation. If only there were a way to unify the `predict()` function across all of these methods...
@@ -500,7 +500,7 @@ calc_class_err(predicted = iris_nb_tst_pred, actual = iris_tst$Species)
 ```
 
 ```
-## [1] 0.05333333
+## [1] 0.02666667
 ```
 
 
@@ -511,9 +511,9 @@ table(predicted = iris_nb_tst_pred, actual = iris_tst$Species)
 ```
 ##             actual
 ## predicted    setosa versicolor virginica
-##   setosa         22          0         0
-##   versicolor      0         26         4
-##   virginica       0          0        23
+##   setosa         21          0         0
+##   versicolor      0         28         2
+##   virginica       0          0        24
 ```
 
 Like LDA, naive Bayes is having trouble with virginica. 
@@ -525,13 +525,13 @@ Like LDA, naive Bayes is having trouble with virginica.
 \hline
 Method & Train Error & Test Error\\
 \hline
-LDA & 0.0400000 & 0.0133333\\
+LDA & 0.0266667 & 0.0133333\\
 \hline
-LDA, Flat Prior & 0.0400000 & 0.0000000\\
+LDA, Flat Prior & 0.0266667 & 0.0133333\\
 \hline
-QDA & 0.0133333 & 0.0400000\\
+QDA & 0.0133333 & 0.0533333\\
 \hline
-Naive Bayes & 0.0533333 & 0.0533333\\
+Naive Bayes & 0.0533333 & 0.0266667\\
 \hline
 \end{tabular}
 
@@ -579,20 +579,20 @@ naiveBayes(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)
 ## A-priori probabilities:
 ## Y
 ##     setosa versicolor  virginica 
-##  0.3733333  0.3200000  0.3066667 
+##  0.3866667  0.2933333  0.3200000 
 ## 
 ## Conditional probabilities:
 ##             Sepal.Length
 ## Y                [,1]      [,2]
-##   setosa     4.978571 0.3774742
-##   versicolor 5.995833 0.5812125
-##   virginica  6.669565 0.6392003
+##   setosa     4.958621 0.3212890
+##   versicolor 6.063636 0.5636154
+##   virginica  6.479167 0.5484993
 ## 
 ##             Sepal.Width
 ## Y                 Large     Medium      Small
-##   setosa     0.07142857 0.67857143 0.25000000
-##   versicolor 0.00000000 0.25000000 0.75000000
-##   virginica  0.00000000 0.43478261 0.56521739
+##   setosa     0.06896552 0.75862069 0.17241379
+##   versicolor 0.00000000 0.27272727 0.72727273
+##   virginica  0.00000000 0.33333333 0.66666667
 ```
 
 Naive Bayes makes a somewhat obvious and intelligent choice to model the categorical variable as a multinomial. It then estimates the probability parameters of a multinomial distribution.
@@ -608,23 +608,23 @@ lda(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)
 ## 
 ## Prior probabilities of groups:
 ##     setosa versicolor  virginica 
-##  0.3733333  0.3200000  0.3066667 
+##  0.3866667  0.2933333  0.3200000 
 ## 
 ## Group means:
 ##            Sepal.Length Sepal.WidthMedium Sepal.WidthSmall
-## setosa         4.978571         0.6785714        0.2500000
-## versicolor     5.995833         0.2500000        0.7500000
-## virginica      6.669565         0.4347826        0.5652174
+## setosa         4.958621         0.7586207        0.1724138
+## versicolor     6.063636         0.2727273        0.7272727
+## virginica      6.479167         0.3333333        0.6666667
 ## 
 ## Coefficients of linear discriminants:
 ##                        LD1        LD2
-## Sepal.Length      2.051602  0.4768608
-## Sepal.WidthMedium 1.728698 -0.4433340
-## Sepal.WidthSmall  3.173903 -2.2804034
+## Sepal.Length      2.194825  0.7108153
+## Sepal.WidthMedium 1.296250 -0.7224618
+## Sepal.WidthSmall  2.922089 -2.5286497
 ## 
 ## Proportion of trace:
 ##    LD1    LD2 
-## 0.9764 0.0236
+## 0.9929 0.0071
 ```
 
 LDA however creates dummy variables, here with `Large` is the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.
@@ -632,7 +632,7 @@ LDA however creates dummy variables, here with `Large` is the reference level, t
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](11-generative.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](11-generative.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

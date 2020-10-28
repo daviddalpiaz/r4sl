@@ -358,7 +358,7 @@
 
 <!-- ## RMarkdown -->
 
-<!-- The RMarkdown file for this chapter can be found [**here**](21-svm.Rmd). The file was created using `R` version 3.5.2 and the following packages: -->
+<!-- The RMarkdown file for this chapter can be found [**here**](21-svm.Rmd). The file was created using `R` version 4.0.2 and the following packages: -->
 
 <!-- - Base Packages, Attached -->
 

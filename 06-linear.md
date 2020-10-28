@@ -141,7 +141,7 @@ sqrt(mean((train_data$Sales - predict(fit_0, train_data)) ^ 2))
 ```
 
 ```
-## [1] 4.788513
+## [1] 5.529258
 ```
 
 ```r
@@ -150,7 +150,7 @@ sqrt(mean((test_data$Sales - predict(fit_0, test_data)) ^ 2))
 ```
 
 ```
-## [1] 5.643574
+## [1] 4.914163
 ```
 
 The previous two operations obtain the train and test RMSE. Since these are operations we are about to use repeatedly, we should use the function that we happen to have already written.
@@ -162,7 +162,7 @@ rmse(actual = train_data$Sales, predicted = predict(fit_0, train_data))
 ```
 
 ```
-## [1] 4.788513
+## [1] 5.529258
 ```
 
 ```r
@@ -171,7 +171,7 @@ rmse(actual = test_data$Sales, predicted = predict(fit_0, test_data))
 ```
 
 ```
-## [1] 5.643574
+## [1] 4.914163
 ```
 
 This function can actually be improved for the inputs that we are using. We would like to obtain train and test RMSE for a fitted model, given a train or test dataset, and the appropriate response variable.
@@ -192,7 +192,7 @@ get_rmse(model = fit_0, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
-## [1] 4.788513
+## [1] 5.529258
 ```
 
 ```r
@@ -200,7 +200,7 @@ get_rmse(model = fit_0, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
-## [1] 5.643574
+## [1] 4.914163
 ```
 
 
@@ -223,7 +223,7 @@ get_rmse(model = fit_1, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
-## [1] 1.637699
+## [1] 1.888488
 ```
 
 ```r
@@ -231,7 +231,7 @@ get_rmse(model = fit_1, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
-## [1] 1.737574
+## [1] 1.461661
 ```
 
 
@@ -249,7 +249,7 @@ get_rmse(model = fit_2, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
-## [1] 0.7797226
+## [1] 1.016822
 ```
 
 ```r
@@ -257,7 +257,7 @@ get_rmse(model = fit_2, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
-## [1] 1.110372
+## [1] 0.9117228
 ```
 
 
@@ -275,7 +275,7 @@ get_rmse(model = fit_3, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
-## [1] 0.4960149
+## [1] 0.6553091
 ```
 
 ```r
@@ -283,7 +283,7 @@ get_rmse(model = fit_3, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
-## [1] 0.7320758
+## [1] 0.6633375
 ```
 
 
@@ -302,7 +302,7 @@ get_rmse(model = fit_4, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
-## [1] 0.488771
+## [1] 0.6421909
 ```
 
 ```r
@@ -310,7 +310,7 @@ get_rmse(model = fit_4, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
-## [1] 0.7466312
+## [1] 0.7465957
 ```
 
 
@@ -329,7 +329,7 @@ get_rmse(model = fit_5, data = train_data, response = "Sales") # train RMSE
 ```
 
 ```
-## [1] 0.4705201
+## [1] 0.6120887
 ```
 
 ```r
@@ -337,7 +337,7 @@ get_rmse(model = fit_5, data = test_data, response = "Sales") # test RMSE
 ```
 
 ```
-## [1] 0.8425384
+## [1] 0.7864181
 ```
 
 ## Choosing a Model
@@ -394,11 +394,11 @@ We also summarize the results as a table. `fit_1` is the least flexible, and `fi
 
 | Model   | Train RMSE        | Test RMSE        | Predictors              |
 |---------|-------------------|------------------|-------------------------|
-| `fit_1` | 1.6376991 | 1.7375736 | 3 |
-| `fit_2` | 0.7797226 | 1.1103716 | 7 |
-| `fit_3` | 0.4960149 | 0.7320758 | 8 |
-| `fit_4` | 0.488771 | 0.7466312 | 10 |
-| `fit_5` | 0.4705201 | 0.8425384 | 14 |
+| `fit_1` | 1.8884884 | 1.4616608 | 3 |
+| `fit_2` | 1.0168223 | 0.9117228 | 7 |
+| `fit_3` | 0.6553091 | 0.6633375 | 8 |
+| `fit_4` | 0.6421909 | 0.7465957 | 10 |
+| `fit_5` | 0.6120887 | 0.7864181 | 14 |
 
 To summarize:
 

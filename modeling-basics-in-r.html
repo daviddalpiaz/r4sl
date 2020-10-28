@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Modeling Basics in R | R for Statistical Learning</title>
   <meta name="description" content="Chapter 4 Modeling Basics in R | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Modeling Basics in R | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="r-rstudio-rmarkdown.html">
-<link rel="next" href="regression-overview.html">
+<link rel="prev" href="r-rstudio-rmarkdown.html"/>
+<link rel="next" href="regression-overview.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,15 +425,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="modeling-basics-in-r" class="section level1">
+<div id="modeling-basics-in-r" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Modeling Basics in <code>R</code></h1>
 <p><strong>TODO:</strong> Instead of specifically considering regression, change the focus of this chapter to modeling, with regression as an example.</p>
 <p>This chapter will recap the basics of performing regression analyses in <code>R</code>. For more detailed coverage, see <a href="http://daviddalpiaz.github.io/appliedstats/">Applied Statistics with <code>R</code></a>.</p>
 <p>We will use the <a href="data/Advertising.csv">Advertising data</a> associated with <a href="http://www-bcf.usc.edu/~gareth/ISL/data.html">Introduction to Statistical Learning</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
-Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/Advertising.csv&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="modeling-basics-in-r.html#cb3-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb3-2"><a href="modeling-basics-in-r.html#cb3-2"></a>Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/Advertising.csv&quot;</span>)</span></code></pre></div>
 <p>After loading data into <code>R</code>, our first step should <strong>always</strong> be to inspect the data. We will start by simply printing some observations in order to understand the basic structure of the data.</p>
-<pre class="sourceCode r"><code class="sourceCode r">Advertising</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="modeling-basics-in-r.html#cb4-1"></a>Advertising</span></code></pre></div>
 <pre><code>## # A tibble: 200 x 4
 ##       TV Radio Newspaper Sales
 ##    &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
@@ -411,33 +449,33 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 ## 10 200.    2.6      21.2  10.6
 ## # … with 190 more rows</code></pre>
 <p>Because the data was read using <code>read_csv()</code>, <code>Advertising</code> is a tibble. We see that there are a total of 200 observations and 4 variables, each of which is numeric. (Specifically double-precision vectors, but more importantly they are numbers.) For the purpose of this analysis, <code>Sales</code> will be the <strong>response variable</strong>. That is, we seek to understand the relationship between <code>Sales</code>, and the <strong>predictor variables</strong>: <code>TV</code>, <code>Radio</code>, and <code>Newspaper</code>.</p>
-<div id="visualization-for-regression" class="section level2">
+<div id="visualization-for-regression" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Visualization for Regression</h2>
 <p>After investigating the structure of the data, the next step should be to visualize the data. Since we have only numeric variables, we should consider <strong>scatter plots</strong>.</p>
 <p>We could do so for any individual predictor.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Sales <span class="op">~</span><span class="st"> </span>TV, <span class="dt">data =</span> Advertising, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>,
-     <span class="dt">main =</span> <span class="st">&quot;Sales vs Television Advertising&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="modeling-basics-in-r.html#cb6-1"></a><span class="kw">plot</span>(Sales <span class="op">~</span><span class="st"> </span>TV, <span class="dt">data =</span> Advertising, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>,</span>
+<span id="cb6-2"><a href="modeling-basics-in-r.html#cb6-2"></a>     <span class="dt">main =</span> <span class="st">&quot;Sales vs Television Advertising&quot;</span>)</span></code></pre></div>
 <p><img src="04-model-basics_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>The <code>pairs()</code> function is a useful way to quickly visualize a number of scatter plots.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(Advertising)</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="modeling-basics-in-r.html#cb7-1"></a><span class="kw">pairs</span>(Advertising)</span></code></pre></div>
 <p><img src="04-model-basics_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Often, we will be most interested in only the relationship between each predictor and the response. For this, we can use the <code>featurePlot()</code> function from the <code>caret</code> package. (We will use the <code>caret</code> package more and more frequently as we introduce new topics.)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
-<span class="kw">featurePlot</span>(<span class="dt">x =</span> Advertising[ , <span class="kw">c</span>(<span class="st">&quot;TV&quot;</span>, <span class="st">&quot;Radio&quot;</span>, <span class="st">&quot;Newspaper&quot;</span>)], <span class="dt">y =</span> Advertising<span class="op">$</span>Sales)</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="modeling-basics-in-r.html#cb8-1"></a><span class="kw">library</span>(caret)</span>
+<span id="cb8-2"><a href="modeling-basics-in-r.html#cb8-2"></a><span class="kw">featurePlot</span>(<span class="dt">x =</span> Advertising[ , <span class="kw">c</span>(<span class="st">&quot;TV&quot;</span>, <span class="st">&quot;Radio&quot;</span>, <span class="st">&quot;Newspaper&quot;</span>)], <span class="dt">y =</span> Advertising<span class="op">$</span>Sales)</span></code></pre></div>
 <p><img src="04-model-basics_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
 <p>We see that there is a clear increase in <code>Sales</code> as <code>Radio</code> or <code>TV</code> are increased. The relationship between <code>Sales</code> and <code>Newspaper</code> is less clear. How all of the predictors work together is also unclear, as there is some obvious correlation between <code>Radio</code> and <code>TV</code>. To investigate further, we will need to model the data.</p>
 </div>
-<div id="the-lm-function" class="section level2">
+<div id="the-lm-function" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> The <code>lm()</code> Function</h2>
 <p>The following code fits an additive <strong>linear model</strong> with <code>Sales</code> as the response and each remaining variable as a predictor. Note, by not using <code>attach()</code> and instead specifying the <code>data =</code> argument, we are able to specify this model without using each of the variable names directly.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Advertising)
-<span class="co"># mod_1 = lm(Sales ~ TV + Radio + Newspaper, data = Advertising)</span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="modeling-basics-in-r.html#cb9-1"></a>mod_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Advertising)</span>
+<span id="cb9-2"><a href="modeling-basics-in-r.html#cb9-2"></a><span class="co"># mod_1 = lm(Sales ~ TV + Radio + Newspaper, data = Advertising)</span></span></code></pre></div>
 <p>Note that the commented line is equivalent to the line that is run, but we will often use the <code>response ~ .</code> syntax when possible.</p>
 </div>
-<div id="hypothesis-testing" class="section level2">
+<div id="hypothesis-testing" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Hypothesis Testing</h2>
 <p>The <code>summary()</code> function will return a large amount of useful information about a model fit using <code>lm()</code>. Much of it will be helpful for hypothesis testing including individual tests about each predictor, as well as the significance of the regression test.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mod_<span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modeling-basics-in-r.html#cb10-1"></a><span class="kw">summary</span>(mod_<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Sales ~ ., data = Advertising)
@@ -458,9 +496,9 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 ## Residual standard error: 1.686 on 196 degrees of freedom
 ## Multiple R-squared:  0.8972, Adjusted R-squared:  0.8956 
 ## F-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>TV <span class="op">+</span><span class="st"> </span>Radio, <span class="dt">data =</span> Advertising)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="modeling-basics-in-r.html#cb12-1"></a>mod_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>TV <span class="op">+</span><span class="st"> </span>Radio, <span class="dt">data =</span> Advertising)</span></code></pre></div>
 <p>The <code>anova()</code> function is useful for comparing two models. Here we compare the full additive model, <code>mod_1</code>, to a reduced model <code>mod_0</code>. Essentially we are testing for the significance of the <code>Newspaper</code> variable in the additive model.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(mod_<span class="dv">0</span>, mod_<span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="modeling-basics-in-r.html#cb13-1"></a><span class="kw">anova</span>(mod_<span class="dv">0</span>, mod_<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: Sales ~ TV + Radio
@@ -470,32 +508,32 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 ## 2    196 556.83  1  0.088717 0.0312 0.8599</code></pre>
 <p>Note that hypothesis testing is <em>not</em> our focus, so we omit many details.</p>
 </div>
-<div id="prediction" class="section level2">
+<div id="prediction" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Prediction</h2>
 <p>The <code>predict()</code> function is an extremely versatile function, for, prediction. When used on the result of a model fit using <code>lm()</code> it will, by default, return predictions for each of the data points used to fit the model. (Here, we limit the printed result to the first 10.)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre>
-<pre><code>##         1         2         3         4         5         6         7 
-## 20.523974 12.337855 12.307671 17.597830 13.188672 12.478348 11.729760 
-##         8         9        10 
-## 12.122953  3.727341 12.550849</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="modeling-basics-in-r.html#cb15-1"></a><span class="kw">head</span>(<span class="kw">predict</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##         1         2         3         4         5         6         7         8 
+## 20.523974 12.337855 12.307671 17.597830 13.188672 12.478348 11.729760 12.122953 
+##         9        10 
+##  3.727341 12.550849</code></pre>
 <p>Note that the effect of the <code>predict()</code> function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class <code>lm</code>. Because of this, <code>predict()</code> then runs the <code>predict.lm()</code> function. Thus, we should use <code>?predict.lm()</code> for details.</p>
 <p>We could also specify new data, which should be a data frame or tibble with the same column names as the predictors.</p>
-<pre class="sourceCode r"><code class="sourceCode r">new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">TV =</span> <span class="dv">150</span>, <span class="dt">Radio =</span> <span class="dv">40</span>, <span class="dt">Newspaper =</span> <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="modeling-basics-in-r.html#cb17-1"></a>new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">TV =</span> <span class="dv">150</span>, <span class="dt">Radio =</span> <span class="dv">40</span>, <span class="dt">Newspaper =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>We can then use the <code>predict()</code> function for point estimates, confidence intervals, and prediction intervals.</p>
 <p>Using only the first two arguments, <code>R</code> will simply return a point estimate, that is, the “predicted value,” <span class="math inline">\(\hat{y}\)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(mod_<span class="dv">1</span>, <span class="dt">newdata =</span> new_obs)</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="modeling-basics-in-r.html#cb18-1"></a><span class="kw">predict</span>(mod_<span class="dv">1</span>, <span class="dt">newdata =</span> new_obs)</span></code></pre></div>
 <pre><code>##        1 
 ## 17.34375</code></pre>
-<p>If we specify an additional argument <code>interval</code> with a value of <code>&quot;confidence&quot;</code>, <code>R</code> will return a 95% confidence interval for the mean response at the specified point. Note that here <code>R</code> also gives the point estimate as <code>fit</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(mod_<span class="dv">1</span>, <span class="dt">newdata =</span> new_obs, <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>)</code></pre>
+<p>If we specify an additional argument <code>interval</code> with a value of <code>"confidence"</code>, <code>R</code> will return a 95% confidence interval for the mean response at the specified point. Note that here <code>R</code> also gives the point estimate as <code>fit</code>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="modeling-basics-in-r.html#cb20-1"></a><span class="kw">predict</span>(mod_<span class="dv">1</span>, <span class="dt">newdata =</span> new_obs, <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 17.34375 16.77654 17.91096</code></pre>
 <p>Lastly, we can alter the level using the <code>level</code> argument. Here we report a prediction interval instead of a confidence interval.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(mod_<span class="dv">1</span>, <span class="dt">newdata =</span> new_obs, <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>, <span class="dt">level =</span> <span class="fl">0.99</span>)</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="modeling-basics-in-r.html#cb22-1"></a><span class="kw">predict</span>(mod_<span class="dv">1</span>, <span class="dt">newdata =</span> new_obs, <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>, <span class="dt">level =</span> <span class="fl">0.99</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 17.34375 12.89612 21.79138</code></pre>
 </div>
-<div id="unusual-observations" class="section level2">
+<div id="unusual-observations" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Unusual Observations</h2>
 <p><code>R</code> provides several functions for obtaining metrics related to unusual observations.</p>
 <ul>
@@ -504,104 +542,102 @@ Advertising =<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 <li><code>rstudent()</code> give the studentized residual for each observation</li>
 <li><code>cooks.distance()</code> calculates the influence of each observation</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">resid</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="modeling-basics-in-r.html#cb24-1"></a><span class="kw">head</span>(<span class="kw">resid</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##           1           2           3           4           5           6 
 ##  1.57602559 -1.93785482 -3.00767078  0.90217049 -0.28867186 -5.27834763 
 ##           7           8           9          10 
 ##  0.07024005  1.07704683  1.07265914 -1.95084872</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">hatvalues</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="modeling-basics-in-r.html#cb26-1"></a><span class="kw">head</span>(<span class="kw">hatvalues</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##           1           2           3           4           5           6 
 ## 0.025202848 0.019418228 0.039226158 0.016609666 0.023508833 0.047481074 
 ##           7           8           9          10 
 ## 0.014435091 0.009184456 0.030714427 0.017147645</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rstudent</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="modeling-basics-in-r.html#cb28-1"></a><span class="kw">head</span>(<span class="kw">rstudent</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##           1           2           3           4           5           6 
 ##  0.94680369 -1.16207937 -1.83138947  0.53877383 -0.17288663 -3.28803309 
 ##           7           8           9          10 
 ##  0.04186991  0.64099269  0.64544184 -1.16856434</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">cooks.distance</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre>
-<pre><code>##            1            2            3            4            5 
-## 5.797287e-03 6.673622e-03 3.382760e-02 1.230165e-03 1.807925e-04 
-##            6            7            8            9           10 
-## 1.283058e-01 6.452021e-06 9.550237e-04 3.310088e-03 5.945006e-03</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="modeling-basics-in-r.html#cb30-1"></a><span class="kw">head</span>(<span class="kw">cooks.distance</span>(mod_<span class="dv">1</span>), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##            1            2            3            4            5            6 
+## 5.797287e-03 6.673622e-03 3.382760e-02 1.230165e-03 1.807925e-04 1.283058e-01 
+##            7            8            9           10 
+## 6.452021e-06 9.550237e-04 3.310088e-03 5.945006e-03</code></pre>
 </div>
-<div id="adding-complexity" class="section level2">
+<div id="adding-complexity" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Adding Complexity</h2>
 <p>We have a number of ways to add complexity to a linear model, even allowing a linear model to be used to model non-linear relationships.</p>
-<div id="interactions" class="section level3">
+<div id="interactions" class="section level3" number="4.6.1">
 <h3><span class="header-section-number">4.6.1</span> Interactions</h3>
 <p>Interactions can be introduced to the <code>lm()</code> procedure in a number of ways.</p>
 <p>We can use the <code>:</code> operator to introduce a single interaction of interest.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>TV<span class="op">:</span>Newspaper, <span class="dt">data =</span> Advertising)
-<span class="kw">coef</span>(mod_<span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="modeling-basics-in-r.html#cb32-1"></a>mod_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>TV<span class="op">:</span>Newspaper, <span class="dt">data =</span> Advertising)</span>
+<span id="cb32-2"><a href="modeling-basics-in-r.html#cb32-2"></a><span class="kw">coef</span>(mod_<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##   (Intercept)            TV         Radio     Newspaper  TV:Newspaper 
 ##  3.8730824491  0.0392939602  0.1901312252 -0.0320449675  0.0002016962</code></pre>
 <p>The <code>response ~ . ^ k</code> syntax can be used to model all <code>k</code>-way interactions. (As well as the appropriate lower order terms.) Here we fit a model with all two-way interactions, and the lower order main effects.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">3</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Advertising)
-<span class="kw">coef</span>(mod_<span class="dv">3</span>)</code></pre>
-<pre><code>##     (Intercept)              TV           Radio       Newspaper 
-##    6.460158e+00    2.032710e-02    2.292919e-02    1.703394e-02 
-##        TV:Radio    TV:Newspaper Radio:Newspaper 
-##    1.139280e-03   -7.971435e-05   -1.095976e-04</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="modeling-basics-in-r.html#cb34-1"></a>mod_<span class="dv">3</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Advertising)</span>
+<span id="cb34-2"><a href="modeling-basics-in-r.html#cb34-2"></a><span class="kw">coef</span>(mod_<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##     (Intercept)              TV           Radio       Newspaper        TV:Radio 
+##    6.460158e+00    2.032710e-02    2.292919e-02    1.703394e-02    1.139280e-03 
+##    TV:Newspaper Radio:Newspaper 
+##   -7.971435e-05   -1.095976e-04</code></pre>
 <p>The <code>*</code> operator can be used to specify all interactions of a certain order, as well as all lower order terms according to the usual hierarchy. Here we see a three-way interaction and all lower order terms.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">4</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>TV <span class="op">*</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper, <span class="dt">data =</span> Advertising)
-<span class="kw">coef</span>(mod_<span class="dv">4</span>)</code></pre>
-<pre><code>##        (Intercept)                 TV              Radio 
-##       6.555887e+00       1.971030e-02       1.962160e-02 
-##          Newspaper           TV:Radio       TV:Newspaper 
-##       1.310565e-02       1.161523e-03      -5.545501e-05 
-##    Radio:Newspaper TV:Radio:Newspaper 
-##       9.062944e-06      -7.609955e-07</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="modeling-basics-in-r.html#cb36-1"></a>mod_<span class="dv">4</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>TV <span class="op">*</span><span class="st"> </span>Radio <span class="op">*</span><span class="st"> </span>Newspaper, <span class="dt">data =</span> Advertising)</span>
+<span id="cb36-2"><a href="modeling-basics-in-r.html#cb36-2"></a><span class="kw">coef</span>(mod_<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##        (Intercept)                 TV              Radio          Newspaper 
+##       6.555887e+00       1.971030e-02       1.962160e-02       1.310565e-02 
+##           TV:Radio       TV:Newspaper    Radio:Newspaper TV:Radio:Newspaper 
+##       1.161523e-03      -5.545501e-05       9.062944e-06      -7.609955e-07</code></pre>
 <p>Note that, we have only been dealing with numeric predictors. <strong>Categorical predictors</strong> are often recorded as <strong>factor</strong> variables in <code>R</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibble)
-cat_pred =<span class="st"> </span><span class="kw">tibble</span>(
-  <span class="dt">x1 =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">10</span>))),
-  <span class="dt">x2 =</span> <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">30</span>),
-  <span class="dt">y  =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">30</span>)
-)
-cat_pred</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="modeling-basics-in-r.html#cb38-1"></a><span class="kw">library</span>(tibble)</span>
+<span id="cb38-2"><a href="modeling-basics-in-r.html#cb38-2"></a>cat_pred =<span class="st"> </span><span class="kw">tibble</span>(</span>
+<span id="cb38-3"><a href="modeling-basics-in-r.html#cb38-3"></a>  <span class="dt">x1 =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="st">&quot;C&quot;</span>, <span class="dv">10</span>))),</span>
+<span id="cb38-4"><a href="modeling-basics-in-r.html#cb38-4"></a>  <span class="dt">x2 =</span> <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">30</span>),</span>
+<span id="cb38-5"><a href="modeling-basics-in-r.html#cb38-5"></a>  <span class="dt">y  =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">30</span>)</span>
+<span id="cb38-6"><a href="modeling-basics-in-r.html#cb38-6"></a>)</span>
+<span id="cb38-7"><a href="modeling-basics-in-r.html#cb38-7"></a>cat_pred</span></code></pre></div>
 <pre><code>## # A tibble: 30 x 3
-##    x1       x2      y
-##    &lt;fct&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1 A     0.839  0.318
-##  2 A     0.301  1.27 
-##  3 A     0.341  0.728
-##  4 A     0.649 -0.156
-##  5 A     0.997  0.296
-##  6 A     0.396  0.738
-##  7 A     0.432  1.89 
-##  8 A     0.406 -0.955
-##  9 A     0.934 -1.09 
-## 10 A     0.463  1.84 
+##    x1        x2       y
+##    &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1 A     0.262  -0.0343
+##  2 A     0.115  -0.0178
+##  3 A     0.399   0.461 
+##  4 A     0.160   0.0463
+##  5 A     0.816  -0.0817
+##  6 A     0.515  -0.646 
+##  7 A     0.162   0.981 
+##  8 A     0.432   0.753 
+##  9 A     0.0166 -1.03  
+## 10 A     0.0274  1.72  
 ## # … with 20 more rows</code></pre>
 <p>Notice that in this simple simulated tibble, we have coerced <code>x1</code> to be a factor variable, although this is not strictly necessary since the variable took values <code>A</code>, <code>B</code>, and <code>C</code>. When using <code>lm()</code>, even if not a factor, <code>R</code> would have treated <code>x1</code> as such. Coercion to factor is more important if a categorical variable is coded for example as <code>1</code>, <code>2</code> and <code>3</code>. Otherwise it is treated as numeric, which creates a difference in the regression model.</p>
 <p>The following two models illustrate the effect of factor variables on linear models.</p>
-<pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
-<span class="kw">coef</span>(cat_pred_mod_add)</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modeling-basics-in-r.html#cb40-1"></a>cat_pred_mod_add =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)</span>
+<span id="cb40-2"><a href="modeling-basics-in-r.html#cb40-2"></a><span class="kw">coef</span>(cat_pred_mod_add)</span></code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2 
-##   1.6136907  -0.8519225  -0.7092184  -1.9548160</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)
-<span class="kw">coef</span>(cat_pred_mod_int)</code></pre>
+##  0.35326468  0.22856423  0.05949584 -0.47329142</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modeling-basics-in-r.html#cb42-1"></a>cat_pred_mod_int =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>x2, <span class="dt">data =</span> cat_pred)</span>
+<span id="cb42-2"><a href="modeling-basics-in-r.html#cb42-2"></a><span class="kw">coef</span>(cat_pred_mod_int)</span></code></pre></div>
 <pre><code>## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  1.59452873 -1.21914760 -0.09529022 -1.92154134  0.76514235 -0.98333898</code></pre>
+##  0.38520381  0.07113332  0.20209042 -0.58327064  0.35868402 -0.19520729</code></pre>
 </div>
-<div id="polynomials" class="section level3">
+<div id="polynomials" class="section level3" number="4.6.2">
 <h3><span class="header-section-number">4.6.2</span> Polynomials</h3>
 <p>Polynomial terms can be specified using the inhibit function <code>I()</code> or through the <code>poly()</code> function. Note that these two methods produce different coefficients, but the same residuals! This is due to the <code>poly()</code> function using orthogonal polynomials by default.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">5</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>TV <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(TV <span class="op">^</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> Advertising)
-<span class="kw">coef</span>(mod_<span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modeling-basics-in-r.html#cb44-1"></a>mod_<span class="dv">5</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>TV <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(TV <span class="op">^</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">data =</span> Advertising)</span>
+<span id="cb44-2"><a href="modeling-basics-in-r.html#cb44-2"></a><span class="kw">coef</span>(mod_<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##   (Intercept)            TV       I(TV^2) 
 ##  6.114120e+00  6.726593e-02 -6.846934e-05</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">6</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> Advertising)
-<span class="kw">coef</span>(mod_<span class="dv">6</span>)</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modeling-basics-in-r.html#cb46-1"></a>mod_<span class="dv">6</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> Advertising)</span>
+<span id="cb46-2"><a href="modeling-basics-in-r.html#cb46-2"></a><span class="kw">coef</span>(mod_<span class="dv">6</span>)</span></code></pre></div>
 <pre><code>##           (Intercept) poly(TV, degree = 2)1 poly(TV, degree = 2)2 
 ##             14.022500             57.572721             -6.228802</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">resid</span>(mod_<span class="dv">5</span>), <span class="kw">resid</span>(mod_<span class="dv">6</span>))</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modeling-basics-in-r.html#cb48-1"></a><span class="kw">all.equal</span>(<span class="kw">resid</span>(mod_<span class="dv">5</span>), <span class="kw">resid</span>(mod_<span class="dv">6</span>))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Polynomials and interactions can be mixed to create even more complex models.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">7</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> Advertising)
-<span class="co"># mod_7 = lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)</span>
-<span class="kw">coef</span>(mod_<span class="dv">7</span>)</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modeling-basics-in-r.html#cb50-1"></a>mod_<span class="dv">7</span> =<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">poly</span>(TV, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> Advertising)</span>
+<span id="cb50-2"><a href="modeling-basics-in-r.html#cb50-2"></a><span class="co"># mod_7 = lm(Sales ~ . ^ 2 + I(TV ^ 2) + I(TV ^ 3), data = Advertising)</span></span>
+<span id="cb50-3"><a href="modeling-basics-in-r.html#cb50-3"></a><span class="kw">coef</span>(mod_<span class="dv">7</span>)</span></code></pre></div>
 <pre><code>##           (Intercept)                    TV                 Radio 
 ##          6.206394e+00          2.092726e-02          3.766579e-02 
 ##             Newspaper poly(TV, degree = 3)1 poly(TV, degree = 3)2 
@@ -612,21 +648,21 @@ cat_pred</code></pre>
 ##         -9.924992e-05</code></pre>
 <p>Notice here that <code>R</code> ignores the first order term from <code>poly(TV, degree = 3)</code> as it is already in the model. We could consider using the commented line instead.</p>
 </div>
-<div id="transformations" class="section level3">
+<div id="transformations" class="section level3" number="4.6.3">
 <h3><span class="header-section-number">4.6.3</span> Transformations</h3>
 <p>Note that we could also create more complex models, which allow for non-linearity, using transformations. Be aware, when doing so to the response variable, that this will affect the units of said variable. You may need to un-transform to compare to non-transformed models.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod_<span class="dv">8</span> =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Sales) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Advertising)
-<span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">resid</span>(mod_<span class="dv">8</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)) <span class="co"># incorrect RMSE for Model 8</span></code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modeling-basics-in-r.html#cb52-1"></a>mod_<span class="dv">8</span> =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Sales) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Advertising)</span>
+<span id="cb52-2"><a href="modeling-basics-in-r.html#cb52-2"></a><span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">resid</span>(mod_<span class="dv">8</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)) <span class="co"># incorrect RMSE for Model 8</span></span></code></pre></div>
 <pre><code>## [1] 0.1849483</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">resid</span>(mod_<span class="dv">7</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)) <span class="co"># RMSE for Model 7</span></code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="modeling-basics-in-r.html#cb54-1"></a><span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">resid</span>(mod_<span class="dv">7</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)) <span class="co"># RMSE for Model 7</span></span></code></pre></div>
 <pre><code>## [1] 0.4813215</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">exp</span>(<span class="kw">resid</span>(mod_<span class="dv">8</span>)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)) <span class="co"># correct RMSE for Model 8</span></code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modeling-basics-in-r.html#cb56-1"></a><span class="kw">sqrt</span>(<span class="kw">mean</span>(<span class="kw">exp</span>(<span class="kw">resid</span>(mod_<span class="dv">8</span>)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)) <span class="co"># correct RMSE for Model 8</span></span></code></pre></div>
 <pre><code>## [1] 1.023205</code></pre>
 </div>
 </div>
-<div id="rmarkdown" class="section level2">
+<div id="rmarkdown" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="04-model-basics.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded in this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="04-model-basics.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2. The following packages (and their dependencies) were loaded in this file:</p>
 <pre><code>## [1] &quot;tibble&quot;  &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot; &quot;readr&quot;</code></pre>
 
 </div>
@@ -645,11 +681,13 @@ cat_pred</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -657,12 +695,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -674,6 +711,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -692,8 +733,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

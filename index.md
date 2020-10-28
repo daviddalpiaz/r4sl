@@ -1,7 +1,7 @@
 --- 
-title: "`R` for Statistical Learning"
+title: "R for Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2019-03-22"
+date: "2020-10-28"
 github-repo: daviddalpiaz/r4sl
 url: 'http\://daviddalpiaz.github.io/r4sl/'
 knit: "bookdown::render_book"
@@ -22,7 +22,7 @@ description: ""
 
 \begin{center}\includegraphics{wordmark} \end{center}
 
-Welcome to `R` for Statistical Learning! While this is the current title, a more appropriate title would be "Machine Learning from the Perspective of a Statistician using `R`" but that doesn't seem as catchy.
+Welcome to **R for Statistical Learning**! While this is the current title, a more appropriate title would be "Machine Learning from the Perspective of a Statistician using `R`" but that doesn't seem as catchy.
 
 ## About This Book {-}
 

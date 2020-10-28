@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 31 Regularized Discriminant Analysis | R for Statistical Learning</title>
   <meta name="description" content="Chapter 31 Regularized Discriminant Analysis | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 31 Regularized Discriminant Analysis | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="non-linear-models.html">
-<link rel="next" href="support-vector-machines.html">
+<link rel="prev" href="non-linear-models.html"/>
+<link rel="next" href="support-vector-machines.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,28 +425,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regularized-discriminant-analysis" class="section level1">
+<div id="regularized-discriminant-analysis" class="section level1" number="31">
 <h1><span class="header-section-number">Chapter 31</span> Regularized Discriminant Analysis</h1>
 <p>We now use the <code>Sonar</code> dataset from the <code>mlbench</code> package to explore a new regularization method, <strong>regularized discriminant analysis</strong> (RDA), which combines the LDA and QDA. This is similar to how elastic net combines the ridge and lasso.</p>
-<div id="sonar-data" class="section level2">
+<div id="sonar-data" class="section level2" number="31.1">
 <h2><span class="header-section-number">31.1</span> Sonar Data</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3</span>
-<span class="co"># see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console</span>
-<span class="kw">library</span>(methods)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mlbench)
-<span class="kw">library</span>(caret)
-<span class="kw">library</span>(glmnet)
-<span class="kw">library</span>(klaR)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Sonar)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#View(Sonar)</span></code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(Sonar<span class="op">$</span>Class) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(Sonar)</code></pre>
+<div class="sourceCode" id="cb927"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb927-1"><a href="regularized-discriminant-analysis.html#cb927-1"></a><span class="co"># this is a temporary workaround for an issue with glmnet, Matrix, and R version 3.3.3</span></span>
+<span id="cb927-2"><a href="regularized-discriminant-analysis.html#cb927-2"></a><span class="co"># see here: http://stackoverflow.com/questions/43282720/r-error-in-validobject-object-when-running-as-script-but-not-in-console</span></span>
+<span id="cb927-3"><a href="regularized-discriminant-analysis.html#cb927-3"></a><span class="kw">library</span>(methods)</span></code></pre></div>
+<div class="sourceCode" id="cb928"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb928-1"><a href="regularized-discriminant-analysis.html#cb928-1"></a><span class="kw">library</span>(mlbench)</span>
+<span id="cb928-2"><a href="regularized-discriminant-analysis.html#cb928-2"></a><span class="kw">library</span>(caret)</span>
+<span id="cb928-3"><a href="regularized-discriminant-analysis.html#cb928-3"></a><span class="kw">library</span>(glmnet)</span>
+<span id="cb928-4"><a href="regularized-discriminant-analysis.html#cb928-4"></a><span class="kw">library</span>(klaR)</span></code></pre></div>
+<div class="sourceCode" id="cb929"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb929-1"><a href="regularized-discriminant-analysis.html#cb929-1"></a><span class="kw">data</span>(Sonar)</span></code></pre></div>
+<div class="sourceCode" id="cb930"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb930-1"><a href="regularized-discriminant-analysis.html#cb930-1"></a><span class="co">#View(Sonar)</span></span></code></pre></div>
+<div class="sourceCode" id="cb931"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb931-1"><a href="regularized-discriminant-analysis.html#cb931-1"></a><span class="kw">table</span>(Sonar<span class="op">$</span>Class) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(Sonar)</span></code></pre></div>
 <pre><code>## 
 ##         M         R 
 ## 0.5336538 0.4663462</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(Sonar) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<div class="sourceCode" id="cb933"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb933-1"><a href="regularized-discriminant-analysis.html#cb933-1"></a><span class="kw">ncol</span>(Sonar) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] 60</code></pre>
 </div>
-<div id="rda" class="section level2">
+<div id="rda" class="section level2" number="31.2">
 <h2><span class="header-section-number">31.2</span> RDA</h2>
 <p>Regularized discriminant analysis uses the same general setup as LDA and QDA but estimates the covariance in a new way, which combines the covariance of QDA <span class="math inline">\((\hat{\Sigma}_k)\)</span> with the covariance of LDA <span class="math inline">\((\hat{\Sigma})\)</span> using a tuning parameter <span class="math inline">\(\lambda\)</span>.</p>
 <p><span class="math display">\[
@@ -426,13 +464,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\((\gamma=1, \lambda=1)\)</span>: Classification using euclidean distance - as in previous case, but variances are the same for all groups. Objects are assigned to group with nearest mean.</li>
 </ul>
 </div>
-<div id="rda-with-grid-search" class="section level2">
+<div id="rda-with-grid-search" class="section level2" number="31.3">
 <h2><span class="header-section-number">31.3</span> RDA with Grid Search</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
-cv_<span class="dv">5</span>_grid =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
-fit_rda_grid =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;rda&quot;</span>, <span class="dt">trControl =</span> cv_<span class="dv">5</span>_grid)
-fit_rda_grid</code></pre>
+<div class="sourceCode" id="cb935"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb935-1"><a href="regularized-discriminant-analysis.html#cb935-1"></a><span class="kw">set.seed</span>(<span class="dv">1337</span>)</span>
+<span id="cb935-2"><a href="regularized-discriminant-analysis.html#cb935-2"></a>cv_<span class="dv">5</span>_grid =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb936"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb936-1"><a href="regularized-discriminant-analysis.html#cb936-1"></a><span class="kw">set.seed</span>(<span class="dv">1337</span>)</span>
+<span id="cb936-2"><a href="regularized-discriminant-analysis.html#cb936-2"></a>fit_rda_grid =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;rda&quot;</span>, <span class="dt">trControl =</span> cv_<span class="dv">5</span>_grid)</span>
+<span id="cb936-3"><a href="regularized-discriminant-analysis.html#cb936-3"></a>fit_rda_grid</span></code></pre></div>
 <pre><code>## Regularized Discriminant Analysis 
 ## 
 ## 208 samples
@@ -441,32 +479,32 @@ fit_rda_grid</code></pre>
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 166, 166, 167, 166, 167 
+## Summary of sample sizes: 167, 166, 166, 167, 166 
 ## Resampling results across tuning parameters:
 ## 
 ##   gamma  lambda  Accuracy   Kappa    
-##   0.0    0.0     0.7013937  0.3841061
-##   0.0    0.5     0.7739837  0.5473212
-##   0.0    1.0     0.7411150  0.4789646
-##   0.5    0.0     0.8217189  0.6390489
-##   0.5    0.5     0.8077816  0.6095537
-##   0.5    1.0     0.7845528  0.5670147
-##   1.0    0.0     0.6778165  0.3535033
-##   1.0    0.5     0.6875726  0.3738076
-##   1.0    1.0     0.6875726  0.3738076
+##   0.0    0.0     0.6977933  0.3791172
+##   0.0    0.5     0.7644599  0.5259800
+##   0.0    1.0     0.7310105  0.4577198
+##   0.5    0.0     0.7885017  0.5730052
+##   0.5    0.5     0.8271777  0.6502693
+##   0.5    1.0     0.7988386  0.5939209
+##   1.0    0.0     0.6732869  0.3418352
+##   1.0    0.5     0.6780488  0.3527778
+##   1.0    1.0     0.6825784  0.3631626
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were gamma = 0.5 and lambda = 0.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit_rda_grid)</code></pre>
+## The final values used for the model were gamma = 0.5 and lambda = 0.5.</code></pre>
+<div class="sourceCode" id="cb938"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb938-1"><a href="regularized-discriminant-analysis.html#cb938-1"></a><span class="kw">plot</span>(fit_rda_grid)</span></code></pre></div>
 <p><img src="31-rda_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
-<div id="rda-with-random-search-search" class="section level2">
+<div id="rda-with-random-search-search" class="section level2" number="31.4">
 <h2><span class="header-section-number">31.4</span> RDA with Random Search Search</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
-cv_<span class="dv">5</span>_rand =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>, <span class="dt">search =</span> <span class="st">&quot;random&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fit_rda_rand =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;rda&quot;</span>,
-                     <span class="dt">trControl =</span> cv_<span class="dv">5</span>_rand, <span class="dt">tuneLength =</span> <span class="dv">9</span>)
-fit_rda_rand</code></pre>
+<div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb939-1"><a href="regularized-discriminant-analysis.html#cb939-1"></a><span class="kw">set.seed</span>(<span class="dv">1337</span>)</span>
+<span id="cb939-2"><a href="regularized-discriminant-analysis.html#cb939-2"></a>cv_<span class="dv">5</span>_rand =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>, <span class="dt">search =</span> <span class="st">&quot;random&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb940"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb940-1"><a href="regularized-discriminant-analysis.html#cb940-1"></a>fit_rda_rand =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;rda&quot;</span>,</span>
+<span id="cb940-2"><a href="regularized-discriminant-analysis.html#cb940-2"></a>                     <span class="dt">trControl =</span> cv_<span class="dv">5</span>_rand, <span class="dt">tuneLength =</span> <span class="dv">9</span>)</span>
+<span id="cb940-3"><a href="regularized-discriminant-analysis.html#cb940-3"></a>fit_rda_rand</span></code></pre></div>
 <pre><code>## Regularized Discriminant Analysis 
 ## 
 ## 208 samples
@@ -475,45 +513,45 @@ fit_rda_rand</code></pre>
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 166, 166, 167, 166, 167 
+## Summary of sample sizes: 167, 166, 166, 167, 166 
 ## Resampling results across tuning parameters:
 ## 
 ##   gamma       lambda      Accuracy   Kappa    
-##   0.07399023  0.99371759  0.7796748  0.5556869
-##   0.14604362  0.33913968  0.8362369  0.6705529
-##   0.24540405  0.92379666  0.8133566  0.6231035
-##   0.28111731  0.97238848  0.7989547  0.5939312
-##   0.33131745  0.98132543  0.7941928  0.5848112
-##   0.37327926  0.19398230  0.8169570  0.6298688
-##   0.45386562  0.82735873  0.8178862  0.6318771
-##   0.56474213  0.97943029  0.7940767  0.5857574
-##   0.94763002  0.02522857  0.7740999  0.5435202
+##   0.07399023  0.99371759  0.7795587  0.5556383
+##   0.14604362  0.33913968  0.8508711  0.6996434
+##   0.24540405  0.92379666  0.8418118  0.6798190
+##   0.28111731  0.97238848  0.8226481  0.6405093
+##   0.33131745  0.98132543  0.8083624  0.6123279
+##   0.37327926  0.19398230  0.7981417  0.5930526
+##   0.45386562  0.82735873  0.8272938  0.6501074
+##   0.94763002  0.02522857  0.7742160  0.5399326
+##   0.97943029  0.24657940  0.7454123  0.4839854
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
 ## The final values used for the model were gamma = 0.1460436 and lambda
 ##  = 0.3391397.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(fit_rda_rand)</code></pre>
+<div class="sourceCode" id="cb942"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb942-1"><a href="regularized-discriminant-analysis.html#cb942-1"></a><span class="kw">ggplot</span>(fit_rda_rand)</span></code></pre></div>
 <p><img src="31-rda_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
-<div id="comparison-to-elastic-net" class="section level2">
+<div id="comparison-to-elastic-net" class="section level2" number="31.5">
 <h2><span class="header-section-number">31.5</span> Comparison to Elastic Net</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
-fit_elnet_grid =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
-                       <span class="dt">trControl =</span> cv_<span class="dv">5</span>_grid, <span class="dt">tuneLength =</span> <span class="dv">10</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
-fit_elnet_int_grid =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
-                           <span class="dt">trControl =</span> cv_<span class="dv">5</span>_grid, <span class="dt">tuneLength =</span> <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb943"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb943-1"><a href="regularized-discriminant-analysis.html#cb943-1"></a><span class="kw">set.seed</span>(<span class="dv">1337</span>)</span>
+<span id="cb943-2"><a href="regularized-discriminant-analysis.html#cb943-2"></a>fit_elnet_grid =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb943-3"><a href="regularized-discriminant-analysis.html#cb943-3"></a>                       <span class="dt">trControl =</span> cv_<span class="dv">5</span>_grid, <span class="dt">tuneLength =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb944"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb944-1"><a href="regularized-discriminant-analysis.html#cb944-1"></a><span class="kw">set.seed</span>(<span class="dv">1337</span>)</span>
+<span id="cb944-2"><a href="regularized-discriminant-analysis.html#cb944-2"></a>fit_elnet_int_grid =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb944-3"><a href="regularized-discriminant-analysis.html#cb944-3"></a>                           <span class="dt">trControl =</span> cv_<span class="dv">5</span>_grid, <span class="dt">tuneLength =</span> <span class="dv">10</span>)</span></code></pre></div>
 </div>
-<div id="results-2" class="section level2">
+<div id="results-2" class="section level2" number="31.6">
 <h2><span class="header-section-number">31.6</span> Results</h2>
-<pre class="sourceCode r"><code class="sourceCode r">get_best_result =<span class="st"> </span><span class="cf">function</span>(caret_fit) {
-  best_result =<span class="st"> </span>caret_fit<span class="op">$</span>results[<span class="kw">as.numeric</span>(<span class="kw">rownames</span>(caret_fit<span class="op">$</span>bestTune)), ]
-  <span class="kw">rownames</span>(best_result) =<span class="st"> </span><span class="ot">NULL</span>
-  best_result
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">rbind</span>(
-  <span class="kw">get_best_result</span>(fit_rda_grid),
-  <span class="kw">get_best_result</span>(fit_rda_rand)))</code></pre>
+<div class="sourceCode" id="cb945"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb945-1"><a href="regularized-discriminant-analysis.html#cb945-1"></a>get_best_result =<span class="st"> </span><span class="cf">function</span>(caret_fit) {</span>
+<span id="cb945-2"><a href="regularized-discriminant-analysis.html#cb945-2"></a>  best_result =<span class="st"> </span>caret_fit<span class="op">$</span>results[<span class="kw">as.numeric</span>(<span class="kw">rownames</span>(caret_fit<span class="op">$</span>bestTune)), ]</span>
+<span id="cb945-3"><a href="regularized-discriminant-analysis.html#cb945-3"></a>  <span class="kw">rownames</span>(best_result) =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb945-4"><a href="regularized-discriminant-analysis.html#cb945-4"></a>  best_result</span>
+<span id="cb945-5"><a href="regularized-discriminant-analysis.html#cb945-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb946"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb946-1"><a href="regularized-discriminant-analysis.html#cb946-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">rbind</span>(</span>
+<span id="cb946-2"><a href="regularized-discriminant-analysis.html#cb946-2"></a>  <span class="kw">get_best_result</span>(fit_rda_grid),</span>
+<span id="cb946-3"><a href="regularized-discriminant-analysis.html#cb946-3"></a>  <span class="kw">get_best_result</span>(fit_rda_rand)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -528,25 +566,25 @@ fit_elnet_int_grid =<span class="st"> </span><span class="kw">train</span>(Class
 <tbody>
 <tr class="odd">
 <td align="right">0.5000000</td>
-<td align="right">0.0000000</td>
-<td align="right">0.8217189</td>
-<td align="right">0.6390489</td>
-<td align="right">0.0455856</td>
-<td align="right">0.0926920</td>
+<td align="right">0.5000000</td>
+<td align="right">0.8271777</td>
+<td align="right">0.6502693</td>
+<td align="right">0.0970937</td>
+<td align="right">0.1962078</td>
 </tr>
 <tr class="even">
 <td align="right">0.1460436</td>
 <td align="right">0.3391397</td>
-<td align="right">0.8362369</td>
-<td align="right">0.6705529</td>
-<td align="right">0.0631932</td>
-<td align="right">0.1255389</td>
+<td align="right">0.8508711</td>
+<td align="right">0.6996434</td>
+<td align="right">0.0887983</td>
+<td align="right">0.1797382</td>
 </tr>
 </tbody>
 </table>
-<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">rbind</span>(
-  <span class="kw">get_best_result</span>(fit_elnet_grid),
-  <span class="kw">get_best_result</span>(fit_elnet_int_grid)))</code></pre>
+<div class="sourceCode" id="cb947"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb947-1"><a href="regularized-discriminant-analysis.html#cb947-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">rbind</span>(</span>
+<span id="cb947-2"><a href="regularized-discriminant-analysis.html#cb947-2"></a>  <span class="kw">get_best_result</span>(fit_elnet_grid),</span>
+<span id="cb947-3"><a href="regularized-discriminant-analysis.html#cb947-3"></a>  <span class="kw">get_best_result</span>(fit_elnet_int_grid)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -560,34 +598,34 @@ fit_elnet_int_grid =<span class="st"> </span><span class="kw">train</span>(Class
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.4</td>
-<td align="right">0.0065641</td>
-<td align="right">0.8034843</td>
-<td align="right">0.6041866</td>
-<td align="right">0.0645470</td>
-<td align="right">0.1297952</td>
+<td align="right">0.1</td>
+<td align="right">0.0350306</td>
+<td align="right">0.8271777</td>
+<td align="right">0.6501991</td>
+<td align="right">0.0416190</td>
+<td align="right">0.0881929</td>
 </tr>
 <tr class="even">
 <td align="right">0.1</td>
-<td align="right">0.0243225</td>
-<td align="right">0.8418118</td>
-<td align="right">0.6809599</td>
-<td align="right">0.0539204</td>
-<td align="right">0.1088486</td>
+<td align="right">0.0561881</td>
+<td align="right">0.8364692</td>
+<td align="right">0.6687824</td>
+<td align="right">0.0751608</td>
+<td align="right">0.1540228</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="external-links-10" class="section level2">
+<div id="external-links-10" class="section level2" number="31.7">
 <h2><span class="header-section-number">31.7</span> External Links</h2>
 <ul>
 <li><a href="http://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a">Random Search for Hyper-Parameter Optimization</a> - Paper justifying random tuning parameter search.</li>
 <li><a href="https://topepo.github.io/caret/random-hyperparameter-search.html">Random Hyperparameter Search</a> - Details on random tuning parameter search in <code>caret</code>.</li>
 </ul>
 </div>
-<div id="rmarkdown-16" class="section level2">
+<div id="rmarkdown-16" class="section level2" number="31.8">
 <h2><span class="header-section-number">31.8</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="31-rda.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2 and the following packages:</p>
+<p>The RMarkdown file for this chapter can be found <a href="31-rda.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2 and the following packages:</p>
 <ul>
 <li>Base Packages, Attached</li>
 </ul>
@@ -596,28 +634,27 @@ fit_elnet_int_grid =<span class="st"> </span><span class="kw">train</span>(Class
 <ul>
 <li>Additional Packages, Attached</li>
 </ul>
-<pre><code>## [1] &quot;klaR&quot;    &quot;MASS&quot;    &quot;glmnet&quot;  &quot;foreach&quot; &quot;Matrix&quot;  &quot;caret&quot;   &quot;ggplot2&quot;
-## [8] &quot;lattice&quot; &quot;mlbench&quot;</code></pre>
+<pre><code>## [1] &quot;klaR&quot;    &quot;MASS&quot;    &quot;glmnet&quot;  &quot;Matrix&quot;  &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot;
+## [8] &quot;mlbench&quot;</code></pre>
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;Rcpp&quot;         &quot;lubridate&quot;    &quot;class&quot;        &quot;assertthat&quot;  
-##  [5] &quot;digest&quot;       &quot;ipred&quot;        &quot;mime&quot;         &quot;R6&quot;          
-##  [9] &quot;plyr&quot;         &quot;stats4&quot;       &quot;e1071&quot;        &quot;evaluate&quot;    
-## [13] &quot;highr&quot;        &quot;pillar&quot;       &quot;rlang&quot;        &quot;lazyeval&quot;    
-## [17] &quot;rstudioapi&quot;   &quot;data.table&quot;   &quot;miniUI&quot;       &quot;rpart&quot;       
-## [21] &quot;combinat&quot;     &quot;rmarkdown&quot;    &quot;labeling&quot;     &quot;splines&quot;     
-## [25] &quot;gower&quot;        &quot;stringr&quot;      &quot;questionr&quot;    &quot;munsell&quot;     
-## [29] &quot;shiny&quot;        &quot;compiler&quot;     &quot;httpuv&quot;       &quot;xfun&quot;        
-## [33] &quot;pkgconfig&quot;    &quot;htmltools&quot;    &quot;nnet&quot;         &quot;tidyselect&quot;  
-## [37] &quot;tibble&quot;       &quot;prodlim&quot;      &quot;bookdown&quot;     &quot;codetools&quot;   
-## [41] &quot;crayon&quot;       &quot;dplyr&quot;        &quot;withr&quot;        &quot;later&quot;       
-## [45] &quot;recipes&quot;      &quot;ModelMetrics&quot; &quot;grid&quot;         &quot;nlme&quot;        
-## [49] &quot;xtable&quot;       &quot;gtable&quot;       &quot;magrittr&quot;     &quot;scales&quot;      
-## [53] &quot;stringi&quot;      &quot;reshape2&quot;     &quot;promises&quot;     &quot;timeDate&quot;    
-## [57] &quot;generics&quot;     &quot;lava&quot;         &quot;iterators&quot;    &quot;tools&quot;       
-## [61] &quot;glue&quot;         &quot;purrr&quot;        &quot;survival&quot;     &quot;yaml&quot;        
-## [65] &quot;colorspace&quot;   &quot;knitr&quot;</code></pre>
+<pre><code>##  [1] &quot;splines&quot;      &quot;foreach&quot;      &quot;prodlim&quot;      &quot;shiny&quot;        &quot;highr&quot;       
+##  [6] &quot;stats4&quot;       &quot;yaml&quot;         &quot;ipred&quot;        &quot;pillar&quot;       &quot;glue&quot;        
+## [11] &quot;pROC&quot;         &quot;digest&quot;       &quot;promises&quot;     &quot;colorspace&quot;   &quot;recipes&quot;     
+## [16] &quot;htmltools&quot;    &quot;httpuv&quot;       &quot;plyr&quot;         &quot;timeDate&quot;     &quot;pkgconfig&quot;   
+## [21] &quot;labelled&quot;     &quot;haven&quot;        &quot;questionr&quot;    &quot;bookdown&quot;     &quot;purrr&quot;       
+## [26] &quot;xtable&quot;       &quot;scales&quot;       &quot;later&quot;        &quot;gower&quot;        &quot;lava&quot;        
+## [31] &quot;tibble&quot;       &quot;combinat&quot;     &quot;generics&quot;     &quot;farver&quot;       &quot;ellipsis&quot;    
+## [36] &quot;withr&quot;        &quot;nnet&quot;         &quot;survival&quot;     &quot;magrittr&quot;     &quot;crayon&quot;      
+## [41] &quot;mime&quot;         &quot;evaluate&quot;     &quot;nlme&quot;         &quot;forcats&quot;      &quot;class&quot;       
+## [46] &quot;tools&quot;        &quot;data.table&quot;   &quot;hms&quot;          &quot;lifecycle&quot;    &quot;stringr&quot;     
+## [51] &quot;munsell&quot;      &quot;compiler&quot;     &quot;e1071&quot;        &quot;rlang&quot;        &quot;grid&quot;        
+## [56] &quot;iterators&quot;    &quot;rstudioapi&quot;   &quot;miniUI&quot;       &quot;labeling&quot;     &quot;rmarkdown&quot;   
+## [61] &quot;gtable&quot;       &quot;ModelMetrics&quot; &quot;codetools&quot;    &quot;reshape2&quot;     &quot;R6&quot;          
+## [66] &quot;lubridate&quot;    &quot;knitr&quot;        &quot;dplyr&quot;        &quot;fastmap&quot;      &quot;shape&quot;       
+## [71] &quot;stringi&quot;      &quot;Rcpp&quot;         &quot;vctrs&quot;        &quot;rpart&quot;        &quot;tidyselect&quot;  
+## [76] &quot;xfun&quot;</code></pre>
 
 </div>
 </div>
@@ -632,11 +669,13 @@ fit_elnet_int_grid =<span class="st"> </span><span class="kw">train</span>(Class
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -644,12 +683,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -661,6 +699,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -679,8 +721,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

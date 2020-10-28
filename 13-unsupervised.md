@@ -217,7 +217,7 @@ USArrests_pca$rotation[, 1] %*% USArrests_pca$rotation[, 2]
 
 ```
 ##               [,1]
-## [1,] -1.387779e-16
+## [1,] -1.665335e-16
 ```
 
 ```r
@@ -225,8 +225,8 @@ USArrests_pca$rotation[, 1] %*% USArrests_pca$rotation[, 3]
 ```
 
 ```
-##               [,1]
-## [1,] -5.551115e-17
+##              [,1]
+## [1,] 1.110223e-16
 ```
 
 ```r
@@ -235,7 +235,7 @@ USArrests_pca$x[, 1] %*% USArrests_pca$x[, 2]
 
 ```
 ##               [,1]
-## [1,] -2.062239e-14
+## [1,] -7.938095e-15
 ```
 
 ```r
@@ -244,7 +244,7 @@ USArrests_pca$x[, 1] %*% USArrests_pca$x[, 3]
 
 ```
 ##              [,1]
-## [1,] 5.384582e-15
+## [1,] 1.787459e-14
 ```
 
 The above verifies some of the "math" of PCA. We see how the loadings obtain the principal components from the original data. We check that the loading vectors are normalized. We also check for orthogonality of both the loading vectors and the principal components. (Note the above inner products aren't exactly 0, but that is simply a numerical issue.)
@@ -352,7 +352,7 @@ max(using_pca$results$Accuracy)
 ```
 
 ```
-## [1] 0.8656997
+## [1] 0.8513357
 ```
 
 ```r
@@ -360,7 +360,7 @@ max(regular_scaling$results$Accuracy)
 ```
 
 ```
-## [1] 0.8609378
+## [1] 0.8267131
 ```
 
 ```r
@@ -412,9 +412,8 @@ names(kmean_out)
 ```
 
 ```
-## [1] "cluster"      "centers"      "totss"        "withinss"    
-## [5] "tot.withinss" "betweenss"    "size"         "iter"        
-## [9] "ifault"
+## [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+## [6] "betweenss"    "size"         "iter"         "ifault"
 ```
 
 Notice that we used `nstart = 10` which will give us a more stable solution by attempting 10 random starting positions for the means. Also notice we chose to use `centers = 3`. (The $k$ in $k$-mean). How did we know to do this? We'll find out on the homework. (It will involve looking at `tot.withinss`)
@@ -425,35 +424,33 @@ kmean_out
 ```
 
 ```
-## K-means clustering with 3 clusters of sizes 61, 60, 59
+## K-means clustering with 3 clusters of sizes 60, 57, 63
 ## 
 ## Cluster means:
-##       [,1]     [,2]      [,3]     [,4]     [,5]      [,6]     [,7]
-## 1 3.997352 4.085592 0.7846534 2.136643 4.059886 3.2490887 1.747697
-## 2 1.008138 2.881229 4.3102354 4.094867 3.022989 0.8878413 4.002270
-## 3 3.993468 4.049505 1.9553560 4.037748 2.825907 2.9960855 3.026397
-##        [,8]      [,9]    [,10]
-## 1 1.8341976 0.8193371 4.043725
-## 2 3.8085492 2.0905060 0.977065
-## 3 0.8992179 3.0041820 2.931030
+##        [,1]     [,2]      [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
+## 1 0.9546789 1.058535 0.9343691 1.050995 1.863093 4.045362 1.949864 1.923591
+## 2 3.9349713 3.901193 2.1648511 1.029045 3.024529 3.917283 1.017899 3.858956
+## 3 4.1010688 4.049770 3.8473862 2.103797 2.088527 3.209953 1.750652 1.874236
+##        [,9]    [,10]
+## 1 1.0041300 3.954435
+## 2 1.1017062 1.932706
+## 3 0.7874858 3.980819
 ## 
 ## Clustering vector:
-##   [1] 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-##  [36] 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 1 1 1 1 1 1 1 1 1 1
-##  [71] 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-## [106] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [141] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [176] 2 2 2 2 2
+##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [75] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3
+## [112] 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2
+## [149] 2 2 2 2 3 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2
 ## 
 ## Within cluster sum of squares by cluster:
-## [1] 609.2674 581.8780 568.3845
-##  (between_SS / total_SS =  54.0 %)
+## [1] 580.8431 534.3726 634.7403
+##  (between_SS / total_SS =  45.1 %)
 ## 
 ## Available components:
 ## 
-## [1] "cluster"      "centers"      "totss"        "withinss"    
-## [5] "tot.withinss" "betweenss"    "size"         "iter"        
-## [9] "ifault"
+## [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+## [6] "betweenss"    "size"         "iter"         "ifault"
 ```
 
 ```r
@@ -465,9 +462,9 @@ table(true_clusters, kmeans_clusters)
 ```
 ##              kmeans_clusters
 ## true_clusters  1  2  3
-##             1 58  0  2
-##             2  0 60  0
-##             3  3  0 57
+##             1  0  2 58
+##             2  0 55  5
+##             3 60  0  0
 ```
 
 We check how well the clustering is working.
@@ -596,9 +593,9 @@ table(true_clusters, clust_data_cut)
 ```
 ##              clust_data_cut
 ## true_clusters  1  2  3
-##             1  9 51  0
-##             2  1  0 59
-##             3 59  1  0
+##             1  0 16 44
+##             2  2 56  2
+##             3 58  2  0
 ```
 
 We see in this case hierarchical clustering doesn't "work" as well as $k$-means.
@@ -645,9 +642,9 @@ table(true_clusters, clust_data_cut)
 ```
 ##              clust_data_cut
 ## true_clusters  1  2  3
-##             1  1 59  0
-##             2  1  0 59
-##             3 58  2  0
+##             1  1 58  1
+##             2  1 59  0
+##             3 60  0  0
 ```
 
 We also try single and average linkage. Single linkage seems to perform poorly here, while average linkage seems to be working well.
@@ -722,9 +719,9 @@ table(iris_kmeans$clust, iris[,5])
 ```
 ##    
 ##     setosa versicolor virginica
-##   1      0         48        14
+##   1     50          0         0
 ##   2      0          2        36
-##   3     50          0         0
+##   3      0         48        14
 ```
 
 ```r
@@ -757,9 +754,9 @@ table(iris_cut, iris_kmeans$clust)
 ```
 ##         
 ## iris_cut  1  2  3
-##        1  0  0 49
-##        2 23  0  1
-##        3 39 38  0
+##        1 49  0  0
+##        2  1  0 23
+##        3  0 38 39
 ```
 
 ```r
@@ -792,7 +789,7 @@ ColorDendrogram(iris_hc, y = iris_cut,
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 3.5.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd). The file was created using `R` version 4.0.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -813,20 +810,18 @@ The RMarkdown file for this chapter can be found [**here**](22-unsupervised.Rmd)
 
 
 ```
-##  [1] "tidyselect"   "xfun"         "purrr"        "reshape2"    
-##  [5] "splines"      "colorspace"   "generics"     "htmltools"   
-##  [9] "stats4"       "yaml"         "survival"     "prodlim"     
-## [13] "rlang"        "e1071"        "ModelMetrics" "pillar"      
-## [17] "glue"         "withr"        "foreach"      "plyr"        
-## [21] "lava"         "stringr"      "timeDate"     "munsell"     
-## [25] "gtable"       "recipes"      "codetools"    "evaluate"    
-## [29] "knitr"        "class"        "Rcpp"         "scales"      
-## [33] "ipred"        "digest"       "stringi"      "bookdown"    
-## [37] "dplyr"        "grid"         "tools"        "magrittr"    
-## [41] "lazyeval"     "tibble"       "crayon"       "pkgconfig"   
-## [45] "Matrix"       "data.table"   "lubridate"    "gower"       
-## [49] "assertthat"   "rmarkdown"    "iterators"    "R6"          
-## [53] "rpart"        "nnet"         "nlme"         "compiler"
+##  [1] "tidyselect"   "xfun"         "purrr"        "reshape2"     "splines"     
+##  [6] "colorspace"   "vctrs"        "generics"     "htmltools"    "stats4"      
+## [11] "yaml"         "survival"     "prodlim"      "rlang"        "e1071"       
+## [16] "ModelMetrics" "pillar"       "glue"         "withr"        "foreach"     
+## [21] "lifecycle"    "plyr"         "lava"         "stringr"      "timeDate"    
+## [26] "munsell"      "gtable"       "recipes"      "codetools"    "evaluate"    
+## [31] "knitr"        "class"        "Rcpp"         "scales"       "ipred"       
+## [36] "digest"       "stringi"      "bookdown"     "dplyr"        "grid"        
+## [41] "tools"        "magrittr"     "tibble"       "crayon"       "pkgconfig"   
+## [46] "ellipsis"     "Matrix"       "data.table"   "pROC"         "lubridate"   
+## [51] "gower"        "rmarkdown"    "iterators"    "R6"           "rpart"       
+## [56] "nnet"         "nlme"         "compiler"
 ```
 
 

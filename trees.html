@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 26 Trees | R for Statistical Learning</title>
   <meta name="description" content="Chapter 26 Trees | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 26 Trees | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="elastic-net.html">
-<link rel="next" href="ensemble-methods.html">
+<link rel="prev" href="elastic-net.html"/>
+<link rel="next" href="ensemble-methods.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,18 +425,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="trees" class="section level1">
+<div id="trees" class="section level1" number="26">
 <h1><span class="header-section-number">Chapter 26</span> Trees</h1>
 <p><strong>Chapter Status:</strong> This chapter was originally written using the <code>tree</code> packages. Currently being re-written to exclusively use the <code>rpart</code> package which seems more widely suggested and provides better plotting features.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tree)</code></pre>
+<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="trees.html#cb747-1"></a><span class="kw">library</span>(tree)</span></code></pre></div>
 <p>In this document, we will use the package <code>tree</code> for both classification and regression trees. Note that there are many packages to do this in <code>R</code>. <a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf"><code>rpart</code></a> may be the most common, however, we will use <code>tree</code> for simplicity.</p>
-<div id="classification-trees" class="section level2">
+<div id="classification-trees" class="section level2" number="26.1">
 <h2><span class="header-section-number">26.1</span> Classification Trees</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)</code></pre>
+<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="trees.html#cb748-1"></a><span class="kw">library</span>(ISLR)</span></code></pre></div>
 <p>To understand classification trees, we will use the <code>Carseat</code> dataset from the <code>ISLR</code> package. We will first modify the response variable <code>Sales</code> from its original use as a numerical variable, to a categorical variable with <code>High</code> for high sales, and <code>Low</code> for low sales.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Carseats)
-<span class="co">#?Carseats</span>
-<span class="kw">str</span>(Carseats)</code></pre>
+<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="trees.html#cb749-1"></a><span class="kw">data</span>(Carseats)</span>
+<span id="cb749-2"><a href="trees.html#cb749-2"></a><span class="co">#?Carseats</span></span>
+<span id="cb749-3"><a href="trees.html#cb749-3"></a><span class="kw">str</span>(Carseats)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    400 obs. of  11 variables:
 ##  $ Sales      : num  9.5 11.22 10.06 7.4 4.15 ...
 ##  $ CompPrice  : num  138 111 113 117 141 124 115 136 132 132 ...
@@ -411,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ Education  : num  17 10 12 14 13 16 15 10 10 17 ...
 ##  $ Urban      : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 2 1 1 ...
 ##  $ US         : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 1 2 1 2 1 2 ...</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">Carseats<span class="op">$</span>Sales =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">ifelse</span>(Carseats<span class="op">$</span>Sales <span class="op">&lt;=</span><span class="st"> </span><span class="dv">8</span>, <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>))
-<span class="kw">str</span>(Carseats)</code></pre>
+<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="trees.html#cb751-1"></a>Carseats<span class="op">$</span>Sales =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">ifelse</span>(Carseats<span class="op">$</span>Sales <span class="op">&lt;=</span><span class="st"> </span><span class="dv">8</span>, <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>))</span>
+<span id="cb751-2"><a href="trees.html#cb751-2"></a><span class="kw">str</span>(Carseats)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    400 obs. of  11 variables:
 ##  $ Sales      : Factor w/ 2 levels &quot;High&quot;,&quot;Low&quot;: 1 1 1 2 2 1 2 1 2 2 ...
 ##  $ CompPrice  : num  138 111 113 117 141 124 115 136 132 132 ...
@@ -426,10 +464,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ Urban      : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 2 1 2 2 1 1 ...
 ##  $ US         : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 2 2 2 1 2 1 2 1 2 ...</code></pre>
 <p>We first fit an unpruned classification tree using all of the predictors. Details of this process can be found using <code>?tree</code> and <code>?tree.control</code></p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_tree =<span class="st"> </span><span class="kw">tree</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Carseats)
-<span class="co"># seat_tree = tree(Sales ~ ., data = Carseats, </span>
-<span class="co">#                  control = tree.control(nobs = nrow(Carseats), minsize = 10))</span>
-<span class="kw">summary</span>(seat_tree)</code></pre>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="trees.html#cb753-1"></a>seat_tree =<span class="st"> </span><span class="kw">tree</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Carseats)</span>
+<span id="cb753-2"><a href="trees.html#cb753-2"></a><span class="co"># seat_tree = tree(Sales ~ ., data = Carseats, </span></span>
+<span id="cb753-3"><a href="trees.html#cb753-3"></a><span class="co">#                  control = tree.control(nobs = nrow(Carseats), minsize = 10))</span></span>
+<span id="cb753-4"><a href="trees.html#cb753-4"></a><span class="kw">summary</span>(seat_tree)</span></code></pre></div>
 <pre><code>## 
 ## Classification tree:
 ## tree(formula = Sales ~ ., data = Carseats)
@@ -440,12 +478,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual mean deviance:  0.4575 = 170.7 / 373 
 ## Misclassification error rate: 0.09 = 36 / 400</code></pre>
 <p>We see this tree has 27 terminal nodes and a misclassification rate of 0.09.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree)
-<span class="kw">text</span>(seat_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
-<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Classification Tree&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="trees.html#cb755-1"></a><span class="kw">plot</span>(seat_tree)</span>
+<span id="cb755-2"><a href="trees.html#cb755-2"></a><span class="kw">text</span>(seat_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)</span>
+<span id="cb755-3"><a href="trees.html#cb755-3"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Classification Tree&quot;</span>)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-5-1.png" width="2304" style="display: block; margin: auto;" /></p>
 <p>Above we plot the tree. Below we output the details of the splits.</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_tree</code></pre>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="trees.html#cb756-1"></a>seat_tree</span></code></pre></div>
 <pre><code>## node), split, n, deviance, yval, (yprob)
 ##       * denotes terminal node
 ## 
@@ -503,246 +541,247 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##             126) Price &lt; 125 5   0.000 High ( 1.00000 0.00000 ) *
 ##             127) Price &gt; 125 5   0.000 Low ( 0.00000 1.00000 ) *</code></pre>
 <p>We now test-train split the data so we can evaluate how well our tree is working. We use 200 observations for each.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Carseats)</code></pre>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="trees.html#cb758-1"></a><span class="kw">dim</span>(Carseats)</span></code></pre></div>
 <pre><code>## [1] 400  11</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2</span>)
-seat_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Carseats), <span class="dv">200</span>)
-seat_trn =<span class="st"> </span>Carseats[seat_idx,]
-seat_tst =<span class="st"> </span>Carseats[<span class="op">-</span>seat_idx,]</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">seat_tree =<span class="st"> </span><span class="kw">tree</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(seat_tree)</code></pre>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="trees.html#cb760-1"></a><span class="kw">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb760-2"><a href="trees.html#cb760-2"></a>seat_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Carseats), <span class="dv">200</span>)</span>
+<span id="cb760-3"><a href="trees.html#cb760-3"></a>seat_trn =<span class="st"> </span>Carseats[seat_idx,]</span>
+<span id="cb760-4"><a href="trees.html#cb760-4"></a>seat_tst =<span class="st"> </span>Carseats[<span class="op">-</span>seat_idx,]</span></code></pre></div>
+<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="trees.html#cb761-1"></a>seat_tree =<span class="st"> </span><span class="kw">tree</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn)</span></code></pre></div>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="trees.html#cb762-1"></a><span class="kw">summary</span>(seat_tree)</span></code></pre></div>
 <pre><code>## 
 ## Classification tree:
 ## tree(formula = Sales ~ ., data = seat_trn)
 ## Variables actually used in tree construction:
-## [1] &quot;ShelveLoc&quot;   &quot;Price&quot;       &quot;Population&quot;  &quot;Advertising&quot; &quot;Income&quot;     
-## [6] &quot;Age&quot;         &quot;CompPrice&quot;  
-## Number of terminal nodes:  19 
-## Residual mean deviance:  0.4282 = 77.51 / 181 
-## Misclassification error rate: 0.105 = 21 / 200</code></pre>
+## [1] &quot;Price&quot;       &quot;Population&quot;  &quot;ShelveLoc&quot;   &quot;Age&quot;         &quot;Education&quot;  
+## [6] &quot;Income&quot;      &quot;US&quot;          &quot;CompPrice&quot;   &quot;Advertising&quot;
+## Number of terminal nodes:  21 
+## Residual mean deviance:  0.5543 = 99.22 / 179 
+## Misclassification error rate: 0.115 = 23 / 200</code></pre>
 <p>Note that, the tree is not using all of the available variables.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(seat_tree)<span class="op">$</span>used</code></pre>
-<pre><code>## [1] ShelveLoc   Price       Population  Advertising Income      Age        
-## [7] CompPrice  
-## 11 Levels: &lt;leaf&gt; CompPrice Income Advertising Population ... US</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Carseats)[<span class="kw">which</span>(<span class="op">!</span>(<span class="kw">names</span>(Carseats) <span class="op">%in%</span><span class="st"> </span><span class="kw">summary</span>(seat_tree)<span class="op">$</span>used))]</code></pre>
-<pre><code>## [1] &quot;Sales&quot;     &quot;Education&quot; &quot;Urban&quot;     &quot;US&quot;</code></pre>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="trees.html#cb764-1"></a><span class="kw">summary</span>(seat_tree)<span class="op">$</span>used</span></code></pre></div>
+<pre><code>## [1] Price       Population  ShelveLoc   Age         Education   Income     
+## [7] US          CompPrice   Advertising
+## 11 Levels: &lt;leaf&gt; CompPrice Income Advertising Population Price ... US</code></pre>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="trees.html#cb766-1"></a><span class="kw">names</span>(Carseats)[<span class="kw">which</span>(<span class="op">!</span>(<span class="kw">names</span>(Carseats) <span class="op">%in%</span><span class="st"> </span><span class="kw">summary</span>(seat_tree)<span class="op">$</span>used))]</span></code></pre></div>
+<pre><code>## [1] &quot;Sales&quot; &quot;Urban&quot;</code></pre>
 <p>Also notice that, this new tree is slightly different than the tree fit to all of the data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree)
-<span class="kw">text</span>(seat_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
-<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Classification Tree&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="trees.html#cb768-1"></a><span class="kw">plot</span>(seat_tree)</span>
+<span id="cb768-2"><a href="trees.html#cb768-2"></a><span class="kw">text</span>(seat_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)</span>
+<span id="cb768-3"><a href="trees.html#cb768-3"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Classification Tree&quot;</span>)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-11-1.png" width="2304" style="display: block; margin: auto;" /></p>
 <p>When using the <code>predict()</code> function on a tree, the default <code>type</code> is <code>vector</code> which gives predicted probabilities for both classes. We will use <code>type = class</code> to directly obtain classes. We first fit the tree using the training data (above), then obtain predictions on both the train and test set, then view the confusion matrix for both.</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_trn_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
-seat_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
-<span class="co">#predict(seat_tree, seat_trn, type = &quot;vector&quot;)</span>
-<span class="co">#predict(seat_tree, seat_tst, type = &quot;vector&quot;)</span></code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train confusion</span>
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_trn_pred, <span class="dt">actual =</span> seat_trn<span class="op">$</span>Sales)</code></pre>
+<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="trees.html#cb769-1"></a>seat_trn_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb769-2"><a href="trees.html#cb769-2"></a>seat_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb769-3"><a href="trees.html#cb769-3"></a><span class="co">#predict(seat_tree, seat_trn, type = &quot;vector&quot;)</span></span>
+<span id="cb769-4"><a href="trees.html#cb769-4"></a><span class="co">#predict(seat_tree, seat_tst, type = &quot;vector&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="trees.html#cb770-1"></a><span class="co"># train confusion</span></span>
+<span id="cb770-2"><a href="trees.html#cb770-2"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_trn_pred, <span class="dt">actual =</span> seat_trn<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   66  10
-##      Low    14 110</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test confusion</span>
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
+##      High   67   8
+##      Low    14 111</code></pre>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="trees.html#cb772-1"></a><span class="co"># test confusion</span></span>
+<span id="cb772-2"><a href="trees.html#cb772-2"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   57  29
-##      Low    27  87</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">accuracy =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train acc</span>
-<span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_trn_pred, <span class="dt">actual =</span> seat_trn<span class="op">$</span>Sales)</code></pre>
-<pre><code>## [1] 0.88</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test acc</span>
-<span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
-<pre><code>## [1] 0.72</code></pre>
+##      High   51  12
+##      Low    32 105</code></pre>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="trees.html#cb774-1"></a>accuracy =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb774-2"><a href="trees.html#cb774-2"></a>  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)</span>
+<span id="cb774-3"><a href="trees.html#cb774-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="trees.html#cb775-1"></a><span class="co"># train acc</span></span>
+<span id="cb775-2"><a href="trees.html#cb775-2"></a><span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_trn_pred, <span class="dt">actual =</span> seat_trn<span class="op">$</span>Sales)</span></code></pre></div>
+<pre><code>## [1] 0.89</code></pre>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="trees.html#cb777-1"></a><span class="co"># test acc</span></span>
+<span id="cb777-2"><a href="trees.html#cb777-2"></a><span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
+<pre><code>## [1] 0.78</code></pre>
 <p>Here it is easy to see that the tree has been over-fit. The train set performs much better than the test set.</p>
 <p>We will now use cross-validation to find a tree by considering trees of different sizes which have been pruned from our original tree.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">3</span>)
-seat_tree_cv =<span class="st"> </span><span class="kw">cv.tree</span>(seat_tree, <span class="dt">FUN =</span> prune.misclass)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># index of tree with minimum error</span>
-min_idx =<span class="st"> </span><span class="kw">which.min</span>(seat_tree_cv<span class="op">$</span>dev)
-min_idx</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># number of terminal nodes in that tree</span>
-seat_tree_cv<span class="op">$</span>size[min_idx]</code></pre>
-<pre><code>## [1] 9</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># misclassification rate of each tree</span>
-seat_tree_cv<span class="op">$</span>dev <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(seat_idx)</code></pre>
-<pre><code>## [1] 0.275 0.275 0.265 0.260 0.250 0.280 0.345 0.325 0.400</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-<span class="co"># default plot</span>
-<span class="kw">plot</span>(seat_tree_cv)
-<span class="co"># better plot</span>
-<span class="kw">plot</span>(seat_tree_cv<span class="op">$</span>size, seat_tree_cv<span class="op">$</span>dev <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(seat_trn), <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>,
-     <span class="dt">xlab =</span> <span class="st">&quot;Tree Size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;CV Misclassification Rate&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="trees.html#cb779-1"></a><span class="kw">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb779-2"><a href="trees.html#cb779-2"></a>seat_tree_cv =<span class="st"> </span><span class="kw">cv.tree</span>(seat_tree, <span class="dt">FUN =</span> prune.misclass)</span></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="trees.html#cb780-1"></a><span class="co"># index of tree with minimum error</span></span>
+<span id="cb780-2"><a href="trees.html#cb780-2"></a>min_idx =<span class="st"> </span><span class="kw">which.min</span>(seat_tree_cv<span class="op">$</span>dev)</span>
+<span id="cb780-3"><a href="trees.html#cb780-3"></a>min_idx</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="trees.html#cb782-1"></a><span class="co"># number of terminal nodes in that tree</span></span>
+<span id="cb782-2"><a href="trees.html#cb782-2"></a>seat_tree_cv<span class="op">$</span>size[min_idx]</span></code></pre></div>
+<pre><code>## [1] 21</code></pre>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="trees.html#cb784-1"></a><span class="co"># misclassification rate of each tree</span></span>
+<span id="cb784-2"><a href="trees.html#cb784-2"></a>seat_tree_cv<span class="op">$</span>dev <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(seat_idx)</span></code></pre></div>
+<pre><code>## [1] 0.375 0.380 0.405 0.405 0.375 0.385 0.390 0.425 0.405</code></pre>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="trees.html#cb786-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb786-2"><a href="trees.html#cb786-2"></a><span class="co"># default plot</span></span>
+<span id="cb786-3"><a href="trees.html#cb786-3"></a><span class="kw">plot</span>(seat_tree_cv)</span>
+<span id="cb786-4"><a href="trees.html#cb786-4"></a><span class="co"># better plot</span></span>
+<span id="cb786-5"><a href="trees.html#cb786-5"></a><span class="kw">plot</span>(seat_tree_cv<span class="op">$</span>size, seat_tree_cv<span class="op">$</span>dev <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(seat_trn), <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb786-6"><a href="trees.html#cb786-6"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Tree Size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;CV Misclassification Rate&quot;</span>)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>It appears that a tree of size 9 has the fewest misclassifications of the considered trees, via cross-validation.</p>
 <p>We use <code>prune.misclass()</code> to obtain that tree from our original tree, and plot this smaller tree.</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_tree_prune =<span class="st"> </span><span class="kw">prune.misclass</span>(seat_tree, <span class="dt">best =</span> <span class="dv">9</span>)
-<span class="kw">summary</span>(seat_tree_prune)</code></pre>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="trees.html#cb787-1"></a>seat_tree_prune =<span class="st"> </span><span class="kw">prune.misclass</span>(seat_tree, <span class="dt">best =</span> <span class="dv">9</span>)</span>
+<span id="cb787-2"><a href="trees.html#cb787-2"></a><span class="kw">summary</span>(seat_tree_prune)</span></code></pre></div>
 <pre><code>## 
 ## Classification tree:
-## snip.tree(tree = seat_tree, nodes = c(223L, 4L, 12L, 54L))
+## snip.tree(tree = seat_tree, nodes = c(13L, 15L, 29L, 2L))
 ## Variables actually used in tree construction:
-## [1] &quot;ShelveLoc&quot;   &quot;Price&quot;       &quot;Advertising&quot; &quot;Age&quot;         &quot;CompPrice&quot;  
+## [1] &quot;Price&quot;      &quot;ShelveLoc&quot;  &quot;Income&quot;     &quot;Age&quot;        &quot;CompPrice&quot; 
+## [6] &quot;Population&quot;
 ## Number of terminal nodes:  9 
-## Residual mean deviance:  0.8103 = 154.8 / 191 
-## Misclassification error rate: 0.155 = 31 / 200</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_tree_prune)
-<span class="kw">text</span>(seat_tree_prune, <span class="dt">pretty =</span> <span class="dv">0</span>)
-<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Pruned Classification Tree&quot;</span>)</code></pre>
+## Residual mean deviance:  0.9135 = 174.5 / 191 
+## Misclassification error rate: 0.175 = 35 / 200</code></pre>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="trees.html#cb789-1"></a><span class="kw">plot</span>(seat_tree_prune)</span>
+<span id="cb789-2"><a href="trees.html#cb789-2"></a><span class="kw">text</span>(seat_tree_prune, <span class="dt">pretty =</span> <span class="dv">0</span>)</span>
+<span id="cb789-3"><a href="trees.html#cb789-3"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Pruned Classification Tree&quot;</span>)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-22-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>We again obtain predictions using this smaller tree, and evaluate on the test and train sets.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># train</span>
-seat_prune_trn_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree_prune, seat_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_prune_trn_pred, <span class="dt">actual =</span> seat_trn<span class="op">$</span>Sales)</code></pre>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="trees.html#cb790-1"></a><span class="co"># train</span></span>
+<span id="cb790-2"><a href="trees.html#cb790-2"></a>seat_prune_trn_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree_prune, seat_trn, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb790-3"><a href="trees.html#cb790-3"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_prune_trn_pred, <span class="dt">actual =</span> seat_trn<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   59  10
-##      Low    21 110</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_prune_trn_pred, <span class="dt">actual =</span> seat_trn<span class="op">$</span>Sales)</code></pre>
-<pre><code>## [1] 0.845</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test</span>
-seat_prune_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree_prune, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_prune_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
+##      High   62  16
+##      Low    19 103</code></pre>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="trees.html#cb792-1"></a><span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_prune_trn_pred, <span class="dt">actual =</span> seat_trn<span class="op">$</span>Sales)</span></code></pre></div>
+<pre><code>## [1] 0.825</code></pre>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="trees.html#cb794-1"></a><span class="co"># test</span></span>
+<span id="cb794-2"><a href="trees.html#cb794-2"></a>seat_prune_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree_prune, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb794-3"><a href="trees.html#cb794-3"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_prune_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   60  22
-##      Low    24  94</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_prune_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
-<pre><code>## [1] 0.77</code></pre>
+##      High   58  20
+##      Low    25  97</code></pre>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="trees.html#cb796-1"></a><span class="kw">accuracy</span>(<span class="dt">predicted =</span> seat_prune_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
+<pre><code>## [1] 0.775</code></pre>
 <p>The train set has performed almost as well as before, and there was a <strong>small</strong> improvement in the test set, but it is still obvious that we have over-fit. Trees tend to do this. We will look at several ways to fix this, including: bagging, boosting and random forests.</p>
 </div>
-<div id="regression-trees" class="section level2">
+<div id="regression-trees" class="section level2" number="26.2">
 <h2><span class="header-section-number">26.2</span> Regression Trees</h2>
 <p>To demonstrate regression trees, we will use the <code>Boston</code> data. Recall <code>medv</code> is the response. We first split the data in half.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
-<span class="kw">set.seed</span>(<span class="dv">18</span>)
-boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
-boston_trn =<span class="st"> </span>Boston[boston_idx,]
-boston_tst =<span class="st"> </span>Boston[<span class="op">-</span>boston_idx,]</code></pre>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="trees.html#cb798-1"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb798-2"><a href="trees.html#cb798-2"></a><span class="kw">set.seed</span>(<span class="dv">18</span>)</span>
+<span id="cb798-3"><a href="trees.html#cb798-3"></a>boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb798-4"><a href="trees.html#cb798-4"></a>boston_trn =<span class="st"> </span>Boston[boston_idx,]</span>
+<span id="cb798-5"><a href="trees.html#cb798-5"></a>boston_tst =<span class="st"> </span>Boston[<span class="op">-</span>boston_idx,]</span></code></pre></div>
 <p>Then fit an unpruned regression tree to the training data.</p>
-<pre class="sourceCode r"><code class="sourceCode r">boston_tree =<span class="st"> </span><span class="kw">tree</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn)
-<span class="kw">summary</span>(boston_tree)</code></pre>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="trees.html#cb799-1"></a>boston_tree =<span class="st"> </span><span class="kw">tree</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn)</span>
+<span id="cb799-2"><a href="trees.html#cb799-2"></a><span class="kw">summary</span>(boston_tree)</span></code></pre></div>
 <pre><code>## 
 ## Regression tree:
 ## tree(formula = medv ~ ., data = boston_trn)
 ## Variables actually used in tree construction:
-## [1] &quot;rm&quot;    &quot;lstat&quot; &quot;crim&quot; 
-## Number of terminal nodes:  9 
-## Residual mean deviance:  12.35 = 3013 / 244 
-## Distribution of residuals:
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## -13.600  -1.832  -0.120   0.000   1.348  26.350</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_tree)
-<span class="kw">text</span>(boston_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)
-<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Regression Tree&quot;</span>)</code></pre>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-27-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>As with classification trees, we can use cross-validation to select a good pruning of the tree.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">18</span>)
-boston_tree_cv =<span class="st"> </span><span class="kw">cv.tree</span>(boston_tree)
-<span class="kw">plot</span>(boston_tree_cv<span class="op">$</span>size, <span class="kw">sqrt</span>(boston_tree_cv<span class="op">$</span>dev <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(boston_trn)), <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>,
-     <span class="dt">xlab =</span> <span class="st">&quot;Tree Size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;CV-RMSE&quot;</span>)</code></pre>
-<p><img src="26-tree_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>While the tree of size 9 does have the lowest RMSE, we’ll prune to a size of 7 as it seems to perform just as well. (Otherwise we would not be pruning.) The pruned tree is, as expected, smaller and easier to interpret.</p>
-<pre class="sourceCode r"><code class="sourceCode r">boston_tree_prune =<span class="st"> </span><span class="kw">prune.tree</span>(boston_tree, <span class="dt">best =</span> <span class="dv">7</span>)
-<span class="kw">summary</span>(boston_tree_prune)</code></pre>
-<pre><code>## 
-## Regression tree:
-## snip.tree(tree = boston_tree, nodes = c(11L, 8L))
-## Variables actually used in tree construction:
-## [1] &quot;rm&quot;    &quot;lstat&quot; &quot;crim&quot; 
-## Number of terminal nodes:  7 
-## Residual mean deviance:  14.05 = 3455 / 246 
+## [1] &quot;lstat&quot; &quot;rm&quot;    &quot;dis&quot;   &quot;tax&quot;   &quot;crim&quot; 
+## Number of terminal nodes:  8 
+## Residual mean deviance:  12.2 = 2988 / 245 
 ## Distribution of residuals:
 ##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## -13.60000  -2.12000   0.01731   0.00000   1.88000  28.02000</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_tree_prune)
-<span class="kw">text</span>(boston_tree_prune, <span class="dt">pretty =</span> <span class="dv">0</span>)
-<span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Pruned Regression Tree&quot;</span>)</code></pre>
+## -10.25000  -2.35500  -0.06778   0.00000   1.87700  15.31000</code></pre>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="trees.html#cb801-1"></a><span class="kw">plot</span>(boston_tree)</span>
+<span id="cb801-2"><a href="trees.html#cb801-2"></a><span class="kw">text</span>(boston_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)</span>
+<span id="cb801-3"><a href="trees.html#cb801-3"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Unpruned Regression Tree&quot;</span>)</span></code></pre></div>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-27-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>As with classification trees, we can use cross-validation to select a good pruning of the tree.</p>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="trees.html#cb802-1"></a><span class="kw">set.seed</span>(<span class="dv">18</span>)</span>
+<span id="cb802-2"><a href="trees.html#cb802-2"></a>boston_tree_cv =<span class="st"> </span><span class="kw">cv.tree</span>(boston_tree)</span>
+<span id="cb802-3"><a href="trees.html#cb802-3"></a><span class="kw">plot</span>(boston_tree_cv<span class="op">$</span>size, <span class="kw">sqrt</span>(boston_tree_cv<span class="op">$</span>dev <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(boston_trn)), <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb802-4"><a href="trees.html#cb802-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Tree Size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;CV-RMSE&quot;</span>)</span></code></pre></div>
+<p><img src="26-tree_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>While the tree of size 9 does have the lowest RMSE, we’ll prune to a size of 7 as it seems to perform just as well. (Otherwise we would not be pruning.) The pruned tree is, as expected, smaller and easier to interpret.</p>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="trees.html#cb803-1"></a>boston_tree_prune =<span class="st"> </span><span class="kw">prune.tree</span>(boston_tree, <span class="dt">best =</span> <span class="dv">7</span>)</span>
+<span id="cb803-2"><a href="trees.html#cb803-2"></a><span class="kw">summary</span>(boston_tree_prune)</span></code></pre></div>
+<pre><code>## 
+## Regression tree:
+## snip.tree(tree = boston_tree, nodes = 4L)
+## Variables actually used in tree construction:
+## [1] &quot;lstat&quot; &quot;rm&quot;    &quot;tax&quot;   &quot;crim&quot; 
+## Number of terminal nodes:  7 
+## Residual mean deviance:  13.35 = 3284 / 246 
+## Distribution of residuals:
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -10.2500  -2.3680  -0.2229   0.0000   1.8770  17.1000</code></pre>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="trees.html#cb805-1"></a><span class="kw">plot</span>(boston_tree_prune)</span>
+<span id="cb805-2"><a href="trees.html#cb805-2"></a><span class="kw">text</span>(boston_tree_prune, <span class="dt">pretty =</span> <span class="dv">0</span>)</span>
+<span id="cb805-3"><a href="trees.html#cb805-3"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Pruned Regression Tree&quot;</span>)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-30-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>Let’s compare this regression tree to an additive linear model and use RMSE as our metric.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))
-}</code></pre>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="trees.html#cb806-1"></a>rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb806-2"><a href="trees.html#cb806-2"></a>  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span>
+<span id="cb806-3"><a href="trees.html#cb806-3"></a>}</span></code></pre></div>
 <p>We obtain predictions on the train and test sets from the pruned tree. We also plot actual vs predicted. This plot may look odd. We’ll compare it to a plot for linear regression below.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># training RMSE two ways</span>
-<span class="kw">sqrt</span>(<span class="kw">summary</span>(boston_tree_prune)<span class="op">$</span>dev <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(boston_trn))</code></pre>
-<pre><code>## [1] 3.695598</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">boston_prune_trn_pred =<span class="st"> </span><span class="kw">predict</span>(boston_tree_prune, <span class="dt">newdata =</span> boston_trn)
-<span class="kw">rmse</span>(boston_prune_trn_pred, boston_trn<span class="op">$</span>medv)</code></pre>
-<pre><code>## [1] 3.695598</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test RMSE</span>
-boston_prune_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_tree_prune, <span class="dt">newdata =</span> boston_tst)
-<span class="kw">rmse</span>(boston_prune_tst_pred, boston_tst<span class="op">$</span>medv)</code></pre>
-<pre><code>## [1] 5.331457</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_prune_tst_pred, boston_tst<span class="op">$</span>medv, <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>)
-<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="trees.html#cb807-1"></a><span class="co"># training RMSE two ways</span></span>
+<span id="cb807-2"><a href="trees.html#cb807-2"></a><span class="kw">sqrt</span>(<span class="kw">summary</span>(boston_tree_prune)<span class="op">$</span>dev <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(boston_trn))</span></code></pre></div>
+<pre><code>## [1] 3.603014</code></pre>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="trees.html#cb809-1"></a>boston_prune_trn_pred =<span class="st"> </span><span class="kw">predict</span>(boston_tree_prune, <span class="dt">newdata =</span> boston_trn)</span>
+<span id="cb809-2"><a href="trees.html#cb809-2"></a><span class="kw">rmse</span>(boston_prune_trn_pred, boston_trn<span class="op">$</span>medv)</span></code></pre></div>
+<pre><code>## [1] 3.603014</code></pre>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="trees.html#cb811-1"></a><span class="co"># test RMSE</span></span>
+<span id="cb811-2"><a href="trees.html#cb811-2"></a>boston_prune_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_tree_prune, <span class="dt">newdata =</span> boston_tst)</span>
+<span id="cb811-3"><a href="trees.html#cb811-3"></a><span class="kw">rmse</span>(boston_prune_tst_pred, boston_tst<span class="op">$</span>medv)</span></code></pre></div>
+<pre><code>## [1] 5.477353</code></pre>
+<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="trees.html#cb813-1"></a><span class="kw">plot</span>(boston_prune_tst_pred, boston_tst<span class="op">$</span>medv, <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>)</span>
+<span id="cb813-2"><a href="trees.html#cb813-2"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Here, using an additive linear regression the actual vs predicted looks much more like what we are used to.</p>
-<pre class="sourceCode r"><code class="sourceCode r">bostom_lm =<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn)
-boston_lm_pred =<span class="st"> </span><span class="kw">predict</span>(bostom_lm, <span class="dt">newdata =</span> boston_tst)
-<span class="kw">plot</span>(boston_lm_pred, boston_tst<span class="op">$</span>medv, <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>)
-<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="trees.html#cb814-1"></a>bostom_lm =<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn)</span>
+<span id="cb814-2"><a href="trees.html#cb814-2"></a>boston_lm_pred =<span class="st"> </span><span class="kw">predict</span>(bostom_lm, <span class="dt">newdata =</span> boston_tst)</span>
+<span id="cb814-3"><a href="trees.html#cb814-3"></a><span class="kw">plot</span>(boston_lm_pred, boston_tst<span class="op">$</span>medv, <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>)</span>
+<span id="cb814-4"><a href="trees.html#cb814-4"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmse</span>(boston_lm_pred, boston_tst<span class="op">$</span>medv)</code></pre>
-<pre><code>## [1] 5.125877</code></pre>
+<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="trees.html#cb815-1"></a><span class="kw">rmse</span>(boston_lm_pred, boston_tst<span class="op">$</span>medv)</span></code></pre></div>
+<pre><code>## [1] 5.016083</code></pre>
 <p>We also see a lower test RMSE. The most obvious linear regression beats the tree! Again, we’ll improve on this tree soon. Also note the summary of the additive linear regression below. Which is easier to interpret, that output, or the small tree above?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(bostom_lm)</code></pre>
+<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="trees.html#cb817-1"></a><span class="kw">coef</span>(bostom_lm)</span></code></pre></div>
 <pre><code>##   (Intercept)          crim            zn         indus          chas 
-##  43.340158284  -0.113490889   0.046881038   0.018046856   3.557944155 
+##  36.580341043  -0.108644810   0.034140802  -0.059738746   1.470388280 
 ##           nox            rm           age           dis           rad 
-## -21.904534125   3.486780787  -0.010592511  -1.766227892   0.354167931 
+## -17.318762356   3.802659420  -0.015408865  -1.571907768   0.326489764 
 ##           tax       ptratio         black         lstat 
-##  -0.015036451  -0.830144898   0.003722857  -0.576134200</code></pre>
+##  -0.014610527  -0.828204777   0.007807754  -0.440281912</code></pre>
 </div>
-<div id="rpart-package" class="section level2">
+<div id="rpart-package" class="section level2" number="26.3">
 <h2><span class="header-section-number">26.3</span> <code>rpart</code> Package</h2>
 <p>The <code>rpart</code> package is an alternative method for fitting trees in <code>R</code>. It is much more feature rich, including fitting multiple cost complexities and performing cross-validation by default. It also has the ability to produce much nicer trees. Based on its default settings, it will often result in smaller trees than using the <code>tree</code> package. See the references below for more information. <code>rpart</code> can also be tuned via <code>caret</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)
-<span class="kw">set.seed</span>(<span class="dv">430</span>)
-<span class="co"># Fit a decision tree using rpart</span>
-<span class="co"># Note: when you fit a tree using rpart, the fitting routine automatically</span>
-<span class="co"># performs 10-fold CV and stores the errors for later use </span>
-<span class="co"># (such as for pruning the tree)</span>
-
-<span class="co"># fit a tree using rpart</span>
-seat_rpart =<span class="st"> </span><span class="kw">rpart</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>)
-
-<span class="co"># plot the cv error curve for the tree</span>
-<span class="co"># rpart tries different cost-complexities by default</span>
-<span class="co"># also stores cv results</span>
-<span class="kw">plotcp</span>(seat_rpart)</code></pre>
+<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="trees.html#cb819-1"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb819-2"><a href="trees.html#cb819-2"></a><span class="kw">set.seed</span>(<span class="dv">430</span>)</span>
+<span id="cb819-3"><a href="trees.html#cb819-3"></a><span class="co"># Fit a decision tree using rpart</span></span>
+<span id="cb819-4"><a href="trees.html#cb819-4"></a><span class="co"># Note: when you fit a tree using rpart, the fitting routine automatically</span></span>
+<span id="cb819-5"><a href="trees.html#cb819-5"></a><span class="co"># performs 10-fold CV and stores the errors for later use </span></span>
+<span id="cb819-6"><a href="trees.html#cb819-6"></a><span class="co"># (such as for pruning the tree)</span></span>
+<span id="cb819-7"><a href="trees.html#cb819-7"></a></span>
+<span id="cb819-8"><a href="trees.html#cb819-8"></a><span class="co"># fit a tree using rpart</span></span>
+<span id="cb819-9"><a href="trees.html#cb819-9"></a>seat_rpart =<span class="st"> </span><span class="kw">rpart</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb819-10"><a href="trees.html#cb819-10"></a></span>
+<span id="cb819-11"><a href="trees.html#cb819-11"></a><span class="co"># plot the cv error curve for the tree</span></span>
+<span id="cb819-12"><a href="trees.html#cb819-12"></a><span class="co"># rpart tries different cost-complexities by default</span></span>
+<span id="cb819-13"><a href="trees.html#cb819-13"></a><span class="co"># also stores cv results</span></span>
+<span id="cb819-14"><a href="trees.html#cb819-14"></a><span class="kw">plotcp</span>(seat_rpart)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find best value of cp</span>
-min_cp =<span class="st"> </span>seat_rpart<span class="op">$</span>cptable[<span class="kw">which.min</span>(seat_rpart<span class="op">$</span>cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>]
-min_cp</code></pre>
-<pre><code>## [1] 0.02083333</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># prunce tree using best cp</span>
-seat_rpart_prune =<span class="st"> </span><span class="kw">prune</span>(seat_rpart, <span class="dt">cp =</span> min_cp)
-
-<span class="co"># nicer plots</span>
-<span class="kw">library</span>(rpart.plot)
-<span class="kw">prp</span>(seat_rpart_prune)</code></pre>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="trees.html#cb820-1"></a><span class="co"># find best value of cp</span></span>
+<span id="cb820-2"><a href="trees.html#cb820-2"></a>min_cp =<span class="st"> </span>seat_rpart<span class="op">$</span>cptable[<span class="kw">which.min</span>(seat_rpart<span class="op">$</span>cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>]</span>
+<span id="cb820-3"><a href="trees.html#cb820-3"></a>min_cp</span></code></pre></div>
+<pre><code>## [1] 0.03703704</code></pre>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="trees.html#cb822-1"></a><span class="co"># prunce tree using best cp</span></span>
+<span id="cb822-2"><a href="trees.html#cb822-2"></a>seat_rpart_prune =<span class="st"> </span><span class="kw">prune</span>(seat_rpart, <span class="dt">cp =</span> min_cp)</span>
+<span id="cb822-3"><a href="trees.html#cb822-3"></a></span>
+<span id="cb822-4"><a href="trees.html#cb822-4"></a><span class="co"># nicer plots</span></span>
+<span id="cb822-5"><a href="trees.html#cb822-5"></a><span class="kw">library</span>(rpart.plot)</span>
+<span id="cb822-6"><a href="trees.html#cb822-6"></a><span class="kw">prp</span>(seat_rpart_prune)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-37-2.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(seat_rpart_prune, <span class="dt">type =</span> <span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="trees.html#cb823-1"></a><span class="kw">prp</span>(seat_rpart_prune, <span class="dt">type =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-37-3.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rpart.plot</span>(seat_rpart_prune)</code></pre>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="trees.html#cb824-1"></a><span class="kw">rpart.plot</span>(seat_rpart_prune)</span></code></pre></div>
 <p><img src="26-tree_files/figure-html/unnamed-chunk-37-4.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="external-links-8" class="section level2">
+<div id="external-links-8" class="section level2" number="26.4">
 <h2><span class="header-section-number">26.4</span> External Links</h2>
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf">An Introduction to Recursive Partitioning Using the <code>rpart</code> Routines</a> - Details of the <code>rpart</code> package.</li>
 <li><a href="http://www.milbo.org/doc/prp.pdf"><code>rpart.plot</code> Package</a> - Detailed manual on plotting with <code>rpart</code> using the <code>rpart.plot</code> package.</li>
 </ul>
 </div>
-<div id="rmarkdown-14" class="section level2">
+<div id="rmarkdown-14" class="section level2" number="26.5">
 <h2><span class="header-section-number">26.5</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="26-tree.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="26-tree.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;rpart.plot&quot; &quot;rpart&quot;      &quot;MASS&quot;       &quot;ISLR&quot;       &quot;tree&quot;</code></pre>
 
 </div>
@@ -758,11 +797,13 @@ seat_rpart_prune =<span class="st"> </span><span class="kw">prune</span>(seat_rp
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -770,12 +811,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -787,6 +827,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -805,8 +849,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

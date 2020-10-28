@@ -19,21 +19,21 @@ tibble::as_tibble(Hitters)
 
 ```
 ## # A tibble: 263 x 20
-##    AtBat  Hits HmRun  Runs   RBI Walks Years CAtBat CHits CHmRun CRuns
-##    <int> <int> <int> <int> <int> <int> <int>  <int> <int>  <int> <int>
-##  1   315    81     7    24    38    39    14   3449   835     69   321
-##  2   479   130    18    66    72    76     3   1624   457     63   224
-##  3   496   141    20    65    78    37    11   5628  1575    225   828
-##  4   321    87    10    39    42    30     2    396   101     12    48
-##  5   594   169     4    74    51    35    11   4408  1133     19   501
-##  6   185    37     1    23     8    21     2    214    42      1    30
-##  7   298    73     0    24    24     7     3    509   108      0    41
-##  8   323    81     6    26    32     8     2    341    86      6    32
-##  9   401    92    17    49    66    65    13   5206  1332    253   784
-## 10   574   159    21   107    75    59    10   4631  1300     90   702
-## # ... with 253 more rows, and 9 more variables: CRBI <int>, CWalks <int>,
-## #   League <fct>, Division <fct>, PutOuts <int>, Assists <int>,
-## #   Errors <int>, Salary <dbl>, NewLeague <fct>
+##    AtBat  Hits HmRun  Runs   RBI Walks Years CAtBat CHits CHmRun CRuns  CRBI
+##    <int> <int> <int> <int> <int> <int> <int>  <int> <int>  <int> <int> <int>
+##  1   315    81     7    24    38    39    14   3449   835     69   321   414
+##  2   479   130    18    66    72    76     3   1624   457     63   224   266
+##  3   496   141    20    65    78    37    11   5628  1575    225   828   838
+##  4   321    87    10    39    42    30     2    396   101     12    48    46
+##  5   594   169     4    74    51    35    11   4408  1133     19   501   336
+##  6   185    37     1    23     8    21     2    214    42      1    30     9
+##  7   298    73     0    24    24     7     3    509   108      0    41    37
+##  8   323    81     6    26    32     8     2    341    86      6    32    34
+##  9   401    92    17    49    66    65    13   5206  1332    253   784   890
+## 10   574   159    21   107    75    59    10   4631  1300     90   702   504
+## # ... with 253 more rows, and 8 more variables: CWalks <int>, League <fct>,
+## #   Division <fct>, PutOuts <int>, Assists <int>, Errors <int>, Salary <dbl>,
+## #   NewLeague <fct>
 ```
 
 
@@ -125,19 +125,19 @@ hit_elnet
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 209, 211, 211, 212, 209 
+## Summary of sample sizes: 211, 210, 210, 211, 210 
 ## Resampling results across tuning parameters:
 ## 
 ##   alpha  lambda   RMSE   Rsquared  MAE  
-##   0.10    0.5106  327.7  0.4869    231.6
-##   0.10    5.1056  327.4  0.4894    230.7
-##   0.10   51.0564  334.3  0.4734    229.4
-##   0.55    0.5106  327.6  0.4873    231.5
-##   0.55    5.1056  328.1  0.4895    229.1
-##   0.55   51.0564  338.7  0.4749    233.2
-##   1.00    0.5106  327.6  0.4877    231.3
-##   1.00    5.1056  331.3  0.4818    229.3
-##   1.00   51.0564  348.8  0.4663    242.2
+##   0.10    0.5106  335.1  0.4549    235.2
+##   0.10    5.1056  332.4  0.4632    231.9
+##   0.10   51.0564  339.4  0.4486    231.1
+##   0.55    0.5106  334.9  0.4551    234.5
+##   0.55    5.1056  332.7  0.4650    230.4
+##   0.55   51.0564  343.5  0.4440    235.9
+##   1.00    0.5106  334.9  0.4546    234.1
+##   1.00    5.1056  336.0  0.4590    230.6
+##   1.00   51.0564  353.3  0.4231    244.1
 ## 
 ## RMSE was used to select the optimal model using the smallest value.
 ## The final values used for the model were alpha = 0.1 and lambda = 5.106.
@@ -182,7 +182,7 @@ get_best_result(hit_elnet_int)
 
 ```
 ##   alpha lambda  RMSE Rsquared   MAE RMSESD RsquaredSD MAESD
-## 1     1  4.135 313.5     0.56 206.1  70.83     0.1254 24.37
+## 1     1  9.552 308.6   0.5555 209.5  55.16    0.08669 21.13
 ```
 
 We see that the best result uses $\alpha = 1$, which makes since. With $\alpha = 1$, many of the added interaction coefficients are likely set to zero. (Unfortunately, obtaining this information after using `caret` with `glmnet` isn't easy. The two don't actually play very nice together. We'll use `cv.glmnet()` with the expanded feature space to explore this.)
@@ -202,7 +202,7 @@ sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min]) # CV-RMSE
 ```
 
 ```
-## [1] 305
+## [1] 306.9
 ```
 
 The commented line is not run, since it produces a lot of output, but if run, it will show that the fast majority of the coefficients are zero! Also, you'll notice that `cv.glmnet()` does not respect the usual predictor hierarchy. Not a problem for prediction, but a massive interpretation issue!
@@ -214,7 +214,7 @@ sum(coef(fit_lasso_cv) != 0)
 ```
 
 ```
-## [1] 5
+## [1] 8
 ```
 
 ```r
@@ -222,7 +222,7 @@ sum(coef(fit_lasso_cv) == 0)
 ```
 
 ```
-## [1] 186
+## [1] 183
 ```
 
 
@@ -269,19 +269,19 @@ def_elnet
 ## Summary of sample sizes: 6001, 6001, 6001, 6000, 6001 
 ## Resampling results across tuning parameters:
 ## 
-##   alpha  lambda     Accuracy  Kappa 
-##   0.10   0.0001242  0.9731    0.4125
-##   0.10   0.0012422  0.9731    0.3878
-##   0.10   0.0124220  0.9679    0.0796
-##   0.55   0.0001242  0.9731    0.4125
-##   0.55   0.0012422  0.9731    0.3909
-##   0.55   0.0124220  0.9684    0.1144
-##   1.00   0.0001242  0.9731    0.4125
-##   1.00   0.0012422  0.9732    0.4104
-##   1.00   0.0124220  0.9693    0.1661
+##   alpha  lambda     Accuracy  Kappa  
+##   0.10   0.0001253  0.9732    0.41637
+##   0.10   0.0012527  0.9727    0.37280
+##   0.10   0.0125270  0.9676    0.07238
+##   0.55   0.0001253  0.9735    0.42510
+##   0.55   0.0012527  0.9727    0.38012
+##   0.55   0.0125270  0.9679    0.09251
+##   1.00   0.0001253  0.9736    0.42638
+##   1.00   0.0012527  0.9725    0.38888
+##   1.00   0.0125270  0.9692    0.16987
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were alpha = 1 and lambda = 0.001242.
+## The final values used for the model were alpha = 1 and lambda = 0.0001253.
 ```
 
 Since the best model used $\alpha = 1$, this is a lasso model.
@@ -307,7 +307,7 @@ get_best_result(def_elnet_int)
 
 ```
 ##   alpha   lambda Accuracy  Kappa AccuracySD KappaSD
-## 1   0.1 0.001888   0.9732 0.3887   0.001843 0.07165
+## 1     1 0.001904   0.9732 0.4039   0.002846 0.07694
 ```
 
 Here we see $\alpha = 0.1$, which is a mix, but close to ridge.
@@ -329,7 +329,7 @@ calc_acc(actual = default_tst$default,
 ```
 
 ```
-## [1] 0.9728
+## [1] 0.9736
 ```
 
 
@@ -341,9 +341,9 @@ calc_acc(actual = default_tst$default,
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](25-elnet.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](25-elnet.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```
-## [1] "glmnet"  "foreach" "Matrix"  "caret"   "ggplot2" "lattice"
+## [1] "glmnet"  "Matrix"  "caret"   "ggplot2" "lattice"
 ```

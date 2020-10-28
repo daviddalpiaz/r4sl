@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 27 Ensemble Methods | R for Statistical Learning</title>
   <meta name="description" content="Chapter 27 Ensemble Methods | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 27 Ensemble Methods | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="trees.html">
-<link rel="next" href="artificial-neural-networks.html">
+<link rel="prev" href="trees.html"/>
+<link rel="next" href="artificial-neural-networks.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,64 +425,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ensemble-methods" class="section level1">
+<div id="ensemble-methods" class="section level1" number="27">
 <h1><span class="header-section-number">Chapter 27</span> Ensemble Methods</h1>
 <p><strong>Chapter Status:</strong> Currently chapter is rather lacking in narrative and gives no introduction to the theory of the methods. The <code>R</code> code is in a reasonable place, but is generally a little heavy on the output, and could use some better summary of results. Using <code>Boston</code> for regression seems OK, but would like a better dataset for classification.</p>
 <p>In this chapter, we’ll consider ensembles of trees.</p>
-<div id="regression-2" class="section level2">
+<div id="regression-2" class="section level2" number="27.1">
 <h2><span class="header-section-number">27.1</span> Regression</h2>
 <p>We first consider the regression case, using the <code>Boston</code> data from the <code>MASS</code> package. We will use RMSE as our metric, so we write a function which will help us along the way.</p>
-<pre class="sourceCode r"><code class="sourceCode r">calc_rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))
-}</code></pre>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="ensemble-methods.html#cb826-1"></a>calc_rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb826-2"><a href="ensemble-methods.html#cb826-2"></a>  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span>
+<span id="cb826-3"><a href="ensemble-methods.html#cb826-3"></a>}</span></code></pre></div>
 <p>We also load all of the packages that we will need.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)
-<span class="kw">library</span>(rpart.plot)
-<span class="kw">library</span>(randomForest)
-<span class="kw">library</span>(gbm)
-<span class="kw">library</span>(caret)
-<span class="kw">library</span>(MASS)
-<span class="kw">library</span>(ISLR)</code></pre>
+<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="ensemble-methods.html#cb827-1"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb827-2"><a href="ensemble-methods.html#cb827-2"></a><span class="kw">library</span>(rpart.plot)</span>
+<span id="cb827-3"><a href="ensemble-methods.html#cb827-3"></a><span class="kw">library</span>(randomForest)</span>
+<span id="cb827-4"><a href="ensemble-methods.html#cb827-4"></a><span class="kw">library</span>(gbm)</span>
+<span id="cb827-5"><a href="ensemble-methods.html#cb827-5"></a><span class="kw">library</span>(caret)</span>
+<span id="cb827-6"><a href="ensemble-methods.html#cb827-6"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb827-7"><a href="ensemble-methods.html#cb827-7"></a><span class="kw">library</span>(ISLR)</span></code></pre></div>
 <p>We first test-train split the data and fit a single tree using <code>rpart</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">18</span>)
-boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
-boston_trn =<span class="st"> </span>Boston[boston_idx,]
-boston_tst =<span class="st"> </span>Boston[<span class="op">-</span>boston_idx,]</code></pre>
-<div id="tree-model" class="section level3">
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="ensemble-methods.html#cb828-1"></a><span class="kw">set.seed</span>(<span class="dv">18</span>)</span>
+<span id="cb828-2"><a href="ensemble-methods.html#cb828-2"></a>boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb828-3"><a href="ensemble-methods.html#cb828-3"></a>boston_trn =<span class="st"> </span>Boston[boston_idx,]</span>
+<span id="cb828-4"><a href="ensemble-methods.html#cb828-4"></a>boston_tst =<span class="st"> </span>Boston[<span class="op">-</span>boston_idx,]</span></code></pre></div>
+<div id="tree-model" class="section level3" number="27.1.1">
 <h3><span class="header-section-number">27.1.1</span> Tree Model</h3>
-<pre class="sourceCode r"><code class="sourceCode r">boston_tree =<span class="st"> </span><span class="kw">rpart</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">boston_tree_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_tree, <span class="dt">newdata =</span> boston_tst)
-<span class="kw">plot</span>(boston_tree_tst_pred, boston_tst<span class="op">$</span>medv, 
-     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>, 
-     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Single Tree, Test Data&quot;</span>,
-     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-<span class="kw">grid</span>()
-<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb829-1"><a href="ensemble-methods.html#cb829-1"></a>boston_tree =<span class="st"> </span><span class="kw">rpart</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn)</span></code></pre></div>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="ensemble-methods.html#cb830-1"></a>boston_tree_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_tree, <span class="dt">newdata =</span> boston_tst)</span>
+<span id="cb830-2"><a href="ensemble-methods.html#cb830-2"></a><span class="kw">plot</span>(boston_tree_tst_pred, boston_tst<span class="op">$</span>medv, </span>
+<span id="cb830-3"><a href="ensemble-methods.html#cb830-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>, </span>
+<span id="cb830-4"><a href="ensemble-methods.html#cb830-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Single Tree, Test Data&quot;</span>,</span>
+<span id="cb830-5"><a href="ensemble-methods.html#cb830-5"></a>     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb830-6"><a href="ensemble-methods.html#cb830-6"></a><span class="kw">grid</span>()</span>
+<span id="cb830-7"><a href="ensemble-methods.html#cb830-7"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">tree_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_tree_tst_pred, boston_tst<span class="op">$</span>medv))</code></pre>
-<pre><code>## [1] 5.458088</code></pre>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="ensemble-methods.html#cb831-1"></a>(<span class="dt">tree_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_tree_tst_pred, boston_tst<span class="op">$</span>medv))</span></code></pre></div>
+<pre><code>## [1] 5.051138</code></pre>
 </div>
-<div id="linear-model" class="section level3">
+<div id="linear-model" class="section level3" number="27.1.2">
 <h3><span class="header-section-number">27.1.2</span> Linear Model</h3>
 <p>Last time, we also fit an additive linear model, which we found to work better than the tree. The test RMSE is lower, and the predicted vs actual plot looks much better.</p>
-<pre class="sourceCode r"><code class="sourceCode r">boston_lm =<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">boston_lm_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_lm, <span class="dt">newdata =</span> boston_tst)
-<span class="kw">plot</span>(boston_lm_tst_pred, boston_tst<span class="op">$</span>medv,
-     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>,
-     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Linear Model, Test Data&quot;</span>,
-     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-<span class="kw">grid</span>()
-<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="ensemble-methods.html#cb833-1"></a>boston_lm =<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn)</span></code></pre></div>
+<div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb834-1"><a href="ensemble-methods.html#cb834-1"></a>boston_lm_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_lm, <span class="dt">newdata =</span> boston_tst)</span>
+<span id="cb834-2"><a href="ensemble-methods.html#cb834-2"></a><span class="kw">plot</span>(boston_lm_tst_pred, boston_tst<span class="op">$</span>medv,</span>
+<span id="cb834-3"><a href="ensemble-methods.html#cb834-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>,</span>
+<span id="cb834-4"><a href="ensemble-methods.html#cb834-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Linear Model, Test Data&quot;</span>,</span>
+<span id="cb834-5"><a href="ensemble-methods.html#cb834-5"></a>     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb834-6"><a href="ensemble-methods.html#cb834-6"></a><span class="kw">grid</span>()</span>
+<span id="cb834-7"><a href="ensemble-methods.html#cb834-7"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">lm_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_lm_tst_pred, boston_tst<span class="op">$</span>medv))</code></pre>
-<pre><code>## [1] 5.125877</code></pre>
+<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb835-1"><a href="ensemble-methods.html#cb835-1"></a>(<span class="dt">lm_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_lm_tst_pred, boston_tst<span class="op">$</span>medv))</span></code></pre></div>
+<pre><code>## [1] 5.016083</code></pre>
 </div>
-<div id="bagging" class="section level3">
+<div id="bagging" class="section level3" number="27.1.3">
 <h3><span class="header-section-number">27.1.3</span> Bagging</h3>
 <p>We now fit a bagged model, using the <code>randomForest</code> package. Bagging is actually a special case of a random forest where <code>mtry</code> is equal to <span class="math inline">\(p\)</span>, the number of predictors.</p>
-<pre class="sourceCode r"><code class="sourceCode r">boston_bag =<span class="st"> </span><span class="kw">randomForest</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn, <span class="dt">mtry =</span> <span class="dv">13</span>, 
-                          <span class="dt">importance =</span> <span class="ot">TRUE</span>, <span class="dt">ntrees =</span> <span class="dv">500</span>)
-boston_bag</code></pre>
+<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="ensemble-methods.html#cb837-1"></a>boston_bag =<span class="st"> </span><span class="kw">randomForest</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn, <span class="dt">mtry =</span> <span class="dv">13</span>, </span>
+<span id="cb837-2"><a href="ensemble-methods.html#cb837-2"></a>                          <span class="dt">importance =</span> <span class="ot">TRUE</span>, <span class="dt">ntrees =</span> <span class="dv">500</span>)</span>
+<span id="cb837-3"><a href="ensemble-methods.html#cb837-3"></a>boston_bag</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ##  randomForest(formula = medv ~ ., data = boston_trn, mtry = 13,      importance = TRUE, ntrees = 500) 
@@ -452,29 +490,29 @@ boston_bag</code></pre>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 13
 ## 
-##           Mean of squared residuals: 13.74459
-##                     % Var explained: 81.53</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">boston_bag_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_bag, <span class="dt">newdata =</span> boston_tst)
-<span class="kw">plot</span>(boston_bag_tst_pred,boston_tst<span class="op">$</span>medv,
-     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>,
-     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Bagged Model, Test Data&quot;</span>,
-     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-<span class="kw">grid</span>()
-<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+##           Mean of squared residuals: 13.79736
+##                     % Var explained: 82.42</code></pre>
+<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb839-1"><a href="ensemble-methods.html#cb839-1"></a>boston_bag_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_bag, <span class="dt">newdata =</span> boston_tst)</span>
+<span id="cb839-2"><a href="ensemble-methods.html#cb839-2"></a><span class="kw">plot</span>(boston_bag_tst_pred,boston_tst<span class="op">$</span>medv,</span>
+<span id="cb839-3"><a href="ensemble-methods.html#cb839-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>,</span>
+<span id="cb839-4"><a href="ensemble-methods.html#cb839-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Bagged Model, Test Data&quot;</span>,</span>
+<span id="cb839-5"><a href="ensemble-methods.html#cb839-5"></a>     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb839-6"><a href="ensemble-methods.html#cb839-6"></a><span class="kw">grid</span>()</span>
+<span id="cb839-7"><a href="ensemble-methods.html#cb839-7"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">bag_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_bag_tst_pred, boston_tst<span class="op">$</span>medv))</code></pre>
-<pre><code>## [1] 3.843966</code></pre>
+<div class="sourceCode" id="cb840"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb840-1"><a href="ensemble-methods.html#cb840-1"></a>(<span class="dt">bag_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_bag_tst_pred, boston_tst<span class="op">$</span>medv))</span></code></pre></div>
+<pre><code>## [1] 3.905538</code></pre>
 <p>Here we see two interesting results. First, the predicted versus actual plot no longer has a small number of predicted values. Second, our test error has dropped dramatically. Also note that the “Mean of squared residuals” which is output by <code>randomForest</code> is the <strong>Out of Bag</strong> estimate of the error.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_bag, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">main =</span> <span class="st">&quot;Bagged Trees: Error vs Number of Trees&quot;</span>)
-<span class="kw">grid</span>()</code></pre>
+<div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb842-1"><a href="ensemble-methods.html#cb842-1"></a><span class="kw">plot</span>(boston_bag, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">main =</span> <span class="st">&quot;Bagged Trees: Error vs Number of Trees&quot;</span>)</span>
+<span id="cb842-2"><a href="ensemble-methods.html#cb842-2"></a><span class="kw">grid</span>()</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="random-forest" class="section level3">
+<div id="random-forest" class="section level3" number="27.1.4">
 <h3><span class="header-section-number">27.1.4</span> Random Forest</h3>
 <p>We now try a random forest. For regression, the suggestion is to use <code>mtry</code> equal to <span class="math inline">\(p/3\)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">boston_forest =<span class="st"> </span><span class="kw">randomForest</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn, <span class="dt">mtry =</span> <span class="dv">4</span>, 
-                             <span class="dt">importance =</span> <span class="ot">TRUE</span>, <span class="dt">ntrees =</span> <span class="dv">500</span>)
-boston_forest</code></pre>
+<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="ensemble-methods.html#cb843-1"></a>boston_forest =<span class="st"> </span><span class="kw">randomForest</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn, <span class="dt">mtry =</span> <span class="dv">4</span>, </span>
+<span id="cb843-2"><a href="ensemble-methods.html#cb843-2"></a>                             <span class="dt">importance =</span> <span class="ot">TRUE</span>, <span class="dt">ntrees =</span> <span class="dv">500</span>)</span>
+<span id="cb843-3"><a href="ensemble-methods.html#cb843-3"></a>boston_forest</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ##  randomForest(formula = medv ~ ., data = boston_trn, mtry = 4,      importance = TRUE, ntrees = 500) 
@@ -482,152 +520,152 @@ boston_forest</code></pre>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 4
 ## 
-##           Mean of squared residuals: 12.78942
-##                     % Var explained: 82.82</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">importance</span>(boston_forest, <span class="dt">type =</span> <span class="dv">1</span>)</code></pre>
+##           Mean of squared residuals: 12.629
+##                     % Var explained: 83.91</code></pre>
+<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb845-1"><a href="ensemble-methods.html#cb845-1"></a><span class="kw">importance</span>(boston_forest, <span class="dt">type =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>##           %IncMSE
-## crim    11.702184
-## zn       4.251232
-## indus    9.789632
-## chas     2.599685
-## nox     14.404374
-## rm      30.629328
-## age     10.192164
-## dis     10.617532
-## rad      4.947145
-## tax      8.663865
-## ptratio 11.686099
-## black    7.345671
-## lstat   23.094159</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">varImpPlot</span>(boston_forest, <span class="dt">type =</span> <span class="dv">1</span>)</code></pre>
+## crim    14.451052
+## zn       2.878652
+## indus   10.258393
+## chas     1.317298
+## nox     12.400294
+## rm      27.137361
+## age     10.473007
+## dis     12.568593
+## rad      5.120156
+## tax      6.960258
+## ptratio 10.684564
+## black    7.750034
+## lstat   28.943216</code></pre>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb847-1"><a href="ensemble-methods.html#cb847-1"></a><span class="kw">varImpPlot</span>(boston_forest, <span class="dt">type =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">boston_forest_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_forest, <span class="dt">newdata =</span> boston_tst)
-<span class="kw">plot</span>(boston_forest_tst_pred, boston_tst<span class="op">$</span>medv,
-     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>,
-     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Random Forest, Test Data&quot;</span>,
-     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-<span class="kw">grid</span>()
-<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="ensemble-methods.html#cb848-1"></a>boston_forest_tst_pred =<span class="st"> </span><span class="kw">predict</span>(boston_forest, <span class="dt">newdata =</span> boston_tst)</span>
+<span id="cb848-2"><a href="ensemble-methods.html#cb848-2"></a><span class="kw">plot</span>(boston_forest_tst_pred, boston_tst<span class="op">$</span>medv,</span>
+<span id="cb848-3"><a href="ensemble-methods.html#cb848-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>,</span>
+<span id="cb848-4"><a href="ensemble-methods.html#cb848-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Random Forest, Test Data&quot;</span>,</span>
+<span id="cb848-5"><a href="ensemble-methods.html#cb848-5"></a>     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb848-6"><a href="ensemble-methods.html#cb848-6"></a><span class="kw">grid</span>()</span>
+<span id="cb848-7"><a href="ensemble-methods.html#cb848-7"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">forest_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_forest_tst_pred, boston_tst<span class="op">$</span>medv))</code></pre>
-<pre><code>## [1] 3.701805</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">boston_forest_trn_pred =<span class="st"> </span><span class="kw">predict</span>(boston_forest, <span class="dt">newdata =</span> boston_trn)
-forest_trn_rmse =<span class="st"> </span><span class="kw">calc_rmse</span>(boston_forest_trn_pred, boston_trn<span class="op">$</span>medv)
-forest_oob_rmse =<span class="st"> </span><span class="kw">calc_rmse</span>(boston_forest<span class="op">$</span>predicted, boston_trn<span class="op">$</span>medv)</code></pre>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="ensemble-methods.html#cb849-1"></a>(<span class="dt">forest_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_forest_tst_pred, boston_tst<span class="op">$</span>medv))</span></code></pre></div>
+<pre><code>## [1] 4.172905</code></pre>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="ensemble-methods.html#cb851-1"></a>boston_forest_trn_pred =<span class="st"> </span><span class="kw">predict</span>(boston_forest, <span class="dt">newdata =</span> boston_trn)</span>
+<span id="cb851-2"><a href="ensemble-methods.html#cb851-2"></a>forest_trn_rmse =<span class="st"> </span><span class="kw">calc_rmse</span>(boston_forest_trn_pred, boston_trn<span class="op">$</span>medv)</span>
+<span id="cb851-3"><a href="ensemble-methods.html#cb851-3"></a>forest_oob_rmse =<span class="st"> </span><span class="kw">calc_rmse</span>(boston_forest<span class="op">$</span>predicted, boston_trn<span class="op">$</span>medv)</span></code></pre></div>
 <p>Here we note three RMSEs. The training RMSE (which is optimistic), the OOB RMSE (which is a reasonable estimate of the test error) and the test RMSE. Also note that variables importance was calculated.</p>
 <pre><code>##       Data    Error
-## 1 Training 1.558111
-## 2      OOB 3.576229
-## 3     Test 3.701805</code></pre>
+## 1 Training 1.583693
+## 2      OOB 3.553731
+## 3     Test 4.172905</code></pre>
 </div>
-<div id="boosting" class="section level3">
+<div id="boosting" class="section level3" number="27.1.5">
 <h3><span class="header-section-number">27.1.5</span> Boosting</h3>
 <p>Lastly, we try a boosted model, which by default will produce a nice <strong>variable importance</strong> plot as well as plots of the marginal effects of the predictors. We use the <code>gbm</code> package.</p>
-<pre class="sourceCode r"><code class="sourceCode r">booston_boost =<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn, <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, 
-                    <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)
-booston_boost</code></pre>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="ensemble-methods.html#cb853-1"></a>booston_boost =<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> boston_trn, <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
+<span id="cb853-2"><a href="ensemble-methods.html#cb853-2"></a>                    <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span>
+<span id="cb853-3"><a href="ensemble-methods.html#cb853-3"></a>booston_boost</span></code></pre></div>
 <pre><code>## gbm(formula = medv ~ ., distribution = &quot;gaussian&quot;, data = boston_trn, 
 ##     n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
 ## A gradient boosted model with gaussian loss function.
 ## 5000 iterations were performed.
 ## There were 13 predictors of which 13 had non-zero influence.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">tibble<span class="op">::</span><span class="kw">as_tibble</span>(<span class="kw">summary</span>(booston_boost))</code></pre>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="ensemble-methods.html#cb855-1"></a>tibble<span class="op">::</span><span class="kw">as_tibble</span>(<span class="kw">summary</span>(booston_boost))</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre><code>## # A tibble: 13 x 2
 ##    var     rel.inf
-##    &lt;fct&gt;     &lt;dbl&gt;
-##  1 lstat    34.4  
-##  2 rm       31.6  
-##  3 dis       9.78 
-##  4 crim      6.15 
-##  5 black     4.50 
-##  6 nox       4.35 
-##  7 age       3.50 
-##  8 ptratio   1.87 
-##  9 tax       1.16 
-## 10 indus     0.959
-## 11 rad       0.885
-## 12 chas      0.687
-## 13 zn        0.145</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
-<span class="kw">plot</span>(booston_boost, <span class="dt">i =</span> <span class="st">&quot;rm&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+##    &lt;chr&gt;     &lt;dbl&gt;
+##  1 lstat   44.3   
+##  2 rm      26.8   
+##  3 dis      5.70  
+##  4 crim     5.00  
+##  5 nox      4.80  
+##  6 black    3.72  
+##  7 age      3.16  
+##  8 ptratio  2.66  
+##  9 tax      2.11  
+## 10 indus    0.869 
+## 11 rad      0.735 
+## 12 zn       0.165 
+## 13 chas     0.0440</code></pre>
+<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="ensemble-methods.html#cb857-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb857-2"><a href="ensemble-methods.html#cb857-2"></a><span class="kw">plot</span>(booston_boost, <span class="dt">i =</span> <span class="st">&quot;rm&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-21-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(booston_boost, <span class="dt">i =</span> <span class="st">&quot;lstat&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb858"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb858-1"><a href="ensemble-methods.html#cb858-1"></a><span class="kw">plot</span>(booston_boost, <span class="dt">i =</span> <span class="st">&quot;lstat&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-21-2.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(booston_boost, <span class="dt">i =</span> <span class="st">&quot;dis&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb859-1"><a href="ensemble-methods.html#cb859-1"></a><span class="kw">plot</span>(booston_boost, <span class="dt">i =</span> <span class="st">&quot;dis&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-21-3.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">boston_boost_tst_pred =<span class="st"> </span><span class="kw">predict</span>(booston_boost, <span class="dt">newdata =</span> boston_tst, <span class="dt">n.trees =</span> <span class="dv">5000</span>)
-(<span class="dt">boost_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_boost_tst_pred, boston_tst<span class="op">$</span>medv))</code></pre>
-<pre><code>## [1] 3.43382</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boston_boost_tst_pred, boston_tst<span class="op">$</span>medv,
-     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>, 
-     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Boosted Model, Test Data&quot;</span>,
-     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-<span class="kw">grid</span>()
-<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb860"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb860-1"><a href="ensemble-methods.html#cb860-1"></a>boston_boost_tst_pred =<span class="st"> </span><span class="kw">predict</span>(booston_boost, <span class="dt">newdata =</span> boston_tst, <span class="dt">n.trees =</span> <span class="dv">5000</span>)</span>
+<span id="cb860-2"><a href="ensemble-methods.html#cb860-2"></a>(<span class="dt">boost_tst_rmse =</span> <span class="kw">calc_rmse</span>(boston_boost_tst_pred, boston_tst<span class="op">$</span>medv))</span></code></pre></div>
+<pre><code>## [1] 3.656622</code></pre>
+<div class="sourceCode" id="cb862"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb862-1"><a href="ensemble-methods.html#cb862-1"></a><span class="kw">plot</span>(boston_boost_tst_pred, boston_tst<span class="op">$</span>medv,</span>
+<span id="cb862-2"><a href="ensemble-methods.html#cb862-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Actual&quot;</span>, </span>
+<span id="cb862-3"><a href="ensemble-methods.html#cb862-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual: Boosted Model, Test Data&quot;</span>,</span>
+<span id="cb862-4"><a href="ensemble-methods.html#cb862-4"></a>     <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb862-5"><a href="ensemble-methods.html#cb862-5"></a><span class="kw">grid</span>()</span>
+<span id="cb862-6"><a href="ensemble-methods.html#cb862-6"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="results" class="section level3">
+<div id="results" class="section level3" number="27.1.6">
 <h3><span class="header-section-number">27.1.6</span> Results</h3>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">boston_rmse =</span> <span class="kw">data.frame</span>(
-  <span class="dt">Model =</span> <span class="kw">c</span>(<span class="st">&quot;Single Tree&quot;</span>, <span class="st">&quot;Linear Model&quot;</span>, <span class="st">&quot;Bagging&quot;</span>,  <span class="st">&quot;Random Forest&quot;</span>,  <span class="st">&quot;Boosting&quot;</span>),
-  <span class="dt">TestError =</span> <span class="kw">c</span>(tree_tst_rmse, lm_tst_rmse, bag_tst_rmse, forest_tst_rmse, boost_tst_rmse)
-  )
-)</code></pre>
+<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb863-1"><a href="ensemble-methods.html#cb863-1"></a>(<span class="dt">boston_rmse =</span> <span class="kw">data.frame</span>(</span>
+<span id="cb863-2"><a href="ensemble-methods.html#cb863-2"></a>  <span class="dt">Model =</span> <span class="kw">c</span>(<span class="st">&quot;Single Tree&quot;</span>, <span class="st">&quot;Linear Model&quot;</span>, <span class="st">&quot;Bagging&quot;</span>,  <span class="st">&quot;Random Forest&quot;</span>,  <span class="st">&quot;Boosting&quot;</span>),</span>
+<span id="cb863-3"><a href="ensemble-methods.html#cb863-3"></a>  <span class="dt">TestError =</span> <span class="kw">c</span>(tree_tst_rmse, lm_tst_rmse, bag_tst_rmse, forest_tst_rmse, boost_tst_rmse)</span>
+<span id="cb863-4"><a href="ensemble-methods.html#cb863-4"></a>  )</span>
+<span id="cb863-5"><a href="ensemble-methods.html#cb863-5"></a>)</span></code></pre></div>
 <pre><code>##           Model TestError
-## 1   Single Tree  5.458088
-## 2  Linear Model  5.125877
-## 3       Bagging  3.843966
-## 4 Random Forest  3.701805
-## 5      Boosting  3.433820</code></pre>
+## 1   Single Tree  5.051138
+## 2  Linear Model  5.016083
+## 3       Bagging  3.905538
+## 4 Random Forest  4.172905
+## 5      Boosting  3.656622</code></pre>
 <p>While a single tree does not beat linear regression, each of the ensemble methods perform much better!</p>
 </div>
 </div>
-<div id="classification-2" class="section level2">
+<div id="classification-2" class="section level2" number="27.2">
 <h2><span class="header-section-number">27.2</span> Classification</h2>
 <p>We now return to the <code>Carseats</code> dataset and the classification setting. We see that an additive logistic regression performs much better than a single tree, but we expect ensemble methods to bring trees closer to the logistic regression. Can they do better?</p>
 <p>We now use prediction accuracy as our metric:</p>
-<pre class="sourceCode r"><code class="sourceCode r">calc_acc =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Carseats)
-Carseats<span class="op">$</span>Sales =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">ifelse</span>(Carseats<span class="op">$</span>Sales <span class="op">&lt;=</span><span class="st"> </span><span class="dv">8</span>, <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2</span>)
-seat_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Carseats), <span class="dv">200</span>)
-seat_trn =<span class="st"> </span>Carseats[seat_idx,]
-seat_tst =<span class="st"> </span>Carseats[<span class="op">-</span>seat_idx,]</code></pre>
-<div id="tree-model-1" class="section level3">
+<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb865-1"><a href="ensemble-methods.html#cb865-1"></a>calc_acc =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb865-2"><a href="ensemble-methods.html#cb865-2"></a>  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)</span>
+<span id="cb865-3"><a href="ensemble-methods.html#cb865-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb866"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb866-1"><a href="ensemble-methods.html#cb866-1"></a><span class="kw">data</span>(Carseats)</span>
+<span id="cb866-2"><a href="ensemble-methods.html#cb866-2"></a>Carseats<span class="op">$</span>Sales =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">ifelse</span>(Carseats<span class="op">$</span>Sales <span class="op">&lt;=</span><span class="st"> </span><span class="dv">8</span>, <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb867"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb867-1"><a href="ensemble-methods.html#cb867-1"></a><span class="kw">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb867-2"><a href="ensemble-methods.html#cb867-2"></a>seat_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Carseats), <span class="dv">200</span>)</span>
+<span id="cb867-3"><a href="ensemble-methods.html#cb867-3"></a>seat_trn =<span class="st"> </span>Carseats[seat_idx,]</span>
+<span id="cb867-4"><a href="ensemble-methods.html#cb867-4"></a>seat_tst =<span class="st"> </span>Carseats[<span class="op">-</span>seat_idx,]</span></code></pre></div>
+<div id="tree-model-1" class="section level3" number="27.2.1">
 <h3><span class="header-section-number">27.2.1</span> Tree Model</h3>
-<pre class="sourceCode r"><code class="sourceCode r">seat_tree =<span class="st"> </span><span class="kw">rpart</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rpart.plot</span>(seat_tree)</code></pre>
+<div class="sourceCode" id="cb868"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb868-1"><a href="ensemble-methods.html#cb868-1"></a>seat_tree =<span class="st"> </span><span class="kw">rpart</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn)</span></code></pre></div>
+<div class="sourceCode" id="cb869"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb869-1"><a href="ensemble-methods.html#cb869-1"></a><span class="kw">rpart.plot</span>(seat_tree)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_tree_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_tree_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
+<div class="sourceCode" id="cb870"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb870-1"><a href="ensemble-methods.html#cb870-1"></a>seat_tree_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_tree, seat_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb870-2"><a href="ensemble-methods.html#cb870-2"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_tree_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   64  26
-##      Low    20  90</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">tree_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_tree_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</code></pre>
-<pre><code>## [1] 0.77</code></pre>
+##      High   58  20
+##      Low    25  97</code></pre>
+<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb872-1"><a href="ensemble-methods.html#cb872-1"></a>(<span class="dt">tree_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_tree_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</span></code></pre></div>
+<pre><code>## [1] 0.775</code></pre>
 </div>
-<div id="logistic-regression-1" class="section level3">
+<div id="logistic-regression-1" class="section level3" number="27.2.2">
 <h3><span class="header-section-number">27.2.2</span> Logistic Regression</h3>
-<pre class="sourceCode r"><code class="sourceCode r">seat_glm =<span class="st"> </span><span class="kw">glm</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">seat_glm_tst_pred =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(seat_glm, seat_tst, <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, 
-                           <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>)
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_glm_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
+<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb874-1"><a href="ensemble-methods.html#cb874-1"></a>seat_glm =<span class="st"> </span><span class="kw">glm</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb875"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb875-1"><a href="ensemble-methods.html#cb875-1"></a>seat_glm_tst_pred =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(seat_glm, seat_tst, <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, </span>
+<span id="cb875-2"><a href="ensemble-methods.html#cb875-2"></a>                           <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>)</span>
+<span id="cb875-3"><a href="ensemble-methods.html#cb875-3"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_glm_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   75   9
-##      Low     9 107</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">glm_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_glm_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</code></pre>
-<pre><code>## [1] 0.91</code></pre>
+##      High   72   6
+##      Low    11 111</code></pre>
+<div class="sourceCode" id="cb877"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb877-1"><a href="ensemble-methods.html#cb877-1"></a>(<span class="dt">glm_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_glm_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</span></code></pre></div>
+<pre><code>## [1] 0.915</code></pre>
 </div>
-<div id="bagging-1" class="section level3">
+<div id="bagging-1" class="section level3" number="27.2.3">
 <h3><span class="header-section-number">27.2.3</span> Bagging</h3>
-<pre class="sourceCode r"><code class="sourceCode r">seat_bag =<span class="st"> </span><span class="kw">randomForest</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">mtry =</span> <span class="dv">10</span>, 
-                        <span class="dt">importance =</span> <span class="ot">TRUE</span>, <span class="dt">ntrees =</span> <span class="dv">500</span>)
-seat_bag</code></pre>
+<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb879-1"><a href="ensemble-methods.html#cb879-1"></a>seat_bag =<span class="st"> </span><span class="kw">randomForest</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">mtry =</span> <span class="dv">10</span>, </span>
+<span id="cb879-2"><a href="ensemble-methods.html#cb879-2"></a>                        <span class="dt">importance =</span> <span class="ot">TRUE</span>, <span class="dt">ntrees =</span> <span class="dv">500</span>)</span>
+<span id="cb879-3"><a href="ensemble-methods.html#cb879-3"></a>seat_bag</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ##  randomForest(formula = Sales ~ ., data = seat_trn, mtry = 10,      importance = TRUE, ntrees = 500) 
@@ -635,25 +673,25 @@ seat_bag</code></pre>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 10
 ## 
-##         OOB estimate of  error rate: 21%
+##         OOB estimate of  error rate: 26%
 ## Confusion matrix:
 ##      High Low class.error
-## High   51  29   0.3625000
-## Low    13 107   0.1083333</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">seat_bag_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_bag, <span class="dt">newdata =</span> seat_tst)
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_bag_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
+## High   51  30   0.3703704
+## Low    22  97   0.1848739</code></pre>
+<div class="sourceCode" id="cb881"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb881-1"><a href="ensemble-methods.html#cb881-1"></a>seat_bag_tst_pred =<span class="st"> </span><span class="kw">predict</span>(seat_bag, <span class="dt">newdata =</span> seat_tst)</span>
+<span id="cb881-2"><a href="ensemble-methods.html#cb881-2"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_bag_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   66  19
-##      Low    18  97</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">bag_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_bag_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</code></pre>
-<pre><code>## [1] 0.815</code></pre>
+##      High   62  14
+##      Low    21 103</code></pre>
+<div class="sourceCode" id="cb883"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb883-1"><a href="ensemble-methods.html#cb883-1"></a>(<span class="dt">bag_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_bag_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</span></code></pre></div>
+<pre><code>## [1] 0.825</code></pre>
 </div>
-<div id="random-forest-1" class="section level3">
+<div id="random-forest-1" class="section level3" number="27.2.4">
 <h3><span class="header-section-number">27.2.4</span> Random Forest</h3>
 <p>For classification, the suggested <code>mtry</code> for a random forest is <span class="math inline">\(\sqrt{p}.\)</span></p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_forest =<span class="st"> </span><span class="kw">randomForest</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">mtry =</span> <span class="dv">3</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>, <span class="dt">ntrees =</span> <span class="dv">500</span>)
-seat_forest</code></pre>
+<div class="sourceCode" id="cb885"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb885-1"><a href="ensemble-methods.html#cb885-1"></a>seat_forest =<span class="st"> </span><span class="kw">randomForest</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn, <span class="dt">mtry =</span> <span class="dv">3</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>, <span class="dt">ntrees =</span> <span class="dv">500</span>)</span>
+<span id="cb885-2"><a href="ensemble-methods.html#cb885-2"></a>seat_forest</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ##  randomForest(formula = Sales ~ ., data = seat_trn, mtry = 3,      importance = TRUE, ntrees = 500) 
@@ -661,60 +699,60 @@ seat_forest</code></pre>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 3
 ## 
-##         OOB estimate of  error rate: 22%
+##         OOB estimate of  error rate: 28.5%
 ## Confusion matrix:
 ##      High Low class.error
-## High   50  30   0.3750000
-## Low    14 106   0.1166667</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">seat_forest_tst_perd =<span class="st"> </span><span class="kw">predict</span>(seat_forest, <span class="dt">newdata =</span> seat_tst)
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_forest_tst_perd, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
+## High   44  37   0.4567901
+## Low    20  99   0.1680672</code></pre>
+<div class="sourceCode" id="cb887"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb887-1"><a href="ensemble-methods.html#cb887-1"></a>seat_forest_tst_perd =<span class="st"> </span><span class="kw">predict</span>(seat_forest, <span class="dt">newdata =</span> seat_tst)</span>
+<span id="cb887-2"><a href="ensemble-methods.html#cb887-2"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_forest_tst_perd, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   64  18
-##      Low    20  98</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">forest_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_forest_tst_perd, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</code></pre>
-<pre><code>## [1] 0.81</code></pre>
+##      High   58   8
+##      Low    25 109</code></pre>
+<div class="sourceCode" id="cb889"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb889-1"><a href="ensemble-methods.html#cb889-1"></a>(<span class="dt">forest_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_forest_tst_perd, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</span></code></pre></div>
+<pre><code>## [1] 0.835</code></pre>
 </div>
-<div id="boosting-1" class="section level3">
+<div id="boosting-1" class="section level3" number="27.2.5">
 <h3><span class="header-section-number">27.2.5</span> Boosting</h3>
 <p>To perform boosting, we modify the response to be <code>0</code> and <code>1</code> to work with <code>gbm</code>. Later we will use <code>caret</code> to fit <code>gbm</code> models, which will avoid this annoyance.</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_trn_mod =<span class="st"> </span>seat_trn
-seat_trn_mod<span class="op">$</span>Sales =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">ifelse</span>(seat_trn_mod<span class="op">$</span>Sales <span class="op">==</span><span class="st"> &quot;Low&quot;</span>, <span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">seat_boost =<span class="st"> </span><span class="kw">gbm</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn_mod, <span class="dt">distribution =</span> <span class="st">&quot;bernoulli&quot;</span>, 
-                 <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)
-seat_boost</code></pre>
+<div class="sourceCode" id="cb891"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb891-1"><a href="ensemble-methods.html#cb891-1"></a>seat_trn_mod =<span class="st"> </span>seat_trn</span>
+<span id="cb891-2"><a href="ensemble-methods.html#cb891-2"></a>seat_trn_mod<span class="op">$</span>Sales =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">ifelse</span>(seat_trn_mod<span class="op">$</span>Sales <span class="op">==</span><span class="st"> &quot;Low&quot;</span>, <span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb892"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb892-1"><a href="ensemble-methods.html#cb892-1"></a>seat_boost =<span class="st"> </span><span class="kw">gbm</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn_mod, <span class="dt">distribution =</span> <span class="st">&quot;bernoulli&quot;</span>, </span>
+<span id="cb892-2"><a href="ensemble-methods.html#cb892-2"></a>                 <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span>
+<span id="cb892-3"><a href="ensemble-methods.html#cb892-3"></a>seat_boost</span></code></pre></div>
 <pre><code>## gbm(formula = Sales ~ ., distribution = &quot;bernoulli&quot;, data = seat_trn_mod, 
 ##     n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
 ## A gradient boosted model with bernoulli loss function.
 ## 5000 iterations were performed.
 ## There were 10 predictors of which 10 had non-zero influence.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">seat_boost_tst_pred =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(seat_boost, seat_tst, <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, 
-                             <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Low&quot;</span>)
-<span class="kw">table</span>(<span class="dt">predicted =</span> seat_boost_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</code></pre>
+<div class="sourceCode" id="cb894"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb894-1"><a href="ensemble-methods.html#cb894-1"></a>seat_boost_tst_pred =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(seat_boost, seat_tst, <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, </span>
+<span id="cb894-2"><a href="ensemble-methods.html#cb894-2"></a>                             <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Low&quot;</span>)</span>
+<span id="cb894-3"><a href="ensemble-methods.html#cb894-3"></a><span class="kw">table</span>(<span class="dt">predicted =</span> seat_boost_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
 <pre><code>##          actual
 ## predicted High Low
-##      High   70  16
-##      Low    14 100</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">boost_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_boost_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</code></pre>
-<pre><code>## [1] 0.85</code></pre>
+##      High   68  10
+##      Low    15 107</code></pre>
+<div class="sourceCode" id="cb896"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb896-1"><a href="ensemble-methods.html#cb896-1"></a>(<span class="dt">boost_tst_acc =</span> <span class="kw">calc_acc</span>(<span class="dt">predicted =</span> seat_boost_tst_pred, <span class="dt">actual =</span> seat_tst<span class="op">$</span>Sales))</span></code></pre></div>
+<pre><code>## [1] 0.875</code></pre>
 </div>
-<div id="results-1" class="section level3">
+<div id="results-1" class="section level3" number="27.2.6">
 <h3><span class="header-section-number">27.2.6</span> Results</h3>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">seat_acc =</span> <span class="kw">data.frame</span>(
-  <span class="dt">Model =</span> <span class="kw">c</span>(<span class="st">&quot;Single Tree&quot;</span>, <span class="st">&quot;Logistic Regression&quot;</span>, <span class="st">&quot;Bagging&quot;</span>,  <span class="st">&quot;Random Forest&quot;</span>,  <span class="st">&quot;Boosting&quot;</span>),
-  <span class="dt">TestAccuracy =</span> <span class="kw">c</span>(tree_tst_acc, glm_tst_acc, bag_tst_acc, forest_tst_acc, boost_tst_acc)
-  )
-)</code></pre>
+<div class="sourceCode" id="cb898"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb898-1"><a href="ensemble-methods.html#cb898-1"></a>(<span class="dt">seat_acc =</span> <span class="kw">data.frame</span>(</span>
+<span id="cb898-2"><a href="ensemble-methods.html#cb898-2"></a>  <span class="dt">Model =</span> <span class="kw">c</span>(<span class="st">&quot;Single Tree&quot;</span>, <span class="st">&quot;Logistic Regression&quot;</span>, <span class="st">&quot;Bagging&quot;</span>,  <span class="st">&quot;Random Forest&quot;</span>,  <span class="st">&quot;Boosting&quot;</span>),</span>
+<span id="cb898-3"><a href="ensemble-methods.html#cb898-3"></a>  <span class="dt">TestAccuracy =</span> <span class="kw">c</span>(tree_tst_acc, glm_tst_acc, bag_tst_acc, forest_tst_acc, boost_tst_acc)</span>
+<span id="cb898-4"><a href="ensemble-methods.html#cb898-4"></a>  )</span>
+<span id="cb898-5"><a href="ensemble-methods.html#cb898-5"></a>)</span></code></pre></div>
 <pre><code>##                 Model TestAccuracy
-## 1         Single Tree        0.770
-## 2 Logistic Regression        0.910
-## 3             Bagging        0.815
-## 4       Random Forest        0.810
-## 5            Boosting        0.850</code></pre>
+## 1         Single Tree        0.775
+## 2 Logistic Regression        0.915
+## 3             Bagging        0.825
+## 4       Random Forest        0.835
+## 5            Boosting        0.875</code></pre>
 <p>Here we see each of the ensemble methods performing better than a single tree, however, they still fall behind logistic regression. Sometimes a simple linear model will beat more complicated models! This is why you should always try a logistic regression for classification.</p>
 </div>
 </div>
-<div id="tuning-1" class="section level2">
+<div id="tuning-1" class="section level2" number="27.3">
 <h2><span class="header-section-number">27.3</span> Tuning</h2>
 <p>So far we fit bagging, boosting and random forest models, but did not tune any of them, we simply used certain, somewhat arbitrary, parameters. Now we will see how to modify the tuning parameters to make these models better.</p>
 <ul>
@@ -734,23 +772,23 @@ seat_boost</code></pre>
 <li>Cross-Validation</li>
 </ul>
 <p>Using Out of Bag samples is advantageous with these methods as compared to Cross-Validation since it removes the need to refit the model and is thus much more computationally efficient. Unfortunately OOB methods cannot be used with <code>gbm</code> models. See the <a href="http://topepo.github.io/caret/training.html"><code>caret</code> documentation</a> for details.</p>
-<div id="random-forest-and-bagging" class="section level3">
+<div id="random-forest-and-bagging" class="section level3" number="27.3.1">
 <h3><span class="header-section-number">27.3.1</span> Random Forest and Bagging</h3>
 <p>Here we setup training control for both OOB and cross-validation methods. Note we specify <code>verbose = FALSE</code> which suppresses output related to progress. You may wish to set this to <code>TRUE</code> when first tuning a model since it will give you an idea of how long the tuning process will take. (Which can sometimes be a long time.)</p>
-<pre class="sourceCode r"><code class="sourceCode r">oob =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;oob&quot;</span>)
-cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</code></pre>
-<p>To tune a Random Forest in <code>caret</code> we will use <code>method = &quot;rf&quot;</code> which uses the <code>randomForest</code> function in the background. Here we elect to use the OOB training control that we created. We could also use cross-validation, however it will likely select a similar model, but require much more time.</p>
+<div class="sourceCode" id="cb900"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb900-1"><a href="ensemble-methods.html#cb900-1"></a>oob =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;oob&quot;</span>)</span>
+<span id="cb900-2"><a href="ensemble-methods.html#cb900-2"></a>cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p>To tune a Random Forest in <code>caret</code> we will use <code>method = "rf"</code> which uses the <code>randomForest</code> function in the background. Here we elect to use the OOB training control that we created. We could also use cross-validation, however it will likely select a similar model, but require much more time.</p>
 <p>We setup a grid of <code>mtry</code> values which include all possible values since there are <span class="math inline">\(10\)</span> predictors in the dataset. An <code>mtry</code> of <span class="math inline">\(10\)</span> is actually bagging.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(seat_trn)</code></pre>
+<div class="sourceCode" id="cb901"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb901-1"><a href="ensemble-methods.html#cb901-1"></a><span class="kw">dim</span>(seat_trn)</span></code></pre></div>
 <pre><code>## [1] 200  11</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">rf_grid =<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">mtry =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">825</span>)
-seat_rf_tune =<span class="st"> </span><span class="kw">train</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn,
-                     <span class="dt">method =</span> <span class="st">&quot;rf&quot;</span>,
-                     <span class="dt">trControl =</span> oob,
-                     <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                     <span class="dt">tuneGrid =</span> rf_grid)
-seat_rf_tune</code></pre>
+<div class="sourceCode" id="cb903"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb903-1"><a href="ensemble-methods.html#cb903-1"></a>rf_grid =<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">mtry =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb904"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb904-1"><a href="ensemble-methods.html#cb904-1"></a><span class="kw">set.seed</span>(<span class="dv">825</span>)</span>
+<span id="cb904-2"><a href="ensemble-methods.html#cb904-2"></a>seat_rf_tune =<span class="st"> </span><span class="kw">train</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn,</span>
+<span id="cb904-3"><a href="ensemble-methods.html#cb904-3"></a>                     <span class="dt">method =</span> <span class="st">&quot;rf&quot;</span>,</span>
+<span id="cb904-4"><a href="ensemble-methods.html#cb904-4"></a>                     <span class="dt">trControl =</span> oob,</span>
+<span id="cb904-5"><a href="ensemble-methods.html#cb904-5"></a>                     <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb904-6"><a href="ensemble-methods.html#cb904-6"></a>                     <span class="dt">tuneGrid =</span> rf_grid)</span>
+<span id="cb904-7"><a href="ensemble-methods.html#cb904-7"></a>seat_rf_tune</span></code></pre></div>
 <pre><code>## Random Forest 
 ## 
 ## 200 samples
@@ -761,29 +799,29 @@ seat_rf_tune</code></pre>
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  Accuracy  Kappa    
-##    1    0.740     0.4090909
-##    2    0.790     0.5434783
-##    3    0.770     0.5043103
-##    4    0.785     0.5376344
-##    5    0.790     0.5493562
-##    6    0.785     0.5415778
-##    7    0.790     0.5493562
-##    8    0.805     0.5824411
-##    9    0.785     0.5376344
-##   10    0.805     0.5824411
+##    1    0.695     0.3055556
+##    2    0.740     0.4337363
+##    3    0.720     0.4001071
+##    4    0.740     0.4406798
+##    5    0.740     0.4474551
+##    6    0.735     0.4333975
+##    7    0.735     0.4402197
+##    8    0.730     0.4308000
+##    9    0.710     0.3836999
+##   10    0.740     0.4474551
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final value used for the model was mtry = 8.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_acc</span>(<span class="kw">predict</span>(seat_rf_tune, seat_tst), seat_tst<span class="op">$</span>Sales)</code></pre>
-<pre><code>## [1] 0.795</code></pre>
+## The final value used for the model was mtry = 2.</code></pre>
+<div class="sourceCode" id="cb906"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb906-1"><a href="ensemble-methods.html#cb906-1"></a><span class="kw">calc_acc</span>(<span class="kw">predict</span>(seat_rf_tune, seat_tst), seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
+<pre><code>## [1] 0.82</code></pre>
 <p>The results returned are based on the OOB samples. (Coincidentally, the test accuracy is the same as the best accuracy found using OOB samples.) Note that when using OOB, for some reason the default plot is not what you would expect and is not at all useful. (Which is why it is omitted here.)</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_rf_tune<span class="op">$</span>bestTune</code></pre>
+<div class="sourceCode" id="cb908"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb908-1"><a href="ensemble-methods.html#cb908-1"></a>seat_rf_tune<span class="op">$</span>bestTune</span></code></pre></div>
 <pre><code>##   mtry
-## 8    8</code></pre>
-<p>Based on these results, we would select the random forest model with an <code>mtry</code> of 8. Note that based on the OOB estimates, the bagging model is expected to perform worse than this selected model, however, based on our results above, that is not what we find to be true in our test set.</p>
-<p>Also note that <code>method = &quot;ranger&quot;</code> would also fit a random forest model. <a href="http://arxiv.org/pdf/1508.04409.pdf">Ranger</a> is a newer <code>R</code> package for random forests that has been shown to be much faster, especially when there are a larger number of predictors.</p>
+## 2    2</code></pre>
+<p>Based on these results, we would select the random forest model with an <code>mtry</code> of 2. Note that based on the OOB estimates, the bagging model is expected to perform worse than this selected model, however, based on our results above, that is not what we find to be true in our test set.</p>
+<p>Also note that <code>method = "ranger"</code> would also fit a random forest model. <a href="http://arxiv.org/pdf/1508.04409.pdf">Ranger</a> is a newer <code>R</code> package for random forests that has been shown to be much faster, especially when there are a larger number of predictors.</p>
 </div>
-<div id="boosting-2" class="section level3">
+<div id="boosting-2" class="section level3" number="27.3.2">
 <h3><span class="header-section-number">27.3.2</span> Boosting</h3>
 <p>We now tune a boosted tree model. We will use the cross-validation tune control setup above. We will fit the model using <code>gbm</code> with <code>caret</code>.</p>
 <p>To setup the tuning grid, we must specify four parameters to tune:</p>
@@ -794,91 +832,91 @@ seat_rf_tune</code></pre>
 <li><code>n.minobsinnode</code>: The minimum number of observations in a node of the tree. (<code>caret</code> requires us to specify this. This is actually a tuning parameter of the trees, not boosting, and we would normally just accept the default.)</li>
 </ul>
 <p>Finally, <code>expand.grid</code> comes in handy, as we can specify a vector of values for each parameter, then we get back a matrix of all possible combinations.</p>
-<pre class="sourceCode r"><code class="sourceCode r">gbm_grid =<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">interaction.depth =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,
-                        <span class="dt">n.trees =</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>) <span class="op">*</span><span class="st"> </span><span class="dv">500</span>,
-                        <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>),
-                        <span class="dt">n.minobsinnode =</span> <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb910"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb910-1"><a href="ensemble-methods.html#cb910-1"></a>gbm_grid =<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">interaction.depth =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
+<span id="cb910-2"><a href="ensemble-methods.html#cb910-2"></a>                        <span class="dt">n.trees =</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>) <span class="op">*</span><span class="st"> </span><span class="dv">500</span>,</span>
+<span id="cb910-3"><a href="ensemble-methods.html#cb910-3"></a>                        <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>),</span>
+<span id="cb910-4"><a href="ensemble-methods.html#cb910-4"></a>                        <span class="dt">n.minobsinnode =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>We now train the model using all possible combinations of the tuning parameters we just specified.</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_gbm_tune =<span class="st"> </span><span class="kw">train</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn,
-                      <span class="dt">method =</span> <span class="st">&quot;gbm&quot;</span>,
-                      <span class="dt">trControl =</span> cv_<span class="dv">5</span>,
-                      <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                      <span class="dt">tuneGrid =</span> gbm_grid)</code></pre>
+<div class="sourceCode" id="cb911"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb911-1"><a href="ensemble-methods.html#cb911-1"></a>seat_gbm_tune =<span class="st"> </span><span class="kw">train</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> seat_trn,</span>
+<span id="cb911-2"><a href="ensemble-methods.html#cb911-2"></a>                      <span class="dt">method =</span> <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb911-3"><a href="ensemble-methods.html#cb911-3"></a>                      <span class="dt">trControl =</span> cv_<span class="dv">5</span>,</span>
+<span id="cb911-4"><a href="ensemble-methods.html#cb911-4"></a>                      <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb911-5"><a href="ensemble-methods.html#cb911-5"></a>                      <span class="dt">tuneGrid =</span> gbm_grid)</span></code></pre></div>
 <p>The additional <code>verbose = FALSE</code> in the <code>train</code> call suppresses additional output from each <code>gbm</code> call.</p>
 <p>By default, calling <code>plot</code> here will produce a nice graphic summarizing the results.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(seat_gbm_tune)</code></pre>
+<div class="sourceCode" id="cb912"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb912-1"><a href="ensemble-methods.html#cb912-1"></a><span class="kw">plot</span>(seat_gbm_tune)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_acc</span>(<span class="kw">predict</span>(seat_gbm_tune, seat_tst), seat_tst<span class="op">$</span>Sales)</code></pre>
-<pre><code>## [1] 0.85</code></pre>
+<div class="sourceCode" id="cb913"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb913-1"><a href="ensemble-methods.html#cb913-1"></a><span class="kw">calc_acc</span>(<span class="kw">predict</span>(seat_gbm_tune, seat_tst), seat_tst<span class="op">$</span>Sales)</span></code></pre></div>
+<pre><code>## [1] 0.84</code></pre>
 <p>We see our tuned model does no better on the test set than the arbitrary boosted model we had fit above, with the slightly different parameters seen below. We could perhaps try a larger tuning grid, but at this point it seems unlikely that we could find a much better model. There seems to be no way to get a tree method to out-perform logistic regression in this dataset.</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat_gbm_tune<span class="op">$</span>bestTune</code></pre>
+<div class="sourceCode" id="cb915"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb915-1"><a href="ensemble-methods.html#cb915-1"></a>seat_gbm_tune<span class="op">$</span>bestTune</span></code></pre></div>
 <pre><code>##    n.trees interaction.depth shrinkage n.minobsinnode
-## 34    2000                 1      0.01             10</code></pre>
+## 64    2000                 1       0.1             10</code></pre>
 </div>
 </div>
-<div id="tree-versus-ensemble-boundaries" class="section level2">
+<div id="tree-versus-ensemble-boundaries" class="section level2" number="27.4">
 <h2><span class="header-section-number">27.4</span> Tree versus Ensemble Boundaries</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mlbench)
-<span class="kw">set.seed</span>(<span class="dv">42</span>)
-sim_trn =<span class="st"> </span><span class="kw">mlbench.circle</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">d =</span> <span class="dv">2</span>)
-sim_trn =<span class="st"> </span><span class="kw">data.frame</span>(sim_trn<span class="op">$</span>x, <span class="dt">class =</span> <span class="kw">as.factor</span>(sim_trn<span class="op">$</span>classes))
-sim_tst =<span class="st"> </span><span class="kw">mlbench.circle</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">d =</span> <span class="dv">2</span>)
-sim_tst =<span class="st"> </span><span class="kw">data.frame</span>(sim_tst<span class="op">$</span>x, <span class="dt">class =</span> <span class="kw">as.factor</span>(sim_tst<span class="op">$</span>classes))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">sim_trn_col =<span class="st"> </span><span class="kw">ifelse</span>(sim_trn<span class="op">$</span>class <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>)
-<span class="kw">plot</span>(sim_trn<span class="op">$</span>X1, sim_trn<span class="op">$</span>X2, <span class="dt">col =</span> sim_trn_col,
-     <span class="dt">xlab =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;X2&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Simulated Training Data&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-<span class="kw">grid</span>()</code></pre>
+<div class="sourceCode" id="cb917"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb917-1"><a href="ensemble-methods.html#cb917-1"></a><span class="kw">library</span>(mlbench)</span>
+<span id="cb917-2"><a href="ensemble-methods.html#cb917-2"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb917-3"><a href="ensemble-methods.html#cb917-3"></a>sim_trn =<span class="st"> </span><span class="kw">mlbench.circle</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">d =</span> <span class="dv">2</span>)</span>
+<span id="cb917-4"><a href="ensemble-methods.html#cb917-4"></a>sim_trn =<span class="st"> </span><span class="kw">data.frame</span>(sim_trn<span class="op">$</span>x, <span class="dt">class =</span> <span class="kw">as.factor</span>(sim_trn<span class="op">$</span>classes))</span>
+<span id="cb917-5"><a href="ensemble-methods.html#cb917-5"></a>sim_tst =<span class="st"> </span><span class="kw">mlbench.circle</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">d =</span> <span class="dv">2</span>)</span>
+<span id="cb917-6"><a href="ensemble-methods.html#cb917-6"></a>sim_tst =<span class="st"> </span><span class="kw">data.frame</span>(sim_tst<span class="op">$</span>x, <span class="dt">class =</span> <span class="kw">as.factor</span>(sim_tst<span class="op">$</span>classes))</span></code></pre></div>
+<div class="sourceCode" id="cb918"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb918-1"><a href="ensemble-methods.html#cb918-1"></a>sim_trn_col =<span class="st"> </span><span class="kw">ifelse</span>(sim_trn<span class="op">$</span>class <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>)</span>
+<span id="cb918-2"><a href="ensemble-methods.html#cb918-2"></a><span class="kw">plot</span>(sim_trn<span class="op">$</span>X1, sim_trn<span class="op">$</span>X2, <span class="dt">col =</span> sim_trn_col,</span>
+<span id="cb918-3"><a href="ensemble-methods.html#cb918-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;X2&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Simulated Training Data&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb918-4"><a href="ensemble-methods.html#cb918-4"></a><span class="kw">grid</span>()</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-52-1.png" width="480" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)
-oob  =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;oob&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">sim_tree_cv =<span class="st"> </span><span class="kw">train</span>(class <span class="op">~</span><span class="st"> </span>.,
-                    <span class="dt">data =</span> sim_trn,
-                    <span class="dt">trControl =</span> cv_<span class="dv">5</span>,
-                    <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart.plot)
-<span class="kw">rpart.plot</span>(sim_tree_cv<span class="op">$</span>finalModel)</code></pre>
+<div class="sourceCode" id="cb919"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb919-1"><a href="ensemble-methods.html#cb919-1"></a>cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</span>
+<span id="cb919-2"><a href="ensemble-methods.html#cb919-2"></a>oob  =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;oob&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb920"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb920-1"><a href="ensemble-methods.html#cb920-1"></a>sim_tree_cv =<span class="st"> </span><span class="kw">train</span>(class <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb920-2"><a href="ensemble-methods.html#cb920-2"></a>                    <span class="dt">data =</span> sim_trn,</span>
+<span id="cb920-3"><a href="ensemble-methods.html#cb920-3"></a>                    <span class="dt">trControl =</span> cv_<span class="dv">5</span>,</span>
+<span id="cb920-4"><a href="ensemble-methods.html#cb920-4"></a>                    <span class="dt">method =</span> <span class="st">&quot;rpart&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb921"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb921-1"><a href="ensemble-methods.html#cb921-1"></a><span class="kw">library</span>(rpart.plot)</span>
+<span id="cb921-2"><a href="ensemble-methods.html#cb921-2"></a><span class="kw">rpart.plot</span>(sim_tree_cv<span class="op">$</span>finalModel)</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">rf_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">mtry =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-sim_rf_oob =<span class="st"> </span><span class="kw">train</span>(class <span class="op">~</span><span class="st"> </span>.,
-                   <span class="dt">data =</span> sim_trn,
-                   <span class="dt">trControl =</span> oob,
-                   <span class="dt">tuneGrid =</span> rf_grid)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">gbm_grid =<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">interaction.depth =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,
-                        <span class="dt">n.trees =</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>) <span class="op">*</span><span class="st"> </span><span class="dv">500</span>,
-                        <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>),
-                        <span class="dt">n.minobsinnode =</span> <span class="dv">10</span>)
-
-sim_gbm_cv =<span class="st"> </span><span class="kw">train</span>(class <span class="op">~</span><span class="st"> </span>., 
-                   <span class="dt">data =</span> sim_trn,
-                   <span class="dt">method =</span> <span class="st">&quot;gbm&quot;</span>,
-                   <span class="dt">trControl =</span> cv_<span class="dv">5</span>,
-                   <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                   <span class="dt">tuneGrid =</span> gbm_grid)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">plot_grid =<span class="st"> </span><span class="kw">expand.grid</span>(
-  <span class="dt">X1 =</span> <span class="kw">seq</span>(<span class="kw">min</span>(sim_tst<span class="op">$</span>X1) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(sim_tst<span class="op">$</span>X1) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>),
-  <span class="dt">X2 =</span> <span class="kw">seq</span>(<span class="kw">min</span>(sim_tst<span class="op">$</span>X2) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(sim_tst<span class="op">$</span>X2) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
-)
-
-tree_pred =<span class="st"> </span><span class="kw">predict</span>(sim_tree_cv, plot_grid)
-rf_pred   =<span class="st"> </span><span class="kw">predict</span>(sim_rf_oob, plot_grid)
-gbm_pred  =<span class="st"> </span><span class="kw">predict</span>(sim_gbm_cv, plot_grid)
-
-tree_col =<span class="st"> </span><span class="kw">ifelse</span>(tree_pred <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>)
-rf_col   =<span class="st"> </span><span class="kw">ifelse</span>(rf_pred <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>)
-gbm_col  =<span class="st"> </span><span class="kw">ifelse</span>(gbm_pred <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
-<span class="kw">plot</span>(plot_grid<span class="op">$</span>X1, plot_grid<span class="op">$</span>X2, <span class="dt">col =</span> tree_col,
-     <span class="dt">xlab =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;X2&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="st">&quot;Single Tree&quot;</span>,
-     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))
-<span class="kw">plot</span>(plot_grid<span class="op">$</span>X1, plot_grid<span class="op">$</span>X2, <span class="dt">col =</span> rf_col,
-     <span class="dt">xlab =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;X2&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="st">&quot;Random Forest&quot;</span>,
-     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))
-<span class="kw">plot</span>(plot_grid<span class="op">$</span>X1, plot_grid<span class="op">$</span>X2, <span class="dt">col =</span> gbm_col,
-     <span class="dt">xlab =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;X2&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="st">&quot;Boosted Trees&quot;</span>,
-     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</code></pre>
+<div class="sourceCode" id="cb922"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb922-1"><a href="ensemble-methods.html#cb922-1"></a>rf_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">mtry =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb922-2"><a href="ensemble-methods.html#cb922-2"></a>sim_rf_oob =<span class="st"> </span><span class="kw">train</span>(class <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb922-3"><a href="ensemble-methods.html#cb922-3"></a>                   <span class="dt">data =</span> sim_trn,</span>
+<span id="cb922-4"><a href="ensemble-methods.html#cb922-4"></a>                   <span class="dt">trControl =</span> oob,</span>
+<span id="cb922-5"><a href="ensemble-methods.html#cb922-5"></a>                   <span class="dt">tuneGrid =</span> rf_grid)</span></code></pre></div>
+<div class="sourceCode" id="cb923"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb923-1"><a href="ensemble-methods.html#cb923-1"></a>gbm_grid =<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">interaction.depth =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
+<span id="cb923-2"><a href="ensemble-methods.html#cb923-2"></a>                        <span class="dt">n.trees =</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>) <span class="op">*</span><span class="st"> </span><span class="dv">500</span>,</span>
+<span id="cb923-3"><a href="ensemble-methods.html#cb923-3"></a>                        <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>),</span>
+<span id="cb923-4"><a href="ensemble-methods.html#cb923-4"></a>                        <span class="dt">n.minobsinnode =</span> <span class="dv">10</span>)</span>
+<span id="cb923-5"><a href="ensemble-methods.html#cb923-5"></a></span>
+<span id="cb923-6"><a href="ensemble-methods.html#cb923-6"></a>sim_gbm_cv =<span class="st"> </span><span class="kw">train</span>(class <span class="op">~</span><span class="st"> </span>., </span>
+<span id="cb923-7"><a href="ensemble-methods.html#cb923-7"></a>                   <span class="dt">data =</span> sim_trn,</span>
+<span id="cb923-8"><a href="ensemble-methods.html#cb923-8"></a>                   <span class="dt">method =</span> <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb923-9"><a href="ensemble-methods.html#cb923-9"></a>                   <span class="dt">trControl =</span> cv_<span class="dv">5</span>,</span>
+<span id="cb923-10"><a href="ensemble-methods.html#cb923-10"></a>                   <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb923-11"><a href="ensemble-methods.html#cb923-11"></a>                   <span class="dt">tuneGrid =</span> gbm_grid)</span></code></pre></div>
+<div class="sourceCode" id="cb924"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb924-1"><a href="ensemble-methods.html#cb924-1"></a>plot_grid =<span class="st"> </span><span class="kw">expand.grid</span>(</span>
+<span id="cb924-2"><a href="ensemble-methods.html#cb924-2"></a>  <span class="dt">X1 =</span> <span class="kw">seq</span>(<span class="kw">min</span>(sim_tst<span class="op">$</span>X1) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(sim_tst<span class="op">$</span>X1) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>),</span>
+<span id="cb924-3"><a href="ensemble-methods.html#cb924-3"></a>  <span class="dt">X2 =</span> <span class="kw">seq</span>(<span class="kw">min</span>(sim_tst<span class="op">$</span>X2) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(sim_tst<span class="op">$</span>X2) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb924-4"><a href="ensemble-methods.html#cb924-4"></a>)</span>
+<span id="cb924-5"><a href="ensemble-methods.html#cb924-5"></a></span>
+<span id="cb924-6"><a href="ensemble-methods.html#cb924-6"></a>tree_pred =<span class="st"> </span><span class="kw">predict</span>(sim_tree_cv, plot_grid)</span>
+<span id="cb924-7"><a href="ensemble-methods.html#cb924-7"></a>rf_pred   =<span class="st"> </span><span class="kw">predict</span>(sim_rf_oob, plot_grid)</span>
+<span id="cb924-8"><a href="ensemble-methods.html#cb924-8"></a>gbm_pred  =<span class="st"> </span><span class="kw">predict</span>(sim_gbm_cv, plot_grid)</span>
+<span id="cb924-9"><a href="ensemble-methods.html#cb924-9"></a></span>
+<span id="cb924-10"><a href="ensemble-methods.html#cb924-10"></a>tree_col =<span class="st"> </span><span class="kw">ifelse</span>(tree_pred <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>)</span>
+<span id="cb924-11"><a href="ensemble-methods.html#cb924-11"></a>rf_col   =<span class="st"> </span><span class="kw">ifelse</span>(rf_pred <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>)</span>
+<span id="cb924-12"><a href="ensemble-methods.html#cb924-12"></a>gbm_col  =<span class="st"> </span><span class="kw">ifelse</span>(gbm_pred <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb925"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb925-1"><a href="ensemble-methods.html#cb925-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb925-2"><a href="ensemble-methods.html#cb925-2"></a><span class="kw">plot</span>(plot_grid<span class="op">$</span>X1, plot_grid<span class="op">$</span>X2, <span class="dt">col =</span> tree_col,</span>
+<span id="cb925-3"><a href="ensemble-methods.html#cb925-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;X2&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="st">&quot;Single Tree&quot;</span>,</span>
+<span id="cb925-4"><a href="ensemble-methods.html#cb925-4"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb925-5"><a href="ensemble-methods.html#cb925-5"></a><span class="kw">plot</span>(plot_grid<span class="op">$</span>X1, plot_grid<span class="op">$</span>X2, <span class="dt">col =</span> rf_col,</span>
+<span id="cb925-6"><a href="ensemble-methods.html#cb925-6"></a>     <span class="dt">xlab =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;X2&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="st">&quot;Random Forest&quot;</span>,</span>
+<span id="cb925-7"><a href="ensemble-methods.html#cb925-7"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb925-8"><a href="ensemble-methods.html#cb925-8"></a><span class="kw">plot</span>(plot_grid<span class="op">$</span>X1, plot_grid<span class="op">$</span>X2, <span class="dt">col =</span> gbm_col,</span>
+<span id="cb925-9"><a href="ensemble-methods.html#cb925-9"></a>     <span class="dt">xlab =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;X2&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="st">&quot;Boosted Trees&quot;</span>,</span>
+<span id="cb925-10"><a href="ensemble-methods.html#cb925-10"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
 <p><img src="27-ensemble_files/figure-html/unnamed-chunk-59-1.png" width="1248" style="display: block; margin: auto;" /></p>
 </div>
-<div id="external-links-9" class="section level2">
+<div id="external-links-9" class="section level2" number="27.5">
 <h2><span class="header-section-number">27.5</span> External Links</h2>
 <ul>
 <li><a href="http://www.bios.unc.edu/~dzeng/BIOS740/randomforest.pdf">Classification and Regression by <code>randomForest</code></a> - Introduction to the <code>randomForest</code> package in <code>R</code> news.</li>
@@ -890,12 +928,11 @@ gbm_col  =<span class="st"> </span><span class="kw">ifelse</span>(gbm_pred <span
 <li><a href="http://xgboost.readthedocs.io/en/latest/R-package/xgboostPresentation.html">XGBoost <code>R</code> Tutorial</a></li>
 </ul>
 </div>
-<div id="rmarkdown-15" class="section level2">
+<div id="rmarkdown-15" class="section level2" number="27.6">
 <h2><span class="header-section-number">27.6</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="27-ensemble.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
-<pre><code>##  [1] &quot;mlbench&quot;      &quot;ISLR&quot;         &quot;MASS&quot;         &quot;caret&quot;       
-##  [5] &quot;ggplot2&quot;      &quot;lattice&quot;      &quot;gbm&quot;          &quot;randomForest&quot;
-##  [9] &quot;rpart.plot&quot;   &quot;rpart&quot;</code></pre>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="27-ensemble.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<pre><code>##  [1] &quot;mlbench&quot;      &quot;ISLR&quot;         &quot;MASS&quot;         &quot;caret&quot;        &quot;ggplot2&quot;     
+##  [6] &quot;lattice&quot;      &quot;gbm&quot;          &quot;randomForest&quot; &quot;rpart.plot&quot;   &quot;rpart&quot;</code></pre>
 
 </div>
 </div>
@@ -910,11 +947,13 @@ gbm_col  =<span class="st"> </span><span class="kw">ifelse</span>(gbm_pred <span
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -922,12 +961,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -939,6 +977,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -957,8 +999,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

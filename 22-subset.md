@@ -76,24 +76,24 @@ summary(fit_all)
 ## NewLeagueN     FALSE      FALSE
 ## 1 subsets of each size up to 8
 ## Selection Algorithm: exhaustive
-##          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns
-## 1  ( 1 ) " "   " "  " "   " "  " " " "   " "   " "    " "   " "    " "  
-## 2  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "  
-## 3  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "  
-## 4  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "  
-## 5  ( 1 ) "*"   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "  
-## 6  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    " "  
-## 7  ( 1 ) " "   "*"  " "   " "  " " "*"   " "   "*"    "*"   "*"    " "  
-## 8  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   " "    " "   "*"    "*"  
-##          CRBI CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
-## 1  ( 1 ) "*"  " "    " "     " "       " "     " "     " "    " "       
-## 2  ( 1 ) "*"  " "    " "     " "       " "     " "     " "    " "       
-## 3  ( 1 ) "*"  " "    " "     " "       "*"     " "     " "    " "       
-## 4  ( 1 ) "*"  " "    " "     "*"       "*"     " "     " "    " "       
-## 5  ( 1 ) "*"  " "    " "     "*"       "*"     " "     " "    " "       
-## 6  ( 1 ) "*"  " "    " "     "*"       "*"     " "     " "    " "       
-## 7  ( 1 ) " "  " "    " "     "*"       "*"     " "     " "    " "       
-## 8  ( 1 ) " "  "*"    " "     "*"       "*"     " "     " "    " "
+##          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns CRBI
+## 1  ( 1 ) " "   " "  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+## 2  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+## 3  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+## 4  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+## 5  ( 1 ) "*"   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+## 6  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    " "   "*" 
+## 7  ( 1 ) " "   "*"  " "   " "  " " "*"   " "   "*"    "*"   "*"    " "   " " 
+## 8  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   " "    " "   "*"    "*"   " " 
+##          CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
+## 1  ( 1 ) " "    " "     " "       " "     " "     " "    " "       
+## 2  ( 1 ) " "    " "     " "       " "     " "     " "    " "       
+## 3  ( 1 ) " "    " "     " "       "*"     " "     " "    " "       
+## 4  ( 1 ) " "    " "     "*"       "*"     " "     " "    " "       
+## 5  ( 1 ) " "    " "     "*"       "*"     " "     " "    " "       
+## 6  ( 1 ) " "    " "     "*"       "*"     " "     " "    " "       
+## 7  ( 1 ) " "    " "     "*"       "*"     " "     " "    " "       
+## 8  ( 1 ) "*"    " "     "*"       "*"     " "     " "    " "
 ```
 
 
@@ -162,10 +162,10 @@ coef(fit_fwd, 7)
 ```
 
 ```
-##  (Intercept)        AtBat         Hits        Walks         CRBI 
-##  109.7873062   -1.9588851    7.4498772    4.9131401    0.8537622 
-##       CWalks    DivisionW      PutOuts 
-##   -0.3053070 -127.1223928    0.2533404
+##  (Intercept)        AtBat         Hits        Walks         CRBI       CWalks 
+##  109.7873062   -1.9588851    7.4498772    4.9131401    0.8537622   -0.3053070 
+##    DivisionW      PutOuts 
+## -127.1223928    0.2533404
 ```
 
 ```r
@@ -173,10 +173,10 @@ coef(fit_bwd, 7)
 ```
 
 ```
-##  (Intercept)        AtBat         Hits        Walks        CRuns 
-##  105.6487488   -1.9762838    6.7574914    6.0558691    1.1293095 
-##       CWalks    DivisionW      PutOuts 
-##   -0.7163346 -116.1692169    0.3028847
+##  (Intercept)        AtBat         Hits        Walks        CRuns       CWalks 
+##  105.6487488   -1.9762838    6.7574914    6.0558691    1.1293095   -0.7163346 
+##    DivisionW      PutOuts 
+## -116.1692169    0.3028847
 ```
 
 ```r
@@ -184,10 +184,10 @@ coef(fit_all, 7)
 ```
 
 ```
-##  (Intercept)         Hits        Walks       CAtBat        CHits 
-##   79.4509472    1.2833513    3.2274264   -0.3752350    1.4957073 
-##       CHmRun    DivisionW      PutOuts 
-##    1.4420538 -129.9866432    0.2366813
+##  (Intercept)         Hits        Walks       CAtBat        CHits       CHmRun 
+##   79.4509472    1.2833513    3.2274264   -0.3752350    1.4957073    1.4420538 
+##    DivisionW      PutOuts 
+## -129.9866432    0.2366813
 ```
 
 
@@ -205,12 +205,10 @@ coef(fit_bwd, which.min(fit_bwd_sum$cp))
 ```
 
 ```
-##  (Intercept)        AtBat         Hits        Walks       CAtBat 
-##  162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798 
-##        CRuns         CRBI       CWalks    DivisionW      PutOuts 
-##    1.4082490    0.7743122   -0.8308264 -112.3800575    0.2973726 
-##      Assists 
-##    0.2831680
+##  (Intercept)        AtBat         Hits        Walks       CAtBat        CRuns 
+##  162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798    1.4082490 
+##         CRBI       CWalks    DivisionW      PutOuts      Assists 
+##    0.7743122   -0.8308264 -112.3800575    0.2973726    0.2831680
 ```
 
 
@@ -221,12 +219,10 @@ coef(fit_aic_back)
 ```
 
 ```
-##  (Intercept)        AtBat         Hits        Walks       CAtBat 
-##  162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798 
-##        CRuns         CRBI       CWalks    DivisionW      PutOuts 
-##    1.4082490    0.7743122   -0.8308264 -112.3800575    0.2973726 
-##      Assists 
-##    0.2831680
+##  (Intercept)        AtBat         Hits        Walks       CAtBat        CRuns 
+##  162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798    1.4082490 
+##         CRBI       CWalks    DivisionW      PutOuts      Assists 
+##    0.7743122   -0.8308264 -112.3800575    0.2973726    0.2831680
 ```
 
 ## Validated RMSE
@@ -251,9 +247,9 @@ test_err
 ```
 
 ```
-##  [1] 357.1226 333.8531 323.6408 320.5458 308.0303 295.1308 301.8142
-##  [8] 309.2389 303.3976 307.9660 307.4841 306.9883 313.2374 314.3905
-## [15] 313.8258 314.0586 313.6674 313.3490 313.3424
+##  [1] 451.5144 415.2496 410.1213 384.0785 377.2735 408.6423 377.8263 392.0436
+##  [9] 394.8037 400.7555 402.4398 403.6991 404.0057 407.3175 406.6637 406.2891
+## [17] 407.1439 406.9280 407.4385
 ```
 
 
@@ -269,7 +265,7 @@ which.min(test_err)
 ```
 
 ```
-## [1] 6
+## [1] 5
 ```
 
 ```r
@@ -277,10 +273,8 @@ coef(fit_all, which.min(test_err))
 ```
 
 ```
-##  (Intercept)        Walks       CAtBat        CHits         CRBI 
-##  171.2082504    5.0067050   -0.4005457    1.2951923    0.7894534 
-##    DivisionW      PutOuts 
-## -131.1212694    0.2682166
+## (Intercept)       Walks      CAtBat       CHits      CHmRun     PutOuts 
+## 102.0163457   3.7019974  -0.4002084   1.5041824   2.9007854   0.1975283
 ```
 
 
@@ -345,11 +339,11 @@ cv_error
 
 ```
 ##        1        2        3        4        5        6        7        8 
-## 373.2202 363.0715 374.8356 362.2405 357.6623 350.0238 348.0589 342.9089 
+## 381.6473 362.3809 355.9959 354.6139 352.5358 345.6078 352.2963 332.4575 
 ##        9       10       11       12       13       14       15       16 
-## 343.8661 341.6405 339.4228 341.9303 342.5545 342.0155 340.8147 343.4722 
+## 342.1292 339.7967 338.0266 338.2973 336.7897 337.6876 340.1955 339.9188 
 ##       17       18       19 
-## 343.4259 343.8129 343.2279
+## 339.6058 339.6544 339.4893
 ```
 
 
@@ -366,12 +360,10 @@ coef(fit_all, which.min(cv_error))
 ```
 
 ```
-##  (Intercept)        AtBat         Hits        Walks       CAtBat 
-##  135.7512195   -2.1277482    6.9236994    5.6202755   -0.1389914 
-##        CRuns         CRBI       CWalks      LeagueN    DivisionW 
-##    1.4553310    0.7852528   -0.8228559   43.1116152 -111.1460252 
-##      PutOuts      Assists 
-##    0.2894087    0.2688277
+##  (Intercept)        AtBat         Hits        Walks       CHmRun        CRuns 
+##  130.9691577   -2.1731903    7.3582935    6.0037597    1.2339718    0.9651349 
+##       CWalks    DivisionW      PutOuts 
+##   -0.8323788 -117.9657795    0.2908431
 ```
 
 
@@ -382,7 +374,7 @@ coef(fit_all, which.min(cv_error))
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 3.5.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The file was created using `R` version 4.0.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -403,21 +395,19 @@ The RMarkdown file for this chapter can be found [**here**](14-subset.Rmd). The 
 
 
 ```
-##  [1] "tidyselect"   "xfun"         "reshape2"     "purrr"       
-##  [5] "splines"      "lattice"      "colorspace"   "generics"    
-##  [9] "htmltools"    "stats4"       "yaml"         "survival"    
-## [13] "prodlim"      "rlang"        "ModelMetrics" "pillar"      
-## [17] "glue"         "withr"        "foreach"      "plyr"        
-## [21] "lava"         "stringr"      "timeDate"     "munsell"     
-## [25] "gtable"       "recipes"      "codetools"    "evaluate"    
-## [29] "knitr"        "caret"        "class"        "Rcpp"        
-## [33] "scales"       "ipred"        "ggplot2"      "digest"      
-## [37] "stringi"      "bookdown"     "dplyr"        "grid"        
-## [41] "tools"        "magrittr"     "lazyeval"     "tibble"      
-## [45] "crayon"       "pkgconfig"    "MASS"         "Matrix"      
-## [49] "data.table"   "lubridate"    "gower"        "assertthat"  
-## [53] "rmarkdown"    "iterators"    "R6"           "rpart"       
-## [57] "nnet"         "nlme"         "compiler"
+##  [1] "tidyselect"   "xfun"         "purrr"        "reshape2"     "splines"     
+##  [6] "lattice"      "colorspace"   "vctrs"        "generics"     "htmltools"   
+## [11] "stats4"       "yaml"         "survival"     "prodlim"      "rlang"       
+## [16] "ModelMetrics" "pillar"       "glue"         "withr"        "foreach"     
+## [21] "lifecycle"    "plyr"         "lava"         "stringr"      "timeDate"    
+## [26] "munsell"      "gtable"       "recipes"      "codetools"    "evaluate"    
+## [31] "knitr"        "caret"        "class"        "Rcpp"         "scales"      
+## [36] "ipred"        "ggplot2"      "digest"       "stringi"      "bookdown"    
+## [41] "dplyr"        "grid"         "tools"        "magrittr"     "tibble"      
+## [46] "crayon"       "pkgconfig"    "ellipsis"     "MASS"         "Matrix"      
+## [51] "data.table"   "pROC"         "lubridate"    "gower"        "rmarkdown"   
+## [56] "iterators"    "R6"           "rpart"        "nnet"         "nlme"        
+## [61] "compiler"
 ```
 
 

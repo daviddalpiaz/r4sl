@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Overview | R for Statistical Learning</title>
   <meta name="description" content="Chapter 5 Overview | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Overview | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="modeling-basics-in-r.html">
-<link rel="next" href="linear-models.html">
+<link rel="prev" href="modeling-basics-in-r.html"/>
+<link rel="next" href="linear-models.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,7 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regression-overview" class="section level1">
+<div id="regression-overview" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Overview</h1>
 <p><strong>Chapter Status:</strong> This chapter is currently undergoing massive rewrites. Some code is mostly for the use of current students. Plotting code is often not best practice for plotting, but is instead useful for understanding.</p>
 <ul>
@@ -432,123 +470,123 @@ Y = f(\bf{x}) + \epsilon
 \]</span>
 - TODO: RSS vs <span class="math inline">\(R^2\)</span> vs RMSE</p>
 <p><strong>Code for Plotting from Class</strong></p>
-<pre class="sourceCode r"><code class="sourceCode r">## load packages
-<span class="kw">library</span>(rpart)
-<span class="kw">library</span>(FNN)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate data</span>
-
-## signal
-f =<span class="st"> </span><span class="cf">function</span>(x) {
-  x <span class="op">^</span><span class="st"> </span><span class="dv">3</span>
-}
-
-## define data generating processs
-get_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">50</span>) {
-  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>)
-  y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> <span class="fl">0.15</span>)
-  <span class="kw">data.frame</span>(x, y)
-}
-
-## simualte training data
-<span class="kw">set.seed</span>(<span class="dv">42</span>)
-sim_trn_data =<span class="st"> </span><span class="kw">get_sim_data</span>(<span class="dt">f =</span> f)
-
-## simulate testing data
-<span class="kw">set.seed</span>(<span class="dv">3</span>)
-sim_tst_data =<span class="st"> </span><span class="kw">get_sim_data</span>(<span class="dt">f =</span> f)
-
-## create grid for plotting
-x_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">0.001</span>))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fit models</span>
-
-## tree models
-tree_fit_l =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
-                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.500</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
-tree_fit_m =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
-                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.015</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
-tree_fit_h =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, 
-                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.000</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))
-
-## knn models
-knn_fit_l =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, 
-                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">40</span>)
-knn_fit_m =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, 
-                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">5</span>)
-knn_fit_h =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, 
-                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">1</span>)
-
-## polynomial models
-poly_fit_l =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">1</span>), <span class="dt">data =</span> sim_trn_data)
-poly_fit_m =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">3</span>), <span class="dt">data =</span> sim_trn_data)
-poly_fit_h =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">22</span>), <span class="dt">data =</span> sim_trn_data)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get predictions</span>
-
-## tree models
-tree_fit_l_pred =<span class="st"> </span><span class="kw">predict</span>(tree_fit_l, <span class="dt">newdata =</span> x_grid)
-tree_fit_m_pred =<span class="st"> </span><span class="kw">predict</span>(tree_fit_m, <span class="dt">newdata =</span> x_grid)
-tree_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(tree_fit_h, <span class="dt">newdata =</span> x_grid)
-
-## knn models
-knn_fit_l_pred =<span class="st"> </span>knn_fit_l<span class="op">$</span>pred
-knn_fit_m_pred =<span class="st"> </span>knn_fit_m<span class="op">$</span>pred
-knn_fit_h_pred =<span class="st"> </span>knn_fit_h<span class="op">$</span>pred
-
-## polynomial models
-poly_fit_l_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_l, <span class="dt">newdata =</span> x_grid)
-poly_fit_m_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_m, <span class="dt">newdata =</span> x_grid)
-poly_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_h, <span class="dt">newdata =</span> x_grid)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted trees</span>
-
-<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
-     <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.5&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
-
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
-     <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.015&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
-
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
-     <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.0&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="regression-overview.html#cb59-1"></a><span class="co">## load packages</span></span>
+<span id="cb59-2"><a href="regression-overview.html#cb59-2"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb59-3"><a href="regression-overview.html#cb59-3"></a><span class="kw">library</span>(FNN)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="regression-overview.html#cb60-1"></a><span class="co"># simulate data</span></span>
+<span id="cb60-2"><a href="regression-overview.html#cb60-2"></a></span>
+<span id="cb60-3"><a href="regression-overview.html#cb60-3"></a><span class="co">## signal</span></span>
+<span id="cb60-4"><a href="regression-overview.html#cb60-4"></a>f =<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb60-5"><a href="regression-overview.html#cb60-5"></a>  x <span class="op">^</span><span class="st"> </span><span class="dv">3</span></span>
+<span id="cb60-6"><a href="regression-overview.html#cb60-6"></a>}</span>
+<span id="cb60-7"><a href="regression-overview.html#cb60-7"></a></span>
+<span id="cb60-8"><a href="regression-overview.html#cb60-8"></a><span class="co">## define data generating processs</span></span>
+<span id="cb60-9"><a href="regression-overview.html#cb60-9"></a>get_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">50</span>) {</span>
+<span id="cb60-10"><a href="regression-overview.html#cb60-10"></a>  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>)</span>
+<span id="cb60-11"><a href="regression-overview.html#cb60-11"></a>  y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> <span class="fl">0.15</span>)</span>
+<span id="cb60-12"><a href="regression-overview.html#cb60-12"></a>  <span class="kw">data.frame</span>(x, y)</span>
+<span id="cb60-13"><a href="regression-overview.html#cb60-13"></a>}</span>
+<span id="cb60-14"><a href="regression-overview.html#cb60-14"></a></span>
+<span id="cb60-15"><a href="regression-overview.html#cb60-15"></a><span class="co">## simualte training data</span></span>
+<span id="cb60-16"><a href="regression-overview.html#cb60-16"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb60-17"><a href="regression-overview.html#cb60-17"></a>sim_trn_data =<span class="st"> </span><span class="kw">get_sim_data</span>(<span class="dt">f =</span> f)</span>
+<span id="cb60-18"><a href="regression-overview.html#cb60-18"></a></span>
+<span id="cb60-19"><a href="regression-overview.html#cb60-19"></a><span class="co">## simulate testing data</span></span>
+<span id="cb60-20"><a href="regression-overview.html#cb60-20"></a><span class="kw">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb60-21"><a href="regression-overview.html#cb60-21"></a>sim_tst_data =<span class="st"> </span><span class="kw">get_sim_data</span>(<span class="dt">f =</span> f)</span>
+<span id="cb60-22"><a href="regression-overview.html#cb60-22"></a></span>
+<span id="cb60-23"><a href="regression-overview.html#cb60-23"></a><span class="co">## create grid for plotting</span></span>
+<span id="cb60-24"><a href="regression-overview.html#cb60-24"></a>x_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">0.001</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="regression-overview.html#cb61-1"></a><span class="co"># fit models</span></span>
+<span id="cb61-2"><a href="regression-overview.html#cb61-2"></a></span>
+<span id="cb61-3"><a href="regression-overview.html#cb61-3"></a><span class="co">## tree models</span></span>
+<span id="cb61-4"><a href="regression-overview.html#cb61-4"></a>tree_fit_l =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, </span>
+<span id="cb61-5"><a href="regression-overview.html#cb61-5"></a>                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.500</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))</span>
+<span id="cb61-6"><a href="regression-overview.html#cb61-6"></a>tree_fit_m =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, </span>
+<span id="cb61-7"><a href="regression-overview.html#cb61-7"></a>                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.015</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))</span>
+<span id="cb61-8"><a href="regression-overview.html#cb61-8"></a>tree_fit_h =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, </span>
+<span id="cb61-9"><a href="regression-overview.html#cb61-9"></a>                   <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.000</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>))</span>
+<span id="cb61-10"><a href="regression-overview.html#cb61-10"></a></span>
+<span id="cb61-11"><a href="regression-overview.html#cb61-11"></a><span class="co">## knn models</span></span>
+<span id="cb61-12"><a href="regression-overview.html#cb61-12"></a>knn_fit_l =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, </span>
+<span id="cb61-13"><a href="regression-overview.html#cb61-13"></a>                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">40</span>)</span>
+<span id="cb61-14"><a href="regression-overview.html#cb61-14"></a>knn_fit_m =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, </span>
+<span id="cb61-15"><a href="regression-overview.html#cb61-15"></a>                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">5</span>)</span>
+<span id="cb61-16"><a href="regression-overview.html#cb61-16"></a>knn_fit_h =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> sim_trn_data[<span class="st">&quot;x&quot;</span>], <span class="dt">y =</span> sim_trn_data<span class="op">$</span>y, </span>
+<span id="cb61-17"><a href="regression-overview.html#cb61-17"></a>                    <span class="dt">test =</span> x_grid, <span class="dt">k =</span> <span class="dv">1</span>)</span>
+<span id="cb61-18"><a href="regression-overview.html#cb61-18"></a></span>
+<span id="cb61-19"><a href="regression-overview.html#cb61-19"></a><span class="co">## polynomial models</span></span>
+<span id="cb61-20"><a href="regression-overview.html#cb61-20"></a>poly_fit_l =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">1</span>), <span class="dt">data =</span> sim_trn_data)</span>
+<span id="cb61-21"><a href="regression-overview.html#cb61-21"></a>poly_fit_m =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x,  <span class="dv">3</span>), <span class="dt">data =</span> sim_trn_data)</span>
+<span id="cb61-22"><a href="regression-overview.html#cb61-22"></a>poly_fit_h =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">22</span>), <span class="dt">data =</span> sim_trn_data)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="regression-overview.html#cb62-1"></a><span class="co"># get predictions</span></span>
+<span id="cb62-2"><a href="regression-overview.html#cb62-2"></a></span>
+<span id="cb62-3"><a href="regression-overview.html#cb62-3"></a><span class="co">## tree models</span></span>
+<span id="cb62-4"><a href="regression-overview.html#cb62-4"></a>tree_fit_l_pred =<span class="st"> </span><span class="kw">predict</span>(tree_fit_l, <span class="dt">newdata =</span> x_grid)</span>
+<span id="cb62-5"><a href="regression-overview.html#cb62-5"></a>tree_fit_m_pred =<span class="st"> </span><span class="kw">predict</span>(tree_fit_m, <span class="dt">newdata =</span> x_grid)</span>
+<span id="cb62-6"><a href="regression-overview.html#cb62-6"></a>tree_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(tree_fit_h, <span class="dt">newdata =</span> x_grid)</span>
+<span id="cb62-7"><a href="regression-overview.html#cb62-7"></a></span>
+<span id="cb62-8"><a href="regression-overview.html#cb62-8"></a><span class="co">## knn models</span></span>
+<span id="cb62-9"><a href="regression-overview.html#cb62-9"></a>knn_fit_l_pred =<span class="st"> </span>knn_fit_l<span class="op">$</span>pred</span>
+<span id="cb62-10"><a href="regression-overview.html#cb62-10"></a>knn_fit_m_pred =<span class="st"> </span>knn_fit_m<span class="op">$</span>pred</span>
+<span id="cb62-11"><a href="regression-overview.html#cb62-11"></a>knn_fit_h_pred =<span class="st"> </span>knn_fit_h<span class="op">$</span>pred</span>
+<span id="cb62-12"><a href="regression-overview.html#cb62-12"></a></span>
+<span id="cb62-13"><a href="regression-overview.html#cb62-13"></a><span class="co">## polynomial models</span></span>
+<span id="cb62-14"><a href="regression-overview.html#cb62-14"></a>poly_fit_l_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_l, <span class="dt">newdata =</span> x_grid)</span>
+<span id="cb62-15"><a href="regression-overview.html#cb62-15"></a>poly_fit_m_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_m, <span class="dt">newdata =</span> x_grid)</span>
+<span id="cb62-16"><a href="regression-overview.html#cb62-16"></a>poly_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(poly_fit_h, <span class="dt">newdata =</span> x_grid)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="regression-overview.html#cb63-1"></a><span class="co"># plot fitted trees</span></span>
+<span id="cb63-2"><a href="regression-overview.html#cb63-2"></a></span>
+<span id="cb63-3"><a href="regression-overview.html#cb63-3"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb63-4"><a href="regression-overview.html#cb63-4"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, </span>
+<span id="cb63-5"><a href="regression-overview.html#cb63-5"></a>     <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.5&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb63-6"><a href="regression-overview.html#cb63-6"></a><span class="kw">grid</span>()</span>
+<span id="cb63-7"><a href="regression-overview.html#cb63-7"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb63-8"><a href="regression-overview.html#cb63-8"></a></span>
+<span id="cb63-9"><a href="regression-overview.html#cb63-9"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb63-10"><a href="regression-overview.html#cb63-10"></a>     <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.015&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb63-11"><a href="regression-overview.html#cb63-11"></a><span class="kw">grid</span>()</span>
+<span id="cb63-12"><a href="regression-overview.html#cb63-12"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb63-13"><a href="regression-overview.html#cb63-13"></a></span>
+<span id="cb63-14"><a href="regression-overview.html#cb63-14"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, </span>
+<span id="cb63-15"><a href="regression-overview.html#cb63-15"></a>     <span class="dt">main =</span> <span class="st">&quot;Tree Model, cp = 0.0&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb63-16"><a href="regression-overview.html#cb63-16"></a><span class="kw">grid</span>()</span>
+<span id="cb63-17"><a href="regression-overview.html#cb63-17"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, tree_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="05-regression_files/figure-html/unnamed-chunk-5-1.png" width="960" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted KNN</span>
-
-<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
-     <span class="dt">main =</span> <span class="st">&quot;KNN, k = 40&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
-
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
-     <span class="dt">main =</span> <span class="st">&quot;KNN, k = 5&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
-
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
-     <span class="dt">main =</span> <span class="st">&quot;KNN, k = 1&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="regression-overview.html#cb64-1"></a><span class="co"># plot fitted KNN</span></span>
+<span id="cb64-2"><a href="regression-overview.html#cb64-2"></a></span>
+<span id="cb64-3"><a href="regression-overview.html#cb64-3"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb64-4"><a href="regression-overview.html#cb64-4"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, </span>
+<span id="cb64-5"><a href="regression-overview.html#cb64-5"></a>     <span class="dt">main =</span> <span class="st">&quot;KNN, k = 40&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb64-6"><a href="regression-overview.html#cb64-6"></a><span class="kw">grid</span>()</span>
+<span id="cb64-7"><a href="regression-overview.html#cb64-7"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb64-8"><a href="regression-overview.html#cb64-8"></a></span>
+<span id="cb64-9"><a href="regression-overview.html#cb64-9"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb64-10"><a href="regression-overview.html#cb64-10"></a>     <span class="dt">main =</span> <span class="st">&quot;KNN, k = 5&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb64-11"><a href="regression-overview.html#cb64-11"></a><span class="kw">grid</span>()</span>
+<span id="cb64-12"><a href="regression-overview.html#cb64-12"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb64-13"><a href="regression-overview.html#cb64-13"></a></span>
+<span id="cb64-14"><a href="regression-overview.html#cb64-14"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, </span>
+<span id="cb64-15"><a href="regression-overview.html#cb64-15"></a>     <span class="dt">main =</span> <span class="st">&quot;KNN, k = 1&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb64-16"><a href="regression-overview.html#cb64-16"></a><span class="kw">grid</span>()</span>
+<span id="cb64-17"><a href="regression-overview.html#cb64-17"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, knn_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="05-regression_files/figure-html/unnamed-chunk-6-1.png" width="960" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot fitted polynomials</span>
-<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
-     <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 1&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
-
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,
-     <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 3&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)
-
-<span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, 
-     <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 22&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)
-<span class="kw">grid</span>()
-<span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="regression-overview.html#cb65-1"></a><span class="co"># plot fitted polynomials</span></span>
+<span id="cb65-2"><a href="regression-overview.html#cb65-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb65-3"><a href="regression-overview.html#cb65-3"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, </span>
+<span id="cb65-4"><a href="regression-overview.html#cb65-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 1&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb65-5"><a href="regression-overview.html#cb65-5"></a><span class="kw">grid</span>()</span>
+<span id="cb65-6"><a href="regression-overview.html#cb65-6"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_l_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb65-7"><a href="regression-overview.html#cb65-7"></a></span>
+<span id="cb65-8"><a href="regression-overview.html#cb65-8"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb65-9"><a href="regression-overview.html#cb65-9"></a>     <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 3&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb65-10"><a href="regression-overview.html#cb65-10"></a><span class="kw">grid</span>()</span>
+<span id="cb65-11"><a href="regression-overview.html#cb65-11"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_m_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb65-12"><a href="regression-overview.html#cb65-12"></a></span>
+<span id="cb65-13"><a href="regression-overview.html#cb65-13"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_trn_data, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, </span>
+<span id="cb65-14"><a href="regression-overview.html#cb65-14"></a>     <span class="dt">main =</span> <span class="st">&quot;Polynomial Model, degree = 22&quot;</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb65-15"><a href="regression-overview.html#cb65-15"></a><span class="kw">grid</span>()</span>
+<span id="cb65-16"><a href="regression-overview.html#cb65-16"></a><span class="kw">lines</span>(x_grid<span class="op">$</span>x, poly_fit_h_pred, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,  <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="05-regression_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
 <!-- ## Regression Notation -->
 <!-- - $\mathbf{X}$ = $n \times p$ data matrix -->
@@ -612,11 +650,13 @@ poly_fit_h_pred =<span class="st"> </span><span class="kw">predict</span>(poly_f
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -624,12 +664,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -641,6 +680,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -659,8 +702,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

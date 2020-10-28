@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Logistic Regression | R for Statistical Learning</title>
   <meta name="description" content="Chapter 10 Logistic Regression | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Logistic Regression | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="classification-overview.html">
-<link rel="next" href="generative-models.html">
+<link rel="prev" href="classification-overview.html"/>
+<link rel="next" href="generative-models.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,12 +425,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="logistic-regression" class="section level1">
+<div id="logistic-regression" class="section level1" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Logistic Regression</h1>
 <p>In this chapter, we continue our discussion of classification. We introduce our first model for classification, logistic regression. To begin, we return to the <code>Default</code> dataset from the previous chapter.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
-<span class="kw">library</span>(tibble)
-<span class="kw">as_tibble</span>(Default)</code></pre>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="logistic-regression.html#cb216-1"></a><span class="kw">library</span>(ISLR)</span>
+<span id="cb216-2"><a href="logistic-regression.html#cb216-2"></a><span class="kw">library</span>(tibble)</span>
+<span id="cb216-3"><a href="logistic-regression.html#cb216-3"></a><span class="kw">as_tibble</span>(Default)</span></code></pre></div>
 <pre><code>## # A tibble: 10,000 x 4
 ##    default student balance income
 ##    &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt;
@@ -408,18 +446,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 No      No           0  29275.
 ## # … with 9,990 more rows</code></pre>
 <p>We also repeat the test-train split from the previous chapter.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-default_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)
-default_trn =<span class="st"> </span>Default[default_idx, ]
-default_tst =<span class="st"> </span>Default[<span class="op">-</span>default_idx, ]</code></pre>
-<div id="linear-regression" class="section level2">
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="logistic-regression.html#cb218-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb218-2"><a href="logistic-regression.html#cb218-2"></a>default_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="dv">5000</span>)</span>
+<span id="cb218-3"><a href="logistic-regression.html#cb218-3"></a>default_trn =<span class="st"> </span>Default[default_idx, ]</span>
+<span id="cb218-4"><a href="logistic-regression.html#cb218-4"></a>default_tst =<span class="st"> </span>Default[<span class="op">-</span>default_idx, ]</span></code></pre></div>
+<div id="linear-regression" class="section level2" number="10.1">
 <h2><span class="header-section-number">10.1</span> Linear Regression</h2>
 <p>Before moving on to logistic regression, why not plain, old, linear regression?</p>
-<pre class="sourceCode r"><code class="sourceCode r">default_trn_lm =<span class="st"> </span>default_trn
-default_tst_lm =<span class="st"> </span>default_tst</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="logistic-regression.html#cb219-1"></a>default_trn_lm =<span class="st"> </span>default_trn</span>
+<span id="cb219-2"><a href="logistic-regression.html#cb219-2"></a>default_tst_lm =<span class="st"> </span>default_tst</span></code></pre></div>
 <p>Since linear regression expects a numeric response variable, we coerce the response to be numeric. (Notice that we also shift the results, as we require <code>0</code> and <code>1</code>, not <code>1</code> and <code>2</code>.) Notice we have also copied the dataset so that we can return the original data with factors later.</p>
-<pre class="sourceCode r"><code class="sourceCode r">default_trn_lm<span class="op">$</span>default =<span class="st"> </span><span class="kw">as.numeric</span>(default_trn_lm<span class="op">$</span>default) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
-default_tst_lm<span class="op">$</span>default =<span class="st"> </span><span class="kw">as.numeric</span>(default_tst_lm<span class="op">$</span>default) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="logistic-regression.html#cb220-1"></a>default_trn_lm<span class="op">$</span>default =<span class="st"> </span><span class="kw">as.numeric</span>(default_trn_lm<span class="op">$</span>default) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb220-2"><a href="logistic-regression.html#cb220-2"></a>default_tst_lm<span class="op">$</span>default =<span class="st"> </span><span class="kw">as.numeric</span>(default_tst_lm<span class="op">$</span>default) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <p>Why would we think this should work? Recall that,</p>
 <p><span class="math display">\[
 \hat{\mathbb{E}}[Y \mid X = x] = X\hat{\beta}.
@@ -429,24 +467,24 @@ default_tst_lm<span class="op">$</span>default =<span class="st"> </span><span c
 \mathbb{E}[Y \mid X = x] = P(Y = 1 \mid X = x).
 \]</span></p>
 <p>It would then seem reasonable that <span class="math inline">\(\mathbf{X}\hat{\beta}\)</span> is a reasonable estimate of <span class="math inline">\(P(Y = 1 \mid X = x)\)</span>. We test this on the <code>Default</code> data.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model_lm =<span class="st"> </span><span class="kw">lm</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn_lm)</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="logistic-regression.html#cb221-1"></a>model_lm =<span class="st"> </span><span class="kw">lm</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn_lm)</span></code></pre></div>
 <p>Everything seems to be working, until we plot the results.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn_lm, 
-     <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="dv">1</span>),
-     <span class="dt">main =</span> <span class="st">&quot;Using Linear Regression for Classification&quot;</span>)
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
-<span class="kw">abline</span>(model_lm, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="logistic-regression.html#cb222-1"></a><span class="kw">plot</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn_lm, </span>
+<span id="cb222-2"><a href="logistic-regression.html#cb222-2"></a>     <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="dv">1</span>),</span>
+<span id="cb222-3"><a href="logistic-regression.html#cb222-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Using Linear Regression for Classification&quot;</span>)</span>
+<span id="cb222-4"><a href="logistic-regression.html#cb222-4"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb222-5"><a href="logistic-regression.html#cb222-5"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb222-6"><a href="logistic-regression.html#cb222-6"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb222-7"><a href="logistic-regression.html#cb222-7"></a><span class="kw">abline</span>(model_lm, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</span></code></pre></div>
 <p><img src="10-logistic_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>Two issues arise. First, all of the predicted probabilities are below 0.5. That means, we would classify every observation as a <code>&quot;No&quot;</code>. This is certainly possible, but not what we would expect.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all</span>(<span class="kw">predict</span>(model_lm) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)</code></pre>
+<p>Two issues arise. First, all of the predicted probabilities are below 0.5. That means, we would classify every observation as a <code>"No"</code>. This is certainly possible, but not what we would expect.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="logistic-regression.html#cb223-1"></a><span class="kw">all</span>(<span class="kw">predict</span>(model_lm) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>The next, and bigger issue, is predicted probabilities less than 0.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">any</span>(<span class="kw">predict</span>(model_lm) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="logistic-regression.html#cb225-1"></a><span class="kw">any</span>(<span class="kw">predict</span>(model_lm) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-<div id="bayes-classifier" class="section level2">
+<div id="bayes-classifier" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Bayes Classifier</h2>
 <p>Why are we using a predicted probability of 0.5 as the cutoff for classification? Recall, the Bayes Classifier, which minimizes the classification error:</p>
 <p><span class="math display">\[
@@ -470,7 +508,7 @@ C^B(x) = \underset{g}{\mathrm{argmax}} \ P(Y = g \mid  X = x)
 \]</span></p>
 <p>This classifier is essentially estimating the Bayes Classifier, thus, is seeking to minimize classification errors.</p>
 </div>
-<div id="logistic-regression-with-glm" class="section level2">
+<div id="logistic-regression-with-glm" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Logistic Regression with <code>glm()</code></h2>
 <p>To better estimate the probability</p>
 <p><span class="math display">\[
@@ -490,20 +528,20 @@ p(x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p
 \]</span></p>
 <p>The model is fit by numerically maximizing the likelihood, which we will let <code>R</code> take care of.</p>
 <p>We start with a single predictor example, again using <code>balance</code> as our single predictor.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model_glm =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre>
-<p>Fitting this model looks very similar to fitting a simple linear regression. Instead of <code>lm()</code> we use <code>glm()</code>. The only other difference is the use of <code>family = &quot;binomial&quot;</code> which indicates that we have a two-class categorical response. Using <code>glm()</code> with <code>family = &quot;gaussian&quot;</code> would perform the usual linear regression.</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="logistic-regression.html#cb227-1"></a>model_glm =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<p>Fitting this model looks very similar to fitting a simple linear regression. Instead of <code>lm()</code> we use <code>glm()</code>. The only other difference is the use of <code>family = "binomial"</code> which indicates that we have a two-class categorical response. Using <code>glm()</code> with <code>family = "gaussian"</code> would perform the usual linear regression.</p>
 <p>First, we can obtain the fitted coefficients the same way we did with linear regression.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(model_glm)</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="logistic-regression.html#cb228-1"></a><span class="kw">coef</span>(model_glm)</span></code></pre></div>
 <pre><code>##   (Intercept)       balance 
-## -10.452182876   0.005367655</code></pre>
+## -10.493158288   0.005424994</code></pre>
 <p>The next thing we should understand is how the <code>predict()</code> function works with <code>glm()</code>. So, let’s look at some predictions.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(model_glm))</code></pre>
-<pre><code>##       9149       9370       2861       8302       6415       5189 
-## -6.9616496 -0.7089539 -4.8936916 -9.4123620 -9.0416096 -7.3600645</code></pre>
-<p>By default, <code>predict.glm()</code> uses <code>type = &quot;link&quot;</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>))</code></pre>
-<pre><code>##       9149       9370       2861       8302       6415       5189 
-## -6.9616496 -0.7089539 -4.8936916 -9.4123620 -9.0416096 -7.3600645</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="logistic-regression.html#cb230-1"></a><span class="kw">head</span>(<span class="kw">predict</span>(model_glm))</span></code></pre></div>
+<pre><code>##      2369      5273      9290      1252      8826       356 
+## -5.376670 -4.875653 -5.018746 -4.007664 -6.538414 -6.601582</code></pre>
+<p>By default, <code>predict.glm()</code> uses <code>type = "link"</code>.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="logistic-regression.html#cb232-1"></a><span class="kw">head</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>))</span></code></pre></div>
+<pre><code>##      2369      5273      9290      1252      8826       356 
+## -5.376670 -4.875653 -5.018746 -4.007664 -6.538414 -6.601582</code></pre>
 <p>That is, <code>R</code> is returning</p>
 <p><span class="math display">\[
 \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots  + \hat{\beta}_p x_p
@@ -513,15 +551,13 @@ for each observation.</p>
 <p><span class="math display">\[
 \hat{p}(x) = \hat{P}(Y = 1 \mid X = x)
 \]</span></p>
-<p>we need to use <code>type = &quot;response&quot;</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>))</code></pre>
-<pre><code>##         9149         9370         2861         8302         6415 
-## 9.466353e-04 3.298300e-01 7.437969e-03 8.170105e-05 1.183661e-04 
-##         5189 
-## 6.357530e-04</code></pre>
+<p>we need to use <code>type = "response"</code></p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="logistic-regression.html#cb234-1"></a><span class="kw">head</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>))</span></code></pre></div>
+<pre><code>##        2369        5273        9290        1252        8826         356 
+## 0.004601914 0.007572331 0.006569370 0.017851333 0.001444691 0.001356375</code></pre>
 <p>Note that these are probabilities, <strong>not</strong> classifications. To obtain classifications, we will need to compare to the correct cutoff value with an <code>ifelse()</code> statement.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model_glm_pred =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)
-<span class="co"># model_glm_pred = ifelse(predict(model_glm, type = &quot;response&quot;) &gt; 0.5, &quot;Yes&quot;, &quot;No&quot;)</span></code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="logistic-regression.html#cb236-1"></a>model_glm_pred =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(model_glm, <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)</span>
+<span id="cb236-2"><a href="logistic-regression.html#cb236-2"></a><span class="co"># model_glm_pred = ifelse(predict(model_glm, type = &quot;response&quot;) &gt; 0.5, &quot;Yes&quot;, &quot;No&quot;)</span></span></code></pre></div>
 <p>The line that is run is performing</p>
 <p><span class="math display">\[
 \hat{C}(x) = 
@@ -547,40 +583,40 @@ for each observation.</p>
 \hat{p}(x) = \hat{P}(Y = 1 \mid X = x).
 \]</span></p>
 <p>Once we have classifications, we can calculate metrics such as the trainging classification error rate.</p>
-<pre class="sourceCode r"><code class="sourceCode r">calc_class_err =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calc_class_err</span>(<span class="dt">actual =</span> default_trn<span class="op">$</span>default, <span class="dt">predicted =</span> model_glm_pred)</code></pre>
-<pre><code>## [1] 0.0278</code></pre>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="logistic-regression.html#cb237-1"></a>calc_class_err =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb237-2"><a href="logistic-regression.html#cb237-2"></a>  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</span>
+<span id="cb237-3"><a href="logistic-regression.html#cb237-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="logistic-regression.html#cb238-1"></a><span class="kw">calc_class_err</span>(<span class="dt">actual =</span> default_trn<span class="op">$</span>default, <span class="dt">predicted =</span> model_glm_pred)</span></code></pre></div>
+<pre><code>## [1] 0.0284</code></pre>
 <p>As we saw previously, the <code>table()</code> and <code>confusionMatrix()</code> functions can be used to quickly obtain many more metrics.</p>
-<pre class="sourceCode r"><code class="sourceCode r">train_tab =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> model_glm_pred, <span class="dt">actual =</span> default_trn<span class="op">$</span>default)
-<span class="kw">library</span>(caret)
-train_con_mat =<span class="st"> </span><span class="kw">confusionMatrix</span>(train_tab, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
-<span class="kw">c</span>(train_con_mat<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>], 
-  train_con_mat<span class="op">$</span>byClass[<span class="st">&quot;Sensitivity&quot;</span>], 
-  train_con_mat<span class="op">$</span>byClass[<span class="st">&quot;Specificity&quot;</span>])</code></pre>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="logistic-regression.html#cb240-1"></a>train_tab =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> model_glm_pred, <span class="dt">actual =</span> default_trn<span class="op">$</span>default)</span>
+<span id="cb240-2"><a href="logistic-regression.html#cb240-2"></a><span class="kw">library</span>(caret)</span>
+<span id="cb240-3"><a href="logistic-regression.html#cb240-3"></a>train_con_mat =<span class="st"> </span><span class="kw">confusionMatrix</span>(train_tab, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb240-4"><a href="logistic-regression.html#cb240-4"></a><span class="kw">c</span>(train_con_mat<span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>], </span>
+<span id="cb240-5"><a href="logistic-regression.html#cb240-5"></a>  train_con_mat<span class="op">$</span>byClass[<span class="st">&quot;Sensitivity&quot;</span>], </span>
+<span id="cb240-6"><a href="logistic-regression.html#cb240-6"></a>  train_con_mat<span class="op">$</span>byClass[<span class="st">&quot;Specificity&quot;</span>])</span></code></pre></div>
 <pre><code>##    Accuracy Sensitivity Specificity 
-##   0.9722000   0.2738095   0.9964818</code></pre>
+##   0.9716000   0.2941176   0.9954451</code></pre>
 <p>We could also write a custom function for the error for use with trained logist regression models.</p>
-<pre class="sourceCode r"><code class="sourceCode r">get_logistic_error =<span class="st"> </span><span class="cf">function</span>(mod, data, <span class="dt">res =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>, <span class="dt">neg =</span> <span class="dv">0</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>) {
-  probs =<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> data, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
-  preds =<span class="st"> </span><span class="kw">ifelse</span>(probs <span class="op">&gt;</span><span class="st"> </span>cut, pos, neg)
-  <span class="kw">calc_class_err</span>(<span class="dt">actual =</span> data[, res], <span class="dt">predicted =</span> preds)
-}</code></pre>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="logistic-regression.html#cb242-1"></a>get_logistic_error =<span class="st"> </span><span class="cf">function</span>(mod, data, <span class="dt">res =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>, <span class="dt">neg =</span> <span class="dv">0</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>) {</span>
+<span id="cb242-2"><a href="logistic-regression.html#cb242-2"></a>  probs =<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> data, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb242-3"><a href="logistic-regression.html#cb242-3"></a>  preds =<span class="st"> </span><span class="kw">ifelse</span>(probs <span class="op">&gt;</span><span class="st"> </span>cut, pos, neg)</span>
+<span id="cb242-4"><a href="logistic-regression.html#cb242-4"></a>  <span class="kw">calc_class_err</span>(<span class="dt">actual =</span> data[, res], <span class="dt">predicted =</span> preds)</span>
+<span id="cb242-5"><a href="logistic-regression.html#cb242-5"></a>}</span></code></pre></div>
 <p>This function will be useful later when calculating train and test errors for several models at the same time.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_logistic_error</span>(model_glm, <span class="dt">data =</span> default_trn, 
-                   <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</code></pre>
-<pre><code>## [1] 0.0278</code></pre>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="logistic-regression.html#cb243-1"></a><span class="kw">get_logistic_error</span>(model_glm, <span class="dt">data =</span> default_trn, </span>
+<span id="cb243-2"><a href="logistic-regression.html#cb243-2"></a>                   <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0284</code></pre>
 <p>To see how much better logistic regression is for this task, we create the same plot we used for linear regression.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn_lm, 
-     <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="dv">1</span>),
-     <span class="dt">main =</span> <span class="st">&quot;Using Logistic Regression for Classification&quot;</span>)
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
-<span class="kw">curve</span>(<span class="kw">predict</span>(model_glm, <span class="kw">data.frame</span>(<span class="dt">balance =</span> x), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>), 
-      <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)
-<span class="kw">abline</span>(<span class="dt">v =</span> <span class="op">-</span><span class="kw">coef</span>(model_glm)[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(model_glm)[<span class="dv">2</span>], <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="logistic-regression.html#cb245-1"></a><span class="kw">plot</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn_lm, </span>
+<span id="cb245-2"><a href="logistic-regression.html#cb245-2"></a>     <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="dv">1</span>),</span>
+<span id="cb245-3"><a href="logistic-regression.html#cb245-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Using Logistic Regression for Classification&quot;</span>)</span>
+<span id="cb245-4"><a href="logistic-regression.html#cb245-4"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb245-5"><a href="logistic-regression.html#cb245-5"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb245-6"><a href="logistic-regression.html#cb245-6"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb245-7"><a href="logistic-regression.html#cb245-7"></a><span class="kw">curve</span>(<span class="kw">predict</span>(model_glm, <span class="kw">data.frame</span>(<span class="dt">balance =</span> x), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>), </span>
+<span id="cb245-8"><a href="logistic-regression.html#cb245-8"></a>      <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</span>
+<span id="cb245-9"><a href="logistic-regression.html#cb245-9"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="op">-</span><span class="kw">coef</span>(model_glm)[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(model_glm)[<span class="dv">2</span>], <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="10-logistic_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>This plot contains a wealth of information.</p>
 <ul>
@@ -589,7 +625,7 @@ train_con_mat =<span class="st"> </span><span class="kw">confusionMatrix</span>(
 <span class="math display">\[
 \hat{p}(x) = \hat{P}(Y = 1 \mid { X = x})
 \]</span></li>
-<li>The solid vertical black line represents the <strong><a href="https://en.wikipedia.org/wiki/Decision_boundary">decision boundary</a></strong>, the <code>balance</code> that obtains a predicted probability of 0.5. In this case <code>balance</code> = 1947.252994.</li>
+<li>The solid vertical black line represents the <strong><a href="https://en.wikipedia.org/wiki/Decision_boundary">decision boundary</a></strong>, the <code>balance</code> that obtains a predicted probability of 0.5. In this case <code>balance</code> = 1934.2247145.</li>
 </ul>
 <p>The decision boundary is found by solving for points that satisfy</p>
 <p><span class="math display">\[
@@ -604,40 +640,40 @@ Thus, for logistic regression with a single predictor, the decision boundary is 
 x_1 = \frac{-\hat{\beta}_0}{\hat{\beta}_1}.
 \]</span></p>
 <p>The following is not run, but an alternative way to add the logistic curve to the plot.</p>
-<pre class="sourceCode r"><code class="sourceCode r">grid =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(default_trn<span class="op">$</span>balance), <span class="dt">by =</span> <span class="fl">0.01</span>)
-
-sigmoid =<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>x))
-}
-
-<span class="kw">lines</span>(grid, <span class="kw">sigmoid</span>(<span class="kw">coef</span>(model_glm)[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(model_glm)[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>grid), <span class="dt">lwd =</span> <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="logistic-regression.html#cb246-1"></a>grid =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(default_trn<span class="op">$</span>balance), <span class="dt">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb246-2"><a href="logistic-regression.html#cb246-2"></a></span>
+<span id="cb246-3"><a href="logistic-regression.html#cb246-3"></a>sigmoid =<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb246-4"><a href="logistic-regression.html#cb246-4"></a>  <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>x))</span>
+<span id="cb246-5"><a href="logistic-regression.html#cb246-5"></a>}</span>
+<span id="cb246-6"><a href="logistic-regression.html#cb246-6"></a></span>
+<span id="cb246-7"><a href="logistic-regression.html#cb246-7"></a><span class="kw">lines</span>(grid, <span class="kw">sigmoid</span>(<span class="kw">coef</span>(model_glm)[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(model_glm)[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>grid), <span class="dt">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p>Using the usual formula syntax, it is easy to add or remove complexity from logistic regressions.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model_<span class="dv">1</span> =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
-model_<span class="dv">2</span> =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
-model_<span class="dv">3</span> =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(balance <span class="op">^</span><span class="st"> </span><span class="dv">2</span>),
-              <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="logistic-regression.html#cb247-1"></a>model_<span class="dv">1</span> =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb247-2"><a href="logistic-regression.html#cb247-2"></a>model_<span class="dv">2</span> =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb247-3"><a href="logistic-regression.html#cb247-3"></a>model_<span class="dv">3</span> =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(balance <span class="op">^</span><span class="st"> </span><span class="dv">2</span>),</span>
+<span id="cb247-4"><a href="logistic-regression.html#cb247-4"></a>              <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <p>Note that, using polynomial transformations of predictors will allow a linear model to have non-linear decision boundaries.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model_list =<span class="st"> </span><span class="kw">list</span>(model_<span class="dv">1</span>, model_<span class="dv">2</span>, model_<span class="dv">3</span>)
-train_errors =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_trn, 
-                      <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
-test_errors  =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_tst, 
-                      <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="logistic-regression.html#cb248-1"></a>model_list =<span class="st"> </span><span class="kw">list</span>(model_<span class="dv">1</span>, model_<span class="dv">2</span>, model_<span class="dv">3</span>)</span>
+<span id="cb248-2"><a href="logistic-regression.html#cb248-2"></a>train_errors =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_trn, </span>
+<span id="cb248-3"><a href="logistic-regression.html#cb248-3"></a>                      <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</span>
+<span id="cb248-4"><a href="logistic-regression.html#cb248-4"></a>test_errors  =<span class="st"> </span><span class="kw">sapply</span>(model_list, get_logistic_error, <span class="dt">data =</span> default_tst, </span>
+<span id="cb248-5"><a href="logistic-regression.html#cb248-5"></a>                      <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p>Here we see the misclassification error rates for each model. The train decreases, and the test decreases, until it starts to increases. Everything we learned about the bias-variance tradeoff for regression also applies here.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(train_errors)</code></pre>
-<pre><code>## [1] -0.0058 -0.0002</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(test_errors)</code></pre>
-<pre><code>## [1] -0.0068  0.0004</code></pre>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="logistic-regression.html#cb249-1"></a><span class="kw">diff</span>(train_errors)</span></code></pre></div>
+<pre><code>## [1] -0.0066  0.0000</code></pre>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="logistic-regression.html#cb251-1"></a><span class="kw">diff</span>(test_errors)</span></code></pre></div>
+<pre><code>## [1] -0.0068  0.0006</code></pre>
 <p>We call <code>model_2</code> the <strong>additive</strong> logistic model, which we will use quite often.</p>
 </div>
-<div id="roc-curves" class="section level2">
+<div id="roc-curves" class="section level2" number="10.4">
 <h2><span class="header-section-number">10.4</span> ROC Curves</h2>
 <p>Let’s return to our simple model with only balance as a predictor.</p>
-<pre class="sourceCode r"><code class="sourceCode r">model_glm =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="logistic-regression.html#cb253-1"></a>model_glm =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">data =</span> default_trn, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <p>We write a function which allows use to make predictions based on different probability cutoffs.</p>
-<pre class="sourceCode r"><code class="sourceCode r">get_logistic_pred =<span class="st"> </span><span class="cf">function</span>(mod, data, <span class="dt">res =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>, <span class="dt">neg =</span> <span class="dv">0</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>) {
-  probs =<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> data, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
-  <span class="kw">ifelse</span>(probs <span class="op">&gt;</span><span class="st"> </span>cut, pos, neg)
-}</code></pre>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="logistic-regression.html#cb254-1"></a>get_logistic_pred =<span class="st"> </span><span class="cf">function</span>(mod, data, <span class="dt">res =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>, <span class="dt">neg =</span> <span class="dv">0</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>) {</span>
+<span id="cb254-2"><a href="logistic-regression.html#cb254-2"></a>  probs =<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> data, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb254-3"><a href="logistic-regression.html#cb254-3"></a>  <span class="kw">ifelse</span>(probs <span class="op">&gt;</span><span class="st"> </span>cut, pos, neg)</span>
+<span id="cb254-4"><a href="logistic-regression.html#cb254-4"></a>}</span></code></pre></div>
 <p><span class="math display">\[
 \hat{C}(x) = 
 \begin{cases} 
@@ -646,54 +682,54 @@ test_errors  =<span class="st"> </span><span class="kw">sapply</span>(model_list
 \end{cases}
 \]</span></p>
 <p>Let’s use this to obtain predictions using a low, medium, and high cutoff. (0.1, 0.5, and 0.9)</p>
-<pre class="sourceCode r"><code class="sourceCode r">test_pred_<span class="dv">10</span> =<span class="st"> </span><span class="kw">get_logistic_pred</span>(model_glm, <span class="dt">data =</span> default_tst, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, 
-                                 <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.1</span>)
-test_pred_<span class="dv">50</span> =<span class="st"> </span><span class="kw">get_logistic_pred</span>(model_glm, <span class="dt">data =</span> default_tst, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, 
-                                 <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)
-test_pred_<span class="dv">90</span> =<span class="st"> </span><span class="kw">get_logistic_pred</span>(model_glm, <span class="dt">data =</span> default_tst, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, 
-                                 <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.9</span>)</code></pre>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="logistic-regression.html#cb255-1"></a>test_pred_<span class="dv">10</span> =<span class="st"> </span><span class="kw">get_logistic_pred</span>(model_glm, <span class="dt">data =</span> default_tst, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, </span>
+<span id="cb255-2"><a href="logistic-regression.html#cb255-2"></a>                                 <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.1</span>)</span>
+<span id="cb255-3"><a href="logistic-regression.html#cb255-3"></a>test_pred_<span class="dv">50</span> =<span class="st"> </span><span class="kw">get_logistic_pred</span>(model_glm, <span class="dt">data =</span> default_tst, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, </span>
+<span id="cb255-4"><a href="logistic-regression.html#cb255-4"></a>                                 <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.5</span>)</span>
+<span id="cb255-5"><a href="logistic-regression.html#cb255-5"></a>test_pred_<span class="dv">90</span> =<span class="st"> </span><span class="kw">get_logistic_pred</span>(model_glm, <span class="dt">data =</span> default_tst, <span class="dt">res =</span> <span class="st">&quot;default&quot;</span>, </span>
+<span id="cb255-6"><a href="logistic-regression.html#cb255-6"></a>                                 <span class="dt">pos =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">neg =</span> <span class="st">&quot;No&quot;</span>, <span class="dt">cut =</span> <span class="fl">0.9</span>)</span></code></pre></div>
 <p>Now we evaluate accuracy, sensitivity, and specificity for these classifiers.</p>
-<pre class="sourceCode r"><code class="sourceCode r">test_tab_<span class="dv">10</span> =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_<span class="dv">10</span>, <span class="dt">actual =</span> default_tst<span class="op">$</span>default)
-test_tab_<span class="dv">50</span> =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_<span class="dv">50</span>, <span class="dt">actual =</span> default_tst<span class="op">$</span>default)
-test_tab_<span class="dv">90</span> =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_<span class="dv">90</span>, <span class="dt">actual =</span> default_tst<span class="op">$</span>default)
-
-test_con_mat_<span class="dv">10</span> =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_<span class="dv">10</span>, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
-test_con_mat_<span class="dv">50</span> =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_<span class="dv">50</span>, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)
-test_con_mat_<span class="dv">90</span> =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_<span class="dv">90</span>, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">metrics =<span class="st"> </span><span class="kw">rbind</span>(
-  
-  <span class="kw">c</span>(test_con_mat_<span class="dv">10</span><span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>], 
-    test_con_mat_<span class="dv">10</span><span class="op">$</span>byClass[<span class="st">&quot;Sensitivity&quot;</span>], 
-    test_con_mat_<span class="dv">10</span><span class="op">$</span>byClass[<span class="st">&quot;Specificity&quot;</span>]),
-  
-  <span class="kw">c</span>(test_con_mat_<span class="dv">50</span><span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>], 
-    test_con_mat_<span class="dv">50</span><span class="op">$</span>byClass[<span class="st">&quot;Sensitivity&quot;</span>], 
-    test_con_mat_<span class="dv">50</span><span class="op">$</span>byClass[<span class="st">&quot;Specificity&quot;</span>]),
-  
-  <span class="kw">c</span>(test_con_mat_<span class="dv">90</span><span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>], 
-    test_con_mat_<span class="dv">90</span><span class="op">$</span>byClass[<span class="st">&quot;Sensitivity&quot;</span>], 
-    test_con_mat_<span class="dv">90</span><span class="op">$</span>byClass[<span class="st">&quot;Specificity&quot;</span>])
-
-)
-
-<span class="kw">rownames</span>(metrics) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;c = 0.10&quot;</span>, <span class="st">&quot;c = 0.50&quot;</span>, <span class="st">&quot;c = 0.90&quot;</span>)
-metrics</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="logistic-regression.html#cb256-1"></a>test_tab_<span class="dv">10</span> =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_<span class="dv">10</span>, <span class="dt">actual =</span> default_tst<span class="op">$</span>default)</span>
+<span id="cb256-2"><a href="logistic-regression.html#cb256-2"></a>test_tab_<span class="dv">50</span> =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_<span class="dv">50</span>, <span class="dt">actual =</span> default_tst<span class="op">$</span>default)</span>
+<span id="cb256-3"><a href="logistic-regression.html#cb256-3"></a>test_tab_<span class="dv">90</span> =<span class="st"> </span><span class="kw">table</span>(<span class="dt">predicted =</span> test_pred_<span class="dv">90</span>, <span class="dt">actual =</span> default_tst<span class="op">$</span>default)</span>
+<span id="cb256-4"><a href="logistic-regression.html#cb256-4"></a></span>
+<span id="cb256-5"><a href="logistic-regression.html#cb256-5"></a>test_con_mat_<span class="dv">10</span> =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_<span class="dv">10</span>, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb256-6"><a href="logistic-regression.html#cb256-6"></a>test_con_mat_<span class="dv">50</span> =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_<span class="dv">50</span>, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb256-7"><a href="logistic-regression.html#cb256-7"></a>test_con_mat_<span class="dv">90</span> =<span class="st"> </span><span class="kw">confusionMatrix</span>(test_tab_<span class="dv">90</span>, <span class="dt">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="logistic-regression.html#cb257-1"></a>metrics =<span class="st"> </span><span class="kw">rbind</span>(</span>
+<span id="cb257-2"><a href="logistic-regression.html#cb257-2"></a>  </span>
+<span id="cb257-3"><a href="logistic-regression.html#cb257-3"></a>  <span class="kw">c</span>(test_con_mat_<span class="dv">10</span><span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>], </span>
+<span id="cb257-4"><a href="logistic-regression.html#cb257-4"></a>    test_con_mat_<span class="dv">10</span><span class="op">$</span>byClass[<span class="st">&quot;Sensitivity&quot;</span>], </span>
+<span id="cb257-5"><a href="logistic-regression.html#cb257-5"></a>    test_con_mat_<span class="dv">10</span><span class="op">$</span>byClass[<span class="st">&quot;Specificity&quot;</span>]),</span>
+<span id="cb257-6"><a href="logistic-regression.html#cb257-6"></a>  </span>
+<span id="cb257-7"><a href="logistic-regression.html#cb257-7"></a>  <span class="kw">c</span>(test_con_mat_<span class="dv">50</span><span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>], </span>
+<span id="cb257-8"><a href="logistic-regression.html#cb257-8"></a>    test_con_mat_<span class="dv">50</span><span class="op">$</span>byClass[<span class="st">&quot;Sensitivity&quot;</span>], </span>
+<span id="cb257-9"><a href="logistic-regression.html#cb257-9"></a>    test_con_mat_<span class="dv">50</span><span class="op">$</span>byClass[<span class="st">&quot;Specificity&quot;</span>]),</span>
+<span id="cb257-10"><a href="logistic-regression.html#cb257-10"></a>  </span>
+<span id="cb257-11"><a href="logistic-regression.html#cb257-11"></a>  <span class="kw">c</span>(test_con_mat_<span class="dv">90</span><span class="op">$</span>overall[<span class="st">&quot;Accuracy&quot;</span>], </span>
+<span id="cb257-12"><a href="logistic-regression.html#cb257-12"></a>    test_con_mat_<span class="dv">90</span><span class="op">$</span>byClass[<span class="st">&quot;Sensitivity&quot;</span>], </span>
+<span id="cb257-13"><a href="logistic-regression.html#cb257-13"></a>    test_con_mat_<span class="dv">90</span><span class="op">$</span>byClass[<span class="st">&quot;Specificity&quot;</span>])</span>
+<span id="cb257-14"><a href="logistic-regression.html#cb257-14"></a></span>
+<span id="cb257-15"><a href="logistic-regression.html#cb257-15"></a>)</span>
+<span id="cb257-16"><a href="logistic-regression.html#cb257-16"></a></span>
+<span id="cb257-17"><a href="logistic-regression.html#cb257-17"></a><span class="kw">rownames</span>(metrics) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;c = 0.10&quot;</span>, <span class="st">&quot;c = 0.50&quot;</span>, <span class="st">&quot;c = 0.90&quot;</span>)</span>
+<span id="cb257-18"><a href="logistic-regression.html#cb257-18"></a>metrics</span></code></pre></div>
 <pre><code>##          Accuracy Sensitivity Specificity
-## c = 0.10   0.9404  0.77575758   0.9460186
-## c = 0.50   0.9738  0.31515152   0.9962771
-## c = 0.90   0.9674  0.01818182   0.9997932</code></pre>
+## c = 0.10   0.9328  0.71779141   0.9400455
+## c = 0.50   0.9730  0.31288344   0.9952450
+## c = 0.90   0.9688  0.04294479   1.0000000</code></pre>
 <p>We see then sensitivity decreases as the cutoff is increased. Conversely, specificity increases as the cutoff increases. This is useful if we are more interested in a particular error, instead of giving them equal weight.</p>
 <p>Note that usually the best accuracy will be seen near <span class="math inline">\(c = 0.50\)</span>.</p>
 <p>Instead of manually checking cutoffs, we can create an ROC curve (receiver operating characteristic curve) which will sweep through all possible cutoffs, and plot the sensitivity and specificity.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pROC)
-test_prob =<span class="st"> </span><span class="kw">predict</span>(model_glm, <span class="dt">newdata =</span> default_tst, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
-test_roc =<span class="st"> </span><span class="kw">roc</span>(default_tst<span class="op">$</span>default <span class="op">~</span><span class="st"> </span>test_prob, <span class="dt">plot =</span> <span class="ot">TRUE</span>, <span class="dt">print.auc =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="logistic-regression.html#cb259-1"></a><span class="kw">library</span>(pROC)</span>
+<span id="cb259-2"><a href="logistic-regression.html#cb259-2"></a>test_prob =<span class="st"> </span><span class="kw">predict</span>(model_glm, <span class="dt">newdata =</span> default_tst, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb259-3"><a href="logistic-regression.html#cb259-3"></a>test_roc =<span class="st"> </span><span class="kw">roc</span>(default_tst<span class="op">$</span>default <span class="op">~</span><span class="st"> </span>test_prob, <span class="dt">plot =</span> <span class="ot">TRUE</span>, <span class="dt">print.auc =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="10-logistic_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(test_roc<span class="op">$</span>auc)</code></pre>
-<pre><code>## [1] 0.9515076</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="logistic-regression.html#cb260-1"></a><span class="kw">as.numeric</span>(test_roc<span class="op">$</span>auc)</span></code></pre></div>
+<pre><code>## [1] 0.9492866</code></pre>
 <p>A good model will have a high AUC, that is as often as possible a high sensitivity and specificity.</p>
 </div>
-<div id="multinomial-logistic-regression" class="section level2">
+<div id="multinomial-logistic-regression" class="section level2" number="10.5">
 <h2><span class="header-section-number">10.5</span> Multinomial Logistic Regression</h2>
 <p>What if the response contains more than two categories? For that we need multinomial logistic regression.</p>
 <p><span class="math display">\[
@@ -702,37 +738,37 @@ P(Y = k \mid { X = x}) = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \bet
 <p>We will omit the details, as ISL has as well. If you are interested, the <a href="https://en.wikipedia.org/wiki/Multinomial_logistic_regression">Wikipedia page</a> provides a rather thorough coverage. Also note that the above is an example of the <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax function</a>.</p>
 <p>As an example of a dataset with a three category response, we use the <code>iris</code> dataset, which is so famous, it has its own <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia entry</a>. It is also a default dataset in <code>R</code>, so no need to load it.</p>
 <p>Before proceeding, we test-train split this data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">430</span>)
-iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)
-iris_idx =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> <span class="op">*</span><span class="st"> </span>iris_obs))
-iris_trn =<span class="st"> </span>iris[iris_idx, ]
-iris_test =<span class="st"> </span>iris[<span class="op">-</span>iris_idx, ]</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="logistic-regression.html#cb262-1"></a><span class="kw">set.seed</span>(<span class="dv">430</span>)</span>
+<span id="cb262-2"><a href="logistic-regression.html#cb262-2"></a>iris_obs =<span class="st"> </span><span class="kw">nrow</span>(iris)</span>
+<span id="cb262-3"><a href="logistic-regression.html#cb262-3"></a>iris_idx =<span class="st"> </span><span class="kw">sample</span>(iris_obs, <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> <span class="op">*</span><span class="st"> </span>iris_obs))</span>
+<span id="cb262-4"><a href="logistic-regression.html#cb262-4"></a>iris_trn =<span class="st"> </span>iris[iris_idx, ]</span>
+<span id="cb262-5"><a href="logistic-regression.html#cb262-5"></a>iris_test =<span class="st"> </span>iris[<span class="op">-</span>iris_idx, ]</span></code></pre></div>
 <p>To perform multinomial logistic regression, we use the <code>multinom</code> function from the <code>nnet</code> package. Training using <code>multinom()</code> is done using similar syntax to <code>lm()</code> and <code>glm()</code>. We add the <code>trace = FALSE</code> argument to suppress information about updates to the optimization routine as the model is trained.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nnet)
-model_multi =<span class="st"> </span><span class="kw">multinom</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris_trn, <span class="dt">trace =</span> <span class="ot">FALSE</span>)
-<span class="kw">summary</span>(model_multi)<span class="op">$</span>coefficients</code></pre>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="logistic-regression.html#cb263-1"></a><span class="kw">library</span>(nnet)</span>
+<span id="cb263-2"><a href="logistic-regression.html#cb263-2"></a>model_multi =<span class="st"> </span><span class="kw">multinom</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris_trn, <span class="dt">trace =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb263-3"><a href="logistic-regression.html#cb263-3"></a><span class="kw">summary</span>(model_multi)<span class="op">$</span>coefficients</span></code></pre></div>
 <pre><code>##            (Intercept) Sepal.Length Sepal.Width Petal.Length Petal.Width
-## versicolor    26.81602    -6.983313   -16.24574     20.35750    3.218787
-## virginica    -34.24228    -8.398869   -17.03985     31.94659   11.594518</code></pre>
+## versicolor    16.77474    -7.855576   -13.98668     25.13860    4.270375
+## virginica    -33.94895   -37.519645   -94.22846     97.82691   73.487162</code></pre>
 <p>Notice we are only given coefficients for two of the three class, much like only needing coefficients for one class in logistic regression.</p>
 <p>A difference between <code>glm()</code> and <code>multinom()</code> is how the <code>predict()</code> function operates.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(model_multi, <span class="dt">newdata =</span> iris_trn))</code></pre>
-<pre><code>## [1] setosa    virginica setosa    setosa    virginica setosa   
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="logistic-regression.html#cb265-1"></a><span class="kw">head</span>(<span class="kw">predict</span>(model_multi, <span class="dt">newdata =</span> iris_trn))</span></code></pre></div>
+<pre><code>## [1] setosa     versicolor versicolor setosa     virginica  versicolor
 ## Levels: setosa versicolor virginica</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">predict</span>(model_multi, <span class="dt">newdata =</span> iris_trn, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>))</code></pre>
-<pre><code>##           setosa   versicolor    virginica
-## 23  1.000000e+00 2.607782e-19 3.891079e-44
-## 106 4.461651e-38 2.328295e-09 1.000000e+00
-## 37  1.000000e+00 1.108222e-18 1.620112e-42
-## 40  1.000000e+00 5.389221e-15 1.525649e-37
-## 145 1.146554e-28 9.816687e-07 9.999990e-01
-## 36  1.000000e+00 6.216549e-16 7.345269e-40</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="logistic-regression.html#cb267-1"></a><span class="kw">head</span>(<span class="kw">predict</span>(model_multi, <span class="dt">newdata =</span> iris_trn, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>))</span></code></pre></div>
+<pre><code>##           setosa   versicolor     virginica
+## 1   1.000000e+00 1.910554e-16 6.118616e-176
+## 92  8.542846e-22 1.000000e+00  1.372168e-18
+## 77  8.343856e-23 1.000000e+00  2.527471e-14
+## 38  1.000000e+00 1.481126e-16 5.777917e-180
+## 108 1.835279e-73 1.403654e-36  1.000000e+00
+## 83  1.256090e-16 1.000000e+00  2.223689e-32</code></pre>
 <p>Notice that by default, classifications are returned. When obtaining probabilities, we are given the predicted probability for <strong>each</strong> class.</p>
 <p>Interestingly, you’ve just fit a neural network, and you didn’t even know it! (Hence the <code>nnet</code> package.) Later we will discuss the connections between logistic regression, multinomial logistic regression, and simple neural networks.</p>
 </div>
-<div id="rmarkdown-4" class="section level2">
+<div id="rmarkdown-4" class="section level2" number="10.6">
 <h2><span class="header-section-number">10.6</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="10-logistic.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="10-logistic.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;nnet&quot;    &quot;pROC&quot;    &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot; &quot;tibble&quot;  &quot;ISLR&quot;</code></pre>
 
 </div>
@@ -748,11 +784,13 @@ model_multi =<span class="st"> </span><span class="kw">multinom</span>(Species <
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -760,12 +798,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -777,6 +814,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -795,8 +836,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

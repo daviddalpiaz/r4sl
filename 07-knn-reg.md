@@ -229,13 +229,13 @@ knitr::kable(knn_results, escape = FALSE, booktabs = TRUE)
 \toprule
 k & Train RMSE & Test RMSE & Fit?\\
 \midrule
-1 & 2.22 & 7.50 & Over\\
-5 & 4.30 & 5.89 & Over\\
-10 & 4.60 & 5.72 & Over\\
-25 & 4.66 & 5.71 & Best\\
-50 & 4.99 & 6.03 & Under\\
+1 & 1.65 & 8.32 & Over\\
+5 & 4.98 & 5.83 & Over\\
+10 & 5.26 & 5.05 & Over\\
+25 & 5.51 & 4.79 & Best\\
+50 & 5.94 & 5.05 & Under\\
 \addlinespace
-250 & 8.90 & 9.47 & Under\\
+250 & 9.61 & 8.75 & Under\\
 \bottomrule
 \end{tabular}
 
@@ -476,7 +476,7 @@ Can you improve this model? Can you find a better $k$? Can you find a better mod
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](07-knn-reg.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

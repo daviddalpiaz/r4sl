@@ -128,11 +128,11 @@ default_glm_mod
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 6001, 6001, 6000, 6001, 6001 
+## Summary of sample sizes: 6001, 6000, 6001, 6001, 6001 
 ## Resampling results:
 ## 
 ##   Accuracy   Kappa    
-##   0.9733372  0.4174282
+##   0.9728038  0.4248613
 ```
 
 Called the stored `train()` object summarizes the training that we have done. We see that we used 7501 observations that had a binary class response and three predictors. We have not done any data pre-processing, and have utilized 5-fold cross-validation. The cross-validated accuracy is reported. Note that, `caret` is an optimist, and prefers to report accuracy (proportion of correct classifications) instead of the error that we often considered before (proportion of incorrect classifications).
@@ -143,11 +143,10 @@ names(default_glm_mod)
 ```
 
 ```
-##  [1] "method"       "modelInfo"    "modelType"    "results"     
-##  [5] "pred"         "bestTune"     "call"         "dots"        
-##  [9] "metric"       "control"      "finalModel"   "preProcess"  
-## [13] "trainingData" "resample"     "resampledCM"  "perfNames"   
-## [17] "maximize"     "yLimits"      "times"        "levels"      
+##  [1] "method"       "modelInfo"    "modelType"    "results"      "pred"        
+##  [6] "bestTune"     "call"         "dots"         "metric"       "control"     
+## [11] "finalModel"   "preProcess"   "trainingData" "resample"     "resampledCM" 
+## [16] "perfNames"    "maximize"     "yLimits"      "times"        "levels"      
 ## [21] "terms"        "coefnames"    "contrasts"    "xlevels"
 ```
 
@@ -159,8 +158,8 @@ default_glm_mod$results
 ```
 
 ```
-##   parameter  Accuracy     Kappa AccuracySD   KappaSD
-## 1      none 0.9733372 0.4174282 0.00358649 0.1180854
+##   parameter  Accuracy     Kappa  AccuracySD    KappaSD
+## 1      none 0.9728038 0.4248613 0.002956624 0.07544475
 ```
 
 The `resutls` show some more detailed results, in particular `AccuracySD` which gives us an estimate of the uncertainty in our accuracy estimate.
@@ -176,11 +175,11 @@ default_glm_mod$finalModel
 ## 
 ## Coefficients:
 ## (Intercept)   studentYes      balance       income  
-##  -1.066e+01   -6.254e-01    5.647e-03    1.395e-06  
+##  -1.070e+01   -6.992e-01    5.676e-03    4.383e-07  
 ## 
 ## Degrees of Freedom: 7500 Total (i.e. Null);  7497 Residual
 ## Null Deviance:	    2192 
-## Residual Deviance: 1204 	AIC: 1212
+## Residual Deviance: 1186 	AIC: 1194
 ```
 
 The `finalModel` is a model object, in this case, the object returned from `glm()`. This final model, is fit to all of the supplied training data. This model object is often used when we call certain relevant functions on the object returned by `train()`, such as `summary()`
@@ -197,22 +196,22 @@ summary(default_glm_mod)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.4350  -0.1486  -0.0588  -0.0218   3.7184  
+## -2.1317  -0.1420  -0.0568  -0.0210   3.7348  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -1.066e+01  5.509e-01 -19.353   <2e-16 ***
-## studentYes  -6.254e-01  2.702e-01  -2.315   0.0206 *  
-## balance      5.647e-03  2.639e-04  21.401   <2e-16 ***
-## income       1.395e-06  9.300e-06   0.150   0.8808    
+## (Intercept) -1.070e+01  5.607e-01 -19.079  < 2e-16 ***
+## studentYes  -6.992e-01  2.708e-01  -2.582  0.00984 ** 
+## balance      5.676e-03  2.644e-04  21.471  < 2e-16 ***
+## income       4.383e-07  9.389e-06   0.047  0.96276    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 2192.2  on 7500  degrees of freedom
-## Residual deviance: 1203.5  on 7497  degrees of freedom
-## AIC: 1211.5
+## Residual deviance: 1185.8  on 7497  degrees of freedom
+## AIC: 1193.8
 ## 
 ## Number of Fisher Scoring iterations: 8
 ```
@@ -248,7 +247,7 @@ calc_acc(actual = default_tst$default,
 ```
 
 ```
-## [1] 0.9739896
+## [1] 0.9735894
 ```
 
 If instead of the default behavior of returning classifications, we instead wanted predicted probabilities, we simply specify `type = "prob"`.
@@ -260,13 +259,13 @@ head(predict(default_glm_mod, newdata = default_trn, type = "prob"))
 ```
 
 ```
-##          No         Yes
-## 1 0.9984674 0.001532637
-## 3 0.9895850 0.010414985
-## 5 0.9979141 0.002085863
-## 6 0.9977233 0.002276746
-## 8 0.9987645 0.001235527
-## 9 0.9829081 0.017091877
+##           No          Yes
+## 2  0.9988332 1.166819e-03
+## 4  0.9995369 4.630821e-04
+## 7  0.9975279 2.472097e-03
+## 8  0.9988855 1.114516e-03
+## 10 0.9999771 2.290522e-05
+## 11 0.9999887 1.134693e-05
 ```
 
 Notice that this returns the probabilities for all possible classes, in this case `No` and `Yes`. Again, this will be true for all methods! This is especially useful for multi-class data!.
@@ -306,10 +305,10 @@ default_knn_mod
 ## Summary of sample sizes: 6001, 6000, 6001, 6001, 6001 
 ## Resampling results across tuning parameters:
 ## 
-##   k  Accuracy   Kappa     
-##   5  0.9660044  0.14910366
-##   7  0.9654711  0.08890944
-##   9  0.9660044  0.03400684
+##   k  Accuracy   Kappa    
+##   5  0.9677377  0.2125623
+##   7  0.9664047  0.1099835
+##   9  0.9680044  0.1223319
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
 ## The final value used for the model was k = 9.
@@ -342,11 +341,11 @@ head(default_knn_mod$results, 5)
 
 ```
 ##   k  Accuracy     Kappa  AccuracySD    KappaSD
-## 1 1 0.9556062 0.2980896 0.003446167 0.04848084
-## 2 3 0.9676048 0.3753023 0.002959213 0.04629315
-## 3 5 0.9701374 0.4040223 0.001442498 0.04092678
-## 4 7 0.9706704 0.3906642 0.001567466 0.05200146
-## 5 9 0.9720034 0.4091064 0.001706297 0.05361118
+## 1 1 0.9544051 0.2843363 0.006566472 0.08989820
+## 2 3 0.9662702 0.3633701 0.004317478 0.09324199
+## 3 5 0.9710698 0.4122812 0.004076929 0.11219277
+## 4 7 0.9712032 0.4031654 0.003576867 0.09624856
+## 5 9 0.9721364 0.4250236 0.003987725 0.09388466
 ```
 
 Since how we have a large number of results, display the entire `results` would create a lot of clutter. Instead, we can plot the tuning results by calling `plot()` on the object returned by `train()`.
@@ -380,7 +379,7 @@ default_knn_mod$bestTune
 
 ```
 ##    k
-## 9 17
+## 6 11
 ```
 
 
@@ -401,8 +400,8 @@ get_best_result(default_knn_mod)
 ```
 
 ```
-##    k  Accuracy     Kappa  AccuracySD    KappaSD
-## 1 17 0.9720036 0.3803205 0.002404977 0.05972573
+##    k Accuracy     Kappa  AccuracySD    KappaSD
+## 1 11  0.97227 0.4225433 0.002654708 0.07773239
 ```
 
 While we did fit a large number of models, the "best" model is stored in `finalModel`. After this model was determined to be the best via cross-validation, it is then fit to the entire training dataset.
@@ -413,7 +412,7 @@ default_knn_mod$finalModel
 ```
 
 ```
-## 17-nearest neighbor model
+## 11-nearest neighbor model
 ## Training set outcome distribution:
 ## 
 ##   No  Yes 
@@ -432,9 +431,9 @@ head(predict(default_knn_mod, newdata = default_tst, type = "prob"))
 ## 1 1.0000000 0.00000000
 ## 2 1.0000000 0.00000000
 ## 3 1.0000000 0.00000000
-## 4 0.9411765 0.05882353
-## 5 1.0000000 0.00000000
-## 6 1.0000000 0.00000000
+## 4 1.0000000 0.00000000
+## 5 0.9090909 0.09090909
+## 6 0.9090909 0.09090909
 ```
 
 As an example of a multi-class response consider the following three models fit to the the `iris` data. Note that the first model is essentially "multinomial logistic regression," but you might notice it also has a tuning parameter now. (Spoiler: It's actually a neural network, so you'll need the `nnet` package.)
@@ -480,13 +479,13 @@ head(predict(iris_log_mod, type = "prob"))
 ```
 
 ```
-##      setosa  versicolor    virginica
-## 1 0.9884905 0.011509549 6.415435e-10
-## 2 0.9637873 0.036212696 8.263511e-09
-## 3 0.9804027 0.019597292 3.376946e-09
-## 4 0.9568631 0.043136865 2.083006e-08
-## 5 0.9903391 0.009660933 5.465878e-10
-## 6 0.9907892 0.009210789 8.230133e-10
+##      setosa   versicolor    virginica
+## 1 1.0000000 1.526406e-09 2.716417e-36
+## 2 0.9999996 3.536476e-07 2.883729e-32
+## 3 1.0000000 4.443506e-08 6.103424e-34
+## 4 0.9999968 3.163905e-06 7.117010e-31
+## 5 1.0000000 1.102983e-09 1.289946e-36
+## 6 1.0000000 3.521573e-10 1.344907e-35
 ```
 
 ```r
@@ -575,8 +574,8 @@ get_best_result(sim_knn_mod)
 ```
 
 ```
-##   k     RMSE  Rsquared      MAE    RMSESD   RsquaredSD     MAESD
-## 1 7 3.602252 0.9870044 2.537763 0.1462808 0.0007503021 0.1388759
+##   k   RMSE  Rsquared      MAE   RMSESD  RsquaredSD     MAESD
+## 1 7 3.6834 0.9863968 2.646447 0.587191 0.002630169 0.3388258
 ```
 
 A few things to notice in the results. In addition to the usual RMSE, which is be used to determine the best model, we also have MAE, the [mean absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error). We are also given standard deviations of both of these metrics.
@@ -614,7 +613,7 @@ get_best_result(sim_knn_mod)$RMSE
 ```
 
 ```
-## [1] 3.602252
+## [1] 3.6834
 ```
 
 
@@ -624,7 +623,7 @@ calc_rmse(actual = sim_tst$y,
 ```
 
 ```
-## [1] 3.446897
+## [1] 3.412332
 ```
 
 Here we see that the cross-validated RMSE is a bit of an overestimate, but still rather close to the test error. The real question is, are either of these any good? Is this model predicting well? No! Notice that we simulated this data with an error standard deviation of 1!
@@ -682,17 +681,17 @@ knitr::kable(head(sim_gbm_mod$results), digits = 3)
 \hline
   & shrinkage & interaction.depth & n.minobsinnode & n.trees & RMSE & Rsquared & MAE & RMSESD & RsquaredSD & MAESD\\
 \hline
-1 & 0.1 & 1 & 20 & 100 & 2.219 & 0.995 & 1.654 & 0.214 & 0.001 & 0.128\\
+1 & 0.1 & 1 & 20 & 100 & 2.151 & 0.995 & 1.569 & 0.321 & 0.001 & 0.185\\
 \hline
-91 & 0.3 & 1 & 20 & 100 & 2.856 & 0.991 & 2.142 & 0.252 & 0.002 & 0.145\\
+91 & 0.3 & 1 & 20 & 100 & 2.800 & 0.991 & 2.068 & 0.180 & 0.001 & 0.183\\
 \hline
-31 & 0.1 & 2 & 20 & 100 & 2.031 & 0.995 & 1.424 & 0.278 & 0.001 & 0.174\\
+31 & 0.1 & 2 & 20 & 100 & 1.996 & 0.996 & 1.439 & 0.286 & 0.001 & 0.165\\
 \hline
-121 & 0.3 & 2 & 20 & 100 & 2.331 & 0.994 & 1.760 & 0.168 & 0.001 & 0.107\\
+121 & 0.3 & 2 & 20 & 100 & 2.377 & 0.994 & 1.784 & 0.285 & 0.001 & 0.191\\
 \hline
-61 & 0.1 & 3 & 20 & 100 & 1.965 & 0.996 & 1.382 & 0.219 & 0.001 & 0.134\\
+61 & 0.1 & 3 & 20 & 100 & 1.967 & 0.996 & 1.410 & 0.325 & 0.001 & 0.148\\
 \hline
-151 & 0.3 & 3 & 20 & 100 & 2.186 & 0.995 & 1.613 & 0.236 & 0.001 & 0.191\\
+151 & 0.3 & 3 & 20 & 100 & 2.166 & 0.995 & 1.620 & 0.150 & 0.001 & 0.135\\
 \hline
 \end{tabular}
 
@@ -712,7 +711,7 @@ sim_gbm_mod$bestTune
 
 ```
 ##    n.trees interaction.depth shrinkage n.minobsinnode
-## 30    3000                 1       0.1             20
+## 35     500                 2       0.1             20
 ```
 
 Here we obtain the set of tuning parameters that performed best. Based on the above plot, do you think we considered enough possible tuning parameters?
@@ -724,9 +723,9 @@ get_best_result(sim_gbm_mod)
 
 ```
 ##   shrinkage interaction.depth n.minobsinnode n.trees     RMSE  Rsquared
-## 1       0.1                 1             20    3000 1.912962 0.9959445
-##        MAE    RMSESD RsquaredSD     MAESD
-## 1 1.406154 0.1621041 0.00064417 0.1265028
+## 1       0.1                 2             20     500 1.854777 0.9962175
+##        MAE    RMSESD   RsquaredSD     MAESD
+## 1 1.346841 0.2556658 0.0007945475 0.1555363
 ```
 
 
@@ -737,7 +736,7 @@ calc_rmse(actual = sim_tst$y,
 ```
 
 ```
-## [1] 1.513519
+## [1] 1.568517
 ```
 
 Again, the cross-validated result is overestimating the error a bit. Also, this model is a big improvement over the `knn` model, but we can still do better.
@@ -763,10 +762,10 @@ sim_lm_mod$finalModel
 ## lm(formula = .outcome ~ ., data = dat)
 ## 
 ## Coefficients:
-##    (Intercept)  `poly(x1, 2)1`  `poly(x1, 2)2`  `poly(x2, 2)1`  
-##       34.63954       646.63539       166.47950        26.11496  
-## `poly(x2, 2)2`             x3B             x3C  
-##        6.77600         1.93871         0.02182
+##    (Intercept)  `poly(x1, 2)1`  `poly(x1, 2)2`  `poly(x2, 2)1`  `poly(x2, 2)2`  
+##       34.75615       645.50804       167.12875        26.00951         6.86587  
+##            x3B             x3C  
+##        1.80700         0.07108
 ```
 
 Here we fit a good old linear model, except, we specify a very specific formula.
@@ -777,7 +776,7 @@ sim_lm_mod$results$RMSE
 ```
 
 ```
-## [1] 0.9806239
+## [1] 1.046702
 ```
 
 
@@ -787,7 +786,7 @@ calc_rmse(actual = sim_tst$y,
 ```
 
 ```
-## [1] 1.014825
+## [1] 1.035896
 ```
 
 This model dominates the previous two. The `gbm` model does still have a big advantage. The `lm` model needed the correct form of the model, whereas `gbm` nearly learned it automatically!
@@ -805,7 +804,7 @@ This question of *which* variables should be included is where we will turn our 
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

@@ -154,10 +154,10 @@ head(predict(mod_1), n = 10)
 ```
 
 ```
-##         1         2         3         4         5         6         7 
-## 20.523974 12.337855 12.307671 17.597830 13.188672 12.478348 11.729760 
-##         8         9        10 
-## 12.122953  3.727341 12.550849
+##         1         2         3         4         5         6         7         8 
+## 20.523974 12.337855 12.307671 17.597830 13.188672 12.478348 11.729760 12.122953 
+##         9        10 
+##  3.727341 12.550849
 ```
 
 Note that the effect of the `predict()` function is dependent on the input to the function. Here, we are supplying as the first argument a model object of class `lm`. Because of this, `predict()` then runs the `predict.lm()` function. Thus, we should use `?predict.lm()` for details.
@@ -256,10 +256,10 @@ head(cooks.distance(mod_1), n = 10)
 ```
 
 ```
-##            1            2            3            4            5 
-## 5.797287e-03 6.673622e-03 3.382760e-02 1.230165e-03 1.807925e-04 
-##            6            7            8            9           10 
-## 1.283058e-01 6.452021e-06 9.550237e-04 3.310088e-03 5.945006e-03
+##            1            2            3            4            5            6 
+## 5.797287e-03 6.673622e-03 3.382760e-02 1.230165e-03 1.807925e-04 1.283058e-01 
+##            7            8            9           10 
+## 6.452021e-06 9.550237e-04 3.310088e-03 5.945006e-03
 ```
 
 
@@ -293,10 +293,10 @@ coef(mod_3)
 ```
 
 ```
-##     (Intercept)              TV           Radio       Newspaper 
-##    6.460158e+00    2.032710e-02    2.292919e-02    1.703394e-02 
-##        TV:Radio    TV:Newspaper Radio:Newspaper 
-##    1.139280e-03   -7.971435e-05   -1.095976e-04
+##     (Intercept)              TV           Radio       Newspaper        TV:Radio 
+##    6.460158e+00    2.032710e-02    2.292919e-02    1.703394e-02    1.139280e-03 
+##    TV:Newspaper Radio:Newspaper 
+##   -7.971435e-05   -1.095976e-04
 ```
 
 The `*` operator can be used to specify all interactions of a certain order, as well as all lower order terms according to the usual hierarchy. Here we see a three-way interaction and all lower order terms.
@@ -308,12 +308,10 @@ coef(mod_4)
 ```
 
 ```
-##        (Intercept)                 TV              Radio 
-##       6.555887e+00       1.971030e-02       1.962160e-02 
-##          Newspaper           TV:Radio       TV:Newspaper 
-##       1.310565e-02       1.161523e-03      -5.545501e-05 
-##    Radio:Newspaper TV:Radio:Newspaper 
-##       9.062944e-06      -7.609955e-07
+##        (Intercept)                 TV              Radio          Newspaper 
+##       6.555887e+00       1.971030e-02       1.962160e-02       1.310565e-02 
+##           TV:Radio       TV:Newspaper    Radio:Newspaper TV:Radio:Newspaper 
+##       1.161523e-03      -5.545501e-05       9.062944e-06      -7.609955e-07
 ```
 
 Note that, we have only been dealing with numeric predictors. **Categorical predictors** are often recorded as **factor** variables in `R`. 
@@ -331,18 +329,18 @@ cat_pred
 
 ```
 ## # A tibble: 30 x 3
-##    x1        x2       y
-##    <fct>  <dbl>   <dbl>
-##  1 A     0.540  -0.0814
-##  2 A     0.231  -1.39  
-##  3 A     0.313   1.55  
-##  4 A     0.593   0.787 
-##  5 A     0.250   0.964 
-##  6 A     0.0422  0.0750
-##  7 A     0.473   0.335 
-##  8 A     0.692  -0.225 
-##  9 A     0.612   0.531 
-## 10 A     0.633  -0.469 
+##    x1        x2      y
+##    <fct>  <dbl>  <dbl>
+##  1 A     0.898   0.569
+##  2 A     0.590  -0.819
+##  3 A     0.748   1.43 
+##  4 A     0.364  -1.98 
+##  5 A     0.274  -1.65 
+##  6 A     0.197   0.686
+##  7 A     0.384  -0.300
+##  8 A     0.335   0.334
+##  9 A     0.920  -1.23 
+## 10 A     0.0780 -0.224
 ## # ... with 20 more rows
 ```
 
@@ -358,7 +356,7 @@ coef(cat_pred_mod_add)
 
 ```
 ## (Intercept)         x1B         x1C          x2 
-##  0.06425596 -0.11314853 -0.05625478  0.32766265
+## -0.59416691  0.15830223  0.07968427  0.57475268
 ```
 
 
@@ -369,7 +367,7 @@ coef(cat_pred_mod_int)
 
 ```
 ## (Intercept)         x1B         x1C          x2      x1B:x2      x1C:x2 
-##  0.25630142 -0.62662349 -0.11109705 -0.11086311  0.90895621  0.08184689
+## -0.58215950 -0.00909676  0.28225787  0.54967226  0.32985120 -0.46143895
 ```
 
 
@@ -461,7 +459,7 @@ sqrt(mean(exp(resid(mod_8)) ^ 2)) # correct RMSE for Model 8
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded in this file:
+The `rmarkdown` file for this chapter can be found [**here**](04-model-basics.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded in this file:
 
 
 ```

@@ -191,7 +191,7 @@ coef(model_glm)
 
 ```
 ##   (Intercept)       balance 
-## -10.452182876   0.005367655
+## -10.493158288   0.005424994
 ```
 
 The next thing we should understand is how the `predict()` function works with `glm()`. So, let's look at some predictions.
@@ -202,8 +202,8 @@ head(predict(model_glm))
 ```
 
 ```
-##       9149       9370       2861       8302       6415       5189 
-## -6.9616496 -0.7089539 -4.8936916 -9.4123620 -9.0416096 -7.3600645
+##      2369      5273      9290      1252      8826       356 
+## -5.376670 -4.875653 -5.018746 -4.007664 -6.538414 -6.601582
 ```
 
 By default, `predict.glm()` uses `type = "link"`.
@@ -214,8 +214,8 @@ head(predict(model_glm, type = "link"))
 ```
 
 ```
-##       9149       9370       2861       8302       6415       5189 
-## -6.9616496 -0.7089539 -4.8936916 -9.4123620 -9.0416096 -7.3600645
+##      2369      5273      9290      1252      8826       356 
+## -5.376670 -4.875653 -5.018746 -4.007664 -6.538414 -6.601582
 ```
 
 That is, `R` is returning
@@ -239,10 +239,8 @@ head(predict(model_glm, type = "response"))
 ```
 
 ```
-##         9149         9370         2861         8302         6415 
-## 9.466353e-04 3.298300e-01 7.437969e-03 8.170105e-05 1.183661e-04 
-##         5189 
-## 6.357530e-04
+##        2369        5273        9290        1252        8826         356 
+## 0.004601914 0.007572331 0.006569370 0.017851333 0.001444691 0.001356375
 ```
 
 Note that these are probabilities, **not** classifications. To obtain classifications, we will need to compare to the correct cutoff value with an `ifelse()` statement.
@@ -300,7 +298,7 @@ calc_class_err(actual = default_trn$default, predicted = model_glm_pred)
 ```
 
 ```
-## [1] 0.0278
+## [1] 0.0284
 ```
 
 As we saw previously, the `table()` and `confusionMatrix()` functions can be used to quickly obtain many more metrics.
@@ -317,7 +315,7 @@ c(train_con_mat$overall["Accuracy"],
 
 ```
 ##    Accuracy Sensitivity Specificity 
-##   0.9722000   0.2738095   0.9964818
+##   0.9716000   0.2941176   0.9954451
 ```
 
 We could also write a custom function for the error for use with trained logist regression models.
@@ -340,7 +338,7 @@ get_logistic_error(model_glm, data = default_trn,
 ```
 
 ```
-## [1] 0.0278
+## [1] 0.0284
 ```
 
 To see how much better logistic regression is for this task, we create the same plot we used for linear regression.
@@ -367,7 +365,7 @@ This plot contains a wealth of information.
 $$
 \hat{p}(x) = \hat{P}(Y = 1 \mid { X = x})
 $$
-- The solid vertical black line represents the **[decision boundary](https://en.wikipedia.org/wiki/Decision_boundary)**, the `balance` that obtains a predicted probability of 0.5. In this case `balance` = 1947.252994.
+- The solid vertical black line represents the **[decision boundary](https://en.wikipedia.org/wiki/Decision_boundary)**, the `balance` that obtains a predicted probability of 0.5. In this case `balance` = 1934.2247145.
 
 The decision boundary is found by solving for points that satisfy
 
@@ -429,7 +427,7 @@ diff(train_errors)
 ```
 
 ```
-## [1] -0.0058 -0.0002
+## [1] -0.0066  0.0000
 ```
 
 ```r
@@ -437,7 +435,7 @@ diff(test_errors)
 ```
 
 ```
-## [1] -0.0068  0.0004
+## [1] -0.0068  0.0006
 ```
 
 We call `model_2` the **additive** logistic model, which we will use quite often.
@@ -519,9 +517,9 @@ metrics
 
 ```
 ##          Accuracy Sensitivity Specificity
-## c = 0.10   0.9404  0.77575758   0.9460186
-## c = 0.50   0.9738  0.31515152   0.9962771
-## c = 0.90   0.9674  0.01818182   0.9997932
+## c = 0.10   0.9328  0.71779141   0.9400455
+## c = 0.50   0.9730  0.31288344   0.9952450
+## c = 0.90   0.9688  0.04294479   1.0000000
 ```
 
 We see then sensitivity decreases as the cutoff is increased. Conversely, specificity increases as the cutoff increases. This is useful if we are more interested in a particular error, instead of giving them equal weight.
@@ -544,7 +542,7 @@ as.numeric(test_roc$auc)
 ```
 
 ```
-## [1] 0.9515076
+## [1] 0.9492866
 ```
 
 A good model will have a high AUC, that is as often as possible a high sensitivity and specificity.
@@ -584,8 +582,8 @@ summary(model_multi)$coefficients
 
 ```
 ##            (Intercept) Sepal.Length Sepal.Width Petal.Length Petal.Width
-## versicolor    26.81602    -6.983313   -16.24574     20.35750    3.218787
-## virginica    -34.24228    -8.398869   -17.03985     31.94659   11.594518
+## versicolor    16.77474    -7.855576   -13.98668     25.13860    4.270375
+## virginica    -33.94895   -37.519645   -94.22846     97.82691   73.487162
 ```
 
 Notice we are only given coefficients for two of the three class, much like only needing coefficients for one class in logistic regression.
@@ -598,7 +596,7 @@ head(predict(model_multi, newdata = iris_trn))
 ```
 
 ```
-## [1] setosa    virginica setosa    setosa    virginica setosa   
+## [1] setosa     versicolor versicolor setosa     virginica  versicolor
 ## Levels: setosa versicolor virginica
 ```
 
@@ -607,13 +605,13 @@ head(predict(model_multi, newdata = iris_trn, type = "prob"))
 ```
 
 ```
-##           setosa   versicolor    virginica
-## 23  1.000000e+00 2.607782e-19 3.891079e-44
-## 106 4.461651e-38 2.328295e-09 1.000000e+00
-## 37  1.000000e+00 1.108222e-18 1.620112e-42
-## 40  1.000000e+00 5.389221e-15 1.525649e-37
-## 145 1.146554e-28 9.816687e-07 9.999990e-01
-## 36  1.000000e+00 6.216549e-16 7.345269e-40
+##           setosa   versicolor     virginica
+## 1   1.000000e+00 1.910554e-16 6.118616e-176
+## 92  8.542846e-22 1.000000e+00  1.372168e-18
+## 77  8.343856e-23 1.000000e+00  2.527471e-14
+## 38  1.000000e+00 1.481126e-16 5.777917e-180
+## 108 1.835279e-73 1.403654e-36  1.000000e+00
+## 83  1.256090e-16 1.000000e+00  2.223689e-32
 ```
 
 Notice that by default, classifications are returned. When obtaining probabilities, we are given the predicted probability for **each** class.
@@ -623,7 +621,7 @@ Interestingly, you've just fit a neural network, and you didn't even know it! (H
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](10-logistic.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](10-logistic.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

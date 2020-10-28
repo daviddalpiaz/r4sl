@@ -141,7 +141,7 @@ calc_class_err(actual    = y_default_tst,
 ```
 
 ```
-## [1] 0.0316
+## [1] 0.0312
 ```
 
 Often with `knn()` we need to consider the scale of the predictors variables. If one variable is contains much larger numbers because of the units or range of the variable, it will dominate other variables in the distance measurements. But this doesn't necessarily mean that it should be such an important variable. It is common practice to scale the predictors to have a mean of zero and unit variance. Be sure to apply the scaling to both the train and test data.
@@ -156,7 +156,7 @@ calc_class_err(actual    = y_default_tst,
 ```
 
 ```
-## [1] 0.0278
+## [1] 0.0284
 ```
 
 Here we see the scaling slightly improves the classification accuracy. This may not always be the case, and often, it is normal to attempt classification with and without scaling.
@@ -206,7 +206,7 @@ min(err_k)
 ```
 
 ```
-## [1] 0.0254
+## [1] 0.025
 ```
 
 We see that five different values of $k$ are tied for the lowest error rate. 
@@ -217,7 +217,7 @@ which(err_k == min(err_k))
 ```
 
 ```
-## [1] 11 17 20 21 22
+## [1] 24
 ```
 
 Given a choice of these five values of $k$, we select the largest, as it is the least variable, and has the least chance of overfitting.
@@ -228,7 +228,7 @@ max(which(err_k == min(err_k)))
 ```
 
 ```
-## [1] 22
+## [1] 24
 ```
 
 Recall that defaulters are the minority class. That is, the majority of observations are non-defaulters.
@@ -241,7 +241,7 @@ table(y_default_tst)
 ```
 ## y_default_tst
 ##   No  Yes 
-## 4835  165
+## 4837  163
 ```
 
 Notice that, as $k$ increases, eventually the error approaches the test prevalence of the minority class.
@@ -252,7 +252,7 @@ mean(y_default_tst == "Yes")
 ```
 
 ```
-## [1] 0.033
+## [1] 0.0326
 ```
 
 
@@ -302,12 +302,12 @@ head(iris_pred, n = 50)
 ##  [1] setosa     setosa     setosa     setosa     setosa     setosa    
 ##  [7] setosa     setosa     setosa     setosa     setosa     setosa    
 ## [13] setosa     setosa     setosa     setosa     setosa     setosa    
-## [19] setosa     setosa     setosa     setosa     versicolor versicolor
+## [19] setosa     setosa     setosa     versicolor versicolor versicolor
 ## [25] versicolor versicolor versicolor versicolor versicolor versicolor
 ## [31] versicolor versicolor versicolor versicolor versicolor versicolor
-## [37] versicolor versicolor versicolor versicolor versicolor versicolor
+## [37] versicolor versicolor virginica  versicolor versicolor versicolor
 ## [43] versicolor versicolor versicolor versicolor versicolor versicolor
-## [49] virginica  versicolor
+## [49] versicolor virginica 
 ## Levels: setosa versicolor virginica
 ```
 
@@ -319,14 +319,9 @@ head(attributes(iris_pred)$prob, n = 50)
 ```
 
 ```
-##  [1] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-##  [8] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-## [15] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-## [22] 1.0000000 0.9000000 1.0000000 0.8000000 1.0000000 0.9000000 0.9000000
-## [29] 0.9000000 0.8000000 1.0000000 0.9000000 1.0000000 0.8000000 0.5000000
-## [36] 0.8000000 0.9000000 0.8000000 1.0000000 1.0000000 0.7272727 0.9000000
-## [43] 0.8000000 0.9000000 1.0000000 1.0000000 0.9000000 0.9000000 0.9000000
-## [50] 0.7000000
+##  [1] 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
+## [20] 1.0 1.0 0.9 0.7 0.7 0.9 0.8 0.8 1.0 0.8 1.0 0.5 1.0 1.0 0.5 0.9 1.0 0.9 0.9
+## [39] 0.6 0.8 0.7 1.0 1.0 1.0 1.0 1.0 0.9 0.8 1.0 0.5
 ```
 
 
@@ -336,7 +331,7 @@ head(attributes(iris_pred)$prob, n = 50)
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](12-knn-class.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](12-knn-class.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

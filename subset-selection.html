@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 22 Subset Selection | R for Statistical Learning</title>
   <meta name="description" content="Chapter 22 Subset Selection | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 22 Subset Selection | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="the-caret-package.html">
-<link rel="next" href="modern-overview.html">
+<link rel="prev" href="the-caret-package.html"/>
+<link rel="next" href="modern-overview.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,27 +425,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="subset-selection" class="section level1">
+<div id="subset-selection" class="section level1" number="22">
 <h1><span class="header-section-number">Chapter 22</span> Subset Selection</h1>
 <p><strong>Instructor’s Note: This chapter is currently missing the usual narrative text. Hopefully it will be added later.</strong></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</code></pre>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="subset-selection.html#cb583-1"></a><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="subset-selection.html#cb584-1"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</span></code></pre></div>
 <pre><code>## [1] 59</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters<span class="op">$</span>Salary))</code></pre>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="subset-selection.html#cb586-1"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters<span class="op">$</span>Salary))</span></code></pre></div>
 <pre><code>## [1] 59</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)
-<span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</code></pre>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="subset-selection.html#cb588-1"></a>Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</span>
+<span id="cb588-2"><a href="subset-selection.html#cb588-2"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div id="aic-bic-and-cp" class="section level2">
+<div id="aic-bic-and-cp" class="section level2" number="22.1">
 <h2><span class="header-section-number">22.1</span> AIC, BIC, and Cp</h2>
-<div id="leaps-package" class="section level3">
+<div id="leaps-package" class="section level3" number="22.1.1">
 <h3><span class="header-section-number">22.1.1</span> <code>leaps</code> Package</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(leaps)</code></pre>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="subset-selection.html#cb590-1"></a><span class="kw">library</span>(leaps)</span></code></pre></div>
 </div>
-<div id="best-subset" class="section level3">
+<div id="best-subset" class="section level3" number="22.1.2">
 <h3><span class="header-section-number">22.1.2</span> Best Subset</h3>
-<pre class="sourceCode r"><code class="sourceCode r">fit_all =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., Hitters)
-<span class="kw">summary</span>(fit_all)</code></pre>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="subset-selection.html#cb591-1"></a>fit_all =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., Hitters)</span>
+<span id="cb591-2"><a href="subset-selection.html#cb591-2"></a><span class="kw">summary</span>(fit_all)</span></code></pre></div>
 <pre><code>## Subset selection object
 ## Call: regsubsets.formula(Salary ~ ., Hitters)
 ## 19 Variables  (and intercept)
@@ -433,190 +471,182 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## NewLeagueN     FALSE      FALSE
 ## 1 subsets of each size up to 8
 ## Selection Algorithm: exhaustive
-##          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns
-## 1  ( 1 ) &quot; &quot;   &quot; &quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;  
-## 2  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;  
-## 3  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;  
-## 4  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;  
-## 5  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;  
-## 6  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;  
-## 7  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot;    &quot; &quot;  
-## 8  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;    &quot;*&quot;  
-##          CRBI CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
-## 1  ( 1 ) &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-## 2  ( 1 ) &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-## 3  ( 1 ) &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-## 4  ( 1 ) &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-## 5  ( 1 ) &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-## 6  ( 1 ) &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-## 7  ( 1 ) &quot; &quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-## 8  ( 1 ) &quot; &quot;  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fit_all =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">nvmax =</span> <span class="dv">19</span>)
-fit_all_sum =<span class="st"> </span><span class="kw">summary</span>(fit_all)
-<span class="kw">names</span>(fit_all_sum)</code></pre>
+##          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns CRBI
+## 1  ( 1 ) &quot; &quot;   &quot; &quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+## 2  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+## 3  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+## 4  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+## 5  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+## 6  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+## 7  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot; 
+## 8  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot; 
+##          CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
+## 1  ( 1 ) &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+## 2  ( 1 ) &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+## 3  ( 1 ) &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+## 4  ( 1 ) &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+## 5  ( 1 ) &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+## 6  ( 1 ) &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+## 7  ( 1 ) &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+## 8  ( 1 ) &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;</code></pre>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="subset-selection.html#cb593-1"></a>fit_all =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">nvmax =</span> <span class="dv">19</span>)</span>
+<span id="cb593-2"><a href="subset-selection.html#cb593-2"></a>fit_all_sum =<span class="st"> </span><span class="kw">summary</span>(fit_all)</span>
+<span id="cb593-3"><a href="subset-selection.html#cb593-3"></a><span class="kw">names</span>(fit_all_sum)</span></code></pre></div>
 <pre><code>## [1] &quot;which&quot;  &quot;rsq&quot;    &quot;rss&quot;    &quot;adjr2&quot;  &quot;cp&quot;     &quot;bic&quot;    &quot;outmat&quot; &quot;obj&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fit_all_sum<span class="op">$</span>bic</code></pre>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="subset-selection.html#cb595-1"></a>fit_all_sum<span class="op">$</span>bic</span></code></pre></div>
 <pre><code>##  [1]  -90.84637 -128.92622 -135.62693 -141.80892 -144.07143 -147.91690
 ##  [7] -145.25594 -147.61525 -145.44316 -143.21651 -138.86077 -133.87283
 ## [13] -128.77759 -123.64420 -118.21832 -112.81768 -107.35339 -101.86391
 ## [19]  -96.30412</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))
-<span class="kw">plot</span>(fit_all_sum<span class="op">$</span>rss, <span class="dt">xlab =</span> <span class="st">&quot;Number of Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;RSS&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)
-
-<span class="kw">plot</span>(fit_all_sum<span class="op">$</span>adjr2, <span class="dt">xlab =</span> <span class="st">&quot;Number of Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Adjusted RSq&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)
-best_adj_r2 =<span class="st"> </span><span class="kw">which.max</span>(fit_all_sum<span class="op">$</span>adjr2)
-<span class="kw">points</span>(best_adj_r2, fit_all_sum<span class="op">$</span>adjr2[best_adj_r2],
-       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,<span class="dt">cex =</span> <span class="dv">2</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-
-<span class="kw">plot</span>(fit_all_sum<span class="op">$</span>cp, <span class="dt">xlab =</span> <span class="st">&quot;Number of Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Cp&quot;</span>, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>)
-best_cp =<span class="st"> </span><span class="kw">which.min</span>(fit_all_sum<span class="op">$</span>cp)
-<span class="kw">points</span>(best_cp, fit_all_sum<span class="op">$</span>cp[best_cp], 
-       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>, <span class="dt">pch =</span> <span class="dv">20</span>)
-
-<span class="kw">plot</span>(fit_all_sum<span class="op">$</span>bic, <span class="dt">xlab =</span> <span class="st">&quot;Number of Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;BIC&quot;</span>, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>)
-best_bic =<span class="st"> </span><span class="kw">which.min</span>(fit_all_sum<span class="op">$</span>bic)
-<span class="kw">points</span>(best_bic, fit_all_sum<span class="op">$</span>bic[best_bic], 
-       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="subset-selection.html#cb597-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb597-2"><a href="subset-selection.html#cb597-2"></a><span class="kw">plot</span>(fit_all_sum<span class="op">$</span>rss, <span class="dt">xlab =</span> <span class="st">&quot;Number of Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;RSS&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb597-3"><a href="subset-selection.html#cb597-3"></a></span>
+<span id="cb597-4"><a href="subset-selection.html#cb597-4"></a><span class="kw">plot</span>(fit_all_sum<span class="op">$</span>adjr2, <span class="dt">xlab =</span> <span class="st">&quot;Number of Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Adjusted RSq&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb597-5"><a href="subset-selection.html#cb597-5"></a>best_adj_r2 =<span class="st"> </span><span class="kw">which.max</span>(fit_all_sum<span class="op">$</span>adjr2)</span>
+<span id="cb597-6"><a href="subset-selection.html#cb597-6"></a><span class="kw">points</span>(best_adj_r2, fit_all_sum<span class="op">$</span>adjr2[best_adj_r2],</span>
+<span id="cb597-7"><a href="subset-selection.html#cb597-7"></a>       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,<span class="dt">cex =</span> <span class="dv">2</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb597-8"><a href="subset-selection.html#cb597-8"></a></span>
+<span id="cb597-9"><a href="subset-selection.html#cb597-9"></a><span class="kw">plot</span>(fit_all_sum<span class="op">$</span>cp, <span class="dt">xlab =</span> <span class="st">&quot;Number of Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Cp&quot;</span>, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>)</span>
+<span id="cb597-10"><a href="subset-selection.html#cb597-10"></a>best_cp =<span class="st"> </span><span class="kw">which.min</span>(fit_all_sum<span class="op">$</span>cp)</span>
+<span id="cb597-11"><a href="subset-selection.html#cb597-11"></a><span class="kw">points</span>(best_cp, fit_all_sum<span class="op">$</span>cp[best_cp], </span>
+<span id="cb597-12"><a href="subset-selection.html#cb597-12"></a>       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb597-13"><a href="subset-selection.html#cb597-13"></a></span>
+<span id="cb597-14"><a href="subset-selection.html#cb597-14"></a><span class="kw">plot</span>(fit_all_sum<span class="op">$</span>bic, <span class="dt">xlab =</span> <span class="st">&quot;Number of Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;BIC&quot;</span>, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>)</span>
+<span id="cb597-15"><a href="subset-selection.html#cb597-15"></a>best_bic =<span class="st"> </span><span class="kw">which.min</span>(fit_all_sum<span class="op">$</span>bic)</span>
+<span id="cb597-16"><a href="subset-selection.html#cb597-16"></a><span class="kw">points</span>(best_bic, fit_all_sum<span class="op">$</span>bic[best_bic], </span>
+<span id="cb597-17"><a href="subset-selection.html#cb597-17"></a>       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</span></code></pre></div>
 <p><img src="22-subset_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
-<div id="stepwise-methods" class="section level3">
+<div id="stepwise-methods" class="section level3" number="22.1.3">
 <h3><span class="header-section-number">22.1.3</span> Stepwise Methods</h3>
-<pre class="sourceCode r"><code class="sourceCode r">fit_fwd =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">nvmax =</span> <span class="dv">19</span>, <span class="dt">method =</span> <span class="st">&quot;forward&quot;</span>)
-fit_fwd_sum =<span class="st"> </span><span class="kw">summary</span>(fit_fwd)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fit_bwd =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">nvmax =</span> <span class="dv">19</span>, <span class="dt">method =</span> <span class="st">&quot;backward&quot;</span>)
-fit_bwd_sum =<span class="st"> </span><span class="kw">summary</span>(fit_bwd)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_fwd, <span class="dv">7</span>)</code></pre>
-<pre><code>##  (Intercept)        AtBat         Hits        Walks         CRBI 
-##  109.7873062   -1.9588851    7.4498772    4.9131401    0.8537622 
-##       CWalks    DivisionW      PutOuts 
-##   -0.3053070 -127.1223928    0.2533404</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_bwd, <span class="dv">7</span>)</code></pre>
-<pre><code>##  (Intercept)        AtBat         Hits        Walks        CRuns 
-##  105.6487488   -1.9762838    6.7574914    6.0558691    1.1293095 
-##       CWalks    DivisionW      PutOuts 
-##   -0.7163346 -116.1692169    0.3028847</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_all, <span class="dv">7</span>)</code></pre>
-<pre><code>##  (Intercept)         Hits        Walks       CAtBat        CHits 
-##   79.4509472    1.2833513    3.2274264   -0.3752350    1.4957073 
-##       CHmRun    DivisionW      PutOuts 
-##    1.4420538 -129.9866432    0.2366813</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fit_bwd_sum =<span class="st"> </span><span class="kw">summary</span>(fit_bwd)
-<span class="kw">which.min</span>(fit_bwd_sum<span class="op">$</span>cp)</code></pre>
-<pre><code>## [1] 10</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_bwd, <span class="kw">which.min</span>(fit_bwd_sum<span class="op">$</span>cp))</code></pre>
-<pre><code>##  (Intercept)        AtBat         Hits        Walks       CAtBat 
-##  162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798 
-##        CRuns         CRBI       CWalks    DivisionW      PutOuts 
-##    1.4082490    0.7743122   -0.8308264 -112.3800575    0.2973726 
-##      Assists 
-##    0.2831680</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fit =<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters)
-fit_aic_back =<span class="st"> </span><span class="kw">step</span>(fit, <span class="dt">trace =</span> <span class="ot">FALSE</span>)
-<span class="kw">coef</span>(fit_aic_back)</code></pre>
-<pre><code>##  (Intercept)        AtBat         Hits        Walks       CAtBat 
-##  162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798 
-##        CRuns         CRBI       CWalks    DivisionW      PutOuts 
-##    1.4082490    0.7743122   -0.8308264 -112.3800575    0.2973726 
-##      Assists 
-##    0.2831680</code></pre>
-</div>
-</div>
-<div id="validated-rmse" class="section level2">
-<h2><span class="header-section-number">22.2</span> Validated RMSE</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-num_vars =<span class="st"> </span><span class="kw">ncol</span>(Hitters) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
-trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="kw">nrow</span>(Hitters), <span class="dt">rep =</span> <span class="ot">TRUE</span>)
-tst_idx =<span class="st"> </span>(<span class="op">!</span>trn_idx)
-
-fit_all =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters[trn_idx, ], <span class="dt">nvmax =</span> num_vars)
-test_mat =<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters[tst_idx, ])
-
-test_err =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_vars)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(test_err)) {
-  coefs =<span class="st"> </span><span class="kw">coef</span>(fit_all, <span class="dt">id =</span> i)
-  pred =<span class="st"> </span>test_mat[, <span class="kw">names</span>(coefs)] <span class="op">%*%</span><span class="st"> </span>coefs
-  test_err[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Hitters<span class="op">$</span>Salary[tst_idx] <span class="op">-</span><span class="st"> </span>pred) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))
-}
-test_err</code></pre>
-<pre><code>##  [1] 357.1226 333.8531 323.6408 320.5458 308.0303 295.1308 301.8142
-##  [8] 309.2389 303.3976 307.9660 307.4841 306.9883 313.2374 314.3905
-## [15] 313.8258 314.0586 313.6674 313.3490 313.3424</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(test_err, <span class="dt">type=</span><span class="st">&#39;b&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Test Set RMSE&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Number of Predictors&quot;</span>)</code></pre>
-<p><img src="22-subset_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which.min</span>(test_err)</code></pre>
-<pre><code>## [1] 6</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fit_all, <span class="kw">which.min</span>(test_err))</code></pre>
-<pre><code>##  (Intercept)        Walks       CAtBat        CHits         CRBI 
-##  171.2082504    5.0067050   -0.4005457    1.2951923    0.7894534 
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="subset-selection.html#cb598-1"></a>fit_fwd =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">nvmax =</span> <span class="dv">19</span>, <span class="dt">method =</span> <span class="st">&quot;forward&quot;</span>)</span>
+<span id="cb598-2"><a href="subset-selection.html#cb598-2"></a>fit_fwd_sum =<span class="st"> </span><span class="kw">summary</span>(fit_fwd)</span></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="subset-selection.html#cb599-1"></a>fit_bwd =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">nvmax =</span> <span class="dv">19</span>, <span class="dt">method =</span> <span class="st">&quot;backward&quot;</span>)</span>
+<span id="cb599-2"><a href="subset-selection.html#cb599-2"></a>fit_bwd_sum =<span class="st"> </span><span class="kw">summary</span>(fit_bwd)</span></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="subset-selection.html#cb600-1"></a><span class="kw">coef</span>(fit_fwd, <span class="dv">7</span>)</span></code></pre></div>
+<pre><code>##  (Intercept)        AtBat         Hits        Walks         CRBI       CWalks 
+##  109.7873062   -1.9588851    7.4498772    4.9131401    0.8537622   -0.3053070 
 ##    DivisionW      PutOuts 
-## -131.1212694    0.2682166</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(fit_all)</code></pre>
-<pre><code>## [1] &quot;regsubsets&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">predict.regsubsets =<span class="st"> </span><span class="cf">function</span>(object, newdata, id, ...) {
-  
-  form  =<span class="st"> </span><span class="kw">as.formula</span>(object<span class="op">$</span>call[[<span class="dv">2</span>]])
-  mat   =<span class="st"> </span><span class="kw">model.matrix</span>(form, newdata)
-  coefs =<span class="st"> </span><span class="kw">coef</span>(object, <span class="dt">id =</span> id)
-  xvars =<span class="st"> </span><span class="kw">names</span>(coefs)
-  
-  mat[, xvars] <span class="op">%*%</span><span class="st"> </span>coefs
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">num_folds =<span class="st"> </span><span class="dv">5</span>
-num_vars  =<span class="st"> </span><span class="dv">19</span>
-<span class="kw">set.seed</span>(<span class="dv">1</span>)
-folds =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createFolds</span>(Hitters<span class="op">$</span>Salary, <span class="dt">k =</span> num_folds)
-fold_error =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> num_folds, <span class="dt">ncol =</span> num_vars, 
-                    <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">19</span>)))
-
-<span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_folds) {
-  
-  train_fold    =<span class="st"> </span>Hitters[<span class="op">-</span>folds[[j]], ]
-  validate_fold =<span class="st"> </span>Hitters[ folds[[j]], ]
-
-  
-  best_fit =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_fold, <span class="dt">nvmax =</span> <span class="dv">19</span>)
-  
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_vars) {
-    
-    pred =<span class="st"> </span><span class="kw">predict</span>(best_fit, validate_fold, <span class="dt">id =</span> i)
-    
-    fold_error[j, i] =<span class="st"> </span><span class="kw">rmse</span>(<span class="dt">actual =</span> validate_fold<span class="op">$</span>Salary,
-                            <span class="dt">predicted =</span> pred)
-  }
-  
-}
-
-cv_error =<span class="st"> </span><span class="kw">apply</span>(fold_error, <span class="dv">2</span>, mean)
-cv_error</code></pre>
-<pre><code>##        1        2        3        4        5        6        7        8 
-## 373.2202 363.0715 374.8356 362.2405 357.6623 350.0238 348.0589 342.9089 
-##        9       10       11       12       13       14       15       16 
-## 343.8661 341.6405 339.4228 341.9303 342.5545 342.0155 340.8147 343.4722 
-##       17       18       19 
-## 343.4259 343.8129 343.2279</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cv_error, <span class="dt">type=</span><span class="st">&#39;b&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Corss-Validated RMSE&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Number of Predictors&quot;</span>)</code></pre>
-<p><img src="22-subset_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">fit_all =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">nvmax =</span> num_vars)
-<span class="kw">coef</span>(fit_all, <span class="kw">which.min</span>(cv_error))</code></pre>
-<pre><code>##  (Intercept)        AtBat         Hits        Walks       CAtBat 
-##  135.7512195   -2.1277482    6.9236994    5.6202755   -0.1389914 
-##        CRuns         CRBI       CWalks      LeagueN    DivisionW 
-##    1.4553310    0.7852528   -0.8228559   43.1116152 -111.1460252 
-##      PutOuts      Assists 
-##    0.2894087    0.2688277</code></pre>
+## -127.1223928    0.2533404</code></pre>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="subset-selection.html#cb602-1"></a><span class="kw">coef</span>(fit_bwd, <span class="dv">7</span>)</span></code></pre></div>
+<pre><code>##  (Intercept)        AtBat         Hits        Walks        CRuns       CWalks 
+##  105.6487488   -1.9762838    6.7574914    6.0558691    1.1293095   -0.7163346 
+##    DivisionW      PutOuts 
+## -116.1692169    0.3028847</code></pre>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="subset-selection.html#cb604-1"></a><span class="kw">coef</span>(fit_all, <span class="dv">7</span>)</span></code></pre></div>
+<pre><code>##  (Intercept)         Hits        Walks       CAtBat        CHits       CHmRun 
+##   79.4509472    1.2833513    3.2274264   -0.3752350    1.4957073    1.4420538 
+##    DivisionW      PutOuts 
+## -129.9866432    0.2366813</code></pre>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="subset-selection.html#cb606-1"></a>fit_bwd_sum =<span class="st"> </span><span class="kw">summary</span>(fit_bwd)</span>
+<span id="cb606-2"><a href="subset-selection.html#cb606-2"></a><span class="kw">which.min</span>(fit_bwd_sum<span class="op">$</span>cp)</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="subset-selection.html#cb608-1"></a><span class="kw">coef</span>(fit_bwd, <span class="kw">which.min</span>(fit_bwd_sum<span class="op">$</span>cp))</span></code></pre></div>
+<pre><code>##  (Intercept)        AtBat         Hits        Walks       CAtBat        CRuns 
+##  162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798    1.4082490 
+##         CRBI       CWalks    DivisionW      PutOuts      Assists 
+##    0.7743122   -0.8308264 -112.3800575    0.2973726    0.2831680</code></pre>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="subset-selection.html#cb610-1"></a>fit =<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters)</span>
+<span id="cb610-2"><a href="subset-selection.html#cb610-2"></a>fit_aic_back =<span class="st"> </span><span class="kw">step</span>(fit, <span class="dt">trace =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb610-3"><a href="subset-selection.html#cb610-3"></a><span class="kw">coef</span>(fit_aic_back)</span></code></pre></div>
+<pre><code>##  (Intercept)        AtBat         Hits        Walks       CAtBat        CRuns 
+##  162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798    1.4082490 
+##         CRBI       CWalks    DivisionW      PutOuts      Assists 
+##    0.7743122   -0.8308264 -112.3800575    0.2973726    0.2831680</code></pre>
 </div>
-<div id="external-links-5" class="section level2">
+</div>
+<div id="validated-rmse" class="section level2" number="22.2">
+<h2><span class="header-section-number">22.2</span> Validated RMSE</h2>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="subset-selection.html#cb612-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb612-2"><a href="subset-selection.html#cb612-2"></a>num_vars =<span class="st"> </span><span class="kw">ncol</span>(Hitters) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb612-3"><a href="subset-selection.html#cb612-3"></a>trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="kw">nrow</span>(Hitters), <span class="dt">rep =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb612-4"><a href="subset-selection.html#cb612-4"></a>tst_idx =<span class="st"> </span>(<span class="op">!</span>trn_idx)</span>
+<span id="cb612-5"><a href="subset-selection.html#cb612-5"></a></span>
+<span id="cb612-6"><a href="subset-selection.html#cb612-6"></a>fit_all =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters[trn_idx, ], <span class="dt">nvmax =</span> num_vars)</span>
+<span id="cb612-7"><a href="subset-selection.html#cb612-7"></a>test_mat =<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters[tst_idx, ])</span>
+<span id="cb612-8"><a href="subset-selection.html#cb612-8"></a></span>
+<span id="cb612-9"><a href="subset-selection.html#cb612-9"></a>test_err =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> num_vars)</span>
+<span id="cb612-10"><a href="subset-selection.html#cb612-10"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(test_err)) {</span>
+<span id="cb612-11"><a href="subset-selection.html#cb612-11"></a>  coefs =<span class="st"> </span><span class="kw">coef</span>(fit_all, <span class="dt">id =</span> i)</span>
+<span id="cb612-12"><a href="subset-selection.html#cb612-12"></a>  pred =<span class="st"> </span>test_mat[, <span class="kw">names</span>(coefs)] <span class="op">%*%</span><span class="st"> </span>coefs</span>
+<span id="cb612-13"><a href="subset-selection.html#cb612-13"></a>  test_err[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Hitters<span class="op">$</span>Salary[tst_idx] <span class="op">-</span><span class="st"> </span>pred) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span>
+<span id="cb612-14"><a href="subset-selection.html#cb612-14"></a>}</span>
+<span id="cb612-15"><a href="subset-selection.html#cb612-15"></a>test_err</span></code></pre></div>
+<pre><code>##  [1] 451.5144 415.2496 410.1213 384.0785 377.2735 408.6423 377.8263 392.0436
+##  [9] 394.8037 400.7555 402.4398 403.6991 404.0057 407.3175 406.6637 406.2891
+## [17] 407.1439 406.9280 407.4385</code></pre>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="subset-selection.html#cb614-1"></a><span class="kw">plot</span>(test_err, <span class="dt">type=</span><span class="st">&#39;b&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Test Set RMSE&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Number of Predictors&quot;</span>)</span></code></pre></div>
+<p><img src="22-subset_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="subset-selection.html#cb615-1"></a><span class="kw">which.min</span>(test_err)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="subset-selection.html#cb617-1"></a><span class="kw">coef</span>(fit_all, <span class="kw">which.min</span>(test_err))</span></code></pre></div>
+<pre><code>## (Intercept)       Walks      CAtBat       CHits      CHmRun     PutOuts 
+## 102.0163457   3.7019974  -0.4002084   1.5041824   2.9007854   0.1975283</code></pre>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="subset-selection.html#cb619-1"></a><span class="kw">class</span>(fit_all)</span></code></pre></div>
+<pre><code>## [1] &quot;regsubsets&quot;</code></pre>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="subset-selection.html#cb621-1"></a>predict.regsubsets =<span class="st"> </span><span class="cf">function</span>(object, newdata, id, ...) {</span>
+<span id="cb621-2"><a href="subset-selection.html#cb621-2"></a>  </span>
+<span id="cb621-3"><a href="subset-selection.html#cb621-3"></a>  form  =<span class="st"> </span><span class="kw">as.formula</span>(object<span class="op">$</span>call[[<span class="dv">2</span>]])</span>
+<span id="cb621-4"><a href="subset-selection.html#cb621-4"></a>  mat   =<span class="st"> </span><span class="kw">model.matrix</span>(form, newdata)</span>
+<span id="cb621-5"><a href="subset-selection.html#cb621-5"></a>  coefs =<span class="st"> </span><span class="kw">coef</span>(object, <span class="dt">id =</span> id)</span>
+<span id="cb621-6"><a href="subset-selection.html#cb621-6"></a>  xvars =<span class="st"> </span><span class="kw">names</span>(coefs)</span>
+<span id="cb621-7"><a href="subset-selection.html#cb621-7"></a>  </span>
+<span id="cb621-8"><a href="subset-selection.html#cb621-8"></a>  mat[, xvars] <span class="op">%*%</span><span class="st"> </span>coefs</span>
+<span id="cb621-9"><a href="subset-selection.html#cb621-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="subset-selection.html#cb622-1"></a>rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb622-2"><a href="subset-selection.html#cb622-2"></a>  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span>
+<span id="cb622-3"><a href="subset-selection.html#cb622-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="subset-selection.html#cb623-1"></a>num_folds =<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb623-2"><a href="subset-selection.html#cb623-2"></a>num_vars  =<span class="st"> </span><span class="dv">19</span></span>
+<span id="cb623-3"><a href="subset-selection.html#cb623-3"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb623-4"><a href="subset-selection.html#cb623-4"></a>folds =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createFolds</span>(Hitters<span class="op">$</span>Salary, <span class="dt">k =</span> num_folds)</span>
+<span id="cb623-5"><a href="subset-selection.html#cb623-5"></a>fold_error =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> num_folds, <span class="dt">ncol =</span> num_vars, </span>
+<span id="cb623-6"><a href="subset-selection.html#cb623-6"></a>                    <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">19</span>)))</span>
+<span id="cb623-7"><a href="subset-selection.html#cb623-7"></a></span>
+<span id="cb623-8"><a href="subset-selection.html#cb623-8"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_folds) {</span>
+<span id="cb623-9"><a href="subset-selection.html#cb623-9"></a>  </span>
+<span id="cb623-10"><a href="subset-selection.html#cb623-10"></a>  train_fold    =<span class="st"> </span>Hitters[<span class="op">-</span>folds[[j]], ]</span>
+<span id="cb623-11"><a href="subset-selection.html#cb623-11"></a>  validate_fold =<span class="st"> </span>Hitters[ folds[[j]], ]</span>
+<span id="cb623-12"><a href="subset-selection.html#cb623-12"></a></span>
+<span id="cb623-13"><a href="subset-selection.html#cb623-13"></a>  </span>
+<span id="cb623-14"><a href="subset-selection.html#cb623-14"></a>  best_fit =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_fold, <span class="dt">nvmax =</span> <span class="dv">19</span>)</span>
+<span id="cb623-15"><a href="subset-selection.html#cb623-15"></a>  </span>
+<span id="cb623-16"><a href="subset-selection.html#cb623-16"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_vars) {</span>
+<span id="cb623-17"><a href="subset-selection.html#cb623-17"></a>    </span>
+<span id="cb623-18"><a href="subset-selection.html#cb623-18"></a>    pred =<span class="st"> </span><span class="kw">predict</span>(best_fit, validate_fold, <span class="dt">id =</span> i)</span>
+<span id="cb623-19"><a href="subset-selection.html#cb623-19"></a>    </span>
+<span id="cb623-20"><a href="subset-selection.html#cb623-20"></a>    fold_error[j, i] =<span class="st"> </span><span class="kw">rmse</span>(<span class="dt">actual =</span> validate_fold<span class="op">$</span>Salary,</span>
+<span id="cb623-21"><a href="subset-selection.html#cb623-21"></a>                            <span class="dt">predicted =</span> pred)</span>
+<span id="cb623-22"><a href="subset-selection.html#cb623-22"></a>  }</span>
+<span id="cb623-23"><a href="subset-selection.html#cb623-23"></a>  </span>
+<span id="cb623-24"><a href="subset-selection.html#cb623-24"></a>}</span>
+<span id="cb623-25"><a href="subset-selection.html#cb623-25"></a></span>
+<span id="cb623-26"><a href="subset-selection.html#cb623-26"></a>cv_error =<span class="st"> </span><span class="kw">apply</span>(fold_error, <span class="dv">2</span>, mean)</span>
+<span id="cb623-27"><a href="subset-selection.html#cb623-27"></a>cv_error</span></code></pre></div>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 381.6473 362.3809 355.9959 354.6139 352.5358 345.6078 352.2963 332.4575 
+##        9       10       11       12       13       14       15       16 
+## 342.1292 339.7967 338.0266 338.2973 336.7897 337.6876 340.1955 339.9188 
+##       17       18       19 
+## 339.6058 339.6544 339.4893</code></pre>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="subset-selection.html#cb625-1"></a><span class="kw">plot</span>(cv_error, <span class="dt">type=</span><span class="st">&#39;b&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Corss-Validated RMSE&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Number of Predictors&quot;</span>)</span></code></pre></div>
+<p><img src="22-subset_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="subset-selection.html#cb626-1"></a>fit_all =<span class="st"> </span><span class="kw">regsubsets</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Hitters, <span class="dt">nvmax =</span> num_vars)</span>
+<span id="cb626-2"><a href="subset-selection.html#cb626-2"></a><span class="kw">coef</span>(fit_all, <span class="kw">which.min</span>(cv_error))</span></code></pre></div>
+<pre><code>##  (Intercept)        AtBat         Hits        Walks       CHmRun        CRuns 
+##  130.9691577   -2.1731903    7.3582935    6.0037597    1.2339718    0.9651349 
+##       CWalks    DivisionW      PutOuts 
+##   -0.8323788 -117.9657795    0.2908431</code></pre>
+</div>
+<div id="external-links-5" class="section level2" number="22.3">
 <h2><span class="header-section-number">22.3</span> External Links</h2>
 <ul>
 <li><a href=""></a> -</li>
 </ul>
 </div>
-<div id="rmarkdown-11" class="section level2">
+<div id="rmarkdown-11" class="section level2" number="22.4">
 <h2><span class="header-section-number">22.4</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="14-subset.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2 and the following packages:</p>
+<p>The RMarkdown file for this chapter can be found <a href="14-subset.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2 and the following packages:</p>
 <ul>
 <li>Base Packages, Attached</li>
 </ul>
@@ -629,21 +659,19 @@ cv_error</code></pre>
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;tidyselect&quot;   &quot;xfun&quot;         &quot;reshape2&quot;     &quot;purrr&quot;       
-##  [5] &quot;splines&quot;      &quot;lattice&quot;      &quot;colorspace&quot;   &quot;generics&quot;    
-##  [9] &quot;htmltools&quot;    &quot;stats4&quot;       &quot;yaml&quot;         &quot;survival&quot;    
-## [13] &quot;prodlim&quot;      &quot;rlang&quot;        &quot;ModelMetrics&quot; &quot;pillar&quot;      
-## [17] &quot;glue&quot;         &quot;withr&quot;        &quot;foreach&quot;      &quot;plyr&quot;        
-## [21] &quot;lava&quot;         &quot;stringr&quot;      &quot;timeDate&quot;     &quot;munsell&quot;     
-## [25] &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;    &quot;evaluate&quot;    
-## [29] &quot;knitr&quot;        &quot;caret&quot;        &quot;class&quot;        &quot;Rcpp&quot;        
-## [33] &quot;scales&quot;       &quot;ipred&quot;        &quot;ggplot2&quot;      &quot;digest&quot;      
-## [37] &quot;stringi&quot;      &quot;bookdown&quot;     &quot;dplyr&quot;        &quot;grid&quot;        
-## [41] &quot;tools&quot;        &quot;magrittr&quot;     &quot;lazyeval&quot;     &quot;tibble&quot;      
-## [45] &quot;crayon&quot;       &quot;pkgconfig&quot;    &quot;MASS&quot;         &quot;Matrix&quot;      
-## [49] &quot;data.table&quot;   &quot;lubridate&quot;    &quot;gower&quot;        &quot;assertthat&quot;  
-## [53] &quot;rmarkdown&quot;    &quot;iterators&quot;    &quot;R6&quot;           &quot;rpart&quot;       
-## [57] &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
+<pre><code>##  [1] &quot;tidyselect&quot;   &quot;xfun&quot;         &quot;purrr&quot;        &quot;reshape2&quot;     &quot;splines&quot;     
+##  [6] &quot;lattice&quot;      &quot;colorspace&quot;   &quot;vctrs&quot;        &quot;generics&quot;     &quot;htmltools&quot;   
+## [11] &quot;stats4&quot;       &quot;yaml&quot;         &quot;survival&quot;     &quot;prodlim&quot;      &quot;rlang&quot;       
+## [16] &quot;ModelMetrics&quot; &quot;pillar&quot;       &quot;glue&quot;         &quot;withr&quot;        &quot;foreach&quot;     
+## [21] &quot;lifecycle&quot;    &quot;plyr&quot;         &quot;lava&quot;         &quot;stringr&quot;      &quot;timeDate&quot;    
+## [26] &quot;munsell&quot;      &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;    &quot;evaluate&quot;    
+## [31] &quot;knitr&quot;        &quot;caret&quot;        &quot;class&quot;        &quot;Rcpp&quot;         &quot;scales&quot;      
+## [36] &quot;ipred&quot;        &quot;ggplot2&quot;      &quot;digest&quot;       &quot;stringi&quot;      &quot;bookdown&quot;    
+## [41] &quot;dplyr&quot;        &quot;grid&quot;         &quot;tools&quot;        &quot;magrittr&quot;     &quot;tibble&quot;      
+## [46] &quot;crayon&quot;       &quot;pkgconfig&quot;    &quot;ellipsis&quot;     &quot;MASS&quot;         &quot;Matrix&quot;      
+## [51] &quot;data.table&quot;   &quot;pROC&quot;         &quot;lubridate&quot;    &quot;gower&quot;        &quot;rmarkdown&quot;   
+## [56] &quot;iterators&quot;    &quot;R6&quot;           &quot;rpart&quot;        &quot;nnet&quot;         &quot;nlme&quot;        
+## [61] &quot;compiler&quot;</code></pre>
 
 </div>
 </div>
@@ -661,11 +689,13 @@ cv_error</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -673,12 +703,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -690,6 +719,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -708,8 +741,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

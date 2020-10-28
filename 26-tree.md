@@ -197,11 +197,11 @@ summary(seat_tree)
 ## Classification tree:
 ## tree(formula = Sales ~ ., data = seat_trn)
 ## Variables actually used in tree construction:
-## [1] "ShelveLoc"   "Price"       "Population"  "Advertising" "Income"     
-## [6] "Age"         "CompPrice"  
-## Number of terminal nodes:  19 
-## Residual mean deviance:  0.4282 = 77.51 / 181 
-## Misclassification error rate: 0.105 = 21 / 200
+## [1] "Price"       "Population"  "ShelveLoc"   "Age"         "Education"  
+## [6] "Income"      "US"          "CompPrice"   "Advertising"
+## Number of terminal nodes:  21 
+## Residual mean deviance:  0.5543 = 99.22 / 179 
+## Misclassification error rate: 0.115 = 23 / 200
 ```
 
 Note that, the tree is not using all of the available variables.
@@ -212,9 +212,9 @@ summary(seat_tree)$used
 ```
 
 ```
-## [1] ShelveLoc   Price       Population  Advertising Income      Age        
-## [7] CompPrice  
-## 11 Levels: <leaf> CompPrice Income Advertising Population ... US
+## [1] Price       Population  ShelveLoc   Age         Education   Income     
+## [7] US          CompPrice   Advertising
+## 11 Levels: <leaf> CompPrice Income Advertising Population Price ... US
 ```
 
 ```r
@@ -222,7 +222,7 @@ names(Carseats)[which(!(names(Carseats) %in% summary(seat_tree)$used))]
 ```
 
 ```
-## [1] "Sales"     "Education" "Urban"     "US"
+## [1] "Sales" "Urban"
 ```
 
 Also notice that, this new tree is slightly different than the tree fit to all of the data.
@@ -258,8 +258,8 @@ table(predicted = seat_trn_pred, actual = seat_trn$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   66  10
-##      Low    14 110
+##      High   67   8
+##      Low    14 111
 ```
 
 ```r
@@ -270,8 +270,8 @@ table(predicted = seat_tst_pred, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   57  29
-##      Low    27  87
+##      High   51  12
+##      Low    32 105
 ```
 
 
@@ -289,7 +289,7 @@ accuracy(predicted = seat_trn_pred, actual = seat_trn$Sales)
 ```
 
 ```
-## [1] 0.88
+## [1] 0.89
 ```
 
 ```r
@@ -298,7 +298,7 @@ accuracy(predicted = seat_tst_pred, actual = seat_tst$Sales)
 ```
 
 ```
-## [1] 0.72
+## [1] 0.78
 ```
 
 Here it is easy to see that the tree has been over-fit. The train set performs much better than the test set.
@@ -319,7 +319,7 @@ min_idx
 ```
 
 ```
-## [1] 5
+## [1] 1
 ```
 
 
@@ -329,7 +329,7 @@ seat_tree_cv$size[min_idx]
 ```
 
 ```
-## [1] 9
+## [1] 21
 ```
 
 
@@ -339,7 +339,7 @@ seat_tree_cv$dev / length(seat_idx)
 ```
 
 ```
-## [1] 0.275 0.275 0.265 0.260 0.250 0.280 0.345 0.325 0.400
+## [1] 0.375 0.380 0.405 0.405 0.375 0.385 0.390 0.425 0.405
 ```
 
 
@@ -370,12 +370,13 @@ summary(seat_tree_prune)
 ```
 ## 
 ## Classification tree:
-## snip.tree(tree = seat_tree, nodes = c(223L, 4L, 12L, 54L))
+## snip.tree(tree = seat_tree, nodes = c(13L, 15L, 29L, 2L))
 ## Variables actually used in tree construction:
-## [1] "ShelveLoc"   "Price"       "Advertising" "Age"         "CompPrice"  
+## [1] "Price"      "ShelveLoc"  "Income"     "Age"        "CompPrice" 
+## [6] "Population"
 ## Number of terminal nodes:  9 
-## Residual mean deviance:  0.8103 = 154.8 / 191 
-## Misclassification error rate: 0.155 = 31 / 200
+## Residual mean deviance:  0.9135 = 174.5 / 191 
+## Misclassification error rate: 0.175 = 35 / 200
 ```
 
 
@@ -401,8 +402,8 @@ table(predicted = seat_prune_trn_pred, actual = seat_trn$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   59  10
-##      Low    21 110
+##      High   62  16
+##      Low    19 103
 ```
 
 ```r
@@ -410,7 +411,7 @@ accuracy(predicted = seat_prune_trn_pred, actual = seat_trn$Sales)
 ```
 
 ```
-## [1] 0.845
+## [1] 0.825
 ```
 
 
@@ -423,8 +424,8 @@ table(predicted = seat_prune_tst_pred, actual = seat_tst$Sales)
 ```
 ##          actual
 ## predicted High Low
-##      High   60  22
-##      Low    24  94
+##      High   58  20
+##      Low    25  97
 ```
 
 ```r
@@ -432,7 +433,7 @@ accuracy(predicted = seat_prune_tst_pred, actual = seat_tst$Sales)
 ```
 
 ```
-## [1] 0.77
+## [1] 0.775
 ```
 
 The train set has performed almost as well as before, and there was a **small** improvement in the test set, but it is still obvious that we have over-fit. Trees tend to do this. We will look at several ways to fix this, including: bagging, boosting and random forests.
@@ -464,12 +465,12 @@ summary(boston_tree)
 ## Regression tree:
 ## tree(formula = medv ~ ., data = boston_trn)
 ## Variables actually used in tree construction:
-## [1] "rm"    "lstat" "crim" 
-## Number of terminal nodes:  9 
-## Residual mean deviance:  12.35 = 3013 / 244 
+## [1] "lstat" "rm"    "dis"   "tax"   "crim" 
+## Number of terminal nodes:  8 
+## Residual mean deviance:  12.2 = 2988 / 245 
 ## Distribution of residuals:
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## -13.600  -1.832  -0.120   0.000   1.348  26.350
+##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## -10.25000  -2.35500  -0.06778   0.00000   1.87700  15.31000
 ```
 
 
@@ -508,14 +509,14 @@ summary(boston_tree_prune)
 ```
 ## 
 ## Regression tree:
-## snip.tree(tree = boston_tree, nodes = c(11L, 8L))
+## snip.tree(tree = boston_tree, nodes = 4L)
 ## Variables actually used in tree construction:
-## [1] "rm"    "lstat" "crim" 
+## [1] "lstat" "rm"    "tax"   "crim" 
 ## Number of terminal nodes:  7 
-## Residual mean deviance:  14.05 = 3455 / 246 
+## Residual mean deviance:  13.35 = 3284 / 246 
 ## Distribution of residuals:
-##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## -13.60000  -2.12000   0.01731   0.00000   1.88000  28.02000
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -10.2500  -2.3680  -0.2229   0.0000   1.8770  17.1000
 ```
 
 
@@ -548,7 +549,7 @@ sqrt(summary(boston_tree_prune)$dev / nrow(boston_trn))
 ```
 
 ```
-## [1] 3.695598
+## [1] 3.603014
 ```
 
 ```r
@@ -557,7 +558,7 @@ rmse(boston_prune_trn_pred, boston_trn$medv)
 ```
 
 ```
-## [1] 3.695598
+## [1] 3.603014
 ```
 
 
@@ -568,7 +569,7 @@ rmse(boston_prune_tst_pred, boston_tst$medv)
 ```
 
 ```
-## [1] 5.331457
+## [1] 5.477353
 ```
 
 
@@ -601,7 +602,7 @@ rmse(boston_lm_pred, boston_tst$medv)
 ```
 
 ```
-## [1] 5.125877
+## [1] 5.016083
 ```
 
 We also see a lower test RMSE. The most obvious linear regression beats the tree! Again, we'll improve on this tree soon. Also note the summary of the additive linear regression below. Which is easier to interpret, that output, or the small tree above?
@@ -613,11 +614,11 @@ coef(bostom_lm)
 
 ```
 ##   (Intercept)          crim            zn         indus          chas 
-##  43.340158284  -0.113490889   0.046881038   0.018046856   3.557944155 
+##  36.580341043  -0.108644810   0.034140802  -0.059738746   1.470388280 
 ##           nox            rm           age           dis           rad 
-## -21.904534125   3.486780787  -0.010592511  -1.766227892   0.354167931 
+## -17.318762356   3.802659420  -0.015408865  -1.571907768   0.326489764 
 ##           tax       ptratio         black         lstat 
-##  -0.015036451  -0.830144898   0.003722857  -0.576134200
+##  -0.014610527  -0.828204777   0.007807754  -0.440281912
 ```
 
 
@@ -654,7 +655,7 @@ min_cp
 ```
 
 ```
-## [1] 0.02083333
+## [1] 0.03703704
 ```
 
 ```r
@@ -694,7 +695,7 @@ rpart.plot(seat_rpart_prune)
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](26-tree.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](26-tree.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

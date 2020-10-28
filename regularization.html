@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 24 Regularization | R for Statistical Learning</title>
   <meta name="description" content="Chapter 24 Regularization | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 24 Regularization | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="modern-overview.html">
-<link rel="next" href="elastic-net.html">
+<link rel="prev" href="modern-overview.html"/>
+<link rel="next" href="elastic-net.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,46 +425,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regularization" class="section level1">
+<div id="regularization" class="section level1" number="24">
 <h1><span class="header-section-number">Chapter 24</span> Regularization</h1>
 <p><strong>Chapter Status:</strong> Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later. Also, more comments on using <code>glmnet</code> with <code>caret</code> will be discussed.</p>
 <p>We will use the <code>Hitters</code> dataset from the <code>ISLR</code> package to explore two shrinkage methods: <strong>ridge regression</strong> and <strong>lasso</strong>. These are otherwise known as <strong>penalized regression</strong> methods.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="regularization.html#cb631-1"></a><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</span></code></pre></div>
 <p>This dataset has some missing data in the response <code>Salaray</code>. We use the <code>na.omit()</code> function the clean the dataset.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</code></pre>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="regularization.html#cb632-1"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</span></code></pre></div>
 <pre><code>## [1] 59</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters<span class="op">$</span>Salary))</code></pre>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="regularization.html#cb634-1"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters<span class="op">$</span>Salary))</span></code></pre></div>
 <pre><code>## [1] 59</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)
-<span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</code></pre>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="regularization.html#cb636-1"></a>Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</span>
+<span id="cb636-2"><a href="regularization.html#cb636-2"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>The predictors variables are offensive and defensive statistics for a number of baseball players.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Hitters)</code></pre>
-<pre><code>##  [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;HmRun&quot;     &quot;Runs&quot;      &quot;RBI&quot;      
-##  [6] &quot;Walks&quot;     &quot;Years&quot;     &quot;CAtBat&quot;    &quot;CHits&quot;     &quot;CHmRun&quot;   
-## [11] &quot;CRuns&quot;     &quot;CRBI&quot;      &quot;CWalks&quot;    &quot;League&quot;    &quot;Division&quot; 
-## [16] &quot;PutOuts&quot;   &quot;Assists&quot;   &quot;Errors&quot;    &quot;Salary&quot;    &quot;NewLeague&quot;</code></pre>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="regularization.html#cb638-1"></a><span class="kw">names</span>(Hitters)</span></code></pre></div>
+<pre><code>##  [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;HmRun&quot;     &quot;Runs&quot;      &quot;RBI&quot;       &quot;Walks&quot;    
+##  [7] &quot;Years&quot;     &quot;CAtBat&quot;    &quot;CHits&quot;     &quot;CHmRun&quot;    &quot;CRuns&quot;     &quot;CRBI&quot;     
+## [13] &quot;CWalks&quot;    &quot;League&quot;    &quot;Division&quot;  &quot;PutOuts&quot;   &quot;Assists&quot;   &quot;Errors&quot;   
+## [19] &quot;Salary&quot;    &quot;NewLeague&quot;</code></pre>
 <p>We use the <code>glmnet()</code> and <code>cv.glmnet()</code> functions from the <code>glmnet</code> package to fit penalized regressions.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(glmnet)</code></pre>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="regularization.html#cb640-1"></a><span class="kw">library</span>(glmnet)</span></code></pre></div>
 <p>Unfortunately, the <code>glmnet</code> function does not allow the use of model formulas, so we setup the data for ease of use with <code>glmnet</code>. Eventually we will use <code>train()</code> from <code>caret</code> which does allow for fitting penalized regression with the formula syntax, but to explore some of the details, we first work with the functions from <code>glmnet</code> directly.</p>
-<pre class="sourceCode r"><code class="sourceCode r">X =<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., Hitters)[, <span class="dv">-1</span>]
-y =<span class="st"> </span>Hitters<span class="op">$</span>Salary</code></pre>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="regularization.html#cb641-1"></a>X =<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., Hitters)[, <span class="dv">-1</span>]</span>
+<span id="cb641-2"><a href="regularization.html#cb641-2"></a>y =<span class="st"> </span>Hitters<span class="op">$</span>Salary</span></code></pre></div>
 <p>First, we fit an ordinary linear regression, and note the size of the predictors’ coefficients, and predictors’ coefficients squared. (The two penalties we will use.)</p>
-<pre class="sourceCode r"><code class="sourceCode r">fit =<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., Hitters)
-<span class="kw">coef</span>(fit)</code></pre>
-<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs 
-##  163.1035878   -1.9798729    7.5007675    4.3308829   -2.3762100 
-##          RBI        Walks        Years       CAtBat        CHits 
-##   -1.0449620    6.2312863   -3.4890543   -0.1713405    0.1339910 
-##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
-##   -0.1728611    1.4543049    0.8077088   -0.8115709   62.5994230 
-##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
-## -116.8492456    0.2818925    0.3710692   -3.3607605  -24.7623251</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit)[<span class="op">-</span><span class="dv">1</span>]))</code></pre>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="regularization.html#cb642-1"></a>fit =<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., Hitters)</span>
+<span id="cb642-2"><a href="regularization.html#cb642-2"></a><span class="kw">coef</span>(fit)</span></code></pre></div>
+<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+##  163.1035878   -1.9798729    7.5007675    4.3308829   -2.3762100   -1.0449620 
+##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+##    6.2312863   -3.4890543   -0.1713405    0.1339910   -0.1728611    1.4543049 
+##         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+##    0.8077088   -0.8115709   62.5994230 -116.8492456    0.2818925    0.3710692 
+##       Errors   NewLeagueN 
+##   -3.3607605  -24.7623251</code></pre>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="regularization.html#cb644-1"></a><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit)[<span class="op">-</span><span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 238.7295</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">coef</span>(fit)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="regularization.html#cb646-1"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 18337.3</code></pre>
-<div id="ridge-regression" class="section level2">
+<div id="ridge-regression" class="section level2" number="24.1">
 <h2><span class="header-section-number">24.1</span> Ridge Regression</h2>
 <p>We first illustrate <strong>ridge regression</strong>, which can be fit using <code>glmnet()</code> with <code>alpha = 0</code> and seeks to minimize</p>
 <p><span class="math display">\[
@@ -434,126 +472,124 @@ y =<span class="st"> </span>Hitters<span class="op">$</span>Salary</code></pre>
 \]</span></p>
 <p>Notice that the intercept is <strong>not</strong> penalized. Also, note that that ridge regression is <strong>not</strong> scale invariant like the usual unpenalized regression. Thankfully, <code>glmnet()</code> takes care of this internally. It automatically standardizes predictors for fitting, then reports fitted coefficient using the original scale.</p>
 <p>The two plots illustrate how much the coefficients are penalized for different values of <span class="math inline">\(\lambda\)</span>. Notice none of the coefficients are forced to be zero.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-fit_ridge =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)
-<span class="kw">plot</span>(fit_ridge)
-<span class="kw">plot</span>(fit_ridge, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="regularization.html#cb648-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb648-2"><a href="regularization.html#cb648-2"></a>fit_ridge =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb648-3"><a href="regularization.html#cb648-3"></a><span class="kw">plot</span>(fit_ridge)</span>
+<span id="cb648-4"><a href="regularization.html#cb648-4"></a><span class="kw">plot</span>(fit_ridge, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="24-regularization_files/figure-html/ridge-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>We use cross-validation to select a good <span class="math inline">\(\lambda\)</span> value. The <code>cv.glmnet()</code>function uses 10 folds by default. The plot illustrates the MSE for the <span class="math inline">\(\lambda\)</span>s considered. Two lines are drawn. The first is the <span class="math inline">\(\lambda\)</span> that gives the smallest MSE. The second is the <span class="math inline">\(\lambda\)</span> that gives an MSE within one standard error of the smallest.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fit_ridge_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)
-<span class="kw">plot</span>(fit_ridge_cv)</code></pre>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="regularization.html#cb649-1"></a>fit_ridge_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb649-2"><a href="regularization.html#cb649-2"></a><span class="kw">plot</span>(fit_ridge_cv)</span></code></pre></div>
 <p><img src="24-regularization_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The <code>cv.glmnet()</code> function returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using 1-SE rule lambda, default behavior</span>
-<span class="kw">coef</span>(fit_ridge_cv)</code></pre>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="regularization.html#cb650-1"></a><span class="co"># fitted coefficients, using 1-SE rule lambda, default behavior</span></span>
+<span id="cb650-2"><a href="regularization.html#cb650-2"></a><span class="kw">coef</span>(fit_ridge_cv)</span></code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept) 226.844379891
-## AtBat         0.086613902
-## Hits          0.352962515
-## HmRun         1.144213851
-## Runs          0.569353372
-## RBI           0.570074066
-## Walks         0.735072618
-## Years         2.397356090
-## CAtBat        0.007295083
-## CHits         0.027995153
-## CHmRun        0.208112349
-## CRuns         0.056146219
-## CRBI          0.058060281
-## CWalks        0.056586702
-## LeagueN       2.850306094
-## DivisionW   -20.329125634
-## PutOuts       0.049296951
-## Assists       0.007063169
-## Errors       -0.128066380
-## NewLeagueN    2.654025549</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using minimum lambda</span>
-<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre>
+## (Intercept) 213.066444060
+## AtBat         0.090095728
+## Hits          0.371252755
+## HmRun         1.180126954
+## Runs          0.596298285
+## RBI           0.594502389
+## Walks         0.772525465
+## Years         2.473494235
+## CAtBat        0.007597952
+## CHits         0.029272172
+## CHmRun        0.217335715
+## CRuns         0.058705097
+## CRBI          0.060722036
+## CWalks        0.058698830
+## LeagueN       3.276567808
+## DivisionW   -21.889942546
+## PutOuts       0.052667119
+## Assists       0.007463678
+## Errors       -0.145121335
+## NewLeagueN    2.972759111</code></pre>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="regularization.html#cb652-1"></a><span class="co"># fitted coefficients, using minimum lambda</span></span>
+<span id="cb652-2"><a href="regularization.html#cb652-2"></a><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept)  7.645824e+01
-## AtBat       -6.315180e-01
-## Hits         2.642160e+00
-## HmRun       -1.388233e+00
-## Runs         1.045729e+00
-## RBI          7.315713e-01
-## Walks        3.278001e+00
-## Years       -8.723734e+00
-## CAtBat       1.256355e-04
-## CHits        1.318975e-01
-## CHmRun       6.895578e-01
-## CRuns        2.830055e-01
-## CRBI         2.514905e-01
-## CWalks      -2.599851e-01
-## LeagueN      5.233720e+01
-## DivisionW   -1.224170e+02
-## PutOuts      2.623667e-01
-## Assists      1.629044e-01
-## Errors      -3.644002e+00
-## NewLeagueN  -1.702598e+01</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># penalty term using minimum lambda</span>
-<span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
-<pre><code>## [1] 18126.85</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using 1-SE rule lambda</span>
-<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre>
+## (Intercept)  8.112693e+01
+## AtBat       -6.815959e-01
+## Hits         2.772312e+00
+## HmRun       -1.365680e+00
+## Runs         1.014826e+00
+## RBI          7.130225e-01
+## Walks        3.378558e+00
+## Years       -9.066800e+00
+## CAtBat      -1.199478e-03
+## CHits        1.361029e-01
+## CHmRun       6.979958e-01
+## CRuns        2.958896e-01
+## CRBI         2.570711e-01
+## CWalks      -2.789666e-01
+## LeagueN      5.321272e+01
+## DivisionW   -1.228345e+02
+## PutOuts      2.638876e-01
+## Assists      1.698796e-01
+## Errors      -3.685645e+00
+## NewLeagueN  -1.810510e+01</code></pre>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="regularization.html#cb654-1"></a><span class="co"># penalty term using minimum lambda</span></span>
+<span id="cb654-2"><a href="regularization.html#cb654-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 18367.29</code></pre>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="regularization.html#cb656-1"></a><span class="co"># fitted coefficients, using 1-SE rule lambda</span></span>
+<span id="cb656-2"><a href="regularization.html#cb656-2"></a><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</span></code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                         1
-## (Intercept) 226.844379891
-## AtBat         0.086613902
-## Hits          0.352962515
-## HmRun         1.144213851
-## Runs          0.569353372
-## RBI           0.570074066
-## Walks         0.735072618
-## Years         2.397356090
-## CAtBat        0.007295083
-## CHits         0.027995153
-## CHmRun        0.208112349
-## CRuns         0.056146219
-## CRBI          0.058060281
-## CWalks        0.056586702
-## LeagueN       2.850306094
-## DivisionW   -20.329125634
-## PutOuts       0.049296951
-## Assists       0.007063169
-## Errors       -0.128066380
-## NewLeagueN    2.654025549</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># penalty term using 1-SE rule lambda</span>
-<span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
-<pre><code>## [1] 436.8923</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict using minimum lambda</span>
-<span class="kw">predict</span>(fit_ridge_cv, X, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict using 1-SE rule lambda, default behavior</span>
-<span class="kw">predict</span>(fit_ridge_cv, X)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calcualte &quot;train error&quot;</span>
-<span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
-<pre><code>## [1] 134397.5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSEs</span>
-<span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm)</code></pre>
-<pre><code>##  [1] 451.1772 449.5218 448.7861 448.5162 448.2212 447.8988 447.5467
-##  [8] 447.1623 446.7428 446.2853 445.7867 445.2435 444.6522 444.0091
-## [15] 443.3103 442.5514 441.7284 440.8367 439.8718 438.8289 437.7034
-## [22] 436.4907 435.1860 433.7849 432.2833 430.6772 428.9634 427.1390
-## [29] 425.2020 423.1511 420.9863 418.7086 416.3203 413.8252 411.2286
-## [36] 408.5376 405.7608 402.9083 399.9921 397.0258 394.0242 391.0032
-## [43] 387.9798 384.9712 381.9951 379.0686 376.2085 373.4305 370.7489
-## [50] 368.1761 365.7223 363.3970 361.2066 359.1553 357.2453 355.4771
-## [57] 353.8490 352.3580 350.9996 349.7684 348.6581 347.6619 346.7727
-## [64] 345.9822 345.2844 344.6755 344.1461 343.6856 343.2892 342.9523
-## [71] 342.6699 342.4358 342.2454 342.0888 341.9642 341.8679 341.7953
-## [78] 341.7394 341.6991 341.6695 341.6482 341.6297 341.6146 341.5953
-## [85] 341.5748 341.5476 341.5157 341.4718 341.4199 341.3587 341.2850
-## [92] 341.2006 341.1064 341.0006 340.8855 340.7584 340.6254 340.4818
-## [99] 340.3364</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSE using minimum lambda</span>
-<span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda.min])</code></pre>
-<pre><code>## [1] 340.3364</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSE using 1-SE rule lambda</span>
-<span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]) </code></pre>
-<pre><code>## [1] 370.7489</code></pre>
+## (Intercept) 213.066444060
+## AtBat         0.090095728
+## Hits          0.371252755
+## HmRun         1.180126954
+## Runs          0.596298285
+## RBI           0.594502389
+## Walks         0.772525465
+## Years         2.473494235
+## CAtBat        0.007597952
+## CHits         0.029272172
+## CHmRun        0.217335715
+## CRuns         0.058705097
+## CRBI          0.060722036
+## CWalks        0.058698830
+## LeagueN       3.276567808
+## DivisionW   -21.889942546
+## PutOuts       0.052667119
+## Assists       0.007463678
+## Errors       -0.145121335
+## NewLeagueN    2.972759111</code></pre>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="regularization.html#cb658-1"></a><span class="co"># penalty term using 1-SE rule lambda</span></span>
+<span id="cb658-2"><a href="regularization.html#cb658-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 507.788</code></pre>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="regularization.html#cb660-1"></a><span class="co"># predict using minimum lambda</span></span>
+<span id="cb660-2"><a href="regularization.html#cb660-2"></a><span class="kw">predict</span>(fit_ridge_cv, X, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="regularization.html#cb661-1"></a><span class="co"># predict using 1-SE rule lambda, default behavior</span></span>
+<span id="cb661-2"><a href="regularization.html#cb661-2"></a><span class="kw">predict</span>(fit_ridge_cv, X)</span></code></pre></div>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="regularization.html#cb662-1"></a><span class="co"># calcualte &quot;train error&quot;</span></span>
+<span id="cb662-2"><a href="regularization.html#cb662-2"></a><span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 132355.6</code></pre>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="regularization.html#cb664-1"></a><span class="co"># CV-RMSEs</span></span>
+<span id="cb664-2"><a href="regularization.html#cb664-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm)</span></code></pre></div>
+<pre><code>##   [1] 451.8190 450.1773 449.3764 449.1046 448.8075 448.4828 448.1282 447.7410
+##   [9] 447.3185 446.8577 446.3555 445.8084 445.2128 444.5650 443.8610 443.0966
+##  [17] 442.2674 441.3691 440.3969 439.3462 438.2122 436.9901 435.6753 434.2633
+##  [25] 432.7497 431.1308 429.4030 427.5636 425.6103 423.5420 421.3583 419.0604
+##  [33] 416.6504 414.1319 411.5104 408.7927 405.9875 403.1047 400.1563 397.1558
+##  [41] 394.1178 391.0583 387.9941 384.9424 381.9207 378.9462 376.0354 373.2039
+##  [49] 370.4660 367.8342 365.3184 362.9276 360.6688 358.5458 356.5609 354.7144
+##  [57] 353.0045 351.4284 349.9815 348.6584 347.4528 346.3581 345.3671 344.4723
+##  [65] 343.6699 342.9507 342.3074 341.7328 341.2215 340.7696 340.3715 340.0189
+##  [73] 339.7092 339.4383 339.1988 338.9890 338.8065 338.6429 338.4985 338.3709
+##  [81] 338.2534 338.1472 338.0493 337.9563 337.8694 337.7825 337.6966 337.6125
+##  [89] 337.5297 337.4436 337.3577 337.2712 337.1844 337.0973 337.0109 336.9265
+##  [97] 336.8448 336.7658 336.6928 336.5957</code></pre>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="regularization.html#cb666-1"></a><span class="co"># CV-RMSE using minimum lambda</span></span>
+<span id="cb666-2"><a href="regularization.html#cb666-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda.min])</span></code></pre></div>
+<pre><code>## [1] 336.5957</code></pre>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="regularization.html#cb668-1"></a><span class="co"># CV-RMSE using 1-SE rule lambda</span></span>
+<span id="cb668-2"><a href="regularization.html#cb668-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]) </span></code></pre></div>
+<pre><code>## [1] 367.8342</code></pre>
 </div>
-<div id="lasso" class="section level2">
+<div id="lasso" class="section level2" number="24.2">
 <h2><span class="header-section-number">24.2</span> Lasso</h2>
 <p>We now illustrate <strong>lasso</strong>, which can be fit using <code>glmnet()</code> with <code>alpha = 1</code> and seeks to minimize</p>
 <p><span class="math display">\[
@@ -561,173 +597,172 @@ fit_ridge =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span c
 \]</span></p>
 <p>Like ridge, lasso is not scale invariant.</p>
 <p>The two plots illustrate how much the coefficients are penalized for different values of <span class="math inline">\(\lambda\)</span>. Notice some of the coefficients are forced to be zero.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-fit_lasso =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)
-<span class="kw">plot</span>(fit_lasso)
-<span class="kw">plot</span>(fit_lasso, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="regularization.html#cb670-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb670-2"><a href="regularization.html#cb670-2"></a>fit_lasso =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb670-3"><a href="regularization.html#cb670-3"></a><span class="kw">plot</span>(fit_lasso)</span>
+<span id="cb670-4"><a href="regularization.html#cb670-4"></a><span class="kw">plot</span>(fit_lasso, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="24-regularization_files/figure-html/lasso-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Again, to actually pick a <span class="math inline">\(\lambda\)</span>, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)</p>
-<pre class="sourceCode r"><code class="sourceCode r">fit_lasso_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)
-<span class="kw">plot</span>(fit_lasso_cv)</code></pre>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="regularization.html#cb671-1"></a>fit_lasso_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb671-2"><a href="regularization.html#cb671-2"></a><span class="kw">plot</span>(fit_lasso_cv)</span></code></pre></div>
 <p><img src="24-regularization_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><code>cv.glmnet()</code> returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using 1-SE rule lambda, default behavior</span>
-<span class="kw">coef</span>(fit_lasso_cv)</code></pre>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="regularization.html#cb672-1"></a><span class="co"># fitted coefficients, using 1-SE rule lambda, default behavior</span></span>
+<span id="cb672-2"><a href="regularization.html#cb672-2"></a><span class="kw">coef</span>(fit_lasso_cv)</span></code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                        1
-## (Intercept) 167.91202846
-## AtBat         .         
-## Hits          1.29269756
-## HmRun         .         
-## Runs          .         
-## RBI           .         
-## Walks         1.39817511
-## Years         .         
-## CAtBat        .         
-## CHits         .         
-## CHmRun        .         
-## CRuns         0.14167760
-## CRBI          0.32192558
-## CWalks        .         
-## LeagueN       .         
-## DivisionW     .         
-## PutOuts       0.04675463
-## Assists       .         
-## Errors        .         
+##                       1
+## (Intercept) 115.3773591
+## AtBat         .        
+## Hits          1.4753071
+## HmRun         .        
+## Runs          .        
+## RBI           .        
+## Walks         1.6566947
+## Years         .        
+## CAtBat        .        
+## CHits         .        
+## CHmRun        .        
+## CRuns         0.1660465
+## CRBI          0.3453397
+## CWalks        .        
+## LeagueN       .        
+## DivisionW   -19.2435215
+## PutOuts       0.1000068
+## Assists       .        
+## Errors        .        
 ## NewLeagueN    .</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using minimum lambda</span>
-<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="regularization.html#cb674-1"></a><span class="co"># fitted coefficients, using minimum lambda</span></span>
+<span id="cb674-2"><a href="regularization.html#cb674-2"></a><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                        1
-## (Intercept)  129.4155569
-## AtBat         -1.6130155
-## Hits           5.8058915
+## (Intercept)  117.5258436
+## AtBat         -1.4742901
+## Hits           5.4994256
 ## HmRun          .        
 ## Runs           .        
 ## RBI            .        
-## Walks          4.8469340
-## Years         -9.9724045
+## Walks          4.5991651
+## Years         -9.1918308
 ## CAtBat         .        
 ## CHits          .        
-## CHmRun         0.5374550
-## CRuns          0.6811938
-## CRBI           0.3903563
-## CWalks        -0.5560143
-## LeagueN       32.4646094
-## DivisionW   -119.3480842
-## PutOuts        0.2741895
-## Assists        0.1855978
-## Errors        -2.1650837
+## CHmRun         0.4806743
+## CRuns          0.6354799
+## CRBI           0.3956153
+## CWalks        -0.4993240
+## LeagueN       31.6238173
+## DivisionW   -119.2516409
+## PutOuts        0.2704287
+## Assists        0.1594997
+## Errors        -1.9426357
 ## NewLeagueN     .</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># penalty term using minimum lambda</span>
-<span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
-<pre><code>## [1] 15463.18</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fitted coefficients, using 1-SE rule lambda</span>
-<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="regularization.html#cb676-1"></a><span class="co"># penalty term using minimum lambda</span></span>
+<span id="cb676-2"><a href="regularization.html#cb676-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 15363.99</code></pre>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="regularization.html#cb678-1"></a><span class="co"># fitted coefficients, using 1-SE rule lambda</span></span>
+<span id="cb678-2"><a href="regularization.html#cb678-2"></a><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</span></code></pre></div>
 <pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                        1
-## (Intercept) 167.91202846
-## AtBat         .         
-## Hits          1.29269756
-## HmRun         .         
-## Runs          .         
-## RBI           .         
-## Walks         1.39817511
-## Years         .         
-## CAtBat        .         
-## CHits         .         
-## CHmRun        .         
-## CRuns         0.14167760
-## CRBI          0.32192558
-## CWalks        .         
-## LeagueN       .         
-## DivisionW     .         
-## PutOuts       0.04675463
-## Assists       .         
-## Errors        .         
+##                       1
+## (Intercept) 115.3773591
+## AtBat         .        
+## Hits          1.4753071
+## HmRun         .        
+## Runs          .        
+## RBI           .        
+## Walks         1.6566947
+## Years         .        
+## CAtBat        .        
+## CHits         .        
+## CHmRun        .        
+## CRuns         0.1660465
+## CRBI          0.3453397
+## CWalks        .        
+## LeagueN       .        
+## DivisionW   -19.2435215
+## PutOuts       0.1000068
+## Assists       .        
+## Errors        .        
 ## NewLeagueN    .</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># penalty term using 1-SE rule lambda</span>
-<span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
-<pre><code>## [1] 3.751855</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict using minimum lambda</span>
-<span class="kw">predict</span>(fit_lasso_cv, X, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predict using 1-SE rule lambda, default behavior</span>
-<span class="kw">predict</span>(fit_lasso_cv, X)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calcualte &quot;train error&quot;</span>
-<span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
-<pre><code>## [1] 123931.3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSEs</span>
-<span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm)</code></pre>
-<pre><code>##  [1] 449.5476 439.8301 430.0707 421.8891 413.7590 405.2809 396.7882
-##  [8] 389.3514 383.2383 378.3132 374.3378 371.1364 368.4413 366.2982
-## [15] 364.4505 362.8489 361.2297 359.4252 357.5374 355.9585 354.6605
-## [22] 353.5969 352.7915 352.2175 351.7586 351.4219 351.1697 351.0200
-## [29] 350.9449 350.9065 350.9106 350.9508 350.9949 351.1107 351.3967
-## [36] 351.6997 352.1176 352.3968 352.2284 351.4513 350.5703 349.5480
-## [43] 348.4454 347.4367 346.4896 345.6987 345.0589 344.5373 344.0981
-## [50] 343.7666 343.6808 343.7934 343.8787 343.9644 344.0379 344.1172
-## [57] 344.2081 344.3154 344.4026 344.3953 344.3500 344.2605 344.2293
-## [64] 344.2134 344.2067 344.2084 344.2437 344.2762 344.3076 344.4098
-## [71] 344.5598 344.6825</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSE using minimum lambda</span>
-<span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda.min])</code></pre>
-<pre><code>## [1] 343.6808</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CV-RMSE using 1-SE rule lambda</span>
-<span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]) </code></pre>
-<pre><code>## [1] 368.4413</code></pre>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="regularization.html#cb680-1"></a><span class="co"># penalty term using 1-SE rule lambda</span></span>
+<span id="cb680-2"><a href="regularization.html#cb680-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 375.3911</code></pre>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="regularization.html#cb682-1"></a><span class="co"># predict using minimum lambda</span></span>
+<span id="cb682-2"><a href="regularization.html#cb682-2"></a><span class="kw">predict</span>(fit_lasso_cv, X, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="regularization.html#cb683-1"></a><span class="co"># predict using 1-SE rule lambda, default behavior</span></span>
+<span id="cb683-2"><a href="regularization.html#cb683-2"></a><span class="kw">predict</span>(fit_lasso_cv, X)</span></code></pre></div>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="regularization.html#cb684-1"></a><span class="co"># calcualte &quot;train error&quot;</span></span>
+<span id="cb684-2"><a href="regularization.html#cb684-2"></a><span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 116096.9</code></pre>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="regularization.html#cb686-1"></a><span class="co"># CV-RMSEs</span></span>
+<span id="cb686-2"><a href="regularization.html#cb686-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm)</span></code></pre></div>
+<pre><code>##  [1] 450.0450 440.5806 430.3877 421.7269 413.7075 404.9846 396.5670 388.9057
+##  [9] 382.3740 377.0449 372.5904 368.6293 365.1786 362.0757 358.8760 355.7098
+## [17] 352.8639 350.4950 348.5285 346.8972 345.4898 344.3528 343.5417 342.9243
+## [25] 342.4168 342.0202 341.7265 341.5692 341.5012 341.4663 341.5029 341.5574
+## [33] 341.5857 341.6196 341.6445 341.9246 342.3273 342.5799 342.6550 342.3637
+## [41] 341.5039 340.5235 339.5177 338.6793 337.9687 337.4356 337.0628 336.8681
+## [49] 336.8258 336.8874 337.2062 337.5072 337.8550 338.2128 338.6038 338.8880
+## [57] 339.0800 339.2685 339.3322 339.4100 339.5017 339.6380 339.8072 339.9620
+## [65] 340.1314 340.2814 340.4493 340.5705 340.7112 340.8467 340.9535 341.0781
+## [73] 341.2051 341.3688 341.4405 341.4999 341.5540 341.6055 341.6554 341.7065</code></pre>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="regularization.html#cb688-1"></a><span class="co"># CV-RMSE using minimum lambda</span></span>
+<span id="cb688-2"><a href="regularization.html#cb688-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda.min])</span></code></pre></div>
+<pre><code>## [1] 336.8258</code></pre>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="regularization.html#cb690-1"></a><span class="co"># CV-RMSE using 1-SE rule lambda</span></span>
+<span id="cb690-2"><a href="regularization.html#cb690-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]) </span></code></pre></div>
+<pre><code>## [1] 355.7098</code></pre>
 </div>
-<div id="broom" class="section level2">
+<div id="broom" class="section level2" number="24.3">
 <h2><span class="header-section-number">24.3</span> <code>broom</code></h2>
 <p>Sometimes, the output from <code>glmnet()</code> can be overwhelming. The <code>broom</code> package can help with that.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="co"># the output from the commented line would be immense</span>
-<span class="co"># fit_lasso_cv</span>
-<span class="kw">tidy</span>(fit_lasso_cv)</code></pre>
-<pre><code>## # A tibble: 72 x 6
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="regularization.html#cb692-1"></a><span class="kw">library</span>(broom)</span>
+<span id="cb692-2"><a href="regularization.html#cb692-2"></a><span class="co"># the output from the commented line would be immense</span></span>
+<span id="cb692-3"><a href="regularization.html#cb692-3"></a><span class="co"># fit_lasso_cv</span></span>
+<span id="cb692-4"><a href="regularization.html#cb692-4"></a><span class="kw">tidy</span>(fit_lasso_cv)</span></code></pre></div>
+<pre><code>## # A tibble: 80 x 6
 ##    lambda estimate std.error conf.low conf.high nzero
 ##     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-##  1   255.  202093.    25322.  176771.   227415.     0
-##  2   233.  193451.    25113.  168337.   218564.     1
-##  3   212.  184961.    24639.  160322.   209600.     2
-##  4   193.  177990.    24206.  153785.   202196.     2
-##  5   176.  171197.    23792.  147404.   194989.     3
-##  6   160.  164253.    23466.  140787.   187718.     4
-##  7   146.  157441.    23212.  134229.   180652.     4
-##  8   133.  151595.    23037.  128558.   174631.     4
-##  9   121.  146872.    22909.  123963.   169780.     4
-## 10   111.  143121.    22782.  120339.   165903.     4
-## # … with 62 more rows</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the two lambda values of interest</span>
-<span class="kw">glance</span>(fit_lasso_cv) </code></pre>
-<pre><code>## # A tibble: 1 x 2
-##   lambda.min lambda.1se
-##        &lt;dbl&gt;      &lt;dbl&gt;
-## 1       2.44       83.6</code></pre>
+##  1   255.  202540.    13105.  189435.   215646.     0
+##  2   233.  194111.    13163.  180948.   207274.     1
+##  3   212.  185234.    13087.  172146.   198321.     2
+##  4   193.  177854.    13190.  164664.   191043.     2
+##  5   176.  171154.    13498.  157655.   184652.     3
+##  6   160.  164013.    13875.  150137.   177888.     4
+##  7   146.  157265.    14093.  143172.   171359.     4
+##  8   133.  151248.    14277.  136971.   165525.     4
+##  9   121.  146210.    14481.  131728.   160691.     4
+## 10   111.  142163.    14731.  127432.   156894.     4
+## # … with 70 more rows</code></pre>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="regularization.html#cb694-1"></a><span class="co"># the two lambda values of interest</span></span>
+<span id="cb694-2"><a href="regularization.html#cb694-2"></a><span class="kw">glance</span>(fit_lasso_cv) </span></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   lambda.min lambda.1se  nobs
+##        &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
+## 1       2.94       63.2   263</code></pre>
 </div>
-<div id="simulated-data-p-n" class="section level2">
+<div id="simulated-data-p-n" class="section level2" number="24.4">
 <h2><span class="header-section-number">24.4</span> Simulated Data, <span class="math inline">\(p &gt; n\)</span></h2>
 <p>Aside from simply shrinking coefficients (ridge) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the <span class="math inline">\(p &gt; n\)</span> case.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
-n =<span class="st"> </span><span class="dv">1000</span>
-p =<span class="st"> </span><span class="dv">5500</span>
-X =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(<span class="dt">n =</span> n))
-beta =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">5497</span>))
-z =<span class="st"> </span>X <span class="op">%*%</span><span class="st"> </span>beta
-prob =<span class="st"> </span><span class="kw">exp</span>(z) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(z))
-y =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(z), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> prob))</code></pre>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="regularization.html#cb696-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb696-2"><a href="regularization.html#cb696-2"></a>n =<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb696-3"><a href="regularization.html#cb696-3"></a>p =<span class="st"> </span><span class="dv">5500</span></span>
+<span id="cb696-4"><a href="regularization.html#cb696-4"></a>X =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(<span class="dt">n =</span> n))</span>
+<span id="cb696-5"><a href="regularization.html#cb696-5"></a>beta =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">5497</span>))</span>
+<span id="cb696-6"><a href="regularization.html#cb696-6"></a>z =<span class="st"> </span>X <span class="op">%*%</span><span class="st"> </span>beta</span>
+<span id="cb696-7"><a href="regularization.html#cb696-7"></a>prob =<span class="st"> </span><span class="kw">exp</span>(z) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(z))</span>
+<span id="cb696-8"><a href="regularization.html#cb696-8"></a>y =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(z), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> prob))</span></code></pre></div>
 <p>We first simulate a classification example where <span class="math inline">\(p &gt; n\)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># glm(y ~ X, family = &quot;binomial&quot;)</span>
-<span class="co"># will not converge</span></code></pre>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="regularization.html#cb697-1"></a><span class="co"># glm(y ~ X, family = &quot;binomial&quot;)</span></span>
+<span id="cb697-2"><a href="regularization.html#cb697-2"></a><span class="co"># will not converge</span></span></code></pre></div>
 <p>We then use a lasso penalty to fit penalized logistic regression. This minimizes</p>
 <p><span class="math display">\[
 \sum_{i=1}^{n} L\left(y_i, \beta_0 + \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
 \]</span></p>
 <p>where <span class="math inline">\(L\)</span> is the appropriate <em>negative</em> <strong>log</strong>-likelihood.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(glmnet)
-fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>)
-<span class="kw">plot</span>(fit_cv)</code></pre>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="regularization.html#cb698-1"></a><span class="kw">library</span>(glmnet)</span>
+<span id="cb698-2"><a href="regularization.html#cb698-2"></a>fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb698-3"><a href="regularization.html#cb698-3"></a><span class="kw">plot</span>(fit_cv)</span></code></pre></div>
 <p><img src="24-regularization_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">coef</span>(fit_cv), <span class="dt">n =</span> <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="regularization.html#cb699-1"></a><span class="kw">head</span>(<span class="kw">coef</span>(fit_cv), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## 10 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                      1
 ## (Intercept) 0.02397452
@@ -740,66 +775,64 @@ fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span c
 ## V7          .         
 ## V8          .         
 ## V9          .</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fit_cv<span class="op">$</span>nzero</code></pre>
-<pre><code>##  s0  s1  s2  s3  s4  s5  s6  s7  s8  s9 s10 s11 s12 s13 s14 s15 s16 s17 
-##   0   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3 
-## s18 s19 s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 s32 s33 s34 s35 
-##   3   3   3   3   3   3   3   3   3   3   3   3   4   6   7  10  18  24 
-## s36 s37 s38 s39 s40 s41 s42 s43 s44 s45 s46 s47 s48 s49 s50 s51 s52 s53 
-##  35  54  65  75  86 100 110 129 147 168 187 202 221 241 254 269 283 298 
-## s54 s55 s56 s57 s58 s59 s60 s61 s62 s63 s64 s65 s66 s67 s68 s69 s70 s71 
-## 310 324 333 350 364 375 387 400 411 429 435 445 453 455 462 466 475 481 
-## s72 s73 s74 s75 s76 s77 s78 s79 s80 s81 s82 s83 s84 s85 s86 s87 s88 s89 
-## 487 491 496 498 502 504 512 518 523 526 528 536 543 550 559 561 563 566 
-## s90 s91 s92 s93 s94 s95 s96 s97 s98 
-## 570 571 576 582 586 590 596 596 600</code></pre>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="regularization.html#cb701-1"></a>fit_cv<span class="op">$</span>nzero</span></code></pre></div>
+<pre><code>##  s0  s1  s2  s3  s4  s5  s6  s7  s8  s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 
+##   0   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3 
+## s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 s32 s33 s34 s35 s36 s37 s38 s39 
+##   3   3   3   3   3   3   3   3   3   3   4   6   7  10  18  24  35  54  65  75 
+## s40 s41 s42 s43 s44 s45 s46 s47 s48 s49 s50 s51 s52 s53 s54 s55 s56 s57 s58 s59 
+##  86 100 110 129 147 168 187 202 221 241 254 269 283 298 310 324 333 350 364 375 
+## s60 s61 s62 s63 s64 s65 s66 s67 s68 s69 s70 s71 s72 s73 s74 s75 s76 s77 s78 s79 
+## 387 400 411 429 435 445 453 455 462 466 475 481 487 491 496 498 502 504 512 518 
+## s80 s81 s82 s83 s84 s85 s86 s87 s88 s89 s90 s91 s92 s93 s94 s95 s96 s97 s98 s99 
+## 523 526 528 536 543 550 559 561 563 566 570 571 576 582 586 590 596 596 600 599</code></pre>
 <p>Notice, only the first three predictors generated are truly significant, and that is exactly what the suggested model finds.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fit_1se =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">lambda =</span> fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se)
-<span class="kw">which</span>(<span class="kw">as.vector</span>(<span class="kw">as.matrix</span>(fit_1se<span class="op">$</span>beta)) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</code></pre>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb703-1"><a href="regularization.html#cb703-1"></a>fit_1se =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">lambda =</span> fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se)</span>
+<span id="cb703-2"><a href="regularization.html#cb703-2"></a><span class="kw">which</span>(<span class="kw">as.vector</span>(<span class="kw">as.matrix</span>(fit_1se<span class="op">$</span>beta)) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
 <p>We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-<span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>))
-<span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb705"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb705-1"><a href="regularization.html#cb705-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb705-2"><a href="regularization.html#cb705-2"></a><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>))</span>
+<span id="cb705-3"><a href="regularization.html#cb705-3"></a><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</span></code></pre></div>
 <p><img src="24-regularization_files/figure-html/unnamed-chunk-38-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>We can extract the two relevant <span class="math inline">\(\lambda\)</span> values.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fit_cv<span class="op">$</span>lambda.min</code></pre>
-<pre><code>## [1] 0.03087158</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se</code></pre>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="regularization.html#cb706-1"></a>fit_cv<span class="op">$</span>lambda.min</span></code></pre></div>
+<pre><code>## [1] 0.03718493</code></pre>
+<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="regularization.html#cb708-1"></a>fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se</span></code></pre></div>
 <pre><code>## [1] 0.0514969</code></pre>
 <p>Since <code>cv.glmnet()</code> does not calculate prediction accuracy for classification, we take the <span class="math inline">\(\lambda\)</span> values and create a grid for <code>caret</code> to search in order to obtain prediction accuracy with <code>train()</code>. We set <span class="math inline">\(\alpha = 1\)</span> in this grid, as <code>glmnet</code> can actually tune over the <span class="math inline">\(\alpha = 1\)</span> parameter. (More on that later.)</p>
-<p>Note that we have to force <code>y</code> to be a factor, so that <code>train()</code> recognizes we want to have a binomial response. The <code>train()</code> function in <code>caret</code> use the type of variable in <code>y</code> to determine if you want to use <code>family = &quot;binomial&quot;</code> or <code>family = &quot;gaussian&quot;</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
-cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)
-lasso_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">alpha =</span> <span class="dv">1</span>, 
-                         <span class="dt">lambda =</span> <span class="kw">c</span>(fit_cv<span class="op">$</span>lambda.min, fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se))
-lasso_grid</code></pre>
+<p>Note that we have to force <code>y</code> to be a factor, so that <code>train()</code> recognizes we want to have a binomial response. The <code>train()</code> function in <code>caret</code> use the type of variable in <code>y</code> to determine if you want to use <code>family = "binomial"</code> or <code>family = "gaussian"</code>.</p>
+<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="regularization.html#cb710-1"></a><span class="kw">library</span>(caret)</span>
+<span id="cb710-2"><a href="regularization.html#cb710-2"></a>cv_<span class="dv">5</span> =<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</span>
+<span id="cb710-3"><a href="regularization.html#cb710-3"></a>lasso_grid =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">alpha =</span> <span class="dv">1</span>, </span>
+<span id="cb710-4"><a href="regularization.html#cb710-4"></a>                         <span class="dt">lambda =</span> <span class="kw">c</span>(fit_cv<span class="op">$</span>lambda.min, fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se))</span>
+<span id="cb710-5"><a href="regularization.html#cb710-5"></a>lasso_grid</span></code></pre></div>
 <pre><code>##   alpha     lambda
-## 1     1 0.03087158
+## 1     1 0.03718493
 ## 2     1 0.05149690</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">sim_data =<span class="st"> </span><span class="kw">data.frame</span>(y, X)
-fit_lasso =<span class="st"> </span><span class="kw">train</span>(
-  y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> sim_data,
-  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
-  <span class="dt">trControl =</span> cv_<span class="dv">5</span>,
-  <span class="dt">tuneGrid =</span> lasso_grid
-)
-fit_lasso<span class="op">$</span>results</code></pre>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb712-1"><a href="regularization.html#cb712-1"></a>sim_data =<span class="st"> </span><span class="kw">data.frame</span>(y, X)</span>
+<span id="cb712-2"><a href="regularization.html#cb712-2"></a>fit_lasso =<span class="st"> </span><span class="kw">train</span>(</span>
+<span id="cb712-3"><a href="regularization.html#cb712-3"></a>  y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> sim_data,</span>
+<span id="cb712-4"><a href="regularization.html#cb712-4"></a>  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb712-5"><a href="regularization.html#cb712-5"></a>  <span class="dt">trControl =</span> cv_<span class="dv">5</span>,</span>
+<span id="cb712-6"><a href="regularization.html#cb712-6"></a>  <span class="dt">tuneGrid =</span> lasso_grid</span>
+<span id="cb712-7"><a href="regularization.html#cb712-7"></a>)</span>
+<span id="cb712-8"><a href="regularization.html#cb712-8"></a>fit_lasso<span class="op">$</span>results</span></code></pre></div>
 <pre><code>##   alpha     lambda  Accuracy     Kappa AccuracySD    KappaSD
-## 1     1 0.03087158 0.7679304 0.5358028 0.03430230 0.06844656
-## 2     1 0.05149690 0.7689003 0.5377583 0.02806941 0.05596114</code></pre>
+## 1     1 0.03718493 0.7560401 0.5119754 0.01738219 0.03459404
+## 2     1 0.05149690 0.7690353 0.5380106 0.02166057 0.04323249</code></pre>
 <p>The interaction between the <code>glmnet</code> and <code>caret</code> packages is sometimes frustrating, but for obtaining results for particular values of <span class="math inline">\(\lambda\)</span>, we see it can be easily used. More on this next chapter.</p>
 </div>
-<div id="external-links-6" class="section level2">
+<div id="external-links-6" class="section level2" number="24.5">
 <h2><span class="header-section-number">24.5</span> External Links</h2>
 <ul>
 <li><a href="https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html"><code>glmnet</code> Web Vingette</a> - Details from the package developers.</li>
 </ul>
 </div>
-<div id="rmarkdown-12" class="section level2">
+<div id="rmarkdown-12" class="section level2" number="24.6">
 <h2><span class="header-section-number">24.6</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="24-regularization.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
-<pre><code>## [1] &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot; &quot;broom&quot;   &quot;glmnet&quot;  &quot;foreach&quot; &quot;Matrix&quot;</code></pre>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="24-regularization.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<pre><code>## [1] &quot;caret&quot;   &quot;ggplot2&quot; &quot;lattice&quot; &quot;broom&quot;   &quot;glmnet&quot;  &quot;Matrix&quot;</code></pre>
 
 </div>
 </div>
@@ -814,11 +847,13 @@ fit_lasso<span class="op">$</span>results</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -826,12 +861,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -843,6 +877,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -861,8 +899,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

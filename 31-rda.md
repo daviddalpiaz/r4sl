@@ -95,22 +95,22 @@ fit_rda_grid
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 166, 166, 167, 166, 167 
+## Summary of sample sizes: 167, 166, 166, 167, 166 
 ## Resampling results across tuning parameters:
 ## 
 ##   gamma  lambda  Accuracy   Kappa    
-##   0.0    0.0     0.7013937  0.3841061
-##   0.0    0.5     0.7739837  0.5473212
-##   0.0    1.0     0.7411150  0.4789646
-##   0.5    0.0     0.8217189  0.6390489
-##   0.5    0.5     0.8077816  0.6095537
-##   0.5    1.0     0.7845528  0.5670147
-##   1.0    0.0     0.6778165  0.3535033
-##   1.0    0.5     0.6875726  0.3738076
-##   1.0    1.0     0.6875726  0.3738076
+##   0.0    0.0     0.6977933  0.3791172
+##   0.0    0.5     0.7644599  0.5259800
+##   0.0    1.0     0.7310105  0.4577198
+##   0.5    0.0     0.7885017  0.5730052
+##   0.5    0.5     0.8271777  0.6502693
+##   0.5    1.0     0.7988386  0.5939209
+##   1.0    0.0     0.6732869  0.3418352
+##   1.0    0.5     0.6780488  0.3527778
+##   1.0    1.0     0.6825784  0.3631626
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were gamma = 0.5 and lambda = 0.
+## The final values used for the model were gamma = 0.5 and lambda = 0.5.
 ```
 
 
@@ -145,19 +145,19 @@ fit_rda_rand
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (5 fold) 
-## Summary of sample sizes: 166, 166, 167, 166, 167 
+## Summary of sample sizes: 167, 166, 166, 167, 166 
 ## Resampling results across tuning parameters:
 ## 
 ##   gamma       lambda      Accuracy   Kappa    
-##   0.07399023  0.99371759  0.7796748  0.5556869
-##   0.14604362  0.33913968  0.8362369  0.6705529
-##   0.24540405  0.92379666  0.8133566  0.6231035
-##   0.28111731  0.97238848  0.7989547  0.5939312
-##   0.33131745  0.98132543  0.7941928  0.5848112
-##   0.37327926  0.19398230  0.8169570  0.6298688
-##   0.45386562  0.82735873  0.8178862  0.6318771
-##   0.56474213  0.97943029  0.7940767  0.5857574
-##   0.94763002  0.02522857  0.7740999  0.5435202
+##   0.07399023  0.99371759  0.7795587  0.5556383
+##   0.14604362  0.33913968  0.8508711  0.6996434
+##   0.24540405  0.92379666  0.8418118  0.6798190
+##   0.28111731  0.97238848  0.8226481  0.6405093
+##   0.33131745  0.98132543  0.8083624  0.6123279
+##   0.37327926  0.19398230  0.7981417  0.5930526
+##   0.45386562  0.82735873  0.8272938  0.6501074
+##   0.94763002  0.02522857  0.7742160  0.5399326
+##   0.97943029  0.24657940  0.7454123  0.4839854
 ## 
 ## Accuracy was used to select the optimal model using the largest value.
 ## The final values used for the model were gamma = 0.1460436 and lambda
@@ -212,9 +212,9 @@ knitr::kable(rbind(
 \hline
 gamma & lambda & Accuracy & Kappa & AccuracySD & KappaSD\\
 \hline
-0.5000000 & 0.0000000 & 0.8217189 & 0.6390489 & 0.0455856 & 0.0926920\\
+0.5000000 & 0.5000000 & 0.8271777 & 0.6502693 & 0.0970937 & 0.1962078\\
 \hline
-0.1460436 & 0.3391397 & 0.8362369 & 0.6705529 & 0.0631932 & 0.1255389\\
+0.1460436 & 0.3391397 & 0.8508711 & 0.6996434 & 0.0887983 & 0.1797382\\
 \hline
 \end{tabular}
 
@@ -230,9 +230,9 @@ knitr::kable(rbind(
 \hline
 alpha & lambda & Accuracy & Kappa & AccuracySD & KappaSD\\
 \hline
-0.4 & 0.0065641 & 0.8034843 & 0.6041866 & 0.0645470 & 0.1297952\\
+0.1 & 0.0350306 & 0.8271777 & 0.6501991 & 0.0416190 & 0.0881929\\
 \hline
-0.1 & 0.0243225 & 0.8418118 & 0.6809599 & 0.0539204 & 0.1088486\\
+0.1 & 0.0561881 & 0.8364692 & 0.6687824 & 0.0751608 & 0.1540228\\
 \hline
 \end{tabular}
 
@@ -245,7 +245,7 @@ alpha & lambda & Accuracy & Kappa & AccuracySD & KappaSD\\
 
 ## RMarkdown
 
-The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The file was created using `R` version 3.5.2 and the following packages:
+The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The file was created using `R` version 4.0.2 and the following packages:
 
 - Base Packages, Attached
 
@@ -259,30 +259,29 @@ The RMarkdown file for this chapter can be found [**here**](31-rda.Rmd). The fil
 
 
 ```
-## [1] "klaR"    "MASS"    "glmnet"  "foreach" "Matrix"  "caret"   "ggplot2"
-## [8] "lattice" "mlbench"
+## [1] "klaR"    "MASS"    "glmnet"  "Matrix"  "caret"   "ggplot2" "lattice"
+## [8] "mlbench"
 ```
 
 - Additional Packages, Not Attached
 
 
 ```
-##  [1] "Rcpp"         "lubridate"    "class"        "assertthat"  
-##  [5] "digest"       "ipred"        "mime"         "R6"          
-##  [9] "plyr"         "stats4"       "e1071"        "evaluate"    
-## [13] "highr"        "pillar"       "rlang"        "lazyeval"    
-## [17] "rstudioapi"   "data.table"   "miniUI"       "rpart"       
-## [21] "combinat"     "rmarkdown"    "labeling"     "splines"     
-## [25] "gower"        "stringr"      "questionr"    "munsell"     
-## [29] "shiny"        "compiler"     "httpuv"       "xfun"        
-## [33] "pkgconfig"    "htmltools"    "nnet"         "tidyselect"  
-## [37] "tibble"       "prodlim"      "bookdown"     "codetools"   
-## [41] "crayon"       "dplyr"        "withr"        "later"       
-## [45] "recipes"      "ModelMetrics" "grid"         "nlme"        
-## [49] "xtable"       "gtable"       "magrittr"     "scales"      
-## [53] "stringi"      "reshape2"     "promises"     "timeDate"    
-## [57] "generics"     "lava"         "iterators"    "tools"       
-## [61] "glue"         "purrr"        "survival"     "yaml"        
-## [65] "colorspace"   "knitr"
+##  [1] "splines"      "foreach"      "prodlim"      "shiny"        "highr"       
+##  [6] "stats4"       "yaml"         "ipred"        "pillar"       "glue"        
+## [11] "pROC"         "digest"       "promises"     "colorspace"   "recipes"     
+## [16] "htmltools"    "httpuv"       "plyr"         "timeDate"     "pkgconfig"   
+## [21] "labelled"     "haven"        "questionr"    "bookdown"     "purrr"       
+## [26] "xtable"       "scales"       "later"        "gower"        "lava"        
+## [31] "tibble"       "combinat"     "generics"     "farver"       "ellipsis"    
+## [36] "withr"        "nnet"         "survival"     "magrittr"     "crayon"      
+## [41] "mime"         "evaluate"     "nlme"         "forcats"      "class"       
+## [46] "tools"        "data.table"   "hms"          "lifecycle"    "stringr"     
+## [51] "munsell"      "compiler"     "e1071"        "rlang"        "grid"        
+## [56] "iterators"    "rstudioapi"   "miniUI"       "labeling"     "rmarkdown"   
+## [61] "gtable"       "ModelMetrics" "codetools"    "reshape2"     "R6"          
+## [66] "lubridate"    "knitr"        "dplyr"        "fastmap"      "shape"       
+## [71] "stringi"      "Rcpp"         "vctrs"        "rpart"        "tidyselect"  
+## [76] "xfun"
 ```
 

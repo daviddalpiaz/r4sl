@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 13 Overview | R for Statistical Learning</title>
   <meta name="description" content="Chapter 13 Overview | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 13 Overview | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="knn-class.html">
-<link rel="next" href="principal-component-analysis-1.html">
+<link rel="prev" href="knn-class.html"/>
+<link rel="next" href="principal-component-analysis-1.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,65 +425,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="unsupervised-overview" class="section level1">
+<div id="unsupervised-overview" class="section level1" number="13">
 <h1><span class="header-section-number">Chapter 13</span> Overview</h1>
 <p><strong>TODO:</strong> Move current content into the following placeholder chapters. Add details.</p>
-<div id="methods" class="section level2">
+<div id="methods" class="section level2" number="13.1">
 <h2><span class="header-section-number">13.1</span> Methods</h2>
-<div id="principal-component-analysis" class="section level3">
+<div id="principal-component-analysis" class="section level3" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> Principal Component Analysis</h3>
 <p>To perform PCA in <code>R</code> we will use <code>prcomp()</code>. See <code>?prcomp()</code> for details.</p>
 </div>
-<div id="k-means-clustering" class="section level3">
+<div id="k-means-clustering" class="section level3" number="13.1.2">
 <h3><span class="header-section-number">13.1.2</span> <span class="math inline">\(k\)</span>-Means Clustering</h3>
 <p>To perform <span class="math inline">\(k\)</span>-means in <code>R</code> we will use <code>kmeans()</code>. See <code>?kmeans()</code> for details.</p>
 </div>
-<div id="hierarchical-clustering" class="section level3">
+<div id="hierarchical-clustering" class="section level3" number="13.1.3">
 <h3><span class="header-section-number">13.1.3</span> Hierarchical Clustering</h3>
 <p>To perform hierarchical clustering in <code>R</code> we will use <code>hclust()</code>. See <code>?hclust()</code> for details.</p>
 </div>
 </div>
-<div id="examples" class="section level2">
+<div id="examples" class="section level2" number="13.2">
 <h2><span class="header-section-number">13.2</span> Examples</h2>
-<div id="us-arrests" class="section level3">
+<div id="us-arrests" class="section level3" number="13.2.1">
 <h3><span class="header-section-number">13.2.1</span> US Arrests</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
-<span class="kw">data</span>(USArrests)
-<span class="kw">apply</span>(USArrests, <span class="dv">2</span>, mean)</code></pre>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="unsupervised-overview.html#cb360-1"></a><span class="kw">library</span>(ISLR)</span>
+<span id="cb360-2"><a href="unsupervised-overview.html#cb360-2"></a><span class="kw">data</span>(USArrests)</span>
+<span id="cb360-3"><a href="unsupervised-overview.html#cb360-3"></a><span class="kw">apply</span>(USArrests, <span class="dv">2</span>, mean)</span></code></pre></div>
 <pre><code>##   Murder  Assault UrbanPop     Rape 
 ##    7.788  170.760   65.540   21.232</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(USArrests, <span class="dv">2</span>, sd)</code></pre>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="unsupervised-overview.html#cb362-1"></a><span class="kw">apply</span>(USArrests, <span class="dv">2</span>, sd)</span></code></pre></div>
 <pre><code>##    Murder   Assault  UrbanPop      Rape 
 ##  4.355510 83.337661 14.474763  9.366385</code></pre>
 <p>“Before” performing PCA, we will scale the data. (This will actually happen inside the <code>prcomp()</code> function.)</p>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca =<span class="st"> </span><span class="kw">prcomp</span>(USArrests, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="unsupervised-overview.html#cb364-1"></a>USArrests_pca =<span class="st"> </span><span class="kw">prcomp</span>(USArrests, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>A large amount of information is stored in the output of <code>prcomp()</code>, some of which can neatly be displayed with <code>summary()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(USArrests_pca)</code></pre>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="unsupervised-overview.html#cb365-1"></a><span class="kw">names</span>(USArrests_pca)</span></code></pre></div>
 <pre><code>## [1] &quot;sdev&quot;     &quot;rotation&quot; &quot;center&quot;   &quot;scale&quot;    &quot;x&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(USArrests_pca)</code></pre>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="unsupervised-overview.html#cb367-1"></a><span class="kw">summary</span>(USArrests_pca)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.5749 0.9949 0.59713 0.41645
 ## Proportion of Variance 0.6201 0.2474 0.08914 0.04336
 ## Cumulative Proportion  0.6201 0.8675 0.95664 1.00000</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>center</code></pre>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="unsupervised-overview.html#cb369-1"></a>USArrests_pca<span class="op">$</span>center</span></code></pre></div>
 <pre><code>##   Murder  Assault UrbanPop     Rape 
 ##    7.788  170.760   65.540   21.232</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>scale</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="unsupervised-overview.html#cb371-1"></a>USArrests_pca<span class="op">$</span>scale</span></code></pre></div>
 <pre><code>##    Murder   Assault  UrbanPop      Rape 
 ##  4.355510 83.337661 14.474763  9.366385</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>rotation</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="unsupervised-overview.html#cb373-1"></a>USArrests_pca<span class="op">$</span>rotation</span></code></pre></div>
 <pre><code>##                 PC1        PC2        PC3         PC4
 ## Murder   -0.5358995  0.4181809 -0.3412327  0.64922780
 ## Assault  -0.5831836  0.1879856 -0.2681484 -0.74340748
 ## UrbanPop -0.2781909 -0.8728062 -0.3780158  0.13387773
 ## Rape     -0.5434321 -0.1673186  0.8177779  0.08902432</code></pre>
 <p>We see that <code>$center</code> and <code>$scale</code> give the mean and standard deviations for the original variables. <code>$rotation</code> gives the loading vectors that are used to rotate the original data to obtain the principal components.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(USArrests_pca<span class="op">$</span>x)</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="unsupervised-overview.html#cb375-1"></a><span class="kw">dim</span>(USArrests_pca<span class="op">$</span>x)</span></code></pre></div>
 <pre><code>## [1] 50  4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(USArrests)</code></pre>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="unsupervised-overview.html#cb377-1"></a><span class="kw">dim</span>(USArrests)</span></code></pre></div>
 <pre><code>## [1] 50  4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(USArrests_pca<span class="op">$</span>x)</code></pre>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="unsupervised-overview.html#cb379-1"></a><span class="kw">head</span>(USArrests_pca<span class="op">$</span>x)</span></code></pre></div>
 <pre><code>##                   PC1        PC2         PC3          PC4
 ## Alabama    -0.9756604  1.1220012 -0.43980366  0.154696581
 ## Alaska     -1.9305379  1.0624269  2.01950027 -0.434175454
@@ -454,19 +492,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## California -2.4986128 -1.5274267  0.59254100 -0.338559240
 ## Colorado   -1.4993407 -0.9776297  1.08400162  0.001450164</code></pre>
 <p>The dimension of the principal components is the same as the original data. The principal components are stored in <code>$x</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>]</code></pre>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="unsupervised-overview.html#cb381-1"></a><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##            [,1]
 ## [1,] -0.9756604</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">2</span>]</code></pre>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="unsupervised-overview.html#cb383-1"></a><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">2</span>]</span></code></pre></div>
 <pre><code>##          [,1]
 ## [1,] 1.122001</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">3</span>]</code></pre>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="unsupervised-overview.html#cb385-1"></a><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">3</span>]</span></code></pre></div>
 <pre><code>##            [,1]
 ## [1,] -0.4398037</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">4</span>]</code></pre>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="unsupervised-overview.html#cb387-1"></a><span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests))[<span class="dv">1</span>, ] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##           [,1]
 ## [1,] 0.1546966</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests)) <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[,<span class="dv">1</span>])</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="unsupervised-overview.html#cb389-1"></a><span class="kw">head</span>(<span class="kw">scale</span>(<span class="kw">as.matrix</span>(USArrests)) <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[,<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>##                  [,1]
 ## Alabama    -0.9756604
 ## Alaska     -1.9305379
@@ -474,77 +512,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Arkansas    0.1399989
 ## California -2.4986128
 ## Colorado   -1.4993407</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>])</code></pre>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="unsupervised-overview.html#cb391-1"></a><span class="kw">head</span>(USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>])</span></code></pre></div>
 <pre><code>##    Alabama     Alaska    Arizona   Arkansas California   Colorado 
 ## -0.9756604 -1.9305379 -1.7454429  0.1399989 -2.4986128 -1.4993407</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="unsupervised-overview.html#cb393-1"></a><span class="kw">sum</span>(USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">2</span>]</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="unsupervised-overview.html#cb395-1"></a>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">2</span>]</span></code></pre></div>
 <pre><code>##               [,1]
-## [1,] -1.387779e-16</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">3</span>]</code></pre>
-<pre><code>##               [,1]
-## [1,] -5.551115e-17</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>x[, <span class="dv">2</span>]</code></pre>
-<pre><code>##               [,1]
-## [1,] -2.062239e-14</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>x[, <span class="dv">3</span>]</code></pre>
+## [1,] -1.665335e-16</code></pre>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="unsupervised-overview.html#cb397-1"></a>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>rotation[, <span class="dv">3</span>]</span></code></pre></div>
 <pre><code>##              [,1]
-## [1,] 5.384582e-15</code></pre>
+## [1,] 1.110223e-16</code></pre>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="unsupervised-overview.html#cb399-1"></a>USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>x[, <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>##               [,1]
+## [1,] -7.938095e-15</code></pre>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="unsupervised-overview.html#cb401-1"></a>USArrests_pca<span class="op">$</span>x[, <span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>USArrests_pca<span class="op">$</span>x[, <span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##              [,1]
+## [1,] 1.787459e-14</code></pre>
 <p>The above verifies some of the “math” of PCA. We see how the loadings obtain the principal components from the original data. We check that the loading vectors are normalized. We also check for orthogonality of both the loading vectors and the principal components. (Note the above inner products aren’t exactly 0, but that is simply a numerical issue.)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(USArrests_pca, <span class="dt">scale =</span> <span class="dv">0</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</code></pre>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="unsupervised-overview.html#cb403-1"></a><span class="kw">biplot</span>(USArrests_pca, <span class="dt">scale =</span> <span class="dv">0</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
 <p>A <code>biplot</code> can be used to visualize both the principal component scores and the principal component loadings. (Note the two scales for each axis.)</p>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>sdev</code></pre>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="unsupervised-overview.html#cb404-1"></a>USArrests_pca<span class="op">$</span>sdev</span></code></pre></div>
 <pre><code>## [1] 1.5748783 0.9948694 0.5971291 0.4164494</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">USArrests_pca<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(USArrests_pca<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="unsupervised-overview.html#cb406-1"></a>USArrests_pca<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(USArrests_pca<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
 <p>Frequently we will be interested in the proportion of variance explained by a principal component.</p>
-<pre class="sourceCode r"><code class="sourceCode r">get_PVE =<span class="st"> </span><span class="cf">function</span>(pca_out) {
-  pca_out<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(pca_out<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
-}</code></pre>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="unsupervised-overview.html#cb408-1"></a>get_PVE =<span class="st"> </span><span class="cf">function</span>(pca_out) {</span>
+<span id="cb408-2"><a href="unsupervised-overview.html#cb408-2"></a>  pca_out<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(pca_out<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb408-3"><a href="unsupervised-overview.html#cb408-3"></a>}</span></code></pre></div>
 <p>So frequently, we would be smart to write a function to do so.</p>
-<pre class="sourceCode r"><code class="sourceCode r">pve =<span class="st"> </span><span class="kw">get_PVE</span>(USArrests_pca)
-
-pve</code></pre>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="unsupervised-overview.html#cb409-1"></a>pve =<span class="st"> </span><span class="kw">get_PVE</span>(USArrests_pca)</span>
+<span id="cb409-2"><a href="unsupervised-overview.html#cb409-2"></a></span>
+<span id="cb409-3"><a href="unsupervised-overview.html#cb409-3"></a>pve</span></code></pre></div>
 <pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
-  pve,
-  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Proportion of Variance Explained&quot;</span>,
-  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
-)</code></pre>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="unsupervised-overview.html#cb411-1"></a><span class="kw">plot</span>(</span>
+<span id="cb411-2"><a href="unsupervised-overview.html#cb411-2"></a>  pve,</span>
+<span id="cb411-3"><a href="unsupervised-overview.html#cb411-3"></a>  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,</span>
+<span id="cb411-4"><a href="unsupervised-overview.html#cb411-4"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Proportion of Variance Explained&quot;</span>,</span>
+<span id="cb411-5"><a href="unsupervised-overview.html#cb411-5"></a>  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb411-6"><a href="unsupervised-overview.html#cb411-6"></a>  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span></span>
+<span id="cb411-7"><a href="unsupervised-overview.html#cb411-7"></a>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>We can then plot the proportion of variance explained for each PC. As expected, we see the PVE decrease.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(pve)</code></pre>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="unsupervised-overview.html#cb412-1"></a><span class="kw">cumsum</span>(pve)</span></code></pre></div>
 <pre><code>## [1] 0.6200604 0.8675017 0.9566425 1.0000000</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
-  <span class="kw">cumsum</span>(pve),
-  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
-  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
-)</code></pre>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="unsupervised-overview.html#cb414-1"></a><span class="kw">plot</span>(</span>
+<span id="cb414-2"><a href="unsupervised-overview.html#cb414-2"></a>  <span class="kw">cumsum</span>(pve),</span>
+<span id="cb414-3"><a href="unsupervised-overview.html#cb414-3"></a>  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,</span>
+<span id="cb414-4"><a href="unsupervised-overview.html#cb414-4"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,</span>
+<span id="cb414-5"><a href="unsupervised-overview.html#cb414-5"></a>  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb414-6"><a href="unsupervised-overview.html#cb414-6"></a>  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span></span>
+<span id="cb414-7"><a href="unsupervised-overview.html#cb414-7"></a>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Often we are interested in the cumulative proportion. A common use of PCA outside of visualization is dimension reduction for modeling. If <span class="math inline">\(p\)</span> is large, PCA is performed, and the principal components that account for a large proportion of variation, say 95%, are used for further analysis. In certain situations that can reduce the dimensionality of data significantly. This can be done almost automatically using <code>caret</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)
-<span class="kw">library</span>(mlbench)
-<span class="kw">data</span>(Sonar)
-<span class="kw">set.seed</span>(<span class="dv">18</span>)
-using_pca =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
-                  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>), 
-                  <span class="dt">preProcess =</span> <span class="st">&quot;pca&quot;</span>,
-                  <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)))
-regular_scaling =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, 
-                        <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>), 
-                        <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>), 
-                        <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)))
-<span class="kw">max</span>(using_pca<span class="op">$</span>results<span class="op">$</span>Accuracy)</code></pre>
-<pre><code>## [1] 0.8656997</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(regular_scaling<span class="op">$</span>results<span class="op">$</span>Accuracy)</code></pre>
-<pre><code>## [1] 0.8609378</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">using_pca<span class="op">$</span>preProcess</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="unsupervised-overview.html#cb415-1"></a><span class="kw">library</span>(caret)</span>
+<span id="cb415-2"><a href="unsupervised-overview.html#cb415-2"></a><span class="kw">library</span>(mlbench)</span>
+<span id="cb415-3"><a href="unsupervised-overview.html#cb415-3"></a><span class="kw">data</span>(Sonar)</span>
+<span id="cb415-4"><a href="unsupervised-overview.html#cb415-4"></a><span class="kw">set.seed</span>(<span class="dv">18</span>)</span>
+<span id="cb415-5"><a href="unsupervised-overview.html#cb415-5"></a>using_pca =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, </span>
+<span id="cb415-6"><a href="unsupervised-overview.html#cb415-6"></a>                  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>), </span>
+<span id="cb415-7"><a href="unsupervised-overview.html#cb415-7"></a>                  <span class="dt">preProcess =</span> <span class="st">&quot;pca&quot;</span>,</span>
+<span id="cb415-8"><a href="unsupervised-overview.html#cb415-8"></a>                  <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)))</span>
+<span id="cb415-9"><a href="unsupervised-overview.html#cb415-9"></a>regular_scaling =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Sonar, <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>, </span>
+<span id="cb415-10"><a href="unsupervised-overview.html#cb415-10"></a>                        <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>), </span>
+<span id="cb415-11"><a href="unsupervised-overview.html#cb415-11"></a>                        <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>), </span>
+<span id="cb415-12"><a href="unsupervised-overview.html#cb415-12"></a>                        <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">k =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)))</span>
+<span id="cb415-13"><a href="unsupervised-overview.html#cb415-13"></a><span class="kw">max</span>(using_pca<span class="op">$</span>results<span class="op">$</span>Accuracy)</span></code></pre></div>
+<pre><code>## [1] 0.8513357</code></pre>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="unsupervised-overview.html#cb417-1"></a><span class="kw">max</span>(regular_scaling<span class="op">$</span>results<span class="op">$</span>Accuracy)</span></code></pre></div>
+<pre><code>## [1] 0.8267131</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="unsupervised-overview.html#cb419-1"></a>using_pca<span class="op">$</span>preProcess</span></code></pre></div>
 <pre><code>## Created from 208 samples and 60 variables
 ## 
 ## Pre-processing:
@@ -556,245 +594,242 @@ regular_scaling =<span class="st"> </span><span class="kw">train</span>(Class <s
 ## PCA needed 30 components to capture 95 percent of the variance</code></pre>
 <p>It won’t always outperform simply using the original predictors, but here using 30 of 60 principal components shows a slight advantage over using all 60 predictors. In other situation, it may result in a large perform gain.</p>
 </div>
-<div id="simulated-data" class="section level3">
+<div id="simulated-data" class="section level3" number="13.2.2">
 <h3><span class="header-section-number">13.2.2</span> Simulated Data</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
-<span class="kw">set.seed</span>(<span class="dv">42</span>)
-n =<span class="st"> </span><span class="dv">180</span>
-p =<span class="st"> </span><span class="dv">10</span>
-clust_data =<span class="st"> </span><span class="kw">rbind</span>(
-  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),
-  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),
-  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p))
-)</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="unsupervised-overview.html#cb421-1"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb421-2"><a href="unsupervised-overview.html#cb421-2"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb421-3"><a href="unsupervised-overview.html#cb421-3"></a>n =<span class="st"> </span><span class="dv">180</span></span>
+<span id="cb421-4"><a href="unsupervised-overview.html#cb421-4"></a>p =<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb421-5"><a href="unsupervised-overview.html#cb421-5"></a>clust_data =<span class="st"> </span><span class="kw">rbind</span>(</span>
+<span id="cb421-6"><a href="unsupervised-overview.html#cb421-6"></a>  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),</span>
+<span id="cb421-7"><a href="unsupervised-overview.html#cb421-7"></a>  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p)),</span>
+<span id="cb421-8"><a href="unsupervised-overview.html#cb421-8"></a>  <span class="kw">mvrnorm</span>(<span class="dt">n =</span> n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">diag</span>(p))</span>
+<span id="cb421-9"><a href="unsupervised-overview.html#cb421-9"></a>)</span></code></pre></div>
 <p>Above we simulate data for clustering. Note that, we did this in a way that will result in three clusters.</p>
-<pre class="sourceCode r"><code class="sourceCode r">true_clusters =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">1</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">2</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>))</code></pre>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="unsupervised-overview.html#cb422-1"></a>true_clusters =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">1</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>), <span class="kw">rep</span>(<span class="dv">2</span>, n <span class="op">/</span><span class="st"> </span><span class="dv">3</span>))</span></code></pre></div>
 <p>We label the true clusters 1, 2, and 3 in a way that will “match” output from <span class="math inline">\(k\)</span>-means. (Which is somewhat arbitrary.)</p>
-<pre class="sourceCode r"><code class="sourceCode r">kmean_out =<span class="st"> </span><span class="kw">kmeans</span>(clust_data, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
-<span class="kw">names</span>(kmean_out)</code></pre>
-<pre><code>## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
-## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
-## [9] &quot;ifault&quot;</code></pre>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="unsupervised-overview.html#cb423-1"></a>kmean_out =<span class="st"> </span><span class="kw">kmeans</span>(clust_data, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)</span>
+<span id="cb423-2"><a href="unsupervised-overview.html#cb423-2"></a><span class="kw">names</span>(kmean_out)</span></code></pre></div>
+<pre><code>## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
 <p>Notice that we used <code>nstart = 10</code> which will give us a more stable solution by attempting 10 random starting positions for the means. Also notice we chose to use <code>centers = 3</code>. (The <span class="math inline">\(k\)</span> in <span class="math inline">\(k\)</span>-mean). How did we know to do this? We’ll find out on the homework. (It will involve looking at <code>tot.withinss</code>)</p>
-<pre class="sourceCode r"><code class="sourceCode r">kmean_out</code></pre>
-<pre><code>## K-means clustering with 3 clusters of sizes 61, 60, 59
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="unsupervised-overview.html#cb425-1"></a>kmean_out</span></code></pre></div>
+<pre><code>## K-means clustering with 3 clusters of sizes 60, 57, 63
 ## 
 ## Cluster means:
-##       [,1]     [,2]      [,3]     [,4]     [,5]      [,6]     [,7]
-## 1 3.997352 4.085592 0.7846534 2.136643 4.059886 3.2490887 1.747697
-## 2 1.008138 2.881229 4.3102354 4.094867 3.022989 0.8878413 4.002270
-## 3 3.993468 4.049505 1.9553560 4.037748 2.825907 2.9960855 3.026397
-##        [,8]      [,9]    [,10]
-## 1 1.8341976 0.8193371 4.043725
-## 2 3.8085492 2.0905060 0.977065
-## 3 0.8992179 3.0041820 2.931030
+##        [,1]     [,2]      [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
+## 1 0.9546789 1.058535 0.9343691 1.050995 1.863093 4.045362 1.949864 1.923591
+## 2 3.9349713 3.901193 2.1648511 1.029045 3.024529 3.917283 1.017899 3.858956
+## 3 4.1010688 4.049770 3.8473862 2.103797 2.088527 3.209953 1.750652 1.874236
+##        [,9]    [,10]
+## 1 1.0041300 3.954435
+## 2 1.1017062 1.932706
+## 3 0.7874858 3.980819
 ## 
 ## Clustering vector:
-##   [1] 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-##  [36] 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 1 1 1 1 1 1 1 1 1 1
-##  [71] 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-## [106] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [141] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [176] 2 2 2 2 2
+##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [75] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3
+## [112] 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2
+## [149] 2 2 2 2 3 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2
 ## 
 ## Within cluster sum of squares by cluster:
-## [1] 609.2674 581.8780 568.3845
-##  (between_SS / total_SS =  54.0 %)
+## [1] 580.8431 534.3726 634.7403
+##  (between_SS / total_SS =  45.1 %)
 ## 
 ## Available components:
 ## 
-## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
-## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
-## [9] &quot;ifault&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">kmeans_clusters =<span class="st"> </span>kmean_out<span class="op">$</span>cluster
-
-<span class="kw">table</span>(true_clusters, kmeans_clusters)</code></pre>
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="unsupervised-overview.html#cb427-1"></a>kmeans_clusters =<span class="st"> </span>kmean_out<span class="op">$</span>cluster</span>
+<span id="cb427-2"><a href="unsupervised-overview.html#cb427-2"></a></span>
+<span id="cb427-3"><a href="unsupervised-overview.html#cb427-3"></a><span class="kw">table</span>(true_clusters, kmeans_clusters)</span></code></pre></div>
 <pre><code>##              kmeans_clusters
 ## true_clusters  1  2  3
-##             1 58  0  2
-##             2  0 60  0
-##             3  3  0 57</code></pre>
+##             1  0  2 58
+##             2  0 55  5
+##             3 60  0  0</code></pre>
 <p>We check how well the clustering is working.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(clust_data)</code></pre>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="unsupervised-overview.html#cb429-1"></a><span class="kw">dim</span>(clust_data)</span></code></pre></div>
 <pre><code>## [1] 180  10</code></pre>
 <p>This data is “high dimensional” so it is difficult to visualize. (Anything more than 2 is hard to visualize.)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
-  clust_data[, <span class="dv">1</span>],
-  clust_data[, <span class="dv">2</span>],
-  <span class="dt">pch =</span> <span class="dv">20</span>,
-  <span class="dt">xlab =</span> <span class="st">&quot;First Variable&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Second Variable&quot;</span>
-)</code></pre>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="unsupervised-overview.html#cb431-1"></a><span class="kw">plot</span>(</span>
+<span id="cb431-2"><a href="unsupervised-overview.html#cb431-2"></a>  clust_data[, <span class="dv">1</span>],</span>
+<span id="cb431-3"><a href="unsupervised-overview.html#cb431-3"></a>  clust_data[, <span class="dv">2</span>],</span>
+<span id="cb431-4"><a href="unsupervised-overview.html#cb431-4"></a>  <span class="dt">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb431-5"><a href="unsupervised-overview.html#cb431-5"></a>  <span class="dt">xlab =</span> <span class="st">&quot;First Variable&quot;</span>,</span>
+<span id="cb431-6"><a href="unsupervised-overview.html#cb431-6"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Second Variable&quot;</span></span>
+<span id="cb431-7"><a href="unsupervised-overview.html#cb431-7"></a>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Plotting the first and second variables simply results in a blob.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
-  clust_data[, <span class="dv">1</span>],
-  clust_data[, <span class="dv">2</span>],
-  <span class="dt">col =</span> true_clusters,
-  <span class="dt">pch =</span> <span class="dv">20</span>,
-  <span class="dt">xlab =</span> <span class="st">&quot;First Variable&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Second Variable&quot;</span>
-)</code></pre>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="unsupervised-overview.html#cb432-1"></a><span class="kw">plot</span>(</span>
+<span id="cb432-2"><a href="unsupervised-overview.html#cb432-2"></a>  clust_data[, <span class="dv">1</span>],</span>
+<span id="cb432-3"><a href="unsupervised-overview.html#cb432-3"></a>  clust_data[, <span class="dv">2</span>],</span>
+<span id="cb432-4"><a href="unsupervised-overview.html#cb432-4"></a>  <span class="dt">col =</span> true_clusters,</span>
+<span id="cb432-5"><a href="unsupervised-overview.html#cb432-5"></a>  <span class="dt">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb432-6"><a href="unsupervised-overview.html#cb432-6"></a>  <span class="dt">xlab =</span> <span class="st">&quot;First Variable&quot;</span>,</span>
+<span id="cb432-7"><a href="unsupervised-overview.html#cb432-7"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Second Variable&quot;</span></span>
+<span id="cb432-8"><a href="unsupervised-overview.html#cb432-8"></a>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Even when using their true clusters for coloring, this plot isn’t very helpful.</p>
-<pre class="sourceCode r"><code class="sourceCode r">clust_data_pca =<span class="st"> </span><span class="kw">prcomp</span>(clust_data, <span class="dt">scale =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">plot</span>(
-  clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>],
-  clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>],
-  <span class="dt">pch =</span> <span class="dv">0</span>,
-  <span class="dt">xlab =</span> <span class="st">&quot;First Principal Component&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span>
-)</code></pre>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="unsupervised-overview.html#cb433-1"></a>clust_data_pca =<span class="st"> </span><span class="kw">prcomp</span>(clust_data, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb433-2"><a href="unsupervised-overview.html#cb433-2"></a></span>
+<span id="cb433-3"><a href="unsupervised-overview.html#cb433-3"></a><span class="kw">plot</span>(</span>
+<span id="cb433-4"><a href="unsupervised-overview.html#cb433-4"></a>  clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>],</span>
+<span id="cb433-5"><a href="unsupervised-overview.html#cb433-5"></a>  clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>],</span>
+<span id="cb433-6"><a href="unsupervised-overview.html#cb433-6"></a>  <span class="dt">pch =</span> <span class="dv">0</span>,</span>
+<span id="cb433-7"><a href="unsupervised-overview.html#cb433-7"></a>  <span class="dt">xlab =</span> <span class="st">&quot;First Principal Component&quot;</span>,</span>
+<span id="cb433-8"><a href="unsupervised-overview.html#cb433-8"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span></span>
+<span id="cb433-9"><a href="unsupervised-overview.html#cb433-9"></a>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>If we instead plot the first two principal components, we see, even without coloring, one blob that is clearly separate from the rest.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
-  clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>],
-  clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>],
-  <span class="dt">col =</span> true_clusters,
-  <span class="dt">pch =</span> <span class="dv">0</span>,
-  <span class="dt">xlab =</span> <span class="st">&quot;First Principal Component&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span>,
-  <span class="dt">cex =</span> <span class="dv">2</span>
-)
-<span class="kw">points</span>(clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>], clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>], <span class="dt">col =</span> kmeans_clusters, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</code></pre>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="unsupervised-overview.html#cb434-1"></a><span class="kw">plot</span>(</span>
+<span id="cb434-2"><a href="unsupervised-overview.html#cb434-2"></a>  clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>],</span>
+<span id="cb434-3"><a href="unsupervised-overview.html#cb434-3"></a>  clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>],</span>
+<span id="cb434-4"><a href="unsupervised-overview.html#cb434-4"></a>  <span class="dt">col =</span> true_clusters,</span>
+<span id="cb434-5"><a href="unsupervised-overview.html#cb434-5"></a>  <span class="dt">pch =</span> <span class="dv">0</span>,</span>
+<span id="cb434-6"><a href="unsupervised-overview.html#cb434-6"></a>  <span class="dt">xlab =</span> <span class="st">&quot;First Principal Component&quot;</span>,</span>
+<span id="cb434-7"><a href="unsupervised-overview.html#cb434-7"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Second Principal Component&quot;</span>,</span>
+<span id="cb434-8"><a href="unsupervised-overview.html#cb434-8"></a>  <span class="dt">cex =</span> <span class="dv">2</span></span>
+<span id="cb434-9"><a href="unsupervised-overview.html#cb434-9"></a>)</span>
+<span id="cb434-10"><a href="unsupervised-overview.html#cb434-10"></a><span class="kw">points</span>(clust_data_pca<span class="op">$</span>x[, <span class="dv">1</span>], clust_data_pca<span class="op">$</span>x[, <span class="dv">2</span>], <span class="dt">col =</span> kmeans_clusters, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Now adding the true colors (boxes) and the <span class="math inline">\(k\)</span>-means results (circles), we obtain a nice visualization.</p>
-<pre class="sourceCode r"><code class="sourceCode r">clust_data_pve =<span class="st"> </span><span class="kw">get_PVE</span>(clust_data_pca)
-
-<span class="kw">plot</span>(
-  <span class="kw">cumsum</span>(clust_data_pve),
-  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
-  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
-)</code></pre>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="unsupervised-overview.html#cb435-1"></a>clust_data_pve =<span class="st"> </span><span class="kw">get_PVE</span>(clust_data_pca)</span>
+<span id="cb435-2"><a href="unsupervised-overview.html#cb435-2"></a></span>
+<span id="cb435-3"><a href="unsupervised-overview.html#cb435-3"></a><span class="kw">plot</span>(</span>
+<span id="cb435-4"><a href="unsupervised-overview.html#cb435-4"></a>  <span class="kw">cumsum</span>(clust_data_pve),</span>
+<span id="cb435-5"><a href="unsupervised-overview.html#cb435-5"></a>  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,</span>
+<span id="cb435-6"><a href="unsupervised-overview.html#cb435-6"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,</span>
+<span id="cb435-7"><a href="unsupervised-overview.html#cb435-7"></a>  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb435-8"><a href="unsupervised-overview.html#cb435-8"></a>  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span></span>
+<span id="cb435-9"><a href="unsupervised-overview.html#cb435-9"></a>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>The above visualization works well because the first two PCs explain a large proportion of the variance.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&#39;sparcl&#39;)</span>
-<span class="kw">library</span>(sparcl)</code></pre>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="unsupervised-overview.html#cb436-1"></a><span class="co">#install.packages(&#39;sparcl&#39;)</span></span>
+<span id="cb436-2"><a href="unsupervised-overview.html#cb436-2"></a><span class="kw">library</span>(sparcl)</span></code></pre></div>
 <p>To create colored dendrograms we will use <code>ColorDendrogram()</code> in the <code>sparcl</code> package.</p>
-<pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
-clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
-<span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
-                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
-                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Complete Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</code></pre>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="unsupervised-overview.html#cb437-1"></a>clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb437-2"><a href="unsupervised-overview.html#cb437-2"></a>clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)</span>
+<span id="cb437-3"><a href="unsupervised-overview.html#cb437-3"></a><span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,</span>
+<span id="cb437-4"><a href="unsupervised-overview.html#cb437-4"></a>                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),</span>
+<span id="cb437-5"><a href="unsupervised-overview.html#cb437-5"></a>                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Complete Linkage&quot;</span>,</span>
+<span id="cb437-6"><a href="unsupervised-overview.html#cb437-6"></a>                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Here we apply hierarchical clustering to the <strong>scaled</strong> data. The <code>dist()</code> function is used to calculate pairwise distances between the (scaled in this case) observations. We use complete linkage. We then use the <code>cutree()</code> function to cluster the data into <code>3</code> clusters. The <code>ColorDendrogram()</code> function is then used to plot the dendrogram. Note that the <code>branchlength</code> argument is somewhat arbitrary (the length of the colored bar) and will need to be modified for each dendrogram.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="unsupervised-overview.html#cb438-1"></a><span class="kw">table</span>(true_clusters, clust_data_cut)</span></code></pre></div>
 <pre><code>##              clust_data_cut
 ## true_clusters  1  2  3
-##             1  9 51  0
-##             2  1  0 59
-##             3 59  1  0</code></pre>
+##             1  0 16 44
+##             2  2 56  2
+##             3 58  2  0</code></pre>
 <p>We see in this case hierarchical clustering doesn’t “work” as well as <span class="math inline">\(k\)</span>-means.</p>
-<pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
-clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
-<span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
-                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
-                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Single Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="fl">0.5</span>)</code></pre>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="unsupervised-overview.html#cb440-1"></a>clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb440-2"><a href="unsupervised-overview.html#cb440-2"></a>clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)</span>
+<span id="cb440-3"><a href="unsupervised-overview.html#cb440-3"></a><span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,</span>
+<span id="cb440-4"><a href="unsupervised-overview.html#cb440-4"></a>                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),</span>
+<span id="cb440-5"><a href="unsupervised-overview.html#cb440-5"></a>                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Single Linkage&quot;</span>,</span>
+<span id="cb440-6"><a href="unsupervised-overview.html#cb440-6"></a>                <span class="dt">branchlength =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="unsupervised-overview.html#cb441-1"></a><span class="kw">table</span>(true_clusters, clust_data_cut)</span></code></pre></div>
 <pre><code>##              clust_data_cut
 ## true_clusters  1  2  3
 ##             1 59  1  0
 ##             2 59  0  1
 ##             3 60  0  0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
-clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)
-<span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,
-                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),
-                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Average Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="unsupervised-overview.html#cb443-1"></a>clust_data_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(clust_data)), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb443-2"><a href="unsupervised-overview.html#cb443-2"></a>clust_data_cut =<span class="st"> </span><span class="kw">cutree</span>(clust_data_hc , <span class="dv">3</span>)</span>
+<span id="cb443-3"><a href="unsupervised-overview.html#cb443-3"></a><span class="kw">ColorDendrogram</span>(clust_data_hc, <span class="dt">y =</span> clust_data_cut,</span>
+<span id="cb443-4"><a href="unsupervised-overview.html#cb443-4"></a>                <span class="dt">labels =</span> <span class="kw">names</span>(clust_data_cut),</span>
+<span id="cb443-5"><a href="unsupervised-overview.html#cb443-5"></a>                <span class="dt">main =</span> <span class="st">&quot;Simulated Data, Average Linkage&quot;</span>,</span>
+<span id="cb443-6"><a href="unsupervised-overview.html#cb443-6"></a>                <span class="dt">branchlength =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(true_clusters, clust_data_cut)</code></pre>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="unsupervised-overview.html#cb444-1"></a><span class="kw">table</span>(true_clusters, clust_data_cut)</span></code></pre></div>
 <pre><code>##              clust_data_cut
 ## true_clusters  1  2  3
-##             1  1 59  0
-##             2  1  0 59
-##             3 58  2  0</code></pre>
+##             1  1 58  1
+##             2  1 59  0
+##             3 60  0  0</code></pre>
 <p>We also try single and average linkage. Single linkage seems to perform poorly here, while average linkage seems to be working well.</p>
 </div>
-<div id="iris-data" class="section level3">
+<div id="iris-data" class="section level3" number="13.2.3">
 <h3><span class="header-section-number">13.2.3</span> Iris Data</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(iris)</code></pre>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="unsupervised-overview.html#cb446-1"></a><span class="kw">str</span>(iris)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
 ##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
 ##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
 ##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
 ##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 ##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">iris_pca =<span class="st"> </span><span class="kw">prcomp</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
-iris_pca<span class="op">$</span>rotation</code></pre>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="unsupervised-overview.html#cb448-1"></a>iris_pca =<span class="st"> </span><span class="kw">prcomp</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb448-2"><a href="unsupervised-overview.html#cb448-2"></a>iris_pca<span class="op">$</span>rotation</span></code></pre></div>
 <pre><code>##                     PC1         PC2        PC3        PC4
 ## Sepal.Length  0.5210659 -0.37741762  0.7195664  0.2612863
 ## Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096
 ## Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492
 ## Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">lab_to_col =<span class="st"> </span><span class="cf">function</span> (labels){
-  cols =<span class="st"> </span><span class="kw">rainbow</span> (<span class="kw">length</span>(<span class="kw">unique</span>(labels)))
-  cols[<span class="kw">as.numeric</span> (<span class="kw">as.factor</span>(labels))]
-}
-
-<span class="kw">plot</span>(iris_pca<span class="op">$</span>x[,<span class="dv">1</span>], iris_pca<span class="op">$</span>x[,<span class="dv">2</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris<span class="op">$</span>Species), <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="unsupervised-overview.html#cb450-1"></a>lab_to_col =<span class="st"> </span><span class="cf">function</span> (labels){</span>
+<span id="cb450-2"><a href="unsupervised-overview.html#cb450-2"></a>  cols =<span class="st"> </span><span class="kw">rainbow</span> (<span class="kw">length</span>(<span class="kw">unique</span>(labels)))</span>
+<span id="cb450-3"><a href="unsupervised-overview.html#cb450-3"></a>  cols[<span class="kw">as.numeric</span> (<span class="kw">as.factor</span>(labels))]</span>
+<span id="cb450-4"><a href="unsupervised-overview.html#cb450-4"></a>}</span>
+<span id="cb450-5"><a href="unsupervised-overview.html#cb450-5"></a></span>
+<span id="cb450-6"><a href="unsupervised-overview.html#cb450-6"></a><span class="kw">plot</span>(iris_pca<span class="op">$</span>x[,<span class="dv">1</span>], iris_pca<span class="op">$</span>x[,<span class="dv">2</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris<span class="op">$</span>Species), <span class="dt">pch =</span> <span class="dv">20</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(iris_pca<span class="op">$</span>x[,<span class="dv">3</span>], iris_pca<span class="op">$</span>x[,<span class="dv">4</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris<span class="op">$</span>Species), <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="unsupervised-overview.html#cb451-1"></a><span class="kw">plot</span>(iris_pca<span class="op">$</span>x[,<span class="dv">3</span>], iris_pca<span class="op">$</span>x[,<span class="dv">4</span>], <span class="dt">col =</span> <span class="kw">lab_to_col</span>(iris<span class="op">$</span>Species), <span class="dt">pch =</span> <span class="dv">20</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">iris_pve =<span class="st"> </span><span class="kw">get_PVE</span>(iris_pca)
-
-<span class="kw">plot</span>(
-  <span class="kw">cumsum</span>(iris_pve),
-  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,
-  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,
-  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>
-)</code></pre>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="unsupervised-overview.html#cb452-1"></a>iris_pve =<span class="st"> </span><span class="kw">get_PVE</span>(iris_pca)</span>
+<span id="cb452-2"><a href="unsupervised-overview.html#cb452-2"></a></span>
+<span id="cb452-3"><a href="unsupervised-overview.html#cb452-3"></a><span class="kw">plot</span>(</span>
+<span id="cb452-4"><a href="unsupervised-overview.html#cb452-4"></a>  <span class="kw">cumsum</span>(iris_pve),</span>
+<span id="cb452-5"><a href="unsupervised-overview.html#cb452-5"></a>  <span class="dt">xlab =</span> <span class="st">&quot;Principal Component&quot;</span>,</span>
+<span id="cb452-6"><a href="unsupervised-overview.html#cb452-6"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>,</span>
+<span id="cb452-7"><a href="unsupervised-overview.html#cb452-7"></a>  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb452-8"><a href="unsupervised-overview.html#cb452-8"></a>  <span class="dt">type =</span> <span class="st">&#39;b&#39;</span></span>
+<span id="cb452-9"><a href="unsupervised-overview.html#cb452-9"></a>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-3.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">iris_kmeans =<span class="st"> </span><span class="kw">kmeans</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
-<span class="kw">table</span>(iris_kmeans<span class="op">$</span>clust, iris[,<span class="dv">5</span>])</code></pre>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="unsupervised-overview.html#cb453-1"></a>iris_kmeans =<span class="st"> </span><span class="kw">kmeans</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)</span>
+<span id="cb453-2"><a href="unsupervised-overview.html#cb453-2"></a><span class="kw">table</span>(iris_kmeans<span class="op">$</span>clust, iris[,<span class="dv">5</span>])</span></code></pre></div>
 <pre><code>##    
 ##     setosa versicolor virginica
-##   1      0         48        14
+##   1     50          0         0
 ##   2      0          2        36
-##   3     50          0         0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
-iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
-<span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
-                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
-                <span class="dt">main =</span> <span class="st">&quot;Iris, Complete Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</code></pre>
+##   3      0         48        14</code></pre>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="unsupervised-overview.html#cb455-1"></a>iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb455-2"><a href="unsupervised-overview.html#cb455-2"></a>iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)</span>
+<span id="cb455-3"><a href="unsupervised-overview.html#cb455-3"></a><span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,</span>
+<span id="cb455-4"><a href="unsupervised-overview.html#cb455-4"></a>                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),</span>
+<span id="cb455-5"><a href="unsupervised-overview.html#cb455-5"></a>                <span class="dt">main =</span> <span class="st">&quot;Iris, Complete Linkage&quot;</span>,</span>
+<span id="cb455-6"><a href="unsupervised-overview.html#cb455-6"></a>                <span class="dt">branchlength =</span> <span class="fl">1.5</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-4.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris_cut, iris[,<span class="dv">5</span>])</code></pre>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="unsupervised-overview.html#cb456-1"></a><span class="kw">table</span>(iris_cut, iris[,<span class="dv">5</span>])</span></code></pre></div>
 <pre><code>##         
 ## iris_cut setosa versicolor virginica
 ##        1     49          0         0
 ##        2      1         21         2
 ##        3      0         29        48</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris_cut, iris_kmeans<span class="op">$</span>clust)</code></pre>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="unsupervised-overview.html#cb458-1"></a><span class="kw">table</span>(iris_cut, iris_kmeans<span class="op">$</span>clust)</span></code></pre></div>
 <pre><code>##         
 ## iris_cut  1  2  3
-##        1  0  0 49
-##        2 23  0  1
-##        3 39 38  0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
-iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
-<span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
-                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
-                <span class="dt">main =</span> <span class="st">&quot;Iris, Single Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="fl">0.3</span>)</code></pre>
+##        1 49  0  0
+##        2  1  0 23
+##        3  0 38 39</code></pre>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="unsupervised-overview.html#cb460-1"></a>iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb460-2"><a href="unsupervised-overview.html#cb460-2"></a>iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)</span>
+<span id="cb460-3"><a href="unsupervised-overview.html#cb460-3"></a><span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,</span>
+<span id="cb460-4"><a href="unsupervised-overview.html#cb460-4"></a>                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),</span>
+<span id="cb460-5"><a href="unsupervised-overview.html#cb460-5"></a>                <span class="dt">main =</span> <span class="st">&quot;Iris, Single Linkage&quot;</span>,</span>
+<span id="cb460-6"><a href="unsupervised-overview.html#cb460-6"></a>                <span class="dt">branchlength =</span> <span class="fl">0.3</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-5.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
-iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)
-<span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,
-                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),
-                <span class="dt">main =</span> <span class="st">&quot;Iris, Average Linkage&quot;</span>,
-                <span class="dt">branchlength =</span> <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="unsupervised-overview.html#cb461-1"></a>iris_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(iris[,<span class="op">-</span><span class="dv">5</span>])), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb461-2"><a href="unsupervised-overview.html#cb461-2"></a>iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <span class="dv">3</span>)</span>
+<span id="cb461-3"><a href="unsupervised-overview.html#cb461-3"></a><span class="kw">ColorDendrogram</span>(iris_hc, <span class="dt">y =</span> iris_cut,</span>
+<span id="cb461-4"><a href="unsupervised-overview.html#cb461-4"></a>                <span class="dt">labels =</span> <span class="kw">names</span>(iris_cut),</span>
+<span id="cb461-5"><a href="unsupervised-overview.html#cb461-5"></a>                <span class="dt">main =</span> <span class="st">&quot;Iris, Average Linkage&quot;</span>,</span>
+<span id="cb461-6"><a href="unsupervised-overview.html#cb461-6"></a>                <span class="dt">branchlength =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="13-unsupervised_files/figure-html/unnamed-chunk-29-6.png" width="672" /></p>
 </div>
 </div>
-<div id="external-links-1" class="section level2">
+<div id="external-links-1" class="section level2" number="13.3">
 <h2><span class="header-section-number">13.3</span> External Links</h2>
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html">Hierarchical Cluster Analysis on Famous Data Sets</a> - Using the <code>dendextend</code> package for in depth hierarchical cluster</li>
@@ -802,9 +837,9 @@ iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <spa
 <li><a href="http://varianceexplained.org/r/kmeans-free-lunch/">Principal Component Analysis - Explained Visually</a> - Interactive PCA visualizations.</li>
 </ul>
 </div>
-<div id="rmarkdown-7" class="section level2">
+<div id="rmarkdown-7" class="section level2" number="13.4">
 <h2><span class="header-section-number">13.4</span> RMarkdown</h2>
-<p>The RMarkdown file for this chapter can be found <a href="22-unsupervised.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2 and the following packages:</p>
+<p>The RMarkdown file for this chapter can be found <a href="22-unsupervised.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2 and the following packages:</p>
 <ul>
 <li>Base Packages, Attached</li>
 </ul>
@@ -817,20 +852,18 @@ iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <spa
 <ul>
 <li>Additional Packages, Not Attached</li>
 </ul>
-<pre><code>##  [1] &quot;tidyselect&quot;   &quot;xfun&quot;         &quot;purrr&quot;        &quot;reshape2&quot;    
-##  [5] &quot;splines&quot;      &quot;colorspace&quot;   &quot;generics&quot;     &quot;htmltools&quot;   
-##  [9] &quot;stats4&quot;       &quot;yaml&quot;         &quot;survival&quot;     &quot;prodlim&quot;     
-## [13] &quot;rlang&quot;        &quot;e1071&quot;        &quot;ModelMetrics&quot; &quot;pillar&quot;      
-## [17] &quot;glue&quot;         &quot;withr&quot;        &quot;foreach&quot;      &quot;plyr&quot;        
-## [21] &quot;lava&quot;         &quot;stringr&quot;      &quot;timeDate&quot;     &quot;munsell&quot;     
-## [25] &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;    &quot;evaluate&quot;    
-## [29] &quot;knitr&quot;        &quot;class&quot;        &quot;Rcpp&quot;         &quot;scales&quot;      
-## [33] &quot;ipred&quot;        &quot;digest&quot;       &quot;stringi&quot;      &quot;bookdown&quot;    
-## [37] &quot;dplyr&quot;        &quot;grid&quot;         &quot;tools&quot;        &quot;magrittr&quot;    
-## [41] &quot;lazyeval&quot;     &quot;tibble&quot;       &quot;crayon&quot;       &quot;pkgconfig&quot;   
-## [45] &quot;Matrix&quot;       &quot;data.table&quot;   &quot;lubridate&quot;    &quot;gower&quot;       
-## [49] &quot;assertthat&quot;   &quot;rmarkdown&quot;    &quot;iterators&quot;    &quot;R6&quot;          
-## [53] &quot;rpart&quot;        &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
+<pre><code>##  [1] &quot;tidyselect&quot;   &quot;xfun&quot;         &quot;purrr&quot;        &quot;reshape2&quot;     &quot;splines&quot;     
+##  [6] &quot;colorspace&quot;   &quot;vctrs&quot;        &quot;generics&quot;     &quot;htmltools&quot;    &quot;stats4&quot;      
+## [11] &quot;yaml&quot;         &quot;survival&quot;     &quot;prodlim&quot;      &quot;rlang&quot;        &quot;e1071&quot;       
+## [16] &quot;ModelMetrics&quot; &quot;pillar&quot;       &quot;glue&quot;         &quot;withr&quot;        &quot;foreach&quot;     
+## [21] &quot;lifecycle&quot;    &quot;plyr&quot;         &quot;lava&quot;         &quot;stringr&quot;      &quot;timeDate&quot;    
+## [26] &quot;munsell&quot;      &quot;gtable&quot;       &quot;recipes&quot;      &quot;codetools&quot;    &quot;evaluate&quot;    
+## [31] &quot;knitr&quot;        &quot;class&quot;        &quot;Rcpp&quot;         &quot;scales&quot;       &quot;ipred&quot;       
+## [36] &quot;digest&quot;       &quot;stringi&quot;      &quot;bookdown&quot;     &quot;dplyr&quot;        &quot;grid&quot;        
+## [41] &quot;tools&quot;        &quot;magrittr&quot;     &quot;tibble&quot;       &quot;crayon&quot;       &quot;pkgconfig&quot;   
+## [46] &quot;ellipsis&quot;     &quot;Matrix&quot;       &quot;data.table&quot;   &quot;pROC&quot;         &quot;lubridate&quot;   
+## [51] &quot;gower&quot;        &quot;rmarkdown&quot;    &quot;iterators&quot;    &quot;R6&quot;           &quot;rpart&quot;       
+## [56] &quot;nnet&quot;         &quot;nlme&quot;         &quot;compiler&quot;</code></pre>
 
 </div>
 </div>
@@ -845,11 +878,13 @@ iris_cut =<span class="st"> </span><span class="kw">cutree</span>(iris_hc , <spa
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -857,12 +892,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -874,6 +908,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -892,8 +930,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

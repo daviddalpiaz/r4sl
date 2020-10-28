@@ -470,7 +470,7 @@ bias ^ 2 + variance == mse
 
 ```
 ##     0     1     2     9 
-## FALSE FALSE FALSE  TRUE
+## FALSE FALSE FALSE FALSE
 ```
 
 But wait, this says it isn't true, except for the degree 9 model? It turns out, this is simply a computational issue. If we allow for some very small error tolerance, we see that the bias-variance decomposition is indeed true for predictions from these for models.
@@ -603,4 +603,4 @@ How good is this estimate? Well, if $\mathcal{D}$ is a random sample from $(X, Y
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](08-tradeoff.Rmd). The file was created using `R` version 3.5.2.
+The `rmarkdown` file for this chapter can be found [**here**](08-tradeoff.Rmd). The file was created using `R` version 4.0.2.

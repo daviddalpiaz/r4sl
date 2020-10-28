@@ -217,8 +217,8 @@ One of the most obvious things to do is arrange predictions and true values in a
 ```
 ##          actual
 ## predicted   No  Yes
-##       No  4319   29
-##       Yes  513  139
+##       No  4354   25
+##       Yes  476  145
 ```
 
 
@@ -229,8 +229,8 @@ One of the most obvious things to do is arrange predictions and true values in a
 ```
 ##          actual
 ## predicted   No  Yes
-##       No  4361   23
-##       Yes  474  142
+##       No  4326   27
+##       Yes  511  136
 ```
 
 Often we give specific names to individual cells of these tables, and in the predictive setting, we would call this table a [**confusion matrix**](https://en.wikipedia.org/wiki/Confusion_matrix). Be aware, that the placement of Actual and Predicted values affects the names of the cells, and often the matrix may be presented transposed.
@@ -252,27 +252,28 @@ trn_con_mat  = confusionMatrix(trn_tab, positive = "Yes")
 ## 
 ##          actual
 ## predicted   No  Yes
-##       No  4361   23
-##       Yes  474  142
-##                                          
-##                Accuracy : 0.9006         
-##                  95% CI : (0.892, 0.9088)
-##     No Information Rate : 0.967          
-##     P-Value [Acc > NIR] : 1              
-##                                          
-##                   Kappa : 0.3287         
-##  Mcnemar's Test P-Value : <2e-16         
-##                                          
-##             Sensitivity : 0.8606         
-##             Specificity : 0.9020         
-##          Pos Pred Value : 0.2305         
-##          Neg Pred Value : 0.9948         
-##              Prevalence : 0.0330         
-##          Detection Rate : 0.0284         
-##    Detection Prevalence : 0.1232         
-##       Balanced Accuracy : 0.8813         
-##                                          
-##        'Positive' Class : Yes            
+##       No  4326   27
+##       Yes  511  136
+##                                           
+##                Accuracy : 0.8924          
+##                  95% CI : (0.8835, 0.9009)
+##     No Information Rate : 0.9674          
+##     P-Value [Acc > NIR] : 1               
+##                                           
+##                   Kappa : 0.2993          
+##                                           
+##  Mcnemar's Test P-Value : <2e-16          
+##                                           
+##             Sensitivity : 0.8344          
+##             Specificity : 0.8944          
+##          Pos Pred Value : 0.2102          
+##          Neg Pred Value : 0.9938          
+##              Prevalence : 0.0326          
+##          Detection Rate : 0.0272          
+##    Detection Prevalence : 0.1294          
+##       Balanced Accuracy : 0.8644          
+##                                           
+##        'Positive' Class : Yes             
 ## 
 ```
 
@@ -313,7 +314,7 @@ Accuracy values can be found by calling `confusionMatrix()`, or, if stored, can 
 
 ```
 ## Accuracy 
-##   0.1084
+##   0.1002
 ```
 
 
@@ -323,7 +324,7 @@ Accuracy values can be found by calling `confusionMatrix()`, or, if stored, can 
 
 ```
 ## Accuracy 
-##   0.0994
+##   0.1076
 ```
 
 Sometimes guarding against making certain errors, FP or FN, are more important than simply finding the best accuracy. Thus, sometimes we will consider **sensitivity** and **specificity**.
@@ -339,7 +340,7 @@ tst_con_mat$byClass["Sensitivity"]
 
 ```
 ## Sensitivity 
-##   0.8606061
+##   0.8343558
 ```
 
 $$
@@ -353,7 +354,7 @@ tst_con_mat$byClass["Specificity"]
 
 ```
 ## Specificity 
-##   0.9019648
+##    0.894356
 ```
 
 Like accuracy, these can easily be found using `confusionMatrix()`.
@@ -371,7 +372,7 @@ trn_con_mat$byClass["Prevalence"]
 
 ```
 ## Prevalence 
-##     0.0336
+##      0.034
 ```
 
 ```r
@@ -380,7 +381,7 @@ tst_con_mat$byClass["Prevalence"]
 
 ```
 ## Prevalence 
-##      0.033
+##     0.0326
 ```
 
 Here, we see an extremely low prevalence, which suggests an even simpler classifier than our current based on `balance`.
@@ -405,7 +406,7 @@ table(predicted = pred_all_no, actual = default_tst$default)
 ```
 ##          actual
 ## predicted   No  Yes
-##        No 4835  165
+##        No 4837  163
 ```
 
 The `confusionMatrix()` function won't even accept this table as input, because it isn't a full matrix, only one row, so we calculate error rates directly. To do so, we write a function.
@@ -424,7 +425,7 @@ calc_class_err(actual = default_tst$default,
 ```
 
 ```
-## [1] 0.033
+## [1] 0.0326
 ```
 
 Here we see that the error rate is exactly the prevelance of the minority class.
@@ -436,8 +437,8 @@ table(default_tst$default) / length(default_tst$default)
 
 ```
 ## 
-##    No   Yes 
-## 0.967 0.033
+##     No    Yes 
+## 0.9674 0.0326
 ```
 
 This classifier does better than the previous. But the point is, in reality, to create a good classifier, we should obtain a test error better than 0.033, which is obtained by simply manipulating the prevalences. Next chapter, we'll introduce much better classifiers which should have no problem accomplishing this task.
@@ -445,7 +446,7 @@ This classifier does better than the previous. But the point is, in reality, to 
 
 ## `rmarkdown`
 
-The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:
+The `rmarkdown` file for this chapter can be found [**here**](09-classification.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:
 
 
 ```

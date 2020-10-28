@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 \(k\)-Nearest Neighbors | R for Statistical Learning</title>
   <meta name="description" content="Chapter 7 \(k\)-Nearest Neighbors | R for Statistical Learning" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 \(k\)-Nearest Neighbors | R for Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,16 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-03-22" />
+<meta name="date" content="2020-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="linear-models.html">
-<link rel="next" href="biasvariance-tradeoff.html">
+<link rel="prev" href="linear-models.html"/>
+<link rel="next" href="biasvariance-tradeoff.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +41,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,31 +49,34 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R for Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i>About This Book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a>
+<ul>
 <li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#mathematics"><i class="fa fa-check"></i><b>0.0.1</b> Mathematics</a></li>
 <li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#code"><i class="fa fa-check"></i><b>0.0.2</b> Code</a></li>
 </ul></li>
@@ -145,11 +152,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>I Prerequisites</b></span></li>
 <li class="chapter" data-level="1" data-path="prerequisites-overview.html"><a href="prerequisites-overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
-<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a><ul>
+<li class="chapter" data-level="2" data-path="probability-review.html"><a href="probability-review.html"><i class="fa fa-check"></i><b>2</b> Probability Review</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="probability-review.html"><a href="probability-review.html#probability-models"><i class="fa fa-check"></i><b>2.1</b> Probability Models</a></li>
 <li class="chapter" data-level="2.2" data-path="probability-review.html"><a href="probability-review.html#probability-axioms"><i class="fa fa-check"></i><b>2.2</b> Probability Axioms</a></li>
 <li class="chapter" data-level="2.3" data-path="probability-review.html"><a href="probability-review.html#probability-rules"><i class="fa fa-check"></i><b>2.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="2.4" data-path="probability-review.html"><a href="probability-review.html#random-variables"><i class="fa fa-check"></i><b>2.4</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="probability-review.html"><a href="probability-review.html#distributions"><i class="fa fa-check"></i><b>2.4.1</b> Distributions</a></li>
 <li class="chapter" data-level="2.4.2" data-path="probability-review.html"><a href="probability-review.html#discrete-random-variables"><i class="fa fa-check"></i><b>2.4.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="2.4.3" data-path="probability-review.html"><a href="probability-review.html#continuous-random-variables"><i class="fa fa-check"></i><b>2.4.3</b> Continuous Random Variables</a></li>
@@ -160,17 +169,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="probability-review.html"><a href="probability-review.html#videos"><i class="fa fa-check"></i><b>2.7</b> Videos</a></li>
 <li class="chapter" data-level="2.8" data-path="probability-review.html"><a href="probability-review.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a><ul>
+<li class="chapter" data-level="3" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html"><i class="fa fa-check"></i><b>3</b> <code>R</code>, RStudio, RMarkdown</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#videos-1"><i class="fa fa-check"></i><b>3.1</b> Videos</a></li>
 <li class="chapter" data-level="3.2" data-path="r-rstudio-rmarkdown.html"><a href="r-rstudio-rmarkdown.html#template"><i class="fa fa-check"></i><b>3.2</b> Template</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a><ul>
+<li class="chapter" data-level="4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html"><i class="fa fa-check"></i><b>4</b> Modeling Basics in <code>R</code></a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#visualization-for-regression"><i class="fa fa-check"></i><b>4.1</b> Visualization for Regression</a></li>
 <li class="chapter" data-level="4.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#the-lm-function"><i class="fa fa-check"></i><b>4.2</b> The <code>lm()</code> Function</a></li>
 <li class="chapter" data-level="4.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.3</b> Hypothesis Testing</a></li>
 <li class="chapter" data-level="4.4" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#prediction"><i class="fa fa-check"></i><b>4.4</b> Prediction</a></li>
 <li class="chapter" data-level="4.5" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#unusual-observations"><i class="fa fa-check"></i><b>4.5</b> Unusual Observations</a></li>
-<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a><ul>
+<li class="chapter" data-level="4.6" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#adding-complexity"><i class="fa fa-check"></i><b>4.6</b> Adding Complexity</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#interactions"><i class="fa fa-check"></i><b>4.6.1</b> Interactions</a></li>
 <li class="chapter" data-level="4.6.2" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#polynomials"><i class="fa fa-check"></i><b>4.6.2</b> Polynomials</a></li>
 <li class="chapter" data-level="4.6.3" data-path="modeling-basics-in-r.html"><a href="modeling-basics-in-r.html#transformations"><i class="fa fa-check"></i><b>4.6.3</b> Transformations</a></li>
@@ -179,16 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>II Regression</b></span></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Overview</a></li>
-<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#assesing-model-accuracy"><i class="fa fa-check"></i><b>6.1</b> Assesing Model Accuracy</a></li>
 <li class="chapter" data-level="6.2" data-path="linear-models.html"><a href="linear-models.html#model-complexity"><i class="fa fa-check"></i><b>6.2</b> Model Complexity</a></li>
 <li class="chapter" data-level="6.3" data-path="linear-models.html"><a href="linear-models.html#test-train-split"><i class="fa fa-check"></i><b>6.3</b> Test-Train Split</a></li>
 <li class="chapter" data-level="6.4" data-path="linear-models.html"><a href="linear-models.html#adding-flexibility-to-linear-models"><i class="fa fa-check"></i><b>6.4</b> Adding Flexibility to Linear Models</a></li>
 <li class="chapter" data-level="6.5" data-path="linear-models.html"><a href="linear-models.html#choosing-a-model"><i class="fa fa-check"></i><b>6.5</b> Choosing a Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="7" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>7</b> <span class="math inline">\(k\)</span>-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="knn-reg.html"><a href="knn-reg.html#parametric-versus-non-parametric-models"><i class="fa fa-check"></i><b>7.1</b> Parametric versus Non-Parametric Models</a></li>
-<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a><ul>
+<li class="chapter" data-level="7.2" data-path="knn-reg.html"><a href="knn-reg.html#local-approaches"><i class="fa fa-check"></i><b>7.2</b> Local Approaches</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="knn-reg.html"><a href="knn-reg.html#neighbors"><i class="fa fa-check"></i><b>7.2.1</b> Neighbors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="knn-reg.html"><a href="knn-reg.html#neighborhoods"><i class="fa fa-check"></i><b>7.2.2</b> Neighborhoods</a></li>
 </ul></li>
@@ -204,7 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="knn-reg.html"><a href="knn-reg.html#data-example"><i class="fa fa-check"></i><b>7.12</b> Data Example</a></li>
 <li class="chapter" data-level="7.13" data-path="knn-reg.html"><a href="knn-reg.html#rmarkdown-1"><i class="fa fa-check"></i><b>7.13</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
@@ -212,13 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#rmarkdown-2"><i class="fa fa-check"></i><b>8.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>III Classification</b></span></li>
-<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a><ul>
+<li class="chapter" data-level="9" data-path="classification-overview.html"><a href="classification-overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="classification-overview.html"><a href="classification-overview.html#visualization-for-classification"><i class="fa fa-check"></i><b>9.1</b> Visualization for Classification</a></li>
 <li class="chapter" data-level="9.2" data-path="classification-overview.html"><a href="classification-overview.html#a-simple-classifier"><i class="fa fa-check"></i><b>9.2</b> A Simple Classifier</a></li>
 <li class="chapter" data-level="9.3" data-path="classification-overview.html"><a href="classification-overview.html#metrics-for-classification"><i class="fa fa-check"></i><b>9.3</b> Metrics for Classification</a></li>
 <li class="chapter" data-level="9.4" data-path="classification-overview.html"><a href="classification-overview.html#rmarkdown-3"><i class="fa fa-check"></i><b>9.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="logistic-regression.html"><a href="logistic-regression.html#linear-regression"><i class="fa fa-check"></i><b>10.1</b> Linear Regression</a></li>
 <li class="chapter" data-level="10.2" data-path="logistic-regression.html"><a href="logistic-regression.html#bayes-classifier"><i class="fa fa-check"></i><b>10.2</b> Bayes Classifier</a></li>
 <li class="chapter" data-level="10.3" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-with-glm"><i class="fa fa-check"></i><b>10.3</b> Logistic Regression with <code>glm()</code></a></li>
@@ -226,27 +244,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="logistic-regression.html"><a href="logistic-regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>10.5</b> Multinomial Logistic Regression</a></li>
 <li class="chapter" data-level="10.6" data-path="logistic-regression.html"><a href="logistic-regression.html#rmarkdown-4"><i class="fa fa-check"></i><b>10.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a><ul>
+<li class="chapter" data-level="11" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>11</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>11.1</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.2" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>11.2</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="11.3" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>11.3</b> Naive Bayes</a></li>
 <li class="chapter" data-level="11.4" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>11.4</b> Discrete Inputs</a></li>
 <li class="chapter" data-level="11.5" data-path="generative-models.html"><a href="generative-models.html#rmarkdown-5"><i class="fa fa-check"></i><b>11.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a><ul>
+<li class="chapter" data-level="12" data-path="knn-class.html"><a href="knn-class.html"><i class="fa fa-check"></i><b>12</b> k-Nearest Neighbors</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="knn-class.html"><a href="knn-class.html#binary-data-example"><i class="fa fa-check"></i><b>12.1</b> Binary Data Example</a></li>
 <li class="chapter" data-level="12.2" data-path="knn-class.html"><a href="knn-class.html#categorical-data"><i class="fa fa-check"></i><b>12.2</b> Categorical Data</a></li>
 <li class="chapter" data-level="12.3" data-path="knn-class.html"><a href="knn-class.html#external-links"><i class="fa fa-check"></i><b>12.3</b> External Links</a></li>
 <li class="chapter" data-level="12.4" data-path="knn-class.html"><a href="knn-class.html#rmarkdown-6"><i class="fa fa-check"></i><b>12.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
 <li class="part"><span><b>IV Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a><ul>
-<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a><ul>
+<li class="chapter" data-level="13" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html"><i class="fa fa-check"></i><b>13</b> Overview</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#methods"><i class="fa fa-check"></i><b>13.1</b> Methods</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#principal-component-analysis"><i class="fa fa-check"></i><b>13.1.1</b> Principal Component Analysis</a></li>
 <li class="chapter" data-level="13.1.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#k-means-clustering"><i class="fa fa-check"></i><b>13.1.2</b> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
 <li class="chapter" data-level="13.1.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.1.3</b> Hierarchical Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a><ul>
+<li class="chapter" data-level="13.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#examples"><i class="fa fa-check"></i><b>13.2</b> Examples</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#us-arrests"><i class="fa fa-check"></i><b>13.2.1</b> US Arrests</a></li>
 <li class="chapter" data-level="13.2.2" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#simulated-data"><i class="fa fa-check"></i><b>13.2.2</b> Simulated Data</a></li>
 <li class="chapter" data-level="13.2.3" data-path="unsupervised-overview.html"><a href="unsupervised-overview.html#iris-data"><i class="fa fa-check"></i><b>13.2.3</b> Iris Data</a></li>
@@ -260,7 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="hierarchical-clustering-1.html"><a href="hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>17</b> Hierarchical Clustering</a></li>
 <li class="part"><span><b>V In Practice</b></span></li>
 <li class="chapter" data-level="18" data-path="practice-overview.html"><a href="practice-overview.html"><i class="fa fa-check"></i><b>18</b> Overview</a></li>
-<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a><ul>
+<li class="chapter" data-level="19" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html"><i class="fa fa-check"></i><b>19</b> Supervised Learning Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#bayes-classifier-1"><i class="fa fa-check"></i>Bayes Classifier</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-bias-variance-tradeoff"><i class="fa fa-check"></i>The Bias-Variance Tradeoff</a></li>
 <li class="chapter" data-level="" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#the-test-train-split"><i class="fa fa-check"></i>The Test-Train Split</a></li>
@@ -274,7 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.1" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#external-links-2"><i class="fa fa-check"></i><b>19.1</b> External Links</a></li>
 <li class="chapter" data-level="19.2" data-path="supervised-learning-overview.html"><a href="supervised-learning-overview.html#rmarkdown-8"><i class="fa fa-check"></i><b>19.2</b> RMarkdown</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a><ul>
+<li class="chapter" data-level="20" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>20</b> Resampling</a>
+<ul>
 <li class="chapter" data-level="20.1" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>20.1</b> Validation-Set Approach</a></li>
 <li class="chapter" data-level="20.2" data-path="resampling.html"><a href="resampling.html#cross-validation-1"><i class="fa fa-check"></i><b>20.2</b> Cross-Validation</a></li>
 <li class="chapter" data-level="20.3" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>20.3</b> Test Data</a></li>
@@ -284,18 +309,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.7" data-path="resampling.html"><a href="resampling.html#external-links-3"><i class="fa fa-check"></i><b>20.7</b> External Links</a></li>
 <li class="chapter" data-level="20.8" data-path="resampling.html"><a href="resampling.html#rmarkdown-9"><i class="fa fa-check"></i><b>20.8</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a><ul>
-<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a><ul>
+<li class="chapter" data-level="21" data-path="the-caret-package.html"><a href="the-caret-package.html"><i class="fa fa-check"></i><b>21</b> The <code>caret</code> Package</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="the-caret-package.html"><a href="the-caret-package.html#classification"><i class="fa fa-check"></i><b>21.1</b> Classification</a>
+<ul>
 <li class="chapter" data-level="21.1.1" data-path="the-caret-package.html"><a href="the-caret-package.html#tuning"><i class="fa fa-check"></i><b>21.1.1</b> Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a><ul>
+<li class="chapter" data-level="21.2" data-path="the-caret-package.html"><a href="the-caret-package.html#regression"><i class="fa fa-check"></i><b>21.2</b> Regression</a>
+<ul>
 <li class="chapter" data-level="21.2.1" data-path="the-caret-package.html"><a href="the-caret-package.html#methods-1"><i class="fa fa-check"></i><b>21.2.1</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="21.3" data-path="the-caret-package.html"><a href="the-caret-package.html#external-links-4"><i class="fa fa-check"></i><b>21.3</b> External Links</a></li>
 <li class="chapter" data-level="21.4" data-path="the-caret-package.html"><a href="the-caret-package.html#rmarkdown-10"><i class="fa fa-check"></i><b>21.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a><ul>
-<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a><ul>
+<li class="chapter" data-level="22" data-path="subset-selection.html"><a href="subset-selection.html"><i class="fa fa-check"></i><b>22</b> Subset Selection</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="subset-selection.html"><a href="subset-selection.html#aic-bic-and-cp"><i class="fa fa-check"></i><b>22.1</b> AIC, BIC, and Cp</a>
+<ul>
 <li class="chapter" data-level="22.1.1" data-path="subset-selection.html"><a href="subset-selection.html#leaps-package"><i class="fa fa-check"></i><b>22.1.1</b> <code>leaps</code> Package</a></li>
 <li class="chapter" data-level="22.1.2" data-path="subset-selection.html"><a href="subset-selection.html#best-subset"><i class="fa fa-check"></i><b>22.1.2</b> Best Subset</a></li>
 <li class="chapter" data-level="22.1.3" data-path="subset-selection.html"><a href="subset-selection.html#stepwise-methods"><i class="fa fa-check"></i><b>22.1.3</b> Stepwise Methods</a></li>
@@ -306,7 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>VI The Modern Era</b></span></li>
 <li class="chapter" data-level="23" data-path="modern-overview.html"><a href="modern-overview.html"><i class="fa fa-check"></i><b>23</b> Overview</a></li>
-<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a><ul>
+<li class="chapter" data-level="24" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>24</b> Regularization</a>
+<ul>
 <li class="chapter" data-level="24.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>24.1</b> Ridge Regression</a></li>
 <li class="chapter" data-level="24.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>24.2</b> Lasso</a></li>
 <li class="chapter" data-level="24.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>24.3</b> <code>broom</code></a></li>
@@ -314,21 +345,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.5" data-path="regularization.html"><a href="regularization.html#external-links-6"><i class="fa fa-check"></i><b>24.5</b> External Links</a></li>
 <li class="chapter" data-level="24.6" data-path="regularization.html"><a href="regularization.html#rmarkdown-12"><i class="fa fa-check"></i><b>24.6</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a><ul>
+<li class="chapter" data-level="25" data-path="elastic-net.html"><a href="elastic-net.html"><i class="fa fa-check"></i><b>25</b> Elastic Net</a>
+<ul>
 <li class="chapter" data-level="25.1" data-path="elastic-net.html"><a href="elastic-net.html#regression-1"><i class="fa fa-check"></i><b>25.1</b> Regression</a></li>
 <li class="chapter" data-level="25.2" data-path="elastic-net.html"><a href="elastic-net.html#classification-1"><i class="fa fa-check"></i><b>25.2</b> Classification</a></li>
 <li class="chapter" data-level="25.3" data-path="elastic-net.html"><a href="elastic-net.html#external-links-7"><i class="fa fa-check"></i><b>25.3</b> External Links</a></li>
 <li class="chapter" data-level="25.4" data-path="elastic-net.html"><a href="elastic-net.html#rmarkdown-13"><i class="fa fa-check"></i><b>25.4</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a><ul>
+<li class="chapter" data-level="26" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>26</b> Trees</a>
+<ul>
 <li class="chapter" data-level="26.1" data-path="trees.html"><a href="trees.html#classification-trees"><i class="fa fa-check"></i><b>26.1</b> Classification Trees</a></li>
 <li class="chapter" data-level="26.2" data-path="trees.html"><a href="trees.html#regression-trees"><i class="fa fa-check"></i><b>26.2</b> Regression Trees</a></li>
 <li class="chapter" data-level="26.3" data-path="trees.html"><a href="trees.html#rpart-package"><i class="fa fa-check"></i><b>26.3</b> <code>rpart</code> Package</a></li>
 <li class="chapter" data-level="26.4" data-path="trees.html"><a href="trees.html#external-links-8"><i class="fa fa-check"></i><b>26.4</b> External Links</a></li>
 <li class="chapter" data-level="26.5" data-path="trees.html"><a href="trees.html#rmarkdown-14"><i class="fa fa-check"></i><b>26.5</b> <code>rmarkdown</code></a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a><ul>
+<li class="chapter" data-level="27" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>27</b> Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#regression-2"><i class="fa fa-check"></i><b>27.1</b> Regression</a>
+<ul>
 <li class="chapter" data-level="27.1.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model"><i class="fa fa-check"></i><b>27.1.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.1.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#linear-model"><i class="fa fa-check"></i><b>27.1.2</b> Linear Model</a></li>
 <li class="chapter" data-level="27.1.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging"><i class="fa fa-check"></i><b>27.1.3</b> Bagging</a></li>
@@ -336,7 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.1.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting"><i class="fa fa-check"></i><b>27.1.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.1.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results"><i class="fa fa-check"></i><b>27.1.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a><ul>
+<li class="chapter" data-level="27.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#classification-2"><i class="fa fa-check"></i><b>27.2</b> Classification</a>
+<ul>
 <li class="chapter" data-level="27.2.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tree-model-1"><i class="fa fa-check"></i><b>27.2.1</b> Tree Model</a></li>
 <li class="chapter" data-level="27.2.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#logistic-regression-1"><i class="fa fa-check"></i><b>27.2.2</b> Logistic Regression</a></li>
 <li class="chapter" data-level="27.2.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#bagging-1"><i class="fa fa-check"></i><b>27.2.3</b> Bagging</a></li>
@@ -344,7 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.2.5" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-1"><i class="fa fa-check"></i><b>27.2.5</b> Boosting</a></li>
 <li class="chapter" data-level="27.2.6" data-path="ensemble-methods.html"><a href="ensemble-methods.html#results-1"><i class="fa fa-check"></i><b>27.2.6</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a><ul>
+<li class="chapter" data-level="27.3" data-path="ensemble-methods.html"><a href="ensemble-methods.html#tuning-1"><i class="fa fa-check"></i><b>27.3</b> Tuning</a>
+<ul>
 <li class="chapter" data-level="27.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#random-forest-and-bagging"><i class="fa fa-check"></i><b>27.3.1</b> Random Forest and Bagging</a></li>
 <li class="chapter" data-level="27.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#boosting-2"><i class="fa fa-check"></i><b>27.3.2</b> Boosting</a></li>
 </ul></li>
@@ -356,7 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VII Appendix</b></span></li>
 <li class="chapter" data-level="29" data-path="appendix-overview.html"><a href="appendix-overview.html"><i class="fa fa-check"></i><b>29</b> Overview</a></li>
 <li class="chapter" data-level="30" data-path="non-linear-models.html"><a href="non-linear-models.html"><i class="fa fa-check"></i><b>30</b> Non-Linear Models</a></li>
-<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a><ul>
+<li class="chapter" data-level="31" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html"><i class="fa fa-check"></i><b>31</b> Regularized Discriminant Analysis</a>
+<ul>
 <li class="chapter" data-level="31.1" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#sonar-data"><i class="fa fa-check"></i><b>31.1</b> Sonar Data</a></li>
 <li class="chapter" data-level="31.2" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda"><i class="fa fa-check"></i><b>31.2</b> RDA</a></li>
 <li class="chapter" data-level="31.3" data-path="regularized-discriminant-analysis.html"><a href="regularized-discriminant-analysis.html#rda-with-grid-search"><i class="fa fa-check"></i><b>31.3</b> RDA with Grid Search</a></li>
@@ -379,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>R</code> for Statistical Learning</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Statistical Learning</a>
           </h1>
         </div>
 
@@ -387,17 +425,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="knn-reg" class="section level1">
+<div id="knn-reg" class="section level1" number="7">
 <h1><span class="header-section-number">Chapter 7</span> <span class="math inline">\(k\)</span>-Nearest Neighbors</h1>
 <p><strong>Chapter Status:</strong> Under Constructions. Main ideas in place but lack narrative. Functional version of much of the code exist but will be cleaned up. Some code and simulation examples need to be expanded.</p>
 <ul>
 <li><p>TODO: last chapter..</p></li>
-<li>TODO: recall goal
+<li><p>TODO: recall goal</p>
 <ul>
 <li>frame around estimating regression function</li>
 </ul></li>
 </ul>
-<div id="parametric-versus-non-parametric-models" class="section level2">
+<div id="parametric-versus-non-parametric-models" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Parametric versus Non-Parametric Models</h2>
 <ul>
 <li>TODO: How they estimate…</li>
@@ -424,25 +462,25 @@ f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p
 \hat{f}(x) = \text{average}( \{ y_i : x_i \text{ equal to (or very close to) x} \} )
 \]</span></p>
 </div>
-<div id="local-approaches" class="section level2">
+<div id="local-approaches" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Local Approaches</h2>
 <ul>
 <li>TODO: how do you figure out what is local? what is “close to”?</li>
 </ul>
-<div id="neighbors" class="section level3">
+<div id="neighbors" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Neighbors</h3>
 <ul>
 <li>example: knn</li>
 </ul>
 </div>
-<div id="neighborhoods" class="section level3">
+<div id="neighborhoods" class="section level3" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Neighborhoods</h3>
 <ul>
 <li>example: trees</li>
 </ul>
 </div>
 </div>
-<div id="k-nearest-neighbors" class="section level2">
+<div id="k-nearest-neighbors" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> <span class="math inline">\(k\)</span>-Nearest Neighbors</h2>
 <ul>
 <li>TODO: for a concrete example of a non-parametric method…</li>
@@ -465,7 +503,7 @@ f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p
 </ul></li>
 </ul>
 </div>
-<div id="tuning-parameters-versus-model-parameters" class="section level2">
+<div id="tuning-parameters-versus-model-parameters" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> Tuning Parameters versus Model Parameters</h2>
 <ul>
 <li>tune (hyper) = how to learn from the data, user specified
@@ -475,26 +513,26 @@ f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p
 <li>model = learned from the data, user specifies how many and form</li>
 </ul>
 </div>
-<div id="knn-in-r" class="section level2">
+<div id="knn-in-r" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> KNN in <code>R</code></h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FNN)
-<span class="kw">library</span>(MASS)
-<span class="kw">data</span>(Boston)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="dt">size =</span> <span class="dv">250</span>)
-trn_boston =<span class="st"> </span>Boston[boston_idx, ]
-tst_boston  =<span class="st"> </span>Boston[<span class="op">-</span>boston_idx, ]</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">X_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;lstat&quot;</span>]
-X_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;lstat&quot;</span>]
-y_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;medv&quot;</span>]
-y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="knn-reg.html#cb121-1"></a><span class="kw">library</span>(FNN)</span>
+<span id="cb121-2"><a href="knn-reg.html#cb121-2"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb121-3"><a href="knn-reg.html#cb121-3"></a><span class="kw">data</span>(Boston)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="knn-reg.html#cb122-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb122-2"><a href="knn-reg.html#cb122-2"></a>boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="dt">size =</span> <span class="dv">250</span>)</span>
+<span id="cb122-3"><a href="knn-reg.html#cb122-3"></a>trn_boston =<span class="st"> </span>Boston[boston_idx, ]</span>
+<span id="cb122-4"><a href="knn-reg.html#cb122-4"></a>tst_boston  =<span class="st"> </span>Boston[<span class="op">-</span>boston_idx, ]</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="knn-reg.html#cb123-1"></a>X_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;lstat&quot;</span>]</span>
+<span id="cb123-2"><a href="knn-reg.html#cb123-2"></a>X_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;lstat&quot;</span>]</span>
+<span id="cb123-3"><a href="knn-reg.html#cb123-3"></a>y_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;medv&quot;</span>]</span>
+<span id="cb123-4"><a href="knn-reg.html#cb123-4"></a>y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</span></code></pre></div>
 <p>We create an additional “test” set <code>lstat_grid</code>, that is a grid of <code>lstat</code> values at which we will predict <code>medv</code> in order to create graphics.</p>
-<pre class="sourceCode r"><code class="sourceCode r">X_trn_boston_min =<span class="st"> </span><span class="kw">min</span>(X_trn_boston)
-X_trn_boston_max =<span class="st"> </span><span class="kw">max</span>(X_trn_boston)
-lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">seq</span>(X_trn_boston_min, X_trn_boston_max, 
-                                    <span class="dt">by =</span> <span class="fl">0.01</span>))</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="knn-reg.html#cb124-1"></a>X_trn_boston_min =<span class="st"> </span><span class="kw">min</span>(X_trn_boston)</span>
+<span id="cb124-2"><a href="knn-reg.html#cb124-2"></a>X_trn_boston_max =<span class="st"> </span><span class="kw">max</span>(X_trn_boston)</span>
+<span id="cb124-3"><a href="knn-reg.html#cb124-3"></a>lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">seq</span>(X_trn_boston_min, X_trn_boston_max, </span>
+<span id="cb124-4"><a href="knn-reg.html#cb124-4"></a>                                    <span class="dt">by =</span> <span class="fl">0.01</span>))</span></code></pre></div>
 <p>To perform KNN for regression, we will need <code>knn.reg()</code> from the <code>FNN</code> package. Notice that, we do <strong>not</strong> load this package, but instead use <code>FNN::knn.reg</code> to access the function. Note that, in the future, we’ll need to be careful about loading the <code>FNN</code> package as it also contains a function called <code>knn</code>. This function also appears in the <code>class</code> package which we will likely use later.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knn.reg</span>(<span class="dt">train =</span> ?, <span class="dt">test =</span> ?, <span class="dt">y =</span> ?, <span class="dt">k =</span> ?)</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="knn-reg.html#cb125-1"></a><span class="kw">knn.reg</span>(<span class="dt">train =</span> ?, <span class="dt">test =</span> ?, <span class="dt">y =</span> ?, <span class="dt">k =</span> ?)</span></code></pre></div>
 <p>INPUT</p>
 <ul>
 <li><code>train</code>: the predictors of the training data</li>
@@ -506,12 +544,12 @@ lstat_grid =<span class="st"> </span><span class="kw">data.frame</span>(<span cl
 <ul>
 <li>the output of <code>knn.reg()</code> is exactly <span class="math inline">\(\hat{f}_k(x)\)</span></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">pred_<span class="dv">001</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">1</span>)
-pred_<span class="dv">005</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">5</span>)
-pred_<span class="dv">010</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)
-pred_<span class="dv">050</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">50</span>)
-pred_<span class="dv">100</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">100</span>)
-pred_<span class="dv">250</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">250</span>)</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="knn-reg.html#cb126-1"></a>pred_<span class="dv">001</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">1</span>)</span>
+<span id="cb126-2"><a href="knn-reg.html#cb126-2"></a>pred_<span class="dv">005</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">5</span>)</span>
+<span id="cb126-3"><a href="knn-reg.html#cb126-3"></a>pred_<span class="dv">010</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)</span>
+<span id="cb126-4"><a href="knn-reg.html#cb126-4"></a>pred_<span class="dv">050</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">50</span>)</span>
+<span id="cb126-5"><a href="knn-reg.html#cb126-5"></a>pred_<span class="dv">100</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">100</span>)</span>
+<span id="cb126-6"><a href="knn-reg.html#cb126-6"></a>pred_<span class="dv">250</span> =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> lstat_grid, <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">250</span>)</span></code></pre></div>
 <p>We make predictions for a large number of possible values of <code>lstat</code>, for different values of <code>k</code>. Note that <code>250</code> is the total number of observations in this training dataset.</p>
 <p><img src="07-knn-reg_files/figure-html/unnamed-chunk-7-1.png" width="576" /></p>
 <ul>
@@ -519,12 +557,12 @@ pred_<span class="dv">250</span> =<span class="st"> </span><span class="kw">knn.
 </ul>
 <p>We see that <code>k = 1</code> is clearly overfitting, as <code>k = 1</code> is a very complex, highly variable model. Conversely, <code>k = 250</code> is clearly underfitting the data, as <code>k = 250</code> is a very simple, low variance model. In fact, here it is predicting a simple average of all the data at each point.</p>
 </div>
-<div id="choosing-k" class="section level2">
+<div id="choosing-k" class="section level2" number="7.6">
 <h2><span class="header-section-number">7.6</span> Choosing <span class="math inline">\(k\)</span></h2>
 <ul>
-<li>low <code>k</code> = very complex model. very wiggly. specifically jagged</li>
+<li><p>low <code>k</code> = very complex model. very wiggly. specifically jagged</p></li>
 <li><p>high <code>k</code> = very inflexible model. very smooth.</p></li>
-<li>want: something in the middle which predicts well on unseen data</li>
+<li><p>want: something in the middle which predicts well on unseen data</p></li>
 <li><p>that is, want <span class="math inline">\(\hat{f}_k\)</span> to minimize</p></li>
 </ul>
 <p><span class="math display">\[
@@ -534,45 +572,45 @@ pred_<span class="dv">250</span> =<span class="st"> </span><span class="kw">knn.
 <ul>
 <li>TODO: Test MSE is an estimate of this. So finding best test RMSE will be our strategy. (Best test RMSE is same as best MSE, but with more understandable units.)</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {
-  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define helper function for getting knn.reg predictions</span>
-<span class="co"># note: this function is highly specific to this situation and dataset</span>
-make_knn_pred =<span class="st"> </span><span class="cf">function</span>(<span class="dt">k =</span> <span class="dv">1</span>, training, predicting) {
-  pred =<span class="st"> </span>FNN<span class="op">::</span><span class="kw">knn.reg</span>(<span class="dt">train =</span> training[<span class="st">&quot;lstat&quot;</span>], 
-                      <span class="dt">test =</span> predicting[<span class="st">&quot;lstat&quot;</span>], 
-                      <span class="dt">y =</span> training<span class="op">$</span>medv, <span class="dt">k =</span> k)<span class="op">$</span>pred
-  act  =<span class="st"> </span>predicting<span class="op">$</span>medv
-  <span class="kw">rmse</span>(<span class="dt">predicted =</span> pred, <span class="dt">actual =</span> act)
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define values of k to evaluate</span>
-k =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">250</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get requested train RMSEs</span>
-knn_trn_rmse =<span class="st"> </span><span class="kw">sapply</span>(k, make_knn_pred, 
-                      <span class="dt">training =</span> trn_boston, 
-                      <span class="dt">predicting =</span> trn_boston)
-<span class="co"># get requested test RMSEs</span>
-knn_tst_rmse =<span class="st"> </span><span class="kw">sapply</span>(k, make_knn_pred, 
-                      <span class="dt">training =</span> trn_boston, 
-                      <span class="dt">predicting =</span> tst_boston)
-
-<span class="co"># determine &quot;best&quot; k</span>
-best_k =<span class="st"> </span>k[<span class="kw">which.min</span>(knn_tst_rmse)]
-
-<span class="co"># find overfitting, underfitting, and &quot;best&quot;&quot; k</span>
-fit_status =<span class="st"> </span><span class="kw">ifelse</span>(k <span class="op">&lt;</span><span class="st"> </span>best_k, <span class="st">&quot;Over&quot;</span>, <span class="kw">ifelse</span>(k <span class="op">==</span><span class="st"> </span>best_k, <span class="st">&quot;Best&quot;</span>, <span class="st">&quot;Under&quot;</span>))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># summarize results</span>
-knn_results =<span class="st"> </span><span class="kw">data.frame</span>(
-  k,
-  <span class="kw">round</span>(knn_trn_rmse, <span class="dv">2</span>),
-  <span class="kw">round</span>(knn_tst_rmse, <span class="dv">2</span>),
-  fit_status
-)
-<span class="kw">colnames</span>(knn_results) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;k&quot;</span>, <span class="st">&quot;Train RMSE&quot;</span>, <span class="st">&quot;Test RMSE&quot;</span>, <span class="st">&quot;Fit?&quot;</span>)
-
-<span class="co"># display results</span>
-knitr<span class="op">::</span><span class="kw">kable</span>(knn_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="knn-reg.html#cb127-1"></a>rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb127-2"><a href="knn-reg.html#cb127-2"></a>  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span>
+<span id="cb127-3"><a href="knn-reg.html#cb127-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="knn-reg.html#cb128-1"></a><span class="co"># define helper function for getting knn.reg predictions</span></span>
+<span id="cb128-2"><a href="knn-reg.html#cb128-2"></a><span class="co"># note: this function is highly specific to this situation and dataset</span></span>
+<span id="cb128-3"><a href="knn-reg.html#cb128-3"></a>make_knn_pred =<span class="st"> </span><span class="cf">function</span>(<span class="dt">k =</span> <span class="dv">1</span>, training, predicting) {</span>
+<span id="cb128-4"><a href="knn-reg.html#cb128-4"></a>  pred =<span class="st"> </span>FNN<span class="op">::</span><span class="kw">knn.reg</span>(<span class="dt">train =</span> training[<span class="st">&quot;lstat&quot;</span>], </span>
+<span id="cb128-5"><a href="knn-reg.html#cb128-5"></a>                      <span class="dt">test =</span> predicting[<span class="st">&quot;lstat&quot;</span>], </span>
+<span id="cb128-6"><a href="knn-reg.html#cb128-6"></a>                      <span class="dt">y =</span> training<span class="op">$</span>medv, <span class="dt">k =</span> k)<span class="op">$</span>pred</span>
+<span id="cb128-7"><a href="knn-reg.html#cb128-7"></a>  act  =<span class="st"> </span>predicting<span class="op">$</span>medv</span>
+<span id="cb128-8"><a href="knn-reg.html#cb128-8"></a>  <span class="kw">rmse</span>(<span class="dt">predicted =</span> pred, <span class="dt">actual =</span> act)</span>
+<span id="cb128-9"><a href="knn-reg.html#cb128-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="knn-reg.html#cb129-1"></a><span class="co"># define values of k to evaluate</span></span>
+<span id="cb129-2"><a href="knn-reg.html#cb129-2"></a>k =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="knn-reg.html#cb130-1"></a><span class="co"># get requested train RMSEs</span></span>
+<span id="cb130-2"><a href="knn-reg.html#cb130-2"></a>knn_trn_rmse =<span class="st"> </span><span class="kw">sapply</span>(k, make_knn_pred, </span>
+<span id="cb130-3"><a href="knn-reg.html#cb130-3"></a>                      <span class="dt">training =</span> trn_boston, </span>
+<span id="cb130-4"><a href="knn-reg.html#cb130-4"></a>                      <span class="dt">predicting =</span> trn_boston)</span>
+<span id="cb130-5"><a href="knn-reg.html#cb130-5"></a><span class="co"># get requested test RMSEs</span></span>
+<span id="cb130-6"><a href="knn-reg.html#cb130-6"></a>knn_tst_rmse =<span class="st"> </span><span class="kw">sapply</span>(k, make_knn_pred, </span>
+<span id="cb130-7"><a href="knn-reg.html#cb130-7"></a>                      <span class="dt">training =</span> trn_boston, </span>
+<span id="cb130-8"><a href="knn-reg.html#cb130-8"></a>                      <span class="dt">predicting =</span> tst_boston)</span>
+<span id="cb130-9"><a href="knn-reg.html#cb130-9"></a></span>
+<span id="cb130-10"><a href="knn-reg.html#cb130-10"></a><span class="co"># determine &quot;best&quot; k</span></span>
+<span id="cb130-11"><a href="knn-reg.html#cb130-11"></a>best_k =<span class="st"> </span>k[<span class="kw">which.min</span>(knn_tst_rmse)]</span>
+<span id="cb130-12"><a href="knn-reg.html#cb130-12"></a></span>
+<span id="cb130-13"><a href="knn-reg.html#cb130-13"></a><span class="co"># find overfitting, underfitting, and &quot;best&quot;&quot; k</span></span>
+<span id="cb130-14"><a href="knn-reg.html#cb130-14"></a>fit_status =<span class="st"> </span><span class="kw">ifelse</span>(k <span class="op">&lt;</span><span class="st"> </span>best_k, <span class="st">&quot;Over&quot;</span>, <span class="kw">ifelse</span>(k <span class="op">==</span><span class="st"> </span>best_k, <span class="st">&quot;Best&quot;</span>, <span class="st">&quot;Under&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="knn-reg.html#cb131-1"></a><span class="co"># summarize results</span></span>
+<span id="cb131-2"><a href="knn-reg.html#cb131-2"></a>knn_results =<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb131-3"><a href="knn-reg.html#cb131-3"></a>  k,</span>
+<span id="cb131-4"><a href="knn-reg.html#cb131-4"></a>  <span class="kw">round</span>(knn_trn_rmse, <span class="dv">2</span>),</span>
+<span id="cb131-5"><a href="knn-reg.html#cb131-5"></a>  <span class="kw">round</span>(knn_tst_rmse, <span class="dv">2</span>),</span>
+<span id="cb131-6"><a href="knn-reg.html#cb131-6"></a>  fit_status</span>
+<span id="cb131-7"><a href="knn-reg.html#cb131-7"></a>)</span>
+<span id="cb131-8"><a href="knn-reg.html#cb131-8"></a><span class="kw">colnames</span>(knn_results) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;k&quot;</span>, <span class="st">&quot;Train RMSE&quot;</span>, <span class="st">&quot;Test RMSE&quot;</span>, <span class="st">&quot;Fit?&quot;</span>)</span>
+<span id="cb131-9"><a href="knn-reg.html#cb131-9"></a></span>
+<span id="cb131-10"><a href="knn-reg.html#cb131-10"></a><span class="co"># display results</span></span>
+<span id="cb131-11"><a href="knn-reg.html#cb131-11"></a>knitr<span class="op">::</span><span class="kw">kable</span>(knn_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -585,38 +623,38 @@ knitr<span class="op">::</span><span class="kw">kable</span>(knn_results, <span 
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">2.22</td>
-<td align="right">7.50</td>
+<td align="right">1.65</td>
+<td align="right">8.32</td>
 <td align="left">Over</td>
 </tr>
 <tr class="even">
 <td align="right">5</td>
-<td align="right">4.30</td>
-<td align="right">5.89</td>
+<td align="right">4.98</td>
+<td align="right">5.83</td>
 <td align="left">Over</td>
 </tr>
 <tr class="odd">
 <td align="right">10</td>
-<td align="right">4.60</td>
-<td align="right">5.72</td>
+<td align="right">5.26</td>
+<td align="right">5.05</td>
 <td align="left">Over</td>
 </tr>
 <tr class="even">
 <td align="right">25</td>
-<td align="right">4.66</td>
-<td align="right">5.71</td>
+<td align="right">5.51</td>
+<td align="right">4.79</td>
 <td align="left">Best</td>
 </tr>
 <tr class="odd">
 <td align="right">50</td>
-<td align="right">4.99</td>
-<td align="right">6.03</td>
+<td align="right">5.94</td>
+<td align="right">5.05</td>
 <td align="left">Under</td>
 </tr>
 <tr class="even">
 <td align="right">250</td>
-<td align="right">8.90</td>
-<td align="right">9.47</td>
+<td align="right">9.61</td>
+<td align="right">8.75</td>
 <td align="left">Under</td>
 </tr>
 </tbody>
@@ -625,7 +663,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(knn_results, <span 
 <li>TODO: What about ties? why isn’t k = 1 give 0 training error? There are some non-unique <span class="math inline">\(x_i\)</span> values in the training data. How do we predict when this is the case?</li>
 </ul>
 </div>
-<div id="linear-versus-non-linear" class="section level2">
+<div id="linear-versus-non-linear" class="section level2" number="7.7">
 <h2><span class="header-section-number">7.7</span> Linear versus Non-Linear</h2>
 <ul>
 <li>TODO; linear relationship example
@@ -644,22 +682,22 @@ knitr<span class="op">::</span><span class="kw">kable</span>(knn_results, <span 
 </ul>
 <p><img src="07-knn-reg_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
 </div>
-<div id="scaling-data" class="section level2">
+<div id="scaling-data" class="section level2" number="7.8">
 <h2><span class="header-section-number">7.8</span> Scaling Data</h2>
 <ul>
 <li>TODO: Sometimes “scale” differentiates between center and scale. <code>R</code> function <code>scale()</code> does both by default. Outputs variables with mean = 0, var = 1.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">sim_knn_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">n_obs =</span> <span class="dv">50</span>) {
-  x1 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dt">length.out =</span> n_obs)
-  x2 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>)
-  x3 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
-  x4 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>)
-  x5 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>)
-  y =<span class="st"> </span>x1 <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_obs)
-  <span class="kw">data.frame</span>(y, x1, x2, x3,x4, x5)
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-knn_data =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="knn-reg.html#cb132-1"></a>sim_knn_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">n_obs =</span> <span class="dv">50</span>) {</span>
+<span id="cb132-2"><a href="knn-reg.html#cb132-2"></a>  x1 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dt">length.out =</span> n_obs)</span>
+<span id="cb132-3"><a href="knn-reg.html#cb132-3"></a>  x2 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>)</span>
+<span id="cb132-4"><a href="knn-reg.html#cb132-4"></a>  x3 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</span>
+<span id="cb132-5"><a href="knn-reg.html#cb132-5"></a>  x4 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>)</span>
+<span id="cb132-6"><a href="knn-reg.html#cb132-6"></a>  x5 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_obs, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">5</span>)</span>
+<span id="cb132-7"><a href="knn-reg.html#cb132-7"></a>  y =<span class="st"> </span>x1 <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_obs)</span>
+<span id="cb132-8"><a href="knn-reg.html#cb132-8"></a>  <span class="kw">data.frame</span>(y, x1, x2, x3,x4, x5)</span>
+<span id="cb132-9"><a href="knn-reg.html#cb132-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="knn-reg.html#cb133-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb133-2"><a href="knn-reg.html#cb133-2"></a>knn_data =<span class="st"> </span><span class="kw">sim_knn_data</span>()</span></code></pre></div>
 <p><img src="07-knn-reg_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <ul>
 <li><p>TODO: How should we scale the test data?</p></li>
@@ -671,30 +709,30 @@ knn_data =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code>
 - RMSE for both, RMSE for both ways KNN</p></li>
 </ul>
 </div>
-<div id="curse-of-dimensionality" class="section level2">
+<div id="curse-of-dimensionality" class="section level2" number="7.9">
 <h2><span class="header-section-number">7.9</span> Curse of Dimensionality</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-knn_data_trn =<span class="st"> </span><span class="kw">sim_knn_data</span>()
-knn_data_tst =<span class="st"> </span><span class="kw">sim_knn_data</span>()</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define helper function for getting knn.reg predictions</span>
-<span class="co"># note: this function is highly specific to this situation and dataset</span>
-make_knn_pred =<span class="st"> </span><span class="cf">function</span>(<span class="dt">k =</span> <span class="dv">1</span>, X_trn, X_pred, y_trn, y_pred) {
-  pred =<span class="st"> </span>FNN<span class="op">::</span><span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn), <span class="dt">test =</span> <span class="kw">scale</span>(X_pred), <span class="dt">y =</span> y_trn, <span class="dt">k =</span> k)<span class="op">$</span>pred
-  act  =<span class="st"> </span>y_pred
-  <span class="kw">rmse</span>(<span class="dt">predicted =</span> pred, <span class="dt">actual =</span> act)
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">TODO</span><span class="co">: DRY</span>
-cod_train_rmse =<span class="st"> </span><span class="kw">c</span>(
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]))</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="knn-reg.html#cb134-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb134-2"><a href="knn-reg.html#cb134-2"></a>knn_data_trn =<span class="st"> </span><span class="kw">sim_knn_data</span>()</span>
+<span id="cb134-3"><a href="knn-reg.html#cb134-3"></a>knn_data_tst =<span class="st"> </span><span class="kw">sim_knn_data</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="knn-reg.html#cb135-1"></a><span class="co"># define helper function for getting knn.reg predictions</span></span>
+<span id="cb135-2"><a href="knn-reg.html#cb135-2"></a><span class="co"># note: this function is highly specific to this situation and dataset</span></span>
+<span id="cb135-3"><a href="knn-reg.html#cb135-3"></a>make_knn_pred =<span class="st"> </span><span class="cf">function</span>(<span class="dt">k =</span> <span class="dv">1</span>, X_trn, X_pred, y_trn, y_pred) {</span>
+<span id="cb135-4"><a href="knn-reg.html#cb135-4"></a>  pred =<span class="st"> </span>FNN<span class="op">::</span><span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn), <span class="dt">test =</span> <span class="kw">scale</span>(X_pred), <span class="dt">y =</span> y_trn, <span class="dt">k =</span> k)<span class="op">$</span>pred</span>
+<span id="cb135-5"><a href="knn-reg.html#cb135-5"></a>  act  =<span class="st"> </span>y_pred</span>
+<span id="cb135-6"><a href="knn-reg.html#cb135-6"></a>  <span class="kw">rmse</span>(<span class="dt">predicted =</span> pred, <span class="dt">actual =</span> act)</span>
+<span id="cb135-7"><a href="knn-reg.html#cb135-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="knn-reg.html#cb136-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: DRY</span></span>
+<span id="cb136-2"><a href="knn-reg.html#cb136-2"></a>cod_train_rmse =<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb136-3"><a href="knn-reg.html#cb136-3"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  </span>
+<span id="cb136-4"><a href="knn-reg.html#cb136-4"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),</span>
+<span id="cb136-5"><a href="knn-reg.html#cb136-5"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], </span>
+<span id="cb136-6"><a href="knn-reg.html#cb136-6"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),</span>
+<span id="cb136-7"><a href="knn-reg.html#cb136-7"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], </span>
+<span id="cb136-8"><a href="knn-reg.html#cb136-8"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),</span>
+<span id="cb136-9"><a href="knn-reg.html#cb136-9"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], </span>
+<span id="cb136-10"><a href="knn-reg.html#cb136-10"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]),</span>
+<span id="cb136-11"><a href="knn-reg.html#cb136-11"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], </span>
+<span id="cb136-12"><a href="knn-reg.html#cb136-12"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>]))</span></code></pre></div>
 <pre><code>## Warning in mean.default((actual - predicted)^2): argument is not numeric or
 ## logical: returning NA
 
@@ -709,18 +747,18 @@ cod_train_rmse =<span class="st"> </span><span class="kw">c</span>(
 
 ## Warning in mean.default((actual - predicted)^2): argument is not numeric or
 ## logical: returning NA</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">TODO</span><span class="co">: DRY</span>
-cod_test_rmse =<span class="st"> </span><span class="kw">c</span>(
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_tst[<span class="st">&quot;x1&quot;</span>],  
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),
-  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], 
-                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]))</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="knn-reg.html#cb138-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: DRY</span></span>
+<span id="cb138-2"><a href="knn-reg.html#cb138-2"></a>cod_test_rmse =<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb138-3"><a href="knn-reg.html#cb138-3"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[<span class="st">&quot;x1&quot;</span>],  <span class="dt">X_pred =</span> knn_data_tst[<span class="st">&quot;x1&quot;</span>],  </span>
+<span id="cb138-4"><a href="knn-reg.html#cb138-4"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),</span>
+<span id="cb138-5"><a href="knn-reg.html#cb138-5"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], </span>
+<span id="cb138-6"><a href="knn-reg.html#cb138-6"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),</span>
+<span id="cb138-7"><a href="knn-reg.html#cb138-7"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>], </span>
+<span id="cb138-8"><a href="knn-reg.html#cb138-8"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),</span>
+<span id="cb138-9"><a href="knn-reg.html#cb138-9"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], </span>
+<span id="cb138-10"><a href="knn-reg.html#cb138-10"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]),</span>
+<span id="cb138-11"><a href="knn-reg.html#cb138-11"></a>  <span class="kw">make_knn_pred</span> (<span class="dt">k =</span> <span class="dv">5</span>, <span class="dt">X_trn =</span> knn_data_trn[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">X_pred =</span> knn_data_tst[, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], </span>
+<span id="cb138-12"><a href="knn-reg.html#cb138-12"></a>                 <span class="dt">y_trn =</span> knn_data_trn[<span class="st">&quot;y&quot;</span>], <span class="dt">y_pred =</span> knn_data_tst[<span class="st">&quot;y&quot;</span>]))</span></code></pre></div>
 <pre><code>## Warning in mean.default((actual - predicted)^2): argument is not numeric or
 ## logical: returning NA
 
@@ -735,15 +773,15 @@ cod_test_rmse =<span class="st"> </span><span class="kw">c</span>(
 
 ## Warning in mean.default((actual - predicted)^2): argument is not numeric or
 ## logical: returning NA</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">cod_results =<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">dimension =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),
-  cod_train_rmse,
-  cod_test_rmse
-)
-
-<span class="kw">colnames</span>(cod_results) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$p$, Dimension&quot;</span>, <span class="st">&quot;Train RMSE&quot;</span>, <span class="st">&quot;Test RMSE&quot;</span>)
-
-knitr<span class="op">::</span><span class="kw">kable</span>(cod_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="knn-reg.html#cb140-1"></a>cod_results =<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb140-2"><a href="knn-reg.html#cb140-2"></a>  <span class="dt">dimension =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb140-3"><a href="knn-reg.html#cb140-3"></a>  cod_train_rmse,</span>
+<span id="cb140-4"><a href="knn-reg.html#cb140-4"></a>  cod_test_rmse</span>
+<span id="cb140-5"><a href="knn-reg.html#cb140-5"></a>)</span>
+<span id="cb140-6"><a href="knn-reg.html#cb140-6"></a></span>
+<span id="cb140-7"><a href="knn-reg.html#cb140-7"></a><span class="kw">colnames</span>(cod_results) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$p$, Dimension&quot;</span>, <span class="st">&quot;Train RMSE&quot;</span>, <span class="st">&quot;Test RMSE&quot;</span>)</span>
+<span id="cb140-8"><a href="knn-reg.html#cb140-8"></a></span>
+<span id="cb140-9"><a href="knn-reg.html#cb140-9"></a>knitr<span class="op">::</span><span class="kw">kable</span>(cod_results, <span class="dt">escape =</span> <span class="ot">FALSE</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -784,7 +822,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(cod_results, <span 
 <li>TODO: Local becomes less local.</li>
 </ul>
 </div>
-<div id="train-time-versus-test-time" class="section level2">
+<div id="train-time-versus-test-time" class="section level2" number="7.10">
 <h2><span class="header-section-number">7.10</span> Train Time versus Test Time</h2>
 <ul>
 <li>TODO: lm vs knn
@@ -795,7 +833,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(cod_results, <span 
 </ul></li>
 </ul>
 </div>
-<div id="interpretability" class="section level2">
+<div id="interpretability" class="section level2" number="7.11">
 <h2><span class="header-section-number">7.11</span> Interpretability</h2>
 <ul>
 <li>TODO: lm (high) vs knn (low)
@@ -804,33 +842,33 @@ knitr<span class="op">::</span><span class="kw">kable</span>(cod_results, <span 
 </ul></li>
 </ul>
 </div>
-<div id="data-example" class="section level2">
+<div id="data-example" class="section level2" number="7.12">
 <h2><span class="header-section-number">7.12</span> Data Example</h2>
 <p>Returning to the <code>Boston</code> dataset, we now use all of the available predictors.</p>
-<pre class="sourceCode r"><code class="sourceCode r">X_trn_boston =<span class="st"> </span>trn_boston[, <span class="op">!</span><span class="kw">names</span>(trn_boston) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;medv&quot;</span>)]
-X_tst_boston =<span class="st"> </span>tst_boston[, <span class="op">!</span><span class="kw">names</span>(tst_boston) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;medv&quot;</span>)]
-y_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;medv&quot;</span>]
-y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">scaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn_boston), <span class="dt">test =</span> <span class="kw">scale</span>(X_tst_boston), 
-                      <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)<span class="op">$</span>pred
-unscaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> X_tst_boston, 
-                        <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)<span class="op">$</span>pred
-
-<span class="co"># test rmse</span>
-<span class="kw">rmse</span>(<span class="dt">predicted =</span> scaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># with scaling</span></code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="knn-reg.html#cb141-1"></a>X_trn_boston =<span class="st"> </span>trn_boston[, <span class="op">!</span><span class="kw">names</span>(trn_boston) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;medv&quot;</span>)]</span>
+<span id="cb141-2"><a href="knn-reg.html#cb141-2"></a>X_tst_boston =<span class="st"> </span>tst_boston[, <span class="op">!</span><span class="kw">names</span>(tst_boston) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;medv&quot;</span>)]</span>
+<span id="cb141-3"><a href="knn-reg.html#cb141-3"></a>y_trn_boston =<span class="st"> </span>trn_boston[<span class="st">&quot;medv&quot;</span>]</span>
+<span id="cb141-4"><a href="knn-reg.html#cb141-4"></a>y_tst_boston =<span class="st"> </span>tst_boston[<span class="st">&quot;medv&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="knn-reg.html#cb142-1"></a>scaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> <span class="kw">scale</span>(X_trn_boston), <span class="dt">test =</span> <span class="kw">scale</span>(X_tst_boston), </span>
+<span id="cb142-2"><a href="knn-reg.html#cb142-2"></a>                      <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)<span class="op">$</span>pred</span>
+<span id="cb142-3"><a href="knn-reg.html#cb142-3"></a>unscaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train =</span> X_trn_boston, <span class="dt">test =</span> X_tst_boston, </span>
+<span id="cb142-4"><a href="knn-reg.html#cb142-4"></a>                        <span class="dt">y =</span> y_trn_boston, <span class="dt">k =</span> <span class="dv">10</span>)<span class="op">$</span>pred</span>
+<span id="cb142-5"><a href="knn-reg.html#cb142-5"></a></span>
+<span id="cb142-6"><a href="knn-reg.html#cb142-6"></a><span class="co"># test rmse</span></span>
+<span id="cb142-7"><a href="knn-reg.html#cb142-7"></a><span class="kw">rmse</span>(<span class="dt">predicted =</span> scaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># with scaling</span></span></code></pre></div>
 <pre><code>## Warning in mean.default((actual - predicted)^2): argument is not numeric or
 ## logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmse</span>(<span class="dt">predicted =</span> unscaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># without scaling</span></code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="knn-reg.html#cb145-1"></a><span class="kw">rmse</span>(<span class="dt">predicted =</span> unscaled_pred, <span class="dt">actual =</span> y_tst_boston) <span class="co"># without scaling</span></span></code></pre></div>
 <pre><code>## Warning in mean.default((actual - predicted)^2): argument is not numeric or
 ## logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>Here we see that scaling makes a pretty big difference.</p>
 <p>Can you improve this model? Can you find a better <span class="math inline">\(k\)</span>? Can you find a better model by only using some of the predictors?</p>
 </div>
-<div id="rmarkdown-1" class="section level2">
+<div id="rmarkdown-1" class="section level2" number="7.13">
 <h2><span class="header-section-number">7.13</span> <code>rmarkdown</code></h2>
-<p>The <code>rmarkdown</code> file for this chapter can be found <a href="07-knn-reg.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 3.5.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
+<p>The <code>rmarkdown</code> file for this chapter can be found <a href="07-knn-reg.Rmd"><strong>here</strong></a>. The file was created using <code>R</code> version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file:</p>
 <pre><code>## [1] &quot;MASS&quot; &quot;FNN&quot;</code></pre>
 
 </div>
@@ -846,11 +884,13 @@ unscaled_pred =<span class="st"> </span><span class="kw">knn.reg</span>(<span cl
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -858,12 +898,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -875,6 +914,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -893,8 +936,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
