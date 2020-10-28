@@ -11,7 +11,7 @@ cache:
   - $TRAVIS_BUILD_DIR/_bookdown_files
 env:
   global:
-  - secure: ujwiHrANVDfbCVMex+3AKe045RO4p76RHxpNALu1OgIGiiUIgnHAVnJ0weVIlRHjmiM1fFQS+vfhPx9XfymXUM4CtnhOhzrYICrG03bWV9dvosanD0snDx9H5RdgPPI/1KwpRo4Hxu7pcyEQU/DvcJczWk0Y7vDpvw/s7My41SsQw6JCnU/VgCrH7ZD6IEjwLNWyzudlVnU3Se/UeAwYxKBm+4rSyYOEDLsbZqcYrRo4FwK6CDv8JtB8/edLTYI0hOlaU7SjQumqFinjMEVllF0Vbdy8Dlna2yLY/sd56UGKxJn9hMiCyAyeo8GWD85vG96v8h8DbX+/r5Z9cV7DR8+QL/Tf1HBMWa1wU4ABQA0QJP8NxEZKZulBJ6jzkXJEckDmHSeMgP9lVtj3SFP0JvoXD63oi4q5VVy9205sYt+S+W5GElnYygkWuz+zQlQEoK1wOHM/JuagAY6ARGM7RAS/XYrJJkPLcA+U8bQZ8TBN0WvVCjUFPp8DJYFfFHCBIlA0yBSH2oD8+WbBw+WOLNEAqpENZ3u0d7WsDKyuaAQU1mzzg31FLE/MAOC3aK1pPBmPPJ4Dx5xPcEiEUIhAWiPAwFpQdSvfWwrFvnYIFSn43Deosdmh919PTcwjnMg9CHs+KaCbPSHGOb3ltHR+fJXWk0synbpy6HHE1yoddcY=
+  - MAKEFLAGS="-j 2"
 before_script:
 - chmod +x ./deployment/_build.sh
 - chmod +x ./deployment/_deploy.sh
