@@ -25,7 +25,7 @@ knitr::opts_chunk$set(fig.align = "center")
 knitr::include_graphics("wordmark.png")
 ```
 
-Welcome to `R` for Statistical Learning! While this is the current title, a more appropriate title would be "Machine Learning from the Perspective of a Statistician using `R`" but that doesn't seem as catchy.
+Welcome to **R for Statistical Learning**! While this is the current title, a more appropriate title would be "Machine Learning from the Perspective of a Statistician using `R`" but that doesn't seem as catchy.
 
 ## About This Book {-}
 
