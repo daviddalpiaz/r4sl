@@ -87,7 +87,7 @@ We now fit a bagged model, using the `randomForest` package. Bagging is actually
 
 ```{r, message = FALSE, warning = FALSE}
 boston_bag = randomForest(medv ~ ., data = boston_trn, mtry = 13, 
-                          importance = TRUE, ntrees = 500)
+                          importance = TRUE, ntree = 500)
 boston_bag
 ```
 
@@ -119,7 +119,7 @@ We now try a random forest. For regression, the suggestion is to use `mtry` equa
 
 ```{r}
 boston_forest = randomForest(medv ~ ., data = boston_trn, mtry = 4, 
-                             importance = TRUE, ntrees = 500)
+                             importance = TRUE, ntree = 500)
 boston_forest
 ```
 
@@ -264,7 +264,7 @@ table(predicted = seat_glm_tst_pred, actual = seat_tst$Sales)
 
 ```{r, message = FALSE, warning = FALSE}
 seat_bag = randomForest(Sales ~ ., data = seat_trn, mtry = 10, 
-                        importance = TRUE, ntrees = 500)
+                        importance = TRUE, ntree = 500)
 seat_bag
 ```
 
@@ -280,7 +280,7 @@ table(predicted = seat_bag_tst_pred, actual = seat_tst$Sales)
 For classification, the suggested `mtry` for a random forest is $\sqrt{p}.$
 
 ```{r}
-seat_forest = randomForest(Sales ~ ., data = seat_trn, mtry = 3, importance = TRUE, ntrees = 500)
+seat_forest = randomForest(Sales ~ ., data = seat_trn, mtry = 3, importance = TRUE, ntree = 500)
 seat_forest
 ```
 
@@ -335,7 +335,7 @@ So far we fit bagging, boosting and random forest models, but did not tune any o
 - Random Forest: `mtry`
 - Boosting: `n.trees`, `interaction.depth`, `shrinkage`, `n.minobsinnode`
 
-We will use the `caret` package to accomplish this. Technically `ntrees` is a tuning parameter for both bagging and random forest, but `caret` will use 500 by default and there is no easy way to tune it. This will not make a big difference since for both we simply need "enough" and 500 seems to do the trick.
+We will use the `caret` package to accomplish this. Technically `ntree` is a tuning parameter for both bagging and random forest, but `caret` will use 500 by default and there is no easy way to tune it. This will not make a big difference since for both we simply need "enough" and 500 seems to do the trick.
 
 While `mtry` is a tuning parameter, there are suggested values for classification and regression:
 
