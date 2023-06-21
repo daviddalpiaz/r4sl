@@ -1,6 +1,6 @@
 # Support Vector Machines
 
-**TOOD:** This chpater is currently empty to reduce build time.
+**TODO:** This chapter is currently empty to reduce build time.
 
 <!-- ## `R` Packages -->
 
