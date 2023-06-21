@@ -24,7 +24,7 @@ $$
 \mathbb{E}_{X, Y} \left[ (Y - f(X)) ^ 2 \right] = \mathbb{E}_{X} \mathbb{E}_{Y \mid X} \left[ ( Y - f(X) ) ^ 2 \mid X = x \right]
 $$
 
-Minimizing the right-hand side is much easier, as it simply amounts to minimizing the inner expectation with respect to $Y \mid X$, essentially minimizing the risk pointwise, for each $x$.
+Minimizing the right-hand side is much easier, as it simply amounts to minimizing the inner expectation with respect to $Y \mid X$, essentially minimizing the risk point-wise, for each $x$.
 
 It turns out, that the risk is minimized by the conditional mean of $Y$ given $X$,
 
@@ -264,7 +264,7 @@ legend("bottomleft", c("(Expected) Test", "Train"), lty = c(6, 1), lwd = 3,
 
 ## Simulation
 
-We will illustrate these decompositions, most importantly the bias-variance tradeoff, through simulation. Suppose we would like to train a model to learn the true regression function function $f(x) = x^2$.
+We will illustrate these decompositions, most importantly the bias-variance tradeoff, through simulation. Suppose we would like to train a model to learn the true regression function $f(x) = x^2$.
 
 ```{r}
 f = function(x) {
@@ -701,7 +701,7 @@ epe
 ```{r, echo = FALSE, eval = FALSE}
 # hmmm, what's wrong here?
 # the mean realative diff does go down with n
-# is there really just that much compuational error?
+# is there really just that much computational error?
 sigma_hat = mean((y - f(x = 0.90)) ^ 2)
 all.equal(epe, bias ^ 2 + variance + sigma_hat)
 ```

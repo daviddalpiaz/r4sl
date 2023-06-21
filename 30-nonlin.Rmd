@@ -1,6 +1,6 @@
 # Non-Linear Models
 
-**TOOD:** This chpater is currently empty to reduce build time.
+**TODO:** This chapter is currently empty to reduce build time.
 
 <!-- Some notes: -->
 

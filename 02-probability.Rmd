@@ -10,7 +10,7 @@ When discussing probability models, we speak of random **experiments** that prod
 A **probability model** that describes the uncertainty of an experiment consists of two elements:
 
 - The **sample space**, often denoted as $\Omega$, which is a set that contains all possible outcomes.
--  A **probability function** that assigns to an event $A$ a nonnegative number, $P[A]$, that represents how likely it is that event $A$ occurs as a result of the experiment.
+-  A **probability function** that assigns to an event $A$ a non-negative number, $P[A]$, that represents how likely it is that event $A$ occurs as a result of the experiment.
 
 We call $P[A]$ the **probability** of event $A$. An **event** $A$ could be any subset of the sample space, not necessarily a single possible outcome. The probability law must follow a number of rules, which are the result of a set of axioms that we introduce now.
 
@@ -19,7 +19,7 @@ We call $P[A]$ the **probability** of event $A$. An **event** $A$ could be any s
 
 Given a sample space $\Omega$ for a particular experiment, the **probability function** associated with the experiment must satisfy the following axioms.
 
-1. *Nonnegativity*: $P[A] \geq 0$ for any event $A \subset \Omega$.
+1. *Non-negativity*: $P[A] \geq 0$ for any event $A \subset \Omega$.
 2. *Normalization*: $P[\Omega] = 1$. That is, the probability of the entire space is 1.
 3. *Additivity*: For mutually exclusive events $E_1, E_2, \ldots$
 $$
@@ -185,7 +185,7 @@ $$
 f(x | \mu, \sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} \cdot \exp\left[\frac{-1}{2} \left(\frac{x - \mu}{\sigma}\right)^2 \right],  \ \ \ -\infty < x < \infty, \ -\infty < \mu < \infty, \ \sigma > 0.
 $$
 
-- The function $f(x | \mu, \sigma^2)$ is the density function. It is a function of $x$, the possible values of the random variable $X$. It is conditional on the **paramters** $\mu$ and $\sigma^2$. Different values of these parameters specify different normal distributions.
+- The function $f(x | \mu, \sigma^2)$ is the density function. It is a function of $x$, the possible values of the random variable $X$. It is conditional on the **parameters** $\mu$ and $\sigma^2$. Different values of these parameters specify different normal distributions.
 - $-\infty < x < \infty$ indicates the sample space. In this case, the random variable may take any value on the real line.
 - $-\infty < \mu < \infty$ and $\sigma > 0$ specify the parameter space. These are the possible values of the parameters that give a valid normal distribution.
 

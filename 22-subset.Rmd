@@ -59,7 +59,7 @@ points(best_bic, fit_all_sum$bic[best_bic],
        col = "red", cex = 2, pch = 20)
 ```
 
-### Stepwise Methods
+### Step-wise Methods
 
 ```{r}
 fit_fwd = regsubsets(Salary ~ ., data = Hitters, nvmax = 19, method = "forward")

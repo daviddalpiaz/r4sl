@@ -12,7 +12,7 @@ We will use the `Hitters` dataset from the `ISLR` package to explore two shrinka
 data(Hitters, package = "ISLR")
 ```
 
-This dataset has some missing data in the response `Salaray`. We use the `na.omit()` function the clean the dataset.
+This dataset has some missing data in the response `Salary`. We use the `na.omit()` function the clean the dataset.
 
 ```{r}
 sum(is.na(Hitters))

@@ -34,7 +34,7 @@ Thankfully, the `R` community has essentially provided a silver bullet for these
         - `data`, the data used for training
         - `trControl` which specifies the resampling scheme, that is, how cross-validation should be performed to find the best values of the tuning parameters
         - `preProcess` which allows for specification of data pre-processing such as centering and scaling
-        - `method`, a statistical learning method from [a long list of availible models](https://topepo.github.io/caret/available-models.html)
+        - `method`, a statistical learning method from [a long list of available models](https://topepo.github.io/caret/available-models.html)
         - `tuneGrid` which specifies the tuning parameters to train over
 - Use chosen model to make predictions
     - `predict()` used on objects of type `train` will be truly magical!
@@ -82,7 +82,7 @@ Here, we have supplied four arguments to the `train()` function form the `caret`
 - `trControl = trainControl(method = "cv", number = 5)` specifies that we will be using 5-fold cross-validation.
 - `method = glm` specifies that we will fit a generalized linear model. 
 
-The `method` essentially specifies both the model (and more specifically the function to fit said model in `R`) and package that will be used. The `train()` function is essentially a wrapper around whatever method we chose. In this case, the function is the base `R` function `glm()`, so no additional package is required. When a method requires a function from a certain package, that package will need to be installed. See the [list of availible models](https://topepo.github.io/caret/available-models.html) for package information.
+The `method` essentially specifies both the model (and more specifically the function to fit said model in `R`) and package that will be used. The `train()` function is essentially a wrapper around whatever method we chose. In this case, the function is the base `R` function `glm()`, so no additional package is required. When a method requires a function from a certain package, that package will need to be installed. See the [list of available models](https://topepo.github.io/caret/available-models.html) for package information.
 
 The list that we have passed to the `trControl` argument is created using the `trainControl()` function from `caret`. The `trainControl()` function is a powerful tool for specifying a number of the training choices required by `train()`, in particular the resampling scheme. 
 
@@ -116,7 +116,7 @@ We see that there is a wealth of information stored in the list returned by `tra
 default_glm_mod$results
 ```
 
-The `resutls` show some more detailed results, in particular `AccuracySD` which gives us an estimate of the uncertainty in our accuracy estimate.
+The `results` show some more detailed results, in particular `AccuracySD` which gives us an estimate of the uncertainty in our accuracy estimate.
 
 ```{r}
 default_glm_mod$finalModel

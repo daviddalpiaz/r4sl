@@ -1,7 +1,7 @@
 # k-Nearest Neighbors {#knn-class}
 
 
-In this chapter we introduce our first **non-parametric** classification method, $k$-nearest neighbors. So far, all of the methods for classificaiton that we have seen have been parametric. For example, logistic regression had the form
+In this chapter we introduce our first **non-parametric** classification method, $k$-nearest neighbors. So far, all of the methods for classification that we have seen have been parametric. For example, logistic regression had the form
 
 $$
 \log\left(\frac{p(x)}{1 - p(x)}\right) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots  + \beta_p x_p.
@@ -15,7 +15,7 @@ $$
 
 As we saw in regression, $k$-nearest neighbors has no such model parameters. Instead, it has a **tuning parameter**, $k$. This is a parameter which determines *how* the model is trained, instead of a parameter that is *learned* through training. Note that tuning parameters are not used exclusively with non-parametric methods. Later we will see examples of tuning parameters for parametric methods.
 
-Often when discussing $k$-nearest neighbors for classification, it is framed as a black-box method that directly returns classifications. We will instead frame it as a non-parametric model for the probabilites $p_g(x) = P(Y = g \mid X = x)$. That is a $k$-nearest neighbors model using $k$ neighbors estimates this probability as
+Often when discussing $k$-nearest neighbors for classification, it is framed as a black-box method that directly returns classifications. We will instead frame it as a non-parametric model for the probabilities $p_g(x) = P(Y = g \mid X = x)$. That is a $k$-nearest neighbors model using $k$ neighbors estimates this probability as
 
 $$
 \hat{p}_{kg}(x) = \hat{P}_k(Y = g \mid X = x) = \frac{1}{k} \sum_{i \in \mathcal{N}_k(x, \mathcal{D})} I(y_i = g)
@@ -29,7 +29,7 @@ $$
 \hat{C}_k(x) =  \underset{g}{\mathrm{argmax}} \ \ \hat{p}_{kg}(x)
 $$
 
-This is the same as saying that we classify to the class with the most observations in the $k$ nearest neighbors. If more than one class is tied for the highest estimated probablity, simply assign a class at random to one of the classes tied for highest.
+This is the same as saying that we classify to the class with the most observations in the $k$ nearest neighbors. If more than one class is tied for the highest estimated probability, simply assign a class at random to one of the classes tied for highest.
 
 In the binary case this becomes
 
@@ -106,7 +106,7 @@ X_default_tst = default_tst[, -1]
 y_default_tst = default_tst$default
 ```
 
-Again, there is very little "training" with $k$-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that $k$-nearest neighbors is fast at training time. However, at test time, $k$-nearest neighbors is very slow. For each test observation, the method must find the $k$-nearest neighbors, which is not computationally cheap. Note that by deafult, `knn()` uses Euclidean distance to determine neighbors.
+Again, there is very little "training" with $k$-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that $k$-nearest neighbors is fast at training time. However, at test time, $k$-nearest neighbors is very slow. For each test observation, the method must find the $k$-nearest neighbors, which is not computationally cheap. Note that by default, `knn()` uses Euclidean distance to determine neighbors.
 
 ```{r}
 head(knn(train = X_default_trn, 
@@ -168,7 +168,7 @@ for (i in seq_along(k_to_try)) {
 }
 ```
 
-The `seq_along()` function can be very useful for looping over a vector that stores non-consecutive numbers. It often removes the need for an additional counter variable. We actually didn't need it in the above `knn()` example, but it is still a good habit. For example maybe we didn't want to try every value of $k$, but only odd integers, which woudl prevent ties. Or perhaps we'd only like to check multiples of 5 to further cut down on computation time.
+The `seq_along()` function can be very useful for looping over a vector that stores non-consecutive numbers. It often removes the need for an additional counter variable. We actually didn't need it in the above `knn()` example, but it is still a good habit. For example maybe we didn't want to try every value of $k$, but only odd integers, which would prevent ties. Or perhaps we'd only like to check multiples of 5 to further cut down on computation time.
 
 Also, note that we set a seed before running this loops. This is because we are considering even values of $k$, thus, there are ties which are randomly broken.
 

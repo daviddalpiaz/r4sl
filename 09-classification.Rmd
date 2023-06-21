@@ -280,7 +280,7 @@ calc_class_err(actual = default_tst$default,
                predicted = pred_all_no)
 ```
 
-Here we see that the error rate is exactly the prevelance of the minority class.
+Here we see that the error rate is exactly the prevalence of the minority class.
 
 ```{r}
 table(default_tst$default) / length(default_tst$default)

@@ -87,14 +87,14 @@ f = function(x) {
   x ^ 3
 }
 
-## define data generating processs
+## define data generating process
 get_sim_data = function(f, sample_size = 50) {
   x = runif(n = sample_size, min = -1, max = 1)
   y = rnorm(n = sample_size, mean = f(x), sd = 0.15)
   data.frame(x, y)
 }
 
-## simualte training data
+## simulate training data
 set.seed(42)
 sim_trn_data = get_sim_data(f = f)
 

@@ -56,7 +56,7 @@ $$
 ||\beta||_2 = \sqrt{\sum_{j=1}^{p} \beta_j^2}
 $$
 
-These both quantify how "large" the coefficients are. Like lasso and ridge, the intercept is not penalized and `glment` takes care of standardization internally. Also reported coefficients are on the original scale.
+These both quantify how "large" the coefficients are. Like lasso and ridge, the intercept is not penalized and `glmnet` takes care of standardization internally. Also reported coefficients are on the original scale.
 
 The new penalty is $\frac{\lambda \cdot (1-\alpha)}{2}$ times the ridge penalty plus $\lambda \cdot \alpha$ times the lasso lasso penalty. (Dividing the ridge penalty by 2 is a mathematical convenience for optimization.) Essentially, with the correct choice of $\lambda$ and $\alpha$ these two "penalty coefficients" can be any positive numbers.
 

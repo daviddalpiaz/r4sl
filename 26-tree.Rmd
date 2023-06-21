@@ -303,7 +303,7 @@ plotcp(seat_rpart)
 min_cp = seat_rpart$cptable[which.min(seat_rpart$cptable[,"xerror"]),"CP"]
 min_cp
 
-# prunce tree using best cp
+# prune tree using best cp
 seat_rpart_prune = prune(seat_rpart, cp = min_cp)
 
 # nicer plots

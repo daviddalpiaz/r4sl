@@ -109,7 +109,7 @@ sqrt(a ^ 2 + b ^ 2)
 
 For the most part, we will follow the `tidyverse` [style guide](https://style.tidyverse.org/), however with one massive and obvious exception. Instead of the usual assignment operator, `<-`, we will instead use the more visually appealing and easier to type `-`. Not many do this, but there are [dozens](https://github.com/coatless/errorist) [of](https://github.com/yihui/knitr) [us](https://github.com/csgillespie/efficientR).
 
-## Acknowledgements {-}
+## Acknowledgments {-}
 
 The following is a (likely incomplete) list of helpful contributors.
 
