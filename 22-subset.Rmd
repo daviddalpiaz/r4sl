@@ -50,12 +50,12 @@ points(best_adj_r2, fit_all_sum$adjr2[best_adj_r2],
 
 plot(fit_all_sum$cp, xlab = "Number of Variables", ylab = "Cp", type = 'b')
 best_cp = which.min(fit_all_sum$cp)
-points(best_cp, fit_all_sum$cp[best_cp], 
+points(best_cp, fit_all_sum$cp[best_cp],
        col = "red", cex = 2, pch = 20)
 
 plot(fit_all_sum$bic, xlab = "Number of Variables", ylab = "BIC", type = 'b')
 best_bic = which.min(fit_all_sum$bic)
-points(best_bic, fit_all_sum$bic[best_bic], 
+points(best_bic, fit_all_sum$bic[best_bic],
        col = "red", cex = 2, pch = 20)
 ```
 
@@ -146,7 +146,7 @@ num_folds = 5
 num_vars  = 19
 set.seed(1)
 folds = caret::createFolds(Hitters$Salary, k = num_folds)
-fold_error = matrix(0, nrow = num_folds, ncol = num_vars, 
+fold_error = matrix(0, nrow = num_folds, ncol = num_vars,
                     dimnames = list(paste(1:5), paste(1:19)))
 
 for(j in 1:num_folds) {

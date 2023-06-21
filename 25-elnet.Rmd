@@ -32,7 +32,7 @@ library(glmnet)
 Since he have loaded `caret`, we also have access to the `lattice` package which has a nice histogram function.
 
 ```{r}
-histogram(Hitters$Salary, xlab = "Salary, $1000s", 
+histogram(Hitters$Salary, xlab = "Salary, $1000s",
           main = "Baseball Salaries, 1986 - 1987")
 ```
 

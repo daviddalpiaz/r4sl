@@ -55,7 +55,7 @@ $$
 P\left[\textstyle\bigcup_{i = 1}^{n} E_i\right] = \sum_{i = 1}^{n} P[E_i]
 $$
 
-Often, we would like to understand the probability of an event $A$, given some information about the outcome of event $B$. In that case, we have the **conditional probability rule** provided $P[B] > 0$.  
+Often, we would like to understand the probability of an event $A$, given some information about the outcome of event $B$. In that case, we have the **conditional probability rule** provided $P[B] > 0$.
 
 $$
 P[A \mid B] = \frac{P[A \cap B]}{P[B]}
@@ -135,12 +135,12 @@ $$
 
 This is not a strict mathematical definition, but is useful for conveying the idea.
 
-If the possible values of a random variables are *discrete*, it is called a *discrete random variable*. If the possible values of a random variables are *continuous*, it is called a *continuous random variable*. 
+If the possible values of a random variables are *discrete*, it is called a *discrete random variable*. If the possible values of a random variables are *continuous*, it is called a *continuous random variable*.
 
 
 ### Discrete Random Variables
 
-The distribution of a discrete random variable $X$ is most often specified by a list of possible values and a probability **mass** function, $p(x)$. The mass function directly gives probabilities, that is, 
+The distribution of a discrete random variable $X$ is most often specified by a list of possible values and a probability **mass** function, $p(x)$. The mass function directly gives probabilities, that is,
 
 $$
 p(x) = p_X(x) = P[X = x].
@@ -179,7 +179,7 @@ $$
 
 Note that densities are **not** probabilities.
 
-The most common example of a continuous random variable is a **normal** random variable. The density of a normal random variable $X$, is given by 
+The most common example of a continuous random variable is a **normal** random variable. The density of a normal random variable $X$, is given by
 
 $$
 f(x | \mu, \sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} \cdot \exp\left[\frac{-1}{2} \left(\frac{x - \mu}{\sigma}\right)^2 \right],  \ \ \ -\infty < x < \infty, \ -\infty < \mu < \infty, \ \sigma > 0.

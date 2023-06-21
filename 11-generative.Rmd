@@ -35,21 +35,21 @@ iris_tst = iris[-iris_idx, ]
 
 
 ```{r, fig.height=8, fig.width=8}
-caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
-                                    "Petal.Length", "Petal.Width")], 
+caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width",
+                                    "Petal.Length", "Petal.Width")],
                    y = iris_trn$Species,
-                   plot = "density", 
-                   scales = list(x = list(relation = "free"), 
-                                 y = list(relation = "free")), 
-                   adjust = 1.5, 
-                   pch = "|", 
-                   layout = c(2, 2), 
+                   plot = "density",
+                   scales = list(x = list(relation = "free"),
+                                 y = list(relation = "free")),
+                   adjust = 1.5,
+                   pch = "|",
+                   layout = c(2, 2),
                    auto.key = list(columns = 3))
 ```
 
 ```{r, fig.height=8, fig.width=8}
-caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
-                                    "Petal.Length", "Petal.Width")], 
+caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width",
+                                    "Petal.Length", "Petal.Width")],
                    y = iris_trn$Species,
                    plot = "ellipse",
                    auto.key = list(columns = 3))
@@ -57,8 +57,8 @@ caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width",
 
 
 ```{r, fig.height=4, fig.width=7}
-caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
-                                    "Petal.Length", "Petal.Width")], 
+caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width",
+                                    "Petal.Length", "Petal.Width")],
                    y = iris_trn$Species,
                    plot = "box",
                    scales = list(y = list(relation = "free"),
@@ -162,7 +162,7 @@ $$
 f_k({\mathbf x}) = \frac{1}{(2\pi)^{p/2}|\Sigma_k|^{1/2}}\exp\left[-\frac{1}{2}(\mathbf x - \mu_k)^{\prime}\Sigma_{k}^{-1}(\mathbf x - \mu_k)\right]
 $$
 
-Notice that now $\Sigma_k$ **does** depend on $k$, that is, we are allowing a different $\Sigma_k$ for each class. We only use information from class $k$ to estimate $\Sigma_k$. 
+Notice that now $\Sigma_k$ **does** depend on $k$, that is, we are allowing a different $\Sigma_k$ for each class. We only use information from class $k$ to estimate $\Sigma_k$.
 
 ```{r}
 iris_qda = qda(Species ~ ., data = iris_trn)
@@ -252,7 +252,7 @@ calc_class_err(predicted = iris_nb_tst_pred, actual = iris_tst$Species)
 table(predicted = iris_nb_tst_pred, actual = iris_tst$Species)
 ```
 
-Like LDA, naive Bayes is having trouble with virginica. 
+Like LDA, naive Bayes is having trouble with virginica.
 
 ```{r, echo = FALSE}
 classifiers = c("LDA", "LDA, Flat Prior", "QDA", "Naive Bayes")
@@ -298,8 +298,8 @@ So far, we have assumed that all predictors are numeric. What happens with categ
 ```{r}
 iris_trn_mod = iris_trn
 
-iris_trn_mod$Sepal.Width = ifelse(iris_trn$Sepal.Width > 3, 
-                                  ifelse(iris_trn$Sepal.Width > 4, 
+iris_trn_mod$Sepal.Width = ifelse(iris_trn$Sepal.Width > 3,
+                                  ifelse(iris_trn$Sepal.Width > 4,
                                          "Large", "Medium"),
                                   "Small")
 

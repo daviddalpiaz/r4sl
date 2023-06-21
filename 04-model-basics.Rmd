@@ -162,7 +162,7 @@ mod_4 = lm(Sales ~ TV * Radio * Newspaper, data = Advertising)
 coef(mod_4)
 ```
 
-Note that, we have only been dealing with numeric predictors. **Categorical predictors** are often recorded as **factor** variables in `R`. 
+Note that, we have only been dealing with numeric predictors. **Categorical predictors** are often recorded as **factor** variables in `R`.
 
 ```{r}
 library(tibble)

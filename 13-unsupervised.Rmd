@@ -136,13 +136,13 @@ library(caret)
 library(mlbench)
 data(Sonar)
 set.seed(18)
-using_pca = train(Class ~ ., data = Sonar, method = "knn", 
-                  trControl = trainControl(method = "cv", number = 5), 
+using_pca = train(Class ~ ., data = Sonar, method = "knn",
+                  trControl = trainControl(method = "cv", number = 5),
                   preProcess = "pca",
                   tuneGrid = expand.grid(k = c(1, 3, 5, 7, 9)))
-regular_scaling = train(Class ~ ., data = Sonar, method = "knn", 
-                        trControl = trainControl(method = "cv", number = 5), 
-                        preProcess = c("center", "scale"), 
+regular_scaling = train(Class ~ ., data = Sonar, method = "knn",
+                        trControl = trainControl(method = "cv", number = 5),
+                        preProcess = c("center", "scale"),
                         tuneGrid = expand.grid(k = c(1, 3, 5, 7, 9)))
 max(using_pca$results$Accuracy)
 max(regular_scaling$results$Accuracy)

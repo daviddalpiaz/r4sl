@@ -1,7 +1,7 @@
 # Logistic Regression
 
 
-In this chapter, we continue our discussion of classification. We introduce our first model for classification, logistic regression. To begin, we return to the `Default` dataset from the previous chapter. 
+In this chapter, we continue our discussion of classification. We introduce our first model for classification, logistic regression. To begin, we return to the `Default` dataset from the previous chapter.
 
 ```{r}
 library(ISLR)
@@ -56,7 +56,7 @@ model_lm = lm(default ~ balance, data = default_trn_lm)
 Everything seems to be working, until we plot the results.
 
 ```{r, fig.height=5, fig.width=7}
-plot(default ~ balance, data = default_trn_lm, 
+plot(default ~ balance, data = default_trn_lm,
      col = "darkorange", pch = "|", ylim = c(-0.2, 1),
      main = "Using Linear Regression for Classification")
 abline(h = 0, lty = 3)
@@ -92,7 +92,7 @@ $$
 \hat{p}(x) = \hat{P}(Y = 1 \mid { X = x})
 $$
 
-and 
+and
 
 $$
 \hat{P}(Y = 0 \mid { X = x})
@@ -328,9 +328,9 @@ Note that, using polynomial transformations of predictors will allow a linear mo
 
 ```{r}
 model_list = list(model_1, model_2, model_3)
-train_errors = sapply(model_list, get_logistic_error, data = default_trn, 
+train_errors = sapply(model_list, get_logistic_error, data = default_trn,
                       res = "default", pos = "Yes", neg = "No", cut = 0.5)
-test_errors  = sapply(model_list, get_logistic_error, data = default_tst, 
+test_errors  = sapply(model_list, get_logistic_error, data = default_tst,
                       res = "default", pos = "Yes", neg = "No", cut = 0.5)
 ```
 
@@ -372,11 +372,11 @@ $$
 Let's use this to obtain predictions using a low, medium, and high cutoff. (0.1, 0.5, and 0.9)
 
 ```{r}
-test_pred_10 = get_logistic_pred(model_glm, data = default_tst, res = "default", 
+test_pred_10 = get_logistic_pred(model_glm, data = default_tst, res = "default",
                                  pos = "Yes", neg = "No", cut = 0.1)
-test_pred_50 = get_logistic_pred(model_glm, data = default_tst, res = "default", 
+test_pred_50 = get_logistic_pred(model_glm, data = default_tst, res = "default",
                                  pos = "Yes", neg = "No", cut = 0.5)
-test_pred_90 = get_logistic_pred(model_glm, data = default_tst, res = "default", 
+test_pred_90 = get_logistic_pred(model_glm, data = default_tst, res = "default",
                                  pos = "Yes", neg = "No", cut = 0.9)
 ```
 
@@ -395,16 +395,16 @@ test_con_mat_90 = confusionMatrix(test_tab_90, positive = "Yes")
 ```{r}
 metrics = rbind(
   
-  c(test_con_mat_10$overall["Accuracy"], 
-    test_con_mat_10$byClass["Sensitivity"], 
+  c(test_con_mat_10$overall["Accuracy"],
+    test_con_mat_10$byClass["Sensitivity"],
     test_con_mat_10$byClass["Specificity"]),
   
-  c(test_con_mat_50$overall["Accuracy"], 
-    test_con_mat_50$byClass["Sensitivity"], 
+  c(test_con_mat_50$overall["Accuracy"],
+    test_con_mat_50$byClass["Sensitivity"],
     test_con_mat_50$byClass["Specificity"]),
   
-  c(test_con_mat_90$overall["Accuracy"], 
-    test_con_mat_90$byClass["Sensitivity"], 
+  c(test_con_mat_90$overall["Accuracy"],
+    test_con_mat_90$byClass["Sensitivity"],
     test_con_mat_90$byClass["Specificity"])
 
 )
@@ -431,7 +431,7 @@ A good model will have a high AUC, that is as often as possible a high sensitivi
 
 ## Multinomial Logistic Regression
 
-What if the response contains more than two categories? For that we need multinomial logistic regression. 
+What if the response contains more than two categories? For that we need multinomial logistic regression.
 
 $$
 P(Y = k \mid { X = x}) = \frac{e^{\beta_{0k} + \beta_{1k} x_1 + \cdots +  + \beta_{pk} x_p}}{\sum_{g = 1}^{G} e^{\beta_{0g} + \beta_{1g} x_1 + \cdots + \beta_{pg} x_p}}

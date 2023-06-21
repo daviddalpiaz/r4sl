@@ -212,7 +212,7 @@ matplot(t(cv_rmse)[, 1:10],  pch = 20, type = "b", ylim = c(0.17, 0.35), xlab = 
 
 ## Test Data
 
-The following example, inspired by The Elements of Statistical Learning, will illustrate the need for a dedicated test set which is **never** used in model training. We do this, if for no other reason, because it gives us a quick sanity check that we have cross-validated correctly. To be specific we will always test-train split the data, then perform cross-validation **within the training data**. 
+The following example, inspired by The Elements of Statistical Learning, will illustrate the need for a dedicated test set which is **never** used in model training. We do this, if for no other reason, because it gives us a quick sanity check that we have cross-validated correctly. To be specific we will always test-train split the data, then perform cross-validation **within the training data**.
 
 Essentially, this example will also show how to **not** cross-validate properly. It will also show can example of cross-validated in a classification setting.
 
@@ -317,17 +317,17 @@ fold_err = rep(0, length(folds))
 
 for (i in seq_along(folds)) {
 
-  # split for fold i  
+  # split for fold i
   trn_fold = trn_data[-folds[[i]], ]
   val_fold = trn_data[folds[[i]], ]
 
-  # screening for fold i  
+  # screening for fold i
   correlations = apply(trn_fold[, -1], 2, cor, y = trn_fold[,1])
   selected = order(abs(correlations), decreasing = TRUE)[1:25]
   trn_fold_screen = trn_fold[ , c(1, selected)]
   val_fold_screen = val_fold[ , c(1, selected)]
 
-  # error for fold i  
+  # error for fold i
   add_log_mod = glm(y ~ ., data = trn_fold_screen, family = "binomial")
   add_log_prob = predict(add_log_mod, newdata = val_fold_screen, type = "response")
   add_log_pred = ifelse(add_log_prob > 0.5, yes = 1, no = 0)

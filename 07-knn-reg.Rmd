@@ -105,7 +105,7 @@ We create an additional "test" set `lstat_grid`, that is a grid of `lstat` value
 ```{r}
 X_trn_boston_min = min(X_trn_boston)
 X_trn_boston_max = max(X_trn_boston)
-lstat_grid = data.frame(lstat = seq(X_trn_boston_min, X_trn_boston_max, 
+lstat_grid = data.frame(lstat = seq(X_trn_boston_min, X_trn_boston_max,
                                     by = 0.01))
 ```
 
@@ -189,8 +189,8 @@ rmse = function(actual, predicted) {
 # define helper function for getting knn.reg predictions
 # note: this function is highly specific to this situation and dataset
 make_knn_pred = function(k = 1, training, predicting) {
-  pred = FNN::knn.reg(train = training["lstat"], 
-                      test = predicting["lstat"], 
+  pred = FNN::knn.reg(train = training["lstat"],
+                      test = predicting["lstat"],
                       y = training$medv, k = k)$pred
   act  = predicting$medv
   rmse(predicted = pred, actual = act)
@@ -204,12 +204,12 @@ k = c(1, 5, 10, 25, 50, 250)
 
 ```{r}
 # get requested train RMSEs
-knn_trn_rmse = sapply(k, make_knn_pred, 
-                      training = trn_boston, 
+knn_trn_rmse = sapply(k, make_knn_pred,
+                      training = trn_boston,
                       predicting = trn_boston)
 # get requested test RMSEs
-knn_tst_rmse = sapply(k, make_knn_pred, 
-                      training = trn_boston, 
+knn_tst_rmse = sapply(k, make_knn_pred,
+                      training = trn_boston,
                       predicting = tst_boston)
 
 # determine "best" k
@@ -309,7 +309,7 @@ abline(fit, col = "dodgerblue", lwd = 2, lty = 3)
 # both would have better edge behavior
 ```
 
-    
+
 
 ## Scaling Data
 
@@ -372,30 +372,30 @@ make_knn_pred = function(k = 1, X_trn, X_pred, y_trn, y_pred) {
 ```{r}
 # TODO: DRY
 cod_train_rmse = c(
-  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_trn["x1"],  
+  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_trn["x1"],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_trn[, 2:3], 
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_trn[, 2:3],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_trn[, 2:4], 
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_trn[, 2:4],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_trn[, 2:5], 
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_trn[, 2:5],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_trn[, 2:6], 
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_trn[, 2:6],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_trn["y"]))
 ```
 
 ```{r}
 # TODO: DRY
 cod_test_rmse = c(
-  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_tst["x1"],  
+  make_knn_pred (k = 5, X_trn = knn_data_trn["x1"],  X_pred = knn_data_tst["x1"],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_tst[, 2:3], 
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:3], X_pred = knn_data_tst[, 2:3],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_tst[, 2:4], 
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:4], X_pred = knn_data_tst[, 2:4],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_tst[, 2:5], 
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:5], X_pred = knn_data_tst[, 2:5],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]),
-  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_tst[, 2:6], 
+  make_knn_pred (k = 5, X_trn = knn_data_trn[, 2:6], X_pred = knn_data_tst[, 2:6],
                  y_trn = knn_data_trn["y"], y_pred = knn_data_tst["y"]))
 ```
 
@@ -423,7 +423,7 @@ knitr::kable(cod_results, escape = FALSE, booktabs = TRUE)
     - lm: "slow" train, "fast" test
     - knn: "fast" train, "slow" test
     - illustrate with system timings
- 
+
 
 ## Interpretability
 
@@ -443,9 +443,9 @@ y_tst_boston = tst_boston["medv"]
 ```
 
 ```{r}
-scaled_pred = knn.reg(train = scale(X_trn_boston), test = scale(X_tst_boston), 
+scaled_pred = knn.reg(train = scale(X_trn_boston), test = scale(X_tst_boston),
                       y = y_trn_boston, k = 10)$pred
-unscaled_pred = knn.reg(train = X_trn_boston, test = X_tst_boston, 
+unscaled_pred = knn.reg(train = X_trn_boston, test = X_tst_boston,
                         y = y_trn_boston, k = 10)$pred
 
 # test rmse

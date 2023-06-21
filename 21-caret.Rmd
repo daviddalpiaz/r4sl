@@ -17,7 +17,7 @@ At face value it would seem like it should be easy to repeat this process for a 
 
 - The `predict()` function seems to have a different behavior for each new method we see.
 - Many methods have different cross-validation functions, or worse yet, no built-in process for cross-validation.
-- Not all methods expect the same data format. Some methods do not use formula syntax. 
+- Not all methods expect the same data format. Some methods do not use formula syntax.
 - Different methods have different handling of categorical predictors. Some methods cannot handle factor variables.
 
 Thankfully, the `R` community has essentially provided a silver bullet for these issues, the [`caret`](http://topepo.github.io/caret/) package. Returning to the above list, we will see that a number of these tasks are directly addressed in the `caret` package.
@@ -80,7 +80,7 @@ Here, we have supplied four arguments to the `train()` function form the `caret`
 - `form = default ~ .` specifies the `default` variable as the response. It also indicates that all available predictors should be used.
 - `data = default_trn` specifies that training will be down with the `default_trn` data
 - `trControl = trainControl(method = "cv", number = 5)` specifies that we will be using 5-fold cross-validation.
-- `method = glm` specifies that we will fit a generalized linear model. 
+- `method = glm` specifies that we will fit a generalized linear model.
 
 The `method` essentially specifies both the model (and more specifically the function to fit said model in `R`) and package that will be used. The `train()` function is essentially a wrapper around whatever method we chose. In this case, the function is the base `R` function `glm()`, so no additional package is required. When a method requires a function from a certain package, that package will need to be installed. See the [list of available models](https://topepo.github.io/caret/available-models.html) for package information.
 
@@ -92,7 +92,7 @@ trainControl(method = "cv", number = 5)[1:3]
 
 Here we see just the first three elements of this list, which are related to how the resampling will be done. These are the three elements that we will be most interested in. Here, only the first two are relevant.
 
-- `method` specifies how resampling will be done. Examples include `cv`, `boot`, `LOOCV`, `repeatedcv`, and `oob`. 
+- `method` specifies how resampling will be done. Examples include `cv`, `boot`, `LOOCV`, `repeatedcv`, and `oob`.
 - `number` specifies the number of times resampling should be done for methods that require resample, such as, `cv` and `boot`.
 - `repeats` specifies the number of times to repeat resampling for methods such as `repeatedcv`
 
@@ -180,7 +180,7 @@ First, note that we are using formula syntax here, where previously we needed to
 default_knn_mod
 ```
 
-Here we are again using 5-fold cross-validation and no pre-processing. Notice that we now have multiple results, for `k = 5`, `k = 7`, and `k = 9`. 
+Here we are again using 5-fold cross-validation and no pre-processing. Notice that we now have multiple results, for `k = 5`, `k = 7`, and `k = 9`.
 
 Let's modifying this training by introducing pre-processing, and specifying our own tuning parameters, instead of the default values above.
 
@@ -403,7 +403,7 @@ sim_gbm_mod = train(
   data = sim_trn,
   trControl = trainControl(method = "cv", number = 5),
   method = "gbm",
-  tuneGrid = gbm_grid, 
+  tuneGrid = gbm_grid,
   verbose = FALSE
 )
 ```

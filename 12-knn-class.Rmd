@@ -109,9 +109,9 @@ y_default_tst = default_tst$default
 Again, there is very little "training" with $k$-nearest neighbors. Essentially the only training is to simply remember the inputs. Because of this, we say that $k$-nearest neighbors is fast at training time. However, at test time, $k$-nearest neighbors is very slow. For each test observation, the method must find the $k$-nearest neighbors, which is not computationally cheap. Note that by default, `knn()` uses Euclidean distance to determine neighbors.
 
 ```{r}
-head(knn(train = X_default_trn, 
-         test  = X_default_tst, 
-         cl    = y_default_trn, 
+head(knn(train = X_default_trn,
+         test  = X_default_tst,
+         cl    = y_default_trn,
          k     = 3))
 ```
 
@@ -144,9 +144,9 @@ Often with `knn()` we need to consider the scale of the predictors variables. If
 
 ```{r}
 calc_class_err(actual    = y_default_tst,
-               predicted = knn(train = scale(X_default_trn), 
-                               test  = scale(X_default_tst), 
-                               cl    = y_default_trn, 
+               predicted = knn(train = scale(X_default_trn),
+                               test  = scale(X_default_tst),
+                               cl    = y_default_trn,
                                k     = 5))
 ```
 
@@ -160,9 +160,9 @@ k_to_try = 1:100
 err_k = rep(x = 0, times = length(k_to_try))
 
 for (i in seq_along(k_to_try)) {
-  pred = knn(train = scale(X_default_trn), 
-             test  = scale(X_default_tst), 
-             cl    = y_default_trn, 
+  pred = knn(train = scale(X_default_trn),
+             test  = scale(X_default_tst),
+             cl    = y_default_trn,
              k     = k_to_try[i])
   err_k[i] = calc_class_err(y_default_tst, pred)
 }
@@ -176,7 +176,7 @@ Naturally, we plot the $k$-nearest neighbor results.
 
 ```{r, fig.height = 6, fig.width = 8}
 # plot error vs choice of k
-plot(err_k, type = "b", col = "dodgerblue", cex = 1, pch = 20, 
+plot(err_k, type = "b", col = "dodgerblue", cex = 1, pch = 20,
      xlab = "k, number of neighbors", ylab = "classification error",
      main = "(Test) Error Rate vs Neighbors")
 # add line for min error seen
@@ -191,7 +191,7 @@ The dotted orange line represents the smallest observed test classification erro
 min(err_k)
 ```
 
-We see that five different values of $k$ are tied for the lowest error rate. 
+We see that five different values of $k$ are tied for the lowest error rate.
 
 ```{r}
 which(err_k == min(err_k))
@@ -243,7 +243,7 @@ y_iris_tst = iris_tst$Species
 Like previous methods, we can obtain predicted probabilities given test predictors. To do so, we add an argument, `prob = TRUE`
 
 ```{r}
-iris_pred = knn(train = scale(X_iris_trn), 
+iris_pred = knn(train = scale(X_iris_trn),
                 test  = scale(X_iris_tst),
                 cl    = y_iris_trn,
                 k     = 10,

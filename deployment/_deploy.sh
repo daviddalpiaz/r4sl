@@ -17,7 +17,7 @@ git clone -b gh-pages \
   book-output
 
 # The goal of the gh-pages branch is to contain the contents of _book and all .Rmd files
- 
+
 # Change to the gh-page branch known on the file system as book-output
 cd book-output
 
