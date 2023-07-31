@@ -12,7 +12,7 @@ We will use the `Hitters` dataset from the `ISLR` package to explore two shrinka
 data(Hitters, package = "ISLR")
 ```
 
-This dataset has some missing data in the response `Salaray`. We use the `na.omit()` function the clean the dataset.
+This dataset has some missing data in the response `Salary`. We use the `na.omit()` function the clean the dataset.
 
 ```{r}
 sum(is.na(Hitters))
@@ -130,7 +130,7 @@ sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min])
 
 ```{r}
 # CV-RMSE using 1-SE rule lambda
-sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) 
+sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se])
 ```
 
 
@@ -214,7 +214,7 @@ sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min])
 
 ```{r}
 # CV-RMSE using 1-SE rule lambda
-sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]) 
+sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se])
 ```
 
 
@@ -228,7 +228,7 @@ library(broom)
 # fit_lasso_cv
 tidy(fit_lasso_cv)
 # the two lambda values of interest
-glance(fit_lasso_cv) 
+glance(fit_lasso_cv)
 ```
 
 
@@ -305,7 +305,7 @@ Note that we have to force `y` to be a factor, so that `train()` recognizes we w
 ```{r, message = FALSE, warning = FALSE}
 library(caret)
 cv_5 = trainControl(method = "cv", number = 5)
-lasso_grid = expand.grid(alpha = 1, 
+lasso_grid = expand.grid(alpha = 1,
                          lambda = c(fit_cv$lambda.min, fit_cv$lambda.1se))
 lasso_grid
 ```

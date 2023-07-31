@@ -33,7 +33,7 @@ We first fit an unpruned classification tree using all of the predictors. Detail
 
 ```{r}
 seat_tree = tree(Sales ~ ., data = Carseats)
-# seat_tree = tree(Sales ~ ., data = Carseats, 
+# seat_tree = tree(Sales ~ ., data = Carseats,
 #                  control = tree.control(nobs = nrow(Carseats), minsize = 10))
 summary(seat_tree)
 ```
@@ -241,7 +241,7 @@ rmse = function(actual, predicted) {
 ```
 
 
-We obtain predictions on the train and test sets from the pruned tree. We also plot actual vs predicted. This plot may look odd. We'll compare it to a plot for linear regression below. 
+We obtain predictions on the train and test sets from the pruned tree. We also plot actual vs predicted. This plot may look odd. We'll compare it to a plot for linear regression below.
 
 ```{r}
 # training RMSE two ways
@@ -288,7 +288,7 @@ library(rpart)
 set.seed(430)
 # Fit a decision tree using rpart
 # Note: when you fit a tree using rpart, the fitting routine automatically
-# performs 10-fold CV and stores the errors for later use 
+# performs 10-fold CV and stores the errors for later use
 # (such as for pruning the tree)
 
 # fit a tree using rpart
@@ -303,7 +303,7 @@ plotcp(seat_rpart)
 min_cp = seat_rpart$cptable[which.min(seat_rpart$cptable[,"xerror"]),"CP"]
 min_cp
 
-# prunce tree using best cp
+# prune tree using best cp
 seat_rpart_prune = prune(seat_rpart, cp = min_cp)
 
 # nicer plots

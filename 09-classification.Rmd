@@ -2,7 +2,7 @@
 
 # Overview {#classification-overview}
 
-**Classification** is a form of **supervised learning** where the response variable is categorical, as opposed to numeric for regression. *Our goal is to find a rule, algorithm, or function which takes as input a feature vector, and outputs a category which is the true category as often as possible.* 
+**Classification** is a form of **supervised learning** where the response variable is categorical, as opposed to numeric for regression. *Our goal is to find a rule, algorithm, or function which takes as input a feature vector, and outputs a category which is the true category as often as possible.*
 
 ![](images/classification.png)
 
@@ -20,7 +20,7 @@ library(tibble)
 as_tibble(Default)
 ```
 
-Our goal is to properly classify individuals as defaulters based on student status, credit card balance, and income. Be aware that the response `default` is a factor, as is the predictor `student`. 
+Our goal is to properly classify individuals as defaulters based on student status, credit card balance, and income. Be aware that the response `default` is a factor, as is the predictor `student`.
 
 ```{r}
 is.factor(Default$default)
@@ -54,14 +54,14 @@ $$
 for each numeric predictor $x_i$ and each category $k$ of the response $y$.
 
 ```{r, fig.height = 5, fig.width = 10}
-featurePlot(x = default_trn[, c("balance", "income")], 
+featurePlot(x = default_trn[, c("balance", "income")],
             y = default_trn$default,
-            plot = "density", 
-            scales = list(x = list(relation = "free"), 
-                          y = list(relation = "free")), 
-            adjust = 1.5, 
-            pch = "|", 
-            layout = c(2, 1), 
+            plot = "density",
+            scales = list(x = list(relation = "free"),
+                          y = list(relation = "free")),
+            adjust = 1.5,
+            pch = "|",
+            layout = c(2, 1),
             auto.key = list(columns = 2))
 ```
 
@@ -79,22 +79,22 @@ Some notes about the arguments to this function:
 It seems that the income variable by itself is not particularly useful. However, there seems to be a big difference in default status at a `balance` of about 1400. We will use this information shortly.
 
 ```{r, fig.height = 5, fig.width = 10, message = FALSE, warning = FALSE}
-featurePlot(x = default_trn[, c("balance", "income")], 
+featurePlot(x = default_trn[, c("balance", "income")],
             y = default_trn$student,
-            plot = "density", 
-            scales = list(x = list(relation = "free"), 
-                          y = list(relation = "free")), 
-            adjust = 1.5, 
-            pch = "|", 
-            layout = c(2, 1), 
+            plot = "density",
+            scales = list(x = list(relation = "free"),
+                          y = list(relation = "free")),
+            adjust = 1.5,
+            pch = "|",
+            layout = c(2, 1),
             auto.key = list(columns = 2))
 ```
 
 Above, we create a similar plot, except with `student` as the response. We see that students often carry a slightly larger balance, and have far lower income. This will be useful to know when making more complicated classifiers.
 
 ```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
-featurePlot(x = default_trn[, c("student", "balance", "income")], 
-            y = default_trn$default, 
+featurePlot(x = default_trn[, c("student", "balance", "income")],
+            y = default_trn$default,
             plot = "pairs",
             auto.key = list(columns = 2))
 ```
@@ -103,8 +103,8 @@ We can use `plot = "pairs"` to consider multiple variables at the same time. Thi
 
 ```{r, fig.height = 6, fig.width = 6, message = FALSE, warning = FALSE}
 library(ellipse)
-featurePlot(x = default_trn[, c("balance", "income")], 
-            y = default_trn$default, 
+featurePlot(x = default_trn[, c("balance", "income")],
+            y = default_trn$default,
             plot = "ellipse",
             auto.key = list(columns = 2))
 ```
@@ -280,7 +280,7 @@ calc_class_err(actual = default_tst$default,
                predicted = pred_all_no)
 ```
 
-Here we see that the error rate is exactly the prevelance of the minority class.
+Here we see that the error rate is exactly the prevalence of the minority class.
 
 ```{r}
 table(default_tst$default) / length(default_tst$default)

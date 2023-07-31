@@ -24,7 +24,7 @@ $$
 \mathbb{E}_{X, Y} \left[ (Y - f(X)) ^ 2 \right] = \mathbb{E}_{X} \mathbb{E}_{Y \mid X} \left[ ( Y - f(X) ) ^ 2 \mid X = x \right]
 $$
 
-Minimizing the right-hand side is much easier, as it simply amounts to minimizing the inner expectation with respect to $Y \mid X$, essentially minimizing the risk pointwise, for each $x$.
+Minimizing the right-hand side is much easier, as it simply amounts to minimizing the inner expectation with respect to $Y \mid X$, essentially minimizing the risk point-wise, for each $x$.
 
 It turns out, that the risk is minimized by the conditional mean of $Y$ given $X$,
 
@@ -54,7 +54,7 @@ Now, given data $\mathcal{D} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}$, o
 
 ## Reducible and Irreducible Error
 
-Suppose that we obtain some $\hat{f}$, how well does it estimate $f$? We define the **expected prediction error** of predicting $Y$ using $\hat{f}(X)$. A good $\hat{f}$ will have a low expected prediction error. 
+Suppose that we obtain some $\hat{f}$, how well does it estimate $f$? We define the **expected prediction error** of predicting $Y$ using $\hat{f}(X)$. A good $\hat{f}$ will have a low expected prediction error.
 
 $$
 \text{EPE}\left(Y, \hat{f}(X)\right) \triangleq \mathbb{E}_{X, Y, \mathcal{D}} \left[  \left( Y - \hat{f}(X) \right)^2 \right]
@@ -141,10 +141,10 @@ g = function(x) {
   1 - ((x - 50) / 50)
 }
 
-par(mgp = c(1.5, 1.5, 0)) 
+par(mgp = c(1.5, 1.5, 0))
 plot(x, g(x), ylim = c(0, 3), type = "l", lwd = 2,
      ylab = "Error", xlab = expression(Low %<-% Complexity %->% High),
-     main = "Error versus Model Complexity", col = "darkorange", 
+     main = "Error versus Model Complexity", col = "darkorange",
      axes = FALSE)
 grid()
 axis(1, labels = FALSE)
@@ -243,16 +243,16 @@ g = function(x) {
   1 - ((x - 50) / 50)
 }
 
-par(mgp = c(1.5, 1.5, 0)) 
+par(mgp = c(1.5, 1.5, 0))
 plot(x, g(x), ylim = c(0, 3), type = "l", lwd = 2,
      ylab = "Error", xlab = "",
-     main = "Error versus Model Complexity", col = "darkorange", 
+     main = "Error versus Model Complexity", col = "darkorange",
      axes = FALSE)
 grid()
 axis(1, labels = FALSE)
 axis(2, labels = FALSE)
 box()
-ylabels = list(bquote("Low" %<-% "Complexity" %->% "High"), 
+ylabels = list(bquote("Low" %<-% "Complexity" %->% "High"),
                bquote("High" %<-% "Bias" %->% "Low"),
                bquote("Low" %<-% "Variance" %->% "High"))
 mtext(do.call(expression, ylabels), side = 1, line = 2:4)
@@ -264,7 +264,7 @@ legend("bottomleft", c("(Expected) Test", "Train"), lty = c(6, 1), lwd = 3,
 
 ## Simulation
 
-We will illustrate these decompositions, most importantly the bias-variance tradeoff, through simulation. Suppose we would like to train a model to learn the true regression function function $f(x) = x^2$.
+We will illustrate these decompositions, most importantly the bias-variance tradeoff, through simulation. Suppose we would like to train a model to learn the true regression function $f(x) = x^2$.
 
 ```{r}
 f = function(x) {
@@ -370,8 +370,8 @@ lines(grid, predict(fit_1, newdata = data.frame(x = grid)), col = "firebrick",  
 lines(grid, predict(fit_2, newdata = data.frame(x = grid)), col = "springgreen", lwd = 2, lty = 4)
 lines(grid, predict(fit_9, newdata = data.frame(x = grid)), col = "darkorange",  lwd = 2, lty = 5)
 
-legend("topleft", 
-       c("y ~ 1", "y ~ poly(x, 1)", "y ~ poly(x, 2)",  "y ~ poly(x, 9)", "truth"), 
+legend("topleft",
+       c("y ~ 1", "y ~ poly(x, 1)", "y ~ poly(x, 2)",  "y ~ poly(x, 9)", "truth"),
        col = c("dodgerblue", "firebrick", "springgreen", "darkorange", "black"), lty = c(2, 3, 4, 5, 1), lwd = 2)
 ```
 
@@ -630,7 +630,7 @@ knitr::kable(results, booktabs = TRUE, escape = TRUE, align = "c")
 
 A number of things to notice here:
 
-- We use squared bias in this table. Since bias can be positive or negative, squared bias is more useful for observing the trend as complexity increases. 
+- We use squared bias in this table. Since bias can be positive or negative, squared bias is more useful for observing the trend as complexity increases.
 - The squared bias trend which we see here is **decreasing** as complexity increases, which we expect to see in general.
 - The exact opposite is true of variance. As model complexity increases, variance **increases**.
 - The mean squared error, which is a function of the bias and variance, decreases, then increases. This is a result of the bias-variance tradeoff. We can decrease bias, by increasing variance. Or, we can decrease variance by increasing bias. By striking the correct balance, we can find a good mean squared error!
@@ -640,12 +640,12 @@ We can check for these trends with the `diff()` function in `R`.
 ```{r}
 all(diff(bias ^ 2) < 0)
 all(diff(variance) > 0)
-diff(mse) < 0 
+diff(mse) < 0
 ```
 
 The models with polynomial degrees 2 and 9 are both essentially unbiased. We see some bias here as a result of using simulation. If we increased the number of simulations, we would see both biases go down. Since they are both unbiased, the model with degree 2 outperforms the model with degree 9 due to its smaller variance.
 
-Models with degree 0 and 1 are biased because they assume the wrong form of the regression function. While the degree 9 model does this as well, it does include all the necessary polynomial degrees. 
+Models with degree 0 and 1 are biased because they assume the wrong form of the regression function. While the degree 9 model does this as well, it does include all the necessary polynomial degrees.
 
 $$
 \hat{f}_9(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2 + \ldots + \hat{\beta}_9 x^9
@@ -684,7 +684,7 @@ $$
 \mathbb{E}_{Y \mid X, \mathcal{D}} \left[  \left(Y - \hat{f}_k(X) \right)^2 \mid X = 0.90 \right]
 $$
 
-We can estimate this quantity for each of the four models using the simulation study we already performed. 
+We can estimate this quantity for each of the four models using the simulation study we already performed.
 
 ```{r}
 get_epe = function(realized, estimate) {
@@ -701,12 +701,12 @@ epe
 ```{r, echo = FALSE, eval = FALSE}
 # hmmm, what's wrong here?
 # the mean realative diff does go down with n
-# is there really just that much compuational error?
+# is there really just that much computational error?
 sigma_hat = mean((y - f(x = 0.90)) ^ 2)
 all.equal(epe, bias ^ 2 + variance + sigma_hat)
 ```
 
-What about the unconditional expected prediction error. That is, for any $X$, not just $0.90$. Specifically, the expected prediction error of estimating $Y$ using $\hat{f}(X)$. The following (new) simulation study provides an estimate of 
+What about the unconditional expected prediction error. That is, for any $X$, not just $0.90$. Specifically, the expected prediction error of estimating $Y$ using $\hat{f}(X)$. The following (new) simulation study provides an estimate of
 
 $$
 \text{EPE}\left(Y, \hat{f}_k(X)\right) = \mathbb{E}_{X, Y, \mathcal{D}} \left[  \left( Y - \hat{f}_k(X) \right)^2 \right]
@@ -775,7 +775,7 @@ $$
 \sum_{i \in \texttt{tst}}\left(y_i - \hat{f}(x_i)\right) ^ 2
 $$
 
-as an estimate of 
+as an estimate of
 
 $$
 \mathbb{E}_{X, Y, \mathcal{D}} \left[  (Y - \hat{f}(X))^2 \right]

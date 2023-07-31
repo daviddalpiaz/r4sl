@@ -47,8 +47,8 @@ boston_tree = rpart(medv ~ ., data = boston_trn)
 
 ```{r}
 boston_tree_tst_pred = predict(boston_tree, newdata = boston_tst)
-plot(boston_tree_tst_pred, boston_tst$medv, 
-     xlab = "Predicted", ylab = "Actual", 
+plot(boston_tree_tst_pred, boston_tst$medv,
+     xlab = "Predicted", ylab = "Actual",
      main = "Predicted vs Actual: Single Tree, Test Data",
      col = "dodgerblue", pch = 20)
 grid()
@@ -86,7 +86,7 @@ abline(0, 1, col = "darkorange", lwd = 2)
 We now fit a bagged model, using the `randomForest` package. Bagging is actually a special case of a random forest where `mtry` is equal to $p$, the number of predictors.
 
 ```{r, message = FALSE, warning = FALSE}
-boston_bag = randomForest(medv ~ ., data = boston_trn, mtry = 13, 
+boston_bag = randomForest(medv ~ ., data = boston_trn, mtry = 13,
                           importance = TRUE, ntree = 500)
 boston_bag
 ```
@@ -118,7 +118,7 @@ grid()
 We now try a random forest. For regression, the suggestion is to use `mtry` equal to $p/3$.
 
 ```{r}
-boston_forest = randomForest(medv ~ ., data = boston_trn, mtry = 4, 
+boston_forest = randomForest(medv ~ ., data = boston_trn, mtry = 4,
                              importance = TRUE, ntree = 500)
 boston_forest
 ```
@@ -161,7 +161,7 @@ Here we note three RMSEs. The training RMSE (which is optimistic), the OOB RMSE 
 Lastly, we try a boosted model, which by default will produce a nice **variable importance** plot as well as plots of the marginal effects of the predictors. We use the `gbm` package.
 
 ```{r, fig.height = 6, fig.width = 8, message = FALSE, warning = FALSE}
-booston_boost = gbm(medv ~ ., data = boston_trn, distribution = "gaussian", 
+booston_boost = gbm(medv ~ ., data = boston_trn, distribution = "gaussian",
                     n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
 booston_boost
 ```
@@ -184,7 +184,7 @@ boston_boost_tst_pred = predict(booston_boost, newdata = boston_tst, n.trees = 5
 
 ```{r}
 plot(boston_boost_tst_pred, boston_tst$medv,
-     xlab = "Predicted", ylab = "Actual", 
+     xlab = "Predicted", ylab = "Actual",
      main = "Predicted vs Actual: Boosted Model, Test Data",
      col = "dodgerblue", pch = 20)
 grid()
@@ -253,7 +253,7 @@ seat_glm = glm(Sales ~ ., data = seat_trn, family = "binomial")
 ```
 
 ```{r}
-seat_glm_tst_pred = ifelse(predict(seat_glm, seat_tst, "response") > 0.5, 
+seat_glm_tst_pred = ifelse(predict(seat_glm, seat_tst, "response") > 0.5,
                            "Low", "High")
 table(predicted = seat_glm_tst_pred, actual = seat_tst$Sales)
 (glm_tst_acc = calc_acc(predicted = seat_glm_tst_pred, actual = seat_tst$Sales))
@@ -263,7 +263,7 @@ table(predicted = seat_glm_tst_pred, actual = seat_tst$Sales)
 ### Bagging
 
 ```{r, message = FALSE, warning = FALSE}
-seat_bag = randomForest(Sales ~ ., data = seat_trn, mtry = 10, 
+seat_bag = randomForest(Sales ~ ., data = seat_trn, mtry = 10,
                         importance = TRUE, ntree = 500)
 seat_bag
 ```
@@ -301,13 +301,13 @@ seat_trn_mod$Sales = as.numeric(ifelse(seat_trn_mod$Sales == "Low", "0", "1"))
 ```
 
 ```{r}
-seat_boost = gbm(Sales ~ ., data = seat_trn_mod, distribution = "bernoulli", 
+seat_boost = gbm(Sales ~ ., data = seat_trn_mod, distribution = "bernoulli",
                  n.trees = 5000, interaction.depth = 4, shrinkage = 0.01)
 seat_boost
 ```
 
 ```{r}
-seat_boost_tst_pred = ifelse(predict(seat_boost, seat_tst, n.trees = 5000, "response") > 0.5, 
+seat_boost_tst_pred = ifelse(predict(seat_boost, seat_tst, n.trees = 5000, "response") > 0.5,
                              "High", "Low")
 table(predicted = seat_boost_tst_pred, actual = seat_tst$Sales)
 (boost_tst_acc = calc_acc(predicted = seat_boost_tst_pred, actual = seat_tst$Sales))
@@ -344,7 +344,7 @@ While `mtry` is a tuning parameter, there are suggested values for classificatio
 
 Also note that with these tree-based ensemble methods there are two resampling solutions for tuning the model:
 
-- Out of Bag 
+- Out of Bag
 - Cross-Validation
 
 Using Out of Bag samples is advantageous with these methods as compared to Cross-Validation since it removes the need to refit the model and is thus much more computationally efficient. Unfortunately OOB methods cannot be used with `gbm` models. See the [`caret` documentation](http://topepo.github.io/caret/training.html) for details.
@@ -425,7 +425,7 @@ seat_gbm_tune = train(Sales ~ ., data = seat_trn,
 
 The additional `verbose = FALSE` in the `train` call suppresses additional output from each `gbm` call.
 
-By default, calling `plot` here will produce a nice graphic summarizing the results. 
+By default, calling `plot` here will produce a nice graphic summarizing the results.
 
 ```{r}
 plot(seat_gbm_tune)
@@ -491,7 +491,7 @@ gbm_grid =  expand.grid(interaction.depth = 1:5,
                         shrinkage = c(0.001, 0.01, 0.1),
                         n.minobsinnode = 10)
 
-sim_gbm_cv = train(class ~ ., 
+sim_gbm_cv = train(class ~ .,
                    data = sim_trn,
                    method = "gbm",
                    trControl = cv_5,
@@ -534,7 +534,7 @@ plot(plot_grid$X1, plot_grid$X2, col = gbm_col,
 - [`ranger`: A Fast Implementation of Random Forests](https://github.com/imbs-hl/ranger) - Alternative package for fitting random forests with potentially better speed.
 - [On `ranger`'s respect.unordered.factors Argument](http://www.win-vector.com/blog/2016/05/on-ranger-respect-unordered-factors/) - A note on handling of categorical variables with random forests.
 - [Extremely Randomized Trees](https://pdfs.semanticscholar.org/336a/165c17c9c56160d332b9f4a2b403fccbdbfb.pdf)
-- [`extraTrees` Method for Classificationand Regression](https://cran.r-project.org/web/packages/extraTrees/vignettes/extraTrees.pdf)
+- [`extraTrees` Method for Classification and Regression](https://cran.r-project.org/web/packages/extraTrees/vignettes/extraTrees.pdf)
 - [XGBoost](http://xgboost.readthedocs.io/en/latest/) - Scalable and Flexible Gradient Boosting
 - [XGBoost `R` Tutorial](http://xgboost.readthedocs.io/en/latest/R-package/xgboostPresentation.html)
 

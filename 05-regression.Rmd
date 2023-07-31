@@ -87,14 +87,14 @@ f = function(x) {
   x ^ 3
 }
 
-## define data generating processs
+## define data generating process
 get_sim_data = function(f, sample_size = 50) {
   x = runif(n = sample_size, min = -1, max = 1)
   y = rnorm(n = sample_size, mean = f(x), sd = 0.15)
   data.frame(x, y)
 }
 
-## simualte training data
+## simulate training data
 set.seed(42)
 sim_trn_data = get_sim_data(f = f)
 
@@ -110,19 +110,19 @@ x_grid = data.frame(x = seq(-1.5, 1.5, 0.001))
 # fit models
 
 ## tree models
-tree_fit_l = rpart(y ~ x, data = sim_trn_data, 
+tree_fit_l = rpart(y ~ x, data = sim_trn_data,
                    control = rpart.control(cp = 0.500, minsplit = 2))
-tree_fit_m = rpart(y ~ x, data = sim_trn_data, 
+tree_fit_m = rpart(y ~ x, data = sim_trn_data,
                    control = rpart.control(cp = 0.015, minsplit = 2))
-tree_fit_h = rpart(y ~ x, data = sim_trn_data, 
+tree_fit_h = rpart(y ~ x, data = sim_trn_data,
                    control = rpart.control(cp = 0.000, minsplit = 2))
 
 ## knn models
-knn_fit_l = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y, 
+knn_fit_l = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y,
                     test = x_grid, k = 40)
-knn_fit_m = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y, 
+knn_fit_m = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y,
                     test = x_grid, k = 5)
-knn_fit_h = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y, 
+knn_fit_h = knn.reg(train = sim_trn_data["x"], y = sim_trn_data$y,
                     test = x_grid, k = 1)
 
 ## polynomial models
@@ -154,7 +154,7 @@ poly_fit_h_pred = predict(poly_fit_h, newdata = x_grid)
 # plot fitted trees
 
 par(mfrow = c(1, 3))
-plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
      main = "Tree Model, cp = 0.5", cex = 1.5)
 grid()
 lines(x_grid$x, tree_fit_l_pred, col = "darkgrey",  lwd = 2)
@@ -164,7 +164,7 @@ plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
 grid()
 lines(x_grid$x, tree_fit_m_pred, col = "darkgrey",  lwd = 2)
 
-plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
      main = "Tree Model, cp = 0.0", cex = 1.5)
 grid()
 lines(x_grid$x, tree_fit_h_pred, col = "darkgrey",  lwd = 2)
@@ -174,7 +174,7 @@ lines(x_grid$x, tree_fit_h_pred, col = "darkgrey",  lwd = 2)
 # plot fitted KNN
 
 par(mfrow = c(1, 3))
-plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
      main = "KNN, k = 40", cex = 1.5)
 grid()
 lines(x_grid$x, knn_fit_l_pred, col = "darkgrey",  lwd = 2)
@@ -184,7 +184,7 @@ plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
 grid()
 lines(x_grid$x, knn_fit_m_pred, col = "darkgrey",  lwd = 2)
 
-plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
      main = "KNN, k = 1", cex = 1.5)
 grid()
 lines(x_grid$x, knn_fit_h_pred, col = "darkgrey",  lwd = 2)
@@ -193,7 +193,7 @@ lines(x_grid$x, knn_fit_h_pred, col = "darkgrey",  lwd = 2)
 ```{r fig.height = 4, fig.width = 10}
 # plot fitted polynomials
 par(mfrow = c(1, 3))
-plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
      main = "Polynomial Model, degree = 1", cex = 1.5)
 grid()
 lines(x_grid$x, poly_fit_l_pred, col = "darkgrey",  lwd = 2)
@@ -203,7 +203,7 @@ plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
 grid()
 lines(x_grid$x, poly_fit_m_pred, col = "darkgrey",  lwd = 2)
 
-plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20,
      main = "Polynomial Model, degree = 22", cex = 1.5)
 grid()
 lines(x_grid$x, poly_fit_h_pred, col = "darkgrey",  lwd = 2)

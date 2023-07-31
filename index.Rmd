@@ -38,8 +38,7 @@ The initial focus of this text was to expand on ISL's introduction to using `R` 
 - Mathematical rigor that matches the background of the readers
 - A book structure that matches the overall structure of the course
 
-In other words, this text seeks to replicate the best parts of [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/), [The Elements of 
-Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), and [Applied Predictive Modeling](http://appliedpredictivemodeling.com/) that are most needed by a particular set of students.
+In other words, this text seeks to replicate the best parts of [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/), [The Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), and [Applied Predictive Modeling](http://appliedpredictivemodeling.com/) that are most needed by a particular set of students.
 
 ## Organization {-}
 
@@ -109,11 +108,11 @@ sqrt(a ^ 2 + b ^ 2)
 
 For the most part, we will follow the `tidyverse` [style guide](https://style.tidyverse.org/), however with one massive and obvious exception. Instead of the usual assignment operator, `<-`, we will instead use the more visually appealing and easier to type `-`. Not many do this, but there are [dozens](https://github.com/coatless/errorist) [of](https://github.com/yihui/knitr) [us](https://github.com/csgillespie/efficientR).
 
-## Acknowledgements {-}
+## Acknowledgments {-}
 
 The following is a (likely incomplete) list of helpful contributors.
 
-- [James Balamuta](http://www.thecoatlessprofessor.com/), Summer 2016 - ??? 
+- [James Balamuta](http://www.thecoatlessprofessor.com/), Summer 2016 - ???
 - Korawat Tanwisuth, Spring 2017
 - [Yiming Gao](https://www.linkedin.com/in/yiming-gao), Spring 2017
 - [Binxiang Ni](https://github.com/binxiangni), Summer 2017
@@ -129,7 +128,7 @@ The following is a (likely incomplete) list of helpful contributors.
 
 Your name could be here! If you submit a correction and would like to be listed below, please provide your name as you would like it to appear, as well as a link to a GitHub, LinkedIn, or personal website. Pull requests encouraged!
 
-Looking for ways to contribute? 
+Looking for ways to contribute?
 
 - You'll notice that a lot of the plotting code is not displayed in the text, but is available in the source. Currently that code was written to accomplish a task, but without much thought about the best way to accomplish the task. Try refactoring some of this code.
 - Fix typos. Since the book is actively being developed, typos are getting added all the time.
